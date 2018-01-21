@@ -1,5 +1,5 @@
 package com.yagn.nadlii.service.alarm;
 
-public class TrashClass {
+public class TrashClasses {
 
 }
