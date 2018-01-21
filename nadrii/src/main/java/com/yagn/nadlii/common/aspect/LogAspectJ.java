@@ -4,7 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 /*
  * FileName : PojoAspectJ.java
- *	:: XML ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ aspect ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½   
+ *	:: XML ¿¡ ¼±¾ðÀûÀ¸·Î aspect ÀÇ Àû¿ë   
   */
 public class LogAspectJ {
 
@@ -17,16 +17,16 @@ public class LogAspectJ {
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 			
 		System.out.println("");
-		System.out.println("[Around before] Å¸ï¿½ï¿½ï¿½ï¿½Ã¼.ï¿½Þ¼ï¿½ï¿½ï¿½ :"+
+		System.out.println("[Around before] Å¸?¦°´Ã?.¸Þ¼­µå :"+
 													joinPoint.getTarget().getClass().getName() +"."+
 													joinPoint.getSignature().getName());
 		if(joinPoint.getArgs().length !=0){
-			System.out.println("[Around before]methodï¿½ï¿½ ï¿½ï¿½ï¿½ÞµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ : "+ joinPoint.getArgs()[0]);
+			System.out.println("[Around before]method¿¡ Àü´ÞµÇ´Â ÀÎÀÚ : "+ joinPoint.getArgs()[0]);
 		}
-		//==> Å¸ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ Method ï¿½ï¿½ È£ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½Îºï¿½ 
+		//==> Å¸°Ù °´Ã¼ÀÇ Method ¸¦ È£Ãâ ÇÏ´Â ºÎºÐ 
 		Object obj = joinPoint.proceed();
 
-		System.out.println("[Around after] Å¸ï¿½ï¿½ ï¿½ï¿½Ã¼return value  : "+obj);
+		System.out.println("[Around after] Å¸°Ù °´Ã¼return value  : "+obj);
 		System.out.println("");
 		
 		return obj;
