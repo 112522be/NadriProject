@@ -1,4 +1,4 @@
-package com.yagn.nadrii.service.planner;
+package com.model2.mvc.service.user;
 
 import java.util.List;
 
@@ -6,10 +6,8 @@ import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
 
 
-
-
-
-public interface PlannerDao {
+//==> ȸ���������� CRUD �߻�ȭ/ĸ��ȭ�� DAO Interface Definition
+public interface UserDao {
 	
 	// INSERT
 	public void addUser(User user) throws Exception ;

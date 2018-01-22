@@ -1,4 +1,4 @@
-package com.yagn.nadrii.service.planner.impl;
+package com.model2.mvc.service.user.impl;
 
 import java.util.List;
 
@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.model2.mvc.service.user.UserDao;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
-import com.yagn.nadrii.service.planner.PlannerDao;
 
 
 //==> ȸ������ DAO CRUD ����
 @Repository("userDaoImpl")
-public class PlannerDaoImpl implements PlannerDao{
+public class UserDaoImpl implements UserDao{
 	
 	///Field
 	@Autowired
@@ -25,7 +25,7 @@ public class PlannerDaoImpl implements PlannerDao{
 	}
 	
 	///Constructor
-	public PlannerDaoImpl() {
+	public UserDaoImpl() {
 		System.out.println(this.getClass());
 	}
 

@@ -1,15 +1,12 @@
-package com.yagn.nadrii.service.planner;
+package com.model2.mvc.service.user;
 
 import java.util.Map;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
 
-
-
-
 //==> ȸ���������� ������ ���� �߻�ȭ/ĸ��ȭ�� Service  Interface Definition  
-public interface PlannerService {
+public interface UserService {
 	
 	// ȸ������
 	public void addUser(User user) throws Exception;

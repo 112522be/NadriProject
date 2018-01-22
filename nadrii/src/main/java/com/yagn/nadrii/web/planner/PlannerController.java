@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.model2.mvc.common.Page;
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
+import com.yagn.nadrii.common.Page;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.planner.PlannerService;
 
 
-//==> È¸¿ø°ü¸® Controller
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Controller
 @Controller
 @RequestMapping("/user/*")
 public class PlannerController {
@@ -30,7 +31,7 @@ public class PlannerController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private PlannerService userService;
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 	public PlannerController(){
 		System.out.println(this.getClass());
@@ -67,7 +68,7 @@ public class PlannerController {
 		System.out.println("/user/getUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		
 		return "forward:/user/getUser.jsp";
@@ -80,7 +81,7 @@ public class PlannerController {
 		System.out.println("/user/updateUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		
 		return "forward:/user/updateUser.jsp";
@@ -142,7 +143,7 @@ public class PlannerController {
 		System.out.println("/user/checkDuplication : POST");
 		//Business Logic
 		boolean result=userService.checkDuplication(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("result", new Boolean(result));
 		model.addAttribute("userId", userId);
 
@@ -160,13 +161,13 @@ public class PlannerController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String , Object> map=userService.getUserList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

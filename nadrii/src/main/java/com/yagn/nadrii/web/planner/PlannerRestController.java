@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.planner.PlannerService;
 
 
-//==> È¸¿ø°ü¸® RestController
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RestController
 @RestController
 @RequestMapping("/user/*")
 public class PlannerRestController {
@@ -23,7 +24,7 @@ public class PlannerRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private PlannerService userService;
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 	public PlannerRestController(){
 		System.out.println(this.getClass());
