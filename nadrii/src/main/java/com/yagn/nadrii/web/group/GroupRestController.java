@@ -1,4 +1,4 @@
-package com.yagn.nadlii.web.group;
+package com.yagn.nadrii.web.group;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yagn.nadlii.common.Search;
+import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
 import com.yagn.nadrii.service.group.GroupService;
 
