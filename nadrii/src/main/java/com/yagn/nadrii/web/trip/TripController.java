@@ -19,9 +19,7 @@ public class TripController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
-	
-	
-	
+		
 	public TripController() {
 		System.out.println(this.getClass());
 	}

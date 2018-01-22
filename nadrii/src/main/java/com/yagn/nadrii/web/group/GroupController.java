@@ -1,4 +1,4 @@
-package com.yagn.nadlii.web.group;
+package com.yagn.nadrii.web.group;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yagn.nadlii.common.Page;
-import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
-import com.yagn.nadlii.service.group.GroupService;
+import com.yagn.nadrii.common.Page;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.group.GroupService;
 
 @Controller
 @RequestMapping("/group/*")
@@ -120,13 +120,13 @@ public class GroupController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("resultPage :: "+resultPage);
 		
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

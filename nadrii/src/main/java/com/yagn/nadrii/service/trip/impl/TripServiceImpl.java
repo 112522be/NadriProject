@@ -19,6 +19,14 @@ public class TripServiceImpl implements TripService {
 	private TripDao tripDao;
 	
 	
+	
+	public TripServiceImpl() {
+		System.out.println(this.getClass());
+		
+	}
+
+
+
 	@Override
 	public Map listTrip() throws Exception{
 		Map map = new HashMap();

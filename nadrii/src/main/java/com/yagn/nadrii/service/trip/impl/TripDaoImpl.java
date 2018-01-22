@@ -27,11 +27,17 @@ import com.yagn.nadrii.service.trip.TripDao;
 @Repository("tripDaoImpl")
 public class TripDaoImpl implements TripDao {
 
+	
+	
+	public TripDaoImpl() {
+		System.out.println(this.getClass());
+		
+	}
+
 	public List listTrip() throws Exception {
 		HttpClient httpClient = new DefaultHttpClient();
 		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
-		
-	
+			
 		tourAPlUrlManage.setContentTypeId("14");
 		tourAPlUrlManage.setCat1("A02");
 		
@@ -45,8 +51,7 @@ public class TripDaoImpl implements TripDao {
 		httpGet.setHeader("Content-Type", "application/json");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
-		
-		
+				
 		HttpEntity httpEntity = httpResponse.getEntity();
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
