@@ -14,19 +14,34 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	function addComment(comment) {
+		console.log(comment);
+		$('body').append('<div class="container"><p/>'+comment+'<div/>');
+	}
+	$(function() {
+		$('textarea.form-control').bind('click', function() {
+			$(this).empty();
+		})
+		$('button.btn.btn-info:contains("댓 글")').bind('click', function() {
+			var comment=$('textarea.form-control').val();
+			addComment(comment);
+		})
+	})
+</script>
 </head>
 <body>
 	<div class="container">
-		<div align="center">
-			<h3>서울 야경투어</h3>
+		<p/>
+		<hr/>
+		<div>
+			<div class="col-md-11">
+				<textarea class="form-control" rows="3" >댓글을 입력하세요</textarea>
+			</div>
+			<div class="col-md-1">
+				<button align="right" type="button" class="btn btn-info" name="submitComment">댓 글<p/>저 장</button>
+			</div>
 		</div>
-		<div class="col-md-10">
-			<p>
-				서울의 색다른 야경 투어 코스를 소개합니다. 제가 처음 간 곳은 남산의 N서울 타워였어요.
-			</p>
-			<img alt="N서울 타워" src="">
-		</div>
-		<div class="col-md-2">지도 추가예정 예정예정</div>
 	</div>
 </body>
 </html>
