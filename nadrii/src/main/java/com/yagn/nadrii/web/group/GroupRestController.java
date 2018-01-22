@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
-import com.yagn.nadlii.service.group.GroupService;
+import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.group.GroupService;
 
 @RestController
 @RequestMapping("/group/*")

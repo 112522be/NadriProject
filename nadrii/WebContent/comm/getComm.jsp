@@ -20,13 +20,21 @@
 		<div align="center">
 			<h3>서울 야경투어</h3>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-11" align="center">
 			<p>
 				서울의 색다른 야경 투어 코스를 소개합니다. 제가 처음 간 곳은 남산의 N서울 타워였어요.
 			</p>
-			<img alt="N서울 타워" src="">
+			<img alt="N서울 타워" src="resources/images/6700442525_688f48b58b_b.jpg">
 		</div>
-		<div class="col-md-2">지도 추가예정 예정예정</div>
+		<div class="col-md-1">지도 추가예정 예정예정</div>
+	</div>
+	<div class="container" align="right">
+		사용자 프로필
+		<h3 style="bold">user01</h3>
+		E-mail : abc@bit.com
+		<div align="center">
+			<button type="button" class="btn btn-info">쪽지보내기</button>
+		</div>
 	</div>
 </body>
 </html>
