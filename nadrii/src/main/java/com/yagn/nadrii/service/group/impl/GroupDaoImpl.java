@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.group.impl;
+package com.yagn.nadrii.service.group.impl;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
-import com.yagn.nadlii.service.group.GroupDao;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.group.GroupDao;
 
 @Repository("groupDaoImpl")
 public class GroupDaoImpl implements GroupDao{

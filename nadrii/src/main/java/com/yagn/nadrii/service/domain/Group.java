@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.domain;
+package com.yagn.nadrii.service.domain;
 
 import java.sql.Date;
 
