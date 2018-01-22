@@ -86,6 +86,33 @@ public class TripDaoImpl implements TripDao {
 		
 		return list;
 	}
+
+	@Override
+	public TourApiDomain getTrip() throws Exception {
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		
+		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
+				+ "detailCommon?"
+				+ "ServiceKey=¿Œ¡ı≈∞"
+				+ "&contentTypeId=14"
+				+ "&contentId=130105"
+				+ "&MobileOS=ETC"
+				+ "&MobileApp=TourAPI3.0_Guide"
+				+ "&defaultYN=Y"
+				+ "&firstImageYN=Y"
+				+ "&areacodeYN=Y"
+				+ "&catcodeYN=Y"
+				+ "&addrinfoYN=Y"
+				+ "&mapinfoYN=Y"
+				+ "&overviewYN=Y"
+				+ "&transGuideYN=Y ";
+
+		return null;
+	}
+	
+	
 	
 	
 }

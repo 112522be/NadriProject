@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
 
@@ -35,4 +36,15 @@ public class TripServiceImpl implements TripService {
 		map.put("list", list);
 		return map;
 	}
+
+
+
+	@Override
+	public TourApiDomain getTrip() throws Exception {
+		
+		return null;
+	}
+	
+	
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripService;
 
 
@@ -39,6 +40,15 @@ public class TripController {
 		return "forward:/Trip/listTrip.jsp";
 	}
 	
+	
+	public String getMuseum(TourApiDomain tourApiDomain) throws Exception{
+		
+		System.out.println("/trip/getMuseum");
+		
+		
+		
+		return null;
+	}
 	
 	
 
