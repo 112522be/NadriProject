@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.trip;
+package com.yagn.nadlii.web.trip;
 
 public class TrashClass {
 

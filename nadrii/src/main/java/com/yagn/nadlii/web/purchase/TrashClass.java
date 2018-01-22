@@ -1,4 +1,4 @@
-package com.yagn.nadlii.web.purchase;
+package com.yagn.nadlii.service.purchase;
 
 public class TrashClass {
 

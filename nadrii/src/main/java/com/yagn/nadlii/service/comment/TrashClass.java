@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.comment;
+package com.yagn.nadlii.web.comment;
 
 public class TrashClass {
 
