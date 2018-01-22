@@ -2,11 +2,10 @@ package com.yagn.nadrii.service.planner;
 
 import java.util.List;
 
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
 
 
-//==> È¸¿ø°ü¸®¿¡¼­ CRUD Ãß»óÈ­/Ä¸½¶È­ÇÑ DAO Interface Definition
+
+
 public interface PlannerDao {
 	
 	// INSERT
@@ -21,7 +20,7 @@ public interface PlannerDao {
 	// UPDATE
 	public void updateUser(User user) throws Exception ;
 	
-	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return
+	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
 	
 }
