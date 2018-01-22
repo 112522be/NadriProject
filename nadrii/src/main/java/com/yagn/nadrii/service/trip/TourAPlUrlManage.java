@@ -152,6 +152,9 @@ public class TourAPlUrlManage {
 		return urlcomplete;
 	}
 		
+	public void urlClean() {
+	
+	}
 	
 	
 }

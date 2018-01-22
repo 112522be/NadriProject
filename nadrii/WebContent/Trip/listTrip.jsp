@@ -85,15 +85,15 @@
     
     <input type="hidden" id="pageNo" value="${pageNo}"/>
     <c:set var= "i" value="0"/>
-	<c:forEach var ="product" items="${museum}">
+	<c:forEach var ="product" items="${list}">
 		
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img data-src="holder.js/100%x200" alt="100%x200" src="${museum.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+          <img data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
           <div class="caption">
-            <h3 id="thumbnail-label">${museum.get(i).title}<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
-            <p>${museum.get(i).addr1}</p>
-            <input type="hidden" name="pageNo" value="${museum.get(i).contentid}"/>
+            <h3 id="thumbnail-label">${list.get(i).title}<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
+            <p>${list.get(i).addr1}</p>
+            <input type="hidden" name="pageNo" value="${list.get(i).contentid}"/>
             <p> <a href="#" class="btn btn-primary" role="button">공유</a> 
             	<a href="#" class="btn btn-default" role="button">좋아요</a>
             	<a href="#" class="btn btn-danger" role="button">위시리스트</a>	
