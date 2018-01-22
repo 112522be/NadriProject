@@ -95,7 +95,7 @@
 </head>
 
 <body>
-	<!-- ToolBar Start /////////////////////////////////////-->
+	<!-- ToolBar Start ////////////////////////////////////
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
@@ -182,7 +182,7 @@
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
 	
-	<!-- PageNavigation Start... -->
+	<!-- PageNavigation Start... 
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
 
