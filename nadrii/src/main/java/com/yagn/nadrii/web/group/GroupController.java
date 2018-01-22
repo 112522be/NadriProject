@@ -21,8 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yagn.nadlii.common.Page;
 import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
-import com.yagn.nadlii.service.group.GroupService;
+import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.group.GroupService;
 
 @Controller
 @RequestMapping("/group/*")
