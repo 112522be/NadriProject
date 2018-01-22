@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.model2.mvc.service.ticket.TicketDao;
-import com.model2.mvc.service.ticket.TicketService;
+import com.yagn.nadrii.service.ticket.TicketDao;
+import com.yagn.nadrii.service.ticket.TicketService;
 
 @Service("ticketServiceImpl")
 public class TicketServiceImpl implements TicketService {

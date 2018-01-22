@@ -17,11 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.model2.mvc.service.domain.DetailIntro;
-import com.model2.mvc.service.domain.SearchFestival;
-import com.model2.mvc.service.ticket.TicketDao;
-import com.model2.mvc.service.ticket.TicketService;
-
+import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.ticket.TicketDao;
 
 @Service("tourApiDaoImpl")
 public class TourApiDaoImpl implements TicketDao {

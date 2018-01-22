@@ -6,7 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.model2.mvc.service.domain.User;
+import com.yagn.nadrii.service.domain.User;
+
 
 
 /*

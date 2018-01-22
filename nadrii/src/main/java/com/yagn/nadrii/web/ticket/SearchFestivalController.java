@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.model2.mvc.common.OpenApiPage;
-import com.model2.mvc.common.OpenApiSearch;
-import com.model2.mvc.service.domain.DetailIntro;
-import com.model2.mvc.service.domain.SearchFestival;
-import com.model2.mvc.service.ticket.TicketService;
+import com.yagn.nadrii.service.ticket.TicketService;
 
 // [행사정보 조회] 
 @Controller
