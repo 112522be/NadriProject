@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.group.impl;
+package com.yagn.nadrii.service.group.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
-import com.yagn.nadlii.service.group.GroupDao;
-import com.yagn.nadlii.service.group.GroupService;;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.group.GroupDao;
+import com.yagn.nadrii.service.group.GroupService;;
 
 
-//==> È¸¿ø°ü¸® ¼­ºñ½º ±¸Çö
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 @Service("groupServiceImpl")
 public class GroupServiceImpl implements GroupService{
 	

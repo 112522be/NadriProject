@@ -1,9 +1,9 @@
-package com.yagn.nadlii.service.group;
+package com.yagn.nadrii.service.group;
 
 import java.util.List;
 
-import com.yagn.nadlii.common.Search;
-import com.yagn.nadlii.service.domain.Group;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Group;
 
 public interface GroupDao {
 
