@@ -16,6 +16,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.service.trip.TourAPlUrlManage;
@@ -23,7 +24,7 @@ import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
 
 
-@Service("tripDaoImpl")
+@Repository("tripDaoImpl")
 public class TripDaoImpl implements TripDao {
 
 	public List listTrip() throws Exception {

@@ -19,6 +19,14 @@ public class TripController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
+	
+	
+	
+	public TripController() {
+		System.out.println(this.getClass());
+	}
+
+
 	@RequestMapping(value="listMuseum")
 	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
 		
