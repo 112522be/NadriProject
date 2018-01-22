@@ -29,6 +29,8 @@ public class TripDaoImpl implements TripDao {
 	@Override
 	public List listTripFromTour() throws Exception{
 		
+		
+		//DB 접속만 하고 검색 조건(TourApiUrlManage)는 컨트롤러로 옮기기
 		HttpClient httpClient = new DefaultHttpClient();
 		TourApiUrlManage tourApiUrlManage = new TourApiUrlManage();
 		tourApiUrlManage.urlClean();
@@ -71,14 +73,15 @@ public class TripDaoImpl implements TripDao {
 		System.out.println("===================================================");
 		JSONArray jsonArray = (JSONArray)items.get("item");
 		System.out.println(jsonArray);
+		
 		List list = new ArrayList();
 		for(int i=0;i<jsonArray.size();++i) {
 			JSONObject obj = (JSONObject)jsonArray.get(i);
 			System.out.println(obj);
 			ObjectMapper objectMapper = new ObjectMapper();
-			TourTripInfo tourTripInfoTest = new TourTripInfo();
-			tourTripInfoTest = objectMapper.readValue(obj.toJSONString(), TourTripInfo.class);
-			list.add(tourTripInfoTest);
+			TourTripInfo tourTripInfo = new TourTripInfo();
+			tourTripInfo = objectMapper.readValue(obj.toJSONString(), TourTripInfo.class);
+			list.add(tourTripInfo);
 		}
 		
 		return list;
