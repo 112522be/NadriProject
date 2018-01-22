@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface TripDao {
 	
-	public List listTrip() throws Exception;
+	public List listTrip(int pageNo) throws Exception;
 }

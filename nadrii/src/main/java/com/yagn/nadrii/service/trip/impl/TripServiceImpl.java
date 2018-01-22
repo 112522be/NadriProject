@@ -28,10 +28,10 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip() throws Exception{
+	public Map listTrip(int pageNo) throws Exception{
 		Map map = new HashMap();
 		
-		List list = tripDao.listTrip();
+		List list = tripDao.listTrip(pageNo);
 		map.put("list", list);
 		return map;
 	}

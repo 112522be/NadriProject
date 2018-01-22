@@ -28,7 +28,7 @@
 	
 	function getList(page){
 		$.ajax({
-			url:"../tour/json/museum/"+page+"",
+			url:"../trip/json/listMuseum/"+page+"",
 			method:"GET",
 			dataType:"json",
 			data:{"page" :page},
@@ -38,11 +38,9 @@
 			},
 						
 			success: function(returnData){
-				var data = returnData.museum;
+				var data = returnData.trip;
 				//alert(data);
-				
-			
-				
+								
 				for(var a =0; a<data.length;++a){
 					var dpValue =
 					
@@ -60,9 +58,7 @@
 			          "</div>"+
 			        "</div>"+
 			      "</div>"
-						
-						
-						
+										
 					$(".row").append(dpValue);	
 				}
 								

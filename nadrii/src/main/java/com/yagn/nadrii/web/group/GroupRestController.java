@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
+
 import com.yagn.nadrii.common.Search;
-=======
-import com.yagn.nadlii.common.Search;
->>>>>>> refs/remotes/origin/master
+
+import com.yagn.nadrii.common.Search;
+
 import com.yagn.nadrii.service.domain.Group;
 import com.yagn.nadrii.service.group.GroupService;
 
