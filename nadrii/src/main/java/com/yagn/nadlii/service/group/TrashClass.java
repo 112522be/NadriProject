@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.group;
+package com.yagn.nadlii.web.group;
 
 public class TrashClass {
 

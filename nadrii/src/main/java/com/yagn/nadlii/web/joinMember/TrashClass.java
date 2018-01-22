@@ -1,4 +1,4 @@
-package com.yagn.nadlii.web.joinMember;
+package com.yagn.nadlii.service.joinMember;
 
 public class TrashClass {
 

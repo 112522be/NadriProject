@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.wish;
+package com.yagn.nadlii.web.wish;
 
 public class TrashClass {
 

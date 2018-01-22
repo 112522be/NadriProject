@@ -1,4 +1,4 @@
-package com.yagn.nadlii.web.alarm;
+package com.yagn.nadlii.service.alarm;
 
 public class TrashClass {
 
