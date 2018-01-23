@@ -19,7 +19,9 @@ import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadrii.service.trip.TourAPlUrlManage;
+import com.yagn.nadrii.service.trip.TourAPIGetDetailUrlManage;
+import com.yagn.nadrii.service.trip.TourAPIGetUrlManage;
+import com.yagn.nadrii.service.trip.TourAPlListUrlManage;
 import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
 
@@ -31,7 +33,10 @@ public class TripDaoImpl implements TripDao {
 		System.out.println(this.getClass());		
 	}
 
-	public List listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception {
+	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
+		
+		System.out.println("listTrip Dao");
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 				
@@ -78,28 +83,64 @@ public class TripDaoImpl implements TripDao {
 	}
 
 	@Override
-	public TourApiDomain getTrip() throws Exception {
+	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
 		
+		
+		//기본 정보가져오기
 		HttpClient httpClient = new DefaultHttpClient();
-		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		HttpGet httpGet = new HttpGet(tourAPIGetUrlManage.urlMaking()); 
 		
-		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
-				+ "detailCommon?"
-				+ "ServiceKey=인증키"
-				+ "&contentTypeId=14"
-				+ "&contentId=130105"
-				+ "&MobileOS=ETC"
-				+ "&MobileApp=TourAPI3.0_Guide"
-				+ "&defaultYN=Y"
-				+ "&firstImageYN=Y"
-				+ "&areacodeYN=Y"
-				+ "&catcodeYN=Y"
-				+ "&addrinfoYN=Y"
-				+ "&mapinfoYN=Y"
-				+ "&overviewYN=Y"
-				+ "&transGuideYN=Y ";
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+		
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+				
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		
+		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+		JSONObject response = (JSONObject) jsonObject.get("response");
+		JSONObject header = (JSONObject) response.get("header");
+		JSONObject body = (JSONObject) response.get("body");
+		JSONObject items = (JSONObject) body.get("items");
+		JSONObject jsonobj = (JSONObject)items.get("item");
+		ObjectMapper objectMapper = new ObjectMapper();
+		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
+		//System.out.println(jsonobj);
+		
+		/*
+				*/
+		return tourApiDomain;
+		
+	}
 
-		return null;
+	@Override
+	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
+		// TODO Auto-generated method stub
+		//요금정보 가져오기
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(tourAPIGetDetailUrlManage.urlMaking());
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+				
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		
+		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+		JSONObject response = (JSONObject) jsonObject.get("response");
+		JSONObject header = (JSONObject) response.get("header");
+		JSONObject body = (JSONObject) response.get("body");
+		JSONObject items = (JSONObject) body.get("items");
+		JSONObject jsonobj = (JSONObject)items.get("item");	
+		System.out.println(jsonobj);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
+				
+		return tourApiDomain;
 	}
 	
 	

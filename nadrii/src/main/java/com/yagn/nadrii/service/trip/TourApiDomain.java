@@ -36,7 +36,168 @@ public class TourApiDomain {
 	private String createdtime;
 	private String modifiedtime;
 	private String tel;
+	private String booktour;
+	private String telname;
+	private String homepage;
 	
+	//요금정보 보는 JSON
+	
+	private String restdateculture;
+	private String spendtime;
+	private String scale;
+	private String parkingculture;
+	private String usefee;
+	private String parkingfee;
+	private String chkcreditcardculture;
+	private String chkbabycarriageculture;
+	private String infocenterculture;
+	private String usetimeculture;
+	private String chkpetculture;
+	
+	
+	/// Constructor
+	public TourApiDomain() {
+			
+	}
+	
+	
+	public String getRestdateculture() {
+		return restdateculture;
+	}
+
+
+	public void setRestdateculture(String restdateculture) {
+		this.restdateculture = restdateculture;
+	}
+
+
+	public String getSpendtime() {
+		return spendtime;
+	}
+
+
+	public void setSpendtime(String spendtime) {
+		this.spendtime = spendtime;
+	}
+
+
+	public String getScale() {
+		return scale;
+	}
+
+
+	public void setScale(String scale) {
+		this.scale = scale;
+	}
+
+
+	public String getParkingculture() {
+		return parkingculture;
+	}
+
+
+	public void setParkingculture(String parkingculture) {
+		this.parkingculture = parkingculture;
+	}
+
+
+	public String getUsefee() {
+		return usefee;
+	}
+
+
+	public void setUsefee(String usefee) {
+		this.usefee = usefee;
+	}
+
+
+	public String getParkingfee() {
+		return parkingfee;
+	}
+
+
+	public void setParkingfee(String parkingfee) {
+		this.parkingfee = parkingfee;
+	}
+
+
+	public String getChkcreditcardculture() {
+		return chkcreditcardculture;
+	}
+
+
+	public void setChkcreditcardculture(String chkcreditcardculture) {
+		this.chkcreditcardculture = chkcreditcardculture;
+	}
+
+
+	public String getChkbabycarriageculture() {
+		return chkbabycarriageculture;
+	}
+
+
+	public void setChkbabycarriageculture(String chkbabycarriageculture) {
+		this.chkbabycarriageculture = chkbabycarriageculture;
+	}
+
+
+	public String getInfocenterculture() {
+		return infocenterculture;
+	}
+
+
+	public void setInfocenterculture(String infocenterculture) {
+		this.infocenterculture = infocenterculture;
+	}
+
+
+	public String getUsetimeculture() {
+		return usetimeculture;
+	}
+
+
+	public void setUsetimeculture(String usetimeculture) {
+		this.usetimeculture = usetimeculture;
+	}
+
+
+	public String getChkpetculture() {
+		return chkpetculture;
+	}
+
+
+	public void setChkpetculture(String chkpetculture) {
+		this.chkpetculture = chkpetculture;
+	}
+
+
+	public String getTelname() {
+		return telname;
+	}
+
+
+	public void setTelname(String telname) {
+		this.telname = telname;
+	}
+
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
+
+	public String getBooktour() {
+		return booktour;
+	}
+
+	public void setBooktour(String booktour) {
+		this.booktour = booktour;
+	}
 
 	public String getTel() {
 		return tel;
@@ -54,10 +215,7 @@ public class TourApiDomain {
 		this.modifiedtime = modifiedtime;
 	}
 
-	/// Constructor
-	public TourApiDomain() {
-		
-	}
+	
 
 	public String getResultCode() {
 		return resultCode;

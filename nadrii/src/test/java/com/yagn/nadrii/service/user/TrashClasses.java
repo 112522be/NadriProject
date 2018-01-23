@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.user;
+package com.yagn.nadrii.service.user;
 
 public class TrashClasses {
 

@@ -1,4 +1,4 @@
-package com.yagn.nadlii.service.like;
+package com.yagn.nadrii.service.like;
 
 public class TrashClasses {
 

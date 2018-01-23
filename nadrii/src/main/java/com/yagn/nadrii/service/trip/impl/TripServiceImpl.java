@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadrii.service.trip.TourAPlUrlManage;
+import com.yagn.nadrii.service.trip.TourAPIGetDetailUrlManage;
+import com.yagn.nadrii.service.trip.TourAPIGetUrlManage;
+import com.yagn.nadrii.service.trip.TourAPlListUrlManage;
 import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
@@ -30,7 +32,9 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception{
+	public Map listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception{
+		
+		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
 		List list = tripDao.listTrip(tourAPlUrlManage);
@@ -41,9 +45,25 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTrip() throws Exception {
+	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
 		
-		return null;
+		System.out.println("getTrip SerivceImpl");
+		
+		TourApiDomain tourApiDomain = tripDao.getTrip(tourAPIGetUrlManage);
+		System.out.println(tourApiDomain.getTitle());
+		
+		return tourApiDomain;
+	}
+
+
+
+	@Override
+	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
+		System.out.println("getTripDetail SerivceImpl");
+		
+		TourApiDomain tourApiDomain = tripDao.getTripDetail(tourAPIGetDetailUrlManage);
+		System.out.println(tourApiDomain.getUsefee());
+		return tourApiDomain;
 	}
 	
 	
