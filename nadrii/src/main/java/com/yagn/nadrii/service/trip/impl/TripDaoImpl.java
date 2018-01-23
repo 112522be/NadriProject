@@ -35,6 +35,9 @@ public class TripDaoImpl implements TripDao {
 	}
 
 	public List listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception {
+		
+		System.out.println("listTrip Dao");
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 				
@@ -81,28 +84,24 @@ public class TripDaoImpl implements TripDao {
 	}
 
 	@Override
-	public TourApiDomain getTrip() throws Exception {
+	public TourApiDomain getTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception {
 		
 		HttpClient httpClient = new DefaultHttpClient();
-		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		HttpGet httpGet = new HttpGet(tourAPlUrlManage.urlMaking()); 
 		
-		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
-				+ "detailCommon?"
-				+ "ServiceKey=¿Œ¡ı≈∞"
-				+ "&contentTypeId=14"
-				+ "&contentId=130105"
-				+ "&MobileOS=ETC"
-				+ "&MobileApp=TourAPI3.0_Guide"
-				+ "&defaultYN=Y"
-				+ "&firstImageYN=Y"
-				+ "&areacodeYN=Y"
-				+ "&catcodeYN=Y"
-				+ "&addrinfoYN=Y"
-				+ "&mapinfoYN=Y"
-				+ "&overviewYN=Y"
-				+ "&transGuideYN=Y ";
-
-		return null;
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+		
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+		TourApiDomain tourApiDomain = new TourApiDomain();
+		
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		
+		
+		return tourApiDomain;
+		
 	}
 	
 	

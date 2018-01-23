@@ -31,6 +31,8 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public Map listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception{
+		
+		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
 		List list = tripDao.listTrip(tourAPlUrlManage);
@@ -41,9 +43,13 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTrip() throws Exception {
+	public TourApiDomain getTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception {
 		
-		return null;
+		System.out.println("getTrip SerivceImpl");
+		
+		TourApiDomain tourApiDomain = tripDao.getTrip(tourAPlUrlManage);
+		
+		return tourApiDomain;
 	}
 	
 	

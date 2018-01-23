@@ -6,6 +6,6 @@ public interface TripService {
 	
 	public Map listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception;
 	
-	public TourApiDomain getTrip() throws Exception;
+	public TourApiDomain getTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception;
 
 }

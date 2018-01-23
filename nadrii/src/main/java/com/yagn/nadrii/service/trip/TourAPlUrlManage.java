@@ -2,13 +2,11 @@ package com.yagn.nadrii.service.trip;
 
 public class TourAPlUrlManage {
 
-	String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"; /* URL */
-	
-	
+	private String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/";
+	private String type= "areaBasedList?";
 	
 	private String serviceKeyName = "ServiceKey=";
 	private String contentTypeIdName = "&contentTypeId=";
-	private String contentIdName ="&contentId=";
 	private String areaCodeName = "&areaCode=";
 	private String sigunguCodeName = "&sigunguCode=";
 	private String cat1Name = "&cat1=";
@@ -20,10 +18,11 @@ public class TourAPlUrlManage {
 	private String arrangeName = "&arrange=";
 	private String numOfRowsName = "&numOfRows=";
 	private String pageNoName ="&pageNo=";
+	private String contentIdName ="&contentId=";
 	
-	private String type ="areaBasedList?";
 	private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	private String contentTypeId = "12"; //""
+	private String contentId ="";
 	private String areaCode = "";
 	private String sigunguCode = "";
 	private String cat1="A02";
@@ -33,7 +32,6 @@ public class TourAPlUrlManage {
 	private String MoblieOS = "ETC";
 	private String MobileApp = "TourAPI3.0_Guide";
 	private String arrange = "A";
-	private String contentId="";
 	private int numOfRows=12;
 	private int pageNo =1;
 		
@@ -146,26 +144,27 @@ public class TourAPlUrlManage {
 		this.pageNo = pageNo;
 	}
 	
-		
-	public void setContentId(String contentId) {
-		this.contentId = contentId;
-	}
-		
+	
+
 	public String getType() {
 		return type;
-	}
-
-	public String getContentId() {
-		return contentId;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	public String getContentId() {
+		return contentId;
+	}
+
+	public void setContentId(String contentId) {
+		this.contentId = contentId;
+	}
+
 	public String urlMaking() {
 		String urlcomplete = url+type+serviceKeyName+serviceKey+contentTypeIdName+contentTypeId+
-									contentIdName+contentId+areaCodeName+areaCode+sigunguCodeName+sigunguCode+
+									areaCodeName+areaCode+sigunguCodeName+sigunguCode+
 									cat1Name+cat1+cat2Name+cat2+cat3Name+cat3+listYNName+listYN+
 									MobileOSName+MoblieOS+MobileAppName+MobileApp+arrangeName+arrange+
 									numOfRowsName+numOfRows+pageNoName+pageNo;
@@ -175,11 +174,12 @@ public class TourAPlUrlManage {
 	public void urlClean() {
 		String cleaner = "";
 		this.setType(cleaner);
+		
+		this.setContentId(cleaner);
 		this.setContentTypeId(cleaner);
 		this.setCat1(cleaner);
 		this.setCat2(cleaner);
 		this.setCat3(cleaner);
-		this.setContentId(cleaner);
 		this.setSigunguCode(cleaner);
 	}
 	

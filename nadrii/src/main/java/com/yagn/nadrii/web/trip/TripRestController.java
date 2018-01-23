@@ -31,8 +31,11 @@ public class TripRestController {
 
 	@RequestMapping(value="json/listMuseum/{pageNo}")
 	public Map listMuseum(@PathVariable("pageNo")int pageNo) throws Exception{
+		
+		System.out.println("RestController list Museum");
 		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
 		tourAPlUrlManage.urlClean();
+		tourAPlUrlManage.setType("areaBasedList?");
 		tourAPlUrlManage.setContentTypeId("14");
 		tourAPlUrlManage.setCat1("A02");
 		tourAPlUrlManage.setCat2("A0206");

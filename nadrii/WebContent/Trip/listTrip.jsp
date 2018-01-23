@@ -10,22 +10,27 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 
 	
 	var page = 1;
+	
 	$(function(){
 		page++;
 	});
 	
 	$(window).scroll(function() { 
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+		
 		getList(page);
 		page++
 		}
 	});
 	
+	//ajax 안에서 if문 처리 해보자 
 	function getList(page){
 		$.ajax({
 			url:"../trip/json/listMuseum/"+page+"",
@@ -67,12 +72,52 @@
 		});
 	}
 	
+	/*
+	$(function() {
+		  $('#dialog').dialog({
+		    autoOpen: false,
+		    resizable: false,
+		  });
+		  $('#thumbnailImage').click( function(){
+			  $.ajax({
+				url:"../trip/json/listMuseum/"+page+"",
+				method:"GET",
+				dataType:"json",
+				data:{"page" :page},
+				headers :{
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success: function(){
+					
+				}  
+			  })
+		    $('#dialog').dialog('open');
+		  });
+	});
+*/
+	
+	
+	
 	</script>
 	
 	
 	<title>박물관찾기</title>
 </head>
 <body>
+<!-- 
+<div id="dialog" title="기본 대화상자">
+  
+  
+  
+  <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+  <p>${list.get(i).addr1}</p>
+  
+  
+  
+</div>
+ -->
+	
 	
 <div class="container">
 
@@ -85,7 +130,7 @@
 		
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+          <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
           <div class="caption">
             <h3 id="thumbnail-label">${list.get(i).title}<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
             <p>${list.get(i).addr1}</p>

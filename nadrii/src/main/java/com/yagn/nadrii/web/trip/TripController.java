@@ -32,16 +32,19 @@ public class TripController {
 		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setContentTypeId("14");
+		tourAPlUrlManage.setType("areaBasedList?");
 		tourAPlUrlManage.setCat1("A02");
 		tourAPlUrlManage.setCat2("A0206");
 		tourAPlUrlManage.setCat3("A02060100");
 		tourAPlUrlManage.setPageNo(pageNo);
 		
-		System.out.println(tourAPlUrlManage.urlMaking());
+		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listMuseum");
 		
 		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		
+		map.put("trip", "listMuseum");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		
@@ -50,14 +53,20 @@ public class TripController {
 		return "forward:/Trip/listTrip.jsp";
 	}
 	
-	
-	public String getMuseum(TourApiDomain tourApiDomain) throws Exception{
-		
+	@RequestMapping(value="getMuseum")
+	public String getMuseum(TourApiDomain tourApiDomain, @RequestParam("contentId") String contentId, @RequestParam("contentTypeId") String contentTypeId) throws Exception{
 		System.out.println("/trip/getMuseum");
 		
 		
+		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		tourAPlUrlManage.urlClean();
+		tourAPlUrlManage.setType("detailCommon?");
+		tourAPlUrlManage.setContentId(contentId);
+		tourAPlUrlManage.setContentTypeId(contentTypeId);
 		
-		return null;
+		tourApiDomain = tripService.getTrip(tourAPlUrlManage);
+					
+		return "forward:/Trip/getTrip.jsp";
 	}
 	
 	
