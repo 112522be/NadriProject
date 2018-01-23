@@ -19,7 +19,7 @@
     <!--  ㅇ 어노테이션 기반 :: Spring Framework 사용.
     		ㅇ @Controller annotation 선언된 Bean 만 Wiring
 		   ㅇ @Service / @Repository  annotation 선언된 Bean 은 Scan 제외 -->
-	<context:component-scan base-package="com.model2.mvc.web">
+	<context:component-scan base-package="com.yagn.nadrii.web">
 		<context:include-filter 	type="annotation"		expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Service"/>
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Repository"/>
@@ -65,6 +65,7 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
    	<mvc:resources mapping="/images/**" location="/images/" />
    	<mvc:resources mapping="/javascript/**" location="/javascript/" />
+   	<mvc:resources mapping="/resources/**" location="/resources/" />
    	
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 

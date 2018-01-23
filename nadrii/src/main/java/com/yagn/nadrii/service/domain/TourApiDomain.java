@@ -1,10 +1,10 @@
-package com.yagn.nadrii.service.trip;
+package com.yagn.nadrii.service.domain;
 
 
 import java.util.Map;
 
 
-public class TourTripInfo {
+public class TourApiDomain {
 	
 	/// Field
 	// header value
@@ -56,7 +56,7 @@ public class TourTripInfo {
 	}
 
 	/// Constructor
-	public TourTripInfo() {
+	public TourApiDomain() {
 		
 	}
 
