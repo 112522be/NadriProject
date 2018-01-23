@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.planner.PlannerService;
 
 
 //==> ȸ������ RestController

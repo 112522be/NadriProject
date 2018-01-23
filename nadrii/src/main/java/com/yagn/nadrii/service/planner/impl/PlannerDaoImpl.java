@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
-import com.model2.mvc.service.user.UserDao;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.planner.PlannerDao;
 
 
-//==> ȸ������ DAO CRUD ����
 //@Repository("userDaoImpl")
 public class PlannerDaoImpl implements PlannerDao{
 	

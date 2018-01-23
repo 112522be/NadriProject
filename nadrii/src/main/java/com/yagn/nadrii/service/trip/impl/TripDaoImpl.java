@@ -29,11 +29,8 @@ import com.yagn.nadrii.service.trip.TripDao;
 @Repository("tripDaoImpl")
 public class TripDaoImpl implements TripDao {
 
-	
-	
 	public TripDaoImpl() {
-		System.out.println(this.getClass());
-		
+		System.out.println(this.getClass());		
 	}
 
 	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
