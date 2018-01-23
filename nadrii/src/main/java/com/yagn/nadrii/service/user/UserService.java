@@ -1,4 +1,4 @@
-package com.model2.mvc.service.user;
+package com.yagn.nadrii.service.user;
 
 import java.util.Map;
 

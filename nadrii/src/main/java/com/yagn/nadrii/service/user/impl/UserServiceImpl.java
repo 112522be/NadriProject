@@ -1,4 +1,4 @@
-package com.model2.mvc.service.user.impl;
+package com.yagn.nadrii.service.user.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.model2.mvc.service.user.UserDao;
-import com.model2.mvc.service.user.UserService;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.user.UserDao;
+import com.yagn.nadrii.service.user.UserService;
 
 
 

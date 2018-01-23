@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.model2.mvc.service.user.UserService;
 import com.yagn.nadrii.common.Page;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.planner.PlannerService;
+import com.yagn.nadrii.service.user.UserService;
 
 
 //@Controller
