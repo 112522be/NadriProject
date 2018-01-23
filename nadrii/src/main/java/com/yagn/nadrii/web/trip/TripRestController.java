@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yagn.nadrii.service.trip.TourAPlUrlManage;
+import com.yagn.nadrii.service.trip.TourAPlListUrlManage;
 import com.yagn.nadrii.service.trip.TripService;
 
 
@@ -33,7 +33,7 @@ public class TripRestController {
 	public Map listMuseum(@PathVariable("pageNo")int pageNo) throws Exception{
 		
 		System.out.println("RestController list Museum");
-		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setType("areaBasedList?");
 		tourAPlUrlManage.setContentTypeId("14");

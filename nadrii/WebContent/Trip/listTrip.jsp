@@ -55,7 +55,8 @@
 			          "<div class='caption'>"+
 			            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
 			            "<p>"+data[a].addr1+"</p>"+
-			            "<input type='hidden' name='pageNo' value='" +data[a].contentid+"'/>"+
+			            "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+			            "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 			            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 			            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
 			            	"<a href='#' class='btn btn-danger' role='button'>위시리스트</a>"+	
@@ -97,7 +98,18 @@
 	});
 */
 	
-	
+	$(function(){
+		//$($(".thumbnail")[$(".row div:nth-child(1)").index(this)]).on("click",function(){
+			$("img").on("click",function(){
+			var value =$(this).next().next().val();
+			var valueId = $(this).next().val();
+						
+				
+			self.location ="../trip/getMuseum?contentId="+valueId+
+							"&contentTypeId="+value;
+		
+		});
+	});
 	
 	</script>
 	
@@ -127,14 +139,21 @@
     <input type="hidden" id="pageNo" value="${pageNo}"/>
     <c:set var= "i" value="0"/>
 	<c:forEach var ="product" items="${list}">
-		
-      <div class="col-sm-6 col-md-4">
+	    
+	    <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+          <input type="hidden" name="contentid" value="${list.get(i).contentid}"/>
+          <input type="hidden" name="contenttypeid" value="${list.get(i).contenttypeid}"/>
           <div class="caption">
-            <h3 id="thumbnail-label">${list.get(i).title}<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
+            <h3 id="thumbnail-label">${list.get(i).title}
+            	<a class="anchorjs-link" href="#thumbnail-label">
+            		<span class="anchorjs-icon"></span>
+            	</a>
+            </h3>
+          	
             <p>${list.get(i).addr1}</p>
-            <input type="hidden" name="pageNo" value="${list.get(i).contentid}"/>
+           
             <p> <a href="#" class="btn btn-primary" role="button">공유</a> 
             	<a href="#" class="btn btn-default" role="button">좋아요</a>
             	<a href="#" class="btn btn-danger" role="button">위시리스트</a>	

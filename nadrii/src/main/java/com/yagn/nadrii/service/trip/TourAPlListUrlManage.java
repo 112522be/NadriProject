@@ -1,6 +1,6 @@
 package com.yagn.nadrii.service.trip;
 
-public class TourAPlUrlManage {
+public class TourAPlListUrlManage {
 
 	private String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/";
 	private String type= "areaBasedList?";
@@ -20,7 +20,8 @@ public class TourAPlUrlManage {
 	private String pageNoName ="&pageNo=";
 	private String contentIdName ="&contentId=";
 	
-	private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+	private String serviceKey = "Vq3ddjVdHYzbHG4A6ol%2BlAAlYTGTsmK8WRtUG1v6px9%2BPYYPhypRbhcsUaCx%2Fl6NoNCxjVAZFr56jFVYrJSXXA%3D%3D";
+	//private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	private String contentTypeId = "12"; //""
 	private String contentId ="";
 	private String areaCode = "";
@@ -36,7 +37,7 @@ public class TourAPlUrlManage {
 	private int pageNo =1;
 		
 	
-	public TourAPlUrlManage() {
+	public TourAPlListUrlManage() {
 		
 	}
 
@@ -164,6 +165,7 @@ public class TourAPlUrlManage {
 
 	public String urlMaking() {
 		String urlcomplete = url+type+serviceKeyName+serviceKey+contentTypeIdName+contentTypeId+
+									contentIdName+contentId+
 									areaCodeName+areaCode+sigunguCodeName+sigunguCode+
 									cat1Name+cat1+cat2Name+cat2+cat3Name+cat3+listYNName+listYN+
 									MobileOSName+MoblieOS+MobileAppName+MobileApp+arrangeName+arrange+

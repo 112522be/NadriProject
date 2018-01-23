@@ -152,6 +152,12 @@
         <td>John Doe</td>
         <td>john.doe@example.com</td>
         <td>johndoe1</td>
+        <td>${getTrip.contentid}</td>
+        <td>${getTrip.title}</td>
+        <td>${getTrip.addr1}</td>
+        <td>입장료 : ${getDetail.usefee}</td>
+        <td>휴무일 : ${getDetail.restdateculture}</td>
+        
       </tr>
     </tbody>
   </table>
