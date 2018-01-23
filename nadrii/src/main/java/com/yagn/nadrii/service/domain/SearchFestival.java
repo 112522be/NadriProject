@@ -3,6 +3,10 @@ package com.yagn.nadrii.service.domain;
 public class SearchFestival {
 
 	/// Field
+	// Basic response
+	private int contentid;
+	private int contenttypeid;
+		
 	private String addr1;
 	private String addr2;
 	private int areacode;
@@ -10,8 +14,6 @@ public class SearchFestival {
 	private String cat1;
 	private String cat2;
 	private String cat3;
-	private int contentid;
-	private int contenttypeid;
 	private String createdtime;
 	private int eventstartdate;
 	private int eventenddate;
@@ -159,8 +161,6 @@ public class SearchFestival {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "SearchFestival [addr1=" + addr1 + ", addr2=" + addr2 + ", areacode=" + areacode + ", booktour="
@@ -174,7 +174,4 @@ public class SearchFestival {
 	
 	
 	
-	
-	
-
 }
