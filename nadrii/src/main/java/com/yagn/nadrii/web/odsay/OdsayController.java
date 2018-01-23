@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yagn.nadrii.service.odsay.OdsayService;
 
-@Controller
-@RequestMapping("/odsay/*")
+//@Controller
+//@RequestMapping("/odsay/*")
 public class OdsayController {
 	
 	@Autowired
