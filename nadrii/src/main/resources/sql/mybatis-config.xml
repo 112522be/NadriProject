@@ -20,6 +20,7 @@
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
+		<mapper resource="sql/CommMapper.xml"/>
 	</mappers>
 
 </configuration>
