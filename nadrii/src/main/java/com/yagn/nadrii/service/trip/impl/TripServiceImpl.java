@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.service.trip.TourAPlUrlManage;
 import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
@@ -29,10 +30,10 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(int pageNo) throws Exception{
+	public Map listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception{
 		Map map = new HashMap();
 		
-		List list = tripDao.listTrip(pageNo);
+		List list = tripDao.listTrip(tourAPlUrlManage);
 		map.put("list", list);
 		return map;
 	}

@@ -34,16 +34,9 @@ public class TripDaoImpl implements TripDao {
 		
 	}
 
-	public List listTrip(int pageNo) throws Exception {
+	public List listTrip(TourAPlUrlManage tourAPlUrlManage) throws Exception {
 		HttpClient httpClient = new DefaultHttpClient();
-		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
-			
-		tourAPlUrlManage.setContentTypeId("14");
-		tourAPlUrlManage.setCat1("A02");
 		
-		tourAPlUrlManage.setCat2("A0206");
-		tourAPlUrlManage.setCat3("A02060100");
-		tourAPlUrlManage.setPageNo(pageNo);
 				
 		HttpGet httpGet = new HttpGet(tourAPlUrlManage.urlMaking()); 
 		

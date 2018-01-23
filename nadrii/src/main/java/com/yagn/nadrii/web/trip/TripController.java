@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yagn.nadrii.service.trip.TourAPlUrlManage;
 import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripService;
 
@@ -28,10 +29,19 @@ public class TripController {
 
 	@RequestMapping(value="listMuseum")
 	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
+		TourAPlUrlManage tourAPlUrlManage = new TourAPlUrlManage();
+		tourAPlUrlManage.urlClean();
+		tourAPlUrlManage.setContentTypeId("14");
+		tourAPlUrlManage.setCat1("A02");
+		tourAPlUrlManage.setCat2("A0206");
+		tourAPlUrlManage.setCat3("A02060100");
+		tourAPlUrlManage.setPageNo(pageNo);
+		
+		System.out.println(tourAPlUrlManage.urlMaking());
 		
 		System.out.println("/trip/listMuseum");
 		
-		Map tripMap = tripService.listTrip(pageNo); 
+		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		
