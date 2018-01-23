@@ -5,32 +5,26 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.model2.mvc.common.Page;
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
-import com.model2.mvc.service.user.UserService;
+import com.yagn.nadrii.common.Page;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Planner;
+import com.yagn.nadrii.service.planner.PlannerService;
 
-
-//==> ȸ������ Controller
 //@Controller
-//@RequestMapping("/user/*")
+//@RequestMapping("/planner/*")
 public class PlannerController {
 	
 	///Field
 //	@Autowired
-//	@Qualifier("userServiceImpl")
-	private PlannerService userService;
-	//setter Method ���� ����
+//	@Qualifier("plannerServiceImpl")
+	private PlannerService plannerService;
 		
 	public PlannerController(){
 		System.out.println(this.getClass());
@@ -41,136 +35,77 @@ public class PlannerController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	@RequestMapping( value="addPlanner", method=RequestMethod.GET )
+	public String addPlanner() throws Exception{
 	
-	@RequestMapping( value="addUser", method=RequestMethod.GET )
-	public String addUser() throws Exception{
-	
-		System.out.println("/user/addUser : GET");
+		System.out.println("/planner/addPlanner : GET");
 		
-		return "redirect:/user/addUserView.jsp";
+		return "redirect:/planner/addPlannerView.jsp";
 	}
 	
-	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser( @ModelAttribute("user") User user ) throws Exception {
+	@RequestMapping( value="addPlanner", method=RequestMethod.POST )
+	public String addPlanner( @ModelAttribute("planner") Planner planner ) throws Exception {
 
-		System.out.println("/user/addUser : POST");
+		System.out.println("/planner/addPlanner : POST");
 		//Business Logic
-		userService.addUser(user);
+		plannerService.addPlanner(planner);
 		
-		return "redirect:/user/loginView.jsp";
+		return "redirect:/planner/loginView.jsp";
 	}
 	
-
-	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
+	@RequestMapping( value="getPlanner", method=RequestMethod.GET )
+	public String getPlanner( @RequestParam("postNo") int postNo , Model model ) throws Exception {
 		
-		System.out.println("/user/getUser : GET");
+		System.out.println("/planner/getPlanner : GET");
 		//Business Logic
-		User user = userService.getUser(userId);
+		Planner planner = plannerService.getPlanner(postNo);
 		// Model �� View ����
-		model.addAttribute("user", user);
+		model.addAttribute("planner", planner);
 		
-		return "forward:/user/getUser.jsp";
+		return "forward:/planner/getPlanner.jsp";
 	}
 	
+	@RequestMapping( value="updatePlanner", method=RequestMethod.GET )
+	public String updatePlanner( @RequestParam("postNo") int postNo , Model model ) throws Exception{
 
-	@RequestMapping( value="updateUser", method=RequestMethod.GET )
-	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
-
-		System.out.println("/user/updateUser : GET");
+		System.out.println("/planner/updatePlanner : GET");
 		//Business Logic
-		User user = userService.getUser(userId);
+		Planner planner = plannerService.getPlanner(postNo);
 		// Model �� View ����
-		model.addAttribute("user", user);
+		model.addAttribute("planner", planner);
 		
-		return "forward:/user/updateUser.jsp";
+		return "forward:/planner/updatePlanner.jsp";
 	}
 
-	@RequestMapping( value="updateUser", method=RequestMethod.POST )
-	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
+	@RequestMapping( value="updatePlanner", method=RequestMethod.POST )
+	public String updatePlanner( @ModelAttribute("planner") Planner planner , Model model , HttpSession session) throws Exception{
 
-		System.out.println("/user/updateUser : POST");
+		System.out.println("/planner/updatePlanner : POST");
 		//Business Logic
-		userService.updateUser(user);
-		
-		String sessionId=((User)session.getAttribute("user")).getUserId();
-		if(sessionId.equals(user.getUserId())){
-			session.setAttribute("user", user);
-		}
-		
-		return "redirect:/user/getUser?userId="+user.getUserId();
-	}
-	
-	
-	@RequestMapping( value="login", method=RequestMethod.GET )
-	public String login() throws Exception{
-		
-		System.out.println("/user/logon : GET");
+		plannerService.updatePlanner(planner);
 
-		return "redirect:/user/loginView.jsp";
+		return "redirect:/planner/getPlanner?postNo="+planner.getPostNo();
 	}
 	
-	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	@RequestMapping( value="listPlanner" )
+	public String listPlanner( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
-		System.out.println("/user/login : POST");
-		//Business Logic
-		User dbUser=userService.getUser(user.getUserId());
-		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
-		
-		return "redirect:/index.jsp";
-	}
-		
-	
-	@RequestMapping( value="logout", method=RequestMethod.GET )
-	public String logout(HttpSession session ) throws Exception{
-		
-		System.out.println("/user/logout : POST");
-		
-		session.invalidate();
-		
-		return "redirect:/index.jsp";
-	}
-	
-	
-	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )
-	public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception{
-		
-		System.out.println("/user/checkDuplication : POST");
-		//Business Logic
-		boolean result=userService.checkDuplication(userId);
-		// Model �� View ����
-		model.addAttribute("result", new Boolean(result));
-		model.addAttribute("userId", userId);
-
-		return "forward:/user/checkDuplication.jsp";
-	}
-
-	
-	@RequestMapping( value="listUser" )
-	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
-		
-		System.out.println("/user/listUser : GET / POST");
+		System.out.println("/planner/listPlanner : GET / POST");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
-		// Business logic ����
-		Map<String , Object> map=userService.getUserList(search);
+	
+		Map<String , Object> map=plannerService.getPlannerList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
-		// Model �� View ����
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/user/listUser.jsp";
+		return "forward:/planner/listPlanner.jsp";
 	}
 }

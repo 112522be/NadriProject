@@ -3,17 +3,14 @@ package com.yagn.nadrii.service.planner.impl;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
-import com.model2.mvc.service.user.UserDao;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Planner;
+import com.yagn.nadrii.service.planner.PlannerDao;
 
 
 //==> ȸ������ DAO CRUD ����
-//@Repository("userDaoImpl")
+//@Repository("plannerDaoImpl")
 public class PlannerDaoImpl implements PlannerDao{
 	
 	///Field
@@ -30,24 +27,23 @@ public class PlannerDaoImpl implements PlannerDao{
 	}
 
 	///Method
-	public void addUser(User user) throws Exception {
-		sqlSession.insert("UserMapper.addUser", user);
+	public void addPlanner(Planner planner) throws Exception {
+		sqlSession.insert("PlannerMapper.addPlanner", planner);
 	}
 
-	public User getUser(String userId) throws Exception {
-		return sqlSession.selectOne("UserMapper.getUser", userId);
+	public Planner getPlanner(int postNo) throws Exception {
+		return sqlSession.selectOne("PlannerMapper.getPlanner", postNo);
 	}
 	
-	public void updateUser(User user) throws Exception {
-		sqlSession.update("UserMapper.updateUser", user);
+	public void updatePlanner(Planner planner) throws Exception {
+		sqlSession.update("PlannerMapper.updatePlanner", planner);
 	}
 
-	public List<User> getUserList(Search search) throws Exception {
-		return sqlSession.selectList("UserMapper.getUserList", search);
+	public List<Planner> getPlannerList(Search search) throws Exception {
+		return sqlSession.selectList("PlannerMapper.getPlannerList", search);
 	}
 
-	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("UserMapper.getTotalCount", search);
+		return sqlSession.selectOne("PlannerMapper.getTotalCount", search);
 	}
 }

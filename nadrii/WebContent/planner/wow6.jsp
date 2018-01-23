@@ -1,21 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<title>Insert title here</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<style>
+	  	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+		#sortable li span { position: absolute; margin-left: -1.3em; }
+	</style>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$( function() {
+			$( "#sortable" ).sortable();
+			$( "#sortable" ).disableSelection();
+		});
+	</script>
+	
 </head>
 <body>
-	<div id="map" style="width:100%;height:600px;"></div>
-	<p><em>Áöµµ¸¦ Å¬¸¯ÇØÁÖ¼¼¿ä!</em></p> 
+<div class = "container-fulid">
+	<div class="row">
+		<div class = "col-lg-11"></div>
+		<div class = "col-lg-1">
+			<input type = "button" value ="ì €ì¥">
+		</div>
+		<div class = "col-lg-8" id="map" style="width:65%;height:750px;"></div>
+		<div class = "col-lg-4">
+		
+			<ul id="sortable">
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+			</ul>
+			
+			<hr>
+			
+			<textarea class="form-control" rows="27" cols="blue"></textarea>
+		
+		</div>
+	</div>
+
+	<p><em>ì§€ë„ë¥¼ í´ë¦­í•´ì£¼ì„¸ìš”!</em></p> 
 	<div id="clickLatlng"></div>
 	
+</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> 
+	
 	<script type="text/javascript">
 	
-		/*******************Array insert »ç¿ë**********************/
+		/*******************Array insert ì‚¬ìš©**********************/
 		Array.prototype.insert = function ( index, item ) {
 	    		this.splice( index, 0, item );
 		};
@@ -24,10 +71,10 @@
 	
 	
 	
-		var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
+		var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
 		mapOption = { 
-		    center: new daum.maps.LatLng(37.50187873437067, 127), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-		    level: 10 // ÁöµµÀÇ È®´ë ·¹º§
+		    center: new daum.maps.LatLng(37.50187873437067, 127), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+		    level: 10 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
 		};
 		
 		var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -43,14 +90,14 @@
 		var infowindow = new daum.maps.InfoWindow({
 				
 				position : new daum.maps.LatLng(latlng.getLat(),latlng.getLng()),
-				content :  '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">Ãâ¹ßÁö</a><br>'
-					+'<a href="#" id="pass" onclick="javascript:pass()">°æÀ¯Áö</a><br>'+'<a href="#" id="end" onclick="javascript:end()">µµÂøÁö</a></div>'
+				content :  '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">ì¶œë°œì§€</a><br>'
+					+'<a href="#" id="pass" onclick="javascript:pass()">ê²½ìœ ì§€</a><br>'+'<a href="#" id="end" onclick="javascript:end()">ë„ì°©ì§€</a></div>'
 			});	
 			
-		var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ÁÖ¼ÒÀÔ´Ï´Ù    
-			startSize = new daum.maps.Size(50, 45), // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù 
+		var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì£¼ì†Œì…ë‹ˆë‹¤    
+			startSize = new daum.maps.Size(50, 45), // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ì…ë‹ˆë‹¤ 
 			startOption = { 
-							    offset: new daum.maps.Point(15, 43) // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁö¿¡¼­ ¸¶Ä¿ÀÇ ÁÂÇ¥¿¡ ÀÏÄ¡½ÃÅ³ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù (±âº»°ªÀº ÀÌ¹ÌÁöÀÇ °¡¿îµ¥ ¾Æ·¡ÀÔ´Ï´Ù)
+							    offset: new daum.maps.Point(15, 43) // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì—ì„œ ë§ˆì»¤ì˜ ì¢Œí‘œì— ì¼ì¹˜ì‹œí‚¬ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤ (ê¸°ë³¸ê°’ì€ ì´ë¯¸ì§€ì˜ ê°€ìš´ë° ì•„ë˜ì…ë‹ˆë‹¤)
 							};
 							
 		var startImage = new daum.maps.MarkerImage(startSrc, startSize, startOption);
@@ -67,10 +114,10 @@
 		var passPosition = [];
 		var passMarker = [];
 		
-		var	 passSize = new daum.maps.Size(50, 45), // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù 
-			passOption = { 
-							    offset: new daum.maps.Point(15, 43) // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁö¿¡¼­ ¸¶Ä¿ÀÇ ÁÂÇ¥¿¡ ÀÏÄ¡½ÃÅ³ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù (±âº»°ªÀº ÀÌ¹ÌÁöÀÇ °¡¿îµ¥ ¾Æ·¡ÀÔ´Ï´Ù)
-							};
+		var	 passSize = new daum.maps.Size(50, 45), // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ì…ë‹ˆë‹¤ 
+		passOption = { 
+						    offset: new daum.maps.Point(15, 43) // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì—ì„œ ë§ˆì»¤ì˜ ì¢Œí‘œì— ì¼ì¹˜ì‹œí‚¬ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤ (ê¸°ë³¸ê°’ì€ ì´ë¯¸ì§€ì˜ ê°€ìš´ë° ì•„ë˜ì…ë‹ˆë‹¤)
+						};
 						
 		for(i=1; i<6; i++){
 			
@@ -85,39 +132,39 @@
 			});
 		}
 		
-		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png', // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁöÀÇ ÁÖ¼ÒÀÔ´Ï´Ù    
-			endSize = new daum.maps.Size(50, 45), // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁöÀÇ Å©±âÀÔ´Ï´Ù 
-			endOption = { 
-							    offset: new daum.maps.Point(15, 43) // Ãâ¹ß ¸¶Ä¿ÀÌ¹ÌÁö¿¡¼­ ¸¶Ä¿ÀÇ ÁÂÇ¥¿¡ ÀÏÄ¡½ÃÅ³ ÁÂÇ¥¸¦ ¼³Á¤ÇÕ´Ï´Ù (±âº»°ªÀº ÀÌ¹ÌÁöÀÇ °¡¿îµ¥ ¾Æ·¡ÀÔ´Ï´Ù)
-							};
+		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png', // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì˜ ì£¼ì†Œì…ë‹ˆë‹¤    
+		endSize = new daum.maps.Size(50, 45), // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì˜ í¬ê¸°ì…ë‹ˆë‹¤ 
+		endOption = { 
+						    offset: new daum.maps.Point(15, 43) // ì¶œë°œ ë§ˆì»¤ì´ë¯¸ì§€ì—ì„œ ë§ˆì»¤ì˜ ì¢Œí‘œì— ì¼ì¹˜ì‹œí‚¬ ì¢Œí‘œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤ (ê¸°ë³¸ê°’ì€ ì´ë¯¸ì§€ì˜ ê°€ìš´ë° ì•„ë˜ì…ë‹ˆë‹¤)
+						};
 						
 		var endImage = new daum.maps.MarkerImage(endSrc, endSize, endOption);
 		var endPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
 		
 		var endMarker = new daum.maps.Marker({
-			
-			position: endPosition,
-			image: endImage
+		
+		position: endPosition,
+		image: endImage
 		});
 		
 		
 		daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
 		
-		    // Å¬¸¯ÇÑ À§µµ, °æµµ Á¤º¸¸¦ °¡Á®¿É´Ï´Ù 
+		    // í´ë¦­í•œ ìœ„ë„, ê²½ë„ ì •ë³´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤ 
 		    var latlng = mouseEvent.latLng; 
 		    
-			// Áöµµ¿¡ ¸¶Ä¿¸¦ Ç¥½ÃÇÕ´Ï´Ù
+			// ì§€ë„ì— ë§ˆì»¤ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤
 			marker.setMap(map);
-		    // Áöµµ¿¡ ÀÎÆ÷À©µµ¿ì¸¦ Ç¥½ÃÇÕ´Ï´Ù.
+		    // ì§€ë„ì— ì¸í¬ìœˆë„ìš°ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤.
 			infowindow.setMap(map);
 			
-		    var message = 'Å¬¸¯ÇÑ À§Ä¡ÀÇ À§µµ´Â ' + latlng.getLat() + ' ÀÌ°í, ';
-		    message += '°æµµ´Â ' + latlng.getLng() + ' ÀÔ´Ï´Ù' ;
+		    var message = 'í´ë¦­í•œ ìœ„ì¹˜ì˜ ìœ„ë„ëŠ” ' + latlng.getLat() + ' ì´ê³ , ';
+		    message += 'ê²½ë„ëŠ” ' + latlng.getLng() + ' ì…ë‹ˆë‹¤' ;
 		    
 		    var resultDiv = document.getElementById('clickLatlng'); 
 		    resultDiv.innerHTML = message;
 		    
-		 	// ¸¶Ä¿ À§Ä¡¸¦ Å¬¸¯ÇÑ À§Ä¡·Î ¿Å±é´Ï´Ù
+		 	// ë§ˆì»¤ ìœ„ì¹˜ë¥¼ í´ë¦­í•œ ìœ„ì¹˜ë¡œ ì˜®ê¹ë‹ˆë‹¤
 		    marker.setPosition(latlng);
 		    
 		    infowindow.open(map,marker);
@@ -148,27 +195,38 @@
 				
 				passMarker[1].setPosition(latlng);
 				passMarker[1].setMap(map);
-
+			
+				
+				
+				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() == null){
 				
 				passMarker[2].setPosition(latlng);
 				passMarker[2].setMap(map);
-
+				
+				
+				
+				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() == null){
 				
 				passMarker[3].setPosition(latlng);
 				passMarker[3].setMap(map);
-
+				
+				
+				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() == null){
 				
 				passMarker[4].setPosition(latlng);
 				passMarker[4].setMap(map);
 				
+				
+				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() != null && passMarker[5].getMap() == null){
 				
 				passMarker[5].setPosition(latlng);
 				passMarker[5].setMap(map);
-		
+				
+				
 			}		
 		}
 		
@@ -216,10 +274,10 @@
 		var STNpolyline;
 		
 		
-		var kk ;		//Àı´ë Áö¿ìÁö ¸»°Í Æú¸®¶óÀÎ ´ã´Â ¹è¿­ º¯¼ö ¼±¾ğ!!
+		var kk ;		//ì ˆëŒ€ ì§€ìš°ì§€ ë§ê²ƒ í´ë¦¬ë¼ì¸ ë‹´ëŠ” ë°°ì—´ ë³€ìˆ˜ ì„ ì–¸!!
 		
-		var ak;		//ÀÓ½Ã ¹è¿­
-		var rk;		//ÁøÂ¥ ¹è¿­
+		var ak;		//ì„ì‹œ ë°°ì—´
+		var rk;		//ì§„ì§œ ë°°ì—´
 		
 		var first;
 		var last;
@@ -276,6 +334,24 @@
 				if(k+1 == ak.length){
 					break;
 				}
+				
+				function send(){
+					$.ajax({
+						url:"../odsay/json/getPubTransPath/"+sx+"/"+sy+"/"+ex+"/"+ey+"",
+						method:"GET",
+						dataType:"json",
+						data:{"sx":sx,"sy":sy,"ex":ex,"ey":ey},
+						headers:{
+							"Accept" : "application/json",
+							"Content-type" : "application/json"
+						}
+					});
+				}
+				
+				var sx = first.getLng();
+				var sy = first.getLat();
+				var ex = last.getLng();
+				var ey = last.getLat();
 				search2();
 				
 			}
@@ -297,7 +373,7 @@
 				roadSearch();
 					
 			}
-					
+			
 		}
 		
 		
@@ -313,16 +389,16 @@
 			
 			function search() {
 			
-				//ODsay apiKey ÀÔ·Â
+				//ODsay apiKey ì…ë ¥
 				var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 				xhr.open("GET", url, false);
 				
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
-						console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText ·Î °á°ú¸¦ °¡Á®¿Ã ¼ö ÀÖÀ½
+						console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText ë¡œ ê²°ê³¼ë¥¼ ê°€ì ¸ì˜¬ ìˆ˜ ìˆìŒ
 						
 						if( JSON.parse(xhr.responseText)["result"]["path"] == null ){
-							alert("½Ã¿Ü");	
+							alert("ì‹œì™¸");	
 							
 							var sx = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].SX;
 							var sy = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].SY;
@@ -344,13 +420,13 @@
 							rk.insert(k+1, startLatlng);
 							rk.insert(k+2, endLatlng);
 							
-							console.log("Ãâ¹ßÅÍ¹Ì³Î::"+startLatlng);
-							console.log("µµÂøÅÍ¹Ì³Î::"+endLatlng);
+							console.log("ì¶œë°œí„°ë¯¸ë„::"+startLatlng);
+							console.log("ë„ì°©í„°ë¯¸ë„::"+endLatlng);
 						
+							
 							alert("ak :: "+ ak); 
 							
 							function line2(){
-								
 								STNpolyline = new daum.maps.Polyline({
 								    path: [
 								       startLatlng, endLatlng
@@ -364,7 +440,6 @@
 								STNpolyline.setMap(map);
 								
 							}
-							
 							line2();
 							 
 						}
@@ -376,49 +451,54 @@
 			search();
 			
 		}
+		
 
+		
+
+		
 		function roadSearch(){
-			kk=[];		//Æú¸®¶óÀÎ ´ã´Â ¹è¿­ ¼±¾ğ!!
+			kk=[];		//í´ë¦¬ë¼ì¸ ë‹´ëŠ” ë°°ì—´ ì„ ì–¸!!
 			
 			for(var t=0; t<kk.length;t++){
 				kk[t]=null;
 			}
-			
+
 			var sx = first.getLng();
 			var sy = first.getLat();
 			var ex = last.getLng();
 			var ey = last.getLat();
 			
+			
 			function searchPubTransPathAJAX() {
 				var xhr = new XMLHttpRequest();
-				//ODsay apiKey ÀÔ·Â
+				//ODsay apiKey ì…ë ¥
 				var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 				xhr.open("GET", url, false);
 				
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
-						console.log(JSON.parse(xhr.responseText) ); // <- xhr.responseText ·Î °á°ú¸¦ °¡Á®¿Ã ¼ö ÀÖÀ½
-						//³ë¼±±×·¡ÇÈ µ¥ÀÌÅÍ È£Ãâ
-						callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj);
+					console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText ë¡œ ê²°ê³¼ë¥¼ ê°€ì ¸ì˜¬ ìˆ˜ ìˆìŒ
+					//ë…¸ì„ ê·¸ë˜í”½ ë°ì´í„° í˜¸ì¶œ
+					callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj);
 					}
 				}
 				xhr.send();
 			}
 			
-			//±æÃ£±â API È£Ãâ
+			//ê¸¸ì°¾ê¸° API í˜¸ì¶œ
 			searchPubTransPathAJAX();
 	
 			function callMapObjApiAJAX(mabObj){
 				var xhr = new XMLHttpRequest();
-				//ODsay apiKey ÀÔ·Â
+				//ODsay apiKey ì…ë ¥
 				var url = "https://api.odsay.com/v1/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 				xhr.open("GET", url, true);
 				xhr.send();
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
 						var resultJsonData = JSON.parse(xhr.responseText);
-						daumPolyLine(resultJsonData);		// ³ë¼±±×·¡ÇÈµ¥ÀÌÅÍ ÁöµµÀ§ Ç¥½Ã
-						// boundary µ¥ÀÌÅÍ°¡ ÀÖÀ»°æ¿ì, ÇØ´ç boundary·Î ÁöµµÀÌµ¿
+						daumPolyLine(resultJsonData);		// ë…¸ì„ ê·¸ë˜í”½ë°ì´í„° ì§€ë„ìœ„ í‘œì‹œ
+						// boundary ë°ì´í„°ê°€ ìˆì„ê²½ìš°, í•´ë‹¹ boundaryë¡œ ì§€ë„ì´ë™
 						if(resultJsonData.result.boundary){
 								var boundary = new daum.maps.LatLngBounds(
 						                new daum.maps.LatLng(resultJsonData.result.boundary.top, resultJsonData.result.boundary.left),
@@ -430,7 +510,7 @@
 				}
 			}
 			
-			// ÁöµµÀ§ ¸¶Ä¿ Ç¥½ÃÇØÁÖ´Â ÇÔ¼ö
+			// ì§€ë„ìœ„ ë§ˆì»¤ í‘œì‹œí•´ì£¼ëŠ” í•¨ìˆ˜
 			function drawDaumMarker(x,y){
 				var marker = new daum.maps.Marker({
 				    position: new daum.maps.LatLng(y, x),
@@ -438,9 +518,11 @@
 				});
 			}
 			
-			// ³ë¼±±×·¡ÇÈ µ¥ÀÌÅÍ¸¦ ÀÌ¿ëÇÏ¿© ÁöµµÀ§ Æú¸®¶óÀÎ ±×·ÁÁÖ´Â ÇÔ¼ö
+			// ë…¸ì„ ê·¸ë˜í”½ ë°ì´í„°ë¥¼ ì´ìš©í•˜ì—¬ ì§€ë„ìœ„ í´ë¦¬ë¼ì¸ ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
 			function daumPolyLine(data){
-	
+				
+							
+				
 				for(var i = 0 ; i < data.result.lane.length; i++){
 					for(var j=0 ; j <data.result.lane[i].section.length; j++){
 						lineArray = null;
@@ -450,7 +532,7 @@
 						}
 							
 						
-					//ÁöÇÏÃ¶°á°úÀÇ °æ¿ì ³ë¼±¿¡ µû¸¥ ¶óÀÎ»ö»ó ÁöÁ¤ÇÏ´Â ºÎºĞ (1,2È£¼±ÀÇ °æ¿ì¸¸ ¿¹·Î µéÀ½)
+					//ì§€í•˜ì² ê²°ê³¼ì˜ ê²½ìš° ë…¸ì„ ì— ë”°ë¥¸ ë¼ì¸ìƒ‰ìƒ ì§€ì •í•˜ëŠ” ë¶€ë¶„ (1,2í˜¸ì„ ì˜ ê²½ìš°ë§Œ ì˜ˆë¡œ ë“¤ìŒ)
 
 						polyline = new daum.maps.Polyline({
 							    
@@ -468,15 +550,11 @@
 							}
 						}
 					}
-				}
-				
+				}				
 			}
-			
-			
-			
 		}
 		
-
+		
 		function kkk(){
 			
 			for(var q = 0; q<kk.length; q++){
@@ -490,31 +568,35 @@
 			
 		}
 		
+		
 		function bb(){
-			
-			alert("rk @@ "+rk);
-			
-			jQuery.ajaxSettings.traditional = true;
-
-			$.ajax( 
-					{
-						url : "/planner/json/addPlanner/"+rk ,
-						type : "POST" ,
-						dataType : "json",
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : status
-				});
-			
+			alert(uu);
 		}
 		
+		function doh(){
+			
+			
+			
+		}
+
+		
+		
+
 	</script>
 	
-	<input type="button" value="°æ·ÎÅ½»ö" onclick="javascript:rrr()">
-	<input type="button" value="°æ·Î»èÁ¦" onclick="javascript:kkk()">
-	<input type="button" value="ÁÂÇ¥¹è¿­º¸±â" onclick="javascript:bb()">
+	
+	<form name = "test" method="post">
+
+		<input type="button" value="ê²½ë¡œíƒìƒ‰" onclick="javascript:rrr()">
+		
+		<input type="button" value="ê²½ë¡œì‚­ì œ" onclick="javascript:kkk()">
+		
+		<input type="button" value="ë­˜ê¹Œìš”" onclick="javascript:bb()">
+	
+	</form>
+	
+	
+	
 	
 </body>
 </html>

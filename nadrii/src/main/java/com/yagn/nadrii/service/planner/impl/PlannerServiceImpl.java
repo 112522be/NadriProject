@@ -4,26 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
-import com.model2.mvc.service.user.UserService;
-import com.model2.mvc.service.user.UserDao;;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Planner;
+import com.yagn.nadrii.service.planner.PlannerDao;
+import com.yagn.nadrii.service.planner.PlannerService;;
 
 
 //==> ȸ������ ���� ����
-//@Service("userServiceImpl")
+//@Service("plannerServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field
 //	@Autowired
-//	@Qualifier("userDaoImpl")
-	private PlannerDao userDao;
-	public void setUserDao(PlannerDao userDao) {
-		this.userDao = userDao;
+//	@Qualifier("plannerDaoImpl")
+	private PlannerDao plannerDao;
+	public void setPlannerDao(PlannerDao plannerDao) {
+		this.plannerDao = plannerDao;
 	}
 	
 	///Constructor
@@ -32,17 +28,17 @@ public class PlannerServiceImpl implements PlannerService{
 	}
 
 	///Method
-	public void addUser(User user) throws Exception {
-		userDao.addUser(user);
+	public void addPlanner(Planner planner) throws Exception {
+		plannerDao.addPlanner(planner);
 	}
 
-	public User getUser(String userId) throws Exception {
-		return userDao.getUser(userId);
+	public Planner getPlanner(int postNo) throws Exception {
+		return plannerDao.getPlanner(postNo);
 	}
 
-	public Map<String , Object > getUserList(Search search) throws Exception {
-		List<User> list= userDao.getUserList(search);
-		int totalCount = userDao.getTotalCount(search);
+	public Map<String , Object > getPlannerList(Search search) throws Exception {
+		List<Planner> list= plannerDao.getPlannerList(search);
+		int totalCount = plannerDao.getTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
@@ -51,16 +47,7 @@ public class PlannerServiceImpl implements PlannerService{
 		return map;
 	}
 
-	public void updateUser(User user) throws Exception {
-		userDao.updateUser(user);
-	}
-
-	public boolean checkDuplication(String userId) throws Exception {
-		boolean result=true;
-		User user=userDao.getUser(userId);
-		if(user != null) {
-			result=false;
-		}
-		return result;
+	public void updatePlanner(Planner planner) throws Exception {
+		plannerDao.updatePlanner(planner);
 	}
 }
