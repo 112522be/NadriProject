@@ -37,8 +37,7 @@ public class TourApiDomain {
 	private String modifiedtime;
 	private String tel;
 	
-	
-	
+
 	public String getTel() {
 		return tel;
 	}
