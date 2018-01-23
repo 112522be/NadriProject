@@ -97,7 +97,7 @@
 		  });
 	});
 */
-	
+	/*
 	$(function(){
 		//$($(".thumbnail")[$(".row div:nth-child(1)").index(this)]).on("click",function(){
 			$("img").on("click",function(){
@@ -110,26 +110,60 @@
 		
 		});
 	});
-	
+	*/
+		
+	$(function() {
+		  $('#dialog').dialog({
+			//draggable: false,
+		    autoOpen: false,
+		    resizable: false,
+		    //크기 조절
+		    width: 800,
+		  });
+	  $('#thumbnailImage').click( function(){
+	    
+		 $('#dialog').dialog('open');
+	    
+	  });
+	});	
+		
+		
 	</script>
 	
 	
 	<title>박물관찾기</title>
 </head>
 <body>
-<!-- 
+
+
 <div id="dialog" title="기본 대화상자">
-  
-  
-  
-  <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.get(i).firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+  <img src="C:\Users\user\Desktop\gerjeMuseum.jpg"/>
+  <p>${list.get(i).title}</p>
   <p>${list.get(i).addr1}</p>
+  <div id="map" style="width:100%;height:400px;"></div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+  <script>
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
   
-  
-  
-</div>
- -->
+	var markerPosition  = new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}); 
+
+	//마커를 생성합니다
+	var marker = new daum.maps.Marker({
+	   position: markerPosition
+	});
 	
+	//마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+</script>
+  
+  
+</div>	
 	
 <div class="container">
 

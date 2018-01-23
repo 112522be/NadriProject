@@ -110,17 +110,13 @@ public class TripDaoImpl implements TripDao {
 		JSONObject jsonobj = (JSONObject)items.get("item");
 		ObjectMapper objectMapper = new ObjectMapper();
 		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
-		//System.out.println(jsonobj);
 		
-		/*
-				*/
-		return tourApiDomain;
-		
+		return tourApiDomain;		
 	}
 
 	@Override
 	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
-		// TODO Auto-generated method stub
+		
 		//요금정보 가져오기
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetDetailUrlManage.urlMaking());

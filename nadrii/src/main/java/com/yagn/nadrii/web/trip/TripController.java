@@ -31,6 +31,7 @@ public class TripController {
 
 
 	@RequestMapping(value="listMuseum")
+	
 	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
