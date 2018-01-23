@@ -36,8 +36,6 @@ public class TourApiDomain {
 	private String createdtime;
 	private String modifiedtime;
 	private String tel;
-	
-	
 	private String booktour;
 	private String telname;
 	private String homepage;

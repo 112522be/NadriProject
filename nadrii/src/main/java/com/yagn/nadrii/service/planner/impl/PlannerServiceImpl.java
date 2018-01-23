@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
-import com.model2.mvc.service.user.UserService;
-import com.model2.mvc.service.user.UserDao;;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.planner.PlannerDao;
+import com.yagn.nadrii.service.planner.PlannerService;
 
 
-//==> ȸ������ ���� ����
-//@Service("userServiceImpl")
+
+@Service("userServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field

@@ -4,18 +4,22 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 /*
  * FileName : PojoAspectJ.java
+<<<<<<< HEAD
+ *	:: XML �� ���������� aspect �� ����   
+=======
  *	:: XML aspect   
+>>>>>>> refs/remotes/origin/master
   */
 public class LogAspectJ {
 
-	///Constructor
+	/// Constructor
 	public LogAspectJ() {
-		System.out.println("\nCommon :: "+this.getClass()+"\n");
+		System.out.println("\nCommon :: " + this.getClass() + "\n");
 	}
-	
-	//Around  Advice
+
+	// Around Advice
 	public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
-			
+
 		System.out.println("");
 		System.out.println("[Around before] 타겟 메소드 :"+
 													joinPoint.getTarget().getClass().getName() +"."+
@@ -23,13 +27,13 @@ public class LogAspectJ {
 		if(joinPoint.getArgs().length !=0){
 			System.out.println("[Around before]method에 전달되는 parameter : "+ joinPoint.getArgs()[0]);
 		}
-		//==> 타겟 객체의 Method 를 호출 하는 부분 
+		// ==> Ÿ�� ��ü�� Method �� ȣ�� �ϴ� �κ�
 		Object obj = joinPoint.proceed();
 
 		System.out.println("[Around after] 타겟객체 return value  : "+obj);
 		System.out.println("");
-		
+
 		return obj;
 	}
-	
-}//end of class
+
+}// end of class
