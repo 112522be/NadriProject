@@ -16,13 +16,13 @@ import com.yagn.nadrii.service.planner.PlannerService;
 
 
 //==> ȸ������ RestController
-@RestController
-@RequestMapping("/user/*")
+//@RestController
+//@RequestMapping("/user/*")
 public class PlannerRestController {
 	
 	///Field
-	@Autowired
-	@Qualifier("userServiceImpl")
+//	@Autowired
+//	@Qualifier("userServiceImpl")
 	private PlannerService userService;
 	//setter Method ���� ����
 		

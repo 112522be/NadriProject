@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>네이버 :: Smart Editor 2 &#8482;</title>
-<script type="text/javascript" src="./smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 <form action="sample/viewer/index.php" method="post">
@@ -27,7 +27,7 @@ var sLang = "ko_KR";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_K
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: "ir1",
-	sSkinURI: "./smartEditor2/SmartEditor2Skin.html",	
+	sSkinURI: "/resources/smartEditor2/SmartEditor2Skin.html",	
 	htParams : {
 		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)

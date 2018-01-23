@@ -22,14 +22,13 @@ import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.planner.PlannerService;
 
 
-//==> ȸ������ Controller
-@Controller
-@RequestMapping("/user/*")
+//@Controller
+//@RequestMapping("/user/*")
 public class PlannerController {
 	
 	///Field
-	@Autowired
-	@Qualifier("userServiceImpl")
+//	@Autowired
+//	@Qualifier("userServiceImpl")
 	private PlannerService userService;
 	//setter Method ���� ����
 		

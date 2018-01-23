@@ -15,13 +15,12 @@ import com.yagn.nadrii.service.planner.PlannerService;
 
 
 
-//==> ȸ������ ���� ����
 @Service("userServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field
-	@Autowired
-	@Qualifier("userDaoImpl")
+//	@Autowired
+//	@Qualifier("userDaoImpl")
 	private PlannerDao userDao;
 	public void setUserDao(PlannerDao userDao) {
 		this.userDao = userDao;
