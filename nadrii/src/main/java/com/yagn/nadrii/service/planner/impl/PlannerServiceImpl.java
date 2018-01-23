@@ -14,13 +14,13 @@ import com.model2.mvc.service.user.UserService;
 import com.model2.mvc.service.user.UserDao;;
 
 
-//==> È¸¿ø°ü¸® ¼­ºñ½º ±¸Çö
-@Service("userServiceImpl")
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//@Service("userServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field
-	@Autowired
-	@Qualifier("userDaoImpl")
+//	@Autowired
+//	@Qualifier("userDaoImpl")
 	private PlannerDao userDao;
 	public void setUserDao(PlannerDao userDao) {
 		this.userDao = userDao;

@@ -14,16 +14,16 @@ import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
 
 
-//==> È¸¿ø°ü¸® RestController
-@RestController
-@RequestMapping("/user/*")
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RestController
+//@RestController
+//@RequestMapping("/user/*")
 public class PlannerRestController {
 	
 	///Field
-	@Autowired
-	@Qualifier("userServiceImpl")
+//	@Autowired
+//	@Qualifier("userServiceImpl")
 	private PlannerService userService;
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 	public PlannerRestController(){
 		System.out.println(this.getClass());

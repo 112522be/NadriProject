@@ -116,13 +116,13 @@ public class GroupController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("resultPage :: "+resultPage);
 		
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
