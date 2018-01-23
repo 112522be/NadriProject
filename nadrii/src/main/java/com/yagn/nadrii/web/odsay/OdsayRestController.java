@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model2.mvc.web.odsay.OdsayClientApp;
+//import com.model2.mvc.web.odsay.OdsayClientApp;
+//
+//import test.domain.BusSearch;
+//import test.domain.BusTerminal;
 
-import test.domain.BusSearch;
-import test.domain.BusTerminal;
-
-@RestController
-@RequestMapping("/openApi/*")
+/*
+//@RestController
+//@RequestMapping("/openApi/*")
 public class OdsayRestController {
 	public OdsayRestController() {
 		System.out.println("odsay Constructor....");
@@ -35,5 +36,5 @@ public class OdsayRestController {
 		System.out.println("여기 접근....");
 		return OdsayClientApp.getPubTransPath(sx, sy, ex, ey);
 	}
-				
 }
+//*/
