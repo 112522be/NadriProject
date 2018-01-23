@@ -140,28 +140,36 @@
 
 			<div class="row">
 				<c:set var="i" value="0" />
-				<c:forEach var="ticketList" items="${searchFestival}">
+				<c:forEach var="tt" items="${tourTicket}">
 					<div class="col-sm-3">
 						<h4>
-							<span class="label label-success"> 
-								${ searchFestival.get(i).title }
-							</span>
+							<span class="label label-success"> ${ tt.title } </span>
 						</h4>
 						<div class="thumbnail">
-							<c:if test="${ empty searchFestival.get(i).firstimage }">
-								<img src="http://placehold.it/350X230" />
+
+							<c:if test="${ empty tt.firstimage }">
+								<img src="${ tt.firstimage2 }" />
+								<c:if test="${ empty tt.firstimage }">
+									<img src="http://placehold.it/350X230" />
+								</c:if>
 							</c:if>
-							<img src="${ searchFestival.get(i).firstimage }" />
+							<img src="${ tt.firstimage }" />
+
 							<div class="caption">
-								기&nbsp;간 : ${ searchFestival.get(i).eventstartdate } ~ ${ searchFestival.get(i).eventenddate }<br>
-								조회수 : ${ searchFestival.get(i).readcount }
+								<p>
+									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } <br>
+									조회수 : ${ tt.readcount } <br>
+									관람시간 : ${ tt.playtime } <br>
+									입장료 정보 : ${ tt.usetimefestival } <br>
+								</p>
 								<p class="text-right">
 									<a href="#" class="btn btn-warning" role="button">상세조회</a>
 								</p>
+
 							</div>
 						</div>
+
 					</div>
-					<c:set var="i" value="${ i + 1 }" />
 				</c:forEach>
 				<br>
 			</div>
@@ -182,7 +190,7 @@
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
 	
-	<!-- PageNavigation Start... 
+	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
 

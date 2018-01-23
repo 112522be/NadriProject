@@ -1,6 +1,5 @@
 package com.yagn.nadrii.service.ticket.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,14 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Map<String, Object> getSearchFestival() throws Exception {
 		
-		System.out.println("\n[TicketServiceImpl.java]::getSearchFestival");
+		System.out.println("\n[TicketServiceImpl.java]::getSearchFestival()");
 		
-		Map<String, Object> searchFestivalMap = ticketDao.getSearchFestival();
+		Map<String, Object> map = ticketDao.getSearchFestival();
 		
-		
-//		Map<String, Object> returnMap = ticketDao.getDetailIntro(, ContentTypeId)
-		
-		return searchFestivalMap;
+		return map;
 	}
+	
+	
+	
+	
 }
