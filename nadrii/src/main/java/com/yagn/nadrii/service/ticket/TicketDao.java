@@ -7,10 +7,8 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 
 public interface TicketDao {
 
-	public Map<String, Object> getSearchFestival() throws Exception;
+	public Map<String, Object> getTicketList() throws Exception;
 	
 	public DetailIntro getDetailIntro(int ContentId, int ContentTypeId) throws Exception;
-	
-	
 	
 }

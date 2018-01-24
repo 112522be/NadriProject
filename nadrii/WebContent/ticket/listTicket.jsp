@@ -12,7 +12,7 @@
 <head>
 <meta charset="EUC-KR">
 
-<title>testTicketView.jsp</title>
+<title>나들이 티켓 목록</title>
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +22,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- 무한스크롤 -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- //////////////////// CSS //////////////////// -->
 
@@ -87,9 +90,9 @@
 	
 	
 	function fncGetTicket() {
-		$("form").attr("method", "POST").attr("action", "/ticket/testTicket")
-				.submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/testTicket").submit();
 	}
+	
 </script>
 
 </head>
@@ -108,6 +111,44 @@
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
 			</h5>
 		</div>
+
+	<!-- JQUERY TAB Start -->
+		<div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs " role="tablist">
+				<li role="presentation" class="active">
+					<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+				</li>
+				<li role="presentation">
+					<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+				</li>
+				<li role="presentation">
+					<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+				</li>
+				<li role="presentation">
+					<a href="#settings"	aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="home">...</div>
+				<div role="tabpanel" class="tab-pane" id="profile">...</div>
+				<div role="tabpanel" class="tab-pane" id="messages">...</div>
+				<div role="tabpanel" class="tab-pane" id="settings">...</div>
+			</div>
+			
+			<div class="tab-content">
+  				<div role="tabpanel" class="tab-pane fade in active" id="home">...</div>
+  				<div role="tabpanel" class="tab-pane fade" id="profile">...</div>
+ 				<div role="tabpanel" class="tab-pane fade" id="messages">...</div>
+  				<div role="tabpanel" class="tab-pane fade" id="settings">...</div>			
+			</div>
+
+		</div>
+		
+	<!-- JQUERY TAB End -->
+
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
@@ -190,9 +231,11 @@
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
 	
+	<!-- 
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
+	 -->
 
 </body>
 

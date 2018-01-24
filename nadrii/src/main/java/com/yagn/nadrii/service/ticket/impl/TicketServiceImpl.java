@@ -27,11 +27,9 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Map<String, Object> getSearchFestival() throws Exception {
+	public Map<String, Object> getTicketList() throws Exception {
 		
-		System.out.println("\n[TicketServiceImpl.java]::getSearchFestival()");
-		
-		Map<String, Object> map = ticketDao.getSearchFestival();
+		Map<String, Object> map = ticketDao.getTicketList();
 		
 		return map;
 	}

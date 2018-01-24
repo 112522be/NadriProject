@@ -22,6 +22,7 @@
 		page++;
 	});
 	
+	// ===== 公茄胶农费 start =====
 	$(window).scroll(function() { 
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
 		
@@ -51,10 +52,13 @@
 					
 				 "<div class='col-sm-6 col-md-4'>"+
 			        "<div class='thumbnail'>"+
-			          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "'data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
-			          "<div class='caption'>"+
-			            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
-			            "<p>"+data[a].addr1+"</p>"+
+			          "<img data-src='holder.js/100%x200' alt='100%x200' src='" 
+			          + data[a].firstimage2 
+			          + "'data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>" 
+			          + "<div class='caption'>"+
+			            "<h3 id='thumbnail-label'>" + data[a].title 
+			            + "<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"
+			            + "<p>"+data[a].addr1+"</p>"+
 			            "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 			            "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 			            "<p> <a href='#' class='btn btn-primary' role='button'>傍蜡</a>"+ 
@@ -72,6 +76,7 @@
 			
 		});
 	}
+	// ===== 公茄胶农费 end =====
 	
 	/*
 	$(function() {

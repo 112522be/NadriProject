@@ -15,7 +15,7 @@ import com.yagn.nadrii.service.planner.PlannerService;
 
 
 
-@Service("userServiceImpl")
+@Service("plannerServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field

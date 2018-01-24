@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.ticket;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,14 +23,14 @@ import com.yagn.nadrii.service.ticket.TicketService;
 // [행사정보 조회] 
 @Controller
 @RequestMapping("/ticket/*")
-public class SearchFestivalController {
+public class TicketRestController {
 
 	@Autowired
 	@Qualifier("ticketServiceImpl")
 	private TicketService ticketService;
 	
 	/// Constructor
-	public SearchFestivalController() {
+	public TicketRestController() {
 			System.out.println(this.getClass());
 		}
 	
@@ -38,34 +41,21 @@ public class SearchFestivalController {
 	@Value("#{commonProperties['numOfRows']}")
 	int numOfRows;
 	
-	@RequestMapping(value = "listTicket", method = RequestMethod.GET)
-	public String listTicket(
+	@RequestMapping(value = "json/listTicket/{pageNo}", method = RequestMethod.POST)
+	public Map<String, Object> listTicket(
 			
-			@ModelAttribute("searchFestival") SearchFestival searchFestival,
-			@ModelAttribute("detailIntro") DetailIntro detailIntro,
-			@ModelAttribute("tourTicket") TourTicket tourTicket,
-			Model model
+			@RequestBody TourTicket tourTicket
 			
 			) throws Exception {
 		
 		System.out.println("\n/ticket/listTicket : GET");
 		
-		Map<String, Object> map = ticketService.getSearchFestival();
+		Map<String, Object> map = ticketService.getTicketList();
+		Map<String, Object> returnMap = new HashMap<>();
 		
-		/*
-		System.out.println("\n==========[searchFestival]");
-		System.out.println(map.get("searchFestivalList"));
-		System.out.println("\n==========[detailIntro]");
-		System.out.println(map.get("detailIntroList"));
-		//*/
-		System.out.println("\n==========[tourTicket]");
-		System.out.println(map.get("tourTicketList"));
+		returnMap.put("tourTicket", map.get("tourTicketList"));
 		
-		model.addAttribute("searchFestival", map.get("searchFestivalList"));
-		model.addAttribute("detailIntro", map.get("detailIntroList"));
-		model.addAttribute("tourTicket", map.get("tourTicketList"));
-		
-		return "forward:/ticket/listTicket.jsp";
+		return returnMap; 
 	}
 	
 } // end of class

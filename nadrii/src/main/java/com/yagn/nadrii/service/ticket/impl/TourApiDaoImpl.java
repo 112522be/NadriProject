@@ -45,7 +45,7 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	public static final StringBuilder sendGetURL(StringBuilder urlBuilder) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::sendGetURL");
+//		System.out.println("\n[TourApiDaoImpl.java]::sendGetURL");
 
 		URL url = new URL(urlBuilder.toString());
 		
@@ -54,11 +54,8 @@ public class TourApiDaoImpl implements TicketDao {
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-type", "application/json");
-		
-		/*
+
 		System.out.println("Response code: " + conn.getResponseCode());
-		System.out.println("//=====[sendGetURL 확인]\n");
-		//*/
 		
 		BufferedReader rd;
 		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -79,9 +76,9 @@ public class TourApiDaoImpl implements TicketDao {
 
 	}
 	
-	public Map<String, Object> getSearchFestival() throws Exception {
+	public Map<String, Object> getTicketList() throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::getSearchFestival");
+//		System.out.println("\n[TourApiDaoImpl.java]::getSearchFestival");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -125,7 +122,7 @@ public class TourApiDaoImpl implements TicketDao {
 			detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
 			
 			TourTicket tourTicket = new TourTicket();
-			
+			// searchFestival domain set
 			tourTicket.setContentid(searchFestival.getContentid());
 			tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
@@ -137,7 +134,7 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setTel(searchFestival.getTel());
 			tourTicket.setAreacode(searchFestival.getAreacode());
 			tourTicket.setSigungucode(searchFestival.getSigungucode());
-			
+			// detailIntro domain set
 			tourTicket.setAgelimit(detailIntro.getAgelimit());
 			tourTicket.setBookingplace(detailIntro.getBookingplace());
 			tourTicket.setDiscountinfofestival(detailIntro.getDiscountinfofestival());
@@ -155,12 +152,12 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setSubevent(detailIntro.getSubevent());
 			tourTicket.setUsetimefestival(detailIntro.getUsetimefestival());
 			
-			searchFestivalList.add(searchFestival);
-			detailIntroList.add(detailIntro);  
+//			searchFestivalList.add(searchFestival);
+//			detailIntroList.add(detailIntro);  
 			tourTicketList.add(tourTicket);
 			
-			map.put("searchFestivalList", searchFestivalList);
-			map.put("detailIntroList", detailIntroList);
+//			map.put("searchFestivalList", searchFestivalList);
+//			map.put("detailIntroList", detailIntroList);
 			map.put("tourTicketList", tourTicketList);
 			
 		}
@@ -171,7 +168,7 @@ public class TourApiDaoImpl implements TicketDao {
 
 	public DetailIntro getDetailIntro(int ContentId, int ContentTypeId) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::getDetailIntro");
+//		System.out.println("\n[TourApiDaoImpl.java]::getDetailIntro");
 
 		List<DetailIntro> list = new ArrayList<DetailIntro>();
 		
