@@ -113,11 +113,8 @@
 	});	
 	
 	///*
-	var title;
-	var address;
-	var description;
-	var image;
-	var feeinfo;
+	var mapx;
+	var mapy;
 	
 	function getTheme(contentid, contenttypeid){
 		$.ajax({
@@ -132,6 +129,8 @@
 			success: function(returnData){
 				var common = returnData.getTrip;
 				var fee = returnData.getDetail;
+				mapx = common.mapx;
+				mapy = common.mapy;
 				title = common.title;
 				address = common.addr1;
 				description = common.overview
@@ -147,8 +146,8 @@
 					"<img src='"+common.firstimage2+"'/>"+
 					"<p>"+common.title+"</p>"+
 					"<p>"+common.addr1+"</p>"
-					"<div id='map' style='width:100%;height:400px;'></div>"
-					/*//"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?&appkey=5a4ea92513a5052cd0e179704e1e5f5f&autoload=false'>"+"</"+"script>"+
+					/*"<div id='map' style='width:100%;height:400px;'></div>"
+					//"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?&appkey=5a4ea92513a5052cd0e179704e1e5f5f&autoload=false'>"+"</"+"script>"+
 					"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?&appkey=5a4ea92513a5052cd0e179704e1e5f5f'>"+"</"+"script>"+
 					  	"<script>"+
 							"var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스"+
@@ -169,7 +168,8 @@
 					//*/
 				
 				$("#dialog").append(dpValue);
-				makeMap();	
+				makeMap();
+				
 				makeDialog();
 				//$("#dialog").append(dpValue);
 				$('#dialog').dialog('open');
@@ -180,18 +180,19 @@
 	
 		
 	</script>
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
 	  <script type="text/javascript">
 	  function makeMap(){
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}), //지도의 중심좌표.
+		center: new daum.maps.LatLng(mapy,mapx), //지도의 중심좌표.
 		level: 3 //지도의 레벨(확대, 축소 정도)
 		};
 	
 		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 	  
-		var markerPosition  = new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}); 
+		var markerPosition  = new daum.maps.LatLng(mapy,mapx); 
 	
 		//마커를 생성합니다
 		var marker = new daum.maps.Marker({
@@ -268,37 +269,22 @@
 </div>  
  
    
-   
-<div id="dialog" title="" style="display: none;" >
-<!--	<tr><td>
+<!--  style="display: none;" -->   
+<div id="dialog" title="" >
+
   <div id="map" style="width:400px;height:400px;"></div>
 	  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
 	  <script type="text/javascript">
-	  function makeMap(){
-		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-		var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
-		};
-	
-		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+		  
 	  
-		var markerPosition  = new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}); 
-	
-		//마커를 생성합니다
-		var marker = new daum.maps.Marker({
-		   position: markerPosition
-		});
-		
-		//마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-	  }
+ 
+	  
 	</script>
     
     
-    	<jsp:include page="CallMap.jsp"></jsp:include>
+
     
-    </td></tr>-->
+
   
 </div>	
   
