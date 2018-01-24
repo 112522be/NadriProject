@@ -42,6 +42,14 @@ public class TripController {
 		tourAPlUrlManage.setCat3("A02060100");
 		tourAPlUrlManage.setPageNo(pageNo);
 		
+		
+		
+		
+		tourAPlUrlManage.setNumOfRows(6);
+		
+		
+		
+		
 		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listMuseum");
@@ -54,7 +62,7 @@ public class TripController {
 		
 		
 		
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	@RequestMapping(value="getMuseum")

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yagn.nadrii.service.trip.TourAPIGetDetailUrlManage;
+import com.yagn.nadrii.service.trip.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.TourAPlListUrlManage;
+import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripService;
 
 
@@ -47,6 +50,8 @@ public class TripRestController {
 		System.out.println("/trip/json/listMuseum");
 		
 		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		System.out.println(tourAPlUrlManage.urlMaking());
+		
 		map.put("trip", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		System.out.println(pageNo);
@@ -55,6 +60,33 @@ public class TripRestController {
 		return map;
 	}
 	
+	@RequestMapping(value="json/getMuseum/{contentId}/{contentTypeId}")
+	public Map getMuseum(@PathVariable("contentId") String contentId, @PathVariable("contentTypeId") String contentTypeId) throws Exception{
+		
+		System.out.println("RestController/trip/getMuseum");
+		
+		
+		//기본 상세 정보 가져오기
+		TourAPIGetUrlManage tourAPIGetUrlManage = new TourAPIGetUrlManage();
+		tourAPIGetUrlManage.urlClean();
+		tourAPIGetUrlManage.setContentId(contentId);
+		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
+					
+		// 가격 정보 가져오기
+		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
+		tourAPIGetDetailUrlManage.setContentId(contentId);
+		tourAPIGetDetailUrlManage.setContentTypeId(contentTypeId);
+		
+		TourApiDomain tourApiDomain = tripService.getTrip(tourAPIGetUrlManage);
+		TourApiDomain feeDomain = tripService.getTripDetail(tourAPIGetDetailUrlManage);
+		
+		Map map = new HashMap();
+		
+		map.put("getTrip", tourApiDomain);
+		map.put("getDetail",feeDomain );			
+		
+		return map;
+	}
 	
 	
 

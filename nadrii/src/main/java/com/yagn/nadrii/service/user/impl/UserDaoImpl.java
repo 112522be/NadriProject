@@ -13,12 +13,12 @@ import com.yagn.nadrii.service.user.UserDao;
 
 
 //==> ȸ������ DAO CRUD ����
-@Repository("userDaoImpl")
+//@Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao{
 	
 	///Field
-	@Autowired
-	@Qualifier("sqlSessionTemplate")
+	//@Autowired
+	//@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;

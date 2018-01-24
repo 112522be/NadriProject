@@ -14,7 +14,10 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	
+	
 	<script type="text/javascript">
+	
 
 	
 	var page = 1;
@@ -74,30 +77,48 @@
 		});
 	}
 	
+	function makeDialog(){
+		 $('#dialog').dialog({
+				//draggable: false,
+			    autoOpen: false,
+			    resizable: false,
+			    //크기 조절
+			    width: 800,
+		});
+	}
+	
+	
 	
 	$(function() {
-		  $('#dialog').dialog({
+		/*  $('#dialog').dialog({
 			//draggable: false,
 		    autoOpen: false,
 		    resizable: false,
 		    //크기 조절
 		    width: 800,
-		  });
+		  });*/
 	  $('img').click( function(){
 	    //alert($($(".thumbnail")[$(".row div:nth-child(1)").index(this)]));
 		var contenttypeid =$(this).next().next().val();
 		var contentid = $(this).next().val();
 		alert(contenttypeid);
 		alert(contentid);
-		//getTheme(contentid, contenttypeid);
-		$('#dialog').dialog('open');
+		getTheme(contentid, contenttypeid);
+		
+		//$('#dialog').dialog('open');
 		var type = $("img").index(this);
 		alert(type);
 	    
 	  });
 	});	
 	
-	/*
+	///*
+	var title;
+	var address;
+	var description;
+	var image;
+	var feeinfo;
+	
 	function getTheme(contentid, contenttypeid){
 		$.ajax({
 			url:"../trip/json/getMuseum/"+contentid+"/"+contenttypeid+"",
@@ -111,15 +132,24 @@
 			success: function(returnData){
 				var common = returnData.getTrip;
 				var fee = returnData.getDetail;
+				title = common.title;
+				address = common.addr1;
+				description = common.overview
+				image = common.firstimage2;
+				feeinfo = fee.usefee;
 				
-				var dpValue =
+				alert(common.title);
+				alert(fee.usefee);
+				$("#string").remove();
+				var dpValue = 
 					
-					"<div id='dialog' title='"+ ${common.title}+"'>"+
-					"<img src='"+${common.firstimage2 }+"'/>"+
-					"<p>"+${common.title}+"</p>"+
-					"<p>"+${common.addr1}+"</p>"+
-					"<div id='map' style='width:100%;height:400px;'></div>"+
-					"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f'>"+"</"+"script>"+
+					"<div id='string' title='"+ common.title+"'>"+
+					"<img src='"+common.firstimage2+"'/>"+
+					"<p>"+common.title+"</p>"+
+					"<p>"+common.addr1+"</p>"
+					/*"<div id='map' style='width:100%;height:400px;'></div>"+
+					//"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?&appkey=5a4ea92513a5052cd0e179704e1e5f5f&autoload=false'>"+"</"+"script>"+
+					"<script type='text/javascript' src='//dapi.kakao.com/v2/maps/sdk.js?&appkey=5a4ea92513a5052cd0e179704e1e5f5f'>"+"</"+"script>"+
 					  	"<script>"+
 							"var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스"+
 							"var options = { //지도를 생성할 때 필요한 기본 옵션"+
@@ -127,32 +157,26 @@
 								"level: 3 //지도의 레벨(확대, 축소 정도)"+
 							"};"+
 							"var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴"+
-							"var markerPosition  = new daum.maps.LatLng("+${common.mapy}+","+${common.mapx}+");"+ 
+							"var markerPosition  = new daum.maps.LatLng("+common.mapy+","+common.mapx+");"+ 
 							//마커를 생성합니다
 							"var marker = new daum.maps.Marker({"+
 							   "position: markerPosition"+
 							"});"+
 							//마커가 지도 위에 표시되도록 설정합니다
 							"marker.setMap(map);"+
-						"</" +"script>"+
+						"</" +"script>"+*/
 					"</"+ "div>";
-					
-				$("#dialog").remove();
+					//*/
 				
-				$('#dialog').dialog({
-					//draggable: false,
-				    autoOpen: false,
-				    resizable: false,
-				    //크기 조절
-				    width: 800,
-				  });
+				$("#dialog").append(dpValue);
+				makeDialog();
+				//$("#dialog").append(dpValue);
 				$('#dialog').dialog('open');
-				//$("body").append(dpValue);
 				
 			}
 		});
 	}
-	//*/
+	
 		
 	</script>
 	
@@ -163,6 +187,14 @@
 		}
 	
 	</style>
+	
+	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false"></script>
+		<script type="text/javascript">
+			daum.maps.load(function() {
+	    		// v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+	    		var map = new daum.maps.Map(node, options);
+			});
+	</script>
 	
 	
 	<title>박물관찾기</title>
@@ -213,33 +245,31 @@
   </div>
 </div>  
  
- 
- <!-- style="display: none;" -->
-<div id="dialog" title="${list.get(i).title }" >
+   
+ <!-- --> 
+<div id="dialog" title="" style="display: none;" >
 	
-  <img src="${list.get(i).firstimage2 }"/>
-  <p>${list.get(i).addr1}</p>
-  <div id="map" style="width:100%;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript">
-	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-	};
-
-	var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-  
-	var markerPosition  = new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}); 
-
-	//마커를 생성합니다
-	var marker = new daum.maps.Marker({
-	   position: markerPosition
-	});
+  <div id="map" style="width:400px;height:400px;"></div>
+	  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+	  <script type="text/javascript">
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+		};
 	
-	//마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-</script>
+		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+	  
+		var markerPosition  = new daum.maps.LatLng(${list.get(i).mapy},${list.get(i).mapx}); 
+	
+		//마커를 생성합니다
+		var marker = new daum.maps.Marker({
+		   position: markerPosition
+		});
+		
+		//마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+	</script>
    
   
 </div>	
