@@ -11,6 +11,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.yagn.nadrii.service.domain.odsay.inside.Info;
 import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayDao;
 import com.yagn.nadrii.service.odsay.OdsayService;
@@ -38,12 +40,12 @@ public class OdsayServiceImpl implements OdsayService{
 		System.out.println(this.getClass());
 	}
 	
-	public OBJ getOutTerminal(double sx, double sy, double ex, double ey) throws Exception {
+	public Info getInfo(double sx, double sy, double ex, double ey) throws Exception{
 		
-		System.out.println("@@sx@@"+sx);
-		System.out.println("@@sx@@"+sy);
-		System.out.println("@@sx@@"+ex);
-		System.out.println("@@sx@@"+ey);
+		System.out.println("@ sx : "+sx);
+		System.out.println("@ sy : "+sy);
+		System.out.println("@ ex : "+ex);
+		System.out.println("@ ey : "+ey);
 		
 		HttpClient httpclient = new DefaultHttpClient();
 		
@@ -62,13 +64,57 @@ public class OdsayServiceImpl implements OdsayService{
 		System.out.println();
 		
 		HttpEntity httpEntity = res.getEntity();
-		System.out.println("1");
+
 		InputStream is = httpEntity.getContent();
-		System.out.println("1");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
-		System.out.println("1");
+
 		List list = new ArrayList();
-		System.out.println("1");
+
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		JSONObject result = (JSONObject)jsonobj.get("result");
+		JSONArray pathArray = (JSONArray)result.get("path");
+		JSONObject path = (JSONObject) pathArray.get(0);
+		System.out.println("[4] path : " + path);
+		JSONObject info = (JSONObject) path.get("info");
+		System.out.println("[5] info : " + info);
+		ObjectMapper objectMapper = new ObjectMapper();
+		Info odsayinfo = new Info();
+		odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
+
+		System.out.println("///////////");
+		System.out.println(odsayinfo);
+		return odsayinfo;
+		
+	}
+		
+	public OBJ getOBJ(double sx, double sy, double ex, double ey) throws Exception {
+		
+		System.out.println("@ sx : "+sx);
+		System.out.println("@ sy : "+sy);
+		System.out.println("@ ex : "+ex);
+		System.out.println("@ ey : "+ey);
+		
+		HttpClient httpclient = new DefaultHttpClient();
+		
+		String url = "https://api.odsay.com/api/searchPubTransPath?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&lang=0";
+		if(sx != 0 && sy != 0 && ex != 0 && ey != 0) {
+			url+="&SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey;
+		}
+		
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		
+		HttpResponse res = httpclient.execute(httpGet);
+		
+		System.out.println(res);
+		System.out.println();
+		
+		HttpEntity httpEntity = res.getEntity();
+
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		JSONObject result = (JSONObject)jsonobj.get("result");
 		JSONObject trainRequest = (JSONObject)result.get("outBusRequest");
@@ -76,10 +122,7 @@ public class OdsayServiceImpl implements OdsayService{
 //		for (int i = 0; i < OBJArray.size(); i++) {
 //			JSONObject Object = (JSONObject)OBJArray.get(i);
 //			System.out.println("[4] Object["+i+"] : "+Object);
-		
-		System.out.println("1");
-		
-		
+
 		JSONObject Object = (JSONObject)OBJArray.get(0);
 		System.out.println("[4] Object["+0+"] : "+Object);
 		OBJ obj = new OBJ();
@@ -97,8 +140,6 @@ public class OdsayServiceImpl implements OdsayService{
 		String payment = element.getAsJsonObject().get("payment").getAsString();
 		String mapOBJ = element.getAsJsonObject().get("mapOBJ").getAsString();
 
-		System.out.println("2");
-		
 		obj.setStartSTN(startSTN);
 		obj.setStartID(Integer.parseInt(startID));
 		obj.setSX(Double.parseDouble(SX));
@@ -111,8 +152,6 @@ public class OdsayServiceImpl implements OdsayService{
 		obj.setPayment(Integer.parseInt(payment));
 		obj.setMapOBJ(mapOBJ);
 
-		System.out.println("3");
-		
 		// trainRequestÀÏ¶§¸¸
 		if (element.getAsJsonObject().get("trainType") != null) {
 			String trainType = element.getAsJsonObject().get("trainType").getAsString();
