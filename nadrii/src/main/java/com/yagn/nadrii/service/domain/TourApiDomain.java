@@ -258,7 +258,7 @@ public class TourApiDomain {
 
 	@Override
 	public String toString() {
-		return "TourTripInfoTest_sh [resultCode=" + resultCode + ", resultMsg=" + resultMsg + ", addr1=" + addr1
+		return "TourAPIDomain [resultCode=" + resultCode + ", resultMsg=" + resultMsg + ", addr1=" + addr1
 				+ ", addr2=" + addr2 + ", areacode=" + areacode + ", cat1=" + cat1 + ", cat2=" + cat2 + ", cat3=" + cat3
 				+ ", contentid=" + contentid + ", contenttypeid=" + contenttypeid + ", firstimage=" + firstimage
 				+ ", firstimage2=" + firstimage2 + ", mapx=" + mapx + ", mapy=" + mapy + ", mlevel=" + mlevel
