@@ -7,9 +7,9 @@ import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 
 public interface OdsayService {
 
-	public OBJ getOBJ(double sx, double sy, double ex, double ey) throws Exception;
+	public OBJ getOBJ(double sx, double sy, double ex, double ey, int flag) throws Exception;
 	
-	public Info getInfo(double sx, double sy, double ex, double ey) throws Exception;
+	public Map getInfo(double sx, double sy, double ex, double ey) throws Exception;
 
 	public Map getGraph(String mapObj) throws Exception;
 }

@@ -20,11 +20,5 @@ public class OdsayController {
 	public OdsayController(){
 		System.out.println(this.getClass());
 	}
-	@RequestMapping(value="getOBJ")
-	public OBJ getOBJ(@RequestParam("sx") double sx, @RequestParam("sy") double sy, @RequestParam("ex") double ex, @RequestParam("ey") double ey) throws Exception {
-			
-		System.out.println("getOBJ");
-		
-		return odsayService.getOBJ(sx, sy, ex, ey);
-	}
+
 }

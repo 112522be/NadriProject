@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<title>Insert title here</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -132,13 +133,29 @@
 							"Content-type" : "application/json"
 						},
 						success:function(returnData){
+							
 							alert("시내 success");
-							var mapObj = returnData.mapObj;
-							alert(mapObj);
-							callMapObjApiAJAX(mapObj);
+							var code = returnData.code;
+							if(code == 500){
+								swal({
+									text: "서버 내부 오류",
+									icon: "warning"
+								});
+							}else if(code == -98){
+								swal({
+									text: "필수 입력값 누락",
+									icon: "warning"
+								});
+							}else if (code == -99){
+								swal({
+									text: "검색 결과가 없습니다",
+									icon: "warning"
+								});
+							}
+							//callMapObjApiAJAX(mapObj);
 						},
-						error:function(){
-							alert("error");
+						error:function(returnData){
+							alert("시외");
 							getOBJ();
 						}
 					});
@@ -167,7 +184,7 @@
 							});
 						},
 						error:function(){
-							alert("error");
+							alert("길찾기 error");
 						}
 					});
 				}
@@ -178,49 +195,51 @@
 			
 			
 			
-			function callMapObjApiAJAX(mabObj){
-				
-				var lineArray;
-				
-				$.ajax({
-					url : "../odsay/json/getGraph",
-					method : "GET",
-					dataType : "json",
-					data : {"mapObj": mabObj},
-					headers : {
-						"Accept" : "application/json",
-						"Content-type" : "application/json"
-					},
-					success:function(returnData){
-						
-						alert("success");
-						
-						console.log( "returnData.listX[0] " + returnData.listX[0] );
-						console.log( "returnData.listY[0] " + returnData.listY[0] );
-						console.log( "returnData.listX.length " + returnData.listX.length );
-						console.log( "returnData.listY.length " + returnData.listY.length );
-				
-							lineArray = null;
-							lineArray = new Array();
-							
-							for(var k=0 ; k <returnData.listX.length ; k++){
-								lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
-							}
-														
-							var polyline = new daum.maps.Polyline({
-								map: map,
-								path: lineArray,
-							    strokeWeight: 3
-							});
-							
-					},
-					error:function(){
-						alert("error");
-					}
-				});
-				
-			}
+			
 
+		}
+		
+		function callMapObjApiAJAX(mabObj){
+			
+			var lineArray;
+			
+			$.ajax({
+				url : "../odsay/json/getGraph",
+				method : "GET",
+				dataType : "json",
+				data : {"mapObj": mabObj},
+				headers : {
+					"Accept" : "application/json",
+					"Content-type" : "application/json"
+				},
+				success:function(returnData){
+					
+					alert("success");
+					
+					console.log( "returnData.listX[0] " + returnData.listX[0] );
+					console.log( "returnData.listY[0] " + returnData.listY[0] );
+					console.log( "returnData.listX.length " + returnData.listX.length );
+					console.log( "returnData.listY.length " + returnData.listY.length );
+			
+						lineArray = null;
+						lineArray = new Array();
+						
+						for(var k=0 ; k <returnData.listX.length ; k++){
+							lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
+						}
+													
+						var polyline = new daum.maps.Polyline({
+							map: map,
+							path: lineArray,
+						    strokeWeight: 3
+						});
+						
+				},
+				error:function(){
+					alert("그리기 error");
+				}
+			});
+			
 		}
 		
 		

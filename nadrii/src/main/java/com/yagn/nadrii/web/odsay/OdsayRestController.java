@@ -26,17 +26,17 @@ public class OdsayRestController {
 	}
 	
 	@RequestMapping(value="json/getOBJ")
-	public OBJ getOBJ(@RequestParam("sx") double sx, @RequestParam("sy") double sy, @RequestParam("ex") double ex, @RequestParam("ey") double ey) throws Exception {
+	public OBJ getOBJ(@RequestParam("sx") double sx, @RequestParam("sy") double sy, @RequestParam("ex") double ex, @RequestParam("ey") double ey, @RequestParam("flag") int flag) throws Exception {
 			
 		System.out.println("getOBJ");
 		
-		return odsayService.getOBJ(sx, sy, ex, ey);
+		return odsayService.getOBJ(sx, sy, ex, ey, flag);
 	}
 	
 	@RequestMapping(value="json/getInfo")
-	public Info getInfo(@RequestParam("sx") double sx, @RequestParam("sy") double sy, @RequestParam("ex") double ex, @RequestParam("ey") double ey) throws Exception {
+	public Map getInfo(@RequestParam("sx") double sx, @RequestParam("sy") double sy, @RequestParam("ex") double ex, @RequestParam("ey") double ey) throws Exception {
 			
-		System.out.println("getInfoMapObj");
+		System.out.println("getInfo");
 		
 		return odsayService.getInfo(sx, sy, ex, ey);
 	}
