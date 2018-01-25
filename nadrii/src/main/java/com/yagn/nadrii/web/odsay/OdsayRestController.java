@@ -1,11 +1,14 @@
 package com.yagn.nadrii.web.odsay;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sun.org.apache.regexp.internal.recompile;
 import com.yagn.nadrii.service.domain.odsay.inside.Info;
 import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayService;
@@ -36,5 +39,13 @@ public class OdsayRestController {
 		System.out.println("getInfoMapObj");
 		
 		return odsayService.getInfo(sx, sy, ex, ey);
+	}
+	
+	@RequestMapping(value="json/getGraph")
+	public Map getGraph(String mapObj) throws Exception{
+		
+		System.out.println("getGraph");
+		
+		return odsayService.getGraph(mapObj);
 	}
 }

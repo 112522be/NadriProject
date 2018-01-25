@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.yagn.nadrii.service.domain.odsay.GraphPos;
 import com.yagn.nadrii.service.domain.odsay.inside.Info;
 import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayDao;
@@ -40,6 +43,69 @@ public class OdsayServiceImpl implements OdsayService{
 		System.out.println(this.getClass());
 	}
 	
+	public Map getGraph(String mapObj) throws Exception {
+		
+		System.out.println("??");
+		System.out.println("mapObj :: "+mapObj);
+		HttpClient httpclient = new DefaultHttpClient();
+		
+		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
+		if(mapObj != null) {
+			url+="&mapObject=0:0@"+mapObj;
+		}
+		System.out.println("1");
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		System.out.println("2");
+		HttpResponse res = httpclient.execute(httpGet);
+		System.out.println("3");
+		System.out.println(res);
+		System.out.println();
+		System.out.println("4");
+		HttpEntity httpEntity = res.getEntity();
+		System.out.println("5");
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		System.out.println("6");
+		List listX = new ArrayList();
+		List listY = new ArrayList();
+		System.out.println("7");
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		JSONObject result = (JSONObject)jsonobj.get("result");
+		JSONArray laneArray = (JSONArray)result.get("lane");
+		for (int i = 0; i < laneArray.size(); i++) {
+			JSONObject lane = (JSONObject)laneArray.get(i);
+//			System.out.println("[4] lane["+i+"] : "+lane);
+			JSONArray sectionArray = (JSONArray)lane.get("section");
+//			System.out.println("\n[5] sectionArray : "+sectionArray); 
+			for(int j = 0 ; j<sectionArray.size() ; j++) {
+				JSONObject section = (JSONObject)sectionArray.get(j);
+//				System.out.println("[6] section["+j+"] : "+section);
+				JSONArray graphPosArray = (JSONArray)section.get("graphPos");
+//				System.out.println("[7] graphPosArray : "+graphPosArray);
+				for(int k=0 ; k <graphPosArray.size(); k++){ 
+					JSONObject graphPos = (JSONObject)graphPosArray.get(k);
+//					System.out.println("[8] graphPos["+k+"] : "+graphPos);
+			
+					ObjectMapper objectMapper = new ObjectMapper();
+					GraphPos graphPos2= new GraphPos();
+					graphPos2 = objectMapper.readValue(graphPos.toJSONString(), GraphPos.class);
+					System.out.println("///////////");
+					System.out.println(graphPos2);
+					listX.add(graphPos2.getX());
+					listY.add(graphPos2.getY());
+				}
+			}
+		}
+
+		Map map = new HashMap();
+		map.put("listX", listX);
+		map.put("listY", listY);
+		
+		return map;
+	}
+
 	public Info getInfo(double sx, double sy, double ex, double ey) throws Exception{
 		
 		System.out.println("@ sx : "+sx);
@@ -117,7 +183,7 @@ public class OdsayServiceImpl implements OdsayService{
 
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		JSONObject result = (JSONObject)jsonobj.get("result");
-		JSONObject trainRequest = (JSONObject)result.get("outBusRequest");
+		JSONObject trainRequest = (JSONObject)result.get("exBusRequest");
 		JSONArray OBJArray = (JSONArray)trainRequest.get("OBJ");
 //		for (int i = 0; i < OBJArray.size(); i++) {
 //			JSONObject Object = (JSONObject)OBJArray.get(i);

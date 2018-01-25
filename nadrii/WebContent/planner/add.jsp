@@ -174,57 +174,53 @@
 				
 				getInfo();
 				
-				
 			}
 			
+			
+			
 			function callMapObjApiAJAX(mabObj){
-				alert("!");
-				var xhr = new XMLHttpRequest();
-				//ODsay apiKey 입력
-				var url = "https://api.odsay.com/v1/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-				xhr.open("GET", url, true);
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						var resultJsonData = JSON.parse(xhr.responseText);
-						alert(resultJsonData);
-						daumPolyLine(resultJsonData);		// 노선그래픽데이터 지도위 표시
-						// boundary 데이터가 있을경우, 해당 boundary로 지도이동
-						if(resultJsonData.result.boundary){
-								var boundary = new daum.maps.LatLngBounds(
-						                new daum.maps.LatLng(resultJsonData.result.boundary.top, resultJsonData.result.boundary.left),
-						                new daum.maps.LatLng(resultJsonData.result.boundary.bottom, resultJsonData.result.boundary.right)
-						        );
-							map.setBounds(boundary);	
-						}
-					}
-				}
-			}
-
-			// 노선그래픽 데이터를 이용하여 지도위 폴리라인 그려주는 함수
-			function daumPolyLine(data){
+				
 				var lineArray;
-				for(var i = 0 ; i < data.result.lane.length; i++){
-					for(var j=0 ; j <data.result.lane[i].section.length; j++){
-						lineArray = null;
-						lineArray = new Array();
-						for(var k=0 ; k < data.result.lane[i].section[j].graphPos.length; k++){
-							lineArray.push(new daum.maps.LatLng(data.result.lane[i].section[j].graphPos[k].y, data.result.lane[i].section[j].graphPos[k].x));
-						}
-							
+				
+				$.ajax({
+					url : "../odsay/json/getGraph",
+					method : "GET",
+					dataType : "json",
+					data : {"mapObj": mabObj},
+					headers : {
+						"Accept" : "application/json",
+						"Content-type" : "application/json"
+					},
+					success:function(returnData){
 						
-					//지하철결과의 경우 노선에 따른 라인색상 지정하는 부분 (1,2호선의 경우만 예로 들음)
-
-						var polyline = new daum.maps.Polyline({
-							map: map,
-							path: lineArray,
-						    strokeWeight: 3
-						});
-					
-					
+						alert("success");
+						
+						console.log( "returnData.listX[0] " + returnData.listX[0] );
+						console.log( "returnData.listY[0] " + returnData.listY[0] );
+						console.log( "returnData.listX.length " + returnData.listX.length );
+						console.log( "returnData.listY.length " + returnData.listY.length );
+				
+							lineArray = null;
+							lineArray = new Array();
+							
+							for(var k=0 ; k <returnData.listX.length ; k++){
+								lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
+							}
+														
+							var polyline = new daum.maps.Polyline({
+								map: map,
+								path: lineArray,
+							    strokeWeight: 3
+							});
+							
+					},
+					error:function(){
+						alert("error");
 					}
-				}				
+				});
+				
 			}
+
 		}
 		
 		
