@@ -11,15 +11,33 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.service.domain.odsay.inside.Stations;
+import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayDao;
 
+@Repository("odsayDaoImpl")
 public class OdsayDaoImpl implements OdsayDao {
+
+	///Field
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSession sqlSession;
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+	public OdsayDaoImpl() {
+		System.out.println(this.getClass());
+	}
 
 	@Override
 	public List getPathStationsList(double sx, double sy, double ex, double ey) throws Exception {
@@ -73,4 +91,11 @@ public class OdsayDaoImpl implements OdsayDao {
 
 		return list;
 	}
+	
+	public OBJ getOutTerminal(double sx, double sy, double ex, double ey) throws Exception {
+		
+		
+		return null;
+	}
+	
 }

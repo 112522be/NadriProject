@@ -90,7 +90,7 @@
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('종만아')").on("click" , function() {
-				self.location = "/tour/museum?pageNo=1"
+				self.location = "/trip/listMuseum?pageNo=1"
 			});
 		});
 		
@@ -275,6 +275,8 @@
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 
+<<<<<<< HEAD
+=======
 =======
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style></style>
@@ -460,5 +462,6 @@
 	
 >>>>>>> refs/remotes/origin/master
 </body>
+>>>>>>> refs/remotes/origin/master
 
 </html>

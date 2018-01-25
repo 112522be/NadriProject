@@ -1,6 +1,280 @@
 package com.yagn.nadrii.service.odsay.impl;
-/*
-public class OdsayServiceImpl {
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.yagn.nadrii.service.domain.odsay.GraphPos;
+import com.yagn.nadrii.service.domain.odsay.inside.Info;
+import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
+import com.yagn.nadrii.service.odsay.OdsayDao;
+import com.yagn.nadrii.service.odsay.OdsayService;
+
+@Service("odsayServiceImpl")
+public class OdsayServiceImpl implements OdsayService{
+
+	@Autowired
+	@Qualifier("odsayDaoImpl")
+	private OdsayDao odsayDao;
+	public void setOdsayDao(OdsayDao odsayDao) {
+		this.odsayDao = odsayDao;
+	}
+
+	public OdsayServiceImpl() {
+		System.out.println(this.getClass());
+	}
+	
+	public Map getGraph(String mapObj) throws Exception {
+
+		Map map = new HashMap();
+		
+		HttpClient httpclient = new DefaultHttpClient();
+		
+		System.out.println("mapObj :: "+mapObj);
+		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
+		if(mapObj != null) {
+			url+="&mapObject=0:0@"+mapObj;
+		}
+
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+
+		HttpResponse res = httpclient.execute(httpGet);
+
+		System.out.println(res);
+		System.out.println();
+
+		HttpEntity httpEntity = res.getEntity();
+
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+
+		List listX = new ArrayList();
+		List listY = new ArrayList();
+
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		JSONArray errorArray = (JSONArray)jsonobj.get("error");
+		if( errorArray != null) {
+			System.out.println("@@@error@@@");
+			System.out.println(errorArray);
+			JSONObject error = (JSONObject)errorArray.get(0);
+			System.out.println(error);
+			map.put("error", error);
+			
+			return map;
+			
+		}else {
+			JSONObject result = (JSONObject)jsonobj.get("result");
+			JSONArray laneArray = (JSONArray)result.get("lane");
+			for (int i = 0; i < laneArray.size(); i++) {
+				JSONObject lane = (JSONObject)laneArray.get(i);
+				JSONArray sectionArray = (JSONArray)lane.get("section");
+				for(int j = 0 ; j<sectionArray.size() ; j++) {
+					JSONObject section = (JSONObject)sectionArray.get(j);
+					JSONArray graphPosArray = (JSONArray)section.get("graphPos");
+					for(int k=0 ; k <graphPosArray.size(); k++){ 
+						JSONObject graphPos = (JSONObject)graphPosArray.get(k);
+				
+						ObjectMapper objectMapper = new ObjectMapper();
+						GraphPos graphPos2= new GraphPos();
+						graphPos2 = objectMapper.readValue(graphPos.toJSONString(), GraphPos.class);
+						
+						listX.add(graphPos2.getX());
+						listY.add(graphPos2.getY());
+					}
+				}
+			}
+			
+			map.put("listX", listX);
+			map.put("listY", listY);
+			
+			return map;
+		}
+	}
+
+	public Map getInfo(double sx, double sy, double ex, double ey) throws Exception{
+		
+		System.out.println("@ sx : "+sx);
+		System.out.println("@ sy : "+sy);
+		System.out.println("@ ex : "+ex);
+		System.out.println("@ ey : "+ey);
+		
+		HttpClient httpclient = new DefaultHttpClient();
+		
+		String url = "https://api.odsay.com/api/searchPubTransPath?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&lang=0";
+		if(sx != 0 && sy != 0 && ex != 0 && ey != 0) {
+			url+="&SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey;
+		}
+		
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		
+		HttpResponse res = httpclient.execute(httpGet);
+		
+		System.out.println(res);
+		System.out.println();
+		
+		HttpEntity httpEntity = res.getEntity();
+
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+
+		List list = new ArrayList();
+
+		Map map = new HashMap();
+		
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		JSONObject errorMessage = (JSONObject)jsonobj.get("error");
+		if( errorMessage != null) {
+			System.out.println("@@@error@@@");
+			System.out.println(errorMessage);
+			Object code = errorMessage.get("code");
+			System.out.println(code);
+			map.put("code", code);
+			
+		}else {
+		
+			JSONObject result = (JSONObject)jsonobj.get("result");
+			JSONArray pathArray = (JSONArray)result.get("path");
+			JSONObject path = (JSONObject) pathArray.get(0);
+			System.out.println("[4] path : " + path);
+			JSONObject info = (JSONObject) path.get("info");
+			System.out.println("[5] info : " + info);
+			ObjectMapper objectMapper = new ObjectMapper();
+			Info odsayinfo = new Info();
+			odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
+	
+			map.put("mapObj", odsayinfo.getMapObj().toString());
+			
+		}
+
+		return map;
+	}
+		
+	public OBJ getOBJ(double sx, double sy, double ex, double ey, int flag) throws Exception {
+		
+		System.out.println("@ sx : "+sx);
+		System.out.println("@ sy : "+sy);
+		System.out.println("@ ex : "+ex);
+		System.out.println("@ ey : "+ey);
+		
+		String trans="";
+		
+		HttpClient httpclient = new DefaultHttpClient();
+		
+		String url = "https://api.odsay.com/api/searchPubTransPath?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&lang=0";
+		if(sx != 0 && sy != 0 && ex != 0 && ey != 0) {
+			url+="&SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey;
+		}
+		
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		
+		HttpResponse res = httpclient.execute(httpGet);
+		
+		System.out.println(res);
+		System.out.println();
+		
+		HttpEntity httpEntity = res.getEntity();
+
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+
+		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+		JSONObject result = (JSONObject)jsonobj.get("result");
+		
+		if(flag == 1) {
+			if((JSONObject)result.get("outBusRequest") != null){
+				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
+				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
+				if(OBJArray == null) {
+					trans = "exBusRequest";
+				}else {
+					trans="outBusRequest";
+				}
+			}
+		}else if(flag == 2) {
+			if((JSONObject)result.get("exBusRequest") != null){
+				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
+				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
+				if(OBJArray == null) {
+					trans = "trainRequest";
+				}else {
+					trans = "exBusRequest";
+				}
+			}
+		}else if(flag == 3) {
+			trans = "trainRequest";
+		}
+		
+		JSONObject transRequest = (JSONObject)result.get(trans);
+		JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
+//		for (int i = 0; i < OBJArray.size(); i++) {
+//			JSONObject Object = (JSONObject)OBJArray.get(i);
+//			System.out.println("[4] Object["+i+"] : "+Object);
+
+		JSONObject Object = (JSONObject)OBJArray.get(0);
+		System.out.println("[4] Object["+0+"] : "+Object);
+		OBJ obj = new OBJ();
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(Object.toString());
+		String startSTN = element.getAsJsonObject().get("startSTN").getAsString();
+		String startID = element.getAsJsonObject().get("startID").getAsString();
+		String SX = element.getAsJsonObject().get("SX").getAsString();
+		String SY = element.getAsJsonObject().get("SY").getAsString();
+		String endSTN = element.getAsJsonObject().get("endSTN").getAsString();
+		String endID = element.getAsJsonObject().get("endID").getAsString();
+		String EX = element.getAsJsonObject().get("EX").getAsString();
+		String EY = element.getAsJsonObject().get("EY").getAsString();
+		String time = element.getAsJsonObject().get("time").getAsString();
+		String payment = element.getAsJsonObject().get("payment").getAsString();
+		String mapOBJ = element.getAsJsonObject().get("mapOBJ").getAsString();
+
+		obj.setStartSTN(startSTN);
+		obj.setStartID(Integer.parseInt(startID));
+		obj.setSX(Double.parseDouble(SX));
+		obj.setSY(Double.parseDouble(SY));
+		obj.setEndSTN(endSTN);
+		obj.setEndID(Integer.parseInt(endID));
+		obj.setEX(Double.parseDouble(EX));
+		obj.setEY(Double.parseDouble(EY));
+		obj.setTime(Integer.parseInt(time));
+		obj.setPayment(Integer.parseInt(payment));
+		obj.setMapOBJ(mapOBJ);
+
+		// trainRequestÀÏ¶§¸¸
+		if (element.getAsJsonObject().get("trainType") != null) {
+			String trainType = element.getAsJsonObject().get("trainType").getAsString();
+			obj.setTrainType(trainType);
+		}
+		if (element.getAsJsonObject().get("trainCode") != null) {
+			String trainCode = element.getAsJsonObject().get("trainCode").getAsString();
+			obj.setTrainCode(trainCode);
+		}
+
+		return obj;
+	}
+		
 }
-//*/
