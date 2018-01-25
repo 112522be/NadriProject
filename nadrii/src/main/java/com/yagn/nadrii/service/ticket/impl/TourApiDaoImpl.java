@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,27 +31,23 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
 	@Autowired
-	@Qualifier("sqlSessionTemplate")
-	private SqlSession sqlSession;
-	
-	public void setSqlSession (SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
+	@Qualifier("naverApiDaoImpl")
+	private TicketDao naverDao;
 	
 	private SearchFestival searchFestival;
 	private DetailIntro	 detailIntro;
 	private DetailImage detailImgae;
 	
-	@Value("#{tourapiProperties['searchFestivalURL']}")
+	@Value("#{tourApiProperties['searchFestivalURL']}")
 	private String searchFestivalURL;
 
-	@Value("#{tourapiProperties['essentialURL']}")
+	@Value("#{tourApiProperties['essentialURL']}")
 	private String essentialURL;
 	
-	@Value("#{tourapiProperties['detailIntroURL']}")
+	@Value("#{tourApiProperties['detailIntroURL']}")
 	private String detailIntroURL;
 	
-	@Value("#{tourapiProperties['detailImageURL']}")
+	@Value("#{tourApiProperties['detailImageURL']}")
 	private String detailImageURL;
 	
 	/// Constructor
@@ -72,19 +67,19 @@ public class TourApiDaoImpl implements TicketDao {
 
 		System.out.println("Response code: " + conn.getResponseCode());
 		
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		BufferedReader br;
+		if (conn.getResponseCode() == 200) {
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+			br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
 		}
 		StringBuilder sb = new StringBuilder();
 		String line;
-		while ((line = rd.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
 
-		rd.close();
+		br.close();
 		conn.disconnect();
 
 		return sb;
@@ -103,19 +98,19 @@ public class TourApiDaoImpl implements TicketDao {
 
 		System.out.println("Response code: " + conn.getResponseCode());
 		
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		BufferedReader br;
+		if (conn.getResponseCode() == 200) {
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+			br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
 		}
 		StringBuilder sb = new StringBuilder();
 		String line;
-		while ((line = rd.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
 
-		rd.close();
+		br.close();
 		conn.disconnect();
 
 		return sb;
@@ -125,6 +120,14 @@ public class TourApiDaoImpl implements TicketDao {
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
 		
 		System.out.println("\n[TourApiDaoImpl.java]::getTicketList");
+		
+		System.out.println("[What is this????????]");
+		System.out.println(searchFestivalURL);
+		System.out.println(essentialURL);
+		System.out.println(detailIntroURL);
+		System.out.println(detailImageURL);
+		
+		
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -170,8 +173,23 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 			tourTicket.setEventenddate(searchFestival.getEventenddate());
-			tourTicket.setFirstimage(searchFestival.getFirstimage());
+			
+			if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
+				
+				
+				
+				
+				
+			} else {
+				tourTicket.setFirstimage(searchFestival.getFirstimage());
+			}
+			
+			
+			
 			tourTicket.setFirstimage2(searchFestival.getFirstimage2());
+			
+			
+			
 			tourTicket.setReadcount(searchFestival.getReadcount());
 			tourTicket.setTitle(searchFestival.getTitle());
 			tourTicket.setTel(searchFestival.getTel());
@@ -253,6 +271,7 @@ public class TourApiDaoImpl implements TicketDao {
 		JSONObject diBody = (JSONObject) diResponse.get("body");
 
 		if (diBody.get("items").toString().equals("")) {
+			
 			detailImage.setContentid(000000);
 			detailImage.setImagename("요청 페이지가 없습니다.");
 			detailImage.setOriginimgurl("http://placehold.it/350X230");
@@ -298,7 +317,10 @@ public class TourApiDaoImpl implements TicketDao {
 		return detailImage;
 	}
 	
-	
+	///////////////////////////////////////////////////////////////////////////////////
+	public String getNaverImage(String title) throws Exception {
+		return null;
+	}
 	
 	
 } // end of class
