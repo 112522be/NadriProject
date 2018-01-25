@@ -124,28 +124,35 @@
 				"Content-Type" : "application/json"
 			},
 						
-			always: function(returnData){
+			success: function(returnData){
 				var common = returnData.getTrip;
 				var fee = returnData.getDetail;
 				mapx = common.mapx;
 				mapy = common.mapy;
-				title = common.title;
-				address = common.addr1;
-				description = common.overview
-				image = common.firstimage2;
-				feeinfo = fee.usefee;
+				
 				
 				
 				$("#string").remove();
-				var dpValue = 
+				var dpValue = "<div id ='string'>"; 
+					if(common.firstimage2 !=null){
+						dpValue += "<img src='"+common.firstimage2+"'/>";	
+					}
+				
+					if(common.title != null){
 					
-					"<div id='string' title='"+ common.title+"'>"+
-					"<img src='"+common.firstimage2+"'/>"+
-					"<p>"+common.title+"</p>"+
-					"<p>"+common.addr1+"</p>"+
-					"<p>"+fee.usefee+"</p>"+
-					"<h5>"+common.overview+"</h5>"
-					"</"+ "div>";
+						dpValue	+= "<p>"+ common.title+"</p>";
+					}
+										
+					if(common.addr1!=null){
+						dpValue +="<p>"+common.addr1+"</p>";
+					}
+					if(fee.usefee!=null){
+						dpValue +="<p>"+fee.usefee+"</p>";
+					}
+					if(common.overview!=null){
+						dpValue += "<h5>"+common.overview+"</h5>";	
+					}
+					dpValue += "</"+ "div>";
 					//*/
 				
 				$("#dialog").append(dpValue);
