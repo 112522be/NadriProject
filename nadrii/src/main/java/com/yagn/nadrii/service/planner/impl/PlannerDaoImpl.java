@@ -9,8 +9,6 @@ import com.yagn.nadrii.service.domain.Planner;
 import com.yagn.nadrii.service.planner.PlannerDao;
 
 
-//==> ȸ������ DAO CRUD ����
-//@Repository("plannerDaoImpl")
 public class PlannerDaoImpl implements PlannerDao{
 	
 	///Field

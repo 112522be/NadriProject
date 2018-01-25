@@ -14,4 +14,5 @@ public interface PlannerService {
 	public Map<String , Object > getPlannerList(Search search) throws Exception;
 	
 	public void updatePlanner(Planner planner) throws Exception;
+	
 }

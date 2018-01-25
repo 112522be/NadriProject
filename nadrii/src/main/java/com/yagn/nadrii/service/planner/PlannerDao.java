@@ -16,4 +16,5 @@ public interface PlannerDao {
 	public List<Planner> getPlannerList(Search search) throws Exception;
 	
 	public int getTotalCount(Search search) throws Exception;
+	
 }

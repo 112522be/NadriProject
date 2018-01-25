@@ -1,7 +1,11 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-<<<<<<< HEAD
+encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=EUC-KR
+encoding//src/main/java/com/yagn/nadrii/common/OpenApiSearch.java=EUC-KR
 encoding//src/main/java/com/yagn/nadrii/common/aspect/LogAspectJ.java=UTF-8
-encoding/<project>=EUC-KR
-=======
+encoding//src/main/java/com/yagn/nadrii/service/domain/DetailIntro.java=EUC-KR
+encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketController.java=UTF-8
+encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketRestController.java=UTF-8
 encoding/<project>=euc-kr
->>>>>>> refs/remotes/origin/master

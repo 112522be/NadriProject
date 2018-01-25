@@ -7,11 +7,13 @@ import java.util.Map;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Planner;
 import com.yagn.nadrii.service.planner.PlannerDao;
-import com.yagn.nadrii.service.planner.PlannerService;;
+import com.yagn.nadrii.service.planner.PlannerService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-//==> ȸ������ ���� ����
-//@Service("plannerServiceImpl")
+@Service("plannerServiceImpl")
 public class PlannerServiceImpl implements PlannerService{
 	
 	///Field
