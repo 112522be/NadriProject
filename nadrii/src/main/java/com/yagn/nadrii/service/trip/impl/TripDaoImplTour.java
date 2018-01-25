@@ -19,17 +19,17 @@ import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadrii.service.trip.TourAPIGetDetailUrlManage;
-import com.yagn.nadrii.service.trip.TourAPIGetUrlManage;
-import com.yagn.nadrii.service.trip.TourAPlListUrlManage;
 import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripDao;
+import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
+import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
+import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
 
 @Repository("tripDaoImpl")
-public class TripDaoImpl implements TripDao {
+public class TripDaoImplTour implements TripDao {
 
-	public TripDaoImpl() {
+	public TripDaoImplTour() {
 		System.out.println(this.getClass());		
 	}
 

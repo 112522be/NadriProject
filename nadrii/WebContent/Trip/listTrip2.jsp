@@ -57,14 +57,14 @@
 				for(var a =0; a<data.length;++a){
 					var dpValue =
 					
-				 "<div class='col-sm-6 col-md-4'>"+
+				 "<div class='col-xs-4'>"+
 			        "<div class='thumbnail'>"+
 			          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+			          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+			          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 			          "<div class='caption'>"+
 			            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
 			            "<p>"+data[a].addr1+"</p>"+
-			            "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
-			            "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 			            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 			            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
 			            	"<a href='#' class='btn btn-danger' role='button'>위시리스트</a>"+	
@@ -94,7 +94,7 @@
 	
 	
 	$(function() {
-	  $('img').click( function(){
+	  $(document).on("click","img", function(){
 	    
 		var contenttypeid =$(this).next().next().val();
 		var contentid = $(this).next().val();
@@ -129,23 +129,30 @@
 				var fee = returnData.getDetail;
 				mapx = common.mapx;
 				mapy = common.mapy;
-				title = common.title;
-				address = common.addr1;
-				description = common.overview
-				image = common.firstimage2;
-				feeinfo = fee.usefee;
+				
 				
 				
 				$("#string").remove();
-				var dpValue = 
+				var dpValue = "<div id ='string'>"; 
+					if(common.firstimage2 !=null){
+						dpValue += "<img src='"+common.firstimage2+"'/>";	
+					}
+				
+					if(common.title != null){
 					
-					"<div id='string' title='"+ common.title+"'>"+
-					"<img src='"+common.firstimage2+"'/>"+
-					"<p>"+common.title+"</p>"+
-					"<p>"+common.addr1+"</p>"+
-					"<p>"+fee.usefee+"</p>"+
-					"<h5>"+common.overview+"</h5>"
-					"</"+ "div>";
+						dpValue	+= "<p>"+ common.title+"</p>";
+					}
+										
+					if(common.addr1!=null){
+						dpValue +="<p>"+common.addr1+"</p>";
+					}
+					if(fee.usefee!=null){
+						dpValue +="<p>"+fee.usefee+"</p>";
+					}
+					if(common.overview!=null){
+						dpValue += "<h5>"+common.overview+"</h5>";	
+					}
+					dpValue += "</"+ "div>";
 					//*/
 				
 				$("#dialog").append(dpValue);

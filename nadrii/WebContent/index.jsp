@@ -305,8 +305,14 @@
 		});
 		
 		$( function() {
-			$("a[href='#' ]:contains('투어')").on("click" , function() {
+			$("a[href='#' ]:contains('박물관')").on("click" , function() {
 				self.location = "../trip/listMuseum?pageNo=1"
+			});
+		});
+		
+		$( function() {
+			$("a[href='#' ]:contains('기념관')").on("click" , function() {
+				self.location = "../trip/listExhibit?pageNo=1"
 			});
 		});
 	</script>	
@@ -338,8 +344,8 @@
 	                 <li><a href="#">상품검색</a></li>
 	                 <li><a href="#">회원가입</a></li>
 	                 <li><a href="#">로 그 인</a></li>
-	                 <li><a href="#">투어</a></li>
-	                 
+	                 <li><a href="#">박물관</a></li>
+	                 <li><a href="#">기념관</a></li>
 	           	</ul>
 	       </div>
    		

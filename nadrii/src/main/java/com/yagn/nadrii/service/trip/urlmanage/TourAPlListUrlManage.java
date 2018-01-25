@@ -1,4 +1,4 @@
-package com.yagn.nadrii.service.trip;
+package com.yagn.nadrii.service.trip.urlmanage;
 
 public class TourAPlListUrlManage {
 
