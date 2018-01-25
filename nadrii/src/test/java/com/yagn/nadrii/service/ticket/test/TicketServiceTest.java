@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.DetailImage;
+import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketService;
 
 
@@ -26,19 +29,61 @@ public class TicketServiceTest {
 	@Qualifier("ticketServiceImpl")
 	private TicketService ticketService;
 
-	@Test
+	//@Test
 	public void testGetTicketListAll() throws Exception {
 
-		Map<String, Object> map = ticketService.getTicketList();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+		openApiSearch.setPageNo(4);
+		
+		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 
 		@SuppressWarnings("unchecked")
 		List<Object> list = (List<Object>) map.get("tourTicketList");
 		Assert.assertEquals(10, list.size());
 
 		// ==> console »Æ¿Œ
-		System.out.println("[testGetProdcutProduct] : " + list);
+		System.out.println("[testGetTicketListAll] : " + list);
 
 	}
 	 
+	//@Test
+	public void testGetTicket() throws Exception {
+
+//		int contentId = 790124;
+//		int contentTypeId = 15;
+		int contentId = 2531711;
+		int contentTypeId = 15;
+		
+		DetailIntro detailIntro = new DetailIntro(); 
+		detailIntro = ticketService.getTicket(contentId, contentTypeId);
+		
+		// ==> console »Æ¿Œ
+		System.out.println("[testGetTicket] : " + detailIntro);
+
+		// ==> API »Æ¿Œ
+		Assert.assertEquals(2531711, detailIntro.getContentid());
+		Assert.assertEquals(15, detailIntro.getContenttypeid());
+//		Assert.assertEquals("∞≠ø¯µµ »´√µ µµΩ√ªÍ∏≤∞¯ø¯ ≈‰∏ÆΩ£", detailIntro.getEventplace());
+//		Assert.assertEquals("¿œ∫Œ «¡∑Œ±◊∑• ¿Ø∑·", detailIntro.getUsetimefestival());
+
+	}
+	
+	@Test
+	public void testGetDetailImage() throws Exception {
+
+		int contentId = 1815964;		// ƒ¡≈Ÿ√˜ ID :	
+//		int contentId = 737479;			// ƒ¡≈Ÿ√˜ ID	:
+//		int contentId = 2531711;		// ƒ¡≈Ÿ√˜ ID	:
+
+		DetailImage detailImage = new DetailImage();
+		detailImage = ticketService.getDetailImage(contentId);
+
+		// ==> console »Æ¿Œ
+		System.out.println("[testGetDetailImage] : " + detailImage);
+
+		// ==> API »Æ¿Œ
+//		Assert.assertEquals(null, detailImage.getContentid());
+	
+	}
 	 
 } // end of class

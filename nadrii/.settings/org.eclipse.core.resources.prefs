@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
+encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=EUC-KR
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiSearch.java=EUC-KR
 encoding//src/main/java/com/yagn/nadrii/common/aspect/LogAspectJ.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/service/domain/DetailIntro.java=EUC-KR

@@ -6,7 +6,6 @@
  
 <div class="container text-center">
 
-<!-- General Paging -->
 		 <nav>
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
 		  <ul class="pagination" >

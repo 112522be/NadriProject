@@ -1,26 +1,20 @@
 package com.yagn.nadrii.common;
 
 
-//==>ï¿½ï¿½ï¿½ï¿½Æ®È­ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¸ï¿½(ï¿½ß»ï¿½È­/Ä¸ï¿½ï¿½È­)ï¿½ï¿½ Bean 
 public class OpenApiSearch {
 	
 	///Field
-//	private int currentPage;
 	private int pageNo;
 	private String searchCondition;
 	private String searchKeyword;
 	private int numOfRows;
-	//==> ï¿½ï¿½ï¿½ï¿½Æ®È­ï¿½ï¿½ currentPageï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ROWNUM ï¿½ï¿½ï¿½ SELECT ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ Field 
-	//==> UserMapper.xml ï¿½ï¿½ 
-	//==> <select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
-	//==> ï¿½ï¿½ï¿½ï¿½
+	//==> ¸®½ºÆ®È­¸é currentPage¿¡ ÇØ´çÇÏ´Â È¸¿øÁ¤º¸¸¦ ROWNUM »ç¿ë SELECT À§ÇØ Ãß°¡µÈ Field                   
+	//==> UserMapper.xml ÀÇ                                                              
+	//==> <select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">  
+	//==> ÂüÁ¶                                                                            
 	private int endRowNum;
 	private int startRowNum;
-	
-	/// Price Search ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Field ï¿½ï¿½ï¿½ï¿½
-	private String searchPrice;
-	
-	
+    
 	///Constructor
 	public OpenApiSearch() {
 	}
@@ -54,28 +48,22 @@ public class OpenApiSearch {
 		this.searchKeyword = searchKeyword;
 	}
 	
-	//==> Select Query ï¿½ï¿½ ROWNUM ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
+	//==> Select Query ½Ã ROWNUM ¸¶Áö¸· °ª 
 	public int getEndRowNum() {
 		return getPageNo()*getNumOfRows();
 	}
-	//==> Select Query ï¿½ï¿½ ROWNUM ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	//==> Select Query ½Ã ROWNUM ½ÃÀÛ °ª   
 	public int getStartRowNum() {
 		return (getPageNo()-1)*getNumOfRows()+1;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "OpenApiSearch [pageNo=" + pageNo + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", numOfRows=" + numOfRows + ", endRowNum=" + endRowNum + ", startRowNum="
-				+ startRowNum + ", searchPrice=" + searchPrice + "]";
-	}
-
-	public String getSearchPrice() {
-		return searchPrice;
-	}
-
-	public void setSearchPrice(String searchPrice) {
-		this.searchPrice = searchPrice;
+				+ startRowNum + "]";
 	}
 	
+	
+
 }

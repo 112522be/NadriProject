@@ -9,7 +9,7 @@
 <head>
 <meta charset="EUC-KR">
 
-<title>getProduct.jsp</title>
+<title>나들이 티켓 상세조회</title>
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,6 +19,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- DatePicker -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -44,7 +50,18 @@ $(function(){
 	});
 });
 
-
+<!-- /////////////////////// "DatePicker" Event 연결  /////////////////////// -->
+$(function() {
+	$("#datepicker").datepicker({
+		dateFormat: "yymmdd",
+		changeMonth: true,
+		changeYear: true,
+		
+		minDate: '${ detailIntro.eventstartdate }', 
+		maxDate: '${ detailIntro.eventenddate }'
+		
+	})
+});
 	</script>
 </head>
 
@@ -53,80 +70,69 @@ $(function(){
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-	
+   	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info">상품상세조회</h3>
-	       <!-- <h5 class="text-muted">상품 정보를 <strong class="text-danger">상세하게 관리</strong>해 주세요.</h5> -->
+	       <h3 class = " text-info text-center">
+	       		<p class="bg-warning">나들이 티켓 상세조회</p>
+	       </h3>
+	    
+	    <h1>
+	    	<span class="label label-warning">
+	    		${ tourTicket.title }
+	    	</span>
+	    </h1>
 	    </div>
-	
+
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품번호</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
-		</div>
-	
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품명</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품이미지</strong></div>
-			<div class="col-xs-8 col-md-4">
-				<c:if test = "${ product.fileName == null }">
-					<img src="http://placehold.it/300X300" />
+			<!-- 1st -->
+			<div class="col-sm-4">
+				<c:if test="${ empty detailImage.originimgurl }">
+						<img src="http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg" />
 				</c:if>
-				<c:if test = "${ product.fileName != null }">
-					<img src="/images/uploadFiles/${ product.fileName }" height="240"/><br/>
-				</c:if>
+				<img src="${ detailImage.originimgurl }" alt="There is no image" class="img-responsive img-rounded" >
+			</div>
+		
+			<!-- 2rd -->
+			<div class="col-sm-4">
+				contentId : ${ detailIntro.contentid }<br>	
+				contentTypeId : ${ detailIntro.contenttypeid }				
+				<hr>	
+				관람연령 : ${ detailIntro.agelimit }<br>
+				예매처 : ${ detailIntro.bookingplace }<br>
+				할인정보 : ${ detailIntro.discountinfofestival }<br>
+				행사기간 : ${ detailIntro.eventstartdate } ~ ${ detailIntro.eventenddate }<br>
+				행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
+				행사장소 : ${ detailIntro.eventplace }<br>
+				축제등급 : ${ detailIntro.festivalgrade }<br>
+				행사장 위치 안내 : ${ detailIntro.placeinfo }<br>
+				관람시간 : ${ detailIntro.playtime }<br>
+				관람 소요시간 : ${ detailIntro.spendtimefestival }<br>
+				주최 : ${ detailIntro.sponsor1 }<br>
+				주관사 연락처 : ${ detailIntro.sponsor1tel }<br>
+				부대행사 : ${ detailIntro.subevent }<br>
+				이용요금 : ${ detailIntro.usetimefestival }<br>
+			</div>
+		
+			<!-- 3nd -->
+			<div class="col-sm-4">
+				<p>예매일자 선택</p> 
+				<div id="datepicker" ></div>
 			</div>
 		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품상세정보</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodDetail }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>제조일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>가격</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.price }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>등록일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.regDate }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">
-	  				구 매
+		<div class="col-md-12 text-right ">
+	  			<button type="button" class="btn btn-danger">
+	  				장바구니 담기
 	  			</button>
-	  			<a class="btn btn-primary btn" href="#" role="button">
-	  				이 전
+	  			<a class="btn btn-danger btn" href="#" role="button">
+	  				예매하기
 	  			</a>
 	  		</div>
+		<hr/>
+		
+		<div class="row">
 		</div>
 		
 		<br/>

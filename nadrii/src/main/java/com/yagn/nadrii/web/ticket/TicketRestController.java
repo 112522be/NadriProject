@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yagn.nadrii.common.OpenApiPage;
+import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
@@ -38,24 +40,38 @@ public class TicketRestController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['numOfRows']}")
-	int numOfRows;
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
 	
-	@RequestMapping(value = "json/listTicket/{pageNo}", method = RequestMethod.POST)
+	@RequestMapping(value = "json/listTicket", method = RequestMethod.POST)
 	public Map<String, Object> listTicket(
 			
-			@RequestBody TourTicket tourTicket
+			@RequestBody OpenApiSearch openApiSearch
 			
 			) throws Exception {
 		
 		System.out.println("\n/ticket/listTicket : GET");
 		
-		Map<String, Object> map = ticketService.getTicketList();
-		Map<String, Object> returnMap = new HashMap<>();
+		if(openApiSearch.getPageNo() == 0 ){
+			openApiSearch.setPageNo(1);
+		} 
+		openApiSearch.setNumOfRows(pageSize);
 		
-		returnMap.put("tourTicket", map.get("tourTicketList"));
+		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
-		return returnMap; 
+		OpenApiPage resultPage = new OpenApiPage(
+				openApiSearch.getPageNo(), 
+				((Integer)map.get("totalCount")).intValue(), 
+				pageUnit, 
+				pageSize
+				);
+		
+//		Map<String, Object> returnMap = new HashMap<>();
+		
+		map.put("tourTicket", map.get("tourTicketList"));
+		map.put("resultPage", resultPage);
+		
+		return map; 
 	}
 	
 } // end of class
