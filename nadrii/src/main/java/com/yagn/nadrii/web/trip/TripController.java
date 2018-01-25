@@ -86,7 +86,7 @@ public class TripController {
 	public String listExhibit(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("14");
+		tourAPlUrlManage.setContentTypeId("");
 		tourAPlUrlManage.setType("areaBasedList?");
 		tourAPlUrlManage.setCat1("A02");
 		tourAPlUrlManage.setCat2("A0206");
@@ -162,7 +162,7 @@ public class TripController {
 	}
 
 	@RequestMapping(value="/listTradition")
-	public String listHistory(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
+	public String listTradition(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setContentTypeId("12");
