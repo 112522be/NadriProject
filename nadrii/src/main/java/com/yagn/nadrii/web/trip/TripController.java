@@ -45,7 +45,7 @@ public class TripController {
 		
 		
 		
-		tourAPlUrlManage.setNumOfRows(6);
+		tourAPlUrlManage.setNumOfRows(12);
 		
 		
 		
