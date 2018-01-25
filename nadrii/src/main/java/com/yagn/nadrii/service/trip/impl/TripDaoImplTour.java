@@ -19,8 +19,10 @@ import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadrii.service.trip.TourApiDomain;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
+import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
@@ -173,6 +175,30 @@ public class TripDaoImplTour implements TripDao {
 	public String naverImageSearch(String target) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addTrip(Trip trip) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Trip getTrip(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Trip> listTrip(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateViewCount(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

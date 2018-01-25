@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yagn.nadrii.service.trip.TourApiDomain;
 import com.yagn.nadrii.service.trip.TripService;
+import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
