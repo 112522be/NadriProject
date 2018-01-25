@@ -1,6 +1,7 @@
 package com.yagn.nadrii.service.comm.impl;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -34,80 +35,42 @@ import com.google.cloud.vision.v1.WebDetection;
 import com.google.cloud.vision.v1.WebDetection.WebEntity;
 import com.google.cloud.vision.v1.WebDetection.WebImage;
 import com.google.cloud.vision.v1.WebDetection.WebPage;
+import com.google.instrumentation.trace.Annotation;
+import com.google.protobuf.ByteString;
 import com.yagn.nadrii.service.comm.CommOpenAPIDao;
         
 @Repository("commOpenAPIDaoImpl")
 public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
-
-	@Override
-	public String getImageResult(String filename, PrintStream out) throws Exception {
-		HttpClient httpClient = new DefaultHttpClient();
-		String url = "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDn7y8YBw6t2udCzfFw5HiuiMJNTyZlIk8";
-		HttpPost httpPost = new HttpPost(url);
-		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type","application/json");
-
-		AnnotateImageRequest annotateImageRequest = AnnotateImageRequest.getDefaultInstance();
-		Feature feature1 = Feature.newBuilder().setType(Type.LANDMARK_DETECTION).build();
-		Feature feature2 = Feature.newBuilder().setType(Type.LABEL_DETECTION).build();
-		Feature feature3 = Feature.newBuilder().setType(Type.WEB_DETECTION).build();		
-		ImageSource imageSource = ImageSource.newBuilder().setImageUri("../resources/images/16700442525_688f48b58b_b.jpg").build();
-
-		Image image = Image.newBuilder().setSource(imageSource).build();
-		List<AnnotateImageRequest> requests = new ArrayList<AnnotateImageRequest>();
-		requests.add(annotateImageRequest);
-		annotateImageRequest = annotateImageRequest.newBuilder().setImage(image).addFeatures(feature2).build();
-		System.out.println("55");
-		try(ImageAnnotatorClient client = ImageAnnotatorClient.create()){
-			BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
-			System.out.println("66");
-			List<AnnotateImageResponse> responses = response.getResponsesList();
-			System.out.println("77");
-			for(AnnotateImageResponse res : responses) {
-				if(res.hasError()) {
-					out.printf("Error: %s\n", res.getError().getMessage());
-					return null;
-				}
-				WebDetection annotation = res.getWebDetection();
-				out.println("Entity:Id:Scorce");
-				for (WebEntity entity : annotation.getWebEntitiesList()) {
-			        out.println(entity.getDescription() + " : " + entity.getEntityId() + " : "
-			            + entity.getScore());
-			    }
-			    out.println("\nPages with matching images: Score\n==");
-			    for (WebPage page : annotation.getPagesWithMatchingImagesList()) {
-			    	out.println(page.getUrl() + " : " + page.getScore());
-			    }
-			    out.println("\nPages with partially matching images: Score\n==");
-			    for (WebImage image1 : annotation.getPartialMatchingImagesList()) {
-			    	out.println(image1.getUrl() + " : " + image1.getScore());
-			    }
-			    out.println("\nPages with fully matching images: Score\n==");
-			    for (WebImage image1 : annotation.getFullMatchingImagesList()) {
-			    	out.println(image1.getUrl() + " : " + image1.getScore());
-			    }
+	public String getImageResult(String filePath) throws Exception {
+		
+		String result = "";
+		
+		/// Call the WEB_DETECTION
+		List<String> webValues = CommOpenAPIDaoImpl.getDetectWebDetections(filePath, System.out);
+		if(webValues.size()>0) {
+			for(int i=0;i<webValues.size();i++) {
+				result+=webValues.get(i)+",";
 			}
-			return "성공";
 		}
-}
-//		ObjectMapper mapper = new ObjectMapper();
-//		System.out.println(annotateImageRequest);
-//		String jsonValue = mapper.writeValueAsString(requests);		
-//		HttpEntity httpEntity = new StringEntity(jsonValue.toString());
-//		System.out.println(jsonValue.toString());
-//		
-//		httpPost.setEntity(httpEntity);
-//		HttpResponse httpResponse = httpClient.execute(httpPost);
-//		
-//		System.out.println(httpResponse);
-//		
-//		httpEntity = httpResponse.getEntity();
-//		
-//		InputStream is = httpEntity.getContent();
-//		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
-//		
-//		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
-//		
+		
+		/// Call the LANDMARAKS
+		String landmark = CommOpenAPIDaoImpl.getDetectLandmarks(filePath, System.out);
+		if(landmark != null && !landmark.equals("")) {
+		result+=landmark+",";
+		}
+		/// Call the LABELS
+		List<String> labels = CommOpenAPIDaoImpl.getDetectLabels(filePath, System.out);
+		if(labels.size()>0) {
+			for(int i=0;i<labels.size();i++) {
+				if(i==labels.size()-1) {
+					result+=labels.get(i);
+				}else {
+					result+=labels.get(i)+",";
+				}
+			}
+		}
+		return result;
+	}	
 
 	@Override
 	public JSONObject getTranslatedResult(String result) throws Exception {
@@ -132,6 +95,145 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		
 		return object;
+	}
+	
+	/// WEB_DETECTION
+	private static List<String> getDetectWebDetections(String filePath, PrintStream out) {
+		
+		try {
+
+			out.println("\n========== [WEB_DETECTION START] ==========");
+
+			List<AnnotateImageRequest> requests = new ArrayList<>();
+			List<String> values = new ArrayList<>();
+			ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+
+			Image img = Image.newBuilder().setContent(imgBytes).build();
+			Feature feat = Feature.newBuilder().setType(Type.WEB_DETECTION).build();
+			AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+			requests.add(request);
+
+			try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+				BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+				List<AnnotateImageResponse> responses = response.getResponsesList();
+
+				for (AnnotateImageResponse res : responses) {
+					if (res.hasError()) {
+						out.printf("Error: %s\n", res.getError().getMessage());
+						return null;
+					}
+
+					// Search the web for usages of the image. You could use these signals later
+					// for user input moderation or linking external references.
+					// For a full list of available annotations, see http://g.co/cloud/vision/docs
+					WebDetection annotation = res.getWebDetection();
+//					System.out.println("Entity:Id:Score");
+//					System.out.println("===============");
+					for (WebEntity entity : annotation.getWebEntitiesList()) {
+//						System.out.println(	entity.getDescription() + " : " + entity.getEntityId() + " : " + entity.getScore());
+						
+						///*
+//						System.out.println("///////////////////////////");
+						String entityValue = entity.getDescription();
+						values.add(entityValue);
+//						System.out.println("///////////////////////////");
+						//*/
+					}
+				}
+				return values;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/// LANDMARKS
+	private static String getDetectLandmarks(String filePath, PrintStream out) {
+		
+		try {
+
+			System.out.println("\n========== [LANDMARKS_DETECTION START] ==========");
+			
+			String landmark = "";
+			List<AnnotateImageRequest> requests = new ArrayList<>();
+			ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+
+			Image img = Image.newBuilder().setContent(imgBytes).build();
+			Feature feat = Feature.newBuilder().setType(Type.LANDMARK_DETECTION).build();
+			AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+			requests.add(request);
+
+			try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+				BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+				List<AnnotateImageResponse> responses = response.getResponsesList();
+
+				for (AnnotateImageResponse res : responses) {
+					if (res.hasError()) {
+						// out.printf("Error: %s\n", res.getError().getMessage());
+						System.out.println("Error: " + res.getError().getMessage());
+						return null;
+					}
+
+					System.out.println("[결과확인]/////////////////////////////////////////////////");
+
+					// For full list of available annotations, see http://g.co/cloud/vision/docs
+					for (EntityAnnotation annotation : res.getLandmarkAnnotationsList()) {
+						LocationInfo info = annotation.getLocationsList().listIterator().next();
+						// out.printf("Landmark: %s\n %s\n", annotation.getDescription(),
+						// info.getLatLng());
+						System.out.println("Landmark: " + annotation.getDescription());
+						landmark=annotation.getDescription();
+						System.out.println(info.getLatLng());
+					}
+				}
+				return landmark;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+		
+	/// LABELS
+	private static List<String> getDetectLabels(String filePath, PrintStream out) {
+
+		try {
+
+			System.out.println("\n========== [LABELS_DETECTION START] ==========");
+
+			List<AnnotateImageRequest> requests = new ArrayList<>();
+			List<String> values = new ArrayList<>();
+			ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+
+			Image img = Image.newBuilder().setContent(imgBytes).build();
+			Feature feat = Feature.newBuilder().setType(Type.LABEL_DETECTION).build();
+			AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+			requests.add(request);
+
+			try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+				BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+				List<AnnotateImageResponse> responses = response.getResponsesList();
+
+				for (AnnotateImageResponse res : responses) {
+					if (res.hasError()) {
+						System.out.printf("Error: %s\n", res.getError().getMessage());
+						return null;
+					}
+
+					// For full list of available annotations, see http://g.co/cloud/vision/docs
+					for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
+//						annotation.getAllFields().forEach((k, v) -> System.out.printf("%s : %s\n", k, v.toString()));
+						System.out.println(annotation.getDescription());
+						values.add(annotation.getDescription());
+					}
+				}
+				return values;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
