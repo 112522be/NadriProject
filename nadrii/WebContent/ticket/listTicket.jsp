@@ -12,7 +12,7 @@
 <head>
 <meta charset="EUC-KR">
 
-<title>testTicketView.jsp</title>
+<title>나들이 티켓 목록</title>
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +22,9 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- 무한스크롤 -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- //////////////////// CSS //////////////////// -->
 
@@ -34,6 +37,13 @@
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
+
+function fncGetList(pageNo) {
+	
+	$("#pageNo").val(pageNo);
+	$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
+	
+}
 
 	//=================== "조회" Event 연결 =================== 
 	$(function() {
@@ -77,36 +87,97 @@
 		});
 	});
 
-	//=================== "상세조회" Event 연결 =================== 
+	//=================== "상세조회" Event 연결 ===================
 	$(function() {
 		$("a[href='#' ]:contains('상세조회')").bind("click", function() {
-			alert("상세조회 클릭")
 			
+			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
+			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
+			var title = $( $('input[name="title"]')[$( ".btn.btn-warning" ).index(this)] ).val();
+			var encodeTitle = encodeURI(encodeURIComponent(title));
+			
+			console.log('contentId : ' + contentId)
+			console.log('contentTypeId : ' + contentTypeId)
+			console.log('title : ' + title)
+			console.log('encodeTitle : ' + encodeTitle)
+			
+			///*
+			self.location ="/ticket/getTicket?"
+					+ "contentId=" + contentId 
+					+ "&contentTypeId=" + contentTypeId
+					+ "&title=" + encodeTitle;
+			//*/		
 		});
 	});
 	
-	
 	function fncGetTicket() {
-		$("form").attr("method", "POST").attr("action", "/ticket/testTicket")
-				.submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/testTicket").submit();
 	}
+	
 </script>
 
 </head>
 
 <body>
-	<!-- ToolBar Start ////////////////////////////////////
+
+	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
+   	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class="text-info">나들이티켓 테스트</h3>
+			<h3 class="text-info">
+				<p class="bg-warning">나들이티켓 테스트</p>
+			</h3>
 			<h5 class="text-muted text-left">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
 			</h5>
+		</div>
+
+	<!-- JQUERY TAB Start -->
+		<div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs " role="tablist">
+				<li role="presentation" class="active">
+					<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+				</li>
+				<li role="presentation">
+					<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+				</li>
+				<li role="presentation">
+					<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+				</li>
+				<li role="presentation">
+					<a href="#settings"	aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="home">...</div>
+				<div role="tabpanel" class="tab-pane" id="profile">...</div>
+				<div role="tabpanel" class="tab-pane" id="messages">...</div>
+				<div role="tabpanel" class="tab-pane" id="settings">...</div>
+			</div>
+			
+			<div class="tab-content">
+  				<div role="tabpanel" class="tab-pane fade in active" id="home">...</div>
+  				<div role="tabpanel" class="tab-pane fade" id="profile">...</div>
+ 				<div role="tabpanel" class="tab-pane fade" id="messages">...</div>
+  				<div role="tabpanel" class="tab-pane fade" id="settings">...</div>			
+			</div>
+
+		</div>
+	<!-- JQUERY TAB End -->
+
+		<div class="col-md-6 text-left">
+			<p class="text-primary">
+				<code>
+				&lt; 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건수 &gt;
+				</code>
+			</p>
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
@@ -148,41 +219,42 @@
 						<div class="thumbnail">
 
 							<c:if test="${ empty tt.firstimage }">
-								<img src="${ tt.firstimage2 }" />
-								<c:if test="${ empty tt.firstimage }">
-									<img src="http://placehold.it/350X230" />
+								<img src="${ tt.firstimage2 }" class="img-responsive"/>
+								<c:if test="${ empty tt.firstimage2 }">
+									<img src="http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg" class="img-responsive"/>
 								</c:if>
 							</c:if>
-							<img src="${ tt.firstimage }" />
+							<img src="${ tt.firstimage }" class="img-responsive" />
 
 							<div class="caption">
 								<p>
+									contentID : ${ tt.contentid } <br>
+									contentTypeID : ${ tt.contenttypeid } <br>
+									<hr/>
 									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } <br>
-									조회수 : ${ tt.readcount } <br>
-									관람시간 : ${ tt.playtime } <br>
-									입장료 정보 : ${ tt.usetimefestival } <br>
+									조회수 : ${ tt.readcount } <br> 관람시간 : ${ tt.playtime } <br>
 								</p>
 								<p class="text-right">
-									<a href="#" class="btn btn-warning" role="button">상세조회</a>
+									<a href="#" class="btn btn-warning" role="button">
+										상세조회
+										<!-- PageNavigation을 위한 값을 보내는 부분  -->
+										<input type="hidden" name="contentId" value="${ tt.contentid }">
+										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
+										<input type="hidden" name="title" value="${ tt.title }">
+									</a>
 								</p>
 
 							</div>
 						</div>
-
+						
 					</div>
 				</c:forEach>
 				<br>
 			</div>
 
 			<hr />
-<!-- 			
-			<div class="form-group">
-				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">조&nbsp;회</button>
-					<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-				</div>
-			</div>
- -->	
+			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 			
 		</form>
 		<!-- form End /////////////////////////////////////-->
@@ -193,6 +265,7 @@
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
+	 -->
 
 </body>
 

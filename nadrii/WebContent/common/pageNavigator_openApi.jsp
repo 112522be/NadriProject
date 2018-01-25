@@ -6,9 +6,6 @@
  
 <div class="container text-center">
 
-<!-- General Paging -->
-	<c:if test="${ search.searchPrice == null || search.searchPrice == '' }">
-
 		 <nav>
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
 		  <ul class="pagination" >
@@ -55,7 +52,6 @@
 		    </li>
 		  </ul>
 		</nav>
-	</c:if>
 	
 </div> 
  

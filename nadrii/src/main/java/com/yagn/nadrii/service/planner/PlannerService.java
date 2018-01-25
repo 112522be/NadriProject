@@ -3,27 +3,16 @@ package com.yagn.nadrii.service.planner;
 import java.util.Map;
 
 import com.yagn.nadrii.common.Search;
-import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.Planner;
 
-
-
-
-//==> ȸ���������� ������ ���� �߻�ȭ/ĸ��ȭ�� Service  Interface Definition  
 public interface PlannerService {
+
+	public void addPlanner(Planner planner) throws Exception;
 	
-	// ȸ������
-	public void addUser(User user) throws Exception;
+	public Planner getPlanner(int postNo) throws Exception;
 	
-	// ������Ȯ�� / �α���
-	public User getUser(String userId) throws Exception;
+	public Map<String , Object > getPlannerList(Search search) throws Exception;
 	
-	// ȸ����������Ʈ 
-	public Map<String , Object> getUserList(Search search) throws Exception;
-	
-	// ȸ����������
-	public void updateUser(User user) throws Exception;
-	
-	// ȸ�� ID �ߺ� Ȯ��
-	public boolean checkDuplication(String userId) throws Exception;
+	public void updatePlanner(Planner planner) throws Exception;
 	
 }

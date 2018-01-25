@@ -9,14 +9,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.common.OpenApiPage;
+import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
@@ -26,8 +31,17 @@ import com.yagn.nadrii.service.ticket.TicketDao;
 public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSession sqlSession;
+	
+	public void setSqlSession (SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
 	private SearchFestival searchFestival;
 	private DetailIntro	 detailIntro;
+	private DetailImage detailImgae;
 	
 	@Value("#{tourapiProperties['searchFestivalURL']}")
 	private String searchFestivalURL;
@@ -37,6 +51,9 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	@Value("#{tourapiProperties['detailIntroURL']}")
 	private String detailIntroURL;
+	
+	@Value("#{tourapiProperties['detailImageURL']}")
+	private String detailImageURL;
 	
 	/// Constructor
 	public TourApiDaoImpl() {
@@ -49,16 +66,11 @@ public class TourApiDaoImpl implements TicketDao {
 
 		URL url = new URL(urlBuilder.toString());
 		
-//		System.out.println("\n[URL Check] ==>" + url);
-		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-type", "application/json");
-		
-		/*
+
 		System.out.println("Response code: " + conn.getResponseCode());
-		System.out.println("//=====[sendGetURL ÌôïÏù∏]\n");
-		//*/
 		
 		BufferedReader rd;
 		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -79,38 +91,66 @@ public class TourApiDaoImpl implements TicketDao {
 
 	}
 	
-	public Map<String, Object> getSearchFestival() throws Exception {
+	public static final StringBuilder sendPostURL(StringBuilder urlBuilder) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::getSearchFestival");
+		System.out.println("\n[TourApiDaoImpl.java]::sendPostURL");
+
+		URL url = new URL(urlBuilder.toString());
+		
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-type", "application/json");
+
+		System.out.println("Response code: " + conn.getResponseCode());
+		
+		BufferedReader rd;
+		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+
+		rd.close();
+		conn.disconnect();
+
+		return sb;
+
+	}
+	
+	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
+		
+		System.out.println("\n[TourApiDaoImpl.java]::getTicketList");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetURL(new StringBuilder(searchFestivalURL + essentialURL));
+		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetURL(
+				new StringBuilder(
+						searchFestivalURL 
+						+ essentialURL
+						+ "&pageNo=" + openApiSearch.getPageNo()
+						));
 		
 		JSONObject sfJsonObj = (JSONObject) JSONValue.parse(searchFestivalSB.toString());
 		JSONObject sfResponse = (JSONObject) sfJsonObj.get("response");
 		JSONObject sfHeader = (JSONObject) sfResponse.get("header");
+		
 		JSONObject sfBody = (JSONObject) sfResponse.get("body");
+		ObjectMapper sfBodyMapper = new ObjectMapper();
+		OpenApiPage openApiPage = new OpenApiPage();
+		openApiPage = sfBodyMapper.readValue(sfBody.toJSONString(), OpenApiPage.class);
+		
+		System.out.println(""+openApiPage);
+		
+		map.put("totalCount", openApiPage.getTotalCount());
+		
 		JSONObject sfItems = (JSONObject) sfBody.get("items");
 		JSONArray sfItem = (JSONArray) sfItems.get("item"); 
 
-		/* parse data confirm
-		System.out.println("[sfJsonObj] ==>" + sfJsonObj);
-		System.out.println("//=====");
-		System.out.println("[sfResponse] ==>" + sfResponse);
-		System.out.println("//=====");
-		System.out.println("[sfHeader] ==>" + sfHeader);
-		System.out.println("//=====");
-		System.out.println("[sfBody] ==>" + sfBody);
-		System.out.println("//=====");
-		System.out.println("[sfItems] ==>" + sfItems);
-		System.out.println("//=====");
-		System.out.println("[sfItem] ==>" + sfItem);
-		System.out.println("//=====");
-		//*/
-		
-		List<SearchFestival> searchFestivalList = new ArrayList<SearchFestival>();
-		List<DetailIntro> detailIntroList = new ArrayList<DetailIntro>();
 		List<TourTicket> tourTicketList = new ArrayList<TourTicket>();
 		
 		for (int i = 0; i < sfItem.size(); i++) {
@@ -125,7 +165,7 @@ public class TourApiDaoImpl implements TicketDao {
 			detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
 			
 			TourTicket tourTicket = new TourTicket();
-			
+			// searchFestival domain set
 			tourTicket.setContentid(searchFestival.getContentid());
 			tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
@@ -137,7 +177,7 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setTel(searchFestival.getTel());
 			tourTicket.setAreacode(searchFestival.getAreacode());
 			tourTicket.setSigungucode(searchFestival.getSigungucode());
-			
+			// detailIntro domain set
 			tourTicket.setAgelimit(detailIntro.getAgelimit());
 			tourTicket.setBookingplace(detailIntro.getBookingplace());
 			tourTicket.setDiscountinfofestival(detailIntro.getDiscountinfofestival());
@@ -155,12 +195,12 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setSubevent(detailIntro.getSubevent());
 			tourTicket.setUsetimefestival(detailIntro.getUsetimefestival());
 			
-			searchFestivalList.add(searchFestival);
-			detailIntroList.add(detailIntro);  
+//			searchFestivalList.add(searchFestival);
+//			detailIntroList.add(detailIntro);  
 			tourTicketList.add(tourTicket);
 			
-			map.put("searchFestivalList", searchFestivalList);
-			map.put("detailIntroList", detailIntroList);
+//			map.put("searchFestivalList", searchFestivalList);
+//			map.put("detailIntroList", detailIntroList);
 			map.put("tourTicketList", tourTicketList);
 			
 		}
@@ -169,17 +209,15 @@ public class TourApiDaoImpl implements TicketDao {
 		
 	}
 
-	public DetailIntro getDetailIntro(int ContentId, int ContentTypeId) throws Exception {
+	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
 		
 		System.out.println("\n[TourApiDaoImpl.java]::getDetailIntro");
 
-		List<DetailIntro> list = new ArrayList<DetailIntro>();
-		
 		StringBuilder detailIntroSB = TourApiDaoImpl
 				.sendGetURL(new StringBuilder(detailIntroURL + essentialURL 
 						+ "&introYN=Y" 
-						+ "&contentId="	+ ContentId 
-						+ "&contentTypeId=" + ContentTypeId
+						+ "&contentId="	+ contentId 
+						+ "&contentTypeId=" + contentTypeId
 						));
 		
 		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailIntroSB.toString());
@@ -190,28 +228,77 @@ public class TourApiDaoImpl implements TicketDao {
 		JSONObject diItems = (JSONObject) diBody.get("items");
 		JSONObject diItem = (JSONObject) diItems.get("item");
 		
-		/* parse data confirm
-		System.out.println("[diJsonObj] ==>" + diJsonObj);
-		System.out.println("//=====");
-		System.out.println("[diResponse] ==>" + diResponse);
-		System.out.println("//=====");
-		System.out.println("[diHeader] ==>" + diHeader);
-		System.out.println("//=====");
-		System.out.println("[diBody] ==>" + diBody);
-		System.out.println("//=====");
-		System.out.println("[diItems] ==>" + diItems);
-		System.out.println("//=====");
-		System.out.println("[diItem] ==>" + diItem);
-		System.out.println("//=====");
-		//*/
-
 		ObjectMapper objectMapper = new ObjectMapper();
 		detailIntro = new DetailIntro();
 		detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
 		
-		list.add(detailIntro); 
-		
 		return detailIntro;
 	}
 	
-}
+	public DetailImage getDetailImage(int contentId) throws Exception {
+
+		System.out.println("\n[TourApiDaoImpl.java]::getDetailImage");
+
+		DetailImage detailImage = new DetailImage();
+
+		StringBuilder detailImageSB = TourApiDaoImpl.sendGetURL(new StringBuilder(
+				detailImageURL + essentialURL + "&contentId=" + contentId + "&imageYN=Y" + "&subImageYN=Y"));
+
+		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailImageSB.toString());
+		
+		
+		
+		JSONObject diResponse = (JSONObject) diJsonObj.get("response");
+		JSONObject diHeader = (JSONObject) diResponse.get("header");
+		JSONObject diBody = (JSONObject) diResponse.get("body");
+
+		if (diBody.get("items").toString().equals("")) {
+			detailImage.setContentid(000000);
+			detailImage.setImagename("ø‰√ª ∆‰¿Ã¡ˆ∞° æ¯Ω¿¥œ¥Ÿ.");
+			detailImage.setOriginimgurl("http://placehold.it/350X230");
+			detailImage.setSerialnum("ø‰√ª ∆‰¿Ã¡ˆ∞° æ¯Ω¿¥œ¥Ÿ.");
+			detailImage.setSmallimageurl("http://placehold.it/350X230");
+
+			return detailImage;
+			
+		} else {
+			
+			JSONObject diItems = (JSONObject) diBody.get("items");
+
+			if (diItems.get("item") instanceof JSONObject) {
+
+				System.out.println("[response] :: diItems instanceof = JSONObject");
+
+				JSONObject item = (JSONObject) diItems.get("item");
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				detailImage = new DetailImage();
+				detailImage = objectMapper.readValue(item.toJSONString(), DetailImage.class);
+
+			}
+			
+			if (diItems.get("item") instanceof JSONArray) {
+				
+				System.out.println("[response] :: diItems instanceof = JSONArray");
+
+				JSONArray diItem = (JSONArray) diItems.get("item");
+				
+				for (int i = 0; i < diItem.size(); i++) {
+					
+					JSONObject value = (JSONObject) diItem.get(i);
+					System.out.println("[value] ==>" + value);
+					
+					ObjectMapper objectMapper = new ObjectMapper();
+					detailImage = new DetailImage();
+					detailImage = objectMapper.readValue(value.toJSONString(), DetailImage.class);
+					
+				}
+			}
+		}
+		return detailImage;
+	}
+	
+	
+	
+	
+} // end of class

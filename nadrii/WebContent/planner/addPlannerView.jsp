@@ -54,6 +54,8 @@
 		</div>
 	</div>
 
+	
+	
 	<p><em>지도를 클릭해주세요!</em></p> 
 	<div id="clickLatlng"></div>
 	
@@ -143,8 +145,8 @@
 		
 		var endMarker = new daum.maps.Marker({
 		
-		position: endPosition,
-		image: endImage
+			position: endPosition,
+			image: endImage
 		});
 		
 		
@@ -334,24 +336,35 @@
 				if(k+1 == ak.length){
 					break;
 				}
-				
-				function send(){
-					$.ajax({
-						url:"../odsay/json/getPubTransPath/"+sx+"/"+sy+"/"+ex+"/"+ey+"",
-						method:"GET",
-						dataType:"json",
-						data:{"sx":sx,"sy":sy,"ex":ex,"ey":ey},
-						headers:{
-							"Accept" : "application/json",
-							"Content-type" : "application/json"
-						}
-					});
-				}
-				
+							
 				var sx = first.getLng();
 				var sy = first.getLat();
 				var ex = last.getLng();
 				var ey = last.getLat();
+				
+				function dataSend(){
+					$.ajax({
+						url : "../odsay/json/getPubTransPath",
+						method : "GET",
+						dataType : "json",
+						data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+						headers : {
+							"Accept" : "application/json",
+							"Content-type" : "application/json"
+						},
+						success:function(returnData){
+							alert("success");
+							alert(returnData.startSTN);
+						},
+						error:function(){
+							alert("error");
+						}
+					});
+					
+				}
+				
+				dataSend();
+				
 				search2();
 				
 			}
@@ -462,7 +475,9 @@
 			for(var t=0; t<kk.length;t++){
 				kk[t]=null;
 			}
+			
 
+			
 			var sx = first.getLng();
 			var sy = first.getLat();
 			var ex = last.getLng();
@@ -509,15 +524,7 @@
 					}
 				}
 			}
-			
-			// 지도위 마커 표시해주는 함수
-			function drawDaumMarker(x,y){
-				var marker = new daum.maps.Marker({
-				    position: new daum.maps.LatLng(y, x),
-				    map: map
-				});
-			}
-			
+
 			// 노선그래픽 데이터를 이용하여 지도위 폴리라인 그려주는 함수
 			function daumPolyLine(data){
 				
@@ -572,14 +579,6 @@
 		function bb(){
 			alert(uu);
 		}
-		
-		function doh(){
-			
-			
-			
-		}
-
-		
 		
 
 	</script>

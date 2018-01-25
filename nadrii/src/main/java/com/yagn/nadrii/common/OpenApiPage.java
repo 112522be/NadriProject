@@ -1,21 +1,19 @@
 package com.yagn.nadrii.common;
 
 
-//==> PageNavigation ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Bean
 public class OpenApiPage {
 	
-	///Field
-//	private int currentPage;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private int pageNo;			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private int totalCount;		// ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
-	private int pageUnit;			// ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-//	private int pageSize;			// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½
-	private int numOfRows;			// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½
-	private int maxPage;			// ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£(ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
-	private int beginUnitPage;		//È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ö¼Ò¼ï¿½
-	private int endUnitPage;		//È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½
+	///Field                                                 
+	private int pageNo;			// ÇöÀçÆäÀÌÁö                 
+	private int numOfRows;			// ÇÑ ÆäÀÌÁö´ç º¸¿©Áö´Â °Ô½Ã¹°¼ö  
+	private int totalCount;		// ÃÑ °Ô½Ã¹° ¼ö                   
+	private Object items;			// TourAPI binding À» À§ÇÑ ÇÊµå¸í
 	
-	private Object items;
+	private int pageUnit;			// ÇÏ´Ü ÆäÀÌÁö ¹øÈ£ È­¸é¿¡ º¸¿©Áö´Â ¼ö  
+	private int maxPage;			// ÃÖ´ë ÆäÀÌÁö ¹øÈ£(ÀüÃ¼ ÆäÀÌÁö)     
+	private int beginUnitPage;		//È­¸é¿¡ º¸¿©Áö´Â ÆäÀÌÁö ¹øÈ£ÀÇ ÃÖ¼Ò¼ö   
+	private int endUnitPage;	    //È­¸é¿¡ º¸¿©Áö´Â ÆäÀÌÁö ¹øÈ£ÀÇ ÃÖ´ë¼ö 
+	
 	
 	///Constructor
 	public OpenApiPage() {
@@ -95,7 +93,9 @@ public class OpenApiPage {
 	public String toString() {
 		return "OpenApiPage [pageNo=" + pageNo + ", totalCount=" + totalCount + ", pageUnit=" + pageUnit
 				+ ", numOfRows=" + numOfRows + ", maxPage=" + maxPage + ", beginUnitPage=" + beginUnitPage
-				+ ", endUnitPage=" + endUnitPage + ", items=" + items + "]";
+				+ ", endUnitPage=" + endUnitPage 
+//				+ ", items=" + items 
+				+ "]";
 	}
 	
 	
