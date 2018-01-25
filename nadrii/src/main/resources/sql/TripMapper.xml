@@ -6,7 +6,7 @@
 
 <mapper namespace="TripMapper">
 
-	<resultMap type="tripSelectMap" id="trip">
+	<resultMap type="trip" id="tripSelectMap">
 		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>
 		<result property="lat" column="lat" jdbcType="VARCHAR"/>
 		<result property="lng" column="lng" jdbcType="VARCHAR"/>
@@ -86,7 +86,7 @@
 		
 	</select>
 	
-	<update id="updateTrip" parameterType="integer">
+	<update id="updateViewCount" parameterType="integer">
 		UPDATE trip
 		<set>
 			view_count = view_count+1

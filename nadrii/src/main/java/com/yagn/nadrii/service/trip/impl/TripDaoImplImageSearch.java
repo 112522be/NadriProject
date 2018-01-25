@@ -80,11 +80,15 @@ public class TripDaoImplImageSearch implements TripDao {
 			ImageDomain imageDomain = new ImageDomain();
 			imageDomain = objectMapper.readValue(tempObj.toString(), ImageDomain.class);
 			list.add(imageDomain);
-			//System.out.println( ( (ImageDomain)list.get(i) ).getLink());	
+			//System.out.println( ( (ImageDomain)list.get(i) ).getLink());
+			
 		}
                    
-        System.out.println("나보고 어쩌라는 거야 이자식아"+((ImageDomain)list.get(0)).getLink());
-		return ((ImageDomain)list.get(0)).getLink();
+        if(list.size()!=0) {
+        	return ( (ImageDomain)list.get(0) ).getLink();
+        }else {
+        	return "이미지 없음";
+        }
 	}
 
 	@Override

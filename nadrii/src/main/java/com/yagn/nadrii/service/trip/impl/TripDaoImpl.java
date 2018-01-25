@@ -16,6 +16,7 @@ import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
 public class TripDaoImpl implements TripDao {
 
+	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
@@ -57,6 +58,9 @@ public class TripDaoImpl implements TripDao {
 
 	@Override
 	public void addTrip(Trip trip) throws Exception {
+		System.out.println(sqlSession);
+		System.out.println( trip.toString() );
+		
 		sqlSession.insert("TripMapper.addTrip", trip);
 	}
 
@@ -76,7 +80,7 @@ public class TripDaoImpl implements TripDao {
 
 	@Override
 	public void updateViewCount(int postNo) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.update("TripMapper.updateViewCount",postNo);
 		
 	}
 	

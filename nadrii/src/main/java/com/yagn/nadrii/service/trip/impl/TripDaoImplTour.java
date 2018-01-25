@@ -56,8 +56,8 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-//		System.out.println("===================================================");
+		System.out.println("[1 : jsonobj] ==>" + jsonobj);
+		System.out.println("===================================================");
 		JSONObject response = (JSONObject) jsonobj.get("response");
 //		System.out.println("[2 : response] ==>" + response);
 //		System.out.println("===================================================");
@@ -73,11 +73,13 @@ public class TripDaoImplTour implements TripDao {
 		JSONArray jsonArray = (JSONArray)items.get("item");
 //		System.out.println(jsonArray);
 		List list = new ArrayList();
+		
 		tripDaoImplImageSearch = new TripDaoImplImageSearch();
+		ObjectMapper objectMapper = new ObjectMapper();
 		for(int i=0;i<jsonArray.size();++i) {
 			JSONObject obj = (JSONObject)jsonArray.get(i);
 			System.out.println(obj);
-			ObjectMapper objectMapper = new ObjectMapper();
+			
 			TourApiDomain tourDomain = new TourApiDomain();
 			tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
 			

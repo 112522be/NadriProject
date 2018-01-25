@@ -311,8 +311,26 @@
 		});
 		
 		$( function() {
-			$("a[href='#' ]:contains('기념관')").on("click" , function() {
+			$("a[href='#' ]:contains('전시관')").on("click" , function() {
 				self.location = "../trip/listExhibit?pageNo=1"
+			});
+		});
+		
+		$( function() {
+			$("a[href='#' ]:contains('미술관')").on("click" , function() {
+				self.location = "../trip/listGallery?pageNo=1"
+			});
+		});
+		
+		$( function() {
+			$("a[href='#' ]:contains('체험관')").on("click" , function() {
+				self.location = "../trip/listExperience?pageNo=1"
+			});
+		});
+		
+		$( function() {
+			$("a[href='#' ]:contains('민속마을')").on("click" , function() {
+				self.location = "../trip/listTradition?pageNo=1"
 			});
 		});
 	</script>	
@@ -345,7 +363,10 @@
 	                 <li><a href="#">회원가입</a></li>
 	                 <li><a href="#">로 그 인</a></li>
 	                 <li><a href="#">박물관</a></li>
-	                 <li><a href="#">기념관</a></li>
+	                 <li><a href="#">전시관</a></li>
+	                 <li><a href="#">미술관</a></li>
+	                 <li><a href="#">체험관</a></li>
+	                 <li><a href="#">민속마을</a></li>
 	           	</ul>
 	       </div>
    		
