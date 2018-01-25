@@ -13,4 +13,6 @@ public interface TripDao {
 	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage)throws Exception;
 	
 	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage)throws Exception;
+	
+	public String naverImageSearch(String target) throws Exception;
 }

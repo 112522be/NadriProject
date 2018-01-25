@@ -53,8 +53,31 @@ public class TourApiDomain {
 	private String infocenterculture;
 	private String usetimeculture;
 	private String chkpetculture;
+	private String accomcountculture;
+	private String discountinfo;
 	
 	
+	
+	public String getDiscountinfo() {
+		return discountinfo;
+	}
+
+
+	public void setDiscountinfo(String discountinfo) {
+		this.discountinfo = discountinfo;
+	}
+
+
+	public String getAccomcountculture() {
+		return accomcountculture;
+	}
+
+
+	public void setAccomcountculture(String accomcountculture) {
+		this.accomcountculture = accomcountculture;
+	}
+
+
 	/// Constructor
 	public TourApiDomain() {
 			
@@ -413,15 +436,24 @@ public class TourApiDomain {
 		this.title = title;
 	}
 
+
 	@Override
 	public String toString() {
-		return "TourTripInfoTest_sh [resultCode=" + resultCode + ", resultMsg=" + resultMsg + ", addr1=" + addr1
-				+ ", addr2=" + addr2 + ", areacode=" + areacode + ", cat1=" + cat1 + ", cat2=" + cat2 + ", cat3=" + cat3
-				+ ", contentid=" + contentid + ", contenttypeid=" + contenttypeid + ", firstimage=" + firstimage
-				+ ", firstimage2=" + firstimage2 + ", mapx=" + mapx + ", mapy=" + mapy + ", mlevel=" + mlevel
-				+ ", overview=" + overview + ", sigungucode=" + sigungucode + ", zipcode=" + zipcode + ", numOfRows="
-				+ numOfRows + ", pageNo=" + pageNo + ", totalCount=" + totalCount + ", readcount=" + readcount + "]";
+		return "TourApiDomain [resultCode=" + resultCode + ", resultMsg=" + resultMsg + ", title=" + title + ", addr1="
+				+ addr1 + ", addr2=" + addr2 + ", areacode=" + areacode + ", cat1=" + cat1 + ", cat2=" + cat2
+				+ ", cat3=" + cat3 + ", contentid=" + contentid + ", contenttypeid=" + contenttypeid + ", firstimage="
+				+ firstimage + ", firstimage2=" + firstimage2 + ", mapx=" + mapx + ", mapy=" + mapy + ", mlevel="
+				+ mlevel + ", overview=" + overview + ", sigungucode=" + sigungucode + ", zipcode=" + zipcode
+				+ ", numOfRows=" + numOfRows + ", pageNo=" + pageNo + ", totalCount=" + totalCount + ", readcount="
+				+ readcount + ", createdtime=" + createdtime + ", modifiedtime=" + modifiedtime + ", tel=" + tel
+				+ ", booktour=" + booktour + ", telname=" + telname + ", homepage=" + homepage + ", restdateculture="
+				+ restdateculture + ", spendtime=" + spendtime + ", scale=" + scale + ", parkingculture="
+				+ parkingculture + ", usefee=" + usefee + ", parkingfee=" + parkingfee + ", chkcreditcardculture="
+				+ chkcreditcardculture + ", chkbabycarriageculture=" + chkbabycarriageculture + ", infocenterculture="
+				+ infocenterculture + ", usetimeculture=" + usetimeculture + ", chkpetculture=" + chkpetculture + "]";
 	}
+
+	
 
 		
 

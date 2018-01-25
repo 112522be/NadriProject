@@ -29,6 +29,8 @@ import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 @Repository("tripDaoImpl")
 public class TripDaoImplTour implements TripDao {
 
+	private TripDaoImplImageSearch tripDaoImplImageSearch;
+	
 	public TripDaoImplTour() {
 		System.out.println(this.getClass());		
 	}
@@ -52,31 +54,59 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-		System.out.println("===================================================");
+//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
+//		System.out.println("===================================================");
 		JSONObject response = (JSONObject) jsonobj.get("response");
-		System.out.println("[2 : response] ==>" + response);
-		System.out.println("===================================================");
+//		System.out.println("[2 : response] ==>" + response);
+//		System.out.println("===================================================");
 		JSONObject header = (JSONObject) response.get("header");
-		System.out.println("[3 : header] ==>" + header);
-		System.out.println("===================================================");
+//		System.out.println("[3 : header] ==>" + header);
+//		System.out.println("===================================================");
 		JSONObject body = (JSONObject) response.get("body");
-		System.out.println("[4 : body] ==>" + body);
-		System.out.println("===================================================");
+//		System.out.println("[4 : body] ==>" + body);
+//		System.out.println("===================================================");
 		JSONObject items = (JSONObject) body.get("items");
-		System.out.println("[5 : items] ==>" + items);
-		System.out.println("===================================================");
+//		System.out.println("[5 : items] ==>" + items);
+//		System.out.println("===================================================");
 		JSONArray jsonArray = (JSONArray)items.get("item");
-		System.out.println(jsonArray);
+//		System.out.println(jsonArray);
 		List list = new ArrayList();
+		tripDaoImplImageSearch = new TripDaoImplImageSearch();
 		for(int i=0;i<jsonArray.size();++i) {
 			JSONObject obj = (JSONObject)jsonArray.get(i);
 			System.out.println(obj);
 			ObjectMapper objectMapper = new ObjectMapper();
 			TourApiDomain tourDomain = new TourApiDomain();
 			tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
+			
+			System.out.println(tourDomain);
+			
+			
+			if(tourDomain.getFirstimage2()==null) {
+				System.out.println("이미지가 없음-->>"+tourDomain.getTitle());
+				String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+				System.out.println(image);
+				tourDomain.setFirstimage2(image);
+			}
+			
+			
+			
 			list.add(tourDomain);
+			System.out.println(list.get(i));
+			
 		}
+		
+		/* 
+		for (int i = 0; i < list.size(); i++) {
+			if( ((TourApiDomain)list.get(i)).getFirstimage2()==null ) {
+				String image = tripDaoImplImageSearch.naverImageSearch(((TourApiDomain)list.get(i)).getTitle());
+				System.out.println(image);
+				((TourApiDomain)list.get(i)).setFirstimage2(image);
+				System.out.println(list.get(i));
+			}
+						
+		}
+			*/		
 				
 		
 		return list;
@@ -137,6 +167,12 @@ public class TripDaoImplTour implements TripDao {
 		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
 				
 		return tourApiDomain;
+	}
+
+	@Override
+	public String naverImageSearch(String target) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
