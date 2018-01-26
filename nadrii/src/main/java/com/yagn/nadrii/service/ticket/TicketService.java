@@ -8,9 +8,13 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 
 public interface TicketService {
 
+	/// TourAPI
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception;
 	
 	public DetailIntro getTicket(int contentId, int contentTypeId) throws Exception;
 	
 	public DetailImage getDetailImage(int contentId) throws Exception;
+	
+	/// NaverAPI
+	public String getNaverImage(String title) throws Exception;
 }

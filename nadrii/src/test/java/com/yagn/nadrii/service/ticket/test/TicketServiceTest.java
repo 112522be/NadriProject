@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
+import com.yagn.nadrii.service.ticket.impl.TourApiDaoImpl;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,7 +70,7 @@ public class TicketServiceTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void testGetDetailImage() throws Exception {
 
 		int contentId = 1815964;		// 컨텐츠 ID :	
@@ -80,6 +82,21 @@ public class TicketServiceTest {
 
 		// ==> console 확인
 		System.out.println("[testGetDetailImage] : " + detailImage);
+
+		// ==> API 확인
+//		Assert.assertEquals(null, detailImage.getContentid());
+	
+	}
+	
+	@Test
+	public void testGetNaverImage() throws Exception {
+
+		String title = "강동선사문화축제 2017";			
+
+		String returnImage = ticketService.getNaverImage(title);
+
+		// ==> console 확인
+		System.out.println("[testGetNaverImage] : " + returnImage);
 
 		// ==> API 확인
 //		Assert.assertEquals(null, detailImage.getContentid());

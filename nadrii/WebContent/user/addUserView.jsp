@@ -15,8 +15,10 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -24,6 +26,14 @@
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
+        
+        .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+  
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -169,7 +179,7 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">회 원 가 입</h1>
+		<h1 class="bg-success text-center">회 원 가 입</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
@@ -177,38 +187,34 @@
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">입력전 중복확인 부터..</strong>
-		      </span>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" onchange="checkId()" autofocus>
+		      <span id = "chkMsg"></span>
 		    </div>
-		    <div class="col-sm-3">
-		      <button type="button" class="btn btn-info">중복확인</button>
-		    </div>
+		
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
+		      <input type="password" class="form-control password" id="password" name="password" placeholder="비밀번호">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인" oninput="checkPwd()">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
+<!-- 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주민번호</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="주민번호">
@@ -243,18 +249,19 @@
 		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
 		    </div>
 		    <input type="hidden" name="phone"  />
-		  </div>
+		  </div>-->
 		  
 		   <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일">
+		      <input type="button" value="인증" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
 		    </div>
-		  </div>
+		  </div> 
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >가 &nbsp;입</button>
+		      <button type="button" class="btn signupbtn btn-success cancelbtn"  >가 &nbsp;입</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>
@@ -264,6 +271,103 @@
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 	
+<script>
+
+//	이메일 인증 
+function check(){
+	var email = $("#email").val();
+	$.ajax({
+		type:"POST",
+		url:"/user/emailAuth",
+		data:"email=" +email,     //    onclick();
+		success :function(result){
+			
+		}
+	});
+}
+ 
+///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+    var idCheck = 0;
+    var pwdCheck = 0;
+    //아이디 체크하여 가입버튼 비활성화, 중복확인.
+     
+    function checkId() {
+    
+        var data = "userId=" + $("#userId").val();
+        $.ajax({
+            	type:"POST",
+            	data : data,
+				url : "/user/checkId",     
+            
+            success : function(result) {
+            	if(result.check == 1){
+            		//alert("아이디가 중복되었습니다.");
+            		$("#userId").css("background-color", "#FFCECE");
+            		$(".signupbtn").prop("disabled", true);
+	                $(".signupbtn").css("background-color", "#aaaaaa");
+            		return;
+            	}else{
+            		//alert("사용 가능합니다.");
+            		$("#userId").css("background-color", "#B0F6AC");
+            	}
+            }
+        });    
+        
+    }
+    
+    
+    function checkPwd() {
+        var inputed = $('.password').val();
+        var reinputed = $('#password2').val();
+        if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){
+            $(".signupbtn").prop("disabled", true);
+            $(".signupbtn").css("background-color", "#aaaaaa");
+            $("#password2").css("background-color", "#FFCECE");
+        }
+        else if (inputed == reinputed) {
+            $("#password2").css("background-color", "#B0F6AC");
+            pwdCheck = 1;
+            if(idCheck==1 && pwdCheck == 1) {
+                $(".signupbtn").prop("disabled", false);
+                $(".signupbtn").css("background-color", "#4CAF50");
+                signupCheck();
+            }
+        } else if (inputed != reinputed) {
+            pwdCheck = 0;
+            $(".signupbtn").prop("disabled", true);
+            $(".signupbtn").css("background-color", "#aaaaaa");
+            $("#password2").css("background-color", "#FFCECE");
+            
+        }
+    }
+    //닉네임과 이메일 입력하지 않았을 경우 가입버튼 비활성화
+    function signupCheck() {
+        var nickname = $("#nickname").val();
+        var email = $("#email").val();
+        if(nickname=="" || email=="") {
+            $(".signupbtn").prop("disabled", true);
+            $(".signupbtn").css("background-color", "#aaaaaa");
+        } else {
+        }
+    }
+    //캔슬버튼 눌렀을 눌렀을시 인풋박스 클리어
+    $(".cancelbtn").click(function(){
+            $(".id").val(null);
+            $(".pass").val('');
+            $(".signupbtn").prop("disabled", true);
+            $(".signupbtn").css("background-color", "#aaaaaa");
+    });
+    
+//    function joinform(){
+ //   	location.href="getUser.jsp"
+ //   		var str3 = document.getElementById('join');
+
+//		str3.submit();
+
+//		alert("가입이 완료되었습니다.")
+//   }
+    
+</script>
 </body>
 
 </html>
