@@ -13,12 +13,12 @@ import com.yagn.nadrii.service.user.UserDao;
 
 
 //==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DAO CRUD ï¿½ï¿½ï¿½ï¿½
-//@Repository("userDaoImpl")
+@Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao{
 	
 	///Field
-	//@Autowired
-	//@Qualifier("sqlSessionTemplate")
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -49,5 +49,11 @@ public class UserDaoImpl implements UserDao{
 	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("UserMapper.getTotalCount", search);
+	}
+
+	@Override
+	public int checkId(String user) throws Exception {
+		System.out.println("´Ù¿À °ª : " + user);
+		return sqlSession.selectOne("UserMapper.checkId" , user);
 	}
 }

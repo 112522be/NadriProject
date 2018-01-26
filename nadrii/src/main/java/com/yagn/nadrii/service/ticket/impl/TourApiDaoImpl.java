@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +17,7 @@ import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
@@ -27,32 +27,23 @@ import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-@Service("tourApiDaoImpl")
+@Repository("tourApiDaoImpl")
 public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
-	@Autowired
-	@Qualifier("sqlSessionTemplate")
-	private SqlSession sqlSession;
-	
-	public void setSqlSession (SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
 	
 	private SearchFestival searchFestival;
 	private DetailIntro	 detailIntro;
 	private DetailImage detailImgae;
 	
-	@Value("#{tourapiProperties['searchFestivalURL']}")
+	/// TourAPI properties
+	@Value("#{tourApiProperties['searchFestivalURL']}")
 	private String searchFestivalURL;
-
-	@Value("#{tourapiProperties['essentialURL']}")
+	@Value("#{tourApiProperties['essentialURL']}")
 	private String essentialURL;
-	
-	@Value("#{tourapiProperties['detailIntroURL']}")
+	@Value("#{tourApiProperties['detailIntroURL']}")
 	private String detailIntroURL;
-	
-	@Value("#{tourapiProperties['detailImageURL']}")
+	@Value("#{tourApiProperties['detailImageURL']}")
 	private String detailImageURL;
 	
 	/// Constructor
@@ -60,9 +51,9 @@ public class TourApiDaoImpl implements TicketDao {
 		System.out.println(this.getClass());
 	}
 	
-	public static final StringBuilder sendGetURL(StringBuilder urlBuilder) throws Exception {
+	public static final StringBuilder sendGetTourURL(StringBuilder urlBuilder) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::sendGetURL");
+		System.out.println("\n[TourApiDaoImpl.java]::sendGetTourURL");
 
 		URL url = new URL(urlBuilder.toString());
 		
@@ -72,63 +63,33 @@ public class TourApiDaoImpl implements TicketDao {
 
 		System.out.println("Response code: " + conn.getResponseCode());
 		
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		BufferedReader br;
+		if (conn.getResponseCode() == 200) {
+			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
+			br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
 		}
 		StringBuilder sb = new StringBuilder();
 		String line;
-		while ((line = rd.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
 
-		rd.close();
+		br.close();
 		conn.disconnect();
 
 		return sb;
 
 	}
 	
-	public static final StringBuilder sendPostURL(StringBuilder urlBuilder) throws Exception {
-		
-		System.out.println("\n[TourApiDaoImpl.java]::sendPostURL");
-
-		URL url = new URL(urlBuilder.toString());
-		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-type", "application/json");
-
-		System.out.println("Response code: " + conn.getResponseCode());
-		
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-		} else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
-		}
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = rd.readLine()) != null) {
-			sb.append(line);
-		}
-
-		rd.close();
-		conn.disconnect();
-
-		return sb;
-
-	}
 	
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::getTicketList");
+		System.out.println("\n[OpenApiDaoImpl.java]::getTicketList");
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetURL(
+		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL(
 				new StringBuilder(
 						searchFestivalURL 
 						+ essentialURL
@@ -170,7 +131,16 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 			tourTicket.setEventenddate(searchFestival.getEventenddate());
+			
+			/* if there is no image, you should control about it.
+			if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
+
+			} else {
+			}
+			//*/
 			tourTicket.setFirstimage(searchFestival.getFirstimage());
+			
+			
 			tourTicket.setFirstimage2(searchFestival.getFirstimage2());
 			tourTicket.setReadcount(searchFestival.getReadcount());
 			tourTicket.setTitle(searchFestival.getTitle());
@@ -211,10 +181,10 @@ public class TourApiDaoImpl implements TicketDao {
 
 	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
 		
-		System.out.println("\n[TourApiDaoImpl.java]::getDetailIntro");
+		System.out.println("\n[OpenApiDaoImpl.java]::getDetailIntro");
 
 		StringBuilder detailIntroSB = TourApiDaoImpl
-				.sendGetURL(new StringBuilder(detailIntroURL + essentialURL 
+				.sendGetTourURL(new StringBuilder(detailIntroURL + essentialURL 
 						+ "&introYN=Y" 
 						+ "&contentId="	+ contentId 
 						+ "&contentTypeId=" + contentTypeId
@@ -237,22 +207,22 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	public DetailImage getDetailImage(int contentId) throws Exception {
 
-		System.out.println("\n[TourApiDaoImpl.java]::getDetailImage");
+		System.out.println("\n[OpenApiDaoImpl.java]::getDetailImage");
 
 		DetailImage detailImage = new DetailImage();
 
-		StringBuilder detailImageSB = TourApiDaoImpl.sendGetURL(new StringBuilder(
+		StringBuilder detailImageSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(
 				detailImageURL + essentialURL + "&contentId=" + contentId + "&imageYN=Y" + "&subImageYN=Y"));
 
 		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailImageSB.toString());
-		
-		
-		
 		JSONObject diResponse = (JSONObject) diJsonObj.get("response");
 		JSONObject diHeader = (JSONObject) diResponse.get("header");
 		JSONObject diBody = (JSONObject) diResponse.get("body");
 
 		if (diBody.get("items").toString().equals("")) {
+			
+			System.out.println("[response] :: Null");
+			
 			detailImage.setContentid(000000);
 			detailImage.setImagename("요청 페이지가 없습니다.");
 			detailImage.setOriginimgurl("http://placehold.it/350X230");
@@ -286,7 +256,6 @@ public class TourApiDaoImpl implements TicketDao {
 				for (int i = 0; i < diItem.size(); i++) {
 					
 					JSONObject value = (JSONObject) diItem.get(i);
-					System.out.println("[value] ==>" + value);
 					
 					ObjectMapper objectMapper = new ObjectMapper();
 					detailImage = new DetailImage();
@@ -298,7 +267,9 @@ public class TourApiDaoImpl implements TicketDao {
 		return detailImage;
 	}
 	
-	
-	
+	////////////////////////////////////////////////////////////////////////////////
+	public String getNaverImage(String title) throws Exception {
+		return null;
+	}
 	
 } // end of class

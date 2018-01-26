@@ -80,9 +80,7 @@ public class OdsayServiceImpl implements OdsayService{
 			JSONObject error = (JSONObject)errorArray.get(0);
 			System.out.println(error);
 			map.put("error", error);
-			
-			return map;
-			
+						
 		}else {
 			JSONObject result = (JSONObject)jsonobj.get("result");
 			JSONArray laneArray = (JSONArray)result.get("lane");
@@ -108,8 +106,9 @@ public class OdsayServiceImpl implements OdsayService{
 			map.put("listX", listX);
 			map.put("listY", listY);
 			
-			return map;
 		}
+		
+		return map;
 	}
 
 	public Map getInfo(double sx, double sy, double ex, double ey) throws Exception{
@@ -210,6 +209,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
+					System.out.println("시외버스가 없어서 고속버스로 경로 변경");
 					trans = "exBusRequest";
 				}else {
 					trans="outBusRequest";
@@ -220,6 +220,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
+					System.out.println("고속버스가 없어서 기차로 경로 변경");
 					trans = "trainRequest";
 				}else {
 					trans = "exBusRequest";

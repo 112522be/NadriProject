@@ -16,12 +16,12 @@ import com.yagn.nadrii.service.user.UserService;
 
 
 //==> ȸ������ ���� ����
-//@Service("userServiceImpl")
+@Service("userServiceImpl")
 public class UserServiceImpl implements UserService{
 	
 	///Field
-//	@Autowired
-//	@Qualifier("userDaoImpl")
+	@Autowired
+	@Qualifier("userDaoImpl")
 	private UserDao userDao;
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -62,6 +62,14 @@ public class UserServiceImpl implements UserService{
 		if(user != null) {
 			result=false;
 		}
+		
+		
 		return result;
+	}
+	
+	@Override
+	public int checkId(String user) throws Exception {
+		System.out.println("service "+user);
+		return userDao.checkId(user);
 	}
 }
