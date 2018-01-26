@@ -7,6 +7,8 @@ public class ImageDomain {
 	String link;
 	String title;
 	String sizewidth;
+	
+	
 	public String getThumbnail() {
 		return thumbnail;
 	}
