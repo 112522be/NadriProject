@@ -16,7 +16,7 @@ import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
@@ -26,7 +26,7 @@ import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-@Service("tourApiDaoImpl")
+@Repository("tourApiDaoImpl")
 public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
@@ -49,6 +49,17 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	@Value("#{tourApiProperties['detailImageURL']}")
 	private String detailImageURL;
+	
+	@Value("#{testP['test']}")
+	private String test;
+
+	@Value("#{naverApiProperties['clientID']}")
+	private String clientID;
+	@Value("#{naverApiProperties['clientSecret']}")
+	private String clientSecret;
+	@Value("#{naverApiProperties['searchImageURL']}")
+	private String searchImageURL;
+	
 	
 	/// Constructor
 	public TourApiDaoImpl() {
@@ -120,6 +131,17 @@ public class TourApiDaoImpl implements TicketDao {
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
 		
 		System.out.println("\n[TourApiDaoImpl.java]::getTicketList");
+		
+		System.out.println("tourProperties");
+		System.out.println(searchFestivalURL);
+		System.out.println(essentialURL);
+		System.out.println(detailIntroURL);
+		System.out.println(detailImageURL);
+		System.out.println(test);
+		System.out.println("3:"+searchImageURL);
+		System.out.println("4:"+clientID);
+		System.out.println("5:"+clientSecret);
+		
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		

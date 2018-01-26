@@ -9,18 +9,20 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-@Service("naverApiDaoImpl")
+@Repository("naverApiDaoImpl")
 public class NaverApiDaoImpl implements TicketDao {
 	
 	/// Field
+	@Autowired
 	@Value("#{naverApiProperties['searchImageURL']}")
 	public String searchImageURL;
 
