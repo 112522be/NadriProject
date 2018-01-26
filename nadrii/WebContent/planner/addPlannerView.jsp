@@ -7,11 +7,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<title>Insert title here</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link href="../resources/css/keywordSearch.css" rel="stylesheet">
 	<style>
 	  	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
@@ -28,7 +30,9 @@
 	
 </head>
 <body>
+
 <div class = "container-fulid">
+<!-- 
 	<div class="row">
 		<div class = "col-lg-11"></div>
 		<div class = "col-lg-1">
@@ -53,15 +57,69 @@
 		
 		</div>
 	</div>
-
+ -->
+<div class="row">
+		<div class = "col-lg-11"></div>
+		<div class = "col-lg-1">
+			<input type = "button" value ="저장">
+		</div>
+		
+		<div class = "col-lg-8">
+		 
+	<div class="map_wrap">
+	    <div id="map" style="width:100%;height:750px;position:relative;overflow:hidden;"></div>
 	
-	
-	<p><em>지도를 클릭해주세요!</em></p> 
+	    <div id="menu_wrap" class="bg_white">
+	        <div class="option">
+	            <div>
+	                <form onsubmit="searchPlaces(); return false;">
+	                    키워드 : <input type="text" value="" id="keyword" size="15"> 
+	                    <button type="submit">검색하기</button> 
+	                </form>
+	            </div>
+	        </div>
+	        <hr>
+	        <ul id="placesList"></ul>
+	        <div id="pagination"></div>
+	    </div>
+	    <p><em>지도를 클릭해주세요!</em></p> 
 	<div id="clickLatlng"></div>
+	<form name = "test" method="post">
+		<input type="button" value="경로탐색" onclick="javascript:search1(1)">
+		
+		<input type ="button" value="시외버스" onClick="javascript:search1(1)">
+		<input type ="button" value="고속버스" onClick="javascript:search1(2)">
+		<input type ="button" value="기차" onClick="javascript:search1(3)">
+			
+	</form>
+	</div>
+	</div>
+	
+	
+	<div class = "col-lg-4">
+		
+			<ul id="sortable">
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+				<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+			</ul>
+			
+			<hr>
+			
+			<textarea class="form-control" rows="27" cols="blue"></textarea>
+		
+		</div>
+	
 	
 </div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
-	
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
+<script language="JavaScript" src="../resources/js/map.js"></script>
 	<script type="text/javascript">
 	
 		/*******************Array insert 사용**********************/
@@ -70,232 +128,23 @@
 		};
 		
 		/********************************************************/	
-	
-	
-	
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = { 
-		    center: new daum.maps.LatLng(37.50187873437067, 127), // 지도의 중심좌표
-		    level: 10 // 지도의 확대 레벨
-		};
-		
-		var map = new daum.maps.Map(mapContainer, mapOption); 
-		
-		var marker = new daum.maps.Marker({ 
-			
-		    position: map.getCenter() 
-		
-		}); 
-		
-		var latlng = marker.getPosition();
-		
-		var infowindow = new daum.maps.InfoWindow({
-				
-				position : new daum.maps.LatLng(latlng.getLat(),latlng.getLng()),
-				content :  '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">출발지</a><br>'
-					+'<a href="#" id="pass" onclick="javascript:pass()">경유지</a><br>'+'<a href="#" id="end" onclick="javascript:end()">도착지</a></div>'
-			});	
-			
-		var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다    
-			startSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-			startOption = { 
-							    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-							};
-							
-		var startImage = new daum.maps.MarkerImage(startSrc, startSize, startOption);
-		var startPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
-		
-		var startMarker = new daum.maps.Marker({
-			
-			position: startPosition,
-			image: startImage
-		});
-		
-		var passSrc = [];
-		var passImage = [];
-		var passPosition = [];
-		var passMarker = [];
-		
-		var	 passSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-		passOption = { 
-						    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-						};
-						
-		for(i=1; i<6; i++){
-			
-			passSrc[i] = 'http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_'+i+'.png';
-			passImage[i] = new daum.maps.MarkerImage(passSrc[i], passSize, passOption);
-			passPosition[i] = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
-			
-			passMarker[i] = new daum.maps.Marker({
-				
-				position: passPosition[i],
-				image: passImage[i]
-			});
-		}
-		
-		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png', // 출발 마커이미지의 주소입니다    
-		endSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-		endOption = { 
-						    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-						};
-						
-		var endImage = new daum.maps.MarkerImage(endSrc, endSize, endOption);
-		var endPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
-		
-		var endMarker = new daum.maps.Marker({
-		
-			position: endPosition,
-			image: endImage
-		});
-		
-		
-		daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		
-		    // 클릭한 위도, 경도 정보를 가져옵니다 
-		    var latlng = mouseEvent.latLng; 
-		    
-			// 지도에 마커를 표시합니다
-			marker.setMap(map);
-		    // 지도에 인포윈도우를 표시합니다.
-			infowindow.setMap(map);
-			
-		    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-		    message += '경도는 ' + latlng.getLng() + ' 입니다' ;
-		    
-		    var resultDiv = document.getElementById('clickLatlng'); 
-		    resultDiv.innerHTML = message;
-		    
-		 	// 마커 위치를 클릭한 위치로 옮깁니다
-		    marker.setPosition(latlng);
-		    
-		    infowindow.open(map,marker);
-			
-		});
-		
-		function start(){
-		
-			var latlng = marker.getPosition();
-			
-			infowindow.close();
-			marker.setMap(null);
-					
-			startMarker.setPosition(latlng);
-			startMarker.setMap(map);
-			
-		}
-		
-		
-		function pass(){
-		
-			var latlng = marker.getPosition();
-			
-			infowindow.close();
-			marker.setMap(null);
-				
-			if(passMarker[1].getMap() == null){
-				
-				passMarker[1].setPosition(latlng);
-				passMarker[1].setMap(map);
-			
-				
-				
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() == null){
-				
-				passMarker[2].setPosition(latlng);
-				passMarker[2].setMap(map);
-				
-				
-				
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() == null){
-				
-				passMarker[3].setPosition(latlng);
-				passMarker[3].setMap(map);
-				
-				
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() == null){
-				
-				passMarker[4].setPosition(latlng);
-				passMarker[4].setMap(map);
-				
-				
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() != null && passMarker[5].getMap() == null){
-				
-				passMarker[5].setPosition(latlng);
-				passMarker[5].setMap(map);
-				
-				
-			}		
-		}
-		
-		function end(){
-		
-			var latlng = marker.getPosition();
-			
-			infowindow.close();
-			marker.setMap(null);
-					
-			endMarker.setPosition(latlng);
-			endMarker.setMap(map);
-			
-			
-		}
-		
-		////////////////////////////////////////////////////////
-		
-		daum.maps.event.addListener(passMarker[1], 'click', function() {
-        
-			passMarker[1].setMap(null);
-      	});
-      	daum.maps.event.addListener(passMarker[2], 'click', function() {
-         
-			passMarker[2].setMap(null);
-     	 });
-      	daum.maps.event.addListener(passMarker[3], 'click', function() {
-         
-			passMarker[3].setMap(null);
-     	 });
-      	daum.maps.event.addListener(passMarker[4], 'click', function() {
-         
-			passMarker[4].setMap(null);
-      	});
-		daum.maps.event.addListener(passMarker[5], 'click', function() {
-        
-			passMarker[5].setMap(null);
-		});
-		
-		
-		////////////////////////////////////////////////////////
-		
+
+		var polyline;
+		var STNpolyline;
 		var startSTN;
 		var endSTN;
-		var STNpolyline;
-		
-		
-		var kk ;		//절대 지우지 말것 폴리라인 담는 배열 변수 선언!!
-		
-		var ak;		//임시 배열
-		var rk;		//진짜 배열
-		
-		var first;
-		var last;
-		
-		var k;
-		
-		
-		var temp;
-		var xhr = new XMLHttpRequest();
-		
-		function rrr(){
-					
-			if(kk != null){
-				kkk();
-			}
+		var polylineArray;
+
+
+		function search1(flag){
 			
+			if(STNpolyline != null){
+				deleteExSearch();
+			}
+			if(STNpolyline != null || polylineArray != null){
+				deleteInSearch();
+			}
+
 			ak=[];
 			rk=[];
 			
@@ -342,107 +191,40 @@
 				var ex = last.getLng();
 				var ey = last.getLat();
 				
-				function dataSend(){
+				
+				function getOBJ(){
 					$.ajax({
-						url : "../odsay/json/getPubTransPath",
+						url : "../odsay/json/getOBJ",
 						method : "GET",
 						dataType : "json",
-						data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+						data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey, "flag" : flag},
+						async : false,
 						headers : {
 							"Accept" : "application/json",
 							"Content-type" : "application/json"
 						},
 						success:function(returnData){
-							alert("success");
-							alert(returnData.startSTN);
-						},
-						error:function(){
-							alert("error");
-						}
-					});
-					
-				}
-				
-				dataSend();
-				
-				search2();
-				
-			}
-			
-				
-			for(k=0;k<rk.length;k++){
-				if(k==0){
-					first = rk[k];
-				}else{
-					first=temp;
-				}
-				last = rk[k+1];
-				temp = last;
-				if(k+1 == rk.length){
-					break;
-				}
-
-				alert("rk :::"+rk);
-				roadSearch();
-					
-			}
-			
-		}
-		
-		
-		var startLatlng;
-		var endLatlng;
-		
-		function search2(){
-				
-			var sx = first.getLng();
-			var sy = first.getLat();
-			var ex = last.getLng();
-			var ey = last.getLat();
-			
-			function search() {
-			
-				//ODsay apiKey 입력
-				var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-				xhr.open("GET", url, false);
-				
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText 로 결과를 가져올 수 있음
-						
-						if( JSON.parse(xhr.responseText)["result"]["path"] == null ){
-							alert("시외");	
-							
-							var sx = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].SX;
-							var sy = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].SY;
-							var ex = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].EX;
-							var ey = JSON.parse(xhr.responseText)["result"]["outBusRequest"]["OBJ"][0].EY;
+							alert("시외 success 터미널 마커 생성");
 							
 							startSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(sy, sx)
+							    position: new daum.maps.LatLng(returnData.sy, returnData.sx)
 							});
 							endSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(ey, ex)
+							    position: new daum.maps.LatLng(returnData.ey, returnData.ex)
 							});
 							
-							startLatlng = new daum.maps.LatLng(sy, sx);
-							endLatlng = new daum.maps.LatLng(ey, ex);
-							
-							rk.insert(k+1, startLatlng);
-							rk.insert(k+2, endLatlng);
-							
-							console.log("출발터미널::"+startLatlng);
-							console.log("도착터미널::"+endLatlng);
-						
-							
-							alert("ak :: "+ ak); 
+							var startStnPosition = new daum.maps.LatLng(returnData.sy,returnData.sx);
+							var endStnPosition = new daum.maps.LatLng(returnData.ey,returnData.ex)
+		                    
+							rk.insert(k+1, startStnPosition);
+							rk.insert(k+2, endStnPosition);
 							
 							function line2(){
 								STNpolyline = new daum.maps.Polyline({
 								    path: [
-								       startLatlng, endLatlng
+								       startStnPosition, endStnPosition
 								    ],
 								    strokeWeight: 2,
 								    strokeColor: '#FF00FF',
@@ -454,148 +236,160 @@
 								
 							}
 							line2();
-							 
-						}
-					}
-				}
-				
-				xhr.send();
-			}
-			search();
-			
-		}
-		
-
-		
-
-		
-		function roadSearch(){
-			kk=[];		//폴리라인 담는 배열 선언!!
-			
-			for(var t=0; t<kk.length;t++){
-				kk[t]=null;
-			}
-			
-
-			
-			var sx = first.getLng();
-			var sy = first.getLat();
-			var ex = last.getLng();
-			var ey = last.getLat();
-			
-			
-			function searchPubTransPathAJAX() {
-				var xhr = new XMLHttpRequest();
-				//ODsay apiKey 입력
-				var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-				xhr.open("GET", url, false);
-				
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-					console.log( JSON.parse(xhr.responseText) ); // <- xhr.responseText 로 결과를 가져올 수 있음
-					//노선그래픽 데이터 호출
-					callMapObjApiAJAX((JSON.parse(xhr.responseText))["result"]["path"][0].info.mapObj);
-					}
-				}
-				xhr.send();
-			}
-			
-			//길찾기 API 호출
-			searchPubTransPathAJAX();
-	
-			function callMapObjApiAJAX(mabObj){
-				var xhr = new XMLHttpRequest();
-				//ODsay apiKey 입력
-				var url = "https://api.odsay.com/v1/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-				xhr.open("GET", url, true);
-				xhr.send();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						var resultJsonData = JSON.parse(xhr.responseText);
-						daumPolyLine(resultJsonData);		// 노선그래픽데이터 지도위 표시
-						// boundary 데이터가 있을경우, 해당 boundary로 지도이동
-						if(resultJsonData.result.boundary){
-								var boundary = new daum.maps.LatLngBounds(
-						                new daum.maps.LatLng(resultJsonData.result.boundary.top, resultJsonData.result.boundary.left),
-						                new daum.maps.LatLng(resultJsonData.result.boundary.bottom, resultJsonData.result.boundary.right)
-						        );
-								
-						}
-					}
-				}
-			}
-
-			// 노선그래픽 데이터를 이용하여 지도위 폴리라인 그려주는 함수
-			function daumPolyLine(data){
-				
 							
-				
-				for(var i = 0 ; i < data.result.lane.length; i++){
-					for(var j=0 ; j <data.result.lane[i].section.length; j++){
-						lineArray = null;
-						lineArray = new Array();
-						for(var k=0 ; k < data.result.lane[i].section[j].graphPos.length; k++){
-							lineArray.push(new daum.maps.LatLng(data.result.lane[i].section[j].graphPos[k].y, data.result.lane[i].section[j].graphPos[k].x));
+						},
+						error:function(){
+							alert("시내");	
 						}
-							
-						
-					//지하철결과의 경우 노선에 따른 라인색상 지정하는 부분 (1,2호선의 경우만 예로 들음)
-
-						polyline = new daum.maps.Polyline({
-							    
-							path: lineArray,
-						    strokeWeight: 3
-						});
-					
-						kk.push(polyline);
+					});
+				}
 				
-					
-						if(polyline.getMap() == null){
-							for(var q=0;q<kk.length;q++){
+				getOBJ();
+				
+			}
+			
+			for(k=0;k<rk.length;k++){
+				if(k==0){
+					first = rk[k];
+				}else{
+					first=temp;
+				}
+				last = rk[k+1];
+				temp = last;
+				if(k+1 == rk.length){
+					break;
+				}
+				
+				var sx = first.getLng();
+				var sy = first.getLat();
+				var ex = last.getLng();
+				var ey = last.getLat();
+
+				function getInfo(){
+					$.ajax({
+						url : "../odsay/json/getInfo",
+						method : "GET",
+						dataType : "json",
+						data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+						headers : {
+							"Accept" : "application/json",
+							"Content-type" : "application/json"
+						},
+						success:function(returnData){
+							
+							var code = returnData.code;
+							
+							if(code != null){
 								
-								kk[q].setMap(map);
+								if(code == 500){
+									swal({
+										text: "서버 내부 오류",
+										icon: "warning"
+									});
+								}else if(code == -98){
+									swal({
+										text: "필수 입력값이 누락되었습니다.",
+										icon: "warning"
+									});
+								}else if (code == -99){
+									swal({
+										text: "검색 결과가 없습니다",
+										icon: "warning"
+									});
+								}
+								
+							}else{
+								
+								alert("시내 success");
+								callMapObjApiAJAX(returnData.mapObj);
 							}
 						}
+					});
+				}
+				
+				getInfo();
+				
+			}
+			
+			function callMapObjApiAJAX(mabObj){
+				/****************폴리라인배열 선언 및 초기화****************/
+				polylineArray = [];
+				
+				for(var i=0; i<polylineArray.length; i++){
+					polylineArray[i]=null;
+				}
+				
+				var lineArray;
+				
+				$.ajax({
+					url : "../odsay/json/getGraph",
+					method : "GET",
+					dataType : "json",
+					data : {"mapObj": mabObj},
+					headers : {
+						"Accept" : "application/json",
+						"Content-type" : "application/json"
+					},
+					success:function(returnData){
+
+						var error = returnData.error;
+						
+						if(error != null){
+							
+							alert("polyline을 그리던 중 "+error.message);
+							
+						}else{
+							
+							console.log( "returnData.listX[0] " + returnData.listX[0] );
+							console.log( "returnData.listY[0] " + returnData.listY[0] );
+							console.log( "returnData.listX.length " + returnData.listX.length );
+							console.log( "returnData.listY.length " + returnData.listY.length );
+					
+							lineArray = null;
+							lineArray = new Array();
+	
+							for (var k = 0; k < returnData.listY.length; k++) {
+								lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
+							}
+	
+							polyline = new daum.maps.Polyline({
+								path : lineArray,
+								strokeWeight : 3
+							});
+	
+							polylineArray.push(polyline);
+	
+							if (polyline.getMap() == null) {
+								for (var i = 0; i < polylineArray.length; i++) {
+									polylineArray[i].setMap(map);
+								}
+							}
+							
+							alert("폴리라인 success");
+							
+						}
 					}
-				}				
+				});
+
 			}
 		}
-		
-		
-		function kkk(){
-			
-			for(var q = 0; q<kk.length; q++){
-				kk[q].setMap(null);	
-				
-			};
-		
-			startSTN.setMap(null);
-			endSTN.setMap(null);
-			STNpolyline.setMap(null);
-			
-		}
-		
-		
-		function bb(){
-			alert(uu);
-		}
-		
 
+		function deleteExSearch() {
+			if (STNpolyline.getMap() != null) {
+				STNpolyline.setMap(null);
+				startSTN.setMap(null);
+				endSTN.setMap(null);
+			}
+
+			for (var i = 0; i < polylineArray.length; i++) {
+				polylineArray[i].setMap(null);
+			}
+		}
+
+		function deleteInSearch() {
+			for (var i = 0; i < polylineArray.length; i++) {
+				polylineArray[i].setMap(null);
+			}
+		}
 	</script>
-	
-	
-	<form name = "test" method="post">
-
-		<input type="button" value="경로탐색" onclick="javascript:rrr()">
-		
-		<input type="button" value="경로삭제" onclick="javascript:kkk()">
-		
-		<input type="button" value="뭘까요" onclick="javascript:bb()">
-	
-	</form>
-	
-	
-	
-	
-</body>
-</html>
+</body>		
