@@ -14,9 +14,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.NaverImage;
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
-import com.yagn.nadrii.service.trip.domain.ImageDomain;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
@@ -77,15 +77,15 @@ public class TripDaoImplImageSearch implements TripDao {
 	        JSONObject tempObj = (JSONObject)items.get(i);
 	        //System.out.println(tempObj);
 	        ObjectMapper objectMapper = new ObjectMapper();
-			ImageDomain imageDomain = new ImageDomain();
-			imageDomain = objectMapper.readValue(tempObj.toString(), ImageDomain.class);
+			NaverImage imageDomain = new NaverImage();
+			imageDomain = objectMapper.readValue(tempObj.toString(), NaverImage.class);
 			list.add(imageDomain);
 			//System.out.println( ( (ImageDomain)list.get(i) ).getLink());
 			
 		}
                    
         if(list.size()!=0) {
-        	return ( (ImageDomain)list.get(0) ).getLink();
+        	return ( (NaverImage)list.get(0) ).getLink();
         }else {
         	return "이미지 없음";
         }
