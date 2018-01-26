@@ -132,13 +132,13 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 			tourTicket.setEventenddate(searchFestival.getEventenddate());
 			
-			/* if there is no image, you should control about it.
+			///* if there is no image, you should control about it.
 			if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-
+				tourTicket.setFirstimage(searchFestival.getFirstimage());
+				
 			} else {
+//				tourTicket.setFirstimage(searchFestival.getFirstimage());
 			}
-			//*/
-			tourTicket.setFirstimage(searchFestival.getFirstimage());
 			
 			
 			tourTicket.setFirstimage2(searchFestival.getFirstimage2());

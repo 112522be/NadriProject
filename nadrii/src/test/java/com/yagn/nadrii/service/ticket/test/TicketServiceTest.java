@@ -16,7 +16,7 @@ import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
-import com.yagn.nadrii.service.ticket.impl.TourApiDaoImpl;
+import com.yagn.nadrii.service.ticket.impl.NaverApiDaoImpl;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -92,11 +92,13 @@ public class TicketServiceTest {
 	public void testGetNaverImage() throws Exception {
 
 		String title = "강동선사문화축제 2017";			
+//		String clientID = "hC9Dwk1KGJiiTZ79onoy";
+//		String clientSecret = "cLODYnjh2Y";
 
 		String returnImage = ticketService.getNaverImage(title);
 
 		// ==> console 확인
-		System.out.println("[testGetNaverImage] : " + returnImage);
+//		System.out.println("[testGetNaverImage] : " + returnImage);
 
 		// ==> API 확인
 //		Assert.assertEquals(null, detailImage.getContentid());
