@@ -20,7 +20,7 @@
 		<typeAlias alias="map" type="java.util.Map" />
 	</typeAliases>
 	
-	 <!-- SQL Definition :: file include -->
+	<!-- SQL Definition :: file include -->
 	<mappers>
 		<mapper resource="sql/TripMapper.xml"/>
 		<mapper resource="sql/CommMapper.xml"/>
