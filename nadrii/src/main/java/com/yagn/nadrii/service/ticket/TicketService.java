@@ -13,4 +13,7 @@ public interface TicketService {
 	public DetailIntro getTicket(int contentId, int contentTypeId) throws Exception;
 	
 	public DetailImage getDetailImage(int contentId) throws Exception;
+	
+	
+	public String getNaverImage(String title) throws Exception;
 }

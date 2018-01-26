@@ -18,20 +18,13 @@ public class TicketServiceImpl implements TicketService {
 	
 	/// Field
 	@Autowired
-	@Qualifier("tourApiDaoImpl")
-	private TicketDao tourDao;
+	@Qualifier("openApiDaoImpl")
+	private TicketDao openApiDao;
 	
-	@Autowired
-	@Qualifier("naverApiDaoImpl")
-	private TicketDao naverDao;
-	
-	public void setTourDao(TicketDao tourDao) {
-		this.tourDao = tourDao;
+	public void setOpenApiDao(TicketDao openApiDao) {
+		this.openApiDao = openApiDao;
 	}
 	
-	public void setNaverDao(TicketDao naverDao) {
-		this.naverDao = naverDao;
-	}
 	
 	/// Constructor
 	public TicketServiceImpl() {
@@ -40,18 +33,22 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
-		Map<String, Object> map = tourDao.getTicketList(openApiSearch);
+		Map<String, Object> map = openApiDao.getTicketList(openApiSearch);
 		return map;
 	}
 	
 	@Override
 	public DetailIntro getTicket(int contentId, int contentTypeId) throws Exception {
-		return tourDao.getDetailIntro(contentId, contentTypeId);
+		return openApiDao.getDetailIntro(contentId, contentTypeId);
 	}
 	
 	@Override
 	public DetailImage getDetailImage(int contentId) throws Exception {
-		return tourDao.getDetailImage(contentId);
+		return openApiDao.getDetailImage(contentId);
 	}
 	
+	@Override
+	public String getNaverImage(String title) throws Exception {
+		return openApiDao.getNaverImage(title);
+	}
 }

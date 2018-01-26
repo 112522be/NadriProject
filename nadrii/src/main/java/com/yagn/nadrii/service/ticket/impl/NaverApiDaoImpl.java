@@ -18,7 +18,7 @@ import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-@Repository("naverApiDaoImpl")
+//@Repository("naverApiDaoImpl")
 public class NaverApiDaoImpl implements TicketDao {
 	
 	/// Field
@@ -43,7 +43,7 @@ public class NaverApiDaoImpl implements TicketDao {
 		System.out.println(this.getClass());
 	}
 	
-	public static final StringBuilder sendGetURL(StringBuilder urlBuilder, String clientID, String clientSecret) throws Exception {
+	public static final StringBuilder sendGetNaverURL(StringBuilder urlBuilder, String clientID, String clientSecret) throws Exception {
 		
 		System.out.println("\n[NaverApiDaoImpl.java]::sendGetURL");
 
@@ -82,13 +82,6 @@ public class NaverApiDaoImpl implements TicketDao {
 		System.out.println("\n[NaverApiDaoImpl.java]::getNaverImage");
 		
 		String encodeTitle = URLEncoder.encode(title, "UTF-8");
-		
-		System.out.println("1:"+title);
-		System.out.println("2:"+encodeTitle);
-		System.out.println("3:"+searchImageURL);
-		System.out.println("4:"+clientID);
-		System.out.println("5:"+clientSecret);
-		System.out.println("6:"+test);
 		
 		StringBuilder naverImageSB = new StringBuilder(searchImageURL + encodeTitle);
 		
