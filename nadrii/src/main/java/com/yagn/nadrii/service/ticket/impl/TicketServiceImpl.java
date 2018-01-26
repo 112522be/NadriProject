@@ -25,11 +25,13 @@ public class TicketServiceImpl implements TicketService {
 	@Qualifier("naverApiDaoImpl")
 	private TicketDao naverDao;
 	
-	/*
-	public void setTicketDao(TicketDao ticketDao) {
-		this.ticketDao = ticketDao;
+	public void setTourDao(TicketDao tourDao) {
+		this.tourDao = tourDao;
 	}
-	//*/
+	
+	public void setNaverDao(TicketDao naverDao) {
+		this.naverDao = naverDao;
+	}
 	
 	/// Constructor
 	public TicketServiceImpl() {
