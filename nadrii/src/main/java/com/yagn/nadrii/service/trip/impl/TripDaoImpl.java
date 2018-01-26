@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Trip;
@@ -14,6 +15,7 @@ import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
+@Repository("tripDaoImpla")
 public class TripDaoImpl implements TripDao {
 
 	

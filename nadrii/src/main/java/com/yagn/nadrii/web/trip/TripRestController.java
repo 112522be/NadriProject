@@ -35,7 +35,7 @@ public class TripRestController {
 	@RequestMapping(value="json/listMuseum/{pageNo}")
 	public Map listMuseum(@PathVariable("pageNo")int pageNo) throws Exception{
 		
-		System.out.println("RestController list Museum");
+		System.out.println("RestController listMuseum");
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setType("areaBasedList?");
@@ -63,7 +63,7 @@ public class TripRestController {
 	@RequestMapping(value="json/listExhibit/{pageNo}")
 	public Map listExhibit(@PathVariable("pageNo")int pageNo) throws Exception{
 		
-		System.out.println("RestController list Exhibit");
+		System.out.println("RestController listExhibit");
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setType("areaBasedList?");
@@ -91,11 +91,11 @@ public class TripRestController {
 	@RequestMapping(value="json/listExperience/{pageNo}")
 	public Map listExperience(@PathVariable("pageNo")int pageNo) throws Exception{
 		
-		System.out.println("RestController list Museum");
+		System.out.println("RestController listExperience");
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setContentTypeId("14");
+		tourAPlUrlManage.setContentTypeId("12");
 		tourAPlUrlManage.setCat1("A02");
 		tourAPlUrlManage.setCat2("A0203");
 		tourAPlUrlManage.setCat3("A02030200");
@@ -119,15 +119,16 @@ public class TripRestController {
 	@RequestMapping(value="json/listTradition/{pageNo}")
 	public Map listTradition(@PathVariable("pageNo")int pageNo) throws Exception{
 		
-		System.out.println("RestController list Museum");
+		System.out.println("RestController listTradition");
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
+		tourAPlUrlManage.setContentTypeId("12");
 		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setContentTypeId("14");
 		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0206");
-		tourAPlUrlManage.setCat3("A02060100");
+		tourAPlUrlManage.setCat2("A0201");
+		tourAPlUrlManage.setCat3("A02010600");
 		tourAPlUrlManage.setPageNo(pageNo);
+		
 		
 		Map map = new HashMap();
 		
@@ -150,7 +151,7 @@ public class TripRestController {
 	@RequestMapping(value="json/listGallery/{pageNo}")
 	public Map listGallery(@PathVariable("pageNo")int pageNo) throws Exception{
 		
-		System.out.println("RestController list Museum");
+		System.out.println("RestController listGallery");
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
 		tourAPlUrlManage.urlClean();
 		tourAPlUrlManage.setType("areaBasedList?");
