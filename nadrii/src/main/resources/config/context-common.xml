@@ -38,11 +38,7 @@
 	</bean>
 -->		
 
-	<util:properties id="tourApiProperties" location="classpath:common/tourApi.properties"/>
-	<util:properties id="naverApiProperties" location="classpath:common/naverApi.properties"/>
-	<util:properties id="testP" location="classpath:common/testP.properties"/>
 
->>>>>>> refs/remotes/origin/master
 		
 	<!-- 	ㅇ 어노테이션 기반 :: Spring Framework 사용. :: sub element 이해 할것 -->				
 	<context:component-scan base-package="com.yagn.nadrii.service">

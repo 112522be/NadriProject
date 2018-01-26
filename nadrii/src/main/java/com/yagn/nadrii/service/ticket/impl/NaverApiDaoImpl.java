@@ -80,11 +80,12 @@ public class NaverApiDaoImpl implements TicketDao {
 		StringBuilder naverImageSB = NaverApiDaoImpl.sendGetNaverURL
 				(new StringBuilder(searchImageURL + encodeTitle), clientID, clientSecret);
 		
-		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
+		System.out.println("[naverImageSB] ==>" + naverImageSB);
 		
+		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
 		String naverImage = (String) niJsonObj.toString();
 		
-		System.out.println("[valu check] ==>" + naverImage);
+		System.out.println("[naverImage] ==>" + naverImage);
 		
 		
 		return naverImage;
