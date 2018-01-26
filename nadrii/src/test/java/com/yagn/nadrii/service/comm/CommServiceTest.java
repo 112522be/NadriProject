@@ -28,9 +28,9 @@ import com.yagn.nadrii.service.domain.Community;
 //==> Meta-Data 를 다양하게 Wiring 하자...
 //@ContextConfiguration(locations = { "classpath:config/context-*.xml" })
 @ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
-																	"classpath:config/context-aspect.xml",
-																	"classpath:config/context-mybatis.xml",
-																	"classpath:config/context-transaction.xml" })
+										"classpath:config/context-aspect.xml",
+										"classpath:config/context-mybatis.xml",
+										"classpath:config/context-transaction.xml" })
 //@ContextConfiguration(locations = { "classpath:config/context-common.xml" })
 public class CommServiceTest{
 	
@@ -124,7 +124,7 @@ public class CommServiceTest{
 	 }
 	 
 	 //==>  주석을 풀고 실행하면....
-	 @Test
+	 //@Test
 	 public void testGetUserListAll() throws Exception{
 		 
 	 	Search search = new Search();
@@ -228,4 +228,15 @@ public class CommServiceTest{
 	 	totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
 	 }	 
+	 
+	 @Test
+	 public void testListHashTag() throws Exception{
+		
+		String filePath = "C:\\\\Users\\\\Yuri\\\\git\\\\NadriiProject\\\\nadrii\\\\WebContent\\\\resources\\\\images\\\\6700442525_688f48b58b_b.jpg";
+
+		List<String> results = commService.listHasgTag(filePath);
+		for(String result : results) {
+			System.out.println(result);
+		}
+	 }
 }

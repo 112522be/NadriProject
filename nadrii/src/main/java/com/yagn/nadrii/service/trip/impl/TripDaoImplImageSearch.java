@@ -13,10 +13,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-
-import com.yagn.nadrii.service.trip.TourApiDomain;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.domain.ImageDomain;
+import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
@@ -79,11 +80,39 @@ public class TripDaoImplImageSearch implements TripDao {
 			ImageDomain imageDomain = new ImageDomain();
 			imageDomain = objectMapper.readValue(tempObj.toString(), ImageDomain.class);
 			list.add(imageDomain);
-			//System.out.println( ( (ImageDomain)list.get(i) ).getLink());	
+			//System.out.println( ( (ImageDomain)list.get(i) ).getLink());
+			
 		}
                    
-        System.out.println("나보고 어쩌라는 거야 이자식아"+((ImageDomain)list.get(0)).getLink());
-		return ((ImageDomain)list.get(0)).getLink();
+        if(list.size()!=0) {
+        	return ( (ImageDomain)list.get(0) ).getLink();
+        }else {
+        	return "이미지 없음";
+        }
+	}
+
+	@Override
+	public void addTrip(Trip trip) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Trip getTrip(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Trip> listTrip(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateViewCount(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

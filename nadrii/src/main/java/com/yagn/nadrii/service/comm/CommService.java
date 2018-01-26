@@ -12,5 +12,5 @@ public interface CommService {
 	public Map<String, Object> listComm(Search search);
 	public void updateComm(Community community); 
 	public void deleteComm(int postNo);
-	public List<String> listHasgTag(String fileName);
+	public List<String> listHasgTag(String fileName) throws Exception;
 }
