@@ -86,35 +86,49 @@ public class NaverApiDaoImpl implements TicketDao {
 		
 		StringBuilder naverImageSB = NaverApiDaoImpl.sendGetNaverURL
 				(new StringBuilder(searchImageURL 
-						+ "query=" + encodeTitle		//
-						+ "&display=50"					//
-						+ "&filter=large"				//
-						+ "&sort=date"					//
+						+ "query=" + encodeTitle		// (필수) 검색할 문자열
+						+ "&display=100"				// 검색결과 출력 건수 (10(기본값), 100(최대))
+//						+ "&filter=large"				// 사이즈 필터 (all (기본값),large, medium, small)
+//						+ "&sort=sim"					// 정렬 옵션 (sim (유사도순), date (날짜순))
 						), clientID, clientSecret);
 		
 		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
-		System.out.println("\n[niJsonObj] ==>" + niJsonObj);
 		
-		JSONArray niItems = (JSONArray) niJsonObj.get("items");
-		System.out.println("\n[niItems] ==>" + niItems);
-		
-		for (int i = 0; i < niItems.size(); i++) {
-			JSONObject itemsValue = (JSONObject) niItems.get(i);
+		if (niJsonObj.get("total").toString().equals("0")) {
 			
-			ObjectMapper objectMapper = new ObjectMapper();
-			naverImage = new NaverImage();
-			naverImage = objectMapper.readValue(itemsValue.toJSONString(), NaverImage.class);
+			// Daum Search 추가할 부분
+			System.out.println("[Naver has not found Image...idiot]");
 			
-			System.out.println("\n\n" + (i+1) +" 번째 이미지 : "
-			+ naverImage.getThumbnail()
-			+ " / "
-			+ naverImage.getSizeheight()
-			);
-		}
+			String rePresntImage = "http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg";
+			
+			return rePresntImage;
 
-		System.out.println("\n[naverImage] :: " + naverImage);
-		
-		return naverImage.getThumbnail();
+		} else {
+
+			System.out.println("[Naver has found Image...awesome]");
+
+			JSONArray niItems = (JSONArray) niJsonObj.get("items");
+
+			int minImage = 500;
+			String naverReturnImage = "";
+
+			for (int i = 0; i < niItems.size(); i++) {
+				JSONObject itemsValue = (JSONObject) niItems.get(i);
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				naverImage = new NaverImage();
+				naverImage = objectMapper.readValue(itemsValue.toJSONString(), NaverImage.class);
+
+				if (Integer.parseInt(naverImage.getSizeheight()) > minImage) {
+
+					minImage = Integer.parseInt(naverImage.getSizeheight());
+					naverReturnImage = naverImage.getThumbnail();
+				}
+
+			}
+
+			return naverReturnImage;
+		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////

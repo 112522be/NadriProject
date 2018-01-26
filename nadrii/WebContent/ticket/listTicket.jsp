@@ -217,15 +217,7 @@ function fncGetList(pageNo) {
 							<span class="label label-success"> ${ tt.title } </span>
 						</h4>
 						<div class="thumbnail">
-
-							<c:if test="${ empty tt.firstimage }">
-								<img src="${ tt.firstimage2 }" class="img-responsive"/>
-								<c:if test="${ empty tt.firstimage2 }">
-									<img src="http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg" class="img-responsive"/>
-								</c:if>
-							</c:if>
 							<img src="${ tt.firstimage }" class="img-responsive" />
-
 							<div class="caption">
 								<p>
 									contentID : ${ tt.contentid } <br>

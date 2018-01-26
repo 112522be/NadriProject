@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +28,15 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
+import com.yagn.nadrii.service.ticket.TicketService;
 
 @Repository("tourApiDaoImpl")
 public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
+	@Autowired
+	@Qualifier("ticketServiceImpl")
+	private TicketService ticketService;
 	
 	private SearchFestival searchFestival;
 	private DetailIntro	 detailIntro;
@@ -85,14 +91,18 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
 		
-		System.out.println("\n[OpenApiDaoImpl.java]::getTicketList");
+		System.out.println("\n[tourApiDaoImpl.java]::getTicketList");
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+//		System.out.println("현재날짜 확인 :: " + simpleDateFormat.format(new Date()));
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL(
 				new StringBuilder(
 						searchFestivalURL 
-						+ essentialURL
+						+ essentialURL 
+						+ "&eventStartDate=" + simpleDateFormat.format(new Date())
 						+ "&pageNo=" + openApiSearch.getPageNo()
 						));
 		
@@ -122,7 +132,7 @@ public class TourApiDaoImpl implements TicketDao {
 			searchFestival = new SearchFestival();
 			searchFestival = objectMapper.readValue(itemValue.toJSONString(), SearchFestival.class);
 
-			DetailIntro detailIntro = new DetailIntro();
+//			DetailIntro detailIntro = new DetailIntro();
 			detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
 			
 			TourTicket tourTicket = new TourTicket();
@@ -132,14 +142,14 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 			tourTicket.setEventenddate(searchFestival.getEventenddate());
 			
-			///* if there is no image, you should control about it.
 			if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-				tourTicket.setFirstimage(searchFestival.getFirstimage());
+
+				String image = ticketService.getNaverImage(searchFestival.getTitle());
+				tourTicket.setFirstimage(image);
 				
 			} else {
-//				tourTicket.setFirstimage(searchFestival.getFirstimage());
+				tourTicket.setFirstimage(searchFestival.getFirstimage());
 			}
-			
 			
 			tourTicket.setFirstimage2(searchFestival.getFirstimage2());
 			tourTicket.setReadcount(searchFestival.getReadcount());
@@ -181,7 +191,7 @@ public class TourApiDaoImpl implements TicketDao {
 
 	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
 		
-		System.out.println("\n[OpenApiDaoImpl.java]::getDetailIntro");
+		System.out.println("\n[tourApiDaoImpl.java]::getDetailIntro");
 
 		StringBuilder detailIntroSB = TourApiDaoImpl
 				.sendGetTourURL(new StringBuilder(detailIntroURL + essentialURL 
@@ -207,7 +217,7 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	public DetailImage getDetailImage(int contentId) throws Exception {
 
-		System.out.println("\n[OpenApiDaoImpl.java]::getDetailImage");
+		System.out.println("\n[tourApiDaoImpl.java]::getDetailImage");
 
 		DetailImage detailImage = new DetailImage();
 

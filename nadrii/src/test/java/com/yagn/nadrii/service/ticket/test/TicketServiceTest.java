@@ -91,7 +91,8 @@ public class TicketServiceTest {
 	@Test
 	public void testGetNaverImage() throws Exception {
 
-		String title = "강동선사문화축제 2017";			
+//		String title = "강릉 대기리마을겨울축제 2018";			
+		String title = "가평펜션축제 2018";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
