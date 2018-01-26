@@ -209,6 +209,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
+					System.out.println("시외버스가 없어서 고속버스로 경로 변경");
 					trans = "exBusRequest";
 				}else {
 					trans="outBusRequest";
@@ -219,6 +220,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
+					System.out.println("고속버스가 없어서 기차로 경로 변경");
 					trans = "trainRequest";
 				}else {
 					trans = "exBusRequest";

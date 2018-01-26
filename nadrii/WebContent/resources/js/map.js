@@ -1,4 +1,5 @@
 		var markers = [];
+		var keywordMarkerPosition; //키워드 검색 마커 좌표
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -78,7 +79,7 @@
 		
 		
 		daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		
+			infowindow.close();
 		    // 클릭한 위도, 경도 정보를 가져옵니다 
 		    var latlng = mouseEvent.latLng; 
 		    
@@ -101,12 +102,24 @@
 		});
 		
 		function start(){
-		
-			var latlng = clickMarker.getPosition();
+			var latlng;
+			if(clickMarker.getMap() != null){
+				latlng = clickMarker.getPosition();
+				
+				speInfoWindow.close();
+				infowindow.close();
+				
+				clickMarker.setMap(null);
+				
+			}else if(markers[0].getMap() != null){
+				latlng = keywordMarkerPosition;
+				
+				infowindow.close();
+				speInfoWindow.close();
+				
+				
+			}
 			
-			speInfoWindow.close();
-			clickMarker.setMap(null);
-					
 			startMarker.setPosition(latlng);
 			startMarker.setMap(map);
 			
@@ -115,7 +128,22 @@
 		
 		function pass(){
 		
-			var latlng = clickMarker.getPosition();
+			var latlng;
+			
+			if(clickMarker.getMap() != null){
+				latlng = clickMarker.getPosition();
+				
+				speInfoWindow.close();
+				infowindow.close();
+				
+				clickMarker.setMap(null);
+				
+			}else if(markers[0].getMap() != null){
+				latlng = keywordMarkerPosition;
+				
+				infowindow.close();
+				speInfoWindow.close();		
+			}
 			
 			speInfoWindow.close();
 			clickMarker.setMap(null);
@@ -150,11 +178,23 @@
 		
 		function end(){
 		
-			var latlng = clickMarker.getPosition();
+			var latlng;
 			
-			speInfoWindow.close();
-			clickMarker.setMap(null);
-					
+			if(clickMarker.getMap() != null){
+				latlng = clickMarker.getPosition();
+				
+				speInfoWindow.close();
+				infowindow.close();
+				
+				clickMarker.setMap(null);
+				
+			}else if(markers[0].getMap() != null){
+				latlng = keywordMarkerPosition;
+				
+				infowindow.close();
+				speInfoWindow.close();		
+			}
+
 			endMarker.setPosition(latlng);
 			endMarker.setMap(map);
 			
@@ -262,24 +302,22 @@
 		        // 마커와 검색결과 항목에 mouseover 했을때
 		        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 		        // mouseout 했을 때는 인포윈도우를 닫습니다
-		        (function(marker, title) {
-		            daum.maps.event.addListener(marker, 'mouseover', function() {
-		                displayInfowindow(marker, title);
-		            });
-
-		            daum.maps.event.addListener(marker, 'mouseout', function() {
-		                infowindow.close();
+		        (function(marker, title, keyPosition) {
+		            daum.maps.event.addListener(marker, 'click', function(mouseEvent) {
+		                displayInfowindow(marker, title, keyPosition);
+		                speInfoWindow.close();
+		                clickMarker.setMap(null);
 		            });
 
 		            itemEl.onmouseover =  function () {
-		                displayInfowindow(marker, title);
+		                displayInfowindow(marker, title, keyPosition);
 		            };
 
 		            itemEl.onmouseout =  function () {
 		                infowindow.close();
 		            };
 		            
-		        })(marker, places[i].place_name);
+		        })(marker, places[i].place_name, placePosition);
 
 		        fragment.appendChild(itemEl);
 		    }
@@ -378,9 +416,11 @@
 
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
-		function displayInfowindow(marker, title) {
-		    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-
+		function displayInfowindow(marker, title, keyPosition) {
+		    var content = '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">출발지</a><br>'
+				+'<a href="#" id="pass" onclick="javascript:pass()">경유지</a><br>'+'<a href="#" id="end" onclick="javascript:end()">도착지</a><br></div>'
+				+'<div style="padding:5px;z-index:1;">' + title + '<br><br></div>';
+		    keywordMarkerPosition = keyPosition;
 		    infowindow.setContent(content);
 		    infowindow.open(map, marker);
 		}

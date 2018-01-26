@@ -32,16 +32,15 @@
 	
 	$(window).scroll(function() { 
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-		
-		listMuseum(page);
-		page++
+			listTrip(page);
+			page++
 		}
 	});
 	
-	//ajax 안에서 if문 처리 해보자 
-	function listMuseum(page){
+	
+	function listTrip(page){
 		$.ajax({
-			url:"../trip/json/listMuseum/"+page+"",
+			url:"../trip/json/list"+'${trip}'+"/"+page+"",
 			method:"GET",
 			dataType:"json",
 			data:{"page" :page},
@@ -51,7 +50,7 @@
 			},
 						
 			success: function(returnData){
-				var data = returnData.trip;
+				var data = returnData.list;
 				//alert(data);
 								
 				for(var a =0; a<data.length;++a){
@@ -116,7 +115,7 @@
 	
 	function getTheme(contentid, contenttypeid){
 		$.ajax({
-			url:"../trip/json/getMuseum/"+contentid+"/"+contenttypeid+"",
+			url:"../trip/json/getTrip/"+contentid+"/"+contenttypeid+"",
 			method:"GET",
 			dataType:"json",
 			headers :{
@@ -208,7 +207,7 @@
 	<title>박물관찾기</title>
 </head>
 <body>
-
+<input type="hidden" id="type" value="${type}"/>
 
  
 	
@@ -217,7 +216,7 @@
 <div class="bs-example" data-example-id="thumbnails-with-custom-content">
    
     
-    
+    	
 	    <input type="hidden" id="pageNo" value="${pageNo}"/>
 	    <div class="row">
 		<c:forEach var ="list" items="${list}">
@@ -259,33 +258,8 @@
 <div id="dialog" title="" >
 	<!--  지도를 담는 공간 -->
   <div id="map" style="width:400px;height:400px;"></div>
-	  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-	  <script type="text/javascript">
-	  /*
-	  	function makeMap(){
-			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-			var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new daum.maps.LatLng(mapy,mapx), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
-			//draggable : false;
-			};
-		
-			var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-		  
-			var markerPosition  = new daum.maps.LatLng(mapy,mapx); 
-		
-			//마커를 생성합니다
-			var marker = new daum.maps.Marker({
-			   position: markerPosition
-			});
-			
-			//마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
-		  }
-	  
- 
-	  */
-	</script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+  <script type="text/javascript"></script>
     
     
 

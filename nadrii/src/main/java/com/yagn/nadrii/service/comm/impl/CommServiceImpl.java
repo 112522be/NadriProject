@@ -1,9 +1,11 @@
 package com.yagn.nadrii.service.comm.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -57,8 +59,15 @@ public class CommServiceImpl implements CommService {
 	}
 
 	@Override
-	public List<String> listHasgTag(String fileName) {
-		return null;
+	public List<String> listHasgTag(String filePath) throws Exception{
+		String cloudVisionResult = openAPIDao.getImageResult(filePath);
+		String translatedResult = openAPIDao.getTranslatedResult(cloudVisionResult).toString();	
+		String[] temp = translatedResult.split(",");
+		List<String> result = new ArrayList<>();
+		for(int i=0; i<temp.length;i++) {
+			result.add(temp[i]);
+		}
+		return result;
 	}
 
 }
