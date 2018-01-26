@@ -419,7 +419,7 @@
 		function displayInfowindow(marker, title, keyPosition) {
 		    var content = '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">출발지</a><br>'
 				+'<a href="#" id="pass" onclick="javascript:pass()">경유지</a><br>'+'<a href="#" id="end" onclick="javascript:end()">도착지</a><br></div>'
-				+'<div style="padding:5px;z-index:1;">' + title + '<br><br></div>';
+				+'<div style="padding:5px;z-index:1;">' + title + '<br></div>';
 		    keywordMarkerPosition = keyPosition;
 		    infowindow.setContent(content);
 		    infowindow.open(map, marker);

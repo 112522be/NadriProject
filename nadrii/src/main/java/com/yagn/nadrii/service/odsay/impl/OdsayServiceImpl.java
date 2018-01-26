@@ -74,7 +74,9 @@ public class OdsayServiceImpl implements OdsayService{
 
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		JSONArray errorArray = (JSONArray)jsonobj.get("error");
+		
 		if( errorArray != null) {
+			
 			System.out.println("@@@error@@@");
 			System.out.println(errorArray);
 			JSONObject error = (JSONObject)errorArray.get(0);
@@ -82,7 +84,12 @@ public class OdsayServiceImpl implements OdsayService{
 			map.put("error", error);
 						
 		}else {
+			
 			JSONObject result = (JSONObject)jsonobj.get("result");
+			JSONObject boundary = (JSONObject)result.get("boundary");
+			
+			map.put("boundary", boundary);
+			
 			JSONArray laneArray = (JSONArray)result.get("lane");
 			for (int i = 0; i < laneArray.size(); i++) {
 				JSONObject lane = (JSONObject)laneArray.get(i);

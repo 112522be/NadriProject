@@ -10,6 +10,9 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<title>Insert title here</title>
 	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
@@ -90,6 +93,15 @@
 		<input type ="button" value="시외버스" onClick="javascript:search1(1)">
 		<input type ="button" value="고속버스" onClick="javascript:search1(2)">
 		<input type ="button" value="기차" onClick="javascript:search1(3)">
+		
+		<hr/>
+		
+		<input type ="button" value="바운더리1" onClick="javascript:showBoundary(0)">
+		<input type ="button" value="바운더리2" onClick="javascript:showBoundary(1)">
+		<input type ="button" value="바운더리3" onClick="javascript:showBoundary(2)">
+		<input type ="button" value="바운더리4" onClick="javascript:showBoundary(3)">
+		<input type ="button" value="바운더리5" onClick="javascript:showBoundary(4)">
+		
 			
 	</form>
 	</div>
@@ -134,11 +146,11 @@
 		var startSTN;
 		var endSTN;
 		var polylineArray;
-
-
+		var boundaryArray;
+	
 		function search1(flag){
 			
-			if(STNpolyline != null){
+			if(STNpolyline != null ){
 				deleteExSearch();
 			}
 			if(STNpolyline != null || polylineArray != null){
@@ -238,7 +250,7 @@
 							line2();
 						}
 					});
-				}
+				}// getOBJ 끝
 				
 				getOBJ();
 				
@@ -301,20 +313,26 @@
 							}
 						}
 					});
-				}
+				}// getInfo 끝
 				
 				getInfo();
 				
-			}
+			}//for문 끝
 			
 			function callMapObjApiAJAX(mabObj){
+				
 				/****************폴리라인배열 선언 및 초기화****************/
 				polylineArray = [];
-				
+				boundaryArray = [];
+
 				for(var i=0; i<polylineArray.length; i++){
 					polylineArray[i]=null;
 				}
 				
+		//		for(var i=0; i<boundaryArray.length; i++){
+		//			boundaryArray[i]=null;
+		//		}
+							
 				var lineArray;
 				
 				$.ajax({
@@ -340,7 +358,9 @@
 							console.log( "returnData.listY[0] " + returnData.listY[0] );
 							console.log( "returnData.listX.length " + returnData.listX.length );
 							console.log( "returnData.listY.length " + returnData.listY.length );
-					
+							
+							alert(returnData.boundary.top);
+												
 							lineArray = null;
 							lineArray = new Array();
 	
@@ -361,14 +381,25 @@
 								}
 							}
 							
+							boundary = new daum.maps.LatLngBounds(
+								                new daum.maps.LatLng(returnData.boundary.top, returnData.boundary.left),
+								                new daum.maps.LatLng(returnData.boundary.bottom, returnData.boundary.right)
+								          	);
+							
+							boundaryArray.push(boundary);
+							
+							alert("boundaryArray.length : "+boundaryArray.length);
+							alert("boundaryArray : "+boundaryArray);
+							
 							alert("폴리라인 success");
 							
 						}
 					}
 				});
 
-			}
-		}
+			} //callMapObjApiAJAX 끝
+			
+		} // search끝
 
 		function deleteExSearch() {
 			if (STNpolyline.getMap() != null) {
@@ -386,6 +417,11 @@
 			for (var i = 0; i < polylineArray.length; i++) {
 				polylineArray[i].setMap(null);
 			}
+		}
+		
+		function showBoundary(i){
+			console.log("boundaryArray["+i+"] 보여주는중");
+			map.setBounds(boundaryArray[i]);
 		}
 	</script>
 </body>		
