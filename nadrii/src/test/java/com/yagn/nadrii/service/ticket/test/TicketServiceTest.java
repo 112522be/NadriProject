@@ -16,7 +16,7 @@ import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
-import com.yagn.nadrii.service.ticket.impl.OpenApiDaoImpl;
+import com.yagn.nadrii.service.ticket.impl.TourApiDaoImpl;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

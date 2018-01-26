@@ -17,7 +17,6 @@ import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
-import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketService;
 

@@ -18,25 +18,19 @@ import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-//@Repository("naverApiDaoImpl")
+@Repository("naverApiDaoImpl")
 public class NaverApiDaoImpl implements TicketDao {
 	
 	/// Field
 	@Autowired
-	@Value("#{naverApiProperties['searchImageURL']}")
-	public String searchImageURL;
-
-	@Value("#{naverApiProperties['ddddd']}")
-	String clientID;
+	@Value("#{naverApiProperties['clientID']}")
+	private String clientID;
 
 	@Value("#{naverApiProperties['clientSecret']}")
-	public String clientSecret;
-	
-	@Value("#{tourApiProperties['detailImageURL']}")
-	public String detailImageURL;
-	
-	@Value("#{testP['test']}")
-	public String test;
+	private String clientSecret;
+
+	@Value("#{naverApiProperties['searchImageURL']}")
+	private String searchImageURL;
 	
 	/// Constructor
 	public NaverApiDaoImpl() {
@@ -45,7 +39,7 @@ public class NaverApiDaoImpl implements TicketDao {
 	
 	public static final StringBuilder sendGetNaverURL(StringBuilder urlBuilder, String clientID, String clientSecret) throws Exception {
 		
-		System.out.println("\n[NaverApiDaoImpl.java]::sendGetURL");
+		System.out.println("\n[NaverApiDaoImpl.java]::sendGetNaverURL");
 
 		URL url = new URL(urlBuilder.toString());
 		
@@ -83,14 +77,14 @@ public class NaverApiDaoImpl implements TicketDao {
 		
 		String encodeTitle = URLEncoder.encode(title, "UTF-8");
 		
-		StringBuilder naverImageSB = new StringBuilder(searchImageURL + encodeTitle);
-		
-		System.out.println(naverImageSB);
+		StringBuilder naverImageSB = NaverApiDaoImpl.sendGetNaverURL
+				(new StringBuilder(searchImageURL + encodeTitle), clientID, clientSecret);
 		
 		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
-		String naverImage = niJsonObj.toString();
 		
-		System.out.println("[valu check] ==>" + niJsonObj);
+		String naverImage = (String) niJsonObj.toString();
+		
+		System.out.println("[valu check] ==>" + naverImage);
 		
 		
 		return naverImage;

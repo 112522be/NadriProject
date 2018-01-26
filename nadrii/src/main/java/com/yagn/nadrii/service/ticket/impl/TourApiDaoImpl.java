@@ -27,8 +27,8 @@ import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
-@Repository("openApiDaoImpl")
-public class OpenApiDaoImpl implements TicketDao {
+@Repository("tourApiDaoImpl")
+public class TourApiDaoImpl implements TicketDao {
 	
 	/// Field
 	
@@ -37,26 +37,17 @@ public class OpenApiDaoImpl implements TicketDao {
 	private DetailImage detailImgae;
 	
 	/// TourAPI properties
-	@Value("#{openApiProperties['searchFestivalURL']}")
+	@Value("#{tourApiProperties['searchFestivalURL']}")
 	private String searchFestivalURL;
-	@Value("#{openApiProperties['essentialURL']}")
+	@Value("#{tourApiProperties['essentialURL']}")
 	private String essentialURL;
-	@Value("#{openApiProperties['detailIntroURL']}")
+	@Value("#{tourApiProperties['detailIntroURL']}")
 	private String detailIntroURL;
-	@Value("#{openApiProperties['detailImageURL']}")
+	@Value("#{tourApiProperties['detailImageURL']}")
 	private String detailImageURL;
 	
-	/// NaverAPI properties
-	@Value("#{openApiProperties['clientID']}")
-	private String clientID;
-	@Value("#{openApiProperties['clientSecret']}")
-	private String clientSecret;
-	@Value("#{openApiProperties['searchImageURL']}")
-	private String searchImageURL;
-	
-	
 	/// Constructor
-	public OpenApiDaoImpl() {
+	public TourApiDaoImpl() {
 		System.out.println(this.getClass());
 	}
 	
@@ -91,59 +82,14 @@ public class OpenApiDaoImpl implements TicketDao {
 
 	}
 	
-	public static final StringBuilder sendGetNaverURL(StringBuilder urlBuilder, String clientID, String clientSecret) throws Exception {
-		
-		System.out.println("\n[NaverApiDaoImpl.java]::sendGetNaverURL");
-
-		URL url = new URL(urlBuilder.toString());
-		
-		System.out.println("[url check] ==>" + url);
-		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("X-Naver-Client-Id", clientID);
-        conn.setRequestProperty("X-Naver-Client-Secret", clientSecret);
-
-		System.out.println("Response code: " + conn.getResponseCode());
-		
-		BufferedReader br;
-		if (conn.getResponseCode() == 200) {
-			br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-		} else {
-			br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
-		}
-		StringBuilder sb = new StringBuilder();
-		String line;
-		while ((line = br.readLine()) != null) {
-			sb.append(line);
-		}
-
-		br.close();
-		conn.disconnect();
-
-		return sb;
-
-	}
-	
 	
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
 		
 		System.out.println("\n[OpenApiDaoImpl.java]::getTicketList");
 		
-		System.out.println("Tour Properties value check!!!");
-		System.out.println("1::" + searchFestivalURL);
-		System.out.println("2::" + essentialURL);
-		System.out.println("3::" + detailIntroURL);
-		System.out.println("4::" + detailImageURL);
-		
-		System.out.println("Naver Properties value check!!!");
-		System.out.println("1::" + clientID);
-		System.out.println("2::" + clientSecret);
-		System.out.println("3::" + searchImageURL);
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		StringBuilder searchFestivalSB = OpenApiDaoImpl.sendGetTourURL(
+		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL(
 				new StringBuilder(
 						searchFestivalURL 
 						+ essentialURL
@@ -237,7 +183,7 @@ public class OpenApiDaoImpl implements TicketDao {
 		
 		System.out.println("\n[OpenApiDaoImpl.java]::getDetailIntro");
 
-		StringBuilder detailIntroSB = OpenApiDaoImpl
+		StringBuilder detailIntroSB = TourApiDaoImpl
 				.sendGetTourURL(new StringBuilder(detailIntroURL + essentialURL 
 						+ "&introYN=Y" 
 						+ "&contentId="	+ contentId 
@@ -265,7 +211,7 @@ public class OpenApiDaoImpl implements TicketDao {
 
 		DetailImage detailImage = new DetailImage();
 
-		StringBuilder detailImageSB = OpenApiDaoImpl.sendGetTourURL(new StringBuilder(
+		StringBuilder detailImageSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(
 				detailImageURL + essentialURL + "&contentId=" + contentId + "&imageYN=Y" + "&subImageYN=Y"));
 
 		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailImageSB.toString());
@@ -321,29 +267,9 @@ public class OpenApiDaoImpl implements TicketDao {
 		return detailImage;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////
 	public String getNaverImage(String title) throws Exception {
-		
-		String returnImage = "";
-		System.out.println("\n[OpenApiDaoImpl.java]::getNaverImage");
-		
-		System.out.println("Naver Properties value check!!!");
-		System.out.println("1::" + clientID);
-		System.out.println("2::" + clientSecret);
-		System.out.println("3::" + searchImageURL);
-		
-		String encodeTitle = URLEncoder.encode(title, "UTF-8");
-		
-		StringBuilder naverImageSB = new StringBuilder(searchImageURL + encodeTitle);
-		
-		System.out.println(naverImageSB);
-		
-		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
-		String naverImage = niJsonObj.toString();
-		
-		System.out.println("[valu check] ==>" + niJsonObj);
-		
-		return returnImage;
+		return null;
 	}
-	
 	
 } // end of class
