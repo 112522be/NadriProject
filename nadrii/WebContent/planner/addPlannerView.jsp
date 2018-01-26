@@ -236,10 +236,6 @@
 								
 							}
 							line2();
-							
-						},
-						error:function(){
-							alert("시내");	
 						}
 					});
 				}
