@@ -87,7 +87,7 @@ public class TripDaoImplTour implements TripDao {
 			
 			
 			if(tourDomain.getFirstimage2()==null) {
-				System.out.println("이미지가 없음-->>"+tourDomain.getTitle());
+				System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
 				String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 				System.out.println(image);
 				tourDomain.setFirstimage2(image);
