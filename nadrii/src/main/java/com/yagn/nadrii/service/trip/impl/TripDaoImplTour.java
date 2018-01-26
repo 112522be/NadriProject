@@ -19,8 +19,10 @@ import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.yagn.nadrii.service.trip.TourApiDomain;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
+import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
@@ -54,8 +56,8 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-//		System.out.println("===================================================");
+		System.out.println("[1 : jsonobj] ==>" + jsonobj);
+		System.out.println("===================================================");
 		JSONObject response = (JSONObject) jsonobj.get("response");
 //		System.out.println("[2 : response] ==>" + response);
 //		System.out.println("===================================================");
@@ -71,11 +73,13 @@ public class TripDaoImplTour implements TripDao {
 		JSONArray jsonArray = (JSONArray)items.get("item");
 //		System.out.println(jsonArray);
 		List list = new ArrayList();
+		
 		tripDaoImplImageSearch = new TripDaoImplImageSearch();
+		ObjectMapper objectMapper = new ObjectMapper();
 		for(int i=0;i<jsonArray.size();++i) {
 			JSONObject obj = (JSONObject)jsonArray.get(i);
 			System.out.println(obj);
-			ObjectMapper objectMapper = new ObjectMapper();
+			
 			TourApiDomain tourDomain = new TourApiDomain();
 			tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
 			
@@ -173,6 +177,30 @@ public class TripDaoImplTour implements TripDao {
 	public String naverImageSearch(String target) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addTrip(Trip trip) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Trip getTrip(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Trip> listTrip(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateViewCount(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

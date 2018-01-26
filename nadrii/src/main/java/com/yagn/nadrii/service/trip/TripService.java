@@ -2,6 +2,7 @@ package com.yagn.nadrii.service.trip;
 
 import java.util.Map;
 
+import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
