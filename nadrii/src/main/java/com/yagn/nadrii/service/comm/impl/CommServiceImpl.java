@@ -28,8 +28,8 @@ public class CommServiceImpl implements CommService {
 	private CommOpenAPIDao openAPIDao;
 
 	@Override
-	public void addComm(Community community) {
-		commDao.addComm(community);
+	public int addComm(Community community) {
+		return commDao.addComm(community);
 	}
 
 	@Override

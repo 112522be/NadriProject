@@ -7,7 +7,7 @@ import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Community;
 
 public interface CommService {
-	public void addComm(Community community);
+	public int addComm(Community community);
 	public Community getComm(int postNo);
 	public Map<String, Object> listComm(Search search);
 	public void updateComm(Community community); 
