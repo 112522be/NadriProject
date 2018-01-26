@@ -19,6 +19,30 @@
 	<util:properties id="openApiProperties" 	location="classpath:common/openApi.properties"/>
 	<util:properties id="tourApiProperties" 	location="classpath:common/tourApi.properties"/>
 	<util:properties id="naverApiProperties" 	location="classpath:common/naverApi.properties"/>
+
+	
+	<!--  
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="kimjh2218@gmail.com" />
+		<property name="password" value="god2218923" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+-->		
+
+	<util:properties id="tourApiProperties" location="classpath:common/tourApi.properties"/>
+	<util:properties id="naverApiProperties" location="classpath:common/naverApi.properties"/>
+	<util:properties id="testP" location="classpath:common/testP.properties"/>
+
+>>>>>>> refs/remotes/origin/master
 		
 	<!-- 	ㅇ 어노테이션 기반 :: Spring Framework 사용. :: sub element 이해 할것 -->				
 	<context:component-scan base-package="com.yagn.nadrii.service">

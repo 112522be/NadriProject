@@ -18,12 +18,15 @@
 		<typeAlias alias="trip" type = "com.yagn.nadrii.service.domain.Trip" />
 		<typeAlias alias="search" type="com.yagn.nadrii.common.Search"/>
 		<typeAlias alias="map" type="java.util.Map" />
+		<typeAlias alias="user" type="com.yagn.nadrii.service.domain.User" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
 		<mapper resource="sql/TripMapper.xml"/>
 		<mapper resource="sql/CommMapper.xml"/>
+		<mapper resource="sql/UserMapper.xml"/>
 	</mappers>
+	
 
 </configuration>
