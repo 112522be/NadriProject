@@ -2,26 +2,19 @@ package com.yagn.nadrii.service.planner;
 
 import java.util.List;
 
-import com.model2.mvc.common.Search;
-import com.model2.mvc.service.domain.User;
+import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Planner;
 
-
-//==> 회원관리에서 CRUD 추상화/캡슐화한 DAO Interface Definition
 public interface PlannerDao {
+
+	public void addPlanner(Planner planner) throws Exception;
 	
-	// INSERT
-	public void addUser(User user) throws Exception ;
-
-	// SELECT ONE
-	public User getUser(String userId) throws Exception ;
-
-	// SELECT LIST
-	public List<User> getUserList(Search search) throws Exception ;
-
-	// UPDATE
-	public void updateUser(User user) throws Exception ;
+	public Planner getPlanner(int postNo) throws Exception;
 	
-	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
-	public int getTotalCount(Search search) throws Exception ;
+	public void updatePlanner(Planner planner) throws Exception;
+	
+	public List<Planner> getPlannerList(Search search) throws Exception;
+	
+	public int getTotalCount(Search search) throws Exception;
 	
 }
