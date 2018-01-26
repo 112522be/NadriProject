@@ -22,17 +22,19 @@ public class NaverApiDaoImpl implements TicketDao {
 	
 	/// Field
 	@Value("#{naverApiProperties['searchImageURL']}")
-	private String searchImageURL;
+	public String searchImageURL;
 
-	@Value("#{naverApiProperties['clientID']}")
-	private String clientID;
+	@Value("#{naverApiProperties['ddddd']}")
+	String clientID;
 
 	@Value("#{naverApiProperties['clientSecret']}")
-	private String clientSecret;
+	public String clientSecret;
 	
-	@Value("#{tourApiProperties['searchFestivalURL']}")
-	private String searchFestivalURL;
+	@Value("#{tourApiProperties['detailImageURL']}")
+	public String detailImageURL;
 	
+	@Value("#{testP['test']}")
+	public String test;
 	
 	/// Constructor
 	public NaverApiDaoImpl() {
@@ -84,7 +86,7 @@ public class NaverApiDaoImpl implements TicketDao {
 		System.out.println("3:"+searchImageURL);
 		System.out.println("4:"+clientID);
 		System.out.println("5:"+clientSecret);
-		System.out.println("6:"+searchFestivalURL);
+		System.out.println("6:"+test);
 		
 		StringBuilder naverImageSB = new StringBuilder(searchImageURL + encodeTitle);
 		

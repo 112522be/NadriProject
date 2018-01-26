@@ -121,14 +121,6 @@ public class TourApiDaoImpl implements TicketDao {
 		
 		System.out.println("\n[TourApiDaoImpl.java]::getTicketList");
 		
-		System.out.println("[What is this????????]");
-		System.out.println(searchFestivalURL);
-		System.out.println(essentialURL);
-		System.out.println(detailIntroURL);
-		System.out.println(detailImageURL);
-		
-		
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetURL(
@@ -174,22 +166,16 @@ public class TourApiDaoImpl implements TicketDao {
 			tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 			tourTicket.setEventenddate(searchFestival.getEventenddate());
 			
+			/* if there is no image, you should control about it.
 			if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-				
-				
-				
-				
-				
+
 			} else {
-				tourTicket.setFirstimage(searchFestival.getFirstimage());
 			}
-			
+			//*/
+			tourTicket.setFirstimage(searchFestival.getFirstimage());
 			
 			
 			tourTicket.setFirstimage2(searchFestival.getFirstimage2());
-			
-			
-			
 			tourTicket.setReadcount(searchFestival.getReadcount());
 			tourTicket.setTitle(searchFestival.getTitle());
 			tourTicket.setTel(searchFestival.getTel());
@@ -263,14 +249,13 @@ public class TourApiDaoImpl implements TicketDao {
 				detailImageURL + essentialURL + "&contentId=" + contentId + "&imageYN=Y" + "&subImageYN=Y"));
 
 		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailImageSB.toString());
-		
-		
-		
 		JSONObject diResponse = (JSONObject) diJsonObj.get("response");
 		JSONObject diHeader = (JSONObject) diResponse.get("header");
 		JSONObject diBody = (JSONObject) diResponse.get("body");
 
 		if (diBody.get("items").toString().equals("")) {
+			
+			System.out.println("[response] :: Null");
 			
 			detailImage.setContentid(000000);
 			detailImage.setImagename("요청 페이지가 없습니다.");
@@ -305,7 +290,6 @@ public class TourApiDaoImpl implements TicketDao {
 				for (int i = 0; i < diItem.size(); i++) {
 					
 					JSONObject value = (JSONObject) diItem.get(i);
-					System.out.println("[value] ==>" + value);
 					
 					ObjectMapper objectMapper = new ObjectMapper();
 					detailImage = new DetailImage();
