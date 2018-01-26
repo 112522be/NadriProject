@@ -80,9 +80,7 @@ public class OdsayServiceImpl implements OdsayService{
 			JSONObject error = (JSONObject)errorArray.get(0);
 			System.out.println(error);
 			map.put("error", error);
-			
-			return map;
-			
+						
 		}else {
 			JSONObject result = (JSONObject)jsonobj.get("result");
 			JSONArray laneArray = (JSONArray)result.get("lane");
@@ -108,8 +106,9 @@ public class OdsayServiceImpl implements OdsayService{
 			map.put("listX", listX);
 			map.put("listY", listY);
 			
-			return map;
 		}
+		
+		return map;
 	}
 
 	public Map getInfo(double sx, double sy, double ex, double ey) throws Exception{

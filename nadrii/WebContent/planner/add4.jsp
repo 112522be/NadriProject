@@ -209,6 +209,9 @@
 							}
 							line2();
 							
+						},
+						error:function(){
+							alert("시내");	
 						}
 					});
 				}
@@ -244,28 +247,34 @@
 							"Accept" : "application/json",
 							"Content-type" : "application/json"
 						},
-						success:function(returnData){
-							alert("시내 success");
+						success:function(returnData){		
 							
 							var code = returnData.code;
 							
-							if(code == 500){
-								swal({
-									text: "서버 내부 오류",
-									icon: "warning"
-								});
-							}else if(code == -98){
-								swal({
-									text: "필수 입력값이 누락되었습니다.",
-									icon: "warning"
-								});
-							}else if (code == -99){
-								swal({
-									text: "검색 결과가 없습니다",
-									icon: "warning"
-								});
+							if(code != null){
+								
+								if(code == 500){
+									swal({
+										text: "서버 내부 오류",
+										icon: "warning"
+									});
+								}else if(code == -98){
+									swal({
+										text: "필수 입력값이 누락되었습니다.",
+										icon: "warning"
+									});
+								}else if (code == -99){
+									swal({
+										text: "검색 결과가 없습니다",
+										icon: "warning"
+									});
+								}
+								
+							}else{
+								
+								alert("시내 success");
+								callMapObjApiAJAX(returnData.mapObj);
 							}
-							callMapObjApiAJAX(returnData.mapObj);
 						}
 					});
 				}
@@ -295,37 +304,41 @@
 					},
 					success:function(returnData){
 						
-						alert("폴리라인 success");
-						
-						console.log( "returnData.listX[0] " + returnData.listX[0] );
-						console.log( "returnData.listY[0] " + returnData.listY[0] );
-						console.log( "returnData.listX.length " + returnData.listX.length );
-						console.log( "returnData.listY.length " + returnData.listY.length );
-				
-						
 						var error = returnData.error;
+						
 						if(error != null){
-							alert("polyline을 그리는 중 "+error.message);
-						}
+							
+							alert("polyline을 그리던 중 "+error.message);
+							
+						}else{
+							
+							console.log( "returnData.listX[0] " + returnData.listX[0] );
+							console.log( "returnData.listY[0] " + returnData.listY[0] );
+							console.log( "returnData.listX.length " + returnData.listX.length );
+							console.log( "returnData.listY.length " + returnData.listY.length );
 					
-						lineArray = null;
-						lineArray = new Array();
-
-						for (var k = 0; k < returnData.listY.length; k++) {
-							lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
-						}
-
-						polyline = new daum.maps.Polyline({
-							path : lineArray,
-							strokeWeight : 3
-						});
-
-						polylineArray.push(polyline);
-
-						if (polyline.getMap() == null) {
-							for (var i = 0; i < polylineArray.length; i++) {
-								polylineArray[i].setMap(map);
+							lineArray = null;
+							lineArray = new Array();
+	
+							for (var k = 0; k < returnData.listY.length; k++) {
+								lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
 							}
+	
+							polyline = new daum.maps.Polyline({
+								path : lineArray,
+								strokeWeight : 3
+							});
+	
+							polylineArray.push(polyline);
+	
+							if (polyline.getMap() == null) {
+								for (var i = 0; i < polylineArray.length; i++) {
+									polylineArray[i].setMap(map);
+								}
+							}
+							
+							alert("폴리라인 success");
+							
 						}
 					}
 				});
