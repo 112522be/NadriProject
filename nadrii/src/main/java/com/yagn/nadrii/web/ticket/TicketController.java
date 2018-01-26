@@ -98,43 +98,6 @@ public class TicketController {
 		
 		return "forward:/ticket/getTicket.jsp";
 	}
-	/*
-	@RequestMapping(value = "getTicket", method = RequestMethod.POST)
-	public String getTicket(
-		@RequestParam("contentId") int contentId,	
-		@RequestParam("contentTypeId") int contentTypeId,
-		@RequestParam("title") String title,
-		@RequestParam("firstImage") String firstImage,
-		@RequestParam("firstImage2") String firstImage2,
-		Model model
-			) throws Exception {
-		
-		System.out.println("\n /ticket/getTicket : POST");
-		
-		System.out.println(contentId);
-		System.out.println(contentTypeId);
-		System.out.println(title);
-		System.out.println(firstImage);
-		System.out.println(firstImage2);
-		
-		TourTicket tourTicket = new TourTicket();
-		tourTicket.setTitle(title);
-		tourTicket.setFirstimage(firstImage);
-		tourTicket.setFirstimage2(firstImage2);
-		
-		DetailIntro detailIntro = ticketService.getTicket(contentId, contentTypeId);
-
-		System.out.println("[1]" + tourTicket);
-		System.out.println("[2]" + detailIntro);
-		
-		model.addAttribute("detailIntro", detailIntro);
-		model.addAttribute("tourTicket", tourTicket);
-		
-		System.out.println("\n\n[값확인1111]" + detailIntro);
-		
-		return "forward:/ticket/getTicket.jsp";
-	}
-	//*/
 	
 	
 } // end of class
