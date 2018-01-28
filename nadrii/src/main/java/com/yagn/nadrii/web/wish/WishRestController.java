@@ -2,12 +2,12 @@ package com.yagn.nadrii.web.wish;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.wish.WishService;
 
-@Repository
+@RestController
 @RequestMapping("/wish/*")
 public class WishRestController {
 	
@@ -16,7 +16,13 @@ public class WishRestController {
 	private WishService wishService;
 	
 	
+	//userId는 세션을 통해 받는 것이고, 
 	
+	
+	public WishRestController() {
+		System.out.println(this.getClass());
+	}
+
 	public void addWishFromTrip() {
 		System.out.println("addWishFromTrip");
 		
