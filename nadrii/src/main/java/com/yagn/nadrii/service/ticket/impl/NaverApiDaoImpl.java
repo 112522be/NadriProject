@@ -7,6 +7,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,16 @@ import org.springframework.stereotype.Repository;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.NaverImage;
+import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
 @Repository("naverApiDaoImpl")
 public class NaverApiDaoImpl implements TicketDao {
 	
 	/// Field
+	private NaverImage naverImage;
+
 	@Autowired
 	@Value("#{naverApiProperties['clientID']}")
 	private String clientID;
@@ -40,7 +46,7 @@ public class NaverApiDaoImpl implements TicketDao {
 	public static final StringBuilder sendGetNaverURL(StringBuilder urlBuilder, String clientID, String clientSecret) throws Exception {
 		
 		System.out.println("\n[NaverApiDaoImpl.java]::sendGetNaverURL");
-
+		
 		URL url = new URL(urlBuilder.toString());
 		
 		System.out.println("[url check] ==>" + url);
@@ -63,8 +69,9 @@ public class NaverApiDaoImpl implements TicketDao {
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
-
+		
 		br.close();
+		
 		conn.disconnect();
 
 		return sb;
@@ -78,17 +85,36 @@ public class NaverApiDaoImpl implements TicketDao {
 		String encodeTitle = URLEncoder.encode(title, "UTF-8");
 		
 		StringBuilder naverImageSB = NaverApiDaoImpl.sendGetNaverURL
-				(new StringBuilder(searchImageURL + encodeTitle), clientID, clientSecret);
-		
-		System.out.println("[naverImageSB] ==>" + naverImageSB);
+				(new StringBuilder(searchImageURL 
+						+ "query=" + encodeTitle		//
+						+ "&display=50"					//
+						+ "&filter=large"				//
+						+ "&sort=date"					//
+						), clientID, clientSecret);
 		
 		JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
-		String naverImage = (String) niJsonObj.toString();
+		System.out.println("\n[niJsonObj] ==>" + niJsonObj);
 		
-		System.out.println("[naverImage] ==>" + naverImage);
+		JSONArray niItems = (JSONArray) niJsonObj.get("items");
+		System.out.println("\n[niItems] ==>" + niItems);
 		
+		for (int i = 0; i < niItems.size(); i++) {
+			JSONObject itemsValue = (JSONObject) niItems.get(i);
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			naverImage = new NaverImage();
+			naverImage = objectMapper.readValue(itemsValue.toJSONString(), NaverImage.class);
+			
+			System.out.println("\n\n" + (i+1) +" 번째 이미지 : "
+			+ naverImage.getThumbnail()
+			+ " / "
+			+ naverImage.getSizeheight()
+			);
+		}
+
+		System.out.println("\n[naverImage] :: " + naverImage);
 		
-		return naverImage;
+		return naverImage.getThumbnail();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////
