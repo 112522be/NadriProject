@@ -7,6 +7,7 @@ public class DetailImage {
 	/// Field
 	private int contentid;
 	private String imagename;
+	private String imgname;
 	private String originimgurl;
 	private String serialnum;
 	private String smallimageurl;
@@ -30,6 +31,14 @@ public class DetailImage {
 
 	public void setImagename(String imagename) {
 		this.imagename = imagename;
+	}
+
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 
 	public String getOriginimgurl() {
@@ -58,11 +67,11 @@ public class DetailImage {
 
 	@Override
 	public String toString() {
-		return "DetailImage [contentid=" + contentid + ", imagename=" + imagename + ", originimgurl=" + originimgurl
-				+ ", serialnum=" + serialnum + ", smallimageurl=" + smallimageurl + "]";
+		return "DetailImage [contentid=" + contentid + ", imagename=" + imagename + ", imgname=" + imgname
+				+ ", originimgurl=" + originimgurl + ", serialnum=" + serialnum + ", smallimageurl=" + smallimageurl
+				+ "]";
 	}
 
-	
 	
 
 }

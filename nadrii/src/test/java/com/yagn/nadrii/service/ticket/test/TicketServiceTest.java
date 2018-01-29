@@ -1,5 +1,7 @@
 package com.yagn.nadrii.service.ticket.test;
 
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 import com.yagn.nadrii.service.ticket.impl.NaverApiDaoImpl;
@@ -26,25 +29,20 @@ import com.yagn.nadrii.service.ticket.impl.NaverApiDaoImpl;
 										"classpath:config/context-transaction.xml" })
 public class TicketServiceTest {
 
-	//==>@RunWith,@ContextConfiguration 이용 Wiring, Test 할 instance DI
 	@Autowired
 	@Qualifier("ticketServiceImpl")
 	private TicketService ticketService;
 
-	//@Test
+	@Test
 	public void testGetTicketListAll() throws Exception {
 
 		OpenApiSearch openApiSearch = new OpenApiSearch();
 		openApiSearch.setPageNo(4);
+		openApiSearch.setNumOfRows(10);
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
-
-		@SuppressWarnings("unchecked")
-		List<Object> list = (List<Object>) map.get("tourTicketList");
-		Assert.assertEquals(10, list.size());
-
-		// ==> console 확인
-		System.out.println("[testGetTicketListAll] : " + list);
+		
+//		System.out.println("\n[tourTicketList 값 확인] ==> " + map.get("tourTicketList"));
 
 	}
 	 
@@ -88,14 +86,38 @@ public class TicketServiceTest {
 	
 	}
 	
-	@Test
+	//@Test
 	public void testGetNaverImage() throws Exception {
 
-		String title = "강동선사문화축제 2017";			
+//		String title = "강릉 대기리마을겨울축제 2018";			
+		String title = "가평펜션축제 2018";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
 		String returnImage = ticketService.getNaverImage(title);
+
+		// ==> console 확인
+//		System.out.println("[testGetNaverImage] : " + returnImage);
+
+		// ==> API 확인
+//		Assert.assertEquals(null, detailImage.getContentid());
+	
+	}
+	
+	//@Test
+	public void testGetKakaoImage() throws Exception {
+
+		
+//		String title = "고종명성후 가례 재현행사 (상반기)";			
+//		String title = "강릉 대기리마을겨울축제 2018";			
+		String title = "가평펜션축제 2018";			
+//		String clientID = "hC9Dwk1KGJiiTZ79onoy";
+//		String clientSecret = "cLODYnjh2Y";
+
+		String encodeTitle = URLEncoder.encode(title, "UTF-8");
+		
+		
+		String returnImage = ticketService.getKakaoImage(title);
 
 		// ==> console 확인
 //		System.out.println("[testGetNaverImage] : " + returnImage);

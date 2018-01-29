@@ -10,35 +10,32 @@
 		<result property="wishNo" column="wish_no" jdbcType="NUMERIC"/>
 		<result property="userId" column="user_id" jdbcType="VARCHAR"/>
 		<result property="tripNo" column="trip_no" jdbcType="NUMERIC"/>
-		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>
-		<result property="imageFile" column="image_file" jdbcType="VARCHAR"/>
+		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>		
 	</resultMap>
 	
 	
 	<!-- SQL: INSERT -->
 	<insert id="addWishFromTrip" parameterType="wish">
 		INSERT
-		INTO wish(wish_no, user_id, trip_no, post_no, image_file)
+		INTO wish(wish_no, user_id, trip_no, post_no)
 		
 		VALUES(
 		seq_wish_wish_no.nextval,
-		#{userId},
-		#{tripNo},
-		null,
-		#{imageFile})
+		#{userId:VARCHAR},
+		#{tripNo:NUMERIC},
+		null)
 	
 	</insert>
 	
 	<insert id="addWishFromPost" parameterType="wish">
 		INSERT
-		INTO wish(wish_no, user_id, trip_no, post_no, image_file)
+		INTO wish(wish_no, user_id, trip_no, post_no)
 		
 		VALUES(
 		seq_wish_wish_no.nextval,
-		#{userId},
+		#{userId:VARCHAR},
 		null,
-		#{postNo},
-		#{imageFile})
+		#{postNo:NUMERIC})
 	
 	</insert>
 	
@@ -47,21 +44,19 @@
 			wish_no, 
 			user_id, 
 			trip_no, 
-			post_no, 
-			image_file
+			post_no			
 		FROM wish
 		WHERE wish_no = #{wishNo}	
 	
 	
 	</select>
 	
-	<select id="listWish" parameterType="string" resultMap="tripSelectMap">
+	<select id="listWish" parameterType="string" resultMap="WishSelectMap">
 		SELECT
 			wish_no, 
 			user_id, 
 			trip_no, 
-			post_no, 
-			image_file
+			post_no			
 		FROM wish
 		WHERE user_id = #{userId}	
 	

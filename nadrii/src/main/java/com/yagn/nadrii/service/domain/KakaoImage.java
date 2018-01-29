@@ -11,6 +11,8 @@ public class KakaoImage {
 	private String collection;
 	private String thumbnail_url;
 	private String height;
+	
+	
 	public String getDoc_url() {
 		return doc_url;
 	}

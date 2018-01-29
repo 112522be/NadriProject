@@ -101,12 +101,10 @@ function fncGetList(pageNo) {
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
 			
-			///*
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
-			//*/		
 		});
 	});
 	
@@ -210,29 +208,22 @@ function fncGetList(pageNo) {
 			<hr />
 
 			<div class="row">
-				<c:set var="i" value="0" />
 				<c:forEach var="tt" items="${tourTicket}">
 					<div class="col-sm-3">
 						<h4>
 							<span class="label label-success"> ${ tt.title } </span>
 						</h4>
 						<div class="thumbnail">
-
-							<c:if test="${ empty tt.firstimage }">
-								<img src="${ tt.firstimage2 }" class="img-responsive"/>
-								<c:if test="${ empty tt.firstimage2 }">
-									<img src="http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg" class="img-responsive"/>
-								</c:if>
-							</c:if>
 							<img src="${ tt.firstimage }" class="img-responsive" />
-
 							<div class="caption">
-								<p>
-									contentID : ${ tt.contentid } <br>
-									contentTypeID : ${ tt.contenttypeid } <br>
+								<p> 입장권 : 
+								<c:forEach var="price" items="${ tt.usetimefestival }"  varStatus="status">
+								${ tt.usetimefestival[status.index] }
+									</c:forEach>
 									<hr/>
 									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } <br>
-									조회수 : ${ tt.readcount } <br> 관람시간 : ${ tt.playtime } <br>
+									조회수 : ${ tt.readcount } <br> 
+									관람시간 : ${ tt.playtime } <br>
 								</p>
 								<p class="text-right">
 									<a href="#" class="btn btn-warning" role="button">
