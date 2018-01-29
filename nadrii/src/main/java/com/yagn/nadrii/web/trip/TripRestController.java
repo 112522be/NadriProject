@@ -177,7 +177,6 @@ public class TripRestController {
 		trip.setContentTypeId(tourApiDomain.getContenttypeid()+"");
 		
 		tripService.addTriptoDB(trip);
-		
 	
 		
 		return flag;
@@ -187,6 +186,7 @@ public class TripRestController {
 	public Trip getTripFromDB(@PathVariable("contentTypeId")String contentId) throws Exception {
 		System.out.println("TripRestController getTripFromDB");
 		Trip trip = tripService.getTripFromDB(contentId);
+		System.out.println(trip);
 		return trip;
 	}
 	
