@@ -80,11 +80,12 @@ public class TicketController {
 			) throws Exception {
 		
 		System.out.println("\n /ticket/getTicket : GET");
-
+		System.out.println("[getTicket 인코딩 확인]==>" + title);
+		
 		String decodeTitle = URLDecoder.decode(title, "UTF-8");
 		
 		DetailIntro detailIntro = ticketService.getTicket(contentId, contentTypeId);
-		DetailImage detailImage = ticketService.getDetailImage(contentId);
+		DetailImage detailImage = ticketService.getDetailImage(contentId, decodeTitle);
 		
 		TourTicket tourTicket = new TourTicket();
 		tourTicket.setTitle(decodeTitle);
@@ -109,7 +110,7 @@ public class TicketController {
 		
 		System.out.println("\n /ticket/addBooking : POST");
 		
-		System.out.println("[예매일자 확인]==>" + bookingDate);
+		System.out.println("\n[예매일자 확인]==>" + bookingDate);
 		System.out.println("\n[tourTicket 확인]==>" + tourTicket.toString());
 		System.out.println("\n[detailIntro 확인]==>" + detailIntro.toString());
 		System.out.println("\n[detailImage 확인]==>" + detailImage.toString());

@@ -59,8 +59,8 @@ public class TicketServiceImpl implements TicketService {
 	}
 	
 	@Override
-	public DetailImage getDetailImage(int contentId) throws Exception {
-		return tourApiDao.getDetailImage(contentId);
+	public DetailImage getDetailImage(int contentId, String title) throws Exception {
+		return tourApiDao.getDetailImage(contentId, title);
 	}
 	
 	@Override

@@ -85,6 +85,7 @@ public class NaverApiDaoImpl implements TicketDao {
 	public String getNaverImage(String title) {
 		
 		System.out.println("\n[NaverApiDaoImpl.java]::getNaverImage");
+		System.out.println("[getNaverImage 인코딩 확인]==>" + title);
 		
 		String naverReturnImage = "";
 		
@@ -106,7 +107,7 @@ public class NaverApiDaoImpl implements TicketDao {
 				System.out.println("[Naver has not found Image...idiot]");
 
 				String image = ticketService.getKakaoImage(title);
-
+				System.out.println("\n[getKakaoImage로 부터 받은 이미지 :: ]==>" + image);
 //				String rePresntImage = "http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg";
 
 				return image;
@@ -146,7 +147,7 @@ public class NaverApiDaoImpl implements TicketDao {
 	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
 		return null;
 	}
-	public DetailImage getDetailImage(int contentId) throws Exception {
+	public DetailImage getDetailImage(int contentId, String title) throws Exception {
 		return null;
 	}
 	public String getKakaoImage(String title) throws Exception {

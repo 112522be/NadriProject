@@ -118,8 +118,6 @@ public class TourApiDaoImpl implements TicketDao {
 			OpenApiPage openApiPage = new OpenApiPage();
 			openApiPage = sfBodyMapper.readValue(sfBody.toJSONString(), OpenApiPage.class);
 
-			System.out.println("" + openApiPage);
-
 			map.put("totalCount", openApiPage.getTotalCount());
 
 			JSONObject sfItems = (JSONObject) sfBody.get("items");
@@ -135,6 +133,7 @@ public class TourApiDaoImpl implements TicketDao {
 				searchFestival = new SearchFestival();
 				searchFestival = objectMapper.readValue(itemValue.toJSONString(), SearchFestival.class);
 
+				detailIntro = new DetailIntro();
 				detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
 
 				tourTicket = new TourTicket();
@@ -147,6 +146,7 @@ public class TourApiDaoImpl implements TicketDao {
 
 				System.out.println("\n[1. 타이틀 확인] ==> " + searchFestival.getTitle());
 				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
+					System.out.println("[사진이 없어서 네이버 이미지 검색 호출]");
 					String image = ticketService.getNaverImage(searchFestival.getTitle());
 					tourTicket.setFirstimage(image);
 				} else {
@@ -259,17 +259,63 @@ public class TourApiDaoImpl implements TicketDao {
 		detailIntro = new DetailIntro();
 		detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
 		
-		if (detailIntro.getUsetimefestival().equals("")) {
+		if (detailIntro.getAgelimit() == "" || detailIntro.getAgelimit() == null) {
+			detailIntro.setAgelimit("관련정보없음");
+		}
+		if (detailIntro.getBookingplace() == "" || detailIntro.getBookingplace() == null) {
+			detailIntro.setBookingplace("관련정보없음");
+		}
+		if (detailIntro.getDiscountinfofestival() == "" || detailIntro.getDiscountinfofestival() == null) {
+			detailIntro.setDiscountinfofestival("관련정보없음");
+		}
+		if (detailIntro.getEventhomepage() == "" || detailIntro.getEventhomepage() == null) {
+			detailIntro.setEventhomepage("관련정보없음");
+		}
+		if (detailIntro.getEventplace() == "" || detailIntro.getEventplace() == null) {
+			detailIntro.setEventplace("관련정보없음");
+		}
+		if (detailIntro.getFestivalgrade() == "" || detailIntro.getFestivalgrade() == null) {
+			detailIntro.setFestivalgrade("관련정보없음");
+		}
+		if (detailIntro.getPlaceinfo() == "" || detailIntro.getPlaceinfo() == null) {
+			detailIntro.setPlaceinfo("관련정보없음");
+		}
+		if (detailIntro.getPlaytime() == "" || detailIntro.getPlaytime() == null) {
+			detailIntro.setPlaytime("관련정보없음");
+		}
+		if (detailIntro.getProgram() == "" || detailIntro.getProgram() == null) {
+			detailIntro.setProgram("관련정보없음");
+		}
+		if (detailIntro.getSpendtimefestival() == "" || detailIntro.getSpendtimefestival() == null) {
+			detailIntro.setSpendtimefestival("관련정보없음");
+		}
+		if (detailIntro.getSponsor1tel() == "" || detailIntro.getSponsor1tel() == null) {
+			detailIntro.setSponsor1tel("관련정보없음");
+		}
+		if (detailIntro.getSponsor2tel() == "" || detailIntro.getSponsor2tel() == null) {
+			detailIntro.setSponsor2tel("관련정보없음");
+		}
+		if (detailIntro.getSponsor1() == "" || detailIntro.getSponsor1() == null) {
+			detailIntro.setSponsor1("관련정보없음");
+		}
+		if (detailIntro.getSponsor2() == "" || detailIntro.getSponsor2() == null) {
+			detailIntro.setSponsor2("관련정보없음");
+		}
+		if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
+			detailIntro.setSubevent("관련정보없음");
+		}
+		if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
 			detailIntro.setUsetimefestival("무료");
 		}
 		
 		return detailIntro;
 	}
 	
-	public DetailImage getDetailImage(int contentId) throws Exception {
+	public DetailImage getDetailImage(int contentId, String title) throws Exception {
 
 		System.out.println("\n[tourApiDaoImpl.java]::getDetailImage");
-
+		System.out.println("[getDetailImage 인코딩 확인]==>" + title);
+		
 		DetailImage detailImage = new DetailImage();
 
 		StringBuilder detailImageSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(
@@ -282,14 +328,23 @@ public class TourApiDaoImpl implements TicketDao {
 
 		if (diBody.get("items").toString().equals("")) {
 			
-			System.out.println("[response] :: Null");
+			System.out.println("[사진 타이틀 확인]==>" + title);
 			
+			String image = ticketService.getNaverImage(title);
+			detailImage.setOriginimgurl(image);	
+			
+			System.out.println("\n[getNaverImage로 부터 받은 이미지 :: ]==>" + image);
+			
+			
+			/*
+			System.out.println("[response] :: Null");
 			detailImage.setContentid(000000);
 			detailImage.setImagename("요청 페이지가 없습니다.");
 			detailImage.setOriginimgurl("http://placehold.it/350X230");
 			detailImage.setSerialnum("요청 페이지가 없습니다.");
 			detailImage.setSmallimageurl("http://placehold.it/350X230");
-
+			//*/
+			
 			return detailImage;
 			
 		} else {

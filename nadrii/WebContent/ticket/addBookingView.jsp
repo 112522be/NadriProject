@@ -40,7 +40,7 @@
 	$(function() {
 		$("input.btn.btn-success").bind("click", function() {
 			alert("장바구니")
-		//	fncAddProduct();
+		//	fncAddPurchase();
 		});
 	});
 
@@ -59,7 +59,7 @@
 		});
 	});
 	
-	function fncAddProduct() {
+	function fncAddPurchase() {
 		//Form 유효성 검증
 
 		var name = $("input[name='name']").val();
@@ -67,7 +67,7 @@
 		var phone = $("input[name='phone']").val();
 		var email = $("input[name='email']").val();
 
-		if (name == null || name.length < 1) {
+		if (name == null || name.length < 1 ) {
 			alert("상품명은 반드시 입력하여야 합니다.");
 			return;
 		}
@@ -84,8 +84,10 @@
 			return;
 		}
 
-		$("form").attr("method", "POST").attr("action", "/product/addProduct")
-			.attr("enctype", "multipart/form-data").submit();
+		$("form")
+		.attr("method", "POST")
+		.attr("action", "/purchase/addPurchase")
+		.submit();
 
 	}
 	
@@ -100,7 +102,6 @@
 		    	alert("이메일 형식이 아닙니다.");
 		     }
 		});
-		 
 	});	
 </script>
 	
@@ -125,6 +126,21 @@
 		<form class="form-horizontal">
 
 			<div class="col-sm-6">
+				<img src="${ detailImage.originimgurl }" 
+					alt="There is no image" class="img-responsive img-rounded">
+			</div>
+
+			<div class="col-sm-6">
+				<div class="form-group text-right">
+					<h1>
+						<span class="label label-warning text-center"> ${ tourTicket.title }</span>
+					</h1>
+					<br>
+				</div>
+			</div>
+
+
+			<div class="col-sm-6">
 
 				<div class="input-group">
 					<span class="input-group-addon" id="name">이 름</span> 
@@ -143,12 +159,9 @@
 
 			</div>
 			
-			<div class="col-sm-6">
-			
-			
-			
-			
-			</div>
+
+
+
 			
 				<!-- Button -->
 				<div class="form-group">

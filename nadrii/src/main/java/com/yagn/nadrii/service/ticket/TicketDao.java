@@ -13,7 +13,7 @@ public interface TicketDao {
 	
 	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception;
 	
-	public DetailImage getDetailImage(int contentId) throws Exception;
+	public DetailImage getDetailImage(int contentId, String title) throws Exception;
 	
 	
 	/// NaverAPI
