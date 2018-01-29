@@ -202,6 +202,12 @@ public class TripDaoImplTour implements TripDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Trip getTripFromDB(String contentid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

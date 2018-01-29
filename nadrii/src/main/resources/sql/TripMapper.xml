@@ -96,6 +96,23 @@
 	
 	</update> 
 	
+	<select id="tripCheckDuplication" parameterType="string">
+		SELECT post_no,
+			lat,
+			lng,
+			address,
+			thumbnail_image_file,
+			view_count,
+			description,
+			trip_name,
+			createdtime,
+			contentid,
+			contenttypeid
+		FROM trip
+		WHERE contentid = #{contentid}
+	
+	</select>
+	
 	
 	
  	 

@@ -85,6 +85,14 @@ public class TripDaoImpl implements TripDao {
 		sqlSession.update("TripMapper.updateViewCount",postNo);
 		
 	}
+
+
+	@Override
+	public Trip getTripFromDB(String contentid) throws Exception {
+
+		return sqlSession.selectOne("TripMapper.tripCheckDuplication",contentid);
+		
+	}
 	
 	
 	
