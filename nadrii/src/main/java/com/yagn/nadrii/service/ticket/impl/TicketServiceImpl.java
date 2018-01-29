@@ -33,6 +33,14 @@ public class TicketServiceImpl implements TicketService {
 		this.naverApiDao = naverApiDao;
 	}
 	
+	@Autowired
+	@Qualifier("kakaoApiDaoImpl")
+	private TicketDao kakaoApiDao;
+	
+	public void setKakaoApiDao(TicketDao kakaoApiDao) {
+		this.kakaoApiDao = kakaoApiDao;
+	}
+	
 	
 	/// Constructor
 	public TicketServiceImpl() {
@@ -58,5 +66,10 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public String getNaverImage(String title) throws Exception {
 		return naverApiDao.getNaverImage(title);
+	}
+
+	@Override
+	public String getKakaoImage(String title) throws Exception {
+		return kakaoApiDao.getKakaoImage(title);
 	}
 }

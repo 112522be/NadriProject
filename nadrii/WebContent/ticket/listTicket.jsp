@@ -101,12 +101,10 @@ function fncGetList(pageNo) {
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
 			
-			///*
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
-			//*/		
 		});
 	});
 	
@@ -210,7 +208,6 @@ function fncGetList(pageNo) {
 			<hr />
 
 			<div class="row">
-				<c:set var="i" value="0" />
 				<c:forEach var="tt" items="${tourTicket}">
 					<div class="col-sm-3">
 						<h4>
@@ -219,12 +216,14 @@ function fncGetList(pageNo) {
 						<div class="thumbnail">
 							<img src="${ tt.firstimage }" class="img-responsive" />
 							<div class="caption">
-								<p>
-									contentID : ${ tt.contentid } <br>
-									contentTypeID : ${ tt.contenttypeid } <br>
+								<p> 입장권 : 
+								<c:forEach var="price" items="${ tt.usetimefestival }"  varStatus="status">
+								${ tt.usetimefestival[status.index] }
+									</c:forEach>
 									<hr/>
 									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } <br>
-									조회수 : ${ tt.readcount } <br> 관람시간 : ${ tt.playtime } <br>
+									조회수 : ${ tt.readcount } <br> 
+									관람시간 : ${ tt.playtime } <br>
 								</p>
 								<p class="text-right">
 									<a href="#" class="btn btn-warning" role="button">
