@@ -186,4 +186,6 @@ public class TripController {
 				
 		return "forward:/Trip/listTrip2.jsp";
 	}
+	
+	
 }
