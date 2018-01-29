@@ -101,10 +101,11 @@ public class TicketController {
 	@RequestMapping(value = "addBooking", method = RequestMethod.POST)
 	public String addBooking (
 			@RequestParam("bookingDate") String bookingDate
-			
 			) {
 		
 		System.out.println("\n /ticket/addBooking : POST");
+		
+		System.out.println("[예매일자 확인]==>" + bookingDate);
 		
 		try {
 			

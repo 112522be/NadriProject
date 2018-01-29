@@ -207,7 +207,7 @@ function fncGetList(pageNo) {
 
 			<hr />
 
-			<div class="row">
+		 	<div class="row">  
 				<c:forEach var="tt" items="${tourTicket}">
 					<div class="col-sm-3">
 						<h4>

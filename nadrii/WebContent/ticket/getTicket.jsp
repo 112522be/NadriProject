@@ -39,30 +39,50 @@
 
 $(function(){
 	$("button:contains('장바구니 담기')").bind("click", function(){
-		self.location = "/purchase/addPurchase?prod_no=${ product.prodNo }"
-			$("form").attr("method", "POST")	
-	});
-});
-
-$(function(){
-	$("a[href='#']:contains('예매하기')").bind("click", function(){
-		self.location = "/ticket/addBooking"
+		alert("장바구니 담기")
+//		self.location = "/purchase/addPurchase?prod_no=${ product.prodNo }"
 //			$("form").attr("method", "POST")	
 	});
 });
 
-<!-- /////////////////////// "DatePicker" Event 연결  /////////////////////// -->
+// ========== '예매하기' Event 연결 ==========
+$(function(){
+	$("a[href='#']:contains('예매하기')").bind("click", function(){
+		fncAddBooking();
+	});
+});
+
+// ========== "DatePicker" Event 연결  ==========
 $(function() {
 	$("#datepicker").datepicker({
+		
 		dateFormat: "yymmdd",
 		changeMonth: true,
 		changeYear: true,
 		
 		minDate: '${ detailIntro.eventstartdate }',
-		maxDate: '${ detailIntro.eventenddate }'
-		
+		maxDate: '${ detailIntro.eventenddate }', 
+	
+		onSelect: function(){
+			var bookingDate = $.datepicker.formatDate("yymmdd", $(this).datepicker('getDate'));
+  			$('input[name="bookingDate"]').val(bookingDate);
+		}
 	})
 });
+
+function fncAddBooking() {
+	var bookingDate = $('input[name="bookingDate"]').val();
+	
+	if (bookingDate == null || bookingDate.length < 1) {
+		alert("예매일자를 선택해 주세요");
+		return;
+	}
+	
+	$("form")
+	.attr("method", "POST")
+	.attr("action", "/ticket/addBooking")
+	.submit();
+}
 	</script>
 </head>
 
@@ -91,36 +111,46 @@ $(function() {
 				<br>
 			</div>
 
-			<div class="row">
+			<div class="form-inline row">
 
-				<!-- 1st -->
+				<!-- 1st :: 사진 -->
 				<div class="col-sm-4">
-					<img src="${ detailImage.originimgurl }" alt="There is no image" class="img-responsive img-rounded">
-					<br>
 					<img src="${ detailImage.originimgurl }" alt="There is no image" class="img-responsive img-rounded">
 				</div>
 
-				<!-- 2rd -->
+				<!-- 2rd :: 상세정보 -->
 				<div class="col-sm-4">
-					contentId : ${ detailIntro.contentid }<br> contentTypeId : ${ detailIntro.contenttypeid }
+					contentId : ${ detailIntro.contentid }<br>
+					contentTypeId : ${ detailIntro.contenttypeid }
 					<hr>
-					관람연령 : ${ detailIntro.agelimit }<br> 예매처 : ${ detailIntro.bookingplace }<br>
-					할인정보 : ${ detailIntro.discountinfofestival }<br> 행사기간 : ${ detailIntro.eventstartdate }
-					~ ${ detailIntro.eventenddate }<br> 행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
-					행사장소 : ${ detailIntro.eventplace }<br> 축제등급 : ${ detailIntro.festivalgrade }<br>
-					행사장 위치 안내 : ${ detailIntro.placeinfo }<br> 관람시간 : ${ detailIntro.playtime }<br>
-					관람 소요시간 : ${ detailIntro.spendtimefestival }<br> 주최 : ${ detailIntro.sponsor1 }<br>
-					주관사 연락처 : ${ detailIntro.sponsor1tel }<br> 부대행사 : ${ detailIntro.subevent }<br>
-					이용요금 : ${ detailIntro.usetimefestival }<br>
+					관람연령 : ${ detailIntro.agelimit }<br>
+					예매처 : ${ detailIntro.bookingplace }<br>
+					할인정보 : ${ detailIntro.discountinfofestival }<br> 
+					행사기간 : ${ detailIntro.eventstartdate }
+					~ ${ detailIntro.eventenddate }<br> 
+					행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
+					행사장소 : ${ detailIntro.eventplace }<br> 
+					축제등급 : ${ detailIntro.festivalgrade }<br>
+					행사장 위치 안내 : ${ detailIntro.placeinfo }<br> 
+					관람시간 : ${ detailIntro.playtime }<br>
+					관람 소요시간 : ${ detailIntro.spendtimefestival }<br> 
+					주최 : ${ detailIntro.sponsor1 }<br>
+					주관사 연락처 : ${ detailIntro.sponsor1tel }<br> 
+					부대행사 : ${ detailIntro.subevent }<br>
+					<hr>
+					이용요금 : ${ detailIntro.usetimefestival }
 				</div>
 
-				<!-- 3nd -->
+				<!-- 3nd :: 예매일자 입력 -->
 				<div class="col-sm-4">
 					<p>예매일자 선택</p>
-					<div id="datepicker" name="bookingDate"></div>
+					<div id="datepicker" >
+						<input type="hidden" name="bookingDate"/>
+					</div>
 				</div>
 
 			</div>
+			
 			<div class="col-md-12 text-right ">
 	  			<button type="button" class="btn btn-danger">
 	  				장바구니 담기
@@ -129,12 +159,16 @@ $(function() {
 	  				예매하기
 	  			</a>
 	  		</div>
+	  		
 		<hr/>
 		
 		<div class="row">
 		</div>
 		
 		<br/>
+		
+		</form>
+		<!-- form End /////////////////////////////////////-->
 		
  	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
