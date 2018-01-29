@@ -26,6 +26,10 @@
 
 	
 	<!-- comm의 Read(select) -->
+	<select id="getPostNo" parameterType="com.yagn.nadrii.service.domain.Community" resultType="int">
+		SELECT post_no FROM post WHERE title=#{title} AND text=#{text}
+	</select>
+	
 	<select id="getComm" parameterType="int" resultMap="communitySelectMap">
 		SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, lat, lng, hashtag FROM post WHERE post_no=#{postNo}
  	</select>

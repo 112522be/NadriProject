@@ -19,8 +19,10 @@ public class CommDaoImpl implements CommDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void addComm(Community community) {
+	public int addComm(Community community) {
 		sqlSession.insert("CommMapper.addComm", community);
+		int postNo = sqlSession.selectOne("CommMapper.getPostNo", community);
+		return postNo;
 	}
 
 	@Override
