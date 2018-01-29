@@ -394,14 +394,7 @@
 							alert("polyline을 그리던 중 "+error.message);
 							
 						}else{
-							
-							console.log( "returnData.listX[0] " + returnData.listX[0] );
-							console.log( "returnData.listY[0] " + returnData.listY[0] );
-							console.log( "returnData.listX.length " + returnData.listX.length );
-							console.log( "returnData.listY.length " + returnData.listY.length );
-							
-							alert(returnData.boundary.top);
-												
+																		
 							lineArray = null;
 							lineArray = new Array();
 	
