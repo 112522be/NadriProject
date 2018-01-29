@@ -108,10 +108,7 @@
 		//alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
 		//getTriptoDB(contentid,contenttypeid);
-		/*
-		var type = $("img").index(this);
-		alert(type);
-	    */
+		
 	  });
 	});	
 	

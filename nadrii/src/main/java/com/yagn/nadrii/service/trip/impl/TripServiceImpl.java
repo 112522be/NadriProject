@@ -12,9 +12,7 @@ import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
+
 
 @Service("tripServiceImpl")
 public class TripServiceImpl implements TripService {
@@ -65,6 +63,9 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeid) throws Exception {
 		System.out.println("getTripDetail SerivceImpl");
+		System.out.println(contentId);
+		System.out.println(contentTypeid);
+		
 		
 		TourApiDomain tourApiDomain = tripDaoTour.getTripDetail(contentId, contentTypeid);
 		System.out.println(tourApiDomain.getUsefee());

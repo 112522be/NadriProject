@@ -155,6 +155,8 @@ public class TripDaoImplTour implements TripDao {
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
 		
+		System.out.println(contentId);
+		System.out.println(contentTypeId);
 		
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
