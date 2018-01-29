@@ -1,6 +1,6 @@
 package com.yagn.nadrii.service.domain;
 
-import oracle.sql.CLOB;
+import java.util.List;
 
 public class TourTicket {
 	
@@ -41,7 +41,7 @@ public class TourTicket {
 	private String sponsor2;
 	
 	private String subevent;
-	private String usetimefestival;
+	private List<String> usetimefestival;
 	
 	public TourTicket() {
 	}
@@ -203,10 +203,10 @@ public class TourTicket {
 	public void setSubevent(String subevent) {
 		this.subevent = subevent;
 	}
-	public String getUsetimefestival() {
+	public List<String> getUsetimefestival() {
 		return usetimefestival;
 	}
-	public void setUsetimefestival(String usetimefestival) {
+	public void setUsetimefestival(List<String> usetimefestival) {
 		this.usetimefestival = usetimefestival;
 	}
 	@Override

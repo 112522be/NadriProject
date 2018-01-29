@@ -98,5 +98,24 @@ public class TicketController {
 		return "forward:/ticket/getTicket.jsp";
 	}
 	
+	@RequestMapping(value = "addBooking", method = RequestMethod.POST)
+	public String addBooking (
+			@RequestParam("bookingDate") String bookingDate
+			
+			) {
+		
+		System.out.println("\n /ticket/addBooking : POST");
+		
+		try {
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "forward:/ticket/addBookingView.jsp";
+	}
+	
 	
 } // end of class

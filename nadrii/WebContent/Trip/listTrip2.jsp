@@ -80,6 +80,8 @@
 		});
 	}
 	
+	
+	// 지도 참조 !!!!!!!
 	function makeDialog(){
 		 $('#dialog').dialog({
 				//draggable: false,

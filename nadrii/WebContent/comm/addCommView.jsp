@@ -8,7 +8,8 @@
 <script type="text/javascript" src="/resources/smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
-<form action="sample/viewer/index.php" method="post">
+<form name="textform" action="sample/viewer/index.php" method="post">
+	<textarea name="title">제목을 입력하세요.</textarea>
 	<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
 	<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
 	<p>

@@ -17,4 +17,8 @@ public interface TicketService {
 	
 	/// NaverAPI
 	public String getNaverImage(String title) throws Exception;
+	
+	
+	/// KakaoAPI
+	public String getKakaoImage(String title) throws Exception;
 }
