@@ -107,7 +107,7 @@
 		//alert(contentid);
 		//alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
-		getTriptoDB(contentid);
+		getTripFromDB(contentid);
 		
 	  });
 	});	
@@ -181,7 +181,7 @@
 	}
 	
 	
-	function getTriptoDB(contentid){
+	function getTripFromDB(contentid){
 		$.ajax({
 			url:"../trip/json/getTripFromDB/"+contentid+"",
 			method:"GET",
