@@ -100,12 +100,21 @@ public class TicketController {
 	
 	@RequestMapping(value = "addBooking", method = RequestMethod.POST)
 	public String addBooking (
-			@RequestParam("bookingDate") String bookingDate
+			@RequestParam("bookingDate") String bookingDate,
+			@ModelAttribute("tourTicket") TourTicket tourTicket,
+			@ModelAttribute("detailIntro") DetailIntro detailIntro,
+			@ModelAttribute("detailImage") DetailImage detailImage,
+			Model model
 			) {
 		
 		System.out.println("\n /ticket/addBooking : POST");
 		
 		System.out.println("[예매일자 확인]==>" + bookingDate);
+		System.out.println("\n[tourTicket 확인]==>" + tourTicket.toString());
+		System.out.println("\n[detailIntro 확인]==>" + detailIntro.toString());
+		System.out.println("\n[detailImage 확인]==>" + detailImage.toString());
+		
+		System.out.println(tourTicket.getTitle());
 		
 		try {
 			

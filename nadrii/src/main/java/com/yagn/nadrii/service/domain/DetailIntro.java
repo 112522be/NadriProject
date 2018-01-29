@@ -1,7 +1,5 @@
 package com.yagn.nadrii.service.domain;
 
-import oracle.sql.CLOB;
-
 public class DetailIntro {
 
 	/// Field

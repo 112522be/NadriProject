@@ -104,6 +104,11 @@ function fncAddBooking() {
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-inline">
 
+			<input type="hidden" name="contentid" value="${ detailIntro.contentid }">
+			<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
+			<input type="hidden" name="title" value="${ tourTicket.title }">
+
+
 			<div class="form-group">
 				<h1>
 					<span class="label label-warning"> ${ tourTicket.title } </span>
@@ -126,8 +131,7 @@ function fncAddBooking() {
 					관람연령 : ${ detailIntro.agelimit }<br>
 					예매처 : ${ detailIntro.bookingplace }<br>
 					할인정보 : ${ detailIntro.discountinfofestival }<br> 
-					행사기간 : ${ detailIntro.eventstartdate }
-					~ ${ detailIntro.eventenddate }<br> 
+					행사기간 : ${ detailIntro.eventstartdate }	~ ${ detailIntro.eventenddate }<br> 
 					행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
 					행사장소 : ${ detailIntro.eventplace }<br> 
 					축제등급 : ${ detailIntro.festivalgrade }<br>
@@ -152,7 +156,7 @@ function fncAddBooking() {
 			</div>
 			
 			<div class="col-md-12 text-right ">
-	  			<button type="button" class="btn btn-danger">
+	  			<button type="button" class="btn btn-success">
 	  				장바구니 담기
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">

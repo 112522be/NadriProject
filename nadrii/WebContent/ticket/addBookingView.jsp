@@ -36,36 +36,36 @@
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 
-	//=================== "등록" Event 연결 =================== 
+	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
-		$("button.btn.btn-primary").bind("click", function() {
-			fncAddProduct();
+		$("input.btn.btn-success").bind("click", function() {
+			alert("장바구니")
+		//	fncAddProduct();
 		});
 	});
 
 	//=================== "취소" Event 연결 =================== 
 	$(function() {
-		$("a[href='#' ]").bind("click", function() {
-			$("form")[0].reset();
+		$("a[href='#' ].btn.btn-default").bind("click", function() {
+			alert("취소")
 		});
 	});
 	
-	//=================== "상품제조일자" Event 연결 ===================
+	//=================== "결제" Event 연결 =================== 
 	$(function() {
-		$("#manuDate").datepicker({
-			dateFormat: "yymmdd",
-			changeMonth: true,
-			changeYear: true 
+		$("button.btn.btn-danger").bind("click", function() {
+			alert("결제")
+		//	$("form")[0].reset();
 		});
 	});
-
+	
 	function fncAddProduct() {
 		//Form 유효성 검증
 
-		var name = $("input[name='prodName']").val();
-		var detail = $("input[name='prodDetail']").val();
-		var manuDate = $("input[name='manuDate']").val();
-		var price = $("input[name='price']").val();
+		var name = $("input[name='name']").val();
+		var birthDate = $("input[name='birthDate']").val();
+		var phone = $("input[name='phone']").val();
+		var email = $("input[name='email']").val();
 
 		if (name == null || name.length < 1) {
 			alert("상품명은 반드시 입력하여야 합니다.");
@@ -88,6 +88,20 @@
 			.attr("enctype", "multipart/form-data").submit();
 
 	}
+	
+	//==>"이메일" 유효성Check  Event 처리 및 연결
+	 $(function() {
+		 
+		 $("#email").bind("change" , function() {
+			
+			 var email = $("#email").val();
+		    
+			 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+		    	alert("이메일 형식이 아닙니다.");
+		     }
+		});
+		 
+	});	
 </script>
 	
 </head>
@@ -110,49 +124,42 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
-			<div class="form-group">
-				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="prodName" name="prodName" placeholder="필수입력">
-				</div>
-			</div>
+			<div class="col-sm-6">
 
-			<div class="form-group">
-				<label for="prodDetail"
-					class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="필수입력">
-				</div>
-			</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="name">이 름</span> 
+					<input type="text" class="form-control" placeholder="필수입력" aria-describedby="basic-addon1">
+				</div><br>
 
-			<div class="form-group">
-				<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">상품제조일자</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="필수입력">
-				</div>
-			</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="phone">연락처</span> 
+					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력" aria-describedby="basic-addon1">
+				</div><br>
 
-			<div class="form-group">
-				<label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="price" name="price" placeholder="필수입력">
+				<div class="input-group">
+					<span class="input-group-addon" id="email">@</span> 
+					<input type="text" class="form-control" placeholder="E-mail" aria-describedby="basic-addon1">
 				</div>
-			</div>
 
-			<div class="form-group">
-				<label for="fileNames"
-					class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
-				<div class="col-sm-4">
-					<input type="file" class="form-control" id="fileNames" name="fileNames">
-				</div>
 			</div>
+			
+			<div class="col-sm-6">
+			
+			
+			
+			
+			</div>
+			
+				<!-- Button -->
+				<div class="form-group">
+					<div class="col-sm-12 text-center">
+						<br>
+						<input class="btn btn-success" type="button" value="장바구니 담기">
+						<a class="btn btn-default" href="#" role="button">취&nbsp;소</a>
+						<button type="button" class="btn btn-danger">결&nbsp;제</button>
+					</div>
+				</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">등&nbsp;록</button>
-					<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-				</div>
-			</div>
 
 		</form>
 		<!-- form Start /////////////////////////////////////-->
