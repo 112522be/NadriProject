@@ -37,22 +37,17 @@ public class TripDaoImplTour implements TripDao {
 		System.out.println(this.getClass());		
 	}
 
-	public List listTrip(int pageNo,String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
+	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3) throws Exception {
 		
 		System.out.println("listTrip Dao");
 		
-		
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
+		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
+		tourAPlUrlManage.setPageNo(pageNo);
 		tourAPlUrlManage.setContentTypeId(contentTypeId);
-		tourAPlUrlManage.setType("areaBasedList?");
 		tourAPlUrlManage.setCat1(cat1);
 		tourAPlUrlManage.setCat2(cat2);
 		tourAPlUrlManage.setCat3(cat3);
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
 		
-		System.out.println(tourAPlUrlManage.urlMaking());
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
@@ -112,7 +107,8 @@ public class TripDaoImplTour implements TripDao {
 			System.out.println(list.get(i));
 			
 		}
-						
+		
+	
 		
 		return list;
 	}
@@ -124,7 +120,6 @@ public class TripDaoImplTour implements TripDao {
 		tourAPIGetUrlManage.urlClean();
 		tourAPIGetUrlManage.setContentId(contentId);
 		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
-		
 		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
 		//기본 정보가져오기
@@ -154,10 +149,8 @@ public class TripDaoImplTour implements TripDao {
 
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
-		
-		System.out.println(contentId);
-		System.out.println(contentTypeId);
-		
+		//System.out.println(get);
+		//요금정보 가져오기
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
 		tourAPIGetDetailUrlManage.setContentId(contentId);
@@ -165,7 +158,6 @@ public class TripDaoImplTour implements TripDao {
 		
 		System.out.println(tourAPIGetDetailUrlManage.urlMaking());
 		
-		//요금정보 가져오기
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetDetailUrlManage.urlMaking());
 		httpGet.setHeader("Accept", "application/json");
@@ -177,9 +169,11 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+		System.out.println(jsonObject);
 		JSONObject response = (JSONObject) jsonObject.get("response");
 		JSONObject header = (JSONObject) response.get("header");
 		JSONObject body = (JSONObject) response.get("body");
+		System.out.println(body);
 		JSONObject items = (JSONObject) body.get("items");
 		JSONObject jsonobj = (JSONObject)items.get("item");	
 		System.out.println(jsonobj);

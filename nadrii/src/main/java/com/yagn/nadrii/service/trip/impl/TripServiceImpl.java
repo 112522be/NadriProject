@@ -62,7 +62,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeid) throws Exception {
-		System.out.println("getTripDetail SerivceImpl");
+		System.out.println("12111:getTripDetail SerivceImpl");
 		System.out.println(contentId);
 		System.out.println(contentTypeid);
 		

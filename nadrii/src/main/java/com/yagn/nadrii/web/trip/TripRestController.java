@@ -143,7 +143,7 @@ public class TripRestController {
 		
 		System.out.println("RestController/trip/getMuseum");
 		
-		
+		System.out.println(contentId+", "+ contentTypeId);
 			
 		TourApiDomain tourApiDomain = tripService.getTrip(contentId,contentTypeId);
 		TourApiDomain feeDomain = tripService.getTripDetail(contentId,contentTypeId);

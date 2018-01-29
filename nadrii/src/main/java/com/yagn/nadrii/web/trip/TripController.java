@@ -53,12 +53,8 @@ public class TripController {
 	public String getMuseum(Map map, @RequestParam("contentId") String contentId, @RequestParam("contentTypeId") String contentTypeId) throws Exception{
 		System.out.println("/trip/getMuseum");
 				
-		
-		
-		
 		TourApiDomain tourApiDomain = tripService.getTrip(contentId,contentTypeId);
 		TourApiDomain feeDomain = tripService.getTripDetail(contentId,contentTypeId);
-		
 		
 		map.put("getTrip", tourApiDomain);
 		map.put("getDetail",feeDomain );			
