@@ -33,38 +33,14 @@
 			
 		    // run the currently selected effect
 		    function runEffect() {
-		      // get effect type from
-		      var selectedEffect = $( "#effectTypes" ).val();
-		 
-		      // Most effect types need no options passed by default
-		      var options = {};
-		      // some effects have required parameters
-		      if ( selectedEffect === "scale" ) {
-		        options = { percent: 50 };
-		      } else if ( selectedEffect === "size" ) {
-		        options = { to: { width: 200, height: 60 } };
-		      }
-		 
+		    
 		      // Run the effect
-		      $( "#placesList" ).toggle( "blind", options, 500 );
+		      $( "#placesList" ).toggle( "blind", 300 );
 		    };
 		 
 		    // Set effect from select menu value
 		    $( "#button" ).on( "click", function() {
 		      runEffect();
-		      
-	//		  if($("#placesList").css("display") == "none"){
-		//	  	$("#button")
-		//	  }else{
-		//	  	$("#button")
-		//	  }
-				if(side.hasClass('open')) {
-					side.stop(true).animate({left:'0px'}, duration);
-					sidebt.find('span').text('CLOSE');
-				}else{
-					side.stop(true).animate({left:'-300px'}, duration);
-					sidebt.find('span').text('OPEN');
-				};
 		    });
 		  } );
 		
@@ -119,7 +95,7 @@
 	                    <button id="searchListSubmit" type="submit">검색하기</button> 
 	                </form>
 	                <ul id="placesList" style="display: none;"></ul>
-	        		<text id="button" size="30">▼</text>
+	        		<text id="button">▼</text>
 	            </div>
 	            
 	        </div>
