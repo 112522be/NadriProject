@@ -52,9 +52,9 @@
          
     </bean>
      
-    <bean id="email" class="org.poom.sap.member.model.vo.Email">
+    <bean id="user" class="com.yagn.nadrii.service.domain.User">
     </bean>
-    <bean id="emailSender" class="org.poom.sap.common.util.EmailSender">
+    <bean id="emailSender" class="com.yagn.nadrii.service.user.EmailSender">
     </bean>	
     <!-- email 인증 : gmail end-->
 
