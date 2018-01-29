@@ -93,20 +93,23 @@
 	}
 	
 	
+	var contenttypeid;
+	var contentid;
 	
 	$(function() {
 	  $(document).on("click","img", function(){
 	    
-		var contenttypeid =$(this).next().next().val();
-		var contentid = $(this).next().val();
+		contenttypeid =$(this).next().next().val();
+		contentid = $(this).next().val();
 		alert(contenttypeid);
 		alert(contentid);
+		alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
 		
-		
+		/*
 		var type = $("img").index(this);
 		alert(type);
-	    
+	    */
 	  });
 	});	
 	
@@ -130,8 +133,10 @@
 				var fee = returnData.getDetail;
 				mapx = common.mapx;
 				mapy = common.mapy;
-				
-				
+				contentid =common.contentid;
+				contenttypeid = common.contenttypeid;
+				alert(contenttypeid);
+				alert(contentid);
 				
 				$("#string").remove();
 				var dpValue = "<div id ='string'>"; 
@@ -153,6 +158,15 @@
 					if(common.overview!=null){
 						dpValue += "<h5>"+common.overview+"</h5>";	
 					}
+					
+					dpValue = 
+						dpValue +"<h3>"+
+					"<a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+					"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+					"<a href='#' class='btn btn-danger' role='button'>위시리스트</a>"+	
+					"</h3>"
+					
+					
 					dpValue += "</"+ "div>";
 					//*/
 				
@@ -171,6 +185,19 @@
 			}
 		});
 	}
+	
+	
+	//이벤트는 걸렸는데 인덱스가 틀린다 이런 멍청이가
+	
+	$(function(){
+		$("p a:nth-child(3)").on("click",function(){
+			alert($("a[href='#']:contains('위시리스트')").index(this));
+			alert($($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
+			alert($($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
+		});
+	})
+	
+	
 	
 		
 	</script>

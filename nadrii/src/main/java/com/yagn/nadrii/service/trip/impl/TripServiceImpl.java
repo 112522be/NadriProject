@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
@@ -64,6 +65,18 @@ public class TripServiceImpl implements TripService {
 		TourApiDomain tourApiDomain = tripDao.getTripDetail(tourAPIGetDetailUrlManage);
 		System.out.println(tourApiDomain.getUsefee());
 		return tourApiDomain;
+	}
+
+
+
+	@Override
+	public Trip tripCheckDuplication(String contentid) throws Exception {
+		System.out.println("tripCheckDuplication ServiceImpl");
+		
+		Trip trip = tripDao.getTripFromDB(contentid);
+		System.out.println(trip);
+		
+		return trip;
 	}
 	
 	

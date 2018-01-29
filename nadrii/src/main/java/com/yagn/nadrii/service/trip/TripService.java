@@ -2,6 +2,7 @@ package com.yagn.nadrii.service.trip;
 
 import java.util.Map;
 
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
 import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
@@ -15,4 +16,6 @@ public interface TripService {
 	
 	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage)throws Exception;
 
+	public Trip tripCheckDuplication(String contentid) throws Exception;
+	
 }

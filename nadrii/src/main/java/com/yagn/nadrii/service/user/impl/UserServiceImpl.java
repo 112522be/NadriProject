@@ -3,6 +3,15 @@ package com.yagn.nadrii.service.user.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,4 +81,83 @@ public class UserServiceImpl implements UserService{
 		System.out.println("service "+user);
 		return userDao.checkId(user);
 	}
+
+	@Override
+	public User loginProc(User user) throws Exception {
+		
+		return userDao.loginProc(user);
+	}
+
+	public String findId(String user) throws Exception {
+
+		return userDao.findId(user);
+	}
+
+	public String findPassword(String user) throws Exception {
+		
+		return userDao.findPassword(user);
+	}
+	
+	/*
+	 final String username="kimjh2218@gmail.com";
+	    final String password="god2218923";
+	// 이메일
+		private void sendEmail(String email, String authNum) {
+
+			String setfrom = "kimjh2218@gmail.com";
+			String tomail = email;
+			String title = "나들이 관리자";
+			String content = "이메일 인증번호는 " +authNum+ "입니다.";
+			
+			
+			
+			
+			
+			///////////////////   
+			try {
+			Properties props = new Properties(); 
+	        props.put("mail.smtp.user",username); 
+	        props.put("mail.smtp.password", password);
+	        props.put("mail.smtp.host", "smtp.gmail.com"); 
+	        props.put("mail.smtp.port", "465"); 
+	        props.put("mail.smtp.from", title);
+	        props.put("mail.debug", "true"); 
+	        props.put("mail.smtp.auth", "true"); 
+	        props.put("mail.smtp.starttls.enable","true"); 
+	        props.put("mail.smtp.EnableSSL.enable","true");
+	        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
+	        props.setProperty("mail.smtp.socketFactory.fallback", "false");   
+//	        props.setProperty("mail.smtp.port", "587");   
+//	        props.setProperty("mail.smtp.socketFactory.port", "587"); 
+	    
+	        Session session = Session.getInstance(props, 
+	         new javax.mail.Authenticator() { 
+	        protected PasswordAuthentication getPasswordAuthentication() { 
+	        return new PasswordAuthentication(username, password); 
+	        }});
+	        System.out.println("??");
+	        
+	            Message message = new MimeMessage(session); 
+	            message.setFrom(new InternetAddress("kimjh2218@gmail.com"));// 
+	            message.setRecipients(Message.RecipientType.TO,
+	            InternetAddress.parse(email)); 
+	            message.setSubject("Testing Subject");
+	            message.setText("Dear Mail Crawler," 
+	            + "\n\n No spam to my email, please!");//내용 
+	            message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
+	            System.out.println("send!!!");
+	            Transport.send(message); 
+	            System.out.println("SEND");
+	            
+	        } catch(MessagingException e){
+	            e.printStackTrace();
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        }
+	      ////////////////////////////////////////////////////////       
+	        */
+	        
+	        
+			
+			  
 }

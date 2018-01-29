@@ -20,8 +20,11 @@ public class User {
 	private String phone1;
 	private String phone2;
 	private String phone3;
-
-	
+	/////////////////////////////////email//////////
+	private String subject;
+    private String content;
+    private String receiver;
+    
 	
 	///Constructor
 	public User(){
@@ -98,11 +101,32 @@ public class User {
 	public String getPhone3() {
 		return phone3;
 	}
+	/////////////////////////////////email/////////////
+	public String getReceiver() {
+        return receiver;
+    }
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+  
+    public String getSubject() {
+        return subject;
+    }
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
 	@Override
 	public String toString() {
 		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
+			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate +
+			"[subject]"+subject + "content" + content+"receiver"+receiver;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////

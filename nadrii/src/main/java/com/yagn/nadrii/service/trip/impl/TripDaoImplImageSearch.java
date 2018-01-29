@@ -115,4 +115,10 @@ public class TripDaoImplImageSearch implements TripDao {
 		
 	}
 
+	@Override
+	public Trip getTripFromDB(String contentid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
