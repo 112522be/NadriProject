@@ -25,6 +25,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.yagn.nadrii.service.domain.odsay.GraphPos;
 import com.yagn.nadrii.service.domain.odsay.inside.Info;
+import com.yagn.nadrii.service.domain.odsay.inside.Lane;
+import com.yagn.nadrii.service.domain.odsay.inside.SubPath;
 import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayDao;
 import com.yagn.nadrii.service.odsay.OdsayService;
@@ -164,17 +166,47 @@ public class OdsayServiceImpl implements OdsayService{
 			JSONObject result = (JSONObject)jsonobj.get("result");
 			JSONArray pathArray = (JSONArray)result.get("path");
 			JSONObject path = (JSONObject) pathArray.get(0);
-			System.out.println("[4] path : " + path);
+		//	System.out.println("[4] path : " + path);
+			
+			///////////////
 			JSONObject info = (JSONObject) path.get("info");
 			System.out.println("[5] info : " + info);
 			ObjectMapper objectMapper = new ObjectMapper();
 			Info odsayinfo = new Info();
 			odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
 	
-			map.put("mapObj", odsayinfo.getMapObj().toString());
+			map.put("info", odsayinfo);
 			
-		}
+			///////////////
+			JSONArray subPathArray = (JSONArray)path.get("subPath");
+			for (int i = 0; i < subPathArray.size(); i++) {
+				JSONObject subPath = (JSONObject)subPathArray.get(i);
+				System.out.println("[6] subPath["+i+"] : "+subPath);
 
+				ObjectMapper objectMapper2 = new ObjectMapper();
+				SubPath odsaysubPath = new SubPath();
+				odsaysubPath = objectMapper2.readValue(subPath.toJSONString(), SubPath.class);
+				list.add(subPath);
+				
+				
+				JSONArray laneArray = (JSONArray)subPath.get("lane");	
+				if(laneArray != null) {
+					System.out.println("[7] laneArray : "+laneArray);		
+					JSONObject lane = (JSONObject) laneArray.get(0);
+					System.out.println("[8] lane : " + lane);
+
+					ObjectMapper objectMapper3 = new ObjectMapper();
+					Lane odsayLane = new Lane();
+					odsayLane = objectMapper3.readValue(lane.toJSONString(), Lane.class);
+					map.put("lane", lane);
+
+				}
+				System.out.println();
+			}
+			map.put("list", list);	
+		}
+		System.out.println("@@@map@@@ "+map);
+		
 		return map;
 	}
 		

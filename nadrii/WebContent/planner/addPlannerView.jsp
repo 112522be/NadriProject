@@ -164,6 +164,11 @@
 		var endSTN;
 		var polylineArray;
 		var boundaryArray;
+		
+		var sx;
+		var sy;
+		var ex;
+		var ey;
 	
 		function search1(flag){
 			
@@ -215,10 +220,10 @@
 					break;
 				}
 							
-				var sx = first.getLng();
-				var sy = first.getLat();
-				var ex = last.getLng();
-				var ey = last.getLat();
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
 				
 				
 				function getOBJ(){
@@ -235,13 +240,23 @@
 						success:function(returnData){
 							alert("시외 success 터미널 마커 생성");
 							
+							var markerSrc = '../resources/images/marker/mint.png', // 출발 마커이미지의 주소입니다    
+							markerSize = new daum.maps.Size(30, 45), // 출발 마커이미지의 크기입니다 
+							markerOption = { 
+												    offset: new daum.maps.Point(15, 15) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+												};
+												
+							var markerImage = new daum.maps.MarkerImage(markerSrc, markerSize, markerOption);
+							
 							startSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(returnData.sy, returnData.sx)
+							    position: new daum.maps.LatLng(returnData.sy, returnData.sx),
+							    image: markerImage
 							});
 							endSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(returnData.ey, returnData.ex)
+							    position: new daum.maps.LatLng(returnData.ey, returnData.ex),
+							    image: markerImage
 							});
 							
 							var startStnPosition = new daum.maps.LatLng(returnData.sy,returnData.sx);
@@ -285,10 +300,10 @@
 					break;
 				}
 				
-				var sx = first.getLng();
-				var sy = first.getLat();
-				var ex = last.getLng();
-				var ey = last.getLat();
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
 
 				function getInfo(){
 					$.ajax({
@@ -326,7 +341,7 @@
 							}else{
 								
 								alert("시내 success");
-								callMapObjApiAJAX(returnData.mapObj);
+								callMapObjApiAJAX(returnData.info.mapObj);
 							}
 						}
 					});
@@ -405,68 +420,149 @@
 							
 						}
 					}
-				});
-
-				markerInfoWindow();
-				
+				});				
 			} //callMapObjApiAJAX 끝
 
+			
+			function markerInfoWindow(){
+				
+				$.ajax({
+					url : "../odsay/json/getInfo",
+					method : "GET",
+					dataType : "json",
+					data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+					headers : {
+						"Accept" : "application/json",
+						"Content-type" : "application/json"
+					},
+					success:function(returnData){
+						
+						var code = returnData.code;
+						
+						if(code != null){
+							
+							if(code == 500){
+								swal({
+									text: "서버 내부 오류",
+									icon: "warning"
+								});
+							}else if(code == -98){
+								swal({
+									text: "필수 입력값이 누락되었습니다.",
+									icon: "warning"
+								});
+							}else if (code == -99){
+								swal({
+									text: "검색 결과가 없습니다",
+									icon: "warning"
+								});
+							}
+							
+						}else{
+							
+							var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
+								 pathOption;
+							var pathImage = new daum.maps.MarkerImage('http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png', pathSize, pathOption);
+							
+							var iwContent;
+							
+							var trafficType;
+							
+							
+							for( var i=0; i<returnData.list.length ; i++){
+								
+								alert("i :: "+i);
+								
+								if(i%2==0){
+									
+									if(returnData.list[i].trafficType == 1){
+										trafficType = '역까지 도보 ';
+									}else{
+										trafficType = '정류장까지 도보 ';
+									}
+								
+									iwContent = returnData.list[i].sectionTime+'분 '+returnData.list[i].distance+'m<br/><br/></div>';
+									alert("iwContent :: "+iwContent);
+									
+									if(i==0){
+										
+										var startInfowindow = new daum.maps.InfoWindow({
+										    position : startMarker.getPosition(), 
+										    content : '<div style="padding:5px;">'+returnData.list[1].startName+trafficType+iwContent,
+										    removable : true
+										});
+																	
+									} 	
+									
+								}else{//도보 제외 지하철, 버스
+									
+									var pathStartSTN = new daum.maps.Marker({
+									    map: map,
+									    position: new daum.maps.LatLng(returnData.list[i].startY, returnData.list[i].startX),
+									    image: pathImage
+									});
+									var pathEndSTN = new daum.maps.Marker({
+									    map: map,
+									    position: new daum.maps.LatLng(returnData.list[i].endY, returnData.list[i].endX),
+										image: pathImage
+									});
+									
+									var detailInfo;
+									if(returnData.lane.busNo != null){
+										detailInfo = returnData.lane.busNo+'번 버스 승차';
+									}else{
+										detailInfo = returnData.lane.name+' 승차';
+									}
+
+									var startContent ='<div style="padding:5px;">'
+														+returnData.list[i].startName+'에서 '+detailInfo+'<br/>'
+														+returnData.list[i].endName+' 하차<br/><br/>'
+														+'</div>';
+														
+									var endInfo;
+									if(i+2 != returnData.list.length){
+										endInfo = returnData.list[i+2].startName;
+									}else{
+										endInfo = '도착지';
+									}
+									
+									var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
+														+returnData.list[i+1].sectionTime+'분 '+returnData.list[i+1].distance+'m<br/><br/></div>';
+														
+									var pathStartInfowindow = new daum.maps.InfoWindow({
+									    position : pathStartSTN.getPosition(), 
+									    content : startContent,
+									    removable : true
+									});
+									
+									var pathEndInfowindow = new daum.maps.InfoWindow({
+									    position : pathEndSTN.getPosition(), 
+									    content : endContent,
+									    removable : true
+									});
+									
+									//인포윈도우선언
+									pathStartInfowindow.open(map, pathStartSTN); 
+									pathEndInfowindow.open(map, pathEndSTN); 
+								}
+								
+							
+												
+							}//for문
+	
+						}//if문
+					}
+				});
+				
+			}//markerInfoWindow()
+			
+			markerInfoWindow();
+			
+			
 		} // search끝
 
-		function markerInfoWindow(){
-			
-			$.ajax({
-				url : "../odsay/json/getInfo",
-				method : "GET",
-				dataType : "json",
-				data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
-				headers : {
-					"Accept" : "application/json",
-					"Content-type" : "application/json"
-				},
-				success:function(returnData){
-					
-					var code = returnData.code;
-					
-					if(code != null){
-						
-						if(code == 500){
-							swal({
-								text: "서버 내부 오류",
-								icon: "warning"
-							});
-						}else if(code == -98){
-							swal({
-								text: "필수 입력값이 누락되었습니다.",
-								icon: "warning"
-							});
-						}else if (code == -99){
-							swal({
-								text: "검색 결과가 없습니다",
-								icon: "warning"
-							});
-						}
-						
-					}else{
-						
-						alert("시내 success");
-						callMapObjApiAJAX(returnData.mapObj);
-					}
-				}
-			});
-			
-			var iwContent ='출발지인포윈도우',
-		    	 iwPosition = startMarker.getPosition();
-
-			// 인포윈도우를 생성합니다
-			var infowindow = new daum.maps.InfoWindow({
-			    position : iwPosition, 
-			    content : iwContent 
-			});
-			  
-			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-			infowindow.open(map, startMarker); 
-		}
+		
+		
 			
 		function deleteExSearch() {
 			if (STNpolyline.getMap() != null) {

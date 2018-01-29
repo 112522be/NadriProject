@@ -25,12 +25,12 @@
 			});	
 			
 		var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다    
-			startSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-			startOption = { 
+		markerSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
+		markerOption = { 
 							    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
 							};
 							
-		var startImage = new daum.maps.MarkerImage(startSrc, startSize, startOption);
+		var startImage = new daum.maps.MarkerImage(startSrc, markerSize, markerOption);
 		var startPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
 		
 		var startMarker = new daum.maps.Marker({
@@ -44,15 +44,12 @@
 		var passPosition = [];
 		var passMarker = [];
 		
-		var	 passSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-		passOption = { 
-						    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-						};
+
 						
 		for(i=1; i<6; i++){
 			
 			passSrc[i] = 'http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_'+i+'.png';
-			passImage[i] = new daum.maps.MarkerImage(passSrc[i], passSize, passOption);
+			passImage[i] = new daum.maps.MarkerImage(passSrc[i], markerSize, markerOption);
 			passPosition[i] = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
 			
 			passMarker[i] = new daum.maps.Marker({
@@ -62,13 +59,9 @@
 			});
 		}
 		
-		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png', // 출발 마커이미지의 주소입니다    
-		endSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
-		endOption = { 
-						    offset: new daum.maps.Point(15, 43) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
-						};
-						
-		var endImage = new daum.maps.MarkerImage(endSrc, endSize, endOption);
+		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 출발 마커이미지의 주소입니다    
+
+		var endImage = new daum.maps.MarkerImage(endSrc, markerSize, markerOption);
 		var endPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
 		
 		var endMarker = new daum.maps.Marker({
