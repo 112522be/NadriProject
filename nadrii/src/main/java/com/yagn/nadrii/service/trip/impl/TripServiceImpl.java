@@ -21,8 +21,11 @@ public class TripServiceImpl implements TripService {
 	
 	@Autowired
 	@Qualifier("tripDaoImpl")
-	private TripDao tripDao;
+	private TripDao tripDaoTour;
 	
+	@Autowired
+	@Qualifier("tripDaoImpla")
+	private TripDao tripDaoDB;
 	
 	
 	public TripServiceImpl() {
@@ -33,12 +36,13 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception{
+	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception{
 		
 		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
-		List list = tripDao.listTrip(tourAPlUrlManage);
+		List list = tripDaoTour.listTrip(pageNo,contentTypeId,cat1,cat2,cat3);
+		
 		map.put("list", list);
 		return map;
 	}
@@ -46,11 +50,11 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
+	public TourApiDomain getTrip(String contentId, String contentTypeid) throws Exception {
 		
 		System.out.println("getTrip SerivceImpl");
 		
-		TourApiDomain tourApiDomain = tripDao.getTrip(tourAPIGetUrlManage);
+		TourApiDomain tourApiDomain = tripDaoTour.getTrip(contentId,contentTypeid);
 		System.out.println(tourApiDomain.getTitle());
 		
 		return tourApiDomain;
@@ -59,10 +63,10 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
+	public TourApiDomain getTripDetail(String contentId, String contentTypeid) throws Exception {
 		System.out.println("getTripDetail SerivceImpl");
 		
-		TourApiDomain tourApiDomain = tripDao.getTripDetail(tourAPIGetDetailUrlManage);
+		TourApiDomain tourApiDomain = tripDaoTour.getTripDetail(contentId, contentTypeid);
 		System.out.println(tourApiDomain.getUsefee());
 		return tourApiDomain;
 	}
@@ -73,10 +77,22 @@ public class TripServiceImpl implements TripService {
 	public Trip tripCheckDuplication(String contentid) throws Exception {
 		System.out.println("tripCheckDuplication ServiceImpl");
 		
-		Trip trip = tripDao.getTripFromDB(contentid);
+		Trip trip = tripDaoDB.getTripFromDB(contentid);
 		System.out.println(trip);
 		
 		return trip;
+	}
+
+
+
+	@Override
+	public void addTriptoDB(Trip trip) throws Exception {
+		tripDaoDB.addTrip(trip);		
+	}
+	
+	public Trip getTripFromDB(String contentId)throws Exception{
+		return tripDaoDB.getTripFromDB(contentId);
+		
 	}
 	
 	

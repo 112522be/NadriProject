@@ -33,20 +33,12 @@ public class TripController {
 	@RequestMapping(value="listMuseum")	
 	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
 		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("14");
-		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0206");
-		tourAPlUrlManage.setCat3("A02060100");
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
 				
 		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listMuseum");
 		
-		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100"); 
 		
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
@@ -61,19 +53,11 @@ public class TripController {
 	public String getMuseum(Map map, @RequestParam("contentId") String contentId, @RequestParam("contentTypeId") String contentTypeId) throws Exception{
 		System.out.println("/trip/getMuseum");
 				
-		//기본 상세 정보 가져오기
-		TourAPIGetUrlManage tourAPIGetUrlManage = new TourAPIGetUrlManage();
-		tourAPIGetUrlManage.urlClean();
-		tourAPIGetUrlManage.setContentId(contentId);
-		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
-					
-		// 가격 정보 가져오기
-		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
-		tourAPIGetDetailUrlManage.setContentId(contentId);
-		tourAPIGetDetailUrlManage.setContentTypeId(contentTypeId);
 		
-		TourApiDomain tourApiDomain = tripService.getTrip(tourAPIGetUrlManage);
-		TourApiDomain feeDomain = tripService.getTripDetail(tourAPIGetDetailUrlManage);
+		
+		
+		TourApiDomain tourApiDomain = tripService.getTrip(contentId,contentTypeId);
+		TourApiDomain feeDomain = tripService.getTripDetail(contentId,contentTypeId);
 		
 		
 		map.put("getTrip", tourApiDomain);
@@ -84,21 +68,10 @@ public class TripController {
 	
 	@RequestMapping(value="/listExhibit")
 	public String listExhibit(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("");
-		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0206");
-		tourAPlUrlManage.setCat3("A02060300");
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
 				
-		System.out.println((tourAPlUrlManage.urlMaking()).trim());
-		
 		System.out.println("/trip/listExhibit");
 		
-		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300");
 		
 		map.put("trip", "Exhibit");
 		map.put("list", tripMap.get("list"));
@@ -111,21 +84,10 @@ public class TripController {
 	
 	@RequestMapping(value="/listGallery")
 	public String listGallery(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("14");
-		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0206");
-		tourAPlUrlManage.setCat3("A02060500");
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
-				
-		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listGallery");
 		
-		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500");
 		
 		map.put("trip", "Gallery");
 		map.put("list", tripMap.get("list"));
@@ -137,21 +99,10 @@ public class TripController {
 	
 	@RequestMapping(value="/listExperience")
 	public String listExperience(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("12");
-		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0203");
-		tourAPlUrlManage.setCat3("A02030200");
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
-				
-		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listExperience");
 		
-		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200");
 		
 		map.put("trip", "Experience");
 		map.put("list", tripMap.get("list"));
@@ -163,21 +114,10 @@ public class TripController {
 
 	@RequestMapping(value="/listTradition")
 	public String listTradition(Map map, @RequestParam("pageNo")int pageNo) throws Exception{
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-		tourAPlUrlManage.urlClean();
-		tourAPlUrlManage.setContentTypeId("12");
-		tourAPlUrlManage.setType("areaBasedList?");
-		tourAPlUrlManage.setCat1("A02");
-		tourAPlUrlManage.setCat2("A0201");
-		tourAPlUrlManage.setCat3("A02010600");
-		tourAPlUrlManage.setPageNo(pageNo);
-		tourAPlUrlManage.setNumOfRows(12);
-				
-		System.out.println((tourAPlUrlManage.urlMaking()).trim());
 		
 		System.out.println("/trip/listTradition");
 		
-		Map tripMap = tripService.listTrip(tourAPlUrlManage); 
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600");
 		
 		map.put("trip", "Tradition");
 		map.put("list", tripMap.get("list"));
@@ -186,6 +126,7 @@ public class TripController {
 				
 		return "forward:/Trip/listTrip2.jsp";
 	}
+	
 	
 	
 }

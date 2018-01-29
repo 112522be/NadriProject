@@ -11,11 +11,11 @@ import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
 public interface TripDao {
 	
-	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception;
+	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception;
 	
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage)throws Exception;
+	public TourApiDomain getTrip(String contentid, String contentTypeid)throws Exception;
 	
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage)throws Exception;
+	public TourApiDomain getTripDetail(String contentid, String contentTypeid)throws Exception;
 	
 	public String naverImageSearch(String target) throws Exception;
 	

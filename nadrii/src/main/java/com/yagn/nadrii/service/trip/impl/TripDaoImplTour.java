@@ -37,9 +37,22 @@ public class TripDaoImplTour implements TripDao {
 		System.out.println(this.getClass());		
 	}
 
-	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
+	public List listTrip(int pageNo,String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
 		
 		System.out.println("listTrip Dao");
+		
+		
+		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
+		tourAPlUrlManage.urlClean();
+		tourAPlUrlManage.setContentTypeId(contentTypeId);
+		tourAPlUrlManage.setType("areaBasedList?");
+		tourAPlUrlManage.setCat1(cat1);
+		tourAPlUrlManage.setCat2(cat2);
+		tourAPlUrlManage.setCat3(cat3);
+		tourAPlUrlManage.setPageNo(pageNo);
+		tourAPlUrlManage.setNumOfRows(12);
+		
+		System.out.println(tourAPlUrlManage.urlMaking());
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
@@ -99,26 +112,20 @@ public class TripDaoImplTour implements TripDao {
 			System.out.println(list.get(i));
 			
 		}
-		
-		/* 
-		for (int i = 0; i < list.size(); i++) {
-			if( ((TourApiDomain)list.get(i)).getFirstimage2()==null ) {
-				String image = tripDaoImplImageSearch.naverImageSearch(((TourApiDomain)list.get(i)).getTitle());
-				System.out.println(image);
-				((TourApiDomain)list.get(i)).setFirstimage2(image);
-				System.out.println(list.get(i));
-			}
 						
-		}
-			*/		
-				
 		
 		return list;
 	}
 
 	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
+	public TourApiDomain getTrip(String contentId, String contentTypeId) throws Exception {
 		
+		TourAPIGetUrlManage tourAPIGetUrlManage = new TourAPIGetUrlManage();
+		tourAPIGetUrlManage.urlClean();
+		tourAPIGetUrlManage.setContentId(contentId);
+		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
+		
+		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
 		//기본 정보가져오기
 		HttpClient httpClient = new DefaultHttpClient();
@@ -146,7 +153,15 @@ public class TripDaoImplTour implements TripDao {
 	}
 
 	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
+	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
+		
+		
+		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
+		tourAPIGetDetailUrlManage.urlClean();
+		tourAPIGetDetailUrlManage.setContentId(contentId);
+		tourAPIGetDetailUrlManage.setContentTypeId(contentTypeId);
+		
+		System.out.println(tourAPIGetDetailUrlManage.urlMaking());
 		
 		//요금정보 가져오기
 		HttpClient httpClient = new DefaultHttpClient();

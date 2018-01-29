@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sun.management.jmx.Trace;
+import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.trip.TripDao;
+import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.wish.WishService;
 
 @RestController
@@ -16,6 +20,10 @@ public class WishRestController {
 	private WishService wishService;
 	
 	
+	@Autowired
+	@Qualifier("tripServiceimpl")
+	private TripService tripService;
+	
 	//userId는 세션을 통해 받는 것이고, 
 	
 	
@@ -25,6 +33,7 @@ public class WishRestController {
 
 	public void addWishFromTrip() {
 		System.out.println("addWishFromTrip");
+		Trip trip
 		
 	}
 	

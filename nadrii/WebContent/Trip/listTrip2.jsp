@@ -22,7 +22,7 @@
 // 미비점 : 현재 다이얼로그 창에서 지도를 보여 주는 방식은 기존존재했던 지도 위에 덧붙이는 방법. 화면상 드래그시 그대로 노출됨.
 // 사유 : 지도 공간, 호출 CDN, 호출 대상을 모두 분리해서 코딩했더니 기존에 지도에 덧붙는 방법으로 호출되고, 다이얼로그 tag와 충돌하면서 지도가 깨지는 현상 발생. 
 // 임시 해결방법 : 재차 호출의 경우 문제 없이 호출되는 것을 확인해서 맵생성, 다이얼로그 생성을 각각 2번씩 호출함(우회 코딩)
-
+	///////////////////무한 스크롤 시작
 	
 	var page = 1;
 	
@@ -66,7 +66,7 @@
 			            "<p>"+data[a].addr1+"</p>"+
 			            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 			            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
-			            	"<a href='#' class='btn btn-danger' role='button'>위시리스트</a>"+	
+			            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
 			            "</p>"+
 			          "</div>"+
 			        "</div>"+
@@ -79,6 +79,8 @@
 			
 		});
 	}
+	
+	/////////////////////////////////////////////무한스크롤
 	
 	
 	// 지도 참조 !!!!!!!
@@ -101,11 +103,11 @@
 	    
 		contenttypeid =$(this).next().next().val();
 		contentid = $(this).next().val();
-		alert(contenttypeid);
-		alert(contentid);
-		alert($(".col-xs-4 img:nth-child(1)").index(this));
+		//alert(contenttypeid);
+		//alert(contentid);
+		//alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
-		
+		//getTriptoDB(contentid,contenttypeid);
 		/*
 		var type = $("img").index(this);
 		alert(type);
@@ -114,6 +116,7 @@
 	});	
 	
 	///*
+	// getTrip 대신에 생겨난 다이얼로그 화면(ajax 실행 후의 데이터를 다이얼로그로 송출)
 	// ajax로 나온 좌표값을 기존에 생성했던 지도로 옮기기 위한 전역 변수
 	var mapx;
 	var mapy;
@@ -145,29 +148,23 @@
 					}
 				
 					if(common.title != null){
-					
 						dpValue	+= "<p>"+ common.title+"</p>";
 					}
 										
 					if(common.addr1!=null){
 						dpValue +="<p>"+common.addr1+"</p>";
 					}
+					
 					if(fee.usefee!=null){
 						dpValue +="<p>"+fee.usefee+"</p>";
 					}
+					
 					if(common.overview!=null){
 						dpValue += "<h5>"+common.overview+"</h5>";	
 					}
 					
-					dpValue = 
-						dpValue +"<h3>"+
-					"<a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
-					"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
-					"<a href='#' class='btn btn-danger' role='button'>위시리스트</a>"+	
-					"</h3>"
 					
-					
-					dpValue += "</"+ "div>";
+					dpValue += "</div>";
 					//*/
 				
 				$("#dialog").append(dpValue);
@@ -187,16 +184,50 @@
 	}
 	
 	
-	//이벤트는 걸렸는데 인덱스가 틀린다 이런 멍청이가
+	function getTriptoDB(contentid,contenttypeid){
+		$.ajax({
+			url:"../trip/json/getTriptoDB/"+contentid+"/"+contenttypeid+"",
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success:function(returnData){
+				
+				if(returnData.tripName !=null){
+					alert(returnData.tripName);
+				}else{
+					alert("디비에 없음");
+				}
+			}
+		});
+	}
 	
-	$(function(){
-		$("p a:nth-child(3)").on("click",function(){
+	
+	
+	$(function() {
+	  $(document).on("click","#wish", function(e){
+	
+	//$(function(){
+		//$("a[href='#']:contains('위시리스트')").on("click",function(){
+		//$("p a:nth-child(3)").on("click",function(){
 			alert($("a[href='#']:contains('위시리스트')").index(this));
 			alert($($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
 			alert($($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
+			e.preventDefault();
 		});
 	})
 	
+	
+	
+	$(function(){
+		$("#wishList").on("click",function(e){
+			//alert(contentid);
+			//alert(contenttypeid);
+			e.preventDefault();
+		});
+	})
 	
 	
 		
@@ -266,7 +297,7 @@
 		          <p> 
 		          	<a href="#" class="btn btn-primary" role="button">공유</a> 
 		            <a href="#" class="btn btn-default" role="button">좋아요</a>
-		            <a href="#" class="btn btn-danger" role="button">위시리스트</a>	
+		            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
 		          </p>
 		        </div>
 			</div>
@@ -282,7 +313,7 @@
 </div>  
  
    
-<!--  style="display: none;" -->
+
    
 <div id="dialog" title="" >
 	<!--  지도를 담는 공간 -->
@@ -291,11 +322,11 @@
   <script type="text/javascript"></script>
     
     
-
-    
-
+ 	<a href="#" class="btn btn-primary" role="button">공유</a> 
+    <a href="#" class="btn btn-default" role="button">좋아요</a>
+    <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
   
 </div>	
-  
+ 
 </body>
 </html>
