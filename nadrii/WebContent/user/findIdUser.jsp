@@ -69,14 +69,7 @@
 		//============= 아이디 찾기 화면이동 =============
 		$( function() {
 			$("a[href='#' ]:contains('아이디 찾기')").on("click" , function() {
-				self.location = "/user/findIdPg"
-			});
-		});
-		
-		//============= 비밀번호 찾기 화면이동 =============
-		$( function() {
-			$("a[href='#' ]:contains('비밀번호 찾기')").on("click" , function() {
-				self.location = "/user/findPasswordPg"
+				self.location = "/user/faindIdUser"
 			});
 		});
 		
@@ -84,20 +77,22 @@
 /**
  * 로그인
  */
-function loginProc(){
-	var userId = $("#userId").val();
-	var password = $("#password").val();
-	var data = "userId=" + userId;
-	data += "&password=" + password;
+function fainId(){
+	var data = "userName=" + $("#userName").val;
+	data += "&email=" + $("#email").val;
+	var emailLists = data.user_email;
+	var emailLength = emailLists.length
+	var emailfind = emailLists.substring(1, emailLength-1)
 	
-	if(userId == ''){
-		alert("아이디를 입력해 주세요.");
-		$("#userId").focus();
+	
+	if(userName == ''){
+		alert("이름을 입력해 주세요.");
+		$("#userName").focus();
 		return;
 	}
-	if(password ==''){
-		alert("비밀번호를 입력해 주세요.");
-		$("#password").focus();
+	if(email ==''){
+		alert("이메일을 입력해 주세요.");
+		$("#email").focus();
 		return;
 	}
 	
@@ -107,16 +102,30 @@ function loginProc(){
 		type : "POST",
 		success : function(result){
 			if(result.msg == "failed"){
-				alert("아이디 또는 비밀번호를 확인해주세요.");
+				alert("이메일을 확인해주세요.");
 				return;
 			}
 			if(result.msg == "success"){
-				location.href="/user/main";
+				location.href="/user/loginView";
 			}
 		}
 	});
 		
-} 
+}
+
+	function emailValid(){
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
+		var email = $("#email").val();
+		if(!regExp.test(email)){
+			$(".signupbtn").prop("disabled", true);
+			$("#email").css("background-color", "#FFCECE");
+			return;
+		} 
+		if(regExp.test(email)){
+			$(".signupbtn").prop("disabled", false);
+			$("#email").css("background-color", "#B0F6AC");
+		}
+	}
 		
 		
 	</script>		
@@ -139,40 +148,33 @@ function loginProc(){
 		<div class="row">
 		
 			<br/>
-			
-			<div class="col-md-6">
-				<img src="/images/cropped-1920-1080-693903.jpg" class="img-rounded" width="100%" />
-			</div>
 	   	 	
 	 	 	<div class="col-md-6">
 	 	 	
 		 	 	<br/>
 				
 				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N&nbsp;</h1>
+		 	 		<h1 class="text-center">아&nbsp;이&nbsp;이&nbsp;디&nbsp;찾&nbsp;기</h1>
 
 			        <form class="form-horizontal">
 		  
 					  <div class="form-group">
-					    <label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
+					    <label for="userName" class="col-sm-4 control-label">이&nbsp;름</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="아이디" >
+					      <input type="text" class="form-control" name="userName" id="userName"  placeholder="이름" >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="password" class="col-sm-4 control-label">PASSWORD</label>
+					    <label for="email" class="col-sm-4 control-label">이&nbsp;메&nbsp;일</label>
 					    <div class="col-sm-6">
-					      <input type="password" class="form-control" name="password" id="password" placeholder="패스워드" onkeypress="if(event.keyCode==13){loginProc(); return false}">
+					      <input type="email" class="form-control" name="email" id="email" placeholder="이메일" oninput="emailValid();">
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					      <button type="button" class="btn btn-primary" onclick="loginProc();" >로 &nbsp;그 &nbsp;인</button>
-					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
-					      <a class="btn btn-warning btn" role="button" href="#"> 아이디 찾기 </a>
-					      <a class="btn btn-info" role="button" href="#"> 비밀번호 찾기 </a>
+					      <button type="button" class="btn btn-primary signupbtn" onclick="fainId();" >다&nbsp;음</button>
 					    </div>
 					  </div>
 			

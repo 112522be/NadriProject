@@ -27,8 +27,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-<<<<<<< HEAD
+
 	<!-- Facebook Login -->
 	<!-- HTTPS required. HTTP will give a 403 forbidden response -->
 	<script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
@@ -68,7 +67,7 @@
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('회원가입')").on("click" , function() {
-				self.location = "/user/addUser"
+				location.replace = "/user/addUser"
 			});
 		});
 		
@@ -94,9 +93,17 @@
 			});
 		});
 		
+		$(function(){
+			$("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
+				if(confirm("로그아웃을 하시겠습니까?")){
+				self.location = "/user/logoutProc";
+				}
+			});
+		});
+		
 		//============= FaceBook 로그인 =============
 
-			/*
+		/*
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '1663788730309184',
@@ -134,23 +141,23 @@
 			}, {scope: 'public_profile,email'});
 
 	*/
-	
-	FirebaseChat.prototype.init = function(){ //...생략
-	  	this.liFacebookBtn = document.getElementById('liFacebookBtn'); } 
+	 FirebaseChat.prototype.init = function(){ //...생략
+	  	this.liFacebookBtn = document.getElementById('liFacebookBtn');
+	  } 
 	  /** * 초기 이벤트 바인딩 */ 
-	  FirebaseChat.prototype.initEvent = function(){ 
+	 		 FirebaseChat.prototype.initEvent = function(){ 
 		  //...생략
 	  		this.liFacebookBtn.addEventListener('click', this.onFacebookBtnClick.bind(this)); 
-		  } /** * 페이스북 로그인 버튼 클릭 */ 
+		 }
+		  /* 페이스북 로그인 버튼 클릭 */ 
 		  FirebaseChat.prototype.onFacebookBtnClick = function(){ 
 			  var facebookProvider = new firebase.auth.FacebookAuthProvider(); 
 			  this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION) 
-			  .then(this.signInWithPopup.bind(this, facebookProvider)) 
-			  .catch(function(error) { 
+			  .then(this.signInWithPopup.bind(this, facebookProvider)) .(function(error) { 
 				  console.error('인증 상태 설정 중 에러 발생' , error); 
 				  }); 
-			  }
-	
+			  }    
+		  
 	// This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
       console.log('statusChangeCallback');
@@ -221,14 +228,22 @@
     function testAPI() {
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
+       /*  console.log('Successful login for: ' + response.name);
         document.getElementById('status').innerHTML =
-          'Thanks for logging in, ' + response.name + '!';
+          'Thanks for logging in, ' + response.name + '!'; */
+ 
+          $("#facebookId").val(response.name);
+          $("#facebookForm").submit();
       });
     }
     
+    
 	//============= FaceBook 로그인 =============
     
+	
+		
+		
+		
 	</script>	
 	
 	<!-- Bootstrap core CSS 
@@ -264,13 +279,14 @@
 			    </button>
 			</div>
 			<!-- toolBar Button End //////////////////////// -->
-			
+						
 			<div class="collapse navbar-collapse"  id="target">
 	             <ul class="nav navbar-nav navbar-right">
+	                 <c:if test="${loginUser eq null }">
 	                 <li><a href="#">회원가입</a></li>
 	                 <li><a href="#">로 그 인</a></li>
-					 <li><a href="#">
-					 
+	                  <li><a href="#">
+					
 					 		<!--  facebook login -->
 					 		<script>
 					 		(function(d, s, id) {
@@ -288,6 +304,11 @@
 							<!--  facebook login  end-->
 						 </a>
 					 </li>
+	                 </c:if>
+	                 
+	                 <c:if test="${loginUser ne null }">
+	                 <li><a href="#">로 그 아 웃</a></li>
+	                 </c:if>
 	           	</ul>
 	       </div>
    		
@@ -569,8 +590,12 @@
 	<!--  화면구성 div end /////////////////////////////////////-->
 		
 	
->>>>>>> refs/remotes/origin/master
+	
+	<form id="facebookForm" action="/user/addUser" method="get">
+	  <input type="text" name="facebookId" id="facebookId" value="">
+	</form>
+
 </body>
->>>>>>> refs/remotes/origin/master
+
 
 </html>

@@ -22,12 +22,42 @@
 		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
 	</resultMap>
 	
-	<insert 	id="addUser"		parameterType="user" >
-	 	INSERT
-		INTO users( user_id , user_name , password , role , gender,birth, phone, profi_ieimage_file, children, email , reg_date) 
-		VALUES	 (	#{userId} , #{userName} , #{password} , 'user' , #{gender:VARCHAR}, SYSDATE , 
-							#{phone:VARCHAR} , #{profiIeimageFile:VARCHAR}, #{children:VARCHAR} , #{email:VARCHAR} , SYSDATE )
+	<insert id="addUser" parameterType="user" >
+		 INSERT INTO USERS(
+		 	USER_ID,
+		 	PASSWORD,
+		 	EMAIL,   
+		 	REG_DATE,
+		 	ROLE
+		 ) VALUES (
+		    #{userId},
+		    #{password},
+		    #{email},
+		    SYSDATE,
+		    'user'
+		 )		    
 	 </insert>
+	 
+	 <select id="loginProc" parameterType="user" resultType="user">
+	 	SELECT
+	 			 USER_ID                 AS userId
+	 			,PASSWORD				 AS password
+	 			,EMAIL					 AS email
+	 			,REG_DATE				 AS regDate
+	 			,ROLE				     AS role
+	 			,NAME				     AS name
+	 			,GENDER					 AS gender
+	 			,BIRTH					 AS birth
+	 			,PHONE                   AS phone
+	 			,PROFILE_IMAGE_FILE      AS profileImageFile
+	 			,CHILDREN				 AS children
+	 			,QR_CODE				 AS qrcode	
+	 	FROM users
+	 	WHERE user_id = #{userId}
+	 	  AND password = #{password}	
+	 </select>
+	 
+	 
 	 
 	 <!-- SQL : SELECT ONE -->
 <!-- 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
