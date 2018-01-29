@@ -25,4 +25,10 @@ public interface UserService {
 	
 	public int checkId(String user)throws Exception;
 	
+	public User loginProc(User user)throws Exception;
+	
+	public String findId(String userId) throws Exception;
+	
+	public String findPassword(String userPw) throws Exception;
+
 }

@@ -31,6 +31,7 @@ public class UserDaoImpl implements UserDao{
 
 	///Method
 	public void addUser(User user) throws Exception {
+		System.out.println(user);
 		sqlSession.insert("UserMapper.addUser", user);
 	}
 
@@ -55,5 +56,21 @@ public class UserDaoImpl implements UserDao{
 	public int checkId(String user) throws Exception {
 		System.out.println("다오 값 : " + user);
 		return sqlSession.selectOne("UserMapper.checkId" , user);
+	}
+
+	@Override
+	public User loginProc(User user) throws Exception {
+		System.out.println("아이디 비밀번호" +user);
+		return sqlSession.selectOne("UserMapper.loginProc", user);
+	}
+
+	public String findId(String userId) throws Exception {
+		System.out.println("아이디 찾기" +userId);
+		return sqlSession.selectOne("UserMapper.faindId",userId);
+	}
+
+	public String findPassword(String userPw) throws Exception {
+		System.out.println("비밀번호 찾기" +userPw);
+		return sqlSession.selectOne("UserMapper.faindPassword", userPw);
 	}
 }

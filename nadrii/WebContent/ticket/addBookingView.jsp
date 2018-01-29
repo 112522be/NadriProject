@@ -111,7 +111,7 @@
 		<form class="form-horizontal">
 
 			<div class="form-group">
-				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
+				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="prodName" name="prodName" placeholder="필수입력">
 				</div>

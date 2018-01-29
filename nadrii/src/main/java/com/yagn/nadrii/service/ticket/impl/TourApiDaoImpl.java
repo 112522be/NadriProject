@@ -259,6 +259,10 @@ public class TourApiDaoImpl implements TicketDao {
 		detailIntro = new DetailIntro();
 		detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
 		
+		if (detailIntro.getUsetimefestival().equals("")) {
+			detailIntro.setUsetimefestival("¹«·á");
+		}
+		
 		return detailIntro;
 	}
 	
