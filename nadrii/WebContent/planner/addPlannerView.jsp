@@ -10,15 +10,13 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<title>Insert title here</title>
 	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<link href="../resources/css/keywordSearch.css" rel="stylesheet">
-	<style>
-	  	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-		#sortable li span { position: absolute; margin-left: -1.3em; }
-	</style>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
@@ -26,6 +24,26 @@
 			$( "#sortable" ).sortable();
 			$( "#sortable" ).disableSelection();
 		});
+		
+		$( function() {
+			
+			$("#searchListSubmit").on("click", function(){
+				$("#placesList").css("display","block");
+			});
+			
+		    // run the currently selected effect
+		    function runEffect() {
+		    
+		      // Run the effect
+		      $( "#placesList" ).toggle( "blind", 300 );
+		    };
+		 
+		    // Set effect from select menu value
+		    $( "#button" ).on( "click", function() {
+		      runEffect();
+		    });
+		  } );
+		
 	</script>
 	
 </head>
@@ -74,12 +92,14 @@
 	            <div>
 	                <form onsubmit="searchPlaces(); return false;">
 	                    키워드 : <input type="text" value="" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
+	                    <button id="searchListSubmit" type="submit">검색하기</button> 
 	                </form>
+	                <ul id="placesList" style="display: none;"></ul>
+	        		<text id="button">▼</text>
 	            </div>
+	            
 	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
+	        
 	        <div id="pagination"></div>
 	    </div>
 	    <p><em>지도를 클릭해주세요!</em></p> 
@@ -90,6 +110,15 @@
 		<input type ="button" value="시외버스" onClick="javascript:search1(1)">
 		<input type ="button" value="고속버스" onClick="javascript:search1(2)">
 		<input type ="button" value="기차" onClick="javascript:search1(3)">
+		
+		<hr/>
+		
+		<input type ="button" value="바운더리1" onClick="javascript:showBoundary(0)">
+		<input type ="button" value="바운더리2" onClick="javascript:showBoundary(1)">
+		<input type ="button" value="바운더리3" onClick="javascript:showBoundary(2)">
+		<input type ="button" value="바운더리4" onClick="javascript:showBoundary(3)">
+		<input type ="button" value="바운더리5" onClick="javascript:showBoundary(4)">
+		
 			
 	</form>
 	</div>
@@ -134,11 +163,16 @@
 		var startSTN;
 		var endSTN;
 		var polylineArray;
-
-
+		var boundaryArray;
+		
+		var sx;
+		var sy;
+		var ex;
+		var ey;
+	
 		function search1(flag){
 			
-			if(STNpolyline != null){
+			if(STNpolyline != null ){
 				deleteExSearch();
 			}
 			if(STNpolyline != null || polylineArray != null){
@@ -186,10 +220,10 @@
 					break;
 				}
 							
-				var sx = first.getLng();
-				var sy = first.getLat();
-				var ex = last.getLng();
-				var ey = last.getLat();
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
 				
 				
 				function getOBJ(){
@@ -206,13 +240,23 @@
 						success:function(returnData){
 							alert("시외 success 터미널 마커 생성");
 							
+							var markerSrc = '../resources/images/marker/mint.png', // 출발 마커이미지의 주소입니다    
+							markerSize = new daum.maps.Size(30, 45), // 출발 마커이미지의 크기입니다 
+							markerOption = { 
+												    offset: new daum.maps.Point(15, 15) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+												};
+												
+							var markerImage = new daum.maps.MarkerImage(markerSrc, markerSize, markerOption);
+							
 							startSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(returnData.sy, returnData.sx)
+							    position: new daum.maps.LatLng(returnData.sy, returnData.sx),
+							    image: markerImage
 							});
 							endSTN = new daum.maps.Marker({
 							    map: map,
-							    position: new daum.maps.LatLng(returnData.ey, returnData.ex)
+							    position: new daum.maps.LatLng(returnData.ey, returnData.ex),
+							    image: markerImage
 							});
 							
 							var startStnPosition = new daum.maps.LatLng(returnData.sy,returnData.sx);
@@ -238,7 +282,7 @@
 							line2();
 						}
 					});
-				}
+				}// getOBJ 끝
 				
 				getOBJ();
 				
@@ -256,10 +300,10 @@
 					break;
 				}
 				
-				var sx = first.getLng();
-				var sy = first.getLat();
-				var ex = last.getLng();
-				var ey = last.getLat();
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
 
 				function getInfo(){
 					$.ajax({
@@ -297,24 +341,30 @@
 							}else{
 								
 								alert("시내 success");
-								callMapObjApiAJAX(returnData.mapObj);
+								callMapObjApiAJAX(returnData.info.mapObj);
 							}
 						}
 					});
-				}
+				}// getInfo 끝
 				
 				getInfo();
 				
-			}
+			}//for문 끝
 			
 			function callMapObjApiAJAX(mabObj){
+								
 				/****************폴리라인배열 선언 및 초기화****************/
 				polylineArray = [];
-				
+				boundaryArray = [];
+
 				for(var i=0; i<polylineArray.length; i++){
 					polylineArray[i]=null;
 				}
 				
+		//		for(var i=0; i<boundaryArray.length; i++){
+		//			boundaryArray[i]=null;
+		//		}
+							
 				var lineArray;
 				
 				$.ajax({
@@ -335,12 +385,7 @@
 							alert("polyline을 그리던 중 "+error.message);
 							
 						}else{
-							
-							console.log( "returnData.listX[0] " + returnData.listX[0] );
-							console.log( "returnData.listY[0] " + returnData.listY[0] );
-							console.log( "returnData.listX.length " + returnData.listX.length );
-							console.log( "returnData.listY.length " + returnData.listY.length );
-					
+																		
 							lineArray = null;
 							lineArray = new Array();
 	
@@ -361,15 +406,164 @@
 								}
 							}
 							
+							boundary = new daum.maps.LatLngBounds(
+								                new daum.maps.LatLng(returnData.boundary.top, returnData.boundary.left),
+								                new daum.maps.LatLng(returnData.boundary.bottom, returnData.boundary.right)
+								          	);
+							
+							boundaryArray.push(boundary);
+							
+							alert("boundaryArray.length : "+boundaryArray.length);
+							alert("boundaryArray : "+boundaryArray);
+							
 							alert("폴리라인 success");
 							
 						}
 					}
+				});				
+			} //callMapObjApiAJAX 끝
+
+			
+			function markerInfoWindow(){
+				
+				$.ajax({
+					url : "../odsay/json/getInfo",
+					method : "GET",
+					dataType : "json",
+					data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+					headers : {
+						"Accept" : "application/json",
+						"Content-type" : "application/json"
+					},
+					success:function(returnData){
+						
+						var code = returnData.code;
+						
+						if(code != null){
+							
+							if(code == 500){
+								swal({
+									text: "서버 내부 오류",
+									icon: "warning"
+								});
+							}else if(code == -98){
+								swal({
+									text: "필수 입력값이 누락되었습니다.",
+									icon: "warning"
+								});
+							}else if (code == -99){
+								swal({
+									text: "검색 결과가 없습니다",
+									icon: "warning"
+								});
+							}
+							
+						}else{
+							
+							var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
+								 pathOption;
+							var pathImage = new daum.maps.MarkerImage('http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png', pathSize, pathOption);
+							
+							var iwContent;
+							
+							var trafficType;
+							
+							
+							for( var i=0; i<returnData.list.length ; i++){
+								
+								alert("i :: "+i);
+								
+								if(i%2==0){
+									
+									if(returnData.list[i].trafficType == 1){
+										trafficType = '역까지 도보 ';
+									}else{
+										trafficType = '정류장까지 도보 ';
+									}
+								
+									iwContent = returnData.list[i].sectionTime+'분 '+returnData.list[i].distance+'m<br/><br/></div>';
+									alert("iwContent :: "+iwContent);
+									
+									if(i==0){
+										
+										var startInfowindow = new daum.maps.InfoWindow({
+										    position : startMarker.getPosition(), 
+										    content : '<div style="padding:5px;">'+returnData.list[1].startName+trafficType+iwContent,
+										    removable : true
+										});
+																	
+									} 	
+									
+								}else{//도보 제외 지하철, 버스
+									
+									var pathStartSTN = new daum.maps.Marker({
+									    map: map,
+									    position: new daum.maps.LatLng(returnData.list[i].startY, returnData.list[i].startX),
+									    image: pathImage
+									});
+									var pathEndSTN = new daum.maps.Marker({
+									    map: map,
+									    position: new daum.maps.LatLng(returnData.list[i].endY, returnData.list[i].endX),
+										image: pathImage
+									});
+									
+									var detailInfo;
+									if(returnData.lane.busNo != null){
+										detailInfo = returnData.lane.busNo+'번 버스 승차';
+									}else{
+										detailInfo = returnData.lane.name+' 승차';
+									}
+
+									var startContent ='<div style="padding:5px;">'
+														+returnData.list[i].startName+'에서 '+detailInfo+'<br/>'
+														+returnData.list[i].endName+' 하차<br/><br/>'
+														+'</div>';
+														
+									var endInfo;
+									if(i+2 != returnData.list.length){
+										endInfo = returnData.list[i+2].startName;
+									}else{
+										endInfo = '도착지';
+									}
+									
+									var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
+														+returnData.list[i+1].sectionTime+'분 '+returnData.list[i+1].distance+'m<br/><br/></div>';
+														
+									var pathStartInfowindow = new daum.maps.InfoWindow({
+									    position : pathStartSTN.getPosition(), 
+									    content : startContent,
+									    removable : true
+									});
+									
+									var pathEndInfowindow = new daum.maps.InfoWindow({
+									    position : pathEndSTN.getPosition(), 
+									    content : endContent,
+									    removable : true
+									});
+									
+									//인포윈도우선언
+									pathStartInfowindow.open(map, pathStartSTN); 
+									pathEndInfowindow.open(map, pathEndSTN); 
+								}
+								
+							
+												
+							}//for문
+	
+						}//if문
+					}
 				});
+				
+			}//markerInfoWindow()
+			
+			markerInfoWindow();
+			
+			
+		} // search끝
 
-			}
-		}
-
+		
+		
+			
 		function deleteExSearch() {
 			if (STNpolyline.getMap() != null) {
 				STNpolyline.setMap(null);
@@ -386,6 +580,11 @@
 			for (var i = 0; i < polylineArray.length; i++) {
 				polylineArray[i].setMap(null);
 			}
+		}
+		
+		function showBoundary(i){
+			console.log("boundaryArray["+i+"] 보여주는중");
+			map.setBounds(boundaryArray[i]);
 		}
 	</script>
 </body>		

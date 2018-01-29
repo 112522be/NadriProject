@@ -73,6 +73,7 @@
 			      "</div>";
 										
 					$(".row").append(dpValue);	
+					console.log(data[a].firstimage2)
 				}
 								
 			}

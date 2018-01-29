@@ -21,10 +21,8 @@
 	<textarea name="text" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
 	<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
 	<p>
-		<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
 		<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
 		<input type="button" onclick="submitContents(this);" value="서버로 내용 전송" />
-		<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
 	</p>
 </form>
 
@@ -50,14 +48,11 @@ nhn.husky.EZCreator.createInIFrame({
 	}, //boolean
 	fOnAppLoad : function(){
 		//예제 코드
-		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+		oEditors.getById["ir1"].exec("PASTE_HTML", ["모임 이름 <input type='text' name='groupName'></br>"]);
 	},
 	fCreator: "createSEditor2"
 });
-function pasteHTML() {
-	var sHTML = "모임 이름 <input type='text' name='groupName'>";
-	oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
-}
+
 function showHTML() {
 	var sHTML = oEditors.getById["ir1"].getIR();
 	alert(sHTML);
@@ -69,14 +64,9 @@ function submitContents(elClickedObj) {
 	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
 	
 	try {
-		elClickedObj.form.submit();
+		elClickedObj.form.submitSave();
 	} catch(e) {}
 	alert(this);
-}
-function setDefaultFont() {
-	var sDefaultFont = '고딕';
-	var nFontSize = 10;
-	oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
 }
 
 function submitSave(){
