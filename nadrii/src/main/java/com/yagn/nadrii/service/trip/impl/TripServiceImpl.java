@@ -92,7 +92,9 @@ public class TripServiceImpl implements TripService {
 	}
 	
 	public Trip getTripFromDB(String contentId)throws Exception{
+		System.out.println("TripServiceImpl getTripFromDB");
 		return tripDaoDB.getTripFromDB(contentId);
+		
 		
 	}
 	

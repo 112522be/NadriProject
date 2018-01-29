@@ -64,8 +64,8 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-		System.out.println("===================================================");
+//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
+//		System.out.println("===================================================");
 		JSONObject response = (JSONObject) jsonobj.get("response");
 //		System.out.println("[2 : response] ==>" + response);
 //		System.out.println("===================================================");
@@ -149,7 +149,7 @@ public class TripDaoImplTour implements TripDao {
 
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
-		//System.out.println(get);
+
 		//요금정보 가져오기
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
@@ -169,14 +169,14 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
-		System.out.println(jsonObject);
+//		System.out.println(jsonObject);
 		JSONObject response = (JSONObject) jsonObject.get("response");
 		JSONObject header = (JSONObject) response.get("header");
 		JSONObject body = (JSONObject) response.get("body");
-		System.out.println(body);
+//		System.out.println(body);
 		JSONObject items = (JSONObject) body.get("items");
 		JSONObject jsonobj = (JSONObject)items.get("item");	
-		System.out.println(jsonobj);
+//		System.out.println(jsonobj);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
