@@ -17,11 +17,6 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<link href="../resources/css/keywordSearch.css" rel="stylesheet">
-	<style>
-	  	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-		#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-		#sortable li span { position: absolute; margin-left: -1.3em; }
-	</style>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
@@ -29,6 +24,50 @@
 			$( "#sortable" ).sortable();
 			$( "#sortable" ).disableSelection();
 		});
+		
+		$( function() {
+			
+			$("#searchListSubmit").on("click", function(){
+				$("#placesList").css("display","block");
+			});
+			
+		    // run the currently selected effect
+		    function runEffect() {
+		      // get effect type from
+		      var selectedEffect = $( "#effectTypes" ).val();
+		 
+		      // Most effect types need no options passed by default
+		      var options = {};
+		      // some effects have required parameters
+		      if ( selectedEffect === "scale" ) {
+		        options = { percent: 50 };
+		      } else if ( selectedEffect === "size" ) {
+		        options = { to: { width: 200, height: 60 } };
+		      }
+		 
+		      // Run the effect
+		      $( "#placesList" ).toggle( "blind", options, 500 );
+		    };
+		 
+		    // Set effect from select menu value
+		    $( "#button" ).on( "click", function() {
+		      runEffect();
+		      
+	//		  if($("#placesList").css("display") == "none"){
+		//	  	$("#button")
+		//	  }else{
+		//	  	$("#button")
+		//	  }
+				if(side.hasClass('open')) {
+					side.stop(true).animate({left:'0px'}, duration);
+					sidebt.find('span').text('CLOSE');
+				}else{
+					side.stop(true).animate({left:'-300px'}, duration);
+					sidebt.find('span').text('OPEN');
+				};
+		    });
+		  } );
+		
 	</script>
 	
 </head>
@@ -77,12 +116,14 @@
 	            <div>
 	                <form onsubmit="searchPlaces(); return false;">
 	                    키워드 : <input type="text" value="" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
+	                    <button id="searchListSubmit" type="submit">검색하기</button> 
 	                </form>
+	                <ul id="placesList" style="display: none;"></ul>
+	        		<text id="button" size="30">▼</text>
 	            </div>
+	            
 	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
+	        
 	        <div id="pagination"></div>
 	    </div>
 	    <p><em>지도를 클릭해주세요!</em></p> 
@@ -320,7 +361,7 @@
 			}//for문 끝
 			
 			function callMapObjApiAJAX(mabObj){
-				
+								
 				/****************폴리라인배열 선언 및 초기화****************/
 				polylineArray = [];
 				boundaryArray = [];
@@ -397,10 +438,67 @@
 					}
 				});
 
+				markerInfoWindow();
+				
 			} //callMapObjApiAJAX 끝
-			
+
 		} // search끝
 
+		function markerInfoWindow(){
+			
+			$.ajax({
+				url : "../odsay/json/getInfo",
+				method : "GET",
+				dataType : "json",
+				data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
+				headers : {
+					"Accept" : "application/json",
+					"Content-type" : "application/json"
+				},
+				success:function(returnData){
+					
+					var code = returnData.code;
+					
+					if(code != null){
+						
+						if(code == 500){
+							swal({
+								text: "서버 내부 오류",
+								icon: "warning"
+							});
+						}else if(code == -98){
+							swal({
+								text: "필수 입력값이 누락되었습니다.",
+								icon: "warning"
+							});
+						}else if (code == -99){
+							swal({
+								text: "검색 결과가 없습니다",
+								icon: "warning"
+							});
+						}
+						
+					}else{
+						
+						alert("시내 success");
+						callMapObjApiAJAX(returnData.mapObj);
+					}
+				}
+			});
+			
+			var iwContent ='출발지인포윈도우',
+		    	 iwPosition = startMarker.getPosition();
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new daum.maps.InfoWindow({
+			    position : iwPosition, 
+			    content : iwContent 
+			});
+			  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, startMarker); 
+		}
+			
 		function deleteExSearch() {
 			if (STNpolyline.getMap() != null) {
 				STNpolyline.setMap(null);

@@ -259,7 +259,7 @@
 
 		        // 페이지 번호를 표출합니다
 		        displayPagination(pagination);
-
+		        
 		    } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
 		        alert('검색 결과가 존재하지 않습니다.');
@@ -431,6 +431,7 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
+		
 		
 		
 		
