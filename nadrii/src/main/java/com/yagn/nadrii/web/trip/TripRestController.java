@@ -183,7 +183,8 @@ public class TripRestController {
 		return flag;
 	}
 	
-	public Trip getTripFromDB(String contentId) throws Exception {
+	@RequestMapping(value="json/getTripFromDB/{contentTypeId}")
+	public Trip getTripFromDB(@PathVariable("contentTypeId")String contentId) throws Exception {
 		System.out.println("TripRestController getTripFromDB");
 		Trip trip = tripService.getTripFromDB(contentId);
 		return trip;

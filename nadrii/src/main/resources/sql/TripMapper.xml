@@ -96,7 +96,7 @@
 	
 	</update> 
 	
-	<select id="tripCheckDuplication" parameterType="string">
+	<select id="tripCheckDuplication" parameterType="string" resultMap="tripSelectMap">
 		SELECT post_no,
 			lat,
 			lng,

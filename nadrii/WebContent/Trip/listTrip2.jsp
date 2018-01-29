@@ -107,7 +107,7 @@
 		//alert(contentid);
 		//alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
-		//getTriptoDB(contentid,contenttypeid);
+		getTriptoDB(contentid);
 		
 	  });
 	});	
@@ -181,9 +181,9 @@
 	}
 	
 	
-	function getTriptoDB(contentid,contenttypeid){
+	function getTriptoDB(contentid){
 		$.ajax({
-			url:"../trip/json/getTriptoDB/"+contentid+"/"+contenttypeid+"",
+			url:"../trip/json/getTripFromDB/"+contentid+"",
 			method:"GET",
 			dataType:"json",
 			headers :{
@@ -205,10 +205,6 @@
 	
 	$(function() {
 	  $(document).on("click","#wish", function(e){
-	
-	//$(function(){
-		//$("a[href='#']:contains('위시리스트')").on("click",function(){
-		//$("p a:nth-child(3)").on("click",function(){
 			alert($("a[href='#']:contains('위시리스트')").index(this));
 			alert($($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
 			alert($($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
@@ -220,8 +216,8 @@
 	
 	$(function(){
 		$("#wishList").on("click",function(e){
-			//alert(contentid);
-			//alert(contenttypeid);
+			alert(contentid);
+			alert(contenttypeid);
 			e.preventDefault();
 		});
 	})
@@ -244,12 +240,12 @@
 	  
 		var markerPosition  = new daum.maps.LatLng(mapy,mapx); 
 	
-		//마커를 생성합니다
+		//마커를 생성
 		var marker = new daum.maps.Marker({
 		   position: markerPosition
 		});
 		
-		//마커가 지도 위에 표시되도록 설정합니다
+		//마커가 지도 위에 표시
 		marker.setMap(map);
 	  }
 	</script>
