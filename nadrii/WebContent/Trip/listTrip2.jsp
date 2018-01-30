@@ -108,8 +108,20 @@
 		//alert(contentid);
 		//alert($(".col-xs-4 img:nth-child(1)").index(this));
 		getTheme(contentid, contenttypeid);
-		getTripFromDB(contentid);
+		//getTripFromDB(contentid);
 		
+		/*
+		
+		if(getTripFromDB(contentid) == null){
+		//	alert("널포인터래요 addTriptoDB 실행");
+			
+			//addTriptoDB(contentid,contenttypeid);
+		}else{
+			alert("디비에 있대요 updateViewCount 실행");
+			
+			//updateViewCount(contentid)
+		}
+		*/
 	  });
 	});	
 	
@@ -181,7 +193,7 @@
 		});
 	}
 	
-	
+	/*
 	function getTripFromDB(contentid){
 		$.ajax({
 			url:"../trip/json/getTripFromDB/"+contentid+"",
@@ -192,15 +204,47 @@
 				"Content-Type" : "application/json"
 			},
 			success:function(returnData){
-				
-				if(returnData.trip != null){
-					alert(returnData.tripName);
+				if(returnData.trip==null){
+					alert("널인데?");
 				}else{
-					alert("디비에 없음");
+					alert("있는데?");
 				}
+				return returnData.trip;
 			}
 		});
 	}
+	
+	
+	function addTriptoDB(contentid,contenttypeid){
+		$.ajax({
+			url:"../trip/json/addTriptoDB/"+contentid+"/"+contenttypeid+"",
+			method:"GET",
+			dataType:"json",
+			headers:{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success:function(){
+				alert("새로운 여행지 저장");
+			}
+		});
+	}
+	
+	function updateViewCount(contentid){
+		$.ajax({
+			url:"../trip/json/updateViewCount/"+contentid+"",
+			method:"GET",
+			dataType:"json",
+			headers:{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success:function(){
+				alert("조회수 갱신");
+			}
+		});
+	}
+	*/
 	
 	
 	

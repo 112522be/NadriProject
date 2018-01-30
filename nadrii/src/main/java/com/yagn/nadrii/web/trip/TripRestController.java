@@ -147,15 +147,42 @@ public class TripRestController {
 			
 		TourApiDomain tourApiDomain = tripService.getTrip(contentId,contentTypeId);
 		TourApiDomain feeDomain = tripService.getTripDetail(contentId,contentTypeId);
-		
+		System.out.println(tourApiDomain);
 		Map map = new HashMap();
 		
 		map.put("getTrip", tourApiDomain);
 		map.put("getDetail",feeDomain );			
 		
+		
+		//여행지의 DB 존재 여부 확인해서 add or update 실행
+		
+		Trip trip = tripService.getTripFromDB(contentId);
+		if(trip==null) {
+			trip = new Trip();
+			trip.setAddress(tourApiDomain.getAddr1());
+			trip.setLat(tourApiDomain.getMapy());
+			trip.setLng(tourApiDomain.getMapx());
+			trip.setThumbnailImageFile(tourApiDomain.getFirstimage2());
+			trip.setDescription(tourApiDomain.getOverview());
+			trip.setTripName(tourApiDomain.getTitle());
+			trip.setCreatedTime((tourApiDomain.getCreatedtime()).substring(0, 8));
+			System.out.println(trip.getCreatedTime());
+			trip.setContentId(tourApiDomain.getContentid()+"");
+			trip.setContentTypeId(tourApiDomain.getContenttypeid()+"");
+			tripService.addTriptoDB(trip);
+			
+			
+		}else {
+			tripService.updateViewCount(contentId);
+			
+		}	
+		
+		
 		return map;
 	}
 	
+	
+	/*
 	@RequestMapping(value="json/addTriptoDB/{contentId}/{contentTypeId}")
 	public int addTriptoDB(@PathVariable("contentId")String contentId, @PathVariable("contentTypeId")String contentTypeId) throws Exception{
 		
@@ -172,7 +199,8 @@ public class TripRestController {
 		trip.setThumbnailImageFile(tourApiDomain.getFirstimage2());
 		trip.setDescription(tourApiDomain.getOverview());
 		trip.setTripName(tourApiDomain.getTitle());
-		trip.setCreatedTime(tourApiDomain.getCreatedtime());
+		trip.setCreatedTime((tourApiDomain.getCreatedtime()).substring(0, 8));
+		System.out.println(trip.getCreatedTime());
 		trip.setContentId(tourApiDomain.getContentid()+"");
 		trip.setContentTypeId(tourApiDomain.getContenttypeid()+"");
 		
@@ -182,8 +210,8 @@ public class TripRestController {
 		return flag;
 	}
 	
-	@RequestMapping(value="json/getTripFromDB/{contentTypeId}")
-	public Map getTripFromDB(@PathVariable("contentTypeId")String contentId) throws Exception {
+	@RequestMapping(value="json/getTripFromDB/{contentId}")
+	public Map getTripFromDB(@PathVariable("contentId")String contentId) throws Exception {
 		System.out.println("TripRestController getTripFromDB");
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println("트립맞니? 아이니?"+trip);
@@ -193,5 +221,13 @@ public class TripRestController {
 		return map;
 	}
 	
+	@RequestMapping(value="json/updateViewCount/{contentId}")
+	public void updateViewCount(@PathVariable("contentId")String contentId)throws Exception{
+		System.out.println("TripRestController updateViewCount");
+		tripService.updateViewCount(contentId);
+		
+		
+	}
+	*/
 	
 }

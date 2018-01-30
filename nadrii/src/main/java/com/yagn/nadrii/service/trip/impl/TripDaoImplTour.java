@@ -209,13 +209,13 @@ public class TripDaoImplTour implements TripDao {
 	}
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
+	public void updateViewCount(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Trip getTripFromDB(String contentid) throws Exception {
+	public Trip getTripFromDB(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

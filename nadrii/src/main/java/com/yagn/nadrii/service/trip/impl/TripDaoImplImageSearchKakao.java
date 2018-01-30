@@ -107,7 +107,7 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 	}
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
+	public void updateViewCount(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

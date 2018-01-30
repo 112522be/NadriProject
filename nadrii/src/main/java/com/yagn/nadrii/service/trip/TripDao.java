@@ -25,7 +25,7 @@ public interface TripDao {
 	
 	public List<Trip> listTrip(Search search) throws Exception;
 	
-	public void updateViewCount(int postNo) throws Exception;
+	public void updateViewCount(String contentId) throws Exception;
 	
-	public Trip getTripFromDB(String contentid) throws Exception;
+	public Trip getTripFromDB(String contentId) throws Exception;
 }
