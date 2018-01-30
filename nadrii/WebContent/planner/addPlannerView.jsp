@@ -259,6 +259,9 @@
 							    image: markerImage
 							});
 							
+							startSTN.setZIndex(10);
+							endSTN.setZIndex(10);
+							
 							var outStartInfowindow = new daum.maps.InfoWindow({
 							    map: map, 
 							    position : startSTN.getPosition(), 
@@ -334,6 +337,11 @@
 						},
 						success:function(returnData){
 							
+							var pathStartInfowindow=[];
+							var pathEndInfowindow=[];
+							var pathStartSTN=[];
+							var pathEndSTN=[];
+							
 							var code = returnData.code;
 							
 							if(code != null){
@@ -359,7 +367,8 @@
 								
 								alert("시내 success");
 								callMapObjApiAJAX(returnData.info.mapObj);
-
+														
+								
 								
 								var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
 									 pathOption;
@@ -367,11 +376,10 @@
 								
 								var iwContent;
 								var traffic;
-								
-								
+																					
 								for( var i=0; i<returnData.subPathList.length ; i++){
 									
-									if(i%2==0){
+									if(i%2==0 && i !=returnData.subPathList.length-1){
 										
 										if(returnData.subPathList[i+1].trafficType == 1){
 											traffic = '역까지 도보 ';
@@ -392,7 +400,7 @@
 																		
 										} 	
 										
-										//startInfowindow.open(map, startMarker);
+										startInfowindow.open(map, startMarker);
 										
 										/*
 										daum.maps.event.addListener(startMarker, 'mouseover', function() {
@@ -405,19 +413,24 @@
 										*/
 									
 									
-									}else{//도보 제외 지하철, 버스
-										
-										var pathStartSTN = new daum.maps.Marker({
+									}else if(i%2==1){//도보 제외 지하철, 버스
+																				
+										pathStartSTN[Math.floor(i/2)] = new daum.maps.Marker({
 										    map: map,
 										    position: new daum.maps.LatLng(returnData.subPathList[i].startY, returnData.subPathList[i].startX),
 										    image: pathImage
 										});
-										var pathEndSTN = new daum.maps.Marker({
+									
+										pathEndSTN[Math.floor(i/2)] = new daum.maps.Marker({
 										    map: map,
 										    position: new daum.maps.LatLng(returnData.subPathList[i].endY, returnData.subPathList[i].endX),
 											image: pathImage
 										});
 										
+										if(returnData.subPathList[i+1].sectionTime == 0){
+											pathEndSTN[Math.floor(i/2)].setMap(null);
+										}
+																			
 										var laneName;
 										var stationFlag;
 										
@@ -449,17 +462,16 @@
 										var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
 															+returnData.subPathList[i+1].sectionTime+'분 '+returnData.subPathList[i+1].distance+'m<br/><br/></div>';
 															
-										var pathStartInfowindow = new daum.maps.InfoWindow({
-										    position : pathStartSTN.getPosition(), 
+										pathStartInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
+										    position : pathStartSTN[Math.floor(i/2)].getPosition(), 
 										    content : startContent
-										    ,removable : true
+										//    ,removable : true
 										});
 										
-										var pathEndInfowindow = new daum.maps.InfoWindow({
-										    position : pathEndSTN.getPosition(), 
+										pathEndInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
+										    position : pathEndSTN[Math.floor(i/2)].getPosition(), 
 										    content : endContent
-										    ,removable : true
-										    
+										//    ,removable : true
 										});
 									
 										/*
@@ -467,29 +479,99 @@
 										pathEndInfowindow.open(map, pathEndSTN);
 										*/
 										
-										/*
-										daum.maps.event.addListener(pathStartSTN, 'mouseover', function() {
-										    pathStartInfowindow.open(map, pathStartSTN);
-										});
-										
-										daum.maps.event.addListener(pathStartSTN, 'mouseout', function() {
-										    pathStartInfowindow.close();
-										});
-										
-										daum.maps.event.addListener(pathEndSTN, 'mouseover', function() {
-											pathEndInfowindow.open(map, pathEndSTN);
-										});
-										
-										daum.maps.event.addListener(pathEndSTN, 'mouseout', function() {
-											pathEndInfowindow.close();
-										});		
-										*/
+									
 										
 									}
 									
+									
+									
+																		
 								}//for문
 								
-							}
+								alert("pathStartSTN.length :: "+pathStartSTN.length);
+								
+								daum.maps.event.addListener(pathStartSTN[0], 'mouseover', function() {
+								    pathStartInfowindow[0].open(map, pathStartSTN[0]);
+								});
+								
+								daum.maps.event.addListener(pathStartSTN[0], 'mouseout', function() {
+								    pathStartInfowindow[0].close();
+								});
+								
+								daum.maps.event.addListener(pathEndSTN[0], 'mouseover', function() {
+								    pathEndInfowindow[0].open(map, pathEndSTN[0]);
+								});
+								
+								daum.maps.event.addListener(pathEndSTN[0], 'mouseout', function() {
+								    pathEndInfowindow[0].close();
+								});
+								
+								if(pathStartSTN.length >= 2){
+									
+									daum.maps.event.addListener(pathStartSTN[1], 'mouseover', function() {
+									    pathStartInfowindow[1].open(map, pathStartSTN[1]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[1], 'mouseout', function() {
+									    pathStartInfowindow[1].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[1], 'mouseover', function() {
+									    pathEndInfowindow[1].open(map, pathEndSTN[1]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[1], 'mouseout', function() {
+									    pathEndInfowindow[1].close();
+									});
+								}
+								
+								
+								if(pathStartSTN.length >= 3){
+									
+									daum.maps.event.addListener(pathStartSTN[2], 'mouseover', function() {
+									    pathStartInfowindow[2].open(map, pathStartSTN[2]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[2], 'mouseout', function() {
+									    pathStartInfowindow[2].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[2], 'mouseover', function() {
+									    pathEndInfowindow[2].open(map, pathEndSTN[2]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[2], 'mouseout', function() {
+									    pathEndInfowindow[2].close();
+									});
+								}
+								
+								if(pathStartSTN.length >= 4){
+									
+									daum.maps.event.addListener(pathStartSTN[3], 'mouseover', function() {
+									    pathStartInfowindow[3].open(map, pathStartSTN[3]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[3], 'mouseout', function() {
+									    pathStartInfowindow[3].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[3], 'mouseover', function() {
+									    pathEndInfowindow[3].open(map, pathEndSTN[3]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[3], 'mouseout', function() {
+									    pathEndInfowindow[3].close();
+									});
+								}
+								
+							}//if
+							
+							
+							
+							
 						}
 					});
 				}// getInfo 끝

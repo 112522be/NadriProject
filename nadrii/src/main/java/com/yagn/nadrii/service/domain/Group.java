@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Group {
 	
-	private int groupNo;
+	private JoinMember joinMember;
 	private String groupName;
 	private String categoryCode;
 	private String title;
@@ -18,14 +18,14 @@ public class Group {
 	public Group(){
 	}
 
-	public int getGroupNo() {
-		return groupNo;
+	public JoinMember getJoinMember() {
+		return joinMember;
 	}
 
-	public void setGroupNo(int groupNo) {
-		this.groupNo = groupNo;
+	public void setJoinMember(JoinMember joinMember) {
+		this.joinMember = joinMember;
 	}
-
+	
 	public String getGroupName() {
 		return groupName;
 	}
@@ -100,9 +100,9 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [groupNo=" + groupNo + ", groupName=" + groupName + ", categoryCode=" + categoryCode + ", title=" + title
-				+ ", text=" + text + ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", lat=" + lat
-				+ ", lng=" + lng + ", regDate=" + regDate + "]";
+		return "Group [joinMember=" + joinMember + ", groupName=" + groupName + ", categoryCode=" + categoryCode
+				+ ", title=" + title + ", text=" + text + ", meetingDate=" + meetingDate + ", viewCount=" + viewCount
+				+ ", lat=" + lat + ", lng=" + lng + ", regDate=" + regDate + "]";
 	}
 	
 }
