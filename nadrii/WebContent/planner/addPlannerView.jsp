@@ -259,16 +259,35 @@
 							    image: markerImage
 							});
 							
-							var startStnPosition = new daum.maps.LatLng(returnData.sy,returnData.sx);
-							var endStnPosition = new daum.maps.LatLng(returnData.ey,returnData.ex)
-		                    
-							rk.insert(k+1, startStnPosition);
-							rk.insert(k+2, endStnPosition);
+							startSTN.setZIndex(10);
+							endSTN.setZIndex(10);
+							
+							var outStartInfowindow = new daum.maps.InfoWindow({
+							    map: map, 
+							    position : startSTN.getPosition(), 
+							    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
+							    			+'예상 소요 시간 : '+returnData.time+'분</br>'
+							    			+'요금 : '+returnData.payment+'원</br></div>',
+							    removable : true
+							});
+							
+							var outEndInfowindow = new daum.maps.InfoWindow({
+							    map: map, 
+							    position : endSTN.getPosition(), 
+							    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
+							    removable : true
+							});
+							
+							outStartInfowindow.open(map, startSTN); 
+							outEndInfowindow.open(map, endSTN); 
+									                    
+							rk.insert(k+1, startSTN.getPosition());
+							rk.insert(k+2, endSTN.getPosition());
 							
 							function line2(){
 								STNpolyline = new daum.maps.Polyline({
 								    path: [
-								       startStnPosition, endStnPosition
+								    	startSTN.getPosition(), endSTN.getPosition()
 								    ],
 								    strokeWeight: 2,
 								    strokeColor: '#FF00FF',
@@ -280,7 +299,8 @@
 								
 							}
 							line2();
-						}
+							
+						}//success
 					});
 				}// getOBJ 끝
 				
@@ -317,6 +337,11 @@
 						},
 						success:function(returnData){
 							
+							var pathStartInfowindow=[];
+							var pathEndInfowindow=[];
+							var pathStartSTN=[];
+							var pathEndSTN=[];
+							
 							var code = returnData.code;
 							
 							if(code != null){
@@ -342,12 +367,218 @@
 								
 								alert("시내 success");
 								callMapObjApiAJAX(returnData.info.mapObj);
-							}
+														
+								
+								
+								var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
+									 pathOption;
+								var pathImage = new daum.maps.MarkerImage('http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png', pathSize, pathOption);
+								
+								var iwContent;
+								var traffic;
+																					
+								for( var i=0; i<returnData.subPathList.length ; i++){
+									
+									if(i%2==0 && i !=returnData.subPathList.length-1){
+										
+										if(returnData.subPathList[i+1].trafficType == 1){
+											traffic = '역까지 도보 ';
+										}else{
+											traffic = '정류장까지 도보 ';
+										}
+									
+										iwContent = returnData.subPathList[i].sectionTime+'분 '+returnData.subPathList[i].distance+'m<br/><br/></div>';
+										alert("iwContent :: "+iwContent);
+										
+										if(i==0){
+											
+											var startInfowindow = new daum.maps.InfoWindow({
+											    position : startMarker.getPosition(), 
+											    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+											    ,removable : true
+											});
+																		
+										} 	
+										
+										startInfowindow.open(map, startMarker);
+										
+										/*
+										daum.maps.event.addListener(startMarker, 'mouseover', function() {
+											startInfowindow.open(map, startMarker);
+										});
+										
+										daum.maps.event.addListener(startMarker, 'mouseout', function() {
+											startInfowindow.close();
+										});
+										*/
+									
+									
+									}else if(i%2==1){//도보 제외 지하철, 버스
+																				
+										pathStartSTN[Math.floor(i/2)] = new daum.maps.Marker({
+										    map: map,
+										    position: new daum.maps.LatLng(returnData.subPathList[i].startY, returnData.subPathList[i].startX),
+										    image: pathImage
+										});
+									
+										pathEndSTN[Math.floor(i/2)] = new daum.maps.Marker({
+										    map: map,
+										    position: new daum.maps.LatLng(returnData.subPathList[i].endY, returnData.subPathList[i].endX),
+											image: pathImage
+										});
+										
+										if(returnData.subPathList[i+1].sectionTime == 0){
+											pathEndSTN[Math.floor(i/2)].setMap(null);
+										}
+																			
+										var laneName;
+										var stationFlag;
+										
+										if(returnData.subPathList[i].trafficType == 1){
+											laneName = '역에서 '+returnData.laneList[Math.floor(i/2)].name+' 승차';
+											stationFlag = '역';
+										}else{
+											laneName = '정류장에서 '+returnData.laneList[Math.floor(i/2)].busNo+'번 버스 승차';
+											stationFlag = '정류장';
+										}
+
+										var startContent ='<div style="padding:5px;">'
+															+returnData.subPathList[i].startName+laneName+'<br/>'
+															+returnData.subPathList[i].stationCount+' 정거장 이동 후 '
+															+returnData.subPathList[i].endName+stationFlag+' 하차<br/><br/>'
+															+'</div>';
+															
+										var endInfo;
+										if(i+2 != returnData.subPathList.length){
+											if(returnData.laneList[Math.floor(i/2)+1].busNo != null){
+												endInfo = returnData.subPathList[i+2].startName+'정류장';
+											}else{
+												endInfo = returnData.subPathList[i+2].startName+'역';
+											}										
+										}else{
+											endInfo = '도착지';
+										}
+										
+										var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
+															+returnData.subPathList[i+1].sectionTime+'분 '+returnData.subPathList[i+1].distance+'m<br/><br/></div>';
+															
+										pathStartInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
+										    position : pathStartSTN[Math.floor(i/2)].getPosition(), 
+										    content : startContent
+										//    ,removable : true
+										});
+										
+										pathEndInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
+										    position : pathEndSTN[Math.floor(i/2)].getPosition(), 
+										    content : endContent
+										//    ,removable : true
+										});
+									
+										/*
+										pathStartInfowindow.open(map, pathStartSTN);
+										pathEndInfowindow.open(map, pathEndSTN);
+										*/
+										
+									
+										
+									}
+									
+									
+									
+																		
+								}//for문
+								
+								alert("pathStartSTN.length :: "+pathStartSTN.length);
+								
+								daum.maps.event.addListener(pathStartSTN[0], 'mouseover', function() {
+								    pathStartInfowindow[0].open(map, pathStartSTN[0]);
+								});
+								
+								daum.maps.event.addListener(pathStartSTN[0], 'mouseout', function() {
+								    pathStartInfowindow[0].close();
+								});
+								
+								daum.maps.event.addListener(pathEndSTN[0], 'mouseover', function() {
+								    pathEndInfowindow[0].open(map, pathEndSTN[0]);
+								});
+								
+								daum.maps.event.addListener(pathEndSTN[0], 'mouseout', function() {
+								    pathEndInfowindow[0].close();
+								});
+								
+								if(pathStartSTN.length >= 2){
+									
+									daum.maps.event.addListener(pathStartSTN[1], 'mouseover', function() {
+									    pathStartInfowindow[1].open(map, pathStartSTN[1]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[1], 'mouseout', function() {
+									    pathStartInfowindow[1].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[1], 'mouseover', function() {
+									    pathEndInfowindow[1].open(map, pathEndSTN[1]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[1], 'mouseout', function() {
+									    pathEndInfowindow[1].close();
+									});
+								}
+								
+								
+								if(pathStartSTN.length >= 3){
+									
+									daum.maps.event.addListener(pathStartSTN[2], 'mouseover', function() {
+									    pathStartInfowindow[2].open(map, pathStartSTN[2]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[2], 'mouseout', function() {
+									    pathStartInfowindow[2].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[2], 'mouseover', function() {
+									    pathEndInfowindow[2].open(map, pathEndSTN[2]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[2], 'mouseout', function() {
+									    pathEndInfowindow[2].close();
+									});
+								}
+								
+								if(pathStartSTN.length >= 4){
+									
+									daum.maps.event.addListener(pathStartSTN[3], 'mouseover', function() {
+									    pathStartInfowindow[3].open(map, pathStartSTN[3]);
+									});
+									
+									daum.maps.event.addListener(pathStartSTN[3], 'mouseout', function() {
+									    pathStartInfowindow[3].close();
+									});
+									
+									
+									daum.maps.event.addListener(pathEndSTN[3], 'mouseover', function() {
+									    pathEndInfowindow[3].open(map, pathEndSTN[3]);
+									});
+									
+									daum.maps.event.addListener(pathEndSTN[3], 'mouseout', function() {
+									    pathEndInfowindow[3].close();
+									});
+								}
+								
+							}//if
+							
+							
+							
+							
 						}
 					});
 				}// getInfo 끝
 				
 				getInfo();
+				
+			//	markerInfoWindow();
 				
 			}//for문 끝
 			
@@ -422,148 +653,9 @@
 					}
 				});				
 			} //callMapObjApiAJAX 끝
-
-			
-			function markerInfoWindow(){
-				
-				$.ajax({
-					url : "../odsay/json/getInfo",
-					method : "GET",
-					dataType : "json",
-					data : {"sx" : sx, "sy" : sy, "ex" : ex, "ey" : ey},
-					headers : {
-						"Accept" : "application/json",
-						"Content-type" : "application/json"
-					},
-					success:function(returnData){
-						
-						var code = returnData.code;
-						
-						if(code != null){
-							
-							if(code == 500){
-								swal({
-									text: "서버 내부 오류",
-									icon: "warning"
-								});
-							}else if(code == -98){
-								swal({
-									text: "필수 입력값이 누락되었습니다.",
-									icon: "warning"
-								});
-							}else if (code == -99){
-								swal({
-									text: "검색 결과가 없습니다",
-									icon: "warning"
-								});
-							}
-							
-						}else{
-							
-							var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
-								 pathOption;
-							var pathImage = new daum.maps.MarkerImage('http://www.clker.com/cliparts/I/l/L/S/W/9/map-marker-hi.png', pathSize, pathOption);
-							
-							var iwContent;
-							
-							var trafficType;
-							
-							
-							for( var i=0; i<returnData.list.length ; i++){
-								
-								alert("i :: "+i);
-								
-								if(i%2==0){
-									
-									if(returnData.list[i].trafficType == 1){
-										trafficType = '역까지 도보 ';
-									}else{
-										trafficType = '정류장까지 도보 ';
-									}
-								
-									iwContent = returnData.list[i].sectionTime+'분 '+returnData.list[i].distance+'m<br/><br/></div>';
-									alert("iwContent :: "+iwContent);
-									
-									if(i==0){
-										
-										var startInfowindow = new daum.maps.InfoWindow({
-										    position : startMarker.getPosition(), 
-										    content : '<div style="padding:5px;">'+returnData.list[1].startName+trafficType+iwContent,
-										    removable : true
-										});
-																	
-									} 	
-									
-								}else{//도보 제외 지하철, 버스
-									
-									var pathStartSTN = new daum.maps.Marker({
-									    map: map,
-									    position: new daum.maps.LatLng(returnData.list[i].startY, returnData.list[i].startX),
-									    image: pathImage
-									});
-									var pathEndSTN = new daum.maps.Marker({
-									    map: map,
-									    position: new daum.maps.LatLng(returnData.list[i].endY, returnData.list[i].endX),
-										image: pathImage
-									});
-									
-									var detailInfo;
-									if(returnData.lane.busNo != null){
-										detailInfo = returnData.lane.busNo+'번 버스 승차';
-									}else{
-										detailInfo = returnData.lane.name+' 승차';
-									}
-
-									var startContent ='<div style="padding:5px;">'
-														+returnData.list[i].startName+'에서 '+detailInfo+'<br/>'
-														+returnData.list[i].endName+' 하차<br/><br/>'
-														+'</div>';
-														
-									var endInfo;
-									if(i+2 != returnData.list.length){
-										endInfo = returnData.list[i+2].startName;
-									}else{
-										endInfo = '도착지';
-									}
-									
-									var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
-														+returnData.list[i+1].sectionTime+'분 '+returnData.list[i+1].distance+'m<br/><br/></div>';
-														
-									var pathStartInfowindow = new daum.maps.InfoWindow({
-									    position : pathStartSTN.getPosition(), 
-									    content : startContent,
-									    removable : true
-									});
-									
-									var pathEndInfowindow = new daum.maps.InfoWindow({
-									    position : pathEndSTN.getPosition(), 
-									    content : endContent,
-									    removable : true
-									});
-									
-									//인포윈도우선언
-									pathStartInfowindow.open(map, pathStartSTN); 
-									pathEndInfowindow.open(map, pathEndSTN); 
-								}
-								
-							
-												
-							}//for문
-	
-						}//if문
-					}
-				});
-				
-			}//markerInfoWindow()
-			
-			markerInfoWindow();
-			
 			
 		} // search끝
 
-		
-		
-			
 		function deleteExSearch() {
 			if (STNpolyline.getMap() != null) {
 				STNpolyline.setMap(null);

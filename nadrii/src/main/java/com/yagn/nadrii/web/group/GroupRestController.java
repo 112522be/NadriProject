@@ -58,7 +58,7 @@ public class GroupRestController {
 		
 		groupService.updateGroup(group);
 		
-		return groupService.getGroup(group.getGroupNo());
+		return groupService.getGroup(group.getJoinMember().getGroupNo());
 	}
 	
 	

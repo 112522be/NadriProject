@@ -68,6 +68,7 @@ public class GroupController {
 		model.addAttribute("group", group);
 		
 		return "forward:/group/getGroup.jsp";
+		
 	}
 	
 	@RequestMapping(value="updateGroup", method=RequestMethod.GET)
@@ -107,7 +108,7 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="listGroup")
-	public String listGroup(@ModelAttribute("search") Search search, Model model) throws Exception{
+	public String listGroup(@RequestParam("menu") String menu, @ModelAttribute("search") Search search, Model model) throws Exception{
 		
 		System.out.println("/listGroup");
 		
@@ -116,17 +117,17 @@ public class GroupController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ï¿½ï¿½ï¿½ï¿½
+		// Business logic ¼öÇà
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("resultPage :: "+resultPage);
 		
-		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
+		// Model °ú View ¿¬°á
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/group/listGroup.jsp";	
+		return "forward:/group/listGroup.jsp";
 	}
 }
