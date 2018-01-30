@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.trip.impl.TripDaoImplgetAddress;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
@@ -28,7 +29,9 @@ public class Triptest {
 	@Qualifier("tripDaoImpla")
 	private TripDao tripDao;
 	
-	//private TripDaoImpl tripDaoImpl;
+	@Autowired
+	@Qualifier("tripDaoImplAddress")
+	private TripDao tripDaoImpl;
 	
 	//@Test
 	public void addTripTest() throws Exception {
@@ -59,7 +62,7 @@ public class Triptest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void listTrip() throws Exception{
 		Search search = new Search();
 		search.setSearchCondition("1");
@@ -96,10 +99,21 @@ public class Triptest {
 			
 		}else {
 		
-			tripDao.updateViewCount(trip.getPostNo());
+			tripDao.updateViewCount(trip.getContentId());
+			
 		}
 		
 	}
 	
+	@Test
+	public void getAddress()throws Exception{
+		String lat = "36.777078";
+		String lng = "127.272012";
+		
+		List locate = tripDaoImpl.getClientAddress(lat, lng);
+		System.out.println(locate);
+		//String results = locate.
+		
+	}
 
 }

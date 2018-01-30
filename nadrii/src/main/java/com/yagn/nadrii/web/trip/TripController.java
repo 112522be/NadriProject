@@ -45,8 +45,8 @@ public class TripController {
 		map.put("pageNo", pageNo);		
 		
 		
-		
-		return "forward:/Trip/listTrip2.jsp";
+		return "forward:/Trip/listTrip.jsp";
+		//return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")

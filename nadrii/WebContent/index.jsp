@@ -312,6 +312,12 @@ body {
 
 					<c:if test="${loginUser ne null }">
 						<li><a href="#">로 그 아 웃</a></li>
+						<li><a href="#">박물관</a></li>
+						<li><a href="#">전시관</a></li>
+						<li><a href="#">미술관</a></li>
+						<li><a href="#">체험관</a></li>
+						<li><a href="#">민속마을</a></li>
+						<li><a href="#">나들이티켓</a></li>
 					</c:if>
 				</ul>
 			</div>

@@ -1,13 +1,19 @@
 package com.yagn.nadrii.web.wish;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.yagn.nadrii.service.comm.CommService;
+import com.yagn.nadrii.service.domain.Community;
 import com.yagn.nadrii.service.domain.Trip;
-
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.wish.WishService;
 
@@ -19,6 +25,9 @@ public class WishRestController {
 	@Qualifier("wishServiceImpl")
 	private WishService wishService;
 	
+	@Autowired
+	@Qualifier("commServiceImpl")
+	private CommService CommService;
 	
 	@Autowired
 	@Qualifier("tripServiceImpl")
@@ -30,21 +39,56 @@ public class WishRestController {
 	public WishRestController() {
 		System.out.println(this.getClass());
 	}
-/*
-	public void addWishFromTrip() {
-		System.out.println("addWishFromTrip");
-		Trip trip
+
+	@RequestMapping("json/addWishFromTrip/{contentId}")
+	public void addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
+		
+		System.out.println("RestController addWishFromTrip");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		System.out.println(user);
+		
+		Thread.sleep(1000);
+		Trip trip = tripService.getTripFromDB(contentId);
+		System.out.println(trip);
+		Wish wish = new Wish();
+		wish.setUserId(user.getUserId());
+		wish.setTripNo(trip.getPostNo());
+		System.out.println(wish);
+		
+		wishService.addWishListFromTrip(wish);
+		
 		
 	}
-	*/
-	public void addWishFromPost() {
-		System.out.println("addWishFromPost");
+	
+	@RequestMapping("json/addWishFromPost/{postNo}")
+	public void addWishFromPost(@PathVariable("postNo")int postNo, HttpServletRequest request) throws Exception{
+		
+		System.out.println("RestController addWishFromPost");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("loginUser");
+		
+		
+		System.out.println(user);
+		Thread.sleep(1000);
+		Community community = CommService.getComm(postNo);
+		System.out.println(community);
+		Wish wish = new Wish();
+		wish.setUserId(user.getUserId());
+		wish.setPostNo(community.getPostNo());
+		System.out.println(wish);
+		
+		wishService.addWishListFromPost(wish);
+		
+		
 	}
 	
+	@RequestMapping()
 	public void getWish() {
 		System.out.println("getWish");
 	}
 	
+	@RequestMapping("/json/listWish/{userId}")
 	public void listWish() {
 		System.out.println("listWish");
 	}

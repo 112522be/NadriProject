@@ -25,21 +25,32 @@
 	<insert id="addTrip" parameterType="trip">
 		INSERT
 		INTO trip(
-				post_no,lat,lng,address,thumbnail_image_file,view_count,
-				description,trip_name,createdtime,contentid,contenttypeid)
+				post_no,
+				lat,
+				lng,
+				address,
+				thumbnail_image_file,
+				view_count,
+				description,
+				trip_name,
+				createdtime,
+				contentid,
+				contenttypeid)
 		VALUES(
 		seq_trip_post_no.nextval,
 		#{lat},
 		#{lng},
-		#{address},
-		#{thumbnailImageFile},
+		#{address:VARCHAR},
+		#{thumbnailImageFile:VARCHAR},
 		1,
-		#{description},
-		#{tripName},
-		#{createdTime},
-		#{contentId},
-		#{contentTypeId})		
-	
+		#{description:VARCHAR},
+		#{tripName:VARCHAR},
+		#{createdTime:VARCHAR},
+		#{contentId:VARCHAR},
+		#{contentTypeId:VARCHAR})		
+	<selectKey resultType="integer" keyProperty="postNo" order="AFTER">
+        SELECT seq_trip_post_no.currval FROM dual        
+    </selectKey>    
 	
 	</insert>
 	
@@ -91,7 +102,7 @@
 		<set>
 			view_count = view_count+1
 		</set>
-		WHERE post_no =#{postNo}
+		WHERE contentid =#{contentid}
 			
 	
 	</update> 

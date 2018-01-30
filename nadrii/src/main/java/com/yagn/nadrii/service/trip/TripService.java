@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.trip;
 
+import java.util.List;
 import java.util.Map;
 
 import com.yagn.nadrii.service.domain.Trip;
@@ -18,4 +19,8 @@ public interface TripService {
 	public void addTriptoDB(Trip trip) throws Exception;
 	
 	public Trip getTripFromDB(String contentId)throws Exception;
+	
+	public void updateViewCount(String contentId) throws Exception;
+	
+	public List getClientAddress(String lat, String lng)throws Exception;
 }
