@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.ticket;
 
+import java.util.List;
 import java.util.Map;
 
 import com.yagn.nadrii.common.OpenApiSearch;
@@ -14,6 +15,9 @@ public interface TicketService {
 	public DetailIntro getTicket(int contentId, int contentTypeId) throws Exception;
 	
 	public DetailImage getDetailImage(int contentId, String title) throws Exception;
+	
+	public List<String> getTicketPrice(String priceInfo) throws Exception;
+	
 	
 	/// NaverAPI
 	public String getNaverImage(String title) throws Exception;

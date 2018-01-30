@@ -59,12 +59,15 @@ $(function() {
 		dateFormat: "yymmdd",
 		changeMonth: true,
 		changeYear: true,
+		dayNamesMin: ["월", "화", "수", "목", "금", "토", "일"],
+		monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		showMonthAfterYear: true,
 		
 		minDate: '${ detailIntro.eventstartdate }',
 		maxDate: '${ detailIntro.eventenddate }', 
 	
 		onSelect: function(){
-			var bookingDate = $.datepicker.formatDate("yymmdd", $(this).datepicker('getDate'));
+			var bookingDate = $.datepicker.formatDate("yy년 mm월 dd일", $(this).datepicker('getDate'));
   			$('input[name="bookingDate"]').val(bookingDate);
 		}
 	})
@@ -163,18 +166,20 @@ function fncAddBooking() {
 					<p>예매일자 선택</p>
 					<div id="datepicker" >
 						<input type="hidden" name="bookingDate"/>
-					</div>
-				</div>
-
-			</div>
-			
-			<div class="col-md-12 text-right ">
+					</div><br>
+					
 	  			<button type="button" class="btn btn-success">
 	  				장바구니 담기
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">
 	  				예매하기
 	  			</a>
+					
+				</div>
+
+			</div>
+			
+			<div class="col-md-12 text-right ">
 	  		</div>
 	  		
 		<hr/>

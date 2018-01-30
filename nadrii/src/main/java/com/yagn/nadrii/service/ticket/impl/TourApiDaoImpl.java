@@ -107,6 +107,7 @@ public class TourApiDaoImpl implements TicketDao {
 					+ "&eventStartDate=" + simpleDateFormat.format(new Date())
 							+ "&pageNo=" + openApiSearch.getPageNo() 
 							+ "&numOfRows=" + openApiSearch.getNumOfRows()
+							+ "&arrange=B"			//추후 정렬 추가할것(4가지)
 							));
 
 			JSONObject sfJsonObj = (JSONObject) JSONValue.parse(searchFestivalSB.toString());
@@ -138,12 +139,10 @@ public class TourApiDaoImpl implements TicketDao {
 
 				tourTicket = new TourTicket();
 
-				// searchFestival domain set
+				tourTicket.setTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
 				tourTicket.setContentid(searchFestival.getContentid());
 				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
-				tourTicket.setEventstartdate(searchFestival.getEventstartdate());
-				tourTicket.setEventenddate(searchFestival.getEventenddate());
-
+				
 				System.out.println("\n[1. 타이틀 확인] ==> " + searchFestival.getTitle());
 				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
 					System.out.println("[사진이 없어서 네이버 이미지 검색 호출]");
@@ -152,23 +151,26 @@ public class TourApiDaoImpl implements TicketDao {
 				} else {
 					tourTicket.setFirstimage(searchFestival.getFirstimage());
 				}
-
-				tourTicket.setFirstimage2(searchFestival.getFirstimage2());
+				tourTicket.setEventstartdate(searchFestival.getEventstartdate());
+				tourTicket.setEventenddate(searchFestival.getEventenddate());
 				tourTicket.setReadcount(searchFestival.getReadcount());
-				tourTicket.setTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
+				tourTicket.setEventplace(detailIntro.getEventplace());
+
+				/*
+				// searchFestival domain set
+				tourTicket.setFirstimage2(searchFestival.getFirstimage2());
 				tourTicket.setTel(searchFestival.getTel());
 				tourTicket.setAreacode(searchFestival.getAreacode());
 				tourTicket.setSigungucode(searchFestival.getSigungucode());
 
 				// detailIntro domain set
+				tourTicket.setPlaytime(detailIntro.getPlaytime());
 				tourTicket.setAgelimit(detailIntro.getAgelimit());
 				tourTicket.setBookingplace(detailIntro.getBookingplace());
 				tourTicket.setDiscountinfofestival(detailIntro.getDiscountinfofestival());
 				tourTicket.setEventhomepage(detailIntro.getEventhomepage());
-				tourTicket.setEventplace(detailIntro.getEventplace());
 				tourTicket.setFestivalgrade(detailIntro.getFestivalgrade());
 				tourTicket.setPlaceinfo(detailIntro.getPlaceinfo());
-				tourTicket.setPlaytime(detailIntro.getPlaytime());
 				tourTicket.setProgram(detailIntro.getProgram());
 				tourTicket.setSpendtimefestival(detailIntro.getSpendtimefestival());
 				tourTicket.setSponsor1tel(detailIntro.getSponsor1tel());
@@ -177,16 +179,19 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicket.setSponsor2(detailIntro.getSponsor2());
 				tourTicket.setSubevent(detailIntro.getSubevent());
 				
+				//*/
+//				String priceInfo = detailIntro.getUsetimefestival();
+//				List<String> priceList = ticketService.getTicketPrice(detailIntro.getUsetimefestival());
+				tourTicket.setUsetimefestival(ticketService.getTicketPrice(detailIntro.getUsetimefestival()));
 				
-				String priceInfo = detailIntro.getUsetimefestival();
-				List<String> entranceFee = new ArrayList<String>();
+				/*
 				List<String> priceList = new ArrayList<String>();
-
+				List<String> entranceFee = new ArrayList<String>();
+				
 				System.out.println("\n[2. 입장권 정보 확인] ==> " + priceInfo);
 				
 				// 가격정보가 들어있는 있다면......
-				if (detailIntro.getUsetimefestival().contains("000")
-						|| detailIntro.getUsetimefestival().contains("00")) {
+				if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
 					System.out.println("\n[3. 숫자를 포함한 문구 확인] ==> " + priceInfo);
 
@@ -222,7 +227,9 @@ public class TourApiDaoImpl implements TicketDao {
 					tourTicket.setUsetimefestival(entranceFee);
 				}
 
+				
 				System.out.println("[10. 도메인 값 확인] ==> " + priceList.toString());
+				//*/	
 				
 				tourTicketList.add(tourTicket);
 
@@ -235,79 +242,80 @@ public class TourApiDaoImpl implements TicketDao {
 		return map;
 	}
 
-	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
-		
+	public DetailIntro getDetailIntro(int contentId, int contentTypeId) {
+
 		System.out.println("//======");
 		System.out.println("[tourApiDaoImpl.java]::getDetailIntro");
 
-		StringBuilder detailIntroSB = TourApiDaoImpl
-				.sendGetTourURL(new StringBuilder(detailIntroURL + essentialURL 
-						+ "&introYN=Y" 
-						+ "&contentId="	+ contentId 
-						+ "&contentTypeId=" + contentTypeId
-						));
-		
-		JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailIntroSB.toString());
+		try {
 
-		JSONObject diResponse = (JSONObject) diJsonObj.get("response");
-		JSONObject diHeader = (JSONObject) diResponse.get("header");
-		JSONObject diBody = (JSONObject) diResponse.get("body");
-		JSONObject diItems = (JSONObject) diBody.get("items");
-		JSONObject diItem = (JSONObject) diItems.get("item");
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		detailIntro = new DetailIntro();
-		detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
-		
-		if (detailIntro.getAgelimit() == "" || detailIntro.getAgelimit() == null) {
-			detailIntro.setAgelimit("관련정보없음");
+			StringBuilder detailIntroSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(detailIntroURL + essentialURL
+					+ "&introYN=Y" + "&contentId=" + contentId + "&contentTypeId=" + contentTypeId));
+
+			JSONObject diJsonObj = (JSONObject) JSONValue.parse(detailIntroSB.toString());
+
+			JSONObject diResponse = (JSONObject) diJsonObj.get("response");
+			JSONObject diHeader = (JSONObject) diResponse.get("header");
+			JSONObject diBody = (JSONObject) diResponse.get("body");
+			JSONObject diItems = (JSONObject) diBody.get("items");
+			JSONObject diItem = (JSONObject) diItems.get("item");
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			detailIntro = new DetailIntro();
+			detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
+
+			if (detailIntro.getAgelimit() == "" || detailIntro.getAgelimit() == null) {
+				detailIntro.setAgelimit("관련정보없음");
+			}
+			if (detailIntro.getBookingplace() == "" || detailIntro.getBookingplace() == null) {
+				detailIntro.setBookingplace("관련정보없음");
+			}
+			if (detailIntro.getDiscountinfofestival() == "" || detailIntro.getDiscountinfofestival() == null) {
+				detailIntro.setDiscountinfofestival("관련정보없음");
+			}
+			if (detailIntro.getEventhomepage() == "" || detailIntro.getEventhomepage() == null) {
+				detailIntro.setEventhomepage("관련정보없음");
+			}
+			if (detailIntro.getEventplace() == "" || detailIntro.getEventplace() == null) {
+				detailIntro.setEventplace("관련정보없음");
+			}
+			if (detailIntro.getFestivalgrade() == "" || detailIntro.getFestivalgrade() == null) {
+				detailIntro.setFestivalgrade("관련정보없음");
+			}
+			if (detailIntro.getPlaceinfo() == "" || detailIntro.getPlaceinfo() == null) {
+				detailIntro.setPlaceinfo("관련정보없음");
+			}
+			if (detailIntro.getPlaytime() == "" || detailIntro.getPlaytime() == null) {
+				detailIntro.setPlaytime("관련정보없음");
+			}
+			if (detailIntro.getProgram() == "" || detailIntro.getProgram() == null) {
+				detailIntro.setProgram("관련정보없음");
+			}
+			if (detailIntro.getSpendtimefestival() == "" || detailIntro.getSpendtimefestival() == null) {
+				detailIntro.setSpendtimefestival("관련정보없음");
+			}
+			if (detailIntro.getSponsor1tel() == "" || detailIntro.getSponsor1tel() == null) {
+				detailIntro.setSponsor1tel("관련정보없음");
+			}
+			if (detailIntro.getSponsor2tel() == "" || detailIntro.getSponsor2tel() == null) {
+				detailIntro.setSponsor2tel("관련정보없음");
+			}
+			if (detailIntro.getSponsor1() == "" || detailIntro.getSponsor1() == null) {
+				detailIntro.setSponsor1("관련정보없음");
+			}
+			if (detailIntro.getSponsor2() == "" || detailIntro.getSponsor2() == null) {
+				detailIntro.setSponsor2("관련정보없음");
+			}
+			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
+				detailIntro.setSubevent("관련정보없음");
+			}
+			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
+				detailIntro.setUsetimefestival("무료");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		if (detailIntro.getBookingplace() == "" || detailIntro.getBookingplace() == null) {
-			detailIntro.setBookingplace("관련정보없음");
-		}
-		if (detailIntro.getDiscountinfofestival() == "" || detailIntro.getDiscountinfofestival() == null) {
-			detailIntro.setDiscountinfofestival("관련정보없음");
-		}
-		if (detailIntro.getEventhomepage() == "" || detailIntro.getEventhomepage() == null) {
-			detailIntro.setEventhomepage("관련정보없음");
-		}
-		if (detailIntro.getEventplace() == "" || detailIntro.getEventplace() == null) {
-			detailIntro.setEventplace("관련정보없음");
-		}
-		if (detailIntro.getFestivalgrade() == "" || detailIntro.getFestivalgrade() == null) {
-			detailIntro.setFestivalgrade("관련정보없음");
-		}
-		if (detailIntro.getPlaceinfo() == "" || detailIntro.getPlaceinfo() == null) {
-			detailIntro.setPlaceinfo("관련정보없음");
-		}
-		if (detailIntro.getPlaytime() == "" || detailIntro.getPlaytime() == null) {
-			detailIntro.setPlaytime("관련정보없음");
-		}
-		if (detailIntro.getProgram() == "" || detailIntro.getProgram() == null) {
-			detailIntro.setProgram("관련정보없음");
-		}
-		if (detailIntro.getSpendtimefestival() == "" || detailIntro.getSpendtimefestival() == null) {
-			detailIntro.setSpendtimefestival("관련정보없음");
-		}
-		if (detailIntro.getSponsor1tel() == "" || detailIntro.getSponsor1tel() == null) {
-			detailIntro.setSponsor1tel("관련정보없음");
-		}
-		if (detailIntro.getSponsor2tel() == "" || detailIntro.getSponsor2tel() == null) {
-			detailIntro.setSponsor2tel("관련정보없음");
-		}
-		if (detailIntro.getSponsor1() == "" || detailIntro.getSponsor1() == null) {
-			detailIntro.setSponsor1("관련정보없음");
-		}
-		if (detailIntro.getSponsor2() == "" || detailIntro.getSponsor2() == null) {
-			detailIntro.setSponsor2("관련정보없음");
-		}
-		if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
-			detailIntro.setSubevent("관련정보없음");
-		}
-		if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
-			detailIntro.setUsetimefestival("무료");
-		}
-		
+
 		return detailIntro;
 	}
 	
@@ -329,21 +337,9 @@ public class TourApiDaoImpl implements TicketDao {
 		if (diBody.get("items").toString().equals("")) {
 			
 			System.out.println("[사진 타이틀 확인]==>" + title);
-			
 			String image = ticketService.getNaverImage(title);
 			detailImage.setOriginimgurl(image);	
-			
 			System.out.println("\n[getNaverImage로 부터 받은 이미지 :: ]==>" + image);
-			
-			
-			/*
-			System.out.println("[response] :: Null");
-			detailImage.setContentid(000000);
-			detailImage.setImagename("요청 페이지가 없습니다.");
-			detailImage.setOriginimgurl("http://placehold.it/350X230");
-			detailImage.setSerialnum("요청 페이지가 없습니다.");
-			detailImage.setSmallimageurl("http://placehold.it/350X230");
-			//*/
 			
 			return detailImage;
 			
@@ -381,6 +377,66 @@ public class TourApiDaoImpl implements TicketDao {
 		}
 		return detailImage;
 	}
+	
+	public List<String> getTicketPrice(String priceInfo) {
+
+		System.out.println("\n[tourApiDaoImpl.java]::getTicketPrice");
+
+		List<String> priceList = new ArrayList<String>();
+		List<String> entranceFee = new ArrayList<String>();
+
+		System.out.println("\n[2. 입장권 정보 확인] ==> " + priceInfo);
+		
+		try {
+			// 가격정보가 들어있는 있다면......
+			if (priceInfo.contains("000") || priceInfo.contains("00")) {
+
+				System.out.println("\n[3. 숫자를 포함한 문구 확인] ==> " + priceInfo);
+
+				String[] priceSplit = priceInfo.split(" |/|:");
+				
+				System.out.println("\n[4. 파싱 갯수 확인]==>"+priceSplit.length);
+				
+				for (int k = 0; k < priceSplit.length; k++) {
+					System.out.println("\n[4. 파싱 값 확인] ==>" + priceSplit[k]);
+
+					// split 한 array에서 가격정보만 선택
+					if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
+
+						System.out.println("\n[5. 가격 정보가 들어있는 배열 값 확인] ==> " + priceSplit[k]);
+						String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
+						System.out.println("\n[6. 요금 확인] ==> " + priceValue);
+
+						priceList.add(priceValue);
+						System.out.println("\n[7. 가격 리스트 값 확인]==>" + priceList.size());						
+						
+						for (int j = 0; j < priceList.size(); j++) {
+							System.out.println("		[8. 리스트에 저장된 요금 값 확인] ==>" + priceList.get(j));
+							System.out.println("");
+							// tourTicket.setUsetimefestival(priceList);
+						}
+					}
+				}
+
+			} else if (priceInfo.equals("")) {
+				System.out.println("[9. 입장권 NULL :: '무료' 라고 출력]");
+				entranceFee.add("무료");
+				return entranceFee;
+				// tourTicket.setUsetimefestival(entranceFee);
+
+			} else {
+				System.out.println("[10. 정보 그대로 출력]");
+				entranceFee.add(priceInfo);
+				return entranceFee;
+				// tourTicket.setUsetimefestival(entranceFee);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return priceList;
+	}
+	
 	
 	////////////////////////////////////////////////////////////////////////////////
 	public String getNaverImage(String title) throws Exception {

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -130,6 +131,9 @@ public class KakaoApiDaoImpl implements TicketDao {
 		return null;
 	}
 	public String getNaverImage(String title) throws Exception {
+		return null;
+	}
+	public List<String> getTicketPrice(String priceInfo) throws Exception {
 		return null;
 	}
 	

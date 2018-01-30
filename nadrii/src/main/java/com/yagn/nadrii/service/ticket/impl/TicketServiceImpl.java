@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.ticket.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,4 +73,9 @@ public class TicketServiceImpl implements TicketService {
 	public String getKakaoImage(String title) throws Exception {
 		return kakaoApiDao.getKakaoImage(title);
 	}
+	
+	public List<String> getTicketPrice(String priceInfo) throws Exception {
+		return tourApiDao.getTicketPrice(priceInfo);
+	}
+	
 }

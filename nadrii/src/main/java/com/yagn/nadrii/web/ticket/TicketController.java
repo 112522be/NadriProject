@@ -1,6 +1,7 @@
 package com.yagn.nadrii.web.ticket;
 
 import java.net.URLDecoder;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,20 +111,35 @@ public class TicketController {
 		
 		System.out.println("\n /ticket/addBooking : POST");
 		
-		System.out.println("\n[예매일자 확인]==>" + bookingDate);
+		/*
 		System.out.println("\n[tourTicket 확인]==>" + tourTicket.toString());
-		System.out.println("\n[detailIntro 확인]==>" + detailIntro.toString());
 		System.out.println("\n[detailImage 확인]==>" + detailImage.toString());
+		//*/
 		
+		System.out.println("\n[예매일자 확인]==>" + bookingDate);
+		System.out.println("\n[detailIntro 확인]==>" + detailIntro.getUsetimefestival());
 		System.out.println(tourTicket.getTitle());
+
 		
+		String priceInfo = detailIntro.getUsetimefestival();
 		try {
 			
+			List<String> priceList = ticketService.getTicketPrice(priceInfo);
 			
+			for (int i = 0; i < priceList.size(); i++) {
+				System.out.println("[리턴 값 확인]==>"+priceList.get(i));
+			}
+			
+			tourTicket.setUsetimefestival(priceList);
+			
+			System.out.println("\n[tourTicket 도메인 확인]==>" + tourTicket.getUsetimefestival());
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		model.addAttribute("bookingDate", bookingDate);
+		model.addAttribute("priceList", tourTicket.getUsetimefestival());
 		
 		return "forward:/ticket/addBookingView.jsp";
 	}
