@@ -32,7 +32,7 @@
 				<ul id="thumbs" class="portfolio">
 					<li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
 						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="getComm.jsp">
+						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="/comm/getComm?postNo=30003">
 							<span class="overlay-img"></span>
 							<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>
