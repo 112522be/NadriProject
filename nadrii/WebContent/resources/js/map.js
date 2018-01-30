@@ -43,9 +43,7 @@
 		var passImage = [];
 		var passPosition = [];
 		var passMarker = [];
-		
-
-						
+				
 		for(i=1; i<6; i++){
 			
 			passSrc[i] = 'http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_'+i+'.png';
