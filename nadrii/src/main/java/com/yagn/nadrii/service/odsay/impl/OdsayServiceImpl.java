@@ -148,7 +148,8 @@ public class OdsayServiceImpl implements OdsayService{
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 
-		List list = new ArrayList();
+		List subPathList = new ArrayList();
+		List laneList = new ArrayList();
 
 		Map map = new HashMap();
 		
@@ -186,7 +187,7 @@ public class OdsayServiceImpl implements OdsayService{
 				ObjectMapper objectMapper2 = new ObjectMapper();
 				SubPath odsaysubPath = new SubPath();
 				odsaysubPath = objectMapper2.readValue(subPath.toJSONString(), SubPath.class);
-				list.add(subPath);
+				subPathList.add(subPath);
 				
 				
 				JSONArray laneArray = (JSONArray)subPath.get("lane");	
@@ -198,15 +199,17 @@ public class OdsayServiceImpl implements OdsayService{
 					ObjectMapper objectMapper3 = new ObjectMapper();
 					Lane odsayLane = new Lane();
 					odsayLane = objectMapper3.readValue(lane.toJSONString(), Lane.class);
-					map.put("lane", lane);
-
+					laneList.add(lane);
 				}
 				System.out.println();
-			}
-			map.put("list", list);	
+			}//for¹®
+			map.put("subPathList", subPathList);	
+			map.put("laneList", laneList);	
+			
 		}
+		System.out.println();
 		System.out.println("@@@map@@@ "+map);
-		
+		 
 		return map;
 	}
 		
