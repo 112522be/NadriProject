@@ -107,7 +107,7 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 	}
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
+	public void updateViewCount(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -138,6 +138,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 
 	@Override
 	public TourApiDomain getTripDetail(String contentid, String contentTypeid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

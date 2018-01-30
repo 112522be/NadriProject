@@ -65,9 +65,7 @@ public class TripDaoImpl implements TripDao {
 
 	@Override
 	public void addTrip(Trip trip) throws Exception {
-		System.out.println(sqlSession);
 		System.out.println( trip.toString() );
-		
 		sqlSession.insert("TripMapper.addTrip", trip);
 	}
 
@@ -86,8 +84,8 @@ public class TripDaoImpl implements TripDao {
 
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
-		sqlSession.update("TripMapper.updateViewCount",postNo);
+	public void updateViewCount(String contentId) throws Exception {
+		sqlSession.update("TripMapper.updateViewCount",contentId);
 		
 	}
 
@@ -97,6 +95,13 @@ public class TripDaoImpl implements TripDao {
 
 		return sqlSession.selectOne("TripMapper.tripCheckDuplication",contentid);
 		
+	}
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -25,6 +25,9 @@ public class TripServiceImpl implements TripService {
 	@Qualifier("tripDaoImpla")
 	private TripDao tripDaoDB;
 	
+	@Autowired
+	@Qualifier("tripDaoImplAddress")
+	private TripDao tripDaoAddress;
 	
 	public TripServiceImpl() {
 		System.out.println(this.getClass());
@@ -94,9 +97,22 @@ public class TripServiceImpl implements TripService {
 	public Trip getTripFromDB(String contentId)throws Exception{
 		System.out.println("TripServiceImpl getTripFromDB");
 		return tripDaoDB.getTripFromDB(contentId);
-		
+	}
+	
+	public void updateViewCount(String contentId) throws Exception{
+		System.out.println("TripServiceImpl updateViewCount");
+		tripDaoDB.updateViewCount(contentId);
+	}
+
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		System.out.println("주소찾기 서비스단");
+		return tripDaoAddress.getClientAddress(lat, lng);
 		
 	}
+	
 	
 	
 	
