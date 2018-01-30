@@ -193,7 +193,7 @@
 			},
 			success:function(returnData){
 				
-				if(returnData.tripName !=null){
+				if(returnData.trip != null){
 					alert(returnData.tripName);
 				}else{
 					alert("디비에 없음");

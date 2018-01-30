@@ -183,11 +183,14 @@ public class TripRestController {
 	}
 	
 	@RequestMapping(value="json/getTripFromDB/{contentTypeId}")
-	public Trip getTripFromDB(@PathVariable("contentTypeId")String contentId) throws Exception {
+	public Map getTripFromDB(@PathVariable("contentTypeId")String contentId) throws Exception {
 		System.out.println("TripRestController getTripFromDB");
 		Trip trip = tripService.getTripFromDB(contentId);
-		System.out.println(trip);
-		return trip;
+		System.out.println("트립맞니? 아이니?"+trip);
+		Map map = new HashMap();
+		map.put("trip", trip);
+		
+		return map;
 	}
 	
 	
