@@ -141,6 +141,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

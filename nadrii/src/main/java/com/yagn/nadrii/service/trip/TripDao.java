@@ -28,4 +28,6 @@ public interface TripDao {
 	public void updateViewCount(String contentId) throws Exception;
 	
 	public Trip getTripFromDB(String contentId) throws Exception;
+	
+	public List getClientAddress(String lat, String lng) throws Exception;
 }

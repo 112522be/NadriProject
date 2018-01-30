@@ -129,4 +129,12 @@ public class TripDaoImplImageSearch implements TripDao {
 		return null;
 	}
 
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

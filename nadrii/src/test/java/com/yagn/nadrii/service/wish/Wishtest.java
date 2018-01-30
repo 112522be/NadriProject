@@ -3,6 +3,9 @@ package com.yagn.nadrii.service.wish;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.aspectj.lang.annotation.Around;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +18,7 @@ import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.comm.CommDao;
 import com.yagn.nadrii.service.domain.Community;
 import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripDao;
 
@@ -45,9 +49,9 @@ public class Wishtest {
 	
 	String userId = "test01";
 		
-	//@Test
+	@Test
 	public void addWishListFromTripTest() throws Exception {
-		
+				
 		Trip trip = tripDao.getTrip(20000);
 		System.out.println(trip);
 		wish = new Wish();
@@ -98,7 +102,7 @@ public class Wishtest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void deleteWish() throws Exception{
 		wishDao.deleteWish(10001);
 		System.out.println(wishDao.getWish(10001));

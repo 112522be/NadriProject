@@ -22,14 +22,17 @@
 // 미비점 : 현재 다이얼로그 창에서 지도를 보여 주는 방식은 기존존재했던 지도 위에 덧붙이는 방법. 화면상 드래그시 그대로 노출됨.
 // 사유 : 지도 공간, 호출 CDN, 호출 대상을 모두 분리해서 코딩했더니 기존에 지도에 덧붙는 방법으로 호출되고, 다이얼로그 tag와 충돌하면서 지도가 깨지는 현상 발생. 
 // 임시 해결방법 : 재차 호출의 경우 문제 없이 호출되는 것을 확인해서 맵생성, 다이얼로그 생성을 각각 2번씩 호출함(우회 코딩)
-	///////////////////무한 스크롤 시작
 	
+	///////////////////무한 스크롤 시작
+	//page할 변수
 	var page = 1;
 	
+	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
 	$(function(){
 		page++;
 	});
 	
+	//스크롤이 끝에 닿을 때를 캐치
 	$(window).scroll(function() { 
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
 			listTrip(page);
@@ -37,7 +40,7 @@
 		}
 	});
 	
-	
+	//페이지 네이게이션을 수행하는 JS
 	function listTrip(page){
 		$.ajax({
 			url:"../trip/json/list"+'${trip}'+"/"+page+"",
@@ -51,8 +54,7 @@
 						
 			success: function(returnData){
 				var data = returnData.list;
-				//alert(data);
-								
+												
 				for(var a =0; a<data.length;++a){
 					var dpValue =
 					
@@ -73,7 +75,7 @@
 			      "</div>";
 										
 					$(".row").append(dpValue);	
-					console.log(data[a].firstimage2)
+					
 				}
 								
 			}
@@ -104,28 +106,16 @@
 	    
 		contenttypeid =$(this).next().next().val();
 		contentid = $(this).next().val();
-		//alert(contenttypeid);
-		//alert(contentid);
-		//alert($(".col-xs-4 img:nth-child(1)").index(this));
+		alert(111);
+		
 		getTheme(contentid, contenttypeid);
-		//getTripFromDB(contentid);
-		
-		/*
-		
-		if(getTripFromDB(contentid) == null){
-		//	alert("널포인터래요 addTriptoDB 실행");
 			
-			//addTriptoDB(contentid,contenttypeid);
-		}else{
-			alert("디비에 있대요 updateViewCount 실행");
-			
-			//updateViewCount(contentid)
-		}
-		*/
+		
 	  });
 	});	
 	
 	///*
+	
 	// getTrip 대신에 생겨난 다이얼로그 화면(ajax 실행 후의 데이터를 다이얼로그로 송출)
 	// ajax로 나온 좌표값을 기존에 생성했던 지도로 옮기기 위한 전역 변수
 	var mapx;
@@ -148,8 +138,8 @@
 				mapy = common.mapy;
 				contentid =common.contentid;
 				contenttypeid = common.contenttypeid;
-				alert(contenttypeid);
-				alert(contentid);
+				//alert(contenttypeid);
+				//alert(contentid);
 				
 				$("#string").remove();
 				var dpValue = "<div id ='string'>"; 
@@ -193,79 +183,130 @@
 		});
 	}
 	
-	/*
-	function getTripFromDB(contentid){
+	//우리 디비에 데이터를 호출하고 저장할 때 호출
+	function addTripToDB(contentid, contenttypeid){
 		$.ajax({
-			url:"../trip/json/getTripFromDB/"+contentid+"",
+			url:"../trip/json/getTrip/"+contentid+"/"+contenttypeid+"",
 			method:"GET",
+			//asyn:false,
 			dataType:"json",
 			headers :{
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
-			success:function(returnData){
-				if(returnData.trip==null){
-					alert("널인데?");
-				}else{
-					alert("있는데?");
-				}
-				return returnData.trip;
+			success:function(){
+				alert("선저장");
 			}
-		});
+		})
 	}
 	
-	
-	function addTriptoDB(contentid,contenttypeid){
+	//위시리스트에 저장할 때 사용
+	function addWish(contentid){
 		$.ajax({
-			url:"../trip/json/addTriptoDB/"+contentid+"/"+contenttypeid+"",
+			url:"../wish/json/addWishFromTrip/"+contentid+"",
 			method:"GET",
+			//asyn:false,
 			dataType:"json",
-			headers:{
+			headers :{
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
 			success:function(){
-				alert("새로운 여행지 저장");
+				alert("위시리스트에 저장");
 			}
 		});
+		
 	}
 	
-	function updateViewCount(contentid){
-		$.ajax({
-			url:"../trip/json/updateViewCount/"+contentid+"",
-			method:"GET",
-			dataType:"json",
-			headers:{
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success:function(){
-				alert("조회수 갱신");
-			}
-		});
-	}
-	*/
 	
-	
-	
+	//리스트에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function() {
 	  $(document).on("click","#wish", function(e){
+		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
+			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
+			
 			alert($("a[href='#']:contains('위시리스트')").index(this));
-			alert($($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
-			alert($($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val());
+			alert(contentid);
+			alert(contenttypeid);
+			alert("리스트 위시리스트 클릭");
+			
+			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
+			addTripToDB(contentid, contenttypeid)
+			
+			//위에서 저장한 것을 위시리스트에 재저장 
+			addWish(contentid);
 			e.preventDefault();
 		});
 	})
 	
-	
-	
+		
+	//getTheme 내에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function(){
 		$("#wishList").on("click",function(e){
 			alert(contentid);
 			alert(contenttypeid);
+			alert("다이얼로그 위시리스트 클릭");
+			addTripToDB(contentid, contenttypeid);
+			addWish(contentid);
 			e.preventDefault();
 		});
 	})
+	
+	
+	//사용자의 위치정보를 잡아주는 로직 수행
+	$(document).ready(function() {
+		if(navigator.geolocation) {
+		            navigator.geolocation.getCurrentPosition(
+		                function nowLocation(position) {
+		                    var lat = position.coords.latitude;
+		                    var lon = position.coords.longitude;
+		                   
+		                    alert(lat);
+		                    alert(lon);
+		                    $.ajax({
+		                        type: "POST",
+		                        url: "Map.do",
+		                        data: "lat=" + lat + "&lon=" + lon,
+		                        success: function(data) {
+		                            $('#mapview').html(data);
+		                        }
+		                    });
+		                },
+		                function(error) {
+		                    alert("브라우저의 위치추적을 허용하지 않으셨습니다. 기본좌표로 이동합니다.");
+		                    var lat = 37.5327619;
+		                    var lon = 127.0139427;
+		                   
+		                    $.ajax({
+		                        type: "POST",
+		                        url: "Map.do",
+		                        data: "lat=" + lat + "&lon=" + lon,
+		                        success: function(data) {
+		                            $('#mapview').html(data);
+		                        }
+		                    });  
+		                }
+		        );
+		    }   
+		        else {
+		           //alert("Your Browser don't support for Geolocation");
+		            var lat = 37.5327619;
+		            var lon = 127.0139427;
+		           
+		            $.ajax({
+		                type: "POST",
+		                url: "Map.do",
+		                data: "lat=" + lat + "&lon=" + lon,
+		                success: function(data) {
+		                    $('#mapview').html(data);
+		                }
+		            });  
+		        }
+		    });
+
+		
+
+	
 	
 	
 		
@@ -306,17 +347,14 @@
 </head>
 <body>
 <input type="hidden" id="type" value="${type}"/>
-
- 
 	
 <div class="container">
 
-<div class="bs-example" data-example-id="thumbnails-with-custom-content">
-   
-    
-    	
+	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
+      	
 	    <input type="hidden" id="pageNo" value="${pageNo}"/>
 	    <div class="row">
+		
 		<c:forEach var ="list" items="${list}">
 		
 		
@@ -340,11 +378,10 @@
 		        </div>
 			</div>
 		</div>
-	
-      
-     	
+	     	
       </c:forEach>
-      </div>
+      
+    </div>
       
      
   </div>

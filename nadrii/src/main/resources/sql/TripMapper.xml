@@ -48,7 +48,9 @@
 		#{createdTime:VARCHAR},
 		#{contentId:VARCHAR},
 		#{contentTypeId:VARCHAR})		
-	
+	<selectKey resultType="integer" keyProperty="postNo" order="AFTER">
+        SELECT seq_trip_post_no.currval FROM dual        
+    </selectKey>    
 	
 	</insert>
 	

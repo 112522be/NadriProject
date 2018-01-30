@@ -96,6 +96,13 @@ public class TripDaoImpl implements TripDao {
 		return sqlSession.selectOne("TripMapper.tripCheckDuplication",contentid);
 		
 	}
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
