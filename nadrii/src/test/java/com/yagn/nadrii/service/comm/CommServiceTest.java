@@ -38,7 +38,7 @@ public class CommServiceTest{
 	@Qualifier("commServiceImpl")
 	private CommService commService;
 
-	//@Test
+	@Test
 	public void testAddUser() throws Exception {
 		
 		Community community = new Community();
@@ -229,7 +229,7 @@ public class CommServiceTest{
 	 	System.out.println(totalCount);
 	 }	 
 	 
-	 @Test
+	 //@Test
 	 public void testListHashTag() throws Exception{
 		
 		String filePath = "C:\\\\Users\\\\Yuri\\\\git\\\\NadriiProject\\\\nadrii\\\\WebContent\\\\resources\\\\images\\\\6700442525_688f48b58b_b.jpg";
