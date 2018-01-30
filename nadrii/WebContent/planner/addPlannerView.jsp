@@ -469,41 +469,43 @@
 							var trafficType;
 							
 							
-							for( var i=0; i<returnData.list.length ; i++){
+							for( var i=0; i<returnData.subPathList.length ; i++){
 								
 								alert("i :: "+i);
 								
 								if(i%2==0){
 									
-									if(returnData.list[i].trafficType == 1){
+									if(returnData.subPathList[i+1].trafficType == 1){
 										trafficType = '역까지 도보 ';
 									}else{
 										trafficType = '정류장까지 도보 ';
 									}
 								
-									iwContent = returnData.list[i].sectionTime+'분 '+returnData.list[i].distance+'m<br/><br/></div>';
+									iwContent = returnData.subPathList[i].sectionTime+'분 '+returnData.subPathList[i].distance+'m<br/><br/></div>';
 									alert("iwContent :: "+iwContent);
 									
 									if(i==0){
 										
 										var startInfowindow = new daum.maps.InfoWindow({
 										    position : startMarker.getPosition(), 
-										    content : '<div style="padding:5px;">'+returnData.list[1].startName+trafficType+iwContent,
+										    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+trafficType+iwContent,
 										    removable : true
 										});
 																	
 									} 	
 									
+									startInfowindow.open(map, startMarker); 
+									
 								}else{//도보 제외 지하철, 버스
 									
 									var pathStartSTN = new daum.maps.Marker({
 									    map: map,
-									    position: new daum.maps.LatLng(returnData.list[i].startY, returnData.list[i].startX),
+									    position: new daum.maps.LatLng(returnData.subPathList[i].startY, returnData.subPathList[i].startX),
 									    image: pathImage
 									});
 									var pathEndSTN = new daum.maps.Marker({
 									    map: map,
-									    position: new daum.maps.LatLng(returnData.list[i].endY, returnData.list[i].endX),
+									    position: new daum.maps.LatLng(returnData.subPathList[i].endY, returnData.subPathList[i].endX),
 										image: pathImage
 									});
 									
@@ -515,19 +517,19 @@
 									}
 
 									var startContent ='<div style="padding:5px;">'
-														+returnData.list[i].startName+'에서 '+detailInfo+'<br/>'
-														+returnData.list[i].endName+' 하차<br/><br/>'
+														+returnData.subPathList[i].startName+'에서 '+detailInfo+'<br/>'
+														+returnData.subPathList[i].endName+' 하차<br/><br/>'
 														+'</div>';
 														
 									var endInfo;
-									if(i+2 != returnData.list.length){
-										endInfo = returnData.list[i+2].startName;
+									if(i+2 != returnData.subPathList.length){
+										endInfo = returnData.subPathList[i+2].startName;
 									}else{
 										endInfo = '도착지';
 									}
 									
 									var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
-														+returnData.list[i+1].sectionTime+'분 '+returnData.list[i+1].distance+'m<br/><br/></div>';
+														+returnData.subPathList[i+1].sectionTime+'분 '+returnData.subPathList[i+1].distance+'m<br/><br/></div>';
 														
 									var pathStartInfowindow = new daum.maps.InfoWindow({
 									    position : pathStartSTN.getPosition(), 
