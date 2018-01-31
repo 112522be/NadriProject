@@ -59,12 +59,15 @@ $(function() {
 		dateFormat: "yymmdd",
 		changeMonth: true,
 		changeYear: true,
+		dayNamesMin: ["월", "화", "수", "목", "금", "토", "일"],
+		monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		showMonthAfterYear: true,
 		
 		minDate: '${ detailIntro.eventstartdate }',
 		maxDate: '${ detailIntro.eventenddate }', 
 	
 		onSelect: function(){
-			var bookingDate = $.datepicker.formatDate("yymmdd", $(this).datepicker('getDate'));
+			var bookingDate = $.datepicker.formatDate("yy년 mm월 dd일", $(this).datepicker('getDate'));
   			$('input[name="bookingDate"]').val(bookingDate);
 		}
 	})
@@ -104,9 +107,28 @@ function fncAddBooking() {
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-inline">
 
+			<input type="hidden" name="title" value="${ tourTicket.title }">
+			<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
+			<input type="hidden" name="contentid" value="${ detailIntro.contentid }">
+			<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
+			<input type="hidden" name="agelimit" value="${ detailIntro.agelimit }">
+			<input type="hidden" name="playtime" value="${ detailIntro.playtime }">
+			<input type="hidden" name="eventplace" value="${ detailIntro.eventplace }">
+			<input type="hidden" name="festivalgrade" value="${ detailIntro.festivalgrade }">
+			<input type="hidden" name="placeinfo" value="${ detailIntro.placeinfo }">
+			<input type="hidden" name="spendtimefestival" value="${ detailIntro.spendtimefestival }">
+			<input type="hidden" name="subevent" value="${ detailIntro.subevent }">
+			<input type="hidden" name="sponsor1" value="${ detailIntro.sponsor1 }">
+			<input type="hidden" name="sponsor2" value="${ detailIntro.sponsor2 }">
+			<input type="hidden" name="sponsor1tel" value="${ detailIntro.sponsor1tel }">
+			<input type="hidden" name="sponsor2tel" value="${ detailIntro.sponsor2tel }">
+			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
+			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
+			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+
 			<div class="form-group">
 				<h1>
-					<span class="label label-warning"> ${ tourTicket.title } </span>
+					<span class="label label-warning text-left"> ${ tourTicket.title } </span>
 				</h1>
 				<br>
 			</div>
@@ -120,25 +142,23 @@ function fncAddBooking() {
 
 				<!-- 2rd :: 상세정보 -->
 				<div class="col-sm-4">
-					contentId : ${ detailIntro.contentid }<br>
-					contentTypeId : ${ detailIntro.contenttypeid }
+					● 관람연령 : ${ detailIntro.agelimit }<br>
 					<hr>
-					관람연령 : ${ detailIntro.agelimit }<br>
-					예매처 : ${ detailIntro.bookingplace }<br>
-					할인정보 : ${ detailIntro.discountinfofestival }<br> 
-					행사기간 : ${ detailIntro.eventstartdate }
-					~ ${ detailIntro.eventenddate }<br> 
-					행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
-					행사장소 : ${ detailIntro.eventplace }<br> 
-					축제등급 : ${ detailIntro.festivalgrade }<br>
-					행사장 위치 안내 : ${ detailIntro.placeinfo }<br> 
-					관람시간 : ${ detailIntro.playtime }<br>
-					관람 소요시간 : ${ detailIntro.spendtimefestival }<br> 
-					주최 : ${ detailIntro.sponsor1 }<br>
-					주관사 연락처 : ${ detailIntro.sponsor1tel }<br> 
-					부대행사 : ${ detailIntro.subevent }<br>
+					● 행사기간 : ${ detailIntro.playtime }<br>
+					● 행사장소 : ${ detailIntro.eventplace }<br> 
+					● 축제등급 : ${ detailIntro.festivalgrade }<br>
+					● 행사장 위치 안내 : ${ detailIntro.placeinfo }<br> 
+					● 관람 소요시간 : ${ detailIntro.spendtimefestival }<br> 
+					● 부대행사 : ${ detailIntro.subevent }<br>
 					<hr>
-					이용요금 : ${ detailIntro.usetimefestival }
+					● 주최 : ${ detailIntro.sponsor1 } / ${ detailIntro.sponsor2 }<br>
+					● 주관사 연락처 ① : ${ detailIntro.sponsor1tel }<br> 
+					● 주관사 연락처 ② : ${ detailIntro.sponsor2tel }<br> 
+					<hr>
+					● 행사 홈페이지 : ${ detailIntro.eventhomepage }<br>
+					<hr>
+					● 할인정보 : ${ detailIntro.discountinfofestival }<br> 
+					● 이용요금 : ${ detailIntro.usetimefestival }
 				</div>
 
 				<!-- 3nd :: 예매일자 입력 -->
@@ -146,18 +166,20 @@ function fncAddBooking() {
 					<p>예매일자 선택</p>
 					<div id="datepicker" >
 						<input type="hidden" name="bookingDate"/>
-					</div>
-				</div>
-
-			</div>
-			
-			<div class="col-md-12 text-right ">
-	  			<button type="button" class="btn btn-danger">
+					</div><br>
+					
+	  			<button type="button" class="btn btn-success">
 	  				장바구니 담기
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">
 	  				예매하기
 	  			</a>
+					
+				</div>
+
+			</div>
+			
+			<div class="col-md-12 text-right ">
 	  		</div>
 	  		
 		<hr/>

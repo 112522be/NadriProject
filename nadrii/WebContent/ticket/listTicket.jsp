@@ -214,16 +214,16 @@ function fncGetList(pageNo) {
 							<span class="label label-success"> ${ tt.title } </span>
 						</h4>
 						<div class="thumbnail">
+						<p class = "text-right">조회수 : ${ tt.readcount }</p>
 							<img src="${ tt.firstimage }" class="img-responsive" />
 							<div class="caption">
 								<p> 입장권 : 
-								<c:forEach var="price" items="${ tt.usetimefestival }"  varStatus="status">
-								${ tt.usetimefestival[status.index] }
-									</c:forEach>
+								<c:forEach items="${ tt.usetimefestival }" varStatus="status">
+									${ tt.usetimefestival[status.index] }
+								</c:forEach>
 									<hr/>
-									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } <br>
-									조회수 : ${ tt.readcount } <br> 
-									관람시간 : ${ tt.playtime } <br>
+									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
+									장&nbsp;소 : ${ tt.eventplace } <br>
 								</p>
 								<p class="text-right">
 									<a href="#" class="btn btn-warning" role="button">

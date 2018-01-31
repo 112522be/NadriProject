@@ -1,6 +1,7 @@
 package com.yagn.nadrii.web.ticket;
 
 import java.net.URLDecoder;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,11 +81,12 @@ public class TicketController {
 			) throws Exception {
 		
 		System.out.println("\n /ticket/getTicket : GET");
-
+		System.out.println("[getTicket 인코딩 확인]==>" + title);
+		
 		String decodeTitle = URLDecoder.decode(title, "UTF-8");
 		
 		DetailIntro detailIntro = ticketService.getTicket(contentId, contentTypeId);
-		DetailImage detailImage = ticketService.getDetailImage(contentId);
+		DetailImage detailImage = ticketService.getDetailImage(contentId, decodeTitle);
 		
 		TourTicket tourTicket = new TourTicket();
 		tourTicket.setTitle(decodeTitle);
@@ -100,20 +102,44 @@ public class TicketController {
 	
 	@RequestMapping(value = "addBooking", method = RequestMethod.POST)
 	public String addBooking (
-			@RequestParam("bookingDate") String bookingDate
+			@RequestParam("bookingDate") String bookingDate,
+			@ModelAttribute("tourTicket") TourTicket tourTicket,
+			@ModelAttribute("detailIntro") DetailIntro detailIntro,
+			@ModelAttribute("detailImage") DetailImage detailImage,
+			Model model
 			) {
 		
 		System.out.println("\n /ticket/addBooking : POST");
 		
-		System.out.println("[예매일자 확인]==>" + bookingDate);
+		/*
+		System.out.println("\n[tourTicket 확인]==>" + tourTicket.toString());
+		System.out.println("\n[detailImage 확인]==>" + detailImage.toString());
+		//*/
 		
+		System.out.println("\n[예매일자 확인]==>" + bookingDate);
+		System.out.println("\n[detailIntro 확인]==>" + detailIntro.getUsetimefestival());
+		System.out.println(tourTicket.getTitle());
+
+		
+		String priceInfo = detailIntro.getUsetimefestival();
 		try {
 			
+			List<String> priceList = ticketService.getTicketPrice(priceInfo);
 			
+			for (int i = 0; i < priceList.size(); i++) {
+				System.out.println("[리턴 값 확인]==>"+priceList.get(i));
+			}
+			
+			tourTicket.setUsetimefestival(priceList);
+			
+			System.out.println("\n[tourTicket 도메인 확인]==>" + tourTicket.getUsetimefestival());
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		model.addAttribute("bookingDate", bookingDate);
+		model.addAttribute("priceList", tourTicket.getUsetimefestival());
 		
 		return "forward:/ticket/addBookingView.jsp";
 	}

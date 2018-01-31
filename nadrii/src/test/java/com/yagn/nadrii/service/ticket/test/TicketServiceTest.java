@@ -71,12 +71,13 @@ public class TicketServiceTest {
 	//@Test
 	public void testGetDetailImage() throws Exception {
 
+		String title = null;
 		int contentId = 1815964;		// ƒ¡≈Ÿ√˜ ID :	
 //		int contentId = 737479;			// ƒ¡≈Ÿ√˜ ID	:
 //		int contentId = 2531711;		// ƒ¡≈Ÿ√˜ ID	:
 
 		DetailImage detailImage = new DetailImage();
-		detailImage = ticketService.getDetailImage(contentId);
+		detailImage = ticketService.getDetailImage(contentId, title);
 
 		// ==> console »Æ¿Œ
 		System.out.println("[testGetDetailImage] : " + detailImage);
