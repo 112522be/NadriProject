@@ -37,18 +37,17 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-$(function(){
-	$("button:contains('장바구니 담기')").bind("click", function(){
-		alert("장바구니 담기")
-//		self.location = "/purchase/addPurchase?prod_no=${ product.prodNo }"
-//			$("form").attr("method", "POST")	
-	});
-});
-
-// ========== '예매하기' Event 연결 ==========
+// ========== '예매하기 / 장바구니 담기' Event 연결 ==========
 $(function(){
 	$("a[href='#']:contains('예매하기')").bind("click", function(){
 		fncAddBooking();
+	});
+});
+
+//========== '예매하기 / 장바구니 담기' Event 연결 ==========
+$(function(){
+	$("button:contains('취 소')").bind("click", function(){
+		self.location = "/ticket/listTicket"
 	});
 });
 
@@ -125,6 +124,8 @@ function fncAddBooking() {
 			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
 			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
 			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+			<input type="hidden" name="eventstartdate" value="${ detailIntro.eventstartdate }">
+			<input type="hidden" name="eventenddate" value="${ detailIntro.eventenddate }">
 
 			<div class="form-group">
 				<h1>
@@ -167,12 +168,12 @@ function fncAddBooking() {
 					<div id="datepicker" >
 						<input type="hidden" name="bookingDate"/>
 					</div><br>
-					
+				
 	  			<button type="button" class="btn btn-success">
-	  				장바구니 담기
+	  				취 소
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">
-	  				예매하기
+	  				예매하기 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> 장바구니 담기
 	  			</a>
 					
 				</div>
