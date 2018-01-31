@@ -25,6 +25,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.yagn.nadrii.service.domain.odsay.GraphPos;
 import com.yagn.nadrii.service.domain.odsay.inside.Info;
+import com.yagn.nadrii.service.domain.odsay.inside.Lane;
+import com.yagn.nadrii.service.domain.odsay.inside.SubPath;
 import com.yagn.nadrii.service.domain.odsay.outside.OBJ;
 import com.yagn.nadrii.service.odsay.OdsayDao;
 import com.yagn.nadrii.service.odsay.OdsayService;
@@ -74,7 +76,9 @@ public class OdsayServiceImpl implements OdsayService{
 
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		JSONArray errorArray = (JSONArray)jsonobj.get("error");
+		
 		if( errorArray != null) {
+			
 			System.out.println("@@@error@@@");
 			System.out.println(errorArray);
 			JSONObject error = (JSONObject)errorArray.get(0);
@@ -82,7 +86,12 @@ public class OdsayServiceImpl implements OdsayService{
 			map.put("error", error);
 						
 		}else {
+			
 			JSONObject result = (JSONObject)jsonobj.get("result");
+			JSONObject boundary = (JSONObject)result.get("boundary");
+			
+			map.put("boundary", boundary);
+			
 			JSONArray laneArray = (JSONArray)result.get("lane");
 			for (int i = 0; i < laneArray.size(); i++) {
 				JSONObject lane = (JSONObject)laneArray.get(i);
@@ -139,7 +148,8 @@ public class OdsayServiceImpl implements OdsayService{
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 
-		List list = new ArrayList();
+		List subPathList = new ArrayList();
+		List laneList = new ArrayList();
 
 		Map map = new HashMap();
 		
@@ -157,17 +167,49 @@ public class OdsayServiceImpl implements OdsayService{
 			JSONObject result = (JSONObject)jsonobj.get("result");
 			JSONArray pathArray = (JSONArray)result.get("path");
 			JSONObject path = (JSONObject) pathArray.get(0);
-			System.out.println("[4] path : " + path);
+		//	System.out.println("[4] path : " + path);
+			
+			///////////////
 			JSONObject info = (JSONObject) path.get("info");
 			System.out.println("[5] info : " + info);
 			ObjectMapper objectMapper = new ObjectMapper();
 			Info odsayinfo = new Info();
 			odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
 	
-			map.put("mapObj", odsayinfo.getMapObj().toString());
+			map.put("info", odsayinfo);
+			
+			///////////////
+			JSONArray subPathArray = (JSONArray)path.get("subPath");
+			for (int i = 0; i < subPathArray.size(); i++) {
+				JSONObject subPath = (JSONObject)subPathArray.get(i);
+				System.out.println("[6] subPath["+i+"] : "+subPath);
+
+				ObjectMapper objectMapper2 = new ObjectMapper();
+				SubPath odsaysubPath = new SubPath();
+				odsaysubPath = objectMapper2.readValue(subPath.toJSONString(), SubPath.class);
+				subPathList.add(subPath);
+				
+				
+				JSONArray laneArray = (JSONArray)subPath.get("lane");	
+				if(laneArray != null) {
+					System.out.println("[7] laneArray : "+laneArray);		
+					JSONObject lane = (JSONObject) laneArray.get(0);
+					System.out.println("[8] lane : " + lane);
+
+					ObjectMapper objectMapper3 = new ObjectMapper();
+					Lane odsayLane = new Lane();
+					odsayLane = objectMapper3.readValue(lane.toJSONString(), Lane.class);
+					laneList.add(lane);
+				}
+				System.out.println();
+			}//for¹®
+			map.put("subPathList", subPathList);	
+			map.put("laneList", laneList);	
 			
 		}
-
+		System.out.println();
+		System.out.println("@@@map@@@ "+map);
+		 
 		return map;
 	}
 		

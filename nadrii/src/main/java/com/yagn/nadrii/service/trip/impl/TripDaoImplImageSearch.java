@@ -30,23 +30,7 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	}
 
-	@Override
-	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	public String naverImageSearch(String target)throws Exception{
 		
@@ -110,13 +94,45 @@ public class TripDaoImplImageSearch implements TripDao {
 	}
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
+	public void updateViewCount(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Trip getTripFromDB(String contentid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public TourApiDomain getTrip(String contentid, String contentTypeid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public TourApiDomain getTripDetail(String contentid, String contentTypeid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

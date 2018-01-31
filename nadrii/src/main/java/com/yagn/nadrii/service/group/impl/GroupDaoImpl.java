@@ -48,7 +48,6 @@ public class GroupDaoImpl implements GroupDao{
 		sqlSession.delete("GroupMapper.deleteGroup", group);
 	}
 	
-	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("GroupMapper.getTotalCount", search);
 	}

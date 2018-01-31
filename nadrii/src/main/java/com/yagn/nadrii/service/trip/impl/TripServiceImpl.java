@@ -12,18 +12,22 @@ import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
+
 
 @Service("tripServiceImpl")
 public class TripServiceImpl implements TripService {
 	
 	@Autowired
 	@Qualifier("tripDaoImpl")
-	private TripDao tripDao;
+	private TripDao tripDaoTour;
 	
+	@Autowired
+	@Qualifier("tripDaoImpla")
+	private TripDao tripDaoDB;
 	
+	@Autowired
+	@Qualifier("tripDaoImplAddress")
+	private TripDao tripDaoAddress;
 	
 	public TripServiceImpl() {
 		System.out.println(this.getClass());
@@ -33,12 +37,13 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception{
+	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception{
 		
 		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
-		List list = tripDao.listTrip(tourAPlUrlManage);
+		List list = tripDaoTour.listTrip(pageNo,contentTypeId,cat1,cat2,cat3);
+		
 		map.put("list", list);
 		return map;
 	}
@@ -46,11 +51,11 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
+	public TourApiDomain getTrip(String contentId, String contentTypeid) throws Exception {
 		
 		System.out.println("getTrip SerivceImpl");
 		
-		TourApiDomain tourApiDomain = tripDao.getTrip(tourAPIGetUrlManage);
+		TourApiDomain tourApiDomain = tripDaoTour.getTrip(contentId,contentTypeid);
 		System.out.println(tourApiDomain.getTitle());
 		
 		return tourApiDomain;
@@ -59,10 +64,13 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
-		System.out.println("getTripDetail SerivceImpl");
+	public TourApiDomain getTripDetail(String contentId, String contentTypeid) throws Exception {
+		System.out.println("12111:getTripDetail SerivceImpl");
+		System.out.println(contentId);
+		System.out.println(contentTypeid);
 		
-		TourApiDomain tourApiDomain = tripDao.getTripDetail(tourAPIGetDetailUrlManage);
+		
+		TourApiDomain tourApiDomain = tripDaoTour.getTripDetail(contentId, contentTypeid);
 		System.out.println(tourApiDomain.getUsefee());
 		return tourApiDomain;
 	}
@@ -73,11 +81,38 @@ public class TripServiceImpl implements TripService {
 	public Trip tripCheckDuplication(String contentid) throws Exception {
 		System.out.println("tripCheckDuplication ServiceImpl");
 		
-		Trip trip = tripDao.getTripFromDB(contentid);
+		Trip trip = tripDaoDB.getTripFromDB(contentid);
 		System.out.println(trip);
 		
 		return trip;
 	}
+
+
+
+	@Override
+	public void addTriptoDB(Trip trip) throws Exception {
+		tripDaoDB.addTrip(trip);		
+	}
+	
+	public Trip getTripFromDB(String contentId)throws Exception{
+		System.out.println("TripServiceImpl getTripFromDB");
+		return tripDaoDB.getTripFromDB(contentId);
+	}
+	
+	public void updateViewCount(String contentId) throws Exception{
+		System.out.println("TripServiceImpl updateViewCount");
+		tripDaoDB.updateViewCount(contentId);
+	}
+
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		System.out.println("주소찾기 서비스단");
+		return tripDaoAddress.getClientAddress(lat, lng);
+		
+	}
+	
 	
 	
 	

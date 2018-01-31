@@ -37,9 +37,17 @@ public class TripDaoImplTour implements TripDao {
 		System.out.println(this.getClass());		
 	}
 
-	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
+	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3) throws Exception {
 		
 		System.out.println("listTrip Dao");
+		
+		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
+		tourAPlUrlManage.setPageNo(pageNo);
+		tourAPlUrlManage.setContentTypeId(contentTypeId);
+		tourAPlUrlManage.setCat1(cat1);
+		tourAPlUrlManage.setCat2(cat2);
+		tourAPlUrlManage.setCat3(cat3);
+		
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
@@ -56,8 +64,8 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
 		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-		System.out.println("===================================================");
+//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
+//		System.out.println("===================================================");
 		JSONObject response = (JSONObject) jsonobj.get("response");
 //		System.out.println("[2 : response] ==>" + response);
 //		System.out.println("===================================================");
@@ -100,25 +108,19 @@ public class TripDaoImplTour implements TripDao {
 			
 		}
 		
-		/* 
-		for (int i = 0; i < list.size(); i++) {
-			if( ((TourApiDomain)list.get(i)).getFirstimage2()==null ) {
-				String image = tripDaoImplImageSearch.naverImageSearch(((TourApiDomain)list.get(i)).getTitle());
-				System.out.println(image);
-				((TourApiDomain)list.get(i)).setFirstimage2(image);
-				System.out.println(list.get(i));
-			}
-						
-		}
-			*/		
-				
+	
 		
 		return list;
 	}
 
 	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
+	public TourApiDomain getTrip(String contentId, String contentTypeId) throws Exception {
 		
+		TourAPIGetUrlManage tourAPIGetUrlManage = new TourAPIGetUrlManage();
+		tourAPIGetUrlManage.urlClean();
+		tourAPIGetUrlManage.setContentId(contentId);
+		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
+		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
 		//기본 정보가져오기
 		HttpClient httpClient = new DefaultHttpClient();
@@ -146,9 +148,16 @@ public class TripDaoImplTour implements TripDao {
 	}
 
 	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
-		
+	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
+
 		//요금정보 가져오기
+		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
+		tourAPIGetDetailUrlManage.urlClean();
+		tourAPIGetDetailUrlManage.setContentId(contentId);
+		tourAPIGetDetailUrlManage.setContentTypeId(contentTypeId);
+		
+		System.out.println(tourAPIGetDetailUrlManage.urlMaking());
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetDetailUrlManage.urlMaking());
 		httpGet.setHeader("Accept", "application/json");
@@ -160,12 +169,14 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+//		System.out.println(jsonObject);
 		JSONObject response = (JSONObject) jsonObject.get("response");
 		JSONObject header = (JSONObject) response.get("header");
 		JSONObject body = (JSONObject) response.get("body");
+//		System.out.println(body);
 		JSONObject items = (JSONObject) body.get("items");
 		JSONObject jsonobj = (JSONObject)items.get("item");	
-		System.out.println(jsonobj);
+//		System.out.println(jsonobj);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
@@ -198,13 +209,19 @@ public class TripDaoImplTour implements TripDao {
 	}
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
+	public void updateViewCount(String contentId) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Trip getTripFromDB(String contentid) throws Exception {
+	public Trip getTripFromDB(String contentId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

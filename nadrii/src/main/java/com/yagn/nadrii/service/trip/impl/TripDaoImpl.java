@@ -33,23 +33,28 @@ public class TripDaoImpl implements TripDao {
 	}
 
 
+
+
 	@Override
-	public List listTrip(TourAPlListUrlManage tourAPlUrlManage) throws Exception {
+	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public TourApiDomain getTrip(TourAPIGetUrlManage tourAPIGetUrlManage) throws Exception {
+	public TourApiDomain getTrip(String contentid, String contentTypeid) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public TourApiDomain getTripDetail(TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage) throws Exception {
+	public TourApiDomain getTripDetail(String contentid, String contentTypeid) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public String naverImageSearch(String target) throws Exception {
@@ -60,9 +65,7 @@ public class TripDaoImpl implements TripDao {
 
 	@Override
 	public void addTrip(Trip trip) throws Exception {
-		System.out.println(sqlSession);
 		System.out.println( trip.toString() );
-		
 		sqlSession.insert("TripMapper.addTrip", trip);
 	}
 
@@ -81,8 +84,8 @@ public class TripDaoImpl implements TripDao {
 
 
 	@Override
-	public void updateViewCount(int postNo) throws Exception {
-		sqlSession.update("TripMapper.updateViewCount",postNo);
+	public void updateViewCount(String contentId) throws Exception {
+		sqlSession.update("TripMapper.updateViewCount",contentId);
 		
 	}
 
@@ -93,7 +96,13 @@ public class TripDaoImpl implements TripDao {
 		return sqlSession.selectOne("TripMapper.tripCheckDuplication",contentid);
 		
 	}
-	
+
+
+	@Override
+	public List getClientAddress(String lat, String lng) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
