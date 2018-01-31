@@ -96,6 +96,26 @@
 		
 		var sort =[];	//sortable 배열선언
 		var markerSort;
+			
+		$( function() {
+			
+			$("#searchListSubmit").on("click", function(){
+				$("#placesList").css("display","block");
+			});
+			
+		    // run the currently selected effect
+		    function runEffect() {
+		    
+		      // Run the effect
+		      $( "#placesList" ).toggle( "blind", 300 );
+		    };
+		 
+		    // Set effect from select menu value
+		    $( "#button" ).on( "click", function() {
+		      runEffect();
+		    });
+		  } );
+		
 		
 		$( function() {
 			$( "#sortable" ).sortable({
@@ -130,10 +150,6 @@
 			
 			markerSort =[];
 			markerSort = sort;
-			console.log(markerSort);
-			
-			console.log( $($(".pointer :nth-child(1)")[0]).attr("value") );
-			console.log( $($(".pointer :nth-child(1)")[0]).attr("id"));
 			
 			var k=1; //.pointer의 자식값의 변화를 위한 초기화값
 			for(var i=0; i<7; i++){
@@ -143,8 +159,6 @@
 				}
 			} 
 			sort = markerSort;
-			console.log(sort);
-			
 			
 			/*******데이터 타입이 달라서 맵에 넣을수가 없어서 전달 받은 value값을 파싱하여 latlng 데이터 타입으로 변환하여 마커 위치 재생성********/
 			
@@ -235,6 +249,25 @@
 			
 		} );
 
+		function geo(i){
+			$.ajax({
+				url : "https://dapi.kakao.com/v2/local/geo/coord2address.json",
+				async : false,
+				method : "GET",
+				headers : {
+					"Authorization":"KakaoAK 162ee19a901cbbe89c0c4b261ddecca3"
+				},
+				data : {
+					"x": sort[i].getLng(),
+					"y": sort[i].getLat()
+				},
+				success : function(returnData){
+					console.log(returnData.documents[0].address.address_name);
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+returnData.documents[0].address.address_name+'</li>')
+				}
+			})
+		}
+		
 		function start(){
 			
 			var latlng;
@@ -270,7 +303,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
 			
@@ -314,7 +347,7 @@
 					if(sort[i] ==null){
 
 					}else{
-						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+i+'">'+i+'</li>');
+						geo(i);
 					}
 				}
 				
@@ -333,7 +366,7 @@
 					if(sort[i] ==null){
 
 					}else{
-						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+						geo(i);
 					}
 				}
 				
@@ -352,7 +385,7 @@
 					if(sort[i] ==null){
 
 					}else{
-						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+						geo(i);
 					}
 				}
 
@@ -371,7 +404,7 @@
 					if(sort[i] ==null){
 
 					}else{
-						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+						geo(i);
 					}
 				}
 				
@@ -390,7 +423,7 @@
 					if(sort[i] ==null){
 
 					}else{
-						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+						geo(i);
 					}
 				}
 			}		
@@ -428,7 +461,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
 		}
@@ -448,7 +481,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
       	});
@@ -465,7 +498,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
      	 });
@@ -482,7 +515,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
      	 });
@@ -499,7 +532,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
       	});
@@ -516,7 +549,7 @@
 				if(sort[i] ==null){
 
 				}else{
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					geo(i);
 				}
 			}
 		});
@@ -728,6 +761,10 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
+			
+	
+		var array1;
+		var array2;
 		
 		function getInfo(k){
 			$.ajax({
@@ -743,8 +780,10 @@
 					
 					var pathStartInfowindow=[];
 					var pathEndInfowindow=[];
+					
 					var pathStartSTN=[];
 					var pathEndSTN=[];
+					
 					
 					var code = returnData.code;
 					
@@ -790,7 +829,6 @@
 								}
 							
 								iwContent = returnData.subPathList[i].sectionTime+'분 '+returnData.subPathList[i].distance+'m<br/><br/></div>';
-								alert("iwContent :: "+iwContent);
 								
 								if(k==0){
 									var startInfowindow = new daum.maps.InfoWindow({
@@ -1102,9 +1140,6 @@
 						
 						boundaryArray.push(boundary);
 						
-						alert("boundaryArray.length : "+boundaryArray.length);
-						alert("boundaryArray : "+boundaryArray);
-						
 						alert("폴리라인 success");
 						
 					}
@@ -1190,4 +1225,133 @@
 			});
 		}// getOBJ 끝
 		
+		
+		
+		////////////////////////////////////
+		
+		
+
+		/*******************Array insert 사용**********************/
+		Array.prototype.insert = function ( index, item ) {
+	    		this.splice( index, 0, item );
+		};
+		
+		/********************************************************/	
+
+		var polyline;
+		var STNpolyline;
+		var startSTN;
+		var endSTN;
+		var polylineArray;
+		var boundaryArray;
+		
+		var sx;
+		var sy;
+		var ex;
+		var ey;
+	
+		function search1(flag){
+			
+			if(STNpolyline != null ){
+				deleteExSearch();
+			}
+			if(STNpolyline != null || polylineArray != null){
+				deleteInSearch();
+			}
+
+			tempMarkerArray=[];
+			realMarkerArray=[];
+			
+			tempMarkerArray.push(startMarker.getPosition());
+			realMarkerArray.push(startMarker.getPosition());
+			if(passMarker[1].getMap() != null){
+				tempMarkerArray.push(passMarker[1].getPosition());
+				realMarkerArray.push(passMarker[1].getPosition());
+			}
+			if(passMarker[2].getMap() != null){
+				tempMarkerArray.push(passMarker[2].getPosition());
+				realMarkerArray.push(passMarker[2].getPosition());
+			}
+			if(passMarker[3].getMap() != null){
+				tempMarkerArray.push(passMarker[3].getPosition());
+				realMarkerArray.push(passMarker[3].getPosition());
+			}
+			if(passMarker[4].getMap() != null){
+				tempMarkerArray.push(passMarker[4].getPosition());
+				realMarkerArray.push(passMarker[4].getPosition());
+			}
+			if(passMarker[5].getMap() != null){
+				tempMarkerArray.push(passMarker[5].getPosition());
+				realMarkerArray.push(passMarker[5].getPosition());
+			}
+			
+			tempMarkerArray.push(endMarker.getPosition());
+			realMarkerArray.push(endMarker.getPosition());
+			
+			for(k=0;k<tempMarkerArray.length;k++){
+				if(k==0){
+					first = tempMarkerArray[k];
+				}else{
+					first=temp;
+				}
+				last = tempMarkerArray[k+1];
+				temp = last;
+				if(k+1 == tempMarkerArray.length){
+					break;
+				}
+							
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
+				
+				getOBJ(k, flag);
+				
+			}
+			
+			for(k=0;k<realMarkerArray.length;k++){
+				if(k==0){
+					first = realMarkerArray[k];
+				}else{
+					first=temp;
+				}
+				last = realMarkerArray[k+1];
+				temp = last;
+				if(k+1 == realMarkerArray.length){
+					break;
+				}
+				
+				sx = first.getLng();
+				sy = first.getLat();
+				ex = last.getLng();
+				ey = last.getLat();
+
+				getInfo(k);
+				
+			}//for문 끝
+			
+		} // search끝
+
+		function deleteExSearch() {
+			if (STNpolyline.getMap() != null) {
+				STNpolyline.setMap(null);
+				startSTN.setMap(null);
+				endSTN.setMap(null);
+			}
+
+			for (var i = 0; i < polylineArray.length; i++) {
+				polylineArray[i].setMap(null);
+			}
+		}
+
+		function deleteInSearch() {
+			for (var i = 0; i < polylineArray.length; i++) {
+				polylineArray[i].setMap(null);
+			}
+		}
+		
+		function showBoundary(i){
+			console.log("boundaryArray["+i+"] 보여주는중");
+			map.setBounds(boundaryArray[i]);
+		}
 		

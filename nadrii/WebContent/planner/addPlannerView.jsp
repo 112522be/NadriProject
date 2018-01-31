@@ -20,33 +20,6 @@
 	
 	<link href="../resources/css/keywordSearch.css?version=1" rel="stylesheet">
 		
-	<script>
-		$( function() {
-			$( "#sortable" ).sortable();
-			$( "#sortable" ).disableSelection();
-		});
-		
-		$( function() {
-			
-			$("#searchListSubmit").on("click", function(){
-				$("#placesList").css("display","block");
-			});
-			
-		    // run the currently selected effect
-		    function runEffect() {
-		    
-		      // Run the effect
-		      $( "#placesList" ).toggle( "blind", 300 );
-		    };
-		 
-		    // Set effect from select menu value
-		    $( "#button" ).on( "click", function() {
-		      runEffect();
-		    });
-		  } );
-		
-	</script>
-	
 </head>
 <body>
 <div class = "container-fulid">
@@ -76,6 +49,7 @@
 			        <div id="pagination"></div>
 			    </div>
 			    <p><em>지도를 클릭해주세요!</em></p> 
+			    
 				<div id="clickLatlng"></div>
 				<form name = "test" method="post">
 					<input type="button" value="경로탐색" onclick="javascript:search1(1)">
@@ -103,135 +77,6 @@
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
-<script language="JavaScript" src="../resources/js/map.js?version=414"></script>
+<script language="JavaScript" src="../resources/js/map.js?version=180131.554"></script>
 
-	<script type="text/javascript">
-	
-		/*******************Array insert 사용**********************/
-		Array.prototype.insert = function ( index, item ) {
-	    		this.splice( index, 0, item );
-		};
-		
-		/********************************************************/	
-
-		var polyline;
-		var STNpolyline;
-		var startSTN;
-		var endSTN;
-		var polylineArray;
-		var boundaryArray;
-		
-		var sx;
-		var sy;
-		var ex;
-		var ey;
-	
-		function search1(flag){
-			
-			if(STNpolyline != null ){
-				deleteExSearch();
-			}
-			if(STNpolyline != null || polylineArray != null){
-				deleteInSearch();
-			}
-
-			ak=[];
-			rk=[];
-			
-			ak.push(startMarker.getPosition());
-			rk.push(startMarker.getPosition());
-			if(passMarker[1].getMap() != null){
-				ak.push(passMarker[1].getPosition());
-				rk.push(passMarker[1].getPosition());
-			}
-			if(passMarker[2].getMap() != null){
-				ak.push(passMarker[2].getPosition());
-				rk.push(passMarker[2].getPosition());
-			}
-			if(passMarker[3].getMap() != null){
-				ak.push(passMarker[3].getPosition());
-				rk.push(passMarker[3].getPosition());
-			}
-			if(passMarker[4].getMap() != null){
-				ak.push(passMarker[4].getPosition());
-				rk.push(passMarker[4].getPosition());
-			}
-			if(passMarker[5].getMap() != null){
-				ak.push(passMarker[5].getPosition());
-				rk.push(passMarker[5].getPosition());
-			}
-			
-			ak.push(endMarker.getPosition());
-			rk.push(endMarker.getPosition());
-			
-			for(k=0;k<ak.length;k++){
-				if(k==0){
-					first = ak[k];
-				}else{
-					first=temp;
-				}
-				last = ak[k+1];
-				temp = last;
-				if(k+1 == ak.length){
-					break;
-				}
-							
-				sx = first.getLng();
-				sy = first.getLat();
-				ex = last.getLng();
-				ey = last.getLat();
-				
-				getOBJ(k, flag);
-				
-			}
-			
-			for(k=0;k<rk.length;k++){
-				if(k==0){
-					first = rk[k];
-				}else{
-					first=temp;
-				}
-				last = rk[k+1];
-				temp = last;
-				if(k+1 == rk.length){
-					break;
-				}
-				
-				sx = first.getLng();
-				sy = first.getLat();
-				ex = last.getLng();
-				ey = last.getLat();
-
-				
-				getInfo(k);
-				
-				
-			}//for문 끝
-			
-			
-		} // search끝
-
-		function deleteExSearch() {
-			if (STNpolyline.getMap() != null) {
-				STNpolyline.setMap(null);
-				startSTN.setMap(null);
-				endSTN.setMap(null);
-			}
-
-			for (var i = 0; i < polylineArray.length; i++) {
-				polylineArray[i].setMap(null);
-			}
-		}
-
-		function deleteInSearch() {
-			for (var i = 0; i < polylineArray.length; i++) {
-				polylineArray[i].setMap(null);
-			}
-		}
-		
-		function showBoundary(i){
-			console.log("boundaryArray["+i+"] 보여주는중");
-			map.setBounds(boundaryArray[i]);
-		}
-	</script>
 </body>		

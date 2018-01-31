@@ -4,22 +4,13 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="GroupMapper">
+<mapper namespace="JoinMapper">
  	
-	<resultMap id="groupSelectMap" type="group">
-		<result property="joinMember.joinNo"	column="join_no"	jdbcType="NUMERIC"/>
-		<result property="joinMember.groupNo"	column="group_no"	jdbcType="NUMERIC"/>
-		<result property="joinMember.userId"	column="user_id"	jdbcType="VARCHAR"/>
-		<result property="joinMember.groupRole"	column="group_role"	jdbcType="NUMERIC"/>
-		<result property="groupName"		column="group_name" 			jdbcType="VARCHAR" />
-		<result property="title"					column="title" 						jdbcType="VARCHAR" />
-		<result property="text"					column="text" 						jdbcType="CLOB" />
-		<result property="regDate" 			column="reg_date" 				jdbcType="DATE" />
-		<result property="viewCount"			column="view_count"			 	jdbcType="NUMERIC" />
-		<result property="lat"					column="lat" 						jdbcType="VARCHAR" />
-		<result property="lng"					column="lng" 						jdbcType="VARCHAR" />
-		<result property="categoryCode" 	column="category_code" 			jdbcType="VARCHAR" />
-		<result property="meetingDate" 		column="meeting_date" 			jdbcType="DATE" />		
+	<resultMap id="joinSelectMap" type="join">
+		<result property="joinNo"			column="join_no"		jdbcType="NUMERIC"/>
+		<result property="groupNo"		column="group_no"	jdbcType="NUMERIC"/>
+		<result property="userId"			column="user_id"		jdbcType="VARCHAR"/>
+		<result property="groupRole"	column="group_role"	jdbcType="NUMERIC"/>	
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
