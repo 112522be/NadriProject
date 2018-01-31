@@ -1,6 +1,5 @@
 package com.yagn.nadrii.web.trip;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,24 +10,22 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
 
 @RestController
 @RequestMapping("/trip/*")
 public class TripRestController {
+	
+	
+	//private int page=1;
 	
 	@Autowired
 	@Qualifier("tripServiceImpl")
@@ -38,11 +35,45 @@ public class TripRestController {
 	public TripRestController() {
 		System.out.println(this.getClass());
 	}
+	
+	
 
-
+/*
 	//박물관 리스트
 	@RequestMapping(value="json/listMuseum/{pageNo}")
-	public Map listMuseum(@PathVariable("pageNo")int pageNo) throws Exception{
+	public Map listMuseum(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
+			
+	
+			System.out.println(pageNo);
+			String areaCode = (String)session.getAttribute("areaCode");
+			String localName = (String)session.getAttribute("localName");	
+			
+			System.out.println("RestController listMuseum");
+			System.out.println("현재 페이지 ==>" +pageNo);
+			Map map = new HashMap();
+			
+			System.out.println("/trip/json/listMuseum");
+			
+			Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
+			List list =(List)tripMap.get("list"); 
+			
+			map.put("list", tripMap.get("list"));
+			
+			
+			
+			return map;
+		}
+	*/
+		
+	///*
+	//박물관 리스트
+	@RequestMapping(value="json/listMuseum/")
+	public Map listMuseum(HttpSession session) throws Exception{
+		
+		
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		System.out.println("RestController listMuseum");
 		
@@ -50,12 +81,11 @@ public class TripRestController {
 		
 		System.out.println("/trip/json/listMuseum");
 		
-		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100");
+		Map tripMap = tripService.listTrip("14","A02","A0206","A02060100",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);		
-		System.out.println(pageNo);
+		
 		
 		
 		return map;
@@ -63,20 +93,23 @@ public class TripRestController {
 	
 	
 	//전시관 리스트
-	@RequestMapping(value="json/listExhibit/{pageNo}")
-	public Map listExhibit(@PathVariable("pageNo")int pageNo) throws Exception{
+	@RequestMapping(value="json/listExhibit/")
+	public Map listExhibit(HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExhibit");
-		Map map = new HashMap();
 		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
+		
+		Map map = new HashMap();
+				
 		System.out.println("/trip/json/listExhibit");
 		
-		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300");
+		Map tripMap = tripService.listTrip("14","A02","A0206","A02060300",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);		
-		System.out.println(pageNo);
+		
 		
 		
 		return map;
@@ -84,21 +117,23 @@ public class TripRestController {
 	
 	
 	//체험관 리스트
-	@RequestMapping(value="json/listExperience/{pageNo}")
-	public Map listExperience(@PathVariable("pageNo")int pageNo) throws Exception{
+	@RequestMapping(value="json/listExperience/")
+	public Map listExperience(HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExperience");
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		Map map = new HashMap();
 		
 		System.out.println("/trip/json/listExperience");
 		
-		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200");
+		Map tripMap = tripService.listTrip("12","A02","A0203","A02030200",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);		
-		System.out.println(pageNo);
+		
 		
 		
 		return map;
@@ -106,21 +141,22 @@ public class TripRestController {
 	
 	
 	//민속마을 리스트
-	@RequestMapping(value="json/listTradition/{pageNo}")
-	public Map listTradition(@PathVariable("pageNo")int pageNo) throws Exception{
+	@RequestMapping(value="json/listTradition/")
+	public Map listTradition(HttpSession session) throws Exception{
 		
 		System.out.println("RestController listTradition");
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		Map map = new HashMap();
 		
 		System.out.println("/trip/json/listTradition");
 		
-		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600");
+		Map tripMap = tripService.listTrip("12","A02","A0201","A02010600",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);		
-		System.out.println(pageNo);
 		
 		
 		return map;
@@ -128,27 +164,28 @@ public class TripRestController {
 	
 	
 	//미술관 리스트	
-	@RequestMapping(value="json/listGallery/{pageNo}")
-	public Map listGallery(@PathVariable("pageNo")int pageNo) throws Exception{
+	@RequestMapping(value="json/listGallery/")
+	public Map listGallery(HttpSession session) throws Exception{
 		
 		System.out.println("RestController listGallery");
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		Map map = new HashMap();
 		
 		System.out.println("/trip/json/listMuseum");
 		
-		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500");
+		Map tripMap = tripService.listTrip("14","A02","A0206","A02060500",areaCode, localName);
 		
 		
 
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);		
-		System.out.println(pageNo);
 		
 		
 		return map;
 	}
-	
+	//*/
 	
 	//TourAPI에서 특정 컨텐아이디에 해당하는 여행지를 get
 	@RequestMapping(value="json/getTrip/{contentId}/{contentTypeId}")
@@ -197,7 +234,7 @@ public class TripRestController {
 	}
 	
 	//우리 DB에 담는 로직
-	@RequestMapping("json/addTripToDB/{contentId}/{contentTypeId}")
+	@RequestMapping(value="json/addTripToDB/{contentId}/{contentTypeId}")
 	public Map addTripToDB(@PathVariable("contentId")String contentId, @PathVariable("contentTypeId")String contentTypeId)throws Exception {
 		Map map = new HashMap();
 		
@@ -224,7 +261,7 @@ public class TripRestController {
 		return map;
 	}
 	
-	@RequestMapping("json/getClientAddress")
+	@RequestMapping(value="json/getClientAddress")
 	public void getClientAddress(@RequestBody JSONObject location, HttpServletRequest request)throws Exception {
 		String lat = (Double)location.get("lat")+"";
 		String lng = (Double)location.get("lng")+"";
@@ -239,17 +276,27 @@ public class TripRestController {
 			placeName = "서울";
 		}
 		
-		String areacode = tripService.getAreaCode(placeName, "");
-		System.out.println(placeName+"의 지역코드는  "+areacode);
+		String areaCode = tripService.getAreaCode(placeName, "");
+		//System.out.println(placeName+"의 지역코드는  "+areaCode);
 		placeName = ((String)list.get(2)).trim();
-		String localName = tripService.getAreaCode(placeName, areacode);
-		System.out.println(localName+"이 필요함");
+		String localName = tripService.getAreaCode(placeName, areaCode);
+		//System.out.println(localName+"이 필요함");
 		
 		HttpSession session = request.getSession(true);
-		session.setAttribute("areaCode", areacode);
+		session.setAttribute("areaCode", areaCode);
 		session.setAttribute("localName", localName);
 		
 	
+		
+	}
+	
+	@RequestMapping(value="json/settingZero")
+	public Map settingZero() {
+		Map map = new HashMap();
+		String pageNo = tripService.settingZero();
+		map.put("pageNo", pageNo);
+		return map;
+		
 		
 	}
 	

@@ -22,7 +22,7 @@ import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 public class TripDaoImplgetAddress implements TripDao {
 
 	@Override
-	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
+	public List listTrip( String contentTypeId, String cat1, String cat2, String cat3,String areaCode, String localName) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -98,7 +98,7 @@ public class TripDaoImplgetAddress implements TripDao {
         }
         List list = new ArrayList();
         JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-        System.out.println("JsonObject : "+jsonobj);
+        //System.out.println("JsonObject : "+jsonobj);
         JSONArray results = (JSONArray)jsonobj.get("results");
         
         JSONObject temp = (JSONObject)results.get(0);
@@ -122,5 +122,13 @@ public class TripDaoImplgetAddress implements TripDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String settingZero() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

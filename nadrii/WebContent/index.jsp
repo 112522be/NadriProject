@@ -30,7 +30,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<!-- 위치 정보 가져오는 JS -->
+<script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <!-- Facebook Login -->
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
 <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
@@ -242,7 +243,21 @@ body {
     
     
 	//============= FaceBook 로그인 END =============
-    
+    $(function(){
+		settingZero();
+	});
+		
+		
+		function settingZero(){
+		$.ajax({
+			url:"../trip/json/settingZero",
+			method:"GET",
+			success:function(data){
+				alert("모든 page번호는 0");
+				alert(data.pageNo);
+			}
+		});
+	}
 	</script>
 
 

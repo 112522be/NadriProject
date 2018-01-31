@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="../javascript/tripLocation"></script>
+		
 	
 	<script type="text/javascript">
 	
@@ -24,29 +24,31 @@
 // 임시 해결방법 : 재차 호출의 경우 문제 없이 호출되는 것을 확인해서 맵생성, 다이얼로그 생성을 각각 2번씩 호출함(우회 코딩)
 	
 	///////////////////무한 스크롤 시작
+	/*
 	//page할 변수
 	var page = 1;
+	//*/
 	
 	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
-	$(function(){
-		page++;
-	});
+	
+	
+	
+	
 	
 	//스크롤이 끝에 닿을 때를 캐치
 	$(window).scroll(function() { 
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-			listTrip(page);
-			page++
+			listTrip();
+			
 		}
 	});
 	
 	//페이지 네이게이션을 수행하는 JS
-	function listTrip(page){
+	function listTrip(){
 		$.ajax({
-			url:"../trip/json/list"+'${trip}'+"/"+page+"",
+			url:"../trip/json/list"+'${trip}'+"/",
 			method:"GET",
 			dataType:"json",
-			data:{"page" :page},
 			headers :{
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
@@ -56,29 +58,30 @@
 				var data = returnData.list;
 												
 				for(var a =0; a<data.length;++a){
-					var dpValue =
 					
-				 "<div class='col-xs-4'>"+
-			        "<div class='thumbnail'>"+
-			          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
-			          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
-			          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
-			          "<div class='caption'>"+
-			            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
-			            "<p>"+data[a].addr1+"</p>"+
-			            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
-			            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
-			            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
-			            "</p>"+
-			          "</div>"+
-			        "</div>"+
-			      "</div>";
+					var dpValue =
+						
+					 "<div class='col-xs-4'>"+
+				        "<div class='thumbnail'>"+
+				          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+				          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+				          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+				          "<div class='caption'>"+
+				            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+				            "<p>"+data[a].addr1+"</p>"+
+				            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+				            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+				            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+				            "</p>"+
+				          "</div>"+
+				        "</div>"+
+				      "</div>";
 										
 					$(".row").append(dpValue);	
-					
+					}
 				}
 								
-			}
+			
 			
 		});
 	}
@@ -254,72 +257,7 @@
 	
 	
 	
-	
-	/*
-	//사용자의 위치정보를 잡아주는 로직 수행
-	$(document).ready(function() {
-		if(navigator.geolocation) {
-		            navigator.geolocation.getCurrentPosition(
-		                function nowLocation(position) {
-		                    var lat = position.coords.latitude;
-		                    var lon = position.coords.longitude;
-		                   
-		                    alert(lat);
-		                    alert(lon);
-		                    
-		                    var location ={
-		                    		"lat" : lat,
-		                    		"lng" : lon
-		                    }
-		                    
-		                    var jsonData = JSON.stringify(location);
-		                    
-		                    $.ajax({
-		                        type: "POST",
-		                        url: "../trip/json/getClientAddress/",
-		                        contentType: "application/json",
-		                        data:jsonData,
-		                        dataType: "json",
-		                        success: function() {
-		                            alert("난 니가 어딘지 알고 있다 이클립스 콘솔 확인해라");
-		                        }
-		                    });
-		                },
-		                function(error) {
-		                    alert("브라우저의 위치추적을 허용하지 않으셨습니다. 기본좌표로 이동합니다.");
-		                    var lat = 37.5327619;
-		                    var lon = 127.0139427;
-		                   
-		                    $.ajax({
-		                        type: "POST",
-		                        url: "Map.do",
-		                        data: "json",
-		                        success: function(data) {
-		                            $('#mapview').html(data);
-		                        }
-		                    });  
-		                }
-		        );
-		    }   
-		        else {
-		           //alert("Your Browser don't support for Geolocation");
-		            var lat = 37.5327619;
-		            var lon = 127.0139427;
-		           
-		            $.ajax({
-		                type: "POST",
-		                url: "Map.do",
-		                data: "lat=" + lat + "&lon=" + lon,
-		                success: function(data) {
-		                    $('#mapview').html(data);
-		                }
-		            });  
-		        }
-		    });
-
 		
-//*/
-	
 	
 	
 		
@@ -355,7 +293,7 @@
 		}
 	
 	</style>
-		
+	
 	<title>박물관찾기</title>
 </head>
 <body>
@@ -369,7 +307,6 @@
 	    <div class="row">
 		
 		<c:forEach var ="list" items="${list}">
-		
 		
 		    <div class="col-xs-4">
 	        	<div class="thumbnail">

@@ -8,7 +8,7 @@ import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 
 public interface TripService {
 	
-	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception;
+	public Map listTrip(String contentTypeId, String cat1, String cat2, String cat3,String areaCode, String localName) throws Exception;
 	
 	public TourApiDomain getTrip(String contentId, String contentTypeid) throws Exception;
 	
@@ -25,4 +25,6 @@ public interface TripService {
 	public List getClientAddress(String lat, String lng)throws Exception;
 	
 	public String getAreaCode(String placeName, String areaCode) throws Exception;
+	
+	public String settingZero();
 }

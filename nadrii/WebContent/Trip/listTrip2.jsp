@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	
+		
 	
 	<script type="text/javascript">
 	
@@ -27,10 +27,14 @@
 	//page할 변수
 	var page = 1;
 	
+	
 	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
 	$(function(){
 		page++;
 	});
+	
+	
+	
 	
 	//스크롤이 끝에 닿을 때를 캐치
 	$(window).scroll(function() { 
@@ -252,7 +256,10 @@
 		});
 	})
 	
-	///*
+	
+	
+	
+	/*
 	//사용자의 위치정보를 잡아주는 로직 수행
 	$(document).ready(function() {
 		if(navigator.geolocation) {
@@ -352,7 +359,7 @@
 		}
 	
 	</style>
-		
+	
 	<title>박물관찾기</title>
 </head>
 <body>
