@@ -22,12 +22,17 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- ///////////////////////// jQuery Spinner //////////////////////////  -->
+	<!-- ///////////////////////// jQuery Spinner ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css">  -->
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>
+<!-- <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>  -->
+	 
+	<!--  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 -->
 
 <!-- //////////////////// CSS //////////////////// -->
 
@@ -50,7 +55,7 @@
 
 	//=================== "취소" Event 연결 =================== 
 	$(function() {
-		$("a[href='#' ].btn.btn-default").bind("click", function() {
+		$("input.btn.btn-default").bind("click", function() {
 			alert("취소")
 		});
 	});
@@ -63,68 +68,81 @@
 		});
 	});
 	
-	//=================== "수량증감" Event 연결 =================== 
-	var num = 0;
-	
-	function fncCount(indexVal, countVal) {
-	
-		alert($("input[name='selectPrice']").val())
+	//==================== "수량증감" Event 연결 =================== 
+	function fncTicketCount(indexVal, currentVal, countVal) {
 		
-		if (countVal == "plus") {
-			num += 1;
-			$(document).ready(function() {
-//				$("#" + indexVal).text(num);
-				$(".badge").text(num);
-			});
+		console.log("[fncTicketCount START]")
+		
+		var inputVal = $(".ticketCount").eq(indexVal).val();
+		console.log("[1] inputVal : " + inputVal)
+		
+		var textVal = $(".badge").eq(indexVal).text();
+		console.log("[2] textVal : " + textVal)
+		
+		if (countVal == 'plus') {
+			console.log("[Plus]")
+			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
+			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
+		} 
+		
+		if (countVal == 'minus' && currentVal >= 1) {
+			console.log("[Minus]")
+			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
+			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
+		} else if (countVal == 'minus' && currentVal <= 0) {
+			console.log("[티켓 수량이 0 보다 작음]")
 		}
-
-		if (num == 0) {
-			alert("티켓 수량을 입력해 주세요.")
-		} else if (countVal == "minus") {
-			num -= 1
-			$(document).ready(function() {
-//				$("#" + indexVal).text(num);
-				$(".badge").text(num);
-
-			});
-		}
-	}
-
-	// ===== [+/-] button =====	
+		
+	} 
+	
+	
+	//==================== + / - 버튼 처리 ====================
 	$(function() {
 
-		$("button[name='minus']").bind("click", function() {
+		$("button[name='minus']").bind("click", function(event) {
+
+			event.preventDefault();
 			
 			var indexVal = $("button[name='minus']").index(this);
-			var countVal = $("button[name='minus']").val();
-			//			var count = $( $("button[name='minus']")[$("button[name='minus']").index(this)] ).val();
-			//			alert($("button[name='minus']").index(this) + " / " + count)
-						alert("[minus] : " + indexVal + " / " + countVal)
-			fncCount(indexVal, countVal)
-		});
+			console.log("- 인덱스 값 : " + indexVal)
 
-		$("button[name='plus']").bind("click", function() {
-			var indexVal = $("button[name='plus']").index(this);
-			var countVal = $("button[name='plus']").val();
-						alert("[plus] : " + indexVal + " / " + countVal)
-			fncCount(indexVal, countVal)
+			var countVal = 'minus';
+			console.log("- 카운트 값 : " + countVal)
+			
+			var currentVal = $(".ticketCount").eq(indexVal).val();
+			console.log("- 현재 값 : " + currentVal)
+			
+			if (currentVal <= 0) {
+				alert("티켓 수량 확인 바랍니다.")
+			}
+			
+			fncTicketCount(indexVal, currentVal, countVal);
+			
+			console.log("----------")
+
+		});
+		
+		
+		$("a[name='plus']").bind("click", function(event) {
+
+			event.preventDefault();
+			
+			var indexVal = $("a[name='plus']").index(this);
+			console.log("+ 인덱스 값 : " + indexVal)
+
+			var countVal = 'plus';
+			console.log("+ 카운트 값 : " + countVal)
+			
+			var currentVal = $(".ticketCount").eq(indexVal).val();
+			console.log("+ 현재 값 : " + currentVal)
+			
+			fncTicketCount(indexVal, currentVal, countVal);
+			
+			console.log("++++++++++")
+
 		});
 
 	});
-
-	// ===== JQUERY 수량증가 인터넷 예제 =====	
-	$(function() {
-		$('.bt_up').click(function() {
-			var n = $('.bt_up').index(this);
-			var num = $(".num:eq(" + n + ")").val();
-			num = $(".num:eq(" + n + ")").val(num * 1 + 1);
-		});
-		$('.bt_down').click(function() {
-			var n = $('.bt_down').index(this);
-			var num = $(".num:eq(" + n + ")").val();
-			num = $(".num:eq(" + n + ")").val(num * 1 - 1);
-		});
-	})
 
 	// ===== Form 유효성 검증 =====
 	function fncAddPurchase() {
@@ -219,35 +237,34 @@
 				<div class="alert alert-danger" role="alert">
 					● <strong>입장권 구매 안내</strong> : 구매 수량을 선택하시기 바랍니다.
 				</div>
-
+				
 				<c:forEach items="${ priceList }" varStatus="status">
-
+				
+					<input type="hidden" class="ticketCount" name="ticketCount" value=0>
+				
 					<ul class="nav nav-pills" role="tablist">
 						<li role="presentation" class="active">
 							<a href="#"	value="${ priceList[status.index] }"> 
 								<span class="glyphicon glyphicon-barcode" aria-hidden="true"> </span>&nbsp;
-									${ priceList[status.index] } ￦ <span class="badge" ></span> 
+										${ priceList[status.index] } ￦ <span class="badge">0</span> 
 							</a>
 						</li>
 				
 						<!-- 수량증감 버튼 -->
 						&nbsp;&nbsp;
 						<div class="btn-group" role="group" aria-label="...">
-							<button type="button" class="btn btn-default" id="count"
-								name="minus" value="minus">
+							<button type="button" class="btn btn-default" name="minus" value="minus">
 								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
 							</button>
 
-							<button type="button" class="btn btn-default" id="count"
-								name="plus" value="plus">
+							<a class="btn btn-default" href="#" role="button" name="plus" value="plus">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-							</button>
+				  			</a>
 						</div>
 					</ul>
 					
 					<br>
 				</c:forEach>
-
 
 			</div>
 
@@ -285,8 +302,8 @@
 						<br> 
 						<input class="btn btn-success" type="button" value="장바구니 담기"> 
 					
-						<a class="btn btn-default" href="#" role="button">취&nbsp;소</a>
-					
+						<input class="btn btn-default" type="button" value="취&nbsp;소">
+						
 						<button type="button" class="btn btn-danger">결&nbsp;제</button>
 					</div>
 				</div>
@@ -300,33 +317,8 @@
 
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-		<div id="goods_list ">
-			<form>
-				<table align='' border='1' cellspacing='0' cellpadding='0'>
-					<tr>
-						<td>선택</td>
-					</tr>
-					<tr>
-						<td>
-							<table>
-								<tr>
-									<td><input type="text" name="num" value="1" id="" class="num" /></td>
-									<td>
-										<div>
-											<img src="http://placehold.it/10x10" alt="" width="10" height="10" class="bt_up" />
-										</div>
-										<div>
-											<img src="http://placehold.it/10x10" alt="" width="10" height="10" class="bt_down" />
-										</div>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</form>
 
-		</div>
+	</div>
 		<!--  화면구성 div end /////////////////////////////////////-->
 
 </body>
