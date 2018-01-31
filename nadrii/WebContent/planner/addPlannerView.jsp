@@ -67,7 +67,7 @@
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
 			                    키워드 : <input type="text" value="" id="keyword" size="15"> 
-			                    <button type="submit">검색하기</button> 
+			                    <button type="submit" id="searchListSubmit">검색하기</button> 
 			                </form>
 			                <ul id="placesList" style="display: none;"></ul>
 		        			<text id="button">▼</text>
