@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	
+	<script type="text/javascript" src="../javascript/tripLocation"></script>
 	
 	<script type="text/javascript">
 	
@@ -251,6 +251,9 @@
 			e.preventDefault();
 		});
 	})
+	
+	
+	
 	
 	/*
 	//사용자의 위치정보를 잡아주는 로직 수행
