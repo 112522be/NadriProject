@@ -28,7 +28,7 @@ import com.yagn.nadrii.service.user.UserService;
 
 @Controller
 @RequestMapping("/user/*")
-public class UserController extends SupportController {
+public class UserController {
 	
 //	@Autowired
 //	JavaMailSender mailSender;
@@ -234,13 +234,15 @@ public class UserController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
-	public String addUser(HttpServletRequest request, Model model) throws Exception{
-		
-		if(request.getParameter("facebookId") != null) {
-		String fbId = request.getParameter("facebookId");		
-		System.out.println("페이스북 아이디 : "+fbId);
-		model.addAttribute("facebookId" , fbId );
+	@RequestMapping(value="addUser", method= RequestMethod.GET  )
+	public String addUser(HttpServletRequest request, Model model) throws Exception {
+
+		System.out.println("회원가입");
+
+		if (request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");
+			System.out.println("페이스북 아이디 : " + fbId);
+			model.addAttribute("facebookId", fbId);
 		}
 		return "redirect:/user/addUserView.jsp";
 	}
@@ -251,7 +253,7 @@ public class UserController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
+	@RequestMapping(value="addUser", method= RequestMethod.POST  )
 	@ResponseBody
 	public Object addUser(User user) throws Exception{
 		//회원가입

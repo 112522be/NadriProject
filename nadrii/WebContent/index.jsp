@@ -72,7 +72,8 @@ body {
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('회원가입')").on("click" , function() {
-				location.replace = "/user/addUser"
+				alert("회원가입")
+				self.location = "/user/addUser"
 			});
 		});
 		

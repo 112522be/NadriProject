@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -77,7 +78,7 @@ public class KakaoApiDaoImpl implements TicketDao {
 	public String getKakaoImage(String title) {
 
 		System.out.println("\n[KakaoApiDaoImpl.java]::getKakaoImage");
-//		System.out.println("[Naver 에서 찾지 못한 이미지 타이틀] : " + title);
+		System.out.println("[getKakaoImage 인코딩 확인]==>" + title);
 
 		int minImage = 200;
 		String kakaoReturnImage = "";
@@ -114,7 +115,7 @@ public class KakaoApiDaoImpl implements TicketDao {
 			System.out.println(e);
 		}
 
-		System.out.println("\n[selected image url]:" + kakaoReturnImage);
+		System.out.println("\n[getKakaoImage :: selected image url]==>" + kakaoReturnImage);
 		
 		return kakaoReturnImage;
 	}
@@ -126,10 +127,13 @@ public class KakaoApiDaoImpl implements TicketDao {
 	public DetailIntro getDetailIntro(int contentId, int contentTypeId) throws Exception {
 		return null;
 	}
-	public DetailImage getDetailImage(int contentId) throws Exception {
+	public DetailImage getDetailImage(int contentId, String title) throws Exception {
 		return null;
 	}
 	public String getNaverImage(String title) throws Exception {
+		return null;
+	}
+	public List<String> getTicketPrice(String priceInfo) throws Exception {
 		return null;
 	}
 	
