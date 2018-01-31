@@ -252,7 +252,7 @@
 		});
 	})
 	
-	
+	/*
 	//사용자의 위치정보를 잡아주는 로직 수행
 	$(document).ready(function() {
 		if(navigator.geolocation) {
@@ -315,7 +315,7 @@
 		    });
 
 		
-
+//*/
 	
 	
 	

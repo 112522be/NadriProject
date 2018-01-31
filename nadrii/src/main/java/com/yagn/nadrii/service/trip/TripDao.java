@@ -30,4 +30,6 @@ public interface TripDao {
 	public Trip getTripFromDB(String contentId) throws Exception;
 	
 	public List getClientAddress(String lat, String lng) throws Exception;
+	
+	public String getAreaCode(String placeName, String areaCode) throws Exception;
 }

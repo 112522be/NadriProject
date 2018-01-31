@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -222,13 +225,31 @@ public class TripRestController {
 	}
 	
 	@RequestMapping("json/getClientAddress")
-	public void getClientAddress(@RequestBody JSONObject location)throws Exception {
+	public void getClientAddress(@RequestBody JSONObject location, HttpServletRequest request)throws Exception {
 		String lat = (Double)location.get("lat")+"";
 		String lng = (Double)location.get("lng")+"";
 		System.out.println("전달받은 JSON :   " +location);
 		System.out.println("Latitude : " + lat +" , Longitude : "+ lng);
 		
 		List list = tripService.getClientAddress(lat, lng);
+		System.out.println(list);
+		String placeName =((String)list.get(1)).trim();
+		System.out.println("도시명::"+placeName);
+		if(placeName.equals("서울특별시")) {
+			placeName = "서울";
+		}
+		
+		String areacode = tripService.getAreaCode(placeName, "");
+		System.out.println(placeName+"의 지역코드는  "+areacode);
+		placeName = ((String)list.get(2)).trim();
+		String localName = tripService.getAreaCode(placeName, areacode);
+		System.out.println(localName+"이 필요함");
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("areaCode", areacode);
+		session.setAttribute("localName", localName);
+		
+	
 		
 	}
 	

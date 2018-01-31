@@ -112,6 +112,14 @@ public class TripServiceImpl implements TripService {
 		return tripDaoAddress.getClientAddress(lat, lng);
 		
 	}
+
+
+
+	@Override
+	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		return tripDaoTour.getAreaCode(placeName, areaCode);
+	
+	}
 	
 	
 	

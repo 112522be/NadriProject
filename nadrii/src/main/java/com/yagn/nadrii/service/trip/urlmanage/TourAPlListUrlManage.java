@@ -175,7 +175,6 @@ public class TourAPlListUrlManage {
 	public void urlClean() {
 		String cleaner = "";
 		this.setType(cleaner);
-		
 		this.setContentId(cleaner);
 		this.setContentTypeId(cleaner);
 		this.setCat1(cleaner);

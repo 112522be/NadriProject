@@ -273,7 +273,7 @@
 		                    });
 		                },
 		                function(error) {
-		                    alert("브라우저의 위치추적을 허용하지 않으셨습니다. 기본좌표로 이동합니다.");
+		                    alert("브라우저의 위치추적을 허용하지 않으셨습니다. 기본좌표로 이동합니다.(광화문)");
 		                    var lat = 37.5327619;
 		                    var lon = 127.0139427;
 		                   
@@ -282,7 +282,7 @@
 		                        url: "Map.do",
 		                        data: "lat=" + lat + "&lon=" + lon,
 		                        success: function(data) {
-		                            $('#mapview').html(data);
+		                            //$('#mapview').html(data);
 		                        }
 		                    });  
 		                }
@@ -298,7 +298,7 @@
 		                url: "Map.do",
 		                data: "lat=" + lat + "&lon=" + lon,
 		                success: function(data) {
-		                    $('#mapview').html(data);
+		                    //$('#mapview').html(data);
 		                }
 		            });  
 		        }

@@ -103,6 +103,13 @@ public class TripDaoImpl implements TripDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

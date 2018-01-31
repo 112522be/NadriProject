@@ -100,24 +100,27 @@ public class TripDaoImplgetAddress implements TripDao {
         JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
         System.out.println("JsonObject : "+jsonobj);
         JSONArray results = (JSONArray)jsonobj.get("results");
+        
         JSONObject temp = (JSONObject)results.get(0);
+        String address = (String)temp.get("formatted_address");
+        System.out.println(address);
+        
+        String[] addressParser = address.split(" ");
+         
                
-        JSONArray addressComponents = (JSONArray)temp.get("address_components");
-        for (int i = 0; i < addressComponents.size(); i++) {
-			JSONObject types = (JSONObject)addressComponents.get(i);
-			list.add(types);
-			System.out.println(types);
-		}
         List wordList = new ArrayList();
         
-        for (int i = 0; i < list.size(); i++) {
-			String value = (((JSONObject)list.get(i)).get("short_name")).toString();
-			System.out.println(value);
-			wordList.add(value);
-			
+        for (int i = 0; i < addressParser.length; i++) {
+			wordList.add(addressParser[i]);	
 		}
         
 		return wordList;
+	}
+
+	@Override
+	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

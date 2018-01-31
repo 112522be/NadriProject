@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -183,6 +184,57 @@ public class TripDaoImplTour implements TripDao {
 				
 		return tourApiDomain;
 	}
+	
+	public String getAreaCode(String placeName, String areaCode) throws Exception{
+		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode";
+		
+		String myKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+
+		String serviceKey = "?ServiceKey=" + myKey;				
+		String mobileOS = "&MobileOS=ETC"; 						
+		String mobileApp = "&MobileApp=AppTest"; 
+		int numOfRows = 200;
+		
+				
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet( url + serviceKey + mobileOS + mobileApp
+				+ "&areaCode=" + areaCode
+				+ "&numOfRows=" + numOfRows
+//				+ "&pageNo=" + pageNo
+				);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+				
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		
+		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+//		System.out.println(jsonObject);
+		JSONObject response = (JSONObject) jsonObject.get("response");
+		JSONObject header = (JSONObject) response.get("header");
+		JSONObject body = (JSONObject) response.get("body");
+//		System.out.println(body);
+		JSONObject items = (JSONObject) body.get("items");
+		JSONArray item = (JSONArray)items.get("item");	
+		System.out.println("[6 : item] ==>" + item);
+		List list = new ArrayList();
+		Map map = new HashMap();
+		
+		for (int i = 0; i < item.size(); i++) {
+			String parameter = ((JSONObject)item.get(i)).get("code").toString();
+			//System.out.println(parameter);
+			String key = ((JSONObject)item.get(i)).get("name").toString();
+			System.out.println(key+" : "+parameter);
+			map.put(key, parameter);
+		}
+		
+		
+		return (String)map.get(placeName);
+		
+	}
+	
 
 	@Override
 	public String naverImageSearch(String target) throws Exception {
