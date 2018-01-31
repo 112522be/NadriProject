@@ -125,6 +125,8 @@ function fncAddBooking() {
 			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
 			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
 			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+			<input type="hidden" name="eventstartdate" value="${ detailIntro.eventstartdate }">
+			<input type="hidden" name="eventenddate" value="${ detailIntro.eventenddate }">
 
 			<div class="form-group">
 				<h1>

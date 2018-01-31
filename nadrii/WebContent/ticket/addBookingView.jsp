@@ -48,23 +48,25 @@
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("input.btn.btn-success").bind("click", function() {
-			alert("장바구니")
-		//	fncAddPurchase();
+//			alert("장바구니")
+			var flag = 'basket';
+			fncAddPurchase(flag);
 		});
 	});
 
 	//=================== "취소" Event 연결 =================== 
 	$(function() {
 		$("input.btn.btn-default").bind("click", function() {
-			alert("취소")
+//			alert("취소")
 		});
 	});
 	
 	//=================== "결제" Event 연결 =================== 
 	$(function() {
 		$("button.btn.btn-danger").bind("click", function() {
-			alert("결제")
-			fncAddPurchase();
+//			alert("결제")
+			var flag = 'purchase';
+			fncAddPurchase(flag);
 		});
 	});
 	
@@ -145,16 +147,26 @@
 	});
 
 	// ===== Form 유효성 검증 =====
-	function fncAddPurchase() {
+	function fncAddPurchase(flag) {
 		
+//		console.log(flag)
 		
 		var name = $("input[name='name']").val();
 		var phone = $("input[name='phone']").val();
-//		var ticketCount = $(".ticketCount").eq(index).val();
-
-		console.log('인덱스 확인 : ' + index)
-		console.log('티켓 수량 확인 : ' + ticketCount)
 		
+		var totalTicketCount = "";
+		for (var i = 0; i < $(".ticketPrice").length; i++) {		
+			var ticketPrice = $(".ticketPrice").eq(i).val();
+			var ticketCount = $(".ticketCount").eq(i).val();
+//			console.log('1. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
+			
+			totalTicketCount += ticketCount;
+		}
+	
+		if (totalTicketCount == 0) {
+			alert("티켓 수량을 확인하시기 바랍니다.")
+			return;
+		}
 		if (name == null || name.length < 1) {
 			alert("이름은 반드시 입력해야 합니다.");
 			return;
@@ -163,12 +175,7 @@
 			alert("연락처는 반드시 입력해야 합니다.");
 			return;
 		}
-/*
-		if (ticketCount == null || ticketCount.length < 1) {
-			alert("티켓 수량을 확인 하시기 바랍니다.");
-			return;
-		}
-//*/
+
 		//==>"이메일" 유효성Check  Event 처리 및 연결
 		$(function() {
 
@@ -183,7 +190,7 @@
 		/*
 		$("form")
 		.attr("method", "POST")
-		.attr("action", "/purchase/addPurchase")
+		.attr("action", "/purchase/addPurchase/flag=" + flag)
 		.submit();
 		//*/
 	}
@@ -209,6 +216,16 @@
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+
+		<input type="hidden" name="contentid" value="${ tourTicket.contentid }">
+		<input type="hidden" name="contenttypeid" value="${ tourTicket.contenttypeid }">
+
+		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
+		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
+		<input type="hidden" name="bookingDate" value="${ bookingDate }">
+		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
+		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
 
 			<div class="col-sm-6">
 				<div class="form-group text-center">
@@ -241,6 +258,7 @@
 				<c:forEach items="${ priceList }" varStatus="status">
 				
 					<input type="hidden" class="ticketCount" name="ticketCount" value=0>
+					<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
 				
 					<ul class="nav nav-pills" role="tablist">
 						<li role="presentation" class="active">
@@ -308,12 +326,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-
 
 		</form>
 		<!-- form Start /////////////////////////////////////-->
