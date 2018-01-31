@@ -93,8 +93,9 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 		
 		JSONObject object = (JSONObject)JSONValue.parse(br);
+		JSONObject message = (JSONObject)object.get("message");
 		
-		return object;
+		return (JSONObject)message.get("result");
 	}
 	
 	/// WEB_DETECTION

@@ -20,14 +20,21 @@
 	 	    $.ajax({ // ajax를 통해 파일 업로드 처리
 	 	        data : data,
 	 	        type : "POST",
-	 	        url : "./summernote_imageUpload.jsp",
+	 	        url : "./listHashTag",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
+                    console.log(data.listHashTag.length)
 	 	        	$(editor).summernote('editor.insertImage', data.url);
-	 	        }
+	 	        	for(i=0;i<data.listHashTag.length;i++){
+	 	        		$(editor).summernote('editor.insertText', "#"+data.listHashTag[i])
+	 	        	}
+	 	        },
+	 	        error : function() {
+					alert("파일 업로드에 실패했습니다.")
+				}
 	 	    });
 	 	}
 	</script>
