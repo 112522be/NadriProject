@@ -27,34 +27,53 @@
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
                     console.log(data.listHashTag.length)
-	 	        	$(editor).summernote('editor.insertImage', data.url);
+	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
 	 	        	for(i=0;i<data.listHashTag.length;i++){
-	 	        		$(editor).summernote('editor.insertText', "#"+data.listHashTag[i])
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data.listHashTag[i]+'">#'+data.listHashTag[i]+'</button>');
 	 	        	}
 	 	        },
 	 	        error : function() {
 					alert("파일 업로드에 실패했습니다.")
 				}
 	 	    });
+	 	    
+	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
+	 		   addHashTag($(this).val());
+			})
 	 	}
+        var hashtagList=",";
+        function addHashTag(value) {
+			$('button.hashtags:contains("'+value+'")').remove();
+			$('#selectedHashTags').append("#"+value+" ")
+			hashtagList+=value+",";
+			$('input[name=hashtag]').val(hashtagList);
+		}
 	</script>
 </head>
 <body>
-	<h1>summernote</h1>
-	<form name="writeForm" action="./summernote_insert.jsp" method="post">
-		<textarea id="summernote">Hello Summernote</textarea>
+		<form name="textForm">
+		<textarea id="summernote" name="text"></textarea>
         <script>
             $(document).ready(function() {
                 $('#summernote').summernote({ // summernote를 사용하기 위한 선언
-                    height: 400,
+                    height: 800,
 					callbacks: { // 콜백을 사용
                         // 이미지를 업로드할 경우 이벤트를 발생
 					    onImageUpload: function(files, editor, welEditable) {
-						    sendFile(files[0], this);
+					    	for(i=0;i<files.length;i++){
+					    		sendFile(files[i], this);
+					    	}
 						}
 					}
 				});
 			});
 		</script>
+		<input type="hidden" name="hashtag">
+		<div>
+			<textarea id="selectedHashTags" rows="2"></textarea>
+		</div>
+		<div id="cndHashTags">
+		</div>
+		<br/>
 </body>
 </html>
