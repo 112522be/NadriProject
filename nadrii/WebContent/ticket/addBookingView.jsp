@@ -64,27 +64,28 @@
 	$(function() {
 		$("button.btn.btn-danger").bind("click", function() {
 			alert("결제")
-		//	$("form")[0].reset();
+			fncAddPurchase();
 		});
 	});
 	
 	//==================== "수량증감" Event 연결 =================== 
+	
 	function fncTicketCount(indexVal, currentVal, countVal) {
-		
+
 		console.log("[fncTicketCount START]")
-		
+
 		var inputVal = $(".ticketCount").eq(indexVal).val();
 		console.log("[1] inputVal : " + inputVal)
-		
+
 		var textVal = $(".badge").eq(indexVal).text();
 		console.log("[2] textVal : " + textVal)
-		
+
 		if (countVal == 'plus') {
 			console.log("[Plus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
-		} 
-		
+		}
+
 		if (countVal == 'minus' && currentVal >= 1) {
 			console.log("[Minus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
@@ -93,51 +94,50 @@
 			console.log("[티켓 수량이 0 보다 작음]")
 		}
 		
-	} 
-	
-	
+	}
+
 	//==================== + / - 버튼 처리 ====================
+
 	$(function() {
 
 		$("button[name='minus']").bind("click", function(event) {
 
 			event.preventDefault();
-			
+
 			var indexVal = $("button[name='minus']").index(this);
 			console.log("- 인덱스 값 : " + indexVal)
 
 			var countVal = 'minus';
 			console.log("- 카운트 값 : " + countVal)
-			
+
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 			console.log("- 현재 값 : " + currentVal)
-			
+
 			if (currentVal <= 0) {
-				alert("티켓 수량 확인 바랍니다.")
+				alert("티켓 수량을 확인 하시기 바랍니다.")
 			}
-			
+
 			fncTicketCount(indexVal, currentVal, countVal);
-			
+
 			console.log("----------")
 
 		});
-		
-		
+
 		$("a[name='plus']").bind("click", function(event) {
 
 			event.preventDefault();
-			
+
 			var indexVal = $("a[name='plus']").index(this);
 			console.log("+ 인덱스 값 : " + indexVal)
 
 			var countVal = 'plus';
 			console.log("+ 카운트 값 : " + countVal)
-			
+
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 			console.log("+ 현재 값 : " + currentVal)
-			
+
 			fncTicketCount(indexVal, currentVal, countVal);
-			
+
 			console.log("++++++++++")
 
 		});
@@ -146,51 +146,48 @@
 
 	// ===== Form 유효성 검증 =====
 	function fncAddPurchase() {
-
+		
+		
 		var name = $("input[name='name']").val();
-		var birthDate = $("input[name='birthDate']").val();
 		var phone = $("input[name='phone']").val();
-		var email = $("input[name='email']").val();
+//		var ticketCount = $(".ticketCount").eq(index).val();
 
+		console.log('인덱스 확인 : ' + index)
+		console.log('티켓 수량 확인 : ' + ticketCount)
+		
 		if (name == null || name.length < 1) {
-			alert("상품명은 반드시 입력하여야 합니다.");
+			alert("이름은 반드시 입력해야 합니다.");
 			return;
 		}
-		if (detail == null || detail.length < 1) {
-			alert("상품상세정보는 반드시 입력하여야 합니다.");
+		if (phone == null || phone.length < 1) {
+			alert("연락처는 반드시 입력해야 합니다.");
 			return;
 		}
-		if (manuDate == null || manuDate.length < 1) {
-			alert("제조일자는 반드시 입력하셔야 합니다.");
+/*
+		if (ticketCount == null || ticketCount.length < 1) {
+			alert("티켓 수량을 확인 하시기 바랍니다.");
 			return;
 		}
-		if (price == null || price.length < 1) {
-			alert("가격은 반드시 입력하셔야 합니다.");
-			return;
-		}
+//*/
+		//==>"이메일" 유효성Check  Event 처리 및 연결
+		$(function() {
 
-		$("form").attr("method", "POST")
-				.attr("action", "/purchase/addPurchase").submit();
-
+			$("input[name='email']").bind( "change", function() {
+				var email = $("input[name='email']").val();
+				if (email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)) {
+					alert("이메일 형식이 아닙니다.");
+				}
+			});
+		});
+	
+		/*
+		$("form")
+		.attr("method", "POST")
+		.attr("action", "/purchase/addPurchase")
+		.submit();
+		//*/
 	}
 
-	//==>"이메일" 유효성Check  Event 처리 및 연결
-	$(function() {
-
-		$("#email")
-				.bind(
-						"change",
-						function() {
-
-							var email = $("#email").val();
-
-							if (email != ""
-									&& (email.indexOf('@') < 1 || email
-											.indexOf('.') == -1)) {
-								alert("이메일 형식이 아닙니다.");
-							}
-						});
-	});
 </script>
 	
 </head>
@@ -223,19 +220,22 @@
 				
 				<!-- #1 -->
 				<div class="alert alert-success" role="alert">
-					● <strong>예매일자</strong> : 선택하신 예매일자를 확인하시기 바랍니다.
+					● <strong>예매일자</strong><br> 
+					&nbsp;- 선택하신 예매일자를 확인하시기 바랍니다.
 				</div>
 					<p>${ bookingDate }</p><br>
 					
 				<!-- #2 -->
 				<div class="alert alert-warning" role="alert">
-					● <strong>이용요금</strong> : 아래 이용요금을 확인하시기 바랍니다.
+					● <strong>이용요금</strong><br> 
+					&nbsp;- 아래 이용요금을 확인하시기 바랍니다.
 				</div>
 					<p>${ detailIntro.usetimefestival }</p><br>
 					
 				<!-- #3 -->
 				<div class="alert alert-danger" role="alert">
-					● <strong>입장권 구매 안내</strong> : 구매 수량을 선택하시기 바랍니다.
+					● <strong>입장권 구매 안내</strong><br> 
+					&nbsp;- 구매 수량을 선택하시기 바랍니다.
 				</div>
 				
 				<c:forEach items="${ priceList }" varStatus="status">
@@ -279,21 +279,21 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="name">이 름</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="name" value="추후에 도메인 객체 설정">
 				</div>
 				<br>
 				
 				<div class="input-group">
 					<span class="input-group-addon" id="phone">연락처</span> 
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="phone" value="추후에 도메인 객체 설정">
 				</div>
 				<br>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="email">@</span> 
 					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="email" value="추후에 도메인 객체 설정">
 				</div>
 
 				<!-- Button -->
