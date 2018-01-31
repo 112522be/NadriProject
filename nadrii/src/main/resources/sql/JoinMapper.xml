@@ -14,45 +14,29 @@
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addGroup"		parameterType="group" >
+	<insert 	id="addJoin"		parameterType="join" >
 	 	INSERT
-		INTO groups ( group_no, group_name, title, text, view_count, lat, lng, category_code, meeting_date, reg_date ) 
-		VALUES (	seq_groups_group_no.nextval, #{groupName}, #{title}, #{text}, 0, #{lat:VARCHAR}, #{lng:VARCHAR},
-					#{categoryCode}, #{meetingDate:VARCHAR}, SYSDATE )
+		INTO join_member ( join_no, group_no, user_id, group_role ) 
+		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole} )
 	</insert>
 	 
 	 <!-- SQL : SELECT ONE -->
-	<select 	id="getGroup"	parameterType="int"	resultMap="groupSelectMap">
+	<select 	id="getJoin"	parameterType="int"	resultMap="joinSelectMap">
 		SELECT
 		group_no, group_name, title, text, view_count, lat, lng, category_code, meeting_date, reg_date
 		FROM groups
 		WHERE group_no = #{value}
 	</select>
-	 
-	 <!-- SQL : UPDATE -->
-	<update	id="updateGroup"		parameterType="group" >
-		UPDATE groups
-	   	<set>
-	   		group_name 	= #{groupName},
-	   		title 				= #{title}, 
-	   		text 				= #{text},
-	   		lat 					= #{lat:VARCHAR}, 
-	   		lng 				= #{lng:VARCHAR},
-	   		category_code 	= #{categoryCode}, 
-	   		meeting_date 	= #{meetingDate:VARCHAR}
-	   	</set>
-	   	WHERE group_no = #{groupNo}
-	</update>
-	
-	<delete id="deleteGroup"		parameterType="group">
-	 	DELETE FROM groups
+		
+	<delete id="deleteJoin"		parameterType="join">
+	 	DELETE FROM join_member
 	 	<where>
-	 		group_no = #{groupNo}
+	 		join_no = #{joinNo}
 	 	</where>
 	 </delete>
 	 
 	<!-- SQL : SELECT LIST -->
-	<select  id="getGroupList"  parameterType="search"	resultMap="groupSelectMap">
+	<select  id="getJoinList"  parameterType="search"	resultMap="joinSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, 

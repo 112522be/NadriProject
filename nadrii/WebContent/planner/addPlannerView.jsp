@@ -33,6 +33,7 @@
 		<div class = "col-lg-8">
 		 
 			<div class="map_wrap">
+			
 			    <div id="map" style="width:100%;height:750px;position:relative;overflow:hidden;"></div>
 			
 			    <div id="menu_wrap" class="bg_white">
@@ -57,6 +58,9 @@
 					<input type ="button" value="시외버스" onClick="javascript:search1(1)">
 					<input type ="button" value="고속버스" onClick="javascript:search1(2)">
 					<input type ="button" value="기차" onClick="javascript:search1(3)">
+					
+					
+					<input type="button" value="마커지우기" onclick="javascript:deletePathMarker()">
 				</form>
 			</div>
 		</div>
@@ -77,6 +81,6 @@
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
-<script language="JavaScript" src="../resources/js/map.js?version=180131.554"></script>
+<script language="JavaScript" src="../resources/js/map.js?version=180131.820"></script>
 
 </body>		

@@ -761,10 +761,9 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
-			
-	
-		var array1;
-		var array2;
+					
+		var arrayStart;
+		var arrayEnd;
 		
 		function getInfo(k){
 			$.ajax({
@@ -784,6 +783,9 @@
 					var pathStartSTN=[];
 					var pathEndSTN=[];
 					
+
+					arrayStart=[];
+					arrayEnd=[];
 					
 					var code = returnData.code;
 					
@@ -930,18 +932,22 @@
 								}
 														
 							}else if(i%2==1){//도보 제외 지하철, 버스
-																		
-								pathStartSTN[Math.floor(i/2)] = new daum.maps.Marker({
-								    map: map,
+										
+								var pathStartMarker = new daum.maps.Marker({
+								   // map: map,
 								    position: new daum.maps.LatLng(returnData.subPathList[i].startY, returnData.subPathList[i].startX),
 								    image: pathImage
 								});
+								
+								pathStartSTN.push(pathStartMarker);
 							
-								pathEndSTN[Math.floor(i/2)] = new daum.maps.Marker({
-								    map: map,
+								var pathEndMarker = new daum.maps.Marker({
+								  //  map: map,
 								    position: new daum.maps.LatLng(returnData.subPathList[i].endY, returnData.subPathList[i].endX),
 									image: pathImage
 								});
+								
+								pathEndSTN.push(pathEndMarker);
 								
 								if(returnData.subPathList[i+1].sectionTime == 0){
 									pathEndSTN[Math.floor(i/2)].setMap(null);
@@ -981,20 +987,26 @@
 								pathStartInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
 								    position : pathStartSTN[Math.floor(i/2)].getPosition(), 
 								    content : startContent
-								//    ,removable : true
 								});
 								
 								pathEndInfowindow[Math.floor(i/2)] = new daum.maps.InfoWindow({
 								    position : pathEndSTN[Math.floor(i/2)].getPosition(), 
 								    content : endContent
-								//    ,removable : true
 								});
 						
 							}
 							
 																
 						}//for문
-														
+						
+						arrayStart = pathStartSTN;
+						arrayEnd = pathEndSTN;
+					
+						for( var z=0; z<arrayStart.length ; z++){
+							arrayStart[z].setMap(map);
+							arrayEnd[z].setMap(map);
+						}		
+																
 						daum.maps.event.addListener(pathStartSTN[0], 'mouseover', function() {
 						    pathStartInfowindow[0].open(map, pathStartSTN[0]);
 						});
@@ -1258,7 +1270,7 @@
 			if(STNpolyline != null || polylineArray != null){
 				deleteInSearch();
 			}
-
+			
 			tempMarkerArray=[];
 			realMarkerArray=[];
 			
@@ -1347,8 +1359,18 @@
 		function deleteInSearch() {
 			for (var i = 0; i < polylineArray.length; i++) {
 				polylineArray[i].setMap(null);
+			}			
+		}
+		
+		function deletePathMarker(){
+			for( var z=0; z<arrayStart.length ; z++){
+				console.log(arrayStart[z]);
+				console.log(arrayEnd[z]);
+				arrayStart[z].setMap(null);
+				arrayEnd[z].setMap(null);
 			}
 		}
+		
 		
 		function showBoundary(i){
 			console.log("boundaryArray["+i+"] 보여주는중");
