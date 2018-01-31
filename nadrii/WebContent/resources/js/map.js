@@ -92,9 +92,155 @@
 			
 		});
 		
+		//////////////////////////////////////////////////////
+		
+		var sort =[];	//sortable 배열선언
+		var markerSort;
+		
+		$( function() {
+			$( "#sortable" ).sortable({
+				placeholder: "ui-state-highlight"
+			});
+			$( "#sortable" ).disableSelection();
+		} );			
+		
+		$( "#sortable" ).on( "sortupdate", function( event, ui ) {
+			
+			if(startMarker.getMap() != null){
+				startMarker.setMap(null);
+			}
+			if(passMarker[1].getMap() != null){
+				passMarker[1].setMap(null);
+			}
+			if(passMarker[2].getMap() != null){
+				passMarker[2].setMap(null);
+			}
+			if(passMarker[3].getMap() != null){
+				passMarker[3].setMap(null);
+			}
+			if(passMarker[4].getMap() != null){
+				passMarker[4].setMap(null);
+			}
+			if(passMarker[5].getMap() != null){
+				passMarker[5].setMap(null);
+			}
+			if(endMarker.getMap() != null){
+				endMarker.setMap(null);
+			}
+			
+			markerSort =[];
+			markerSort = sort;
+			console.log(markerSort);
+			
+			console.log( $($(".pointer :nth-child(1)")[0]).attr("value") );
+			console.log( $($(".pointer :nth-child(1)")[0]).attr("id"));
+			
+			var k=1; //.pointer의 자식값의 변화를 위한 초기화값
+			for(var i=0; i<7; i++){
+				if(markerSort[i] != null){
+					markerSort[i]=$($(".pointer :nth-child("+k+")")[0]).attr("value");
+					k++;
+				}
+			} 
+			sort = markerSort;
+			console.log(sort);
+			
+			
+			/*******데이터 타입이 달라서 맵에 넣을수가 없어서 전달 받은 value값을 파싱하여 latlng 데이터 타입으로 변환하여 마커 위치 재생성********/
+			
+			if(sort[0] != null){
+				var parseStartPoint = sort[0].replace("(","");
+				parseStartPoint = parseStartPoint.replace(")","");
+				parseStartPoint = parseStartPoint.split(',');
+				
+				sort[0] = new daum.maps.LatLng(parseStartPoint[0], parseStartPoint[1]);
+				
+				startMarker.setPosition(sort[0]);
+				startMarker.setMap(map);
+			}
+			
+			
+			
+			if(sort[1] != null){
+				var parsePassPoint1 = sort[1].replace("(","");
+				parsePassPoint1 = parsePassPoint1.replace(")","");
+				parsePassPoint1 = parsePassPoint1.split(',');
+				
+				sort[1] = new daum.maps.LatLng(parsePassPoint1[0], parsePassPoint1[1]);
+				
+				passMarker[1].setPosition(sort[1]);
+				passMarker[1].setMap(map);
+			}
+			
+			
+			if(sort[2] != null){
+				var parsePassPoint2 = sort[2].replace("(","");
+				parsePassPoint2 = parsePassPoint2.replace(")","");
+				parsePassPoint2 = parsePassPoint2.split(',');
+				
+				sort[2] = new daum.maps.LatLng(parsePassPoint2[0], parsePassPoint2[1]);
+
+				passMarker[2].setPosition(sort[2]);
+				passMarker[2].setMap(map);
+			}
+			
+			
+			if(sort[3] != null){
+				var parsePassPoint3 = sort[3].replace("(","");
+				parsePassPoint3 = parsePassPoint3.replace(")","");
+				parsePassPoint3 = parsePassPoint3.split(',');
+				
+				sort[3] = new daum.maps.LatLng(parsePassPoint3[0], parsePassPoint3[1]);
+				
+				passMarker[3].setPosition(sort[3]);
+				passMarker[3].setMap(map);
+			}
+			
+			
+			
+			if(sort[4] != null){
+				var parsePassPoint4 = sort[4].replace("(","");
+				parsePassPoint4 = parsePassPoint4.replace(")","");
+				parsePassPoint4 = parsePassPoint4.split(',');
+				
+				sort[4] = new daum.maps.LatLng(parsePassPoint4[0], parsePassPoint4[1]);
+				
+				passMarker[4].setPosition(sort[4]);
+				passMarker[4].setMap(map);
+			}
+			
+		
+			if(sort[5] != null){
+				var parsePassPoint5 = sort[5].replace("(","");
+				parsePassPoint5 = parsePassPoint5.replace(")","");
+				parsePassPoint5 = parsePassPoint5.split(',');
+				
+				sort[5] = new daum.maps.LatLng(parsePassPoint5[0], parsePassPoint5[1]);
+				
+				passMarker[5].setPosition(sort[5]);
+				passMarker[5].setMap(map);
+			}
+			
+			
+			if(sort[6] != null){
+				var parseEndPoint = sort[6].replace("(","");
+				parseEndPoint = parseEndPoint.replace(")","");
+				parseEndPoint = parseEndPoint.split(',');
+				
+				sort[6] = new daum.maps.LatLng(parseEndPoint[0], parseEndPoint[1]);
+				
+				endMarker.setPosition(sort[6]);
+				endMarker.setMap(map);
+			}
+			
+		} );
+
 		function start(){
+			
 			var latlng;
+			
 			if(clickMarker.getMap() != null){
+				
 				latlng = clickMarker.getPosition();
 				
 				speInfoWindow.close();
@@ -103,16 +249,30 @@
 				clickMarker.setMap(null);
 				
 			}else if(markers[0].getMap() != null){
+				
 				latlng = keywordMarkerPosition;
 				
 				infowindow.close();
 				speInfoWindow.close();
 				
-				
 			}
 			
-			startMarker.setPosition(latlng);
+			sort[0] = latlng;			
+			
+			startMarker.setPosition(sort[0]);
 			startMarker.setMap(map);
+			
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
 			
 		}
 		
@@ -141,29 +301,98 @@
 				
 			if(passMarker[1].getMap() == null){
 				
-				passMarker[1].setPosition(latlng);
+				sort[1] = latlng;
+				
+				passMarker[1].setPosition(sort[1]);
 				passMarker[1].setMap(map);
+				
+				if($(".pointer").length > 0){
+					$(".pointer").empty();
+				}
+				for(var i=0;i<sort.length;i++){
+
+					if(sort[i] ==null){
+
+					}else{
+						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+i+'">'+i+'</li>');
+					}
+				}
 				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() == null){
 				
-				passMarker[2].setPosition(latlng);
+				sort[2] = latlng;
+				
+				passMarker[2].setPosition(sort[2]);
 				passMarker[2].setMap(map);
+				
+				if($(".pointer").length > 0){
+					$(".pointer").empty();
+				}
+				for(var i=0;i<sort.length;i++){
+
+					if(sort[i] ==null){
+
+					}else{
+						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					}
+				}
 				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() == null){
 				
-				passMarker[3].setPosition(latlng);
+				sort[3] = latlng;
+				
+				passMarker[3].setPosition(sort[3]);
 				passMarker[3].setMap(map);
+				
+				if($(".pointer").length > 0){
+					$(".pointer").empty();
+				}
+				for(var i=0;i<sort.length;i++){
+
+					if(sort[i] ==null){
+
+					}else{
+						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					}
+				}
 
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() == null){
 				
-				passMarker[4].setPosition(latlng);
+				sort[4] = latlng;
+				
+				passMarker[4].setPosition(sort[4]);
 				passMarker[4].setMap(map);
+				
+				if($(".pointer").length > 0){
+					$(".pointer").empty();
+				}
+				for(var i=0;i<sort.length;i++){
+
+					if(sort[i] ==null){
+
+					}else{
+						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					}
+				}
 				
 			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() != null && passMarker[5].getMap() == null){
 				
-				passMarker[5].setPosition(latlng);
+				sort[5] = latlng;
+				
+				passMarker[5].setPosition(sort[5]);
 				passMarker[5].setMap(map);
 	
+				if($(".pointer").length > 0){
+					$(".pointer").empty();
+				}
+				for(var i=0;i<sort.length;i++){
+
+					if(sort[i] ==null){
+
+					}else{
+						$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+					}
+				}
 			}		
 		}
 		
@@ -185,11 +414,23 @@
 				infowindow.close();
 				speInfoWindow.close();		
 			}
+			
+			sort[6] = latlng;
 
-			endMarker.setPosition(latlng);
+			endMarker.setPosition(sort[6]);
 			endMarker.setMap(map);
 			
-			
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
 		}
 		
 		////////////////////////////////////////////////////////
@@ -197,22 +438,87 @@
 		daum.maps.event.addListener(passMarker[1], 'click', function() {
         
 			passMarker[1].setMap(null);
+			
+			sort[1] = null;
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
       	});
       	daum.maps.event.addListener(passMarker[2], 'click', function() {
          
 			passMarker[2].setMap(null);
+			
+			sort[2] = null;
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
      	 });
       	daum.maps.event.addListener(passMarker[3], 'click', function() {
          
 			passMarker[3].setMap(null);
+			
+			sort[3] = null;
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
      	 });
       	daum.maps.event.addListener(passMarker[4], 'click', function() {
          
 			passMarker[4].setMap(null);
+			
+			sort[4] = null;
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
       	});
 		daum.maps.event.addListener(passMarker[5], 'click', function() {
         
 			passMarker[5].setMap(null);
+			
+			sort[5] = null;
+			if($(".pointer").length > 0){
+				$(".pointer").empty();
+			}
+			for(var i=0;i<sort.length;i++){
+
+				if(sort[i] ==null){
+
+				}else{
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+i+'</li>');
+				}
+			}
 		});
 		
 		
@@ -523,7 +829,8 @@
 									});
 								}			
 								
-if(startInfowindow != null){
+								
+								if(startInfowindow != null){
 									
 									daum.maps.event.addListener(startMarker, 'mouseover', function() {
 										startInfowindow.open(map, startMarker);
