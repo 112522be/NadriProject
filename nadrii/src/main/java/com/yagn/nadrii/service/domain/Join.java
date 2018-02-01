@@ -5,7 +5,7 @@ public class Join {
 	private int joinNo;
 	private int groupNo;
 	private String userId;
-	private int groupRole;
+	private int groupRole;	// 1 - 글쓴이, 2 - 참여자
 	
 	public Join(){
 	}

@@ -34,17 +34,17 @@ public class GroupRestController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	@RequestMapping(value="json/addGroup", method=RequestMethod.POST)
+	//@RequestMapping(value="json/addGroup", method=RequestMethod.POST)
 	public Group addGroup(@RequestBody Group group, @RequestBody Join join) throws Exception {
 
 		System.out.println("/group/json/addGroup :: POST");
 		
-		groupService.addGroup(group, join);
+		groupService.addGroup(group);
 		
 		return group;
 	}
 	
-	@RequestMapping(value="json/getGroup/{groupNo}" , method=RequestMethod.GET)
+	//@RequestMapping(value="json/getGroup/{groupNo}" , method=RequestMethod.GET)
 	public Group getGroup(@PathVariable int groupNo) throws Exception {
 		
 		System.out.println("/getGroup");
@@ -52,18 +52,18 @@ public class GroupRestController {
 		return groupService.getGroup(groupNo);
 	}
 	
-	@RequestMapping(value="json/updateGroup", method=RequestMethod.POST)
+	//@RequestMapping(value="json/updateGroup", method=RequestMethod.POST)
 	public Group updateGroup(@RequestBody Group group) throws Exception{
 
 		System.out.println("/updateGroup");
 		
 		groupService.updateGroup(group);
 		
-		return groupService.getGroup(group.getJoinMember().getGroupNo());
+		return groupService.getGroup(group.getJoin().getGroupNo());
 	}
 	
 	
-	@RequestMapping(value="json/listGroup")
+	//@RequestMapping(value="json/listGroup")
 	public Map listGroup(@RequestBody Search search) throws Exception{
 		
 		System.out.println("/listGroup");

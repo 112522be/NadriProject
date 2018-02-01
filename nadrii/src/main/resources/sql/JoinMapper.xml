@@ -13,25 +13,27 @@
 		<result property="groupRole"	column="group_role"	jdbcType="NUMERIC"/>	
 	</resultMap>
 	
-	<!-- SQL : INSERT -->
-	<insert 	id="addJoin"		parameterType="join" >
+	<insert id="addJoin"		parameterType="join" >
 	 	INSERT
-		INTO join_member ( join_no, group_no, user_id, group_role ) 
+		INTO join ( join_no, group_no, user_id, group_role ) 
 		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole} )
 	</insert>
-	 
-	 <!-- SQL : SELECT ONE -->
-	<select 	id="getJoin"	parameterType="int"	resultMap="joinSelectMap">
-		SELECT
-		join_no, group_no, user_id, group_role
-		FROM join_member
-		WHERE join_no = #{value}
+
+	<select id="getJoinList"		parameterType="Search"	resultMap="joinSelectMap">
+		SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  				FROM		(	SELECT join_no, group_no, user_id, group_role
+									FROM join
+									WHERE user_id = #{searchKeyword}
+									) inner_table
+					WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 		
-	<delete id="deleteJoin"		parameterType="join">
-	 	DELETE FROM join_member
+	<delete id="deleteJoin"	parameterType="join">
+	 	DELETE FROM join
 	 	<where>
-	 		join_no = #{joinNo}
+	 		group_no = #{groupNo} AND user_id = #{userId}
 	 	</where>
 	 </delete>
 	 

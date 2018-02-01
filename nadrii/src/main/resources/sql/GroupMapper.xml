@@ -7,19 +7,19 @@
 <mapper namespace="GroupMapper">
  	
 	<resultMap id="groupSelectMap" type="group">
-		<result property="joinMember.joinNo"	column="join_no"	jdbcType="NUMERIC"/>
-		<result property="joinMember.groupNo"	column="group_no"	jdbcType="NUMERIC"/>
-		<result property="joinMember.userId"	column="user_id"	jdbcType="VARCHAR"/>
-		<result property="joinMember.groupRole"	column="group_role"	jdbcType="NUMERIC"/>
-		<result property="groupName"		column="group_name" 			jdbcType="VARCHAR" />
-		<result property="title"					column="title" 						jdbcType="VARCHAR" />
-		<result property="text"					column="text" 						jdbcType="CLOB" />
-		<result property="regDate" 			column="reg_date" 				jdbcType="DATE" />
-		<result property="viewCount"			column="view_count"			 	jdbcType="NUMERIC" />
-		<result property="lat"					column="lat" 						jdbcType="VARCHAR" />
-		<result property="lng"					column="lng" 						jdbcType="VARCHAR" />
-		<result property="categoryCode" 	column="category_code" 			jdbcType="VARCHAR" />
-		<result property="meetingDate" 		column="meeting_date" 			jdbcType="DATE" />		
+		<result property="join.joinNo"		column="join_no"			jdbcType="NUMERIC"/>
+		<result property="join.groupNo"		column="group_no"		jdbcType="NUMERIC"/>
+		<result property="join.userId"		column="user_id"			jdbcType="VARCHAR"/>
+		<result property="join.groupRole"	column="group_role"		jdbcType="NUMERIC"/>
+		<result property="groupName"		column="group_name" 	jdbcType="VARCHAR" />
+		<result property="title"					column="title" 				jdbcType="VARCHAR" />
+		<result property="text"					column="text" 				jdbcType="CLOB" />
+		<result property="regDate" 			column="reg_date" 		jdbcType="DATE" />
+		<result property="viewCount"			column="view_count"		jdbcType="NUMERIC" />
+		<result property="lat"					column="lat" 				jdbcType="VARCHAR" />
+		<result property="lng"					column="lng" 				jdbcType="VARCHAR" />
+		<result property="categoryCode" 	column="category_code" 	jdbcType="VARCHAR" />
+		<result property="meetingDate" 		column="meeting_date" 	jdbcType="DATE" />		
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -29,13 +29,22 @@
 		VALUES (	seq_groups_group_no.nextval, #{groupName}, #{title}, #{text}, 0, #{lat:VARCHAR}, #{lng:VARCHAR},
 					#{categoryCode}, #{meetingDate:VARCHAR}, SYSDATE )
 	</insert>
+	
+	<select 	id="getGroupNo"	parameterType="group"	resultType="int">
+		SELECT
+		group_no
+		FROM groups
+		WHERE title=#{title} AND group_name=#{groupName}
+	</select>	 
 	 
 	 <!-- SQL : SELECT ONE -->
 	<select 	id="getGroup"	parameterType="int"	resultMap="groupSelectMap">
 		SELECT
-		group_no, group_name, title, text, view_count, lat, lng, category_code, meeting_date, reg_date
-		FROM groups
-		WHERE group_no = #{value}
+		j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+		FROM groups g, join j
+		WHERE g.group_no = j.group_no
+				AND j.group_role = 1
+				AND g.group_no = #{value}
 	</select>
 	 
 	 <!-- SQL : UPDATE -->

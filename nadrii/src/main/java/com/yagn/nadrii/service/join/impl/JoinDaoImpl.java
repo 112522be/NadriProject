@@ -32,20 +32,17 @@ public class JoinDaoImpl implements JoinDao{
 		sqlSession.insert("JoinMapper.addJoin", join);
 	}
 	
+	public String getGroupMaster(int groupNo) throws Exception {
+		return sqlSession.selectOne("JoinMapper.getGroupMaster", groupNo);
+	}
+	
 	public void deleteJoin(Join join) throws Exception {
 		sqlSession.delete("JoinMapper.deleteJoin", join);
 	}
 
 	@Override
-	public Join getJoin(int joinNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Join> getJoinList(Search search) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("JoinMapper.getJoinList", search);
 	}
 
 	@Override
@@ -58,6 +55,12 @@ public class JoinDaoImpl implements JoinDao{
 	public int getTotalCount(Search search) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Join getJoin(int joinNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

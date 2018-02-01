@@ -10,6 +10,8 @@ public interface JoinDao {
 	public void addJoin(Join join) throws Exception ;
 
 	public Join getJoin(int joinNo) throws Exception ;
+	
+	public String getGroupMaster(int groupNo) throws Exception;
 
 	public List<Join> getJoinList(Search search) throws Exception ;
 

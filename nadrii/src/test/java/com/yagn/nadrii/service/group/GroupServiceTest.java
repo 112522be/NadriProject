@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.group;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
 import com.yagn.nadrii.service.domain.Join;
+import com.yagn.nadrii.service.join.JoinService;
 
-/*
- *	FileName :  GroupServiceTest.java
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹İ ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ı¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {	"classpath:config/context-common.xml",
 															"classpath:config/context-aspect.xml",
@@ -30,68 +24,52 @@ import com.yagn.nadrii.service.domain.Join;
 															"classpath:config/context-transaction.xml" })
 public class GroupServiceTest {
 
-	//==>@RunWith,@ContextConfiguration ÀÌ¿ë Wiring, Test ÇÒ instance DI
+	//==>@RunWith,@ContextConfiguration å ì‹±ìš¸ì˜™ Wiring, Test å ì™ì˜™ instance DI
 	@Autowired
 	@Qualifier("groupServiceImpl")
 	private GroupService groupService;
+	
+	@Autowired
+	@Qualifier("joinServiceImpl")
+	private JoinService joinService;
 
-	@Test
+	//@Test
 	public void testAddGroup() throws Exception {
 		
 		Group group = new Group();
 		Join join = new Join();
 		
-		group.setGroupName("½Äµµ¶ô¸ğÀÓ");
-		group.setTitle("1");
-		group.setText("³È³È");
+		group.setGroupName("ëª¨ì„3");
+		group.setTitle("ì œëª©3");
+		group.setText("ë‚´ìš©3");
 		group.setCategoryCode("a");
 		
-		join.setGroupRole(2);
-		join.setUserId("userid");
-		groupService.addGroup(group, join);
-		
-	//	group = groupService.getGroup(10080);
+		int groupNo = groupService.addGroup(group);
 
-		//==> console È®ÀÎ
+		System.out.println("groupNo : "+groupNo);
+
+		join.setGroupNo(groupNo);
+		join.setGroupRole(1);
+		join.setUserId("test01");
+		
+		group.setJoin(join);
+		
+		joinService.addJoin(join);
+		
 		System.out.println(group);
 		
-		//==> API È®ÀÎ
-	//	Assert.assertEquals("testGroupId", group.getGroupId());
-	//	Assert.assertEquals("testGroupName", group.getGroupName());
-	//	Assert.assertEquals("testPasswd", group.getPassword());
-		//Assert.assertEquals("111-2222-3333", group.getPhone());
-		//Assert.assertEquals("°æ±âµµ", group.getAddr());
-		//Assert.assertEquals("test@test.com", group.getEmail());
 	}
 	
 	//@Test
 	public void testGetGroup() throws Exception {
 		
 		Group group = new Group();
-		//==> ÇÊ¿äÇÏ´Ù¸é...
-	//	group.setGroupId("testGroupId");
-	//	group.setGroupName("testGroupName");
-//		group.setPassword("testPasswd");
-//		group.setSsn("1111112222222");
-//		group.setPhone("111-2222-3333");
-//		group.setAddr("°æ±âµµ");
-//		group.setEmail("test@test.com");
+		Join join = new Join();
+	
+		group = groupService.getGroup(60033);
 		
-		group = groupService.getGroup(10120);
-
-		//==> console È®ÀÎ
 		System.out.println(group);
 		
-		//==> API È®ÀÎ
-	//	Assert.assertEquals("testGroupId", group.getGroupId());
-	//	Assert.assertEquals("testGroupName", group.getGroupName());
-	//	Assert.assertEquals("testPasswd", group.getPassword());
-	//	Assert.assertEquals("111-2222-3333", group.getPhone());
-	//	Assert.assertEquals("°æ±âµµ", group.getAddr());
-	//	Assert.assertEquals("test@test.com", group.getEmail());
-
-	//	Assert.assertNotNull(groupService.getGroup("group02"));
-	//	Assert.assertNotNull(groupService.getGroup("group05"));
 	}
 	
 	//@Test
@@ -102,10 +80,10 @@ public class GroupServiceTest {
 		
 	//	Assert.assertEquals("testGroupName", group.getGroupName());
 	//	Assert.assertEquals("111-2222-3333", group.getPhone());
-	//	Assert.assertEquals("°æ±âµµ", group.getAddr());
+	//	Assert.assertEquals("å ì™ì˜™ç«ªï¿½", group.getAddr());
 	//	Assert.assertEquals("test@test.com", group.getEmail());
 
-	//	group.setProdName("·¹¸ó¿öÅÍchange");
+	//	group.setProdName("å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½change");
 	//	group.setPrice(1700);
 		
 		groupService.updateGroup(group);
@@ -113,17 +91,17 @@ public class GroupServiceTest {
 		group = groupService.getGroup(10120);
 	//	Assert.assertNotNull(group);
 		
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 		System.out.println(group);
 			
-		//==> API È®ÀÎ
+		//==> API í™•å ì™ì˜™
 	//	Assert.assertEquals("change", group.getGroupName());
 	//	Assert.assertEquals("777-7777-7777", group.getPhone());
 	//	Assert.assertEquals("change", group.getAddr());
 	//	Assert.assertEquals("change@change.com", group.getEmail());
 	 }
 	 
-	 //==>  ÁÖ¼®À» Ç®°í ½ÇÇàÇÏ¸é....
+	 //==>  å ìŒì‡½ì˜™å ì™ì˜™ í’€å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¹ëªŒì˜™....
 	//@Test
 	public void testGetGroupListAll() throws Exception{
 		 
@@ -135,7 +113,7 @@ public class GroupServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -152,7 +130,7 @@ public class GroupServiceTest {
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
 	 	
-	 	//==> console È®ÀÎ
+	 	//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
@@ -172,7 +150,7 @@ public class GroupServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	//Assert.assertEquals(1, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -188,7 +166,7 @@ public class GroupServiceTest {
 	 	list = (List<Object>)map.get("list");
 	 	//Assert.assertEquals(0, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
@@ -202,13 +180,13 @@ public class GroupServiceTest {
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
 	 	search.setSearchCondition("1");
-	 	search.setSearchKeyword("·¹¸ó");
+	 	search.setSearchKeyword("å ì™ì˜™å ì™ì˜™");
 	 	Map<String,Object> map = groupService.getGroupList(search);
 	 	
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -223,7 +201,7 @@ public class GroupServiceTest {
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(0, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
@@ -241,7 +219,7 @@ public class GroupServiceTest {
 	 	List<Object> list = (List<Object>)map.get("list");
 	 //	Assert.assertEquals(3, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -258,7 +236,7 @@ public class GroupServiceTest {
 	 	list = (List<Object>)map.get("list");
 	// 	Assert.assertEquals(3, list.size());
 	 	
-	 	//==> console È®ÀÎ
+	 	//==> console í™•å ì™ì˜™
 	 	System.out.println(list);
 		 	
 	 	totalCount = (Integer)map.get("totalCount");

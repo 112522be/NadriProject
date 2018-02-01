@@ -29,11 +29,12 @@ public class GroupDaoImpl implements GroupDao{
 	}
 
 	///Method
-	public void addGroup(Group group, Join join) throws Exception {
+	public int addGroup(Group group) throws Exception {
 		sqlSession.insert("GroupMapper.addGroup", group);
-		sqlSession.insert("JoinMapper.addJoin", join);
+		int groupNo = sqlSession.selectOne("GroupMapper.getGroupNo", group);
+		return groupNo;
 	}
-
+	
 	public Group getGroup(int groupNo) throws Exception {
 		return sqlSession.selectOne("GroupMapper.getGroup", groupNo);
 	}

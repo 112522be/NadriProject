@@ -14,8 +14,6 @@ import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupDao;
 import com.yagn.nadrii.service.group.GroupService;;
 
-
-//==> ȸ������ ���� ����
 @Service("groupServiceImpl")
 public class GroupServiceImpl implements GroupService{
 	
@@ -33,8 +31,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	///Method
-	public void addGroup(Group group, Join join) throws Exception {
-		groupDao.addGroup(group, join);
+	public int addGroup(Group group) throws Exception {
+		return groupDao.addGroup(group);
 	}
 
 	public Group getGroup(int groupNo) throws Exception {

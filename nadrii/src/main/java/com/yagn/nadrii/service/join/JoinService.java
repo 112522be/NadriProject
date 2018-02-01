@@ -10,6 +10,8 @@ public interface JoinService {
 	public void addJoin(Join join) throws Exception;
 	
 	public Join getJoin(int joinNo) throws Exception;
+	
+	public String getGroupMaster(int groupNo) throws Exception;
 	 
 	public Map<String , Object> getJoinList(Search search) throws Exception;
 	

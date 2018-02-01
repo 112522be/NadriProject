@@ -35,7 +35,11 @@ public class JoinServiceImpl implements JoinService{
 	public void addJoin(Join join) throws Exception {
 		joinDao.addJoin(join);
 	}
-
+	
+	public String getGroupMaster(int groupNo) throws Exception{
+		return joinDao.getGroupMaster(groupNo);
+	}
+	
 	public Join getJoin(int joinNo) throws Exception {
 		return joinDao.getJoin(joinNo);
 	}

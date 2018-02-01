@@ -8,7 +8,7 @@ import com.yagn.nadrii.service.domain.Join;
   
 public interface GroupService {
 	
-	public void addGroup(Group group, Join join) throws Exception;
+	public int addGroup(Group group) throws Exception;
 	
 	public Group getGroup(int groupNo) throws Exception;
 	 
