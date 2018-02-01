@@ -87,7 +87,7 @@ public class NaverApiDaoImpl implements TicketDao {
 	public String getNaverImage(String title) {
 		
 		System.out.println("\n[NaverApiDaoImpl.java]::getNaverImage");
-		System.out.println("[getNaverImage 인코딩 확인]==>" + title);
+		System.out.println("[getNaverImage title check]==>" + title);
 		
 		String naverReturnImage = "";
 		
@@ -95,21 +95,20 @@ public class NaverApiDaoImpl implements TicketDao {
 			String encodeTitle = URLEncoder.encode(title, "UTF-8");
 
 			StringBuilder naverImageSB = NaverApiDaoImpl
-					.sendGetNaverURL(new StringBuilder(searchImageURL + "query=" + encodeTitle // (필수) 검색할 문자열
-							+ "&display=100" // 검색결과 출력 건수 (10(기본값), 100(최대))
-//							+ "&filter=large" // 사이즈 필터 (all (기본값),large, medium, small)
-//							+ "&sort=sim" // 정렬 옵션 (sim (유사도순), date (날짜순))
+					.sendGetNaverURL(new StringBuilder(searchImageURL + "query=" + encodeTitle 
+							+ "&display=100" 
+//							+ "&filter=large" 
+//							+ "&sort=sim" 
 			), clientID, clientSecret);
 
 			JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
 
 			if (niJsonObj.get("total").toString().equals("0")) {
 
-				// Daum Search 추가할 부분
 				System.out.println("[Naver has not found Image...idiot]");
 
 				String image = ticketService.getKakaoImage(title);
-				System.out.println("\n[getKakaoImage로 부터 받은 이미지 :: ]==>" + image);
+				System.out.println("\n[getKakaoImage give this image :: ]==>" + image);
 //				String rePresntImage = "http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg";
 
 				return image;
@@ -120,7 +119,6 @@ public class NaverApiDaoImpl implements TicketDao {
 
 				JSONArray niItems = (JSONArray) niJsonObj.get("items");
 
-				/// 이미지 Response 후에 사이즈 크기 가장 큰것 찾는 algorithm
 				int minImage = 300;
 				for (int i = 0; i < niItems.size(); i++) {
 					JSONObject itemsValue = (JSONObject) niItems.get(i);

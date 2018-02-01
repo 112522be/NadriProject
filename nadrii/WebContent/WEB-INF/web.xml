@@ -20,6 +20,7 @@
     <init-param>
       <param-name>encoding</param-name>
       <param-value>euc-kr</param-value>
+
     </init-param>
   </filter>
   
