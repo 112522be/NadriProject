@@ -5,12 +5,11 @@
 
 <!DOCTYPE html>
 
-<!-- 
 <html lang="ko">
 
 <head>
 <meta charset="EUC-KR">
- -->
+
  <head>
 <title>나들이 티켓 상세조회</title>
 

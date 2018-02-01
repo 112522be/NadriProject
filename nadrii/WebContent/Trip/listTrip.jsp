@@ -344,6 +344,7 @@
 	<title>박물관찾기</title>
 </head>
 <body>
+<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 
 <div class="container">
 
