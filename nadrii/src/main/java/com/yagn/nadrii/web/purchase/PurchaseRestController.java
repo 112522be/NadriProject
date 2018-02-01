@@ -1,6 +1,8 @@
 package com.yagn.nadrii.web.purchase;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseService;
 
@@ -30,11 +33,19 @@ public class PurchaseRestController {
 			) {
 		
 		System.out.println("\n/purchase/json/addPurchase/flag=basket : POST");
-		System.out.println("What is this ?? " + basket.toString());
 		
 		Purchase purchase = new Purchase();
 		
 		try {
+			
+			JSONObject jsonObj = (JSONObject) JSONValue.parse(basket.toJSONString());
+			System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			purchase = new Purchase();
+			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
+
+			System.out.println("\n[purchase.toString()] ==> " + purchase.toString());
 			
 			
 			//purchaseService.addPurchase(purchase);

@@ -24,15 +24,10 @@
 	
 	<!-- ///////////////////////// jQuery Spinner ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css">  -->
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>  -->
 	 
-	<!--  
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	 -->
 
 <!-- //////////////////// CSS //////////////////// -->
 
@@ -53,6 +48,9 @@
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('장바구니 담기')").bind('click', function() {
+			
+				$( ".label.label-warning[name='titleB']" ).append('${ tourTicket.title }');
+			
 				for (var i = 0; i < $(".ticketPrice").length; i++) {	
 					ticketPrice = $(".ticketPrice").eq(i).val();
 					ticketCount = $(".ticketCount").eq(i).val();
@@ -103,22 +101,22 @@
 	
 	function fncTicketCount(indexVal, currentVal, countVal) {
 
-		console.log("[fncTicketCount START]")
+//		console.log("[fncTicketCount START]")
 
 		var inputVal = $(".ticketCount").eq(indexVal).val();
 		var textVal = $(".badge").eq(indexVal).text();
-
+/*
 		console.log("[1] inputVal : " + inputVal)
 		console.log("[2] textVal : " + textVal)
-
+//*/
 		if (countVal == 'plus') {
-			console.log("[Plus]")
+//			console.log("[Plus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
 		}
 
 		if (countVal == 'minus' && currentVal >= 1) {
-			console.log("[Minus]")
+//			console.log("[Minus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
@@ -172,10 +170,6 @@
 
 	});
 
-	var totalTicketCount = "";
-	var ticketPrice = "";
-	var ticketCount = "";
-	var totalTicketPrice = "";
 	
 	// ===== Form 유효성 검증 후 Navigation =====
 	function fncAddPurchase(flag) {
@@ -215,32 +209,34 @@
 		});
 //*/		
 		if (flag == 'basket') {
-		
-//			alert("flag 값 확인 : " + flag)
+
+			var ticketPriceAll = "";
+			for (var i = 0; i < $(".ticketPrice").length; i++) {	
+				ticketPrice = $(".ticketPrice").eq(i).val();
+				ticketCount = $(".ticketCount").eq(i).val();
+				
+				if (ticketCount != 0) {
+					ticketPriceAll += ticketPrice + "=" + ticketCount + "&";
+				}
+			}
 			
 			var basket = {
-				"ticketTitle" : '${ tourTicket.title }'
-/*
-				"buyer" : "tempUserName",
+				"ticketTitle" : '${ tourTicket.title }' ,
+//				"buyer" : "tempUserName",
 				"imageFile" : '${ detailImage.originimgurl }' , 
 				"bookingDate" : '${ bookingDate }' ,
-				"lat" : "tempLat" ,
-				"lng" : "tempLng" ,
 				"cancelDeadline" : "tempCancelDate" ,
-				"price" : ticketPrice ,
-				"ticketType" : "tempTicketType" ,
-				"ticketCount" : ticketCount ,
+				"ticketPriceAll" : ticketPriceAll ,
 				"contentId" : '${ tourTicket.contentid }' ,
 				"contentTypeId" : '${ tourTicket.contenttypeid }' ,
-				"flag" : 'basket'
-//*/
+				"flag" : flag
 			}
 			
 			var jsonData = JSON.stringify(basket);
 			
 			$.ajax (
 					{
-						url : "/purchase/json/addPurchase/basket",
+						url : "/purchase/json/addPurchase/" + flag,
 						method : "POST",
 						dataType : "json",
 						headers : {
@@ -255,7 +251,6 @@
 							alert("저장하기 완료")
 						}
 					});		
-			
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)
@@ -394,8 +389,6 @@
   							장바구니 담기
 						</button>
 						 
-					<!-- 	<input class="btn btn-success" type="button" value="장바구니 담기2">  --> 
-					
 						<input class="btn btn-default" type="button" value="취&nbsp;소" onclick="goBack()">
 						
 						<button type="button" class="btn btn-danger">결제하기</button>
@@ -418,8 +411,8 @@
 				</div>
 			
 				<div class="modal-body">
-					<h1 class="text-center"><span class="label label-warning">나들이 티켓</span></h1><br>
-					<h2>● 선택한 예매일자 <span class="label label-info">${ bookingDate }</span></h2>
+					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
+					<h2>● 선택한 예매일자 : <span class="label label-info">${ bookingDate }</span></h2>
 					<h2>● 총 결제요금 : <span class="label label-success"></span>&nbsp;원</h2>
 				
 				</div>
