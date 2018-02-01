@@ -33,7 +33,7 @@ public class WishRestController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
-	//userId는 세션을 통해 받는 것이고, 
+	 
 	
 	
 	public WishRestController() {

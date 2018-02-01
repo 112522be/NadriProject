@@ -10,8 +10,7 @@ encoding//src/main/java/com/yagn/nadrii/common/web/LogonCheckInterceptor.java=eu
 encoding//src/main/java/com/yagn/nadrii/service/domain/DetailIntro.java=EUC-KR
 encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketController.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketRestController.java=UTF-8
-encoding/<project>=euc_kr
-encoding/<project>=
-
-
-encoding/<project>=
+encoding//src/main/java/com/yagn/nadrii/web/trip/TripController.java=utf-8
+encoding//src/main/java/com/yagn/nadrii/web/wish/WishRestController.java=utf-8
+encoding/<project>=euc-kr
+separateDerivedEncodings=true
