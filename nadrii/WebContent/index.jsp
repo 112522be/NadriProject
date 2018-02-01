@@ -89,31 +89,31 @@ body {
 		//============================== 정보검색 파트 ===================
 		$( function() {
 			$("a[href='#' ]:contains('박물관')").on("click" , function() {
-				self.location = "../trip/listMuseum?pageNo=1"
+				self.location = "../trip/listMuseum?pageNo=1&area=local"
 			});
 		});
 		
 		$( function() {
 			$("a[href='#' ]:contains('전시관')").on("click" , function() {
-				self.location = "../trip/listExhibit?pageNo=1"
+				self.location = "../trip/listExhibit?pageNo=1&area=local"
 			});
 		});
 		
 		$( function() {
 			$("a[href='#' ]:contains('미술관')").on("click" , function() {
-				self.location = "../trip/listGallery?pageNo=1"
+				self.location = "../trip/listGallery?pageNo=1&area=local"
 			});
 		});
 		
 		$( function() {
 			$("a[href='#' ]:contains('체험관')").on("click" , function() {
-				self.location = "../trip/listExperience?pageNo=1"
+				self.location = "../trip/listExperience?pageNo=1&area=local"
 			});
 		});
 		
 		$( function() {
 			$("a[href='#' ]:contains('민속마을')").on("click" , function() {
-				self.location = "../trip/listTradition?pageNo=1"
+				self.location = "../trip/listTradition?pageNo=1&area=local"
 			});
 		});
 		
@@ -127,7 +127,7 @@ body {
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('종만아')").on("click" , function() {
-				self.location = "/trip/listMuseum?pageNo=1"
+				self.location = "/trip/listMuseum?pageNo=1&area=local"
 			});
 		});
 		
