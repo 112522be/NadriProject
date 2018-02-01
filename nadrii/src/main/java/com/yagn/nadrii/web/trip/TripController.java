@@ -33,20 +33,12 @@ public class TripController {
 
 
 	@RequestMapping(value="listMuseum")	
-	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo, HttpSession session) throws Exception{
 				
 		System.out.println("/trip/listMuseum");
-				
+		
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
-		
-		if(area.equals("federal")) {
-			localName="";
-		}else if(area.equals("national")) {
-			areaCode ="";
-			localName="";
-		}
-		
 		
 		System.out.println(areaCode +":" +localName);
 		
@@ -61,9 +53,6 @@ public class TripController {
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
-		
 		
 		
 		return "forward:/Trip/listTrip.jsp";
@@ -85,30 +74,19 @@ public class TripController {
 	
 	
 	@RequestMapping(value="/listExhibit")
-	public String listExhibit(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listExhibit(Map map, @RequestParam("pageNo")int pageNo, HttpSession session) throws Exception{
 				
 		System.out.println("/trip/listExhibit");
 		
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
-		if(area.equals("federal")) {
-			localName="";
-		}else if(area.equals("national")) {
-			areaCode ="";
-			localName="";
-		}
-		
-		
-		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode,localName);
 		
 		map.put("trip", "Exhibit");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
 		
 				
 		return "forward:/Trip/listTrip.jsp";
@@ -116,88 +94,57 @@ public class TripController {
 	
 	
 	@RequestMapping(value="/listGallery")
-	public String listGallery(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listGallery(Map map, @RequestParam("pageNo")int pageNo, HttpSession session) throws Exception{
 		
 		System.out.println("/trip/listGallery");
 		
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
-		if(area.equals("federal")) {
-			localName="";
-		}else if(area.equals("national")) {
-			areaCode ="";
-			localName="";
-		}
-		
-		
-		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode,localName);
 		
 		map.put("trip", "Gallery");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
 		
 				
 		return "forward:/Trip/listTrip.jsp";
 	}
 	
 	@RequestMapping(value="/listExperience")
-	public String listExperience(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listExperience(Map map, @RequestParam("pageNo")int pageNo, HttpSession session) throws Exception{
 		
 		System.out.println("/trip/listExperience");
 		
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
-		if(area.equals("federal")) {
-			localName="";
-		}else if(area.equals("national")) {
-			areaCode ="";
-			localName="";
-		}
-		
-		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode,localName);
 		
 		map.put("trip", "Experience");
 		map.put("list", tripMap.get("list"));
-		map.put("pageNo", pageNo);	
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
+		map.put("pageNo", pageNo);		
 		
 				
 		return "forward:/Trip/listTrip.jsp";
 	}
 
 	@RequestMapping(value="/listTradition")
-	public String listTradition(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listTradition(Map map, @RequestParam("pageNo")int pageNo, HttpSession session) throws Exception{
 		
 		System.out.println("/trip/listTradition");
 		
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
-		if(area.equals("federal")) {
-			localName="";
-		}else if(area.equals("national")) {
-			areaCode ="";
-			localName="";
-		}
-				
-		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode,localName);
 		
 		map.put("trip", "Tradition");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
 		
 				
 		return "forward:/Trip/listTrip.jsp";

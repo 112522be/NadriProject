@@ -25,7 +25,7 @@ import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 public class TripRestController {
 	
 	
-
+	//private int page=1;
 	
 	@Autowired
 	@Qualifier("tripServiceImpl")
@@ -38,19 +38,43 @@ public class TripRestController {
 	
 	
 
+/*
+	//박물관 리스트
+	@RequestMapping(value="json/listMuseum/{pageNo}")
+	public Map listMuseum(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
+			
+	
+			System.out.println(pageNo);
+			String areaCode = (String)session.getAttribute("areaCode");
+			String localName = (String)session.getAttribute("localName");	
+			
+			System.out.println("RestController listMuseum");
+			System.out.println("현재 페이지 ==>" +pageNo);
+			Map map = new HashMap();
+			
+			System.out.println("/trip/json/listMuseum");
+			
+			Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
+			List list =(List)tripMap.get("list"); 
+			
+			map.put("list", tripMap.get("list"));
+			
+			
+			
+			return map;
+		}
+	*/
 		
 	///*
 	//박물관 리스트
-	@RequestMapping(value="json/listMuseum/{pageNo}/{areaCode}/{localName}")
-	public Map listMuseum(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
-		if(areaCode.equals("0")) {
-			areaCode="";
-		}
+	@RequestMapping(value="json/listMuseum/{pageNo}")
+	public Map listMuseum(@PathVariable("pageNo")int pageNo, HttpSession session) throws Exception{
 		
-		if(localName.equals("0")) {
-			localName ="";
-		}
-		System.out.println(areaCode +" : "+localName);
+		
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
+		
 		System.out.println("RestController listMuseum");
 		
 		Map map = new HashMap();
@@ -60,8 +84,6 @@ public class TripRestController {
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
 		
 		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));
 		
 		
@@ -69,21 +91,15 @@ public class TripRestController {
 		return map;
 	}
 	
-	///*
+	
 	//전시관 리스트
-	@RequestMapping(value="json/listExhibit/{pageNo}/{areaCode}/{localName}")
-	public Map listExhibit(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
+	@RequestMapping(value="json/listExhibit/")
+	public Map listExhibit(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExhibit");
 		
-		if(areaCode.equals("0")) {
-			areaCode="";
-		}
-		
-		if(localName.equals("0")) {
-			localName ="";
-		}
-		System.out.println(areaCode +" : "+localName);
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		Map map = new HashMap();
 				
@@ -91,8 +107,7 @@ public class TripRestController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode, localName);
 		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
+		
 		map.put("list", tripMap.get("list"));
 		
 		
@@ -102,18 +117,13 @@ public class TripRestController {
 	
 	
 	//체험관 리스트
-	@RequestMapping(value="json/listExperience/{pageNo}/{areaCode}/{localName}")
-	public Map listExperience(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
+	@RequestMapping(value="json/listExperience/")
+	public Map listExperience(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExperience");
-		if(areaCode.equals("0")) {
-			areaCode="";
-		}
 		
-		if(localName.equals("0")) {
-			localName ="";
-		}
-		System.out.println(areaCode +" : "+localName);
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
 		
 		Map map = new HashMap();
 		
@@ -121,8 +131,7 @@ public class TripRestController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode, localName);
 		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
+		
 		map.put("list", tripMap.get("list"));
 		
 		
@@ -132,26 +141,21 @@ public class TripRestController {
 	
 	
 	//민속마을 리스트
-	@RequestMapping(value="json/listTradition/{pageNo}/{areaCode}/{localName}")
-	public Map listTradition(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
+	@RequestMapping(value="json/listTradition/")
+	public Map listTradition(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listTradition");
-		if(areaCode.equals("0")) {
-			areaCode="";
-		}
 		
-		if(localName.equals("0")) {
-			localName ="";
-		}
-		System.out.println(areaCode +" : "+localName);
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
+		
 		Map map = new HashMap();
 		
 		System.out.println("/trip/json/listTradition");
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode, localName);
 		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
+		
 		map.put("list", tripMap.get("list"));
 		
 		
@@ -160,18 +164,14 @@ public class TripRestController {
 	
 	
 	//미술관 리스트	
-	@RequestMapping(value="json/listGallery/{pageNo}/{areaCode}/{localName}")
-	public Map listGallery(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
+	@RequestMapping(value="json/listGallery/")
+	public Map listGallery(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listGallery");
-		if(areaCode.equals("0")) {
-			areaCode="";
-		}
 		
-		if(localName.equals("0")) {
-			localName ="";
-		}
-		System.out.println(areaCode +" : "+localName);
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");	
+		
 		Map map = new HashMap();
 		
 		System.out.println("/trip/json/listMuseum");
@@ -179,8 +179,7 @@ public class TripRestController {
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode, localName);
 		
 		
-		map.put("areaCode", areaCode);
-		map.put("localName", localName);
+
 		map.put("list", tripMap.get("list"));
 		
 		

@@ -1,6 +1,4 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=refs/heads/master
+
 eclipse.preferences.version=1
 encoding//WebContent/planner/addPlannerView.jsp=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=EUC-KR
