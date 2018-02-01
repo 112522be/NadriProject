@@ -1,7 +1,5 @@
 package com.yagn.nadrii.web.group;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -80,11 +78,7 @@ public class GroupController {
 		System.out.println("/getGroup");
 		
 		Group group = groupService.getGroup(groupNo);
-		Join join = new Join();
-		
-		join.setUserId(joinService.getGroupMaster(groupNo));
-		group.setJoin(join);
-	
+			
 		model.addAttribute("group", group);
 		
 		return "forward:/group/getGroup?groupNo="+groupNo;
@@ -104,7 +98,7 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="updateGroup", method=RequestMethod.POST)
-	public String updateGroup(@ModelAttribute("group") Group group) throws Exception{
+	public String updateGroup(@ModelAttribute("group") Group group, @ModelAttribute("join") Join join) throws Exception{
 
 		System.out.println("/updateGroup");
 		

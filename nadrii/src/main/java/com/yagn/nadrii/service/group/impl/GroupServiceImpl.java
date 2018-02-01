@@ -40,6 +40,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	public Map<String , Object > getGroupList(Search search) throws Exception {
+		
 		List<Group> list= groupDao.getGroupList(search);
 		int totalCount = groupDao.getTotalCount(search);
 		

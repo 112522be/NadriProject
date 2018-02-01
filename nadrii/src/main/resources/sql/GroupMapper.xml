@@ -59,13 +59,13 @@
 	   		category_code 	= #{categoryCode}, 
 	   		meeting_date 	= #{meetingDate:VARCHAR}
 	   	</set>
-	   	WHERE group_no = #{groupNo}
+	   	WHERE group_no = #{join.groupNo}
 	</update>
 	
 	<delete id="deleteGroup"		parameterType="group">
 	 	DELETE FROM groups
 	 	<where>
-	 		group_no = #{groupNo}
+	 		group_no = #{join.groupNo}
 	 	</where>
 	 </delete>
 	 

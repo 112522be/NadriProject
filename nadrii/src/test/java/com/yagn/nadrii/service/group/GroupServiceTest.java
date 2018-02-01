@@ -1,6 +1,5 @@
 package com.yagn.nadrii.service.group;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,8 +63,7 @@ public class GroupServiceTest {
 	public void testGetGroup() throws Exception {
 		
 		Group group = new Group();
-		Join join = new Join();
-	
+		
 		group = groupService.getGroup(60033);
 		
 		System.out.println(group);
@@ -75,33 +73,33 @@ public class GroupServiceTest {
 	//@Test
 	public void testUpdateGroup() throws Exception{
 		 
-		Group group = groupService.getGroup(10120);
-		Assert.assertNotNull(group);
+		Group group = new Group();
+		Join join = new Join();
 		
-	//	Assert.assertEquals("testGroupName", group.getGroupName());
-	//	Assert.assertEquals("111-2222-3333", group.getPhone());
-	//	Assert.assertEquals("占쏙옙竪�", group.getAddr());
-	//	Assert.assertEquals("test@test.com", group.getEmail());
-
-	//	group.setProdName("占쏙옙占쏙옙占쏙옙占�change");
-	//	group.setPrice(1700);
+		group = groupService.getGroup(60033);
+		
+		System.out.println(group);
+		
+		group.setGroupName("모임이름");
+		join.setGroupNo(60033);
+		group.setJoin(join);
 		
 		groupService.updateGroup(group);
-		
-		group = groupService.getGroup(10120);
-	//	Assert.assertNotNull(group);
-		
-		//==> console 확占쏙옙
+				
 		System.out.println(group);
-			
-		//==> API 확占쏙옙
-	//	Assert.assertEquals("change", group.getGroupName());
-	//	Assert.assertEquals("777-7777-7777", group.getPhone());
-	//	Assert.assertEquals("change", group.getAddr());
-	//	Assert.assertEquals("change@change.com", group.getEmail());
 	 }
+	
+	//@Test
+	public void testDeleteGroup() throws Exception {
+			
+		Group group = new Group();
+		
+	//	joinService.deleteJoin(join);
+		
+		groupService.deleteGroup(group);
+	}
 	 
-	 //==>  占쌍쇽옙占쏙옙 풀占쏙옙 占쏙옙占쏙옙占싹몌옙....
+	
 	//@Test
 	public void testGetGroupListAll() throws Exception{
 		 
