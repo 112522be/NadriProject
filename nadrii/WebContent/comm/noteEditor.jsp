@@ -27,17 +27,20 @@
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
 					alert("파일 업로드에 실패했습니다.")
 				}
 	 	    });
-	 	    
-	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
-	 		   addHashTag($(this).val());
-			})
 	 	}
+        function deleteFile(file) {
+			
+		}
+        function addThumbnail(filePath) {
+			$('input[name="thumbNailFileName"]').val(filePath);
+		}
         var hashtagList=",";
         function listHashTag(filePath) {
         	$.ajax({
@@ -63,8 +66,18 @@
 			$('button.hashtags:contains("'+value+'")').remove();
 			$('#selectedHashTags').append("#"+value+" ")
 			hashtagList+=value+",";
-			$('input[name=hashtag]').val(hashtagList);
+			$('input[name="hashtag"]').val(hashtagList);
 		}
+        $(function() {
+	 	    
+ 	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
+ 	 		   addHashTag($(this).val());
+ 			})
+ 			
+  			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
+ 				console.log($(this).attr('src'))
+ 			}) 
+		})
 	</script>
 </head>
 <body>
@@ -88,12 +101,13 @@
 		<input type="hidden" name="hashtag">
 		<input type="hidden" name="lat">
 		<input type="hidden" name="lng">
+		<input type="hidden" name="thumbNailFileName">
+		
 		<div>
 			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
 		</div>
 		<br/>
 		<div id="cndHashTags"></div>
 		<br/>
-		<div id="cndThumbnail"></div>
 </body>
 </html>
