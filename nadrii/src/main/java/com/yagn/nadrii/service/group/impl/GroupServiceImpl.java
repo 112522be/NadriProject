@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupDao;
 import com.yagn.nadrii.service.group.GroupService;;
 
@@ -32,8 +33,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	///Method
-	public void addGroup(Group group) throws Exception {
-		groupDao.addGroup(group);
+	public void addGroup(Group group, Join join) throws Exception {
+		groupDao.addGroup(group, join);
 	}
 
 	public Group getGroup(int groupNo) throws Exception {

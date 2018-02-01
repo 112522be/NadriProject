@@ -761,9 +761,10 @@
 		        el.removeChild (el.lastChild);
 		    }
 		}
-					
-		var arrayStart;
-		var arrayEnd;
+	
+		var iwArray=[];
+		var arrayStart =[];
+		var arrayEnd = [];
 		
 		function getInfo(k){
 			$.ajax({
@@ -782,11 +783,7 @@
 					
 					var pathStartSTN=[];
 					var pathEndSTN=[];
-					
-
-					arrayStart=[];
-					arrayEnd=[];
-					
+										
 					var code = returnData.code;
 					
 					if(code != null){
@@ -837,100 +834,107 @@
 									    position : startMarker.getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[0]=startInfowindow;
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
 									    position : passMarker[1].getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[1]=pass1Infowindow;
 								}
 								if(k==2){
 									var pass2Infowindow = new daum.maps.InfoWindow({
 									    position : passMarker[2].getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[2]=pass2Infowindow;
 								}
 								if(k==3){
 									var pass3Infowindow = new daum.maps.InfoWindow({
 									    position : passMarker[3].getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[3]=pass3Infowindow;
 								}
 								if(k==4){
 									var pass4Infowindow = new daum.maps.InfoWindow({
 									    position : passMarker[4].getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[4]=pass4Infowindow;
 								}
 								if(k==5){
 									var pass5Infowindow = new daum.maps.InfoWindow({
 									    position : passMarker[5].getPosition(), 
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
+									iwArray[5]=pass5Infowindow;
 								}			
 								
-								
-								if(startInfowindow != null){
+								///////인포윈도우
+								if(iwArray[0] != null){
 									
 									daum.maps.event.addListener(startMarker, 'mouseover', function() {
-										startInfowindow.open(map, startMarker);
+										iwArray[0].open(map, startMarker);
 									});
 									
 									daum.maps.event.addListener(startMarker, 'mouseout', function() {
-										startInfowindow.close();
+										iwArray[0].close();
 									});
 									
-								}else if(pass1Infowindow != null){
+								}else if(iwArray[1] != null){
 									
 									daum.maps.event.addListener(passMarker[1], 'mouseover', function() {
-										pass1Infowindow.open(map, passMarker[1]);
+										iwArray[1].open(map, passMarker[1]);
 									});
 									
 									daum.maps.event.addListener(passMarker[1], 'mouseout', function() {
-										pass1Infowindow.close();
+										iwArray[1].close();
 									});
 									
-								}else if(pass2Infowindow != null){
+								}else if(iwArray[2] != null){
 									
 									daum.maps.event.addListener(passMarker[2], 'mouseover', function() {
-										pass2Infowindow.open(map, passMarker[2]);
+										iwArray[2].open(map, passMarker[2]);
 									});
 									
 									daum.maps.event.addListener(passMarker[2], 'mouseout', function() {
-										pass2Infowindow.close();
+										iwArray[2].close();
 									});
 
-								}else if(pass3Infowindow != null){
+								}else if(iwArray[3] != null){
 									
 									daum.maps.event.addListener(passMarker[3], 'mouseover', function() {
-										pass3Infowindow.open(map, passMarker[3]);
+										iwArray[3].open(map, passMarker[3]);
 									});
 									
 									daum.maps.event.addListener(passMarker[3], 'mouseout', function() {
-										pass3Infowindow.close();
+										iwArray[3].close();
 									});
 									
-								}else if(pass4Infowindow != null){
+								}else if(iwArray[4] != null){
 									
 									daum.maps.event.addListener(passMarker[4], 'mouseover', function() {
-										pass4Infowindow.open(map, passMarker[4]);
+										iwArray[4].open(map, passMarker[4]);
 									});
 									
 									daum.maps.event.addListener(passMarker[4], 'mouseout', function() {
-										pass4Infowindow.close();
+										iwArray[4].close();
 									});
 									
-								}else if(pass5Infowindow != null){
+								}else if(iwArray[5] != null){
 									
 									daum.maps.event.addListener(passMarker[5], 'mouseover', function() {
-										pass5Infowindow.open(map, passMarker[5]);
+										iwArray[5].open(map, passMarker[5]);
 									});
 									
 									daum.maps.event.addListener(passMarker[5], 'mouseout', function() {
-										pass5Infowindow.close();
+										iwArray[5].close();
 									});
 								}
-														
+								
+								
 							}else if(i%2==1){//도보 제외 지하철, 버스
 										
 								var pathStartMarker = new daum.maps.Marker({
@@ -1003,8 +1007,12 @@
 						arrayEnd = pathEndSTN;
 					
 						for( var z=0; z<arrayStart.length ; z++){
+							
+							console.log(":::::   "+arrayStart);
 							arrayStart[z].setMap(map);
+							kk.push(arrayStart[z]);
 							arrayEnd[z].setMap(map);
+							qq.push(arrayEnd[z]);
 						}		
 																
 						daum.maps.event.addListener(pathStartSTN[0], 'mouseover', function() {
@@ -1086,9 +1094,11 @@
 					
 				}
 			});
+			
 		}// getInfo 끝
 		
-		
+		var kk=[];
+		var qq=[];
 
 		function callMapObjApiAJAX(mabObj){
 							
@@ -1214,8 +1224,8 @@
 					outStartInfowindow.open(map, startSTN); 
 					outEndInfowindow.open(map, endSTN); 
 							                    
-					rk.insert(k+1, startSTN.getPosition());
-					rk.insert(k+2, endSTN.getPosition());
+					realMarkerArray.insert(k+1, startSTN.getPosition());
+					realMarkerArray.insert(k+2, endSTN.getPosition());
 					
 					function line2(){
 						STNpolyline = new daum.maps.Polyline({
@@ -1270,6 +1280,7 @@
 			if(STNpolyline != null || polylineArray != null){
 				deleteInSearch();
 			}
+			deletePathMarker();
 			
 			tempMarkerArray=[];
 			realMarkerArray=[];
@@ -1363,12 +1374,19 @@
 		}
 		
 		function deletePathMarker(){
-			for( var z=0; z<arrayStart.length ; z++){
-				console.log(arrayStart[z]);
-				console.log(arrayEnd[z]);
-				arrayStart[z].setMap(null);
-				arrayEnd[z].setMap(null);
+			for( var z=0; z<kk.length ; z++){
+				console.log(kk.length);
+				
+				kk[z].setMap(null);
 			}
+			for(var i=0; i<qq.length; i++){
+				qq[i].setMap(null);
+			}
+			for(var i=0; i<iwArray.length;i++){
+				iwArray[i]=null;
+				iwArray=[];
+			}
+						
 		}
 		
 		

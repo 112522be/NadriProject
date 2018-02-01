@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupService;
 
 @RestController
@@ -34,11 +35,11 @@ public class GroupRestController {
 	int pageSize;
 
 	@RequestMapping(value="json/addGroup", method=RequestMethod.POST)
-	public Group addGroup(@RequestBody Group group) throws Exception {
+	public Group addGroup(@RequestBody Group group, @RequestBody Join join) throws Exception {
 
 		System.out.println("/group/json/addGroup :: POST");
 		
-		groupService.addGroup(group);
+		groupService.addGroup(group, join);
 		
 		return group;
 	}

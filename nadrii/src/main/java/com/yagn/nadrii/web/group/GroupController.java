@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yagn.nadrii.common.Page;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupService;
 
 @Controller
@@ -48,11 +49,11 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="addGroup", method=RequestMethod.POST)
-	public String addGroup(@ModelAttribute("group") Group group) throws Exception {
+	public String addGroup(@ModelAttribute("group") Group group, @ModelAttribute("join") Join join) throws Exception {
 
 		System.out.println("/addGroup");
 		
-		groupService.addGroup(group);
+		groupService.addGroup(group, join);
 
 		return "forward:/group/addGroup.jsp";
 	}

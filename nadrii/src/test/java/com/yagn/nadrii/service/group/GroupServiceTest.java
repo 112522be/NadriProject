@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
+import com.yagn.nadrii.service.domain.Join;
 
 /*
  *	FileName :  GroupServiceTest.java
@@ -38,13 +39,16 @@ public class GroupServiceTest {
 	public void testAddGroup() throws Exception {
 		
 		Group group = new Group();
+		Join join = new Join();
 		
 		group.setGroupName("½Äµµ¶ô¸ðÀÓ");
 		group.setTitle("1");
 		group.setText("³È³È");
 		group.setCategoryCode("a");
 		
-		groupService.addGroup(group);
+		join.setGroupRole(2);
+		join.setUserId("userid");
+		groupService.addGroup(group, join);
 		
 	//	group = groupService.getGroup(10080);
 
