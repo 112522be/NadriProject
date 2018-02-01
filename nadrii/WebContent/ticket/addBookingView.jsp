@@ -222,8 +222,7 @@
 			
 			var basket = {
 				"ticketTitle" : '${ tourTicket.title }' ,
-//				"buyer" : "tempUserName",
-				"imageFile" : '${ detailImage.originimgurl }' , 
+				"ticketImage" : '${ detailImage.originimgurl }' , 
 				"bookingDate" : '${ bookingDate }' ,
 				"cancelDeadline" : "tempCancelDate" ,
 				"ticketPriceAll" : ticketPriceAll ,
