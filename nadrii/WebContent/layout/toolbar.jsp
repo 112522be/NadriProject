@@ -1,171 +1,53 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<!-- ToolBar Start /////////////////////////////////////-->
-<div class="navbar  navbar-inverse navbar-fixed-top">
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+	<!-- javascript -->
+	<script src="/resources/js/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
 	
-	<div class="container">
-	       
-		<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-		
-		<!-- toolBar Button Start //////////////////////// -->
-		<div class="navbar-header">
-		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		</div>
-		<!-- toolBar Button End //////////////////////// -->
-		
-	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	         
-	         	<!-- Tool Bar 를 다양하게 사용하면.... -->
-	             <ul class="nav navbar-nav">
-	             
-	              <!--  회원관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >회원관리</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">개인정보조회</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'admin'}">
-	                         	<li><a href="#">회원정보조회</a></li>
-	                         </c:if>
-	                         
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc...</a></li>
-	                     </ul>
-	                 </li>
-	                 
-	              <!-- 판매상품관리 DrowDown  -->
-	               <c:if test="${sessionScope.user.role == 'admin'}">
-		              <li class="dropdown">
-		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >판매관리</span>
-		                         <span class="caret"></span>
-		                     </a>
-		                     <ul class="dropdown-menu">
-		                         <li><a href="#">판매상품등록</a></li>
-		                         <li><a href="#">판매상품관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">etc..</a></li>
-		                     </ul>
-		                </li>
-	                 </c:if>
-	                 
-	              <!-- 구매관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >상품구매</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">상 품 검 색</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                           <li><a href="#">구매이력조회</a></li>
-	                         </c:if>
-	                         
-	                         <li><a href="#">최근본상품</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">티켓관리</a></li>
-	                     </ul>
-	                 </li>
-	                 
-	                 <li><a href="#">etc...</a></li>
-	             </ul>
-	             
-	             <ul class="nav navbar-nav navbar-right">
-	                <li><a href="#">로그아웃</a></li>
-	            </ul>
-		</div>
-		<!-- dropdown hover END -->	       
-	    
-	</div>
-</div>
-		<!-- ToolBar End /////////////////////////////////////-->
- 	
-   	
-   	
-   	<script type="text/javascript">
-   	
-  	//============= 최근본상품 history() Event  처리 =============
-   	function history(){
-		popWin = window.open("/history.jsp",
-													"popWin",
-													"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-	}   	
+	<!-- css -->
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
+	<link href="/resources/css/flexslider.css" rel="stylesheet" />
+	<link href="/resources/css/style.css" rel="stylesheet" />
 	
-		//============= logout Event  처리 =============	
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('로그아웃')").on("click" , function() {
-				$(self.location).attr("href","/user/logout");
-				//self.location = "/user/logout"
-			}); 
-		 });
-		
-		//============= 회원정보조회 Event  처리 =============	
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('회원정보조회')").on("click" , function() {
-				//$(self.location).attr("href","/user/logout");
-				self.location = "/user/listUser"
-			}); 
-		 });
-		
-		//=============  개인정보조회회 Event  처리 =============	
-	 	$( "a:contains('개인정보조회')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-		});
-		
-	 	//=============  판매상품등록 Event  처리 =============	
-	 	$( "a:contains('판매상품등록')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/product/addProductView.jsp;");
-		});
-	 	
-	 	//=============   판매상품관리 Event  처리 =============	
-	 	$( "a:contains('판매상품관리')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/product/listProduct?menu=manage");
-		});
-	 	
-	 	//=============   상 품 검 색 Event  처리 =============	
-	 	$( "a:contains('상 품 검 색')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/product/listProduct?menu=search");
-		});
-	 	
-	 	//=============   구매이력조회 Event  처리 =============	
-	 	$( "a:contains('구매이력조회')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/purchase/listPurchase");
-		});
-	 	
-	 	//=============   최근본상품 Event  처리 =============	
-	 	$( "a:contains('최근본상품')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			history();
-		});
-	 	
-	 	//=============   유료입장권 조회 Event  처리 =============	
-	 	$( "a:contains('티켓관리')" ).bind("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/ticket/testTicket");
-		});
-	 	
-		
-	</script>  
+	<!-- Theme skin -->
+	<link href="/resources/skins/default.css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<div class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                   	</button>
+					<a class="navbar-brand" href="../index.jsp"><span>Na</span>drii</a>
+				</div>
+				<div class="navbar-collapse collapse ">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="../index.jsp">Home</a></li>
+						<li><a href="/trip/listTrip">나들이 정보</a></li>
+						<li><a href="/comm/listComm">나만의 나들이</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 <b class=" icon-angle-down"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/planner/listPlanner">플래너 게시판</a></li>
+								<li><a href="/planner/addPlannerView.jsp">플래너 작성</a></li>
+							</ul>
+						</li>
+						<li><a href="/ticket/listTicket">나들이티켓</a></li>
+						<li><a href="/group/listGroup">나들이모임</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+</body>
+</html>

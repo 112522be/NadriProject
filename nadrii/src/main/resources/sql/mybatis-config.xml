@@ -22,7 +22,6 @@
 		<typeAlias alias="user" type="com.yagn.nadrii.service.domain.User" />
 		<typeAlias alias="group" type="com.yagn.nadrii.service.domain.Group"/>
 		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.JoinMember"/>
-		<typeAlias alias="purchase" type="com.yagn.nadrii.service.domain.Purchase"/>
 	</typeAliases>
 	
 	<!-- SQL Definition :: file include -->
