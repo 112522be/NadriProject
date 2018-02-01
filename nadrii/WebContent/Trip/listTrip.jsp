@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	<script src="../resources/script/html2canvas.js"></script>	
+	
 	
 	<script type="text/javascript">
 	
@@ -371,8 +371,7 @@
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
-  <input type="button" onclick="javascript:capture()"/>
-  <input type="hidden" name="imgSrc" id="imgSrc" />
+
 </div>	
  
 </body>
