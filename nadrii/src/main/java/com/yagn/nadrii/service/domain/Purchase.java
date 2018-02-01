@@ -5,24 +5,23 @@ import java.sql.Date;
 public class Purchase {
 	
 	/// Field
-	private int ticketNo;				// 티켓번호
-	private User buyer;					// 유저아이디
-	private String ticketTitle;			// 티켓명
-	private String imageFile;			// 티켓 사진
-	private Date regDate;				// 저장일자
-	private String bookingDate;			// 예매일자
-	private String lat; 				// x좌표
-	private String lng; 				// y좌표
-	private String cancelDeadline;		// 취소일자
+	private int ticketNo;			
+	private User buyer;				
+	private String ticketTitle;		
+	private String imageFile;		
+	private Date regDate;			
+	private String bookingDate;		
+	private String lat; 			
+	private String lng; 			
+	private String cancelDeadline;	
 	
-	// 추후 타입 변경할 것
-	private int price;					// 티켓가격
-	private int ticketType;			// 티켓유형
-	private int ticketCount;			// 티켓수량
+	private int price;				
+	private int ticketType;			
+	private int ticketCount;		
 	
-	private int contentId;				// 컨텐트 아이디
-	private int contentTypeId;			// 컨텐트 타입 아이디
-	private String flag; 				// 바스켓 / 구매 구분
+	private int contentId;			
+	private int contentTypeId;		
+	private String flag; 			
 	
 	public Purchase() {
 		

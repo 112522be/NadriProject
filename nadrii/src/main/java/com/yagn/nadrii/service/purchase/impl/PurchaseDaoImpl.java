@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseDao;
 
-
 @Repository("purchaseDaoImpl")
 public class PurchaseDaoImpl implements PurchaseDao {
 
@@ -16,6 +15,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
+	
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}

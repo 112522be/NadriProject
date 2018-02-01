@@ -100,14 +100,14 @@ public class TourApiDaoImpl implements TicketDao {
 		try {
 			// Date currentDate = new Date();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-			// System.out.println("ÇöÀç³¯Â¥ È®ÀÎ :: " + simpleDateFormat.format(new Date()));
+			// System.out.println("current date check :: " + simpleDateFormat.format(new Date()));
 
 			StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(
 					searchFestivalURL + essentialURL 
 					+ "&eventStartDate=" + simpleDateFormat.format(new Date())
 							+ "&pageNo=" + openApiSearch.getPageNo() 
 							+ "&numOfRows=" + openApiSearch.getNumOfRows()
-							+ "&arrange=B"			//ÃßÈÄ Á¤·Ä Ãß°¡ÇÒ°Í(4°¡Áö)
+							+ "&arrange=B"			
 							));
 
 			JSONObject sfJsonObj = (JSONObject) JSONValue.parse(searchFestivalSB.toString());
@@ -143,9 +143,8 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicket.setContentid(searchFestival.getContentid());
 				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 				
-				System.out.println("\n[1. Å¸ÀÌÆ² È®ÀÎ] ==> " + searchFestival.getTitle());
+				System.out.println("\n[1. Title Check] ==> " + searchFestival.getTitle());
 				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-					System.out.println("[»çÁøÀÌ ¾ø¾î¼­ ³×ÀÌ¹ö ÀÌ¹ÌÁö °Ë»ö È£Ãâ]");
 					String image = ticketService.getNaverImage(searchFestival.getTitle());
 					tourTicket.setFirstimage(image);
 				} else {
@@ -188,28 +187,28 @@ public class TourApiDaoImpl implements TicketDao {
 				List<String> priceList = new ArrayList<String>();
 				List<String> entranceFee = new ArrayList<String>();
 				
-				System.out.println("\n[2. ÀÔÀå±Ç Á¤º¸ È®ÀÎ] ==> " + priceInfo);
+				System.out.println("\n[2. ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½] ==> " + priceInfo);
 				
-				// °¡°ÝÁ¤º¸°¡ µé¾îÀÖ´Â ÀÖ´Ù¸é......
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ö´Ù¸ï¿½......
 				if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
-					System.out.println("\n[3. ¼ýÀÚ¸¦ Æ÷ÇÔÇÑ ¹®±¸ È®ÀÎ] ==> " + priceInfo);
+					System.out.println("\n[3. ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½] ==> " + priceInfo);
 
 					String[] priceSplit = priceInfo.split(" |/");
 					for (int k = 0; k < priceSplit.length; k++) {
-						System.out.println("[4. ÆÄ½Ì °ª È®ÀÎ] ==>" + priceSplit[k]);
+						System.out.println("[4. ï¿½Ä½ï¿½ ï¿½ï¿½ È®ï¿½ï¿½] ==>" + priceSplit[k]);
 
-						// split ÇÑ array¿¡¼­ °¡°ÝÁ¤º¸¸¸ ¼±ÅÃ
+						// split ï¿½ï¿½ arrayï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
 
-							System.out.println("\n[5. °¡°Ý Á¤º¸°¡ µé¾îÀÖ´Â ¹è¿­ °ª È®ÀÎ] ==> " + priceSplit[k]);
+							System.out.println("\n[5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½è¿­ ï¿½ï¿½ È®ï¿½ï¿½] ==> " + priceSplit[k]);
 							String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-							System.out.println("[6. ¿ä±Ý È®ÀÎ] ==> " + priceValue);
+							System.out.println("[6. ï¿½ï¿½ï¿½ È®ï¿½ï¿½] ==> " + priceValue);
 
 							priceList.add(priceValue);
 							
 							for (int j = 0; j < priceList.size(); j++) {
-								System.out.println("		[7. ¸®½ºÆ®¿¡ ÀúÀåµÈ ¿ä±Ý °ª È®ÀÎ] ==>" + priceList.get(j));
+								System.out.println("		[7. ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ È®ï¿½ï¿½] ==>" + priceList.get(j));
 								System.out.println("");
 								tourTicket.setUsetimefestival(priceList);
 							}
@@ -217,18 +216,18 @@ public class TourApiDaoImpl implements TicketDao {
 					}
 				
 				} else if (priceInfo.equals("")) {
-					System.out.println("[8. ÀÔÀå±Ç NULL :: '¹«·á' ¶ó°í Ãâ·Â]");
-					entranceFee.add("¹«·á");
+					System.out.println("[8. ï¿½ï¿½ï¿½ï¿½ï¿½ NULL :: 'ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½]");
+					entranceFee.add("ï¿½ï¿½ï¿½ï¿½");
 					tourTicket.setUsetimefestival(entranceFee);
 
 				} else {
-					System.out.println("[9. Á¤º¸ ±×´ë·Î Ãâ·Â]");
+					System.out.println("[9. ï¿½ï¿½ï¿½ï¿½ ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½]");
 					entranceFee.add(priceInfo);
 					tourTicket.setUsetimefestival(entranceFee);
 				}
 
 				
-				System.out.println("[10. µµ¸ÞÀÎ °ª È®ÀÎ] ==> " + priceList.toString());
+				System.out.println("[10. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È®ï¿½ï¿½] ==> " + priceList.toString());
 				//*/	
 				
 				tourTicketList.add(tourTicket);
@@ -265,52 +264,52 @@ public class TourApiDaoImpl implements TicketDao {
 			detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
 
 			if (detailIntro.getAgelimit() == "" || detailIntro.getAgelimit() == null) {
-				detailIntro.setAgelimit("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setAgelimit("There is no Data");
 			}
 			if (detailIntro.getBookingplace() == "" || detailIntro.getBookingplace() == null) {
-				detailIntro.setBookingplace("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setBookingplace("There is no Data");
 			}
 			if (detailIntro.getDiscountinfofestival() == "" || detailIntro.getDiscountinfofestival() == null) {
-				detailIntro.setDiscountinfofestival("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setDiscountinfofestival("There is no Data");
 			}
 			if (detailIntro.getEventhomepage() == "" || detailIntro.getEventhomepage() == null) {
-				detailIntro.setEventhomepage("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setEventhomepage("There is no Data");
 			}
 			if (detailIntro.getEventplace() == "" || detailIntro.getEventplace() == null) {
-				detailIntro.setEventplace("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setEventplace("There is no Data");
 			}
 			if (detailIntro.getFestivalgrade() == "" || detailIntro.getFestivalgrade() == null) {
-				detailIntro.setFestivalgrade("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setFestivalgrade("There is no Data");
 			}
 			if (detailIntro.getPlaceinfo() == "" || detailIntro.getPlaceinfo() == null) {
-				detailIntro.setPlaceinfo("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setPlaceinfo("There is no Data");
 			}
 			if (detailIntro.getPlaytime() == "" || detailIntro.getPlaytime() == null) {
-				detailIntro.setPlaytime("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setPlaytime("There is no Data");
 			}
 			if (detailIntro.getProgram() == "" || detailIntro.getProgram() == null) {
-				detailIntro.setProgram("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setProgram("There is no Data");
 			}
 			if (detailIntro.getSpendtimefestival() == "" || detailIntro.getSpendtimefestival() == null) {
-				detailIntro.setSpendtimefestival("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSpendtimefestival("There is no Data");
 			}
 			if (detailIntro.getSponsor1tel() == "" || detailIntro.getSponsor1tel() == null) {
-				detailIntro.setSponsor1tel("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSponsor1tel("There is no Data");
 			}
 			if (detailIntro.getSponsor2tel() == "" || detailIntro.getSponsor2tel() == null) {
-				detailIntro.setSponsor2tel("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSponsor2tel("There is no Data");
 			}
 			if (detailIntro.getSponsor1() == "" || detailIntro.getSponsor1() == null) {
-				detailIntro.setSponsor1("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSponsor1("There is no Data");
 			}
 			if (detailIntro.getSponsor2() == "" || detailIntro.getSponsor2() == null) {
-				detailIntro.setSponsor2("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSponsor2("There is no Data");
 			}
 			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
-				detailIntro.setSubevent("°ü·ÃÁ¤º¸¾øÀ½");
+				detailIntro.setSubevent("There is no Data");
 			}
 			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
-				detailIntro.setUsetimefestival("¹«·á");
+				detailIntro.setUsetimefestival("Free");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -322,7 +321,6 @@ public class TourApiDaoImpl implements TicketDao {
 	public DetailImage getDetailImage(int contentId, String title) throws Exception {
 
 		System.out.println("\n[tourApiDaoImpl.java]::getDetailImage");
-		System.out.println("[getDetailImage ÀÎÄÚµù È®ÀÎ]==>" + title);
 		
 		DetailImage detailImage = new DetailImage();
 
@@ -336,10 +334,8 @@ public class TourApiDaoImpl implements TicketDao {
 
 		if (diBody.get("items").toString().equals("")) {
 			
-			System.out.println("[»çÁø Å¸ÀÌÆ² È®ÀÎ]==>" + title);
 			String image = ticketService.getNaverImage(title);
 			detailImage.setOriginimgurl(image);	
-			System.out.println("\n[getNaverImage·Î ºÎÅÍ ¹ÞÀº ÀÌ¹ÌÁö :: ]==>" + image);
 			
 			return detailImage;
 			
@@ -385,33 +381,32 @@ public class TourApiDaoImpl implements TicketDao {
 		List<String> priceList = new ArrayList<String>();
 		List<String> entranceFee = new ArrayList<String>();
 
-		System.out.println("\n[2. ÀÔÀå±Ç Á¤º¸ È®ÀÎ] ==> " + priceInfo);
+		System.out.println("\n[2] ==> " + priceInfo);
 		
 		try {
-			// °¡°ÝÁ¤º¸°¡ µé¾îÀÖ´Â ÀÖ´Ù¸é......
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ö´Ù¸ï¿½......
 			if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
-				System.out.println("\n[3. ¼ýÀÚ¸¦ Æ÷ÇÔÇÑ ¹®±¸ È®ÀÎ] ==> " + priceInfo);
+				System.out.println("\n[3] ==> " + priceInfo);
 
 				String[] priceSplit = priceInfo.split(" |/|:");
 				
-				System.out.println("\n[4. ÆÄ½Ì °¹¼ö È®ÀÎ]==>"+priceSplit.length);
+				System.out.println("\n[4]==>"+priceSplit.length);
 				
 				for (int k = 0; k < priceSplit.length; k++) {
-					System.out.println("\n[4. ÆÄ½Ì °ª È®ÀÎ] ==>" + priceSplit[k]);
+					System.out.println("\n[4] ==>" + priceSplit[k]);
 
-					// split ÇÑ array¿¡¼­ °¡°ÝÁ¤º¸¸¸ ¼±ÅÃ
 					if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
 
-						System.out.println("\n[5. °¡°Ý Á¤º¸°¡ µé¾îÀÖ´Â ¹è¿­ °ª È®ÀÎ] ==> " + priceSplit[k]);
+						System.out.println("\n[5] ==> " + priceSplit[k]);
 						String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-						System.out.println("\n[6. ¿ä±Ý È®ÀÎ] ==> " + priceValue);
+						System.out.println("\n[6] ==> " + priceValue);
 
 						priceList.add(priceValue);
-						System.out.println("\n[7. °¡°Ý ¸®½ºÆ® °ª È®ÀÎ]==>" + priceList.size());						
+						System.out.println("\n[7]==>" + priceList.size());						
 						
 						for (int j = 0; j < priceList.size(); j++) {
-							System.out.println("		[8. ¸®½ºÆ®¿¡ ÀúÀåµÈ ¿ä±Ý °ª È®ÀÎ] ==>" + priceList.get(j));
+							System.out.println("		[8] ==>" + priceList.get(j));
 							System.out.println("");
 							// tourTicket.setUsetimefestival(priceList);
 						}
@@ -419,13 +414,13 @@ public class TourApiDaoImpl implements TicketDao {
 				}
 
 			} else if (priceInfo.equals("")) {
-				System.out.println("[9. ÀÔÀå±Ç NULL :: '¹«·á' ¶ó°í Ãâ·Â]");
-				entranceFee.add("¹«·á");
+				System.out.println("[9. if it's Null]");
+				entranceFee.add("Free");
 				return entranceFee;
 				// tourTicket.setUsetimefestival(entranceFee);
 
 			} else {
-				System.out.println("[10. Á¤º¸ ±×´ë·Î Ãâ·Â]");
+				System.out.println("[10. if it's not Null]");
 				entranceFee.add(priceInfo);
 				return entranceFee;
 				// tourTicket.setUsetimefestival(entranceFee);

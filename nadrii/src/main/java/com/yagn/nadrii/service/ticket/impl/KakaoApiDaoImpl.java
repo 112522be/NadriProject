@@ -78,7 +78,7 @@ public class KakaoApiDaoImpl implements TicketDao {
 	public String getKakaoImage(String title) {
 
 		System.out.println("\n[KakaoApiDaoImpl.java]::getKakaoImage");
-		System.out.println("[getKakaoImage 인코딩 확인]==>" + title);
+		System.out.println("[getKakaoImage title check]==>" + title);
 
 		int minImage = 200;
 		String kakaoReturnImage = "";

@@ -83,7 +83,7 @@ public class TicketController {
 			) throws Exception {
 		
 		System.out.println("\n /ticket/getTicket : GET");
-		System.out.println("[getTicket 인코딩 확인]==>" + title);
+		System.out.println("[getTicket 확인]==>" + title);
 		
 		String decodeTitle = URLDecoder.decode(title, "UTF-8");
 		
