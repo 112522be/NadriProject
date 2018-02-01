@@ -24,29 +24,37 @@
 // 임시 해결방법 : 재차 호출의 경우 문제 없이 호출되는 것을 확인해서 맵생성, 다이얼로그 생성을 각각 2번씩 호출함(우회 코딩)
 	
 	///////////////////무한 스크롤 시작
-	/*
+	///*
 	//page할 변수
 	var page = 1;
+	var flag =0;
 	//*/
 	
 	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
-	
+	$(function(){
+		page++;
+	});
 	
 	
 	
 	
 	//스크롤이 끝에 닿을 때를 캐치
 	$(window).scroll(function() { 
-		if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-			listTrip();
-			
+		if($(window).scrollTop() == $(document).height() - $(window).height() & flag ==1){
+			flag=0;
+		}
+		
+		if ($(window).scrollTop() >= $(document).height() - $(window).height()& flag ==0) {
+			flag=1;
+			listTrip(page);
+			page++;
 		}
 	});
 	
 	//페이지 네이게이션을 수행하는 JS
 	function listTrip(){
 		$.ajax({
-			url:"../trip/json/list"+'${trip}'+"/",
+			url:"../trip/json/list"+'${trip}'+"/"+page+"",
 			method:"GET",
 			dataType:"json",
 			headers :{

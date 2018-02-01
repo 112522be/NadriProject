@@ -67,8 +67,8 @@ public class TripRestController {
 		
 	///*
 	//박물관 리스트
-	@RequestMapping(value="json/listMuseum/")
-	public Map listMuseum(HttpSession session) throws Exception{
+	@RequestMapping(value="json/listMuseum/{pageNo}")
+	public Map listMuseum(@PathVariable("pageNo")int pageNo, HttpSession session) throws Exception{
 		
 		
 		
@@ -81,7 +81,7 @@ public class TripRestController {
 		
 		System.out.println("/trip/json/listMuseum");
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060100",areaCode, localName);
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
@@ -94,7 +94,7 @@ public class TripRestController {
 	
 	//전시관 리스트
 	@RequestMapping(value="json/listExhibit/")
-	public Map listExhibit(HttpSession session) throws Exception{
+	public Map listExhibit(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExhibit");
 		
@@ -105,7 +105,7 @@ public class TripRestController {
 				
 		System.out.println("/trip/json/listExhibit");
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060300",areaCode, localName);
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
@@ -118,7 +118,7 @@ public class TripRestController {
 	
 	//체험관 리스트
 	@RequestMapping(value="json/listExperience/")
-	public Map listExperience(HttpSession session) throws Exception{
+	public Map listExperience(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listExperience");
 		
@@ -129,7 +129,7 @@ public class TripRestController {
 		
 		System.out.println("/trip/json/listExperience");
 		
-		Map tripMap = tripService.listTrip("12","A02","A0203","A02030200",areaCode, localName);
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
@@ -142,7 +142,7 @@ public class TripRestController {
 	
 	//민속마을 리스트
 	@RequestMapping(value="json/listTradition/")
-	public Map listTradition(HttpSession session) throws Exception{
+	public Map listTradition(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listTradition");
 		
@@ -153,7 +153,7 @@ public class TripRestController {
 		
 		System.out.println("/trip/json/listTradition");
 		
-		Map tripMap = tripService.listTrip("12","A02","A0201","A02010600",areaCode, localName);
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode, localName);
 		
 		
 		map.put("list", tripMap.get("list"));
@@ -165,7 +165,7 @@ public class TripRestController {
 	
 	//미술관 리스트	
 	@RequestMapping(value="json/listGallery/")
-	public Map listGallery(HttpSession session) throws Exception{
+	public Map listGallery(@PathVariable("pageNo")int pageNo,HttpSession session) throws Exception{
 		
 		System.out.println("RestController listGallery");
 		
@@ -176,7 +176,7 @@ public class TripRestController {
 		
 		System.out.println("/trip/json/listMuseum");
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060500",areaCode, localName);
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode, localName);
 		
 		
 
@@ -290,14 +290,5 @@ public class TripRestController {
 		
 	}
 	
-	@RequestMapping(value="json/settingZero")
-	public Map settingZero() {
-		Map map = new HashMap();
-		String pageNo = tripService.settingZero();
-		map.put("pageNo", pageNo);
-		return map;
-		
-		
-	}
 	
 }

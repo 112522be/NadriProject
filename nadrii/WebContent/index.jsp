@@ -243,21 +243,7 @@ body {
     
     
 	//============= FaceBook 로그인 END =============
-    $(function(){
-		settingZero();
-	});
-		
-		
-		function settingZero(){
-		$.ajax({
-			url:"../trip/json/settingZero",
-			method:"GET",
-			success:function(data){
-				alert("모든 page번호는 0");
-				alert(data.pageNo);
-			}
-		});
-	}
+    
 	</script>
 
 

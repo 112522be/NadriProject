@@ -37,12 +37,12 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(String contentTypeId, String cat1, String cat2, String cat3, String areaCode, String localName) throws Exception{
+	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3, String areaCode, String localName) throws Exception{
 		
 		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
-		List list = tripDaoTour.listTrip(contentTypeId,cat1,cat2,cat3,areaCode,localName);
+		List list = tripDaoTour.listTrip(pageNo, contentTypeId,cat1,cat2,cat3,areaCode,localName);
 		
 		
 		/*
@@ -129,9 +129,6 @@ public class TripServiceImpl implements TripService {
 	
 	}
 	
-	public String settingZero(){
-		return tripDaoTour.settingZero();
-	}
 	
 	
 	

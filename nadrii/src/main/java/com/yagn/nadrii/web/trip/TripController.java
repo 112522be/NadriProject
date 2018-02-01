@@ -48,7 +48,7 @@ public class TripController {
 		
 		System.out.println("/trip/listMuseum");
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060100",areaCode,localName); 
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode,localName); 
 		
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
@@ -82,7 +82,7 @@ public class TripController {
 		String localName = (String)session.getAttribute("localName");		
 		
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060300",areaCode,localName);
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode,localName);
 		
 		map.put("trip", "Exhibit");
 		map.put("list", tripMap.get("list"));
@@ -102,7 +102,7 @@ public class TripController {
 		String localName = (String)session.getAttribute("localName");		
 		
 		
-		Map tripMap = tripService.listTrip("14","A02","A0206","A02060500",areaCode,localName);
+		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode,localName);
 		
 		map.put("trip", "Gallery");
 		map.put("list", tripMap.get("list"));
@@ -121,7 +121,7 @@ public class TripController {
 		String localName = (String)session.getAttribute("localName");		
 		
 		
-		Map tripMap = tripService.listTrip("12","A02","A0203","A02030200",areaCode,localName);
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode,localName);
 		
 		map.put("trip", "Experience");
 		map.put("list", tripMap.get("list"));
@@ -140,7 +140,7 @@ public class TripController {
 		String localName = (String)session.getAttribute("localName");		
 		
 		
-		Map tripMap = tripService.listTrip("12","A02","A0201","A02010600",areaCode,localName);
+		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode,localName);
 		
 		map.put("trip", "Tradition");
 		map.put("list", tripMap.get("list"));
