@@ -49,8 +49,8 @@ public class TripDaoImplTour implements TripDao {
 		tourAPlUrlManage.setCat1(cat1);
 		tourAPlUrlManage.setCat2(cat2);
 		tourAPlUrlManage.setCat3(cat3);
-		tourAPlUrlManage.setAreaCode(areaCode);
-		tourAPlUrlManage.setSigunguCode(localName);
+		tourAPlUrlManage.setAreaCode("");
+		tourAPlUrlManage.setSigunguCode("");
 		tourAPlUrlManage.setType("areaBasedList?");
 
 		System.out.println(tourAPlUrlManage.urlMaking());
@@ -79,62 +79,32 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject body = (JSONObject) response.get("body");
 		System.out.println("[4 : body] ==>" + body);
 		
-		//데이터가 잘 넘어 온 경우
-		if(body.get("items") instanceof JSONObject) {
-			JSONObject items = (JSONObject) body.get("items");
-			
-			//데이터가 여러개인 경우
-			if(items.get("item") instanceof JSONArray) {
-				JSONArray jsonArray = (JSONArray)items.get("item");
+		JSONObject items = (JSONObject) body.get("items");
+		
+		JSONArray jsonArray = (JSONArray)items.get("item");
 				
-				tripDaoImplImageSearch = new TripDaoImplImageSearch();
-						
-				for(int i=0;i<jsonArray.size();++i) {
-					JSONObject obj = (JSONObject)jsonArray.get(i);
-					System.out.println(obj);
-							
-					TourApiDomain tourDomain = new TourApiDomain();
-					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-					System.out.println(tourDomain);
+
+		tripDaoImplImageSearch = new TripDaoImplImageSearch();
+				
+		for(int i=0;i<jsonArray.size();++i) {
+			JSONObject obj = (JSONObject)jsonArray.get(i);
+			System.out.println(obj);
 					
-					if(tourDomain.getFirstimage2()==null) {
-						System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
-						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
-						System.out.println(image);
-						tourDomain.setFirstimage2(image);
-					}
-								
-					list.add(tourDomain);
-					System.out.println(list.get(i));
-				}
-				
-			//데이터가 한개 인경우	
-				
-			}else {
-				JSONObject jsonObject = (JSONObject)items.get("item");
-				TourApiDomain tourDomain = new TourApiDomain();
-				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
-				if(tourDomain.getFirstimage2() ==null) {
-					tripDaoImplImageSearch = new TripDaoImplImageSearch();
-					System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
-					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
-					System.out.println(image);
-					tourDomain.setFirstimage2(image);
-				}
-				TourApiDomain lastNotice = new TourApiDomain();
-				lastNotice.setTitle("마지막 여행지");
-				
-				list.add(tourDomain);
-				list.add(lastNotice);
-				
-				
+			TourApiDomain tourDomain = new TourApiDomain();
+			tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
+			System.out.println(tourDomain);
+			
+			if(tourDomain.getFirstimage2()==null) {
+				System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
+				String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+				System.out.println(image);
+				tourDomain.setFirstimage2(image);
 			}
-		//전달 데이터가 없는 경우	
-		}else {
-			TourApiDomain lastNotice = new TourApiDomain();
-			lastNotice.setTitle("마지막 여행지");
-			list.add(lastNotice);
+						
+			list.add(tourDomain);
+			System.out.println(list.get(i));
 		}
+		
 		return list;
 	}
 	
