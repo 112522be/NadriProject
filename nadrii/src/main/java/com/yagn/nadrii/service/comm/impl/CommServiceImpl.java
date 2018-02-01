@@ -61,13 +61,27 @@ public class CommServiceImpl implements CommService {
 	@Override
 	public List<String> listHasgTag(String filePath) throws Exception{
 		String cloudVisionResult = openAPIDao.getImageResult(filePath);
-		String translatedResult = openAPIDao.getTranslatedResult(cloudVisionResult).toString();	
-		String[] temp = translatedResult.split(",");
+		JSONObject translatedResult = openAPIDao.getTranslatedResult(cloudVisionResult);
+		String[] temp = translatedResult.get("translatedText").toString().split(",");
 		List<String> result = new ArrayList<>();
 		for(int i=0; i<temp.length;i++) {
-			result.add(temp[i]);
+			temp[i] = CommServiceImpl.trim(temp[i]);
+			System.out.println(temp[i]);
+			System.out.println(result.toString());
+			if(result.toString().indexOf(temp[i]) == -1) {
+				result.add(CommServiceImpl.trim(temp[i]));
+			}
 		}
 		return result;
+	}
+	
+	public static String trim(String str) {
+		String[] temp = str.split(" ");
+		str="";
+		for(int i=0;i<temp.length;i++) {
+				str+=temp[i];
+		}
+		return str;
 	}
 
 }

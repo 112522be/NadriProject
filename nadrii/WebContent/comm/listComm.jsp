@@ -25,6 +25,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
+<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<div class="container">
 		<div class="clearfix"></div>
 		<div class="row">
@@ -32,7 +33,7 @@
 				<ul id="thumbs" class="portfolio">
 					<li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
 						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="getComm.jsp">
+						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="/comm/getComm?postNo=30003">
 							<span class="overlay-img"></span>
 							<span class="overlay-img-thumb font-icon-plus"></span>
 						</a>

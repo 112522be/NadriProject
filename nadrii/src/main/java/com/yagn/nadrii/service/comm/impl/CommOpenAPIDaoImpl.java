@@ -45,6 +45,12 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		
 		String result = "";
 		
+		/// Call the LANDMARAKS
+		String landmark = CommOpenAPIDaoImpl.getDetectLandmarks(filePath, System.out);
+			if(landmark != null && !landmark.equals("")) {
+			result+=landmark+",";
+		}
+		
 		/// Call the WEB_DETECTION
 		List<String> webValues = CommOpenAPIDaoImpl.getDetectWebDetections(filePath, System.out);
 		if(webValues.size()>0) {
@@ -53,11 +59,6 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 			}
 		}
 		
-		/// Call the LANDMARAKS
-		String landmark = CommOpenAPIDaoImpl.getDetectLandmarks(filePath, System.out);
-		if(landmark != null && !landmark.equals("")) {
-		result+=landmark+",";
-		}
 		/// Call the LABELS
 		List<String> labels = CommOpenAPIDaoImpl.getDetectLabels(filePath, System.out);
 		if(labels.size()>0) {
@@ -93,8 +94,9 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
 		
 		JSONObject object = (JSONObject)JSONValue.parse(br);
+		JSONObject message = (JSONObject)object.get("message");
 		
-		return object;
+		return (JSONObject)message.get("result");
 	}
 	
 	/// WEB_DETECTION

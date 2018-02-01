@@ -45,26 +45,62 @@
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 
+	/// Field
+	var totalTicketCount = "";
+	var ticketPrice = "";
+	var ticketCount = "";
+
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
-		$("input.btn.btn-success").bind("click", function() {
-			alert("장바구니")
-		//	fncAddPurchase();
+		$("button:contains('장바구니 담기')").bind('click', function() {
+//			alert("장바구니 담기")
+				for (var i = 0; i < $(".ticketPrice").length; i++) {	
+					
+					ticketPrice = $(".ticketPrice").eq(i).val();
+					ticketCount = $(".ticketCount").eq(i).val();
+					console.log('3. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
+					totalTicketCount += ticketCount;
+					
+					if (ticketCount != 0) {
+//						alert("들어왔어")
+						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>￦ "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;장</h2>");
+												
+					}
+				}
+			})
+		});
+
+	//=================== "장바구니 내에서 저장하기" Event 연결 =================== 
+	$(function() {
+		$("button:contains('저장하기')").bind("click", function() {
+			var flag = 'basket';
+			fncAddPurchase(flag);
+			alert("저장하기 완료")
+			return;
+			
 		});
 	});
 
 	//=================== "취소" Event 연결 =================== 
+	
+	function goBack() {
+    	window.history.back();
+	}
+	/*	
 	$(function() {
 		$("input.btn.btn-default").bind("click", function() {
-			alert("취소")
+//			alert("취소")
+			self.location = "/ticket/listTicket"
 		});
 	});
+	//*/
 	
 	//=================== "결제" Event 연결 =================== 
 	$(function() {
 		$("button.btn.btn-danger").bind("click", function() {
-			alert("결제")
-			fncAddPurchase();
+//			alert("결제")
+			var flag = 'purchase';
+			fncAddPurchase(flag);
 		});
 	});
 	
@@ -144,17 +180,27 @@
 
 	});
 
-	// ===== Form 유효성 검증 =====
-	function fncAddPurchase() {
-		
-		
+	// ===== Form 유효성 검증 후 Navigation =====
+	function fncAddPurchase(flag) {
 		var name = $("input[name='name']").val();
 		var phone = $("input[name='phone']").val();
-//		var ticketCount = $(".ticketCount").eq(index).val();
-
-		console.log('인덱스 확인 : ' + index)
-		console.log('티켓 수량 확인 : ' + ticketCount)
 		
+		
+		
+		
+		/*
+		for (var i = 0; i < $(".ticketPrice").length; i++) {		
+			ticketPrice = $(".ticketPrice").eq(i).val();
+			ticketCount = $(".ticketCount").eq(i).val();
+			console.log('1. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
+			totalTicketCount += ticketCount;
+		}
+		*/
+		
+		if (totalTicketCount == 0) {
+			alert("티켓 수량을 확인하시기 바랍니다.")
+			return;
+		}
 		if (name == null || name.length < 1) {
 			alert("이름은 반드시 입력해야 합니다.");
 			return;
@@ -163,15 +209,8 @@
 			alert("연락처는 반드시 입력해야 합니다.");
 			return;
 		}
-/*
-		if (ticketCount == null || ticketCount.length < 1) {
-			alert("티켓 수량을 확인 하시기 바랍니다.");
-			return;
-		}
-//*/
-		//==>"이메일" 유효성Check  Event 처리 및 연결
+		//==>"이메일" 유효성 Check Event 처리 및 연결
 		$(function() {
-
 			$("input[name='email']").bind( "change", function() {
 				var email = $("input[name='email']").val();
 				if (email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)) {
@@ -179,13 +218,21 @@
 				}
 			});
 		});
-	
-		/*
-		$("form")
-		.attr("method", "POST")
-		.attr("action", "/purchase/addPurchase")
-		.submit();
-		//*/
+		if (flag == 'basket') {
+			
+			$.ajax
+			/*
+			$("form")
+			.attr("method", "POST")
+			.attr("action", "json/purchase/addPurchase/flag=" + flag)
+			.submit();
+			//*/
+		} else {
+			$("form")
+			.attr("method", "POST")
+			.attr("action", "/purchase/addPurchase/flag=" + flag)
+			.submit();
+		}
 	}
 
 </script>
@@ -209,6 +256,16 @@
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+
+		<input type="hidden" name="contentid" value="${ tourTicket.contentid }">
+		<input type="hidden" name="contenttypeid" value="${ tourTicket.contenttypeid }">
+
+		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
+		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
+		<input type="hidden" name="bookingDate" value="${ bookingDate }">
+		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
+		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
 
 			<div class="col-sm-6">
 				<div class="form-group text-center">
@@ -241,6 +298,7 @@
 				<c:forEach items="${ priceList }" varStatus="status">
 				
 					<input type="hidden" class="ticketCount" name="ticketCount" value=0>
+					<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
 				
 					<ul class="nav nav-pills" role="tablist">
 						<li role="presentation" class="active">
@@ -249,9 +307,8 @@
 										${ priceList[status.index] } ￦ <span class="badge">0</span> 
 							</a>
 						</li>
-				
-						<!-- 수량증감 버튼 -->
 						&nbsp;&nbsp;
+						<!-- 수량증감 버튼 -->
 						<div class="btn-group" role="group" aria-label="...">
 							<button type="button" class="btn btn-default" name="minus" value="minus">
 								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
@@ -299,19 +356,49 @@
 				<!-- Button -->
 				<div class="form-group">
 					<div class="col-sm-12 text-center">
-						<br> 
-						<input class="btn btn-success" type="button" value="장바구니 담기"> 
-					
-						<input class="btn btn-default" type="button" value="취&nbsp;소">
+						<br>
 						
-						<button type="button" class="btn btn-danger">결&nbsp;제</button>
+						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
+  							장바구니 담기
+						</button>
+						 
+					<!-- 	<input class="btn btn-success" type="button" value="장바구니 담기2">  --> 
+					
+						<input class="btn btn-default" type="button" value="취&nbsp;소" onclick="goBack()">
+						
+						<button type="button" class="btn btn-danger">결제하기</button>
 					</div>
 				</div>
 			</div>
 
-
-
-
+<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-copy" aria-hidden="true"> </span>
+						장바구니에 저장 하시겠습니까?
+					</h4>
+				</div>
+			
+				<div class="modal-body">
+					<h1><span class="label label-warning">나들이 티켓</span></h1><br>
+					<h2>● 선택한 예매일자 <span class="label label-info">${ bookingDate }</span></h2>
+					<h2>● 총 결제요금 : <span class="label label-success">추후 구현 예정</span>&nbsp;원</h2>
+				
+				</div>
+			
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">저장하기</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">취 소</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -320,6 +407,8 @@
 
 	</div>
 		<!--  화면구성 div end /////////////////////////////////////-->
+
+	
 
 </body>
 

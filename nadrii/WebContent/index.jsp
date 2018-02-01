@@ -262,7 +262,7 @@ body {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
+<%-- 	<div class="navbar  navbar-default">
 
 		<div class="container">
 
@@ -325,7 +325,8 @@ body {
 			</div>
 
 		</div>
-	</div>
+	</div> --%>
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->

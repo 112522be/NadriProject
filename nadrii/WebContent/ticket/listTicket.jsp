@@ -232,6 +232,9 @@ function fncGetList(pageNo) {
 										<input type="hidden" name="contentId" value="${ tt.contentid }">
 										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
 										<input type="hidden" name="title" value="${ tt.title }">
+										<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+										<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
+										
 									</a>
 								</p>
 
