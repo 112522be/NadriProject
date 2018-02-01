@@ -220,18 +220,18 @@
 				}
 			}
 			
-			var basket = {
+			var basketData = {
 				"ticketTitle" : '${ tourTicket.title }' ,
 				"ticketImage" : '${ detailImage.originimgurl }' , 
 				"bookingDate" : '${ bookingDate }' ,
-				"cancelDeadline" : "tempCancelDate" ,
+				"cancelDate" : "tempCancelDate" ,
 				"ticketPriceAll" : ticketPriceAll ,
 				"contentId" : '${ tourTicket.contentid }' ,
 				"contentTypeId" : '${ tourTicket.contenttypeid }' ,
 				"flag" : flag
 			}
 			
-			var jsonData = JSON.stringify(basket);
+			var jsonData = JSON.stringify(basketData);
 			
 			$.ajax (
 					{

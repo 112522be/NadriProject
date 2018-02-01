@@ -1,5 +1,8 @@
 package com.yagn.nadrii.web.purchase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -45,17 +48,32 @@ public class PurchaseRestController {
 			purchase = new Purchase();
 			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
 
-			System.out.println("\n[purchase.toString()] ==> " + purchase.toString());
+			System.out.println("bookingDate check ==> " + purchase.getBookingDate());
+			String bookingDate = purchase.getBookingDate().replaceAll("[^0-9]", "");
+			System.out.println(bookingDate);
+			/*
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date bDate = sdf.parse(bookingDate);
 			
+			System.out.println(bDate.toString());
+			//*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			System.out.println("\n[purchase.toString()] ==> " + purchase.toString());
 			
 			//purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
 	
-	}
+	} // end of method
 	
 } // end of class

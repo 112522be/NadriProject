@@ -95,12 +95,12 @@ function fncGetList(pageNo) {
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var title = $( $('input[name="title"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
-			
+			/*
 			console.log('contentId : ' + contentId)
 			console.log('contentTypeId : ' + contentTypeId)
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
-			
+			//*/
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId

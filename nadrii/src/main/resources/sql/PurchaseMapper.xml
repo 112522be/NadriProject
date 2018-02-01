@@ -4,59 +4,47 @@
 		  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		  
-<mapper namespace="Purchase">
+<mapper namespace="PurchaseMapper">
 
 	<resultMap id="purchaseSelectMap" type="purchase" >
-		<result property="ticketNo" 		column="ticket_no" 		 	jdbcType="NUMERIC"/>
-		<result property="buyer.userId" 	column="buyer_id" 		 	jdbcType="VARCHAR"/>
-		<result property="imageFile" 		column="image_file"	 	 	jdbcType="VARCHAR"/>
-		<result property="regDate" 			column="reg_date"	 	 	jdbcType="DATE"/>
-		<result property="bookingDate" 		column="booking_date"	 	jdbcType="NUMERIC"/>
-		<result property="lat" 				column="lat"		 	 	jdbcType="VARCHAR"/>
-		<result property="lng" 				column="lng" 	 		 	jdbcType="VARCHAR"/>
-		<result property="cancelDeadline" 	column="cancel_deadline" 	jdbcType="VARCHAR"/>
-		<result property="price" 			column="price" 	 			jdbcType="NUMERIC"/>
-		<result property="ticketType" 		column="ticket_type" 	 	jdbcType="NUMERIC"/>
-		<result property="ticketCount" 		column="ticket_count" 	 	jdbcType="NUMERIC"/>
+		<result property="postNo" 			column="post_no" 		 	jdbcType="NUMERIC"/>
+		<result property="ticketTitle" 		column="ticket_title" 	 	jdbcType="VARCHAR"/>
+		<result property="ticketImage" 		column="ticket_image"	 	jdbcType="VARCHAR"/>
+		<result property="bookingDate" 		column="booking_date"	 	jdbcType="VARCHAR"/>
+		<result property="cancelDate"		column="cancel_date"	 	jdbcType="VARCHAR"/>
+		<result property="ticketPriceAll"	column="ticket_priceall" 	jdbcType="VARCHAR"/>
 		<result property="contentId" 		column="content_id" 	 	jdbcType="NUMERIC"/>
-		<result property="contentTypeId" 	column="content_type_id" 	jdbcType="NUMERIC"/>
+		<result property="contentTypeId" 	column="content_typeid" 	jdbcType="NUMERIC"/>
 		<result property="flag" 			column="flag_bp" 	 		jdbcType="VARCHAR"/>
+		<result property="regDate"			column="reg_date" 	 		jdbcType="DATE"/>
+		
 	</resultMap>
-	
 	
 	<insert id="addPurchase" parameterType="purchase">
 		INSERT
 		INTO purchase (
-						ticket_no,
-						reg_date,
-						buyer_id,
-						image_file,
+						post_no,
+						ticket_title,
+						ticket_image,
 						booking_date,
-						lat,
-						lng,
-						cancel_deadline,	
-						price,
-						ticket_type,
-						ticket_count,
+						cancel_date,	
+						ticket_priceall,
 						content_id,
 						content_type_id,
-						flag_bp
+						flag_bp,
+						reg_date
 						)
 		VALUES (
-				seq_purchase_ticket_no.NEXTVAL,
-				SYSDATE,
-				#{buyer.userId:VARCHAR},	
-				#{imageFile:VARCHAR}
-				#{bookingDate:NUMERIC}
-				#{lat:VARCHAR}
-				#{lng:VARCHAR}
-				#{cancelDeadline:VARCHAR}
-				#{price:NUMERIC}
-				#{ticketType:NUMERIC}
-				#{ticketCount:NUMERIC}
-				#{contentId:NUMERIC}
-				#{contentTypeId:NUMERIC}
-				#{flag:VARCHAR}
+				seq_purchase_post_no.NEXTVAL,
+				#{ticketTitle:VARCHAR},
+				#{ticketImage:VARCHAR},
+				#{bookingDate:VARCHAR},
+				#{cancelDate:VARCHAR},
+				#{ticketPriceAll:VARCHAR},
+				#{contentId:NUMERIC},
+				#{contentTypeId:NUMERIC},
+				#{flag:VARCHAR},
+				SYSDATE
 				))
 	</insert>
 
