@@ -53,8 +53,17 @@
 	
 	//페이지 네이게이션을 수행하는 JS
 	function listTrip(){
+		var areaCode = "${areaCode}";
+		var localName ="${localName}";
+		if(areaCode ==""){
+			areaCode ="0";
+		}
+		if(localName==""){
+			localName="0";
+		}
+		
 		$.ajax({
-			url:"../trip/json/list"+'${trip}'+"/"+page+"",
+			url:"../trip/json/list"+'${trip}'+"/"+page+"/"+areaCode+"/"+localName,
 			method:"GET",
 			dataType:"json",
 			headers :{
@@ -277,9 +286,26 @@
             });
         }
 	
-	
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$("a[href='#' ]:contains('시구단위')").on("click" , function() {
+			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=local"
+		});
+	});
 		
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$("a[href='#' ]:contains('광역단위')").on("click" , function() {
+			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=federal"
+		});
+	});
 	
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$("a[href='#' ]:contains('전국단위')").on("click" , function() {
+			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=national"
+		});
+	});
 	
 		
 	</script>
@@ -318,15 +344,20 @@
 	<title>박물관찾기</title>
 </head>
 <body>
-<input type="hidden" id="type" value="${type}"/>
-	
+
 <div class="container">
+
+	<ul class="nav nav-tabs">
+	  <li role="presentation" ><a href="#">시구단위</a></li>
+	  <li role="presentation" ><a href="#">광역단위</a></li>
+	  <li role="presentation"><a href="#">전국단위</a></li>
+	</ul>
 
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
       	
 	    <input type="hidden" id="pageNo" value="${pageNo}"/>
 	    <div class="row">
-		
+	
 		<c:forEach var ="list" items="${list}">
 		
 		    <div class="col-xs-4">
