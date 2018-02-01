@@ -33,9 +33,7 @@ public class WishRestController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
-	 
-	
-	
+		
 	public WishRestController() {
 		System.out.println(this.getClass());
 	}
