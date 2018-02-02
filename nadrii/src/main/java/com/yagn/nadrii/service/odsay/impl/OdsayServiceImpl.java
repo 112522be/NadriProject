@@ -51,11 +51,11 @@ public class OdsayServiceImpl implements OdsayService{
 		
 		HttpClient httpclient = new DefaultHttpClient();
 		
-		System.out.println("mapObj :: "+mapObj);
-		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-		if(mapObj != null) {
-			url+="&mapObject=0:0@"+mapObj;
-		}
+		String trimMapObj = mapObj.trim();
+		
+		System.out.println("mapObj :: "+trimMapObj);
+		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&mapObject=0:0@"+trimMapObj;
+		
 
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
