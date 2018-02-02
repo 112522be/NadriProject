@@ -2,6 +2,7 @@ package com.yagn.nadrii.service.join;
 
 import java.util.Map;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,6 +32,21 @@ public class JoinServiceTest {
 		join.setGroupNo(60033);
 		join.setGroupRole(2);
 		join.setUserId("test02");
+				
+		joinService.addJoin(join);
+		
+		System.out.println(join);
+		
+	}
+	
+	//@Test
+	public void testAddJoin1() throws Exception {
+
+		Join join = new Join();
+		
+		join.setGroupNo(60033);
+		join.setGroupRole(1);
+		join.setUserId("test01");
 				
 		joinService.addJoin(join);
 		

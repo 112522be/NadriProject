@@ -835,6 +835,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[0]=startInfowindow;
+									
+									$("#roadStartContent").append('<div>'+iwArray[0].getContent()+'</div>');
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
@@ -842,6 +844,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[1]=pass1Infowindow;
+									
+									$("#roadPass1Content").append('<div>'+iwArray[1].getContent()+'</div>');
 								}
 								if(k==2){
 									var pass2Infowindow = new daum.maps.InfoWindow({
@@ -849,6 +853,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[2]=pass2Infowindow;
+									
+									$("#roadPass2Content").append('<div>'+iwArray[2].getContent()+'</div>');
 								}
 								if(k==3){
 									var pass3Infowindow = new daum.maps.InfoWindow({
@@ -856,6 +862,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[3]=pass3Infowindow;
+									
+									$("#roadPass3Content").append('<div>'+iwArray[3].getContent()+'</div>');
 								}
 								if(k==4){
 									var pass4Infowindow = new daum.maps.InfoWindow({
@@ -863,6 +871,7 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[4]=pass4Infowindow;
+									$("#roadPass4Content").append('<div>'+iwArray[4].getContent()+'</div>');
 								}
 								if(k==5){
 									var pass5Infowindow = new daum.maps.InfoWindow({
@@ -870,6 +879,7 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[5]=pass5Infowindow;
+									$("#roadPass5Content").append('<div>'+iwArray[5].getContent()+'</div>');
 								}			
 								
 								///////인포윈도우
@@ -1259,6 +1269,35 @@
 		};
 		
 		/********************************************************/	
+		
+		
+		/*********************좌측 경로정보 지우기*********************/
+		
+		function deleteRoadContent(){
+			
+			if($("#roadStartContent").length > 0){
+				$('#roadStartContent').empty();
+			}
+			if($("#roadPass1Content").length > 0){
+				$('#roadPass1Content').empty();
+			}
+			if($("#roadPass2Content").length > 0){
+				$('#roadPass2Content').empty();
+			}
+			if($("#roadPass3Content").length > 0){
+				$('#roadPass3Content').empty();
+			}
+			if($("#roadPass4Content").length > 0){
+				$('#roadPass4Content').empty();
+			}
+			if($("#roadPass5Content").length > 0){
+				$('#roadPass5Content').empty();
+			}
+		}
+		
+		/*********************좌측 경로정보 지우기*********************/
+		
+		
 
 		var polyline;
 		var STNpolyline;
@@ -1273,6 +1312,19 @@
 		var ey;
 	
 		function search1(flag){
+			
+			deleteRoadContent();		//우측 경로탐색 정보 지우기
+			
+			
+			if(startMarker.getMap() == null){
+				alert("출발지를 지정해주세요!");
+				return;
+			}
+			
+			if(endMarker.getMap() == null){
+				alert("도착지를 지정해주세요!");
+				return;
+			}
 			
 			if(STNpolyline != null ){
 				deleteExSearch();
@@ -1394,4 +1446,3 @@
 			console.log("boundaryArray["+i+"] 보여주는중");
 			map.setBounds(boundaryArray[i]);
 		}
-		

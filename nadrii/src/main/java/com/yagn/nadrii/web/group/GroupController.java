@@ -108,11 +108,20 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="deleteGroup")
-	public String deletePurchase(@RequestParam("groupNo") int groupNo, Model model) throws Exception {
+	public String deleteGroup(@RequestParam("groupNo") int groupNo, Model model, HttpSession session) throws Exception {
 		
-		System.out.println("/deletePurchase");
+		System.out.println("/deleteGroup");
 		
 		Group group = groupService.getGroup(groupNo);
+		
+		Join join = new Join();
+		
+		join.setGroupNo(groupNo);
+		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		
+		joinService.deleteJoin(join);
+		
+		group.setJoin(join);
 		
 		groupService.deleteGroup(group);
 		
