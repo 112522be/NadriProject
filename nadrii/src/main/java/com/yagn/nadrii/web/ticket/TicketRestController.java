@@ -44,14 +44,13 @@ public class TicketRestController {
 	int pageSize;
 	
 	@RequestMapping(value = "json/listTicket", method = RequestMethod.POST)
-	public Map<String, Object> listTicket(
-			
-			@RequestBody OpenApiSearch openApiSearch
-			
+	public String listTicket(
+			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+			Model model
 			) throws Exception {
 		
-		System.out.println("\n/ticket/listTicket : GET");
-		
+		System.out.println("\n /ticket/listTicket : GET / POST");
+
 		if(openApiSearch.getPageNo() == 0 ){
 			openApiSearch.setPageNo(1);
 		} 
@@ -59,19 +58,21 @@ public class TicketRestController {
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
+//		System.out.println(map.get("tourTicketList"));
+		
 		OpenApiPage resultPage = new OpenApiPage(
 				openApiSearch.getPageNo(), 
 				((Integer)map.get("totalCount")).intValue(), 
 				pageUnit, 
 				pageSize
 				);
+			
+		System.out.println("[resultPage]"+resultPage);
 		
-//		Map<String, Object> returnMap = new HashMap<>();
+		model.addAttribute("tourTicket", map.get("tourTicketList"));
+		model.addAttribute("resultPage", resultPage);
 		
-		map.put("tourTicket", map.get("tourTicketList"));
-		map.put("resultPage", resultPage);
-		
-		return map; 
+		return "forward:/ticket/listTicket.jsp";
 	}
 	
 } // end of class

@@ -35,6 +35,8 @@
 		body {
             padding-top : 50px;
         }
+        
+        
 	</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -219,7 +221,6 @@
 					ticketPriceAll += ticketPrice + "=" + ticketCount + "&";
 				}
 			}
-			
 
 			var basketData = {
 				"ticketTitle" : '${ tourTicket.title }' ,
@@ -236,7 +237,7 @@
 			
 			$.ajax (
 					{
-						url : "/purchase/json/addPurchase/" + flag,
+						url : "/purchase/json/addBasket/",
 						method : "POST",
 						dataType : "json",
 						headers : {
@@ -281,15 +282,15 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
-		<input type="hidden" name="contentid" value="${ tourTicket.contentid }">
-		<input type="hidden" name="contenttypeid" value="${ tourTicket.contenttypeid }">
+		<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
+		<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
 
-		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
 		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
 		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
 		<input type="hidden" name="bookingDate" value="${ bookingDate }">
 		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
-		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
+		<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
 
 			<div class="col-sm-6">
 				<div class="form-group text-center">

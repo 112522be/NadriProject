@@ -107,7 +107,7 @@ public class TourApiDaoImpl implements TicketDao {
 					+ "&eventStartDate=" + simpleDateFormat.format(new Date())
 							+ "&pageNo=" + openApiSearch.getPageNo() 
 							+ "&numOfRows=" + openApiSearch.getNumOfRows()
-							+ "&arrange=B"			
+							+ "&arrange=" + openApiSearch.getSearchArrange()			
 							));
 
 			JSONObject sfJsonObj = (JSONObject) JSONValue.parse(searchFestivalSB.toString());
@@ -187,28 +187,28 @@ public class TourApiDaoImpl implements TicketDao {
 				List<String> priceList = new ArrayList<String>();
 				List<String> entranceFee = new ArrayList<String>();
 				
-				System.out.println("\n[2. ����� ���� Ȯ��] ==> " + priceInfo);
+				System.out.println("\n[2. 占쏙옙占쏙옙占� 占쏙옙占쏙옙 확占쏙옙] ==> " + priceInfo);
 				
-				// ���������� ����ִ� �ִٸ�......
+				// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙獵占� 占쌍다몌옙......
 				if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
-					System.out.println("\n[3. ���ڸ� ������ ���� Ȯ��] ==> " + priceInfo);
+					System.out.println("\n[3. 占쏙옙占쌘몌옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 확占쏙옙] ==> " + priceInfo);
 
 					String[] priceSplit = priceInfo.split(" |/");
 					for (int k = 0; k < priceSplit.length; k++) {
-						System.out.println("[4. �Ľ� �� Ȯ��] ==>" + priceSplit[k]);
+						System.out.println("[4. 占식쏙옙 占쏙옙 확占쏙옙] ==>" + priceSplit[k]);
 
-						// split �� array���� ���������� ����
+						// split 占쏙옙 array占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 						if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
 
-							System.out.println("\n[5. ���� ������ ����ִ� �迭 �� Ȯ��] ==> " + priceSplit[k]);
+							System.out.println("\n[5. 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙獵占� 占썼열 占쏙옙 확占쏙옙] ==> " + priceSplit[k]);
 							String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-							System.out.println("[6. ��� Ȯ��] ==> " + priceValue);
+							System.out.println("[6. 占쏙옙占� 확占쏙옙] ==> " + priceValue);
 
 							priceList.add(priceValue);
 							
 							for (int j = 0; j < priceList.size(); j++) {
-								System.out.println("		[7. ����Ʈ�� ����� ��� �� Ȯ��] ==>" + priceList.get(j));
+								System.out.println("		[7. 占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙占� 占쏙옙占� 占쏙옙 확占쏙옙] ==>" + priceList.get(j));
 								System.out.println("");
 								tourTicket.setUsetimefestival(priceList);
 							}
@@ -216,18 +216,18 @@ public class TourApiDaoImpl implements TicketDao {
 					}
 				
 				} else if (priceInfo.equals("")) {
-					System.out.println("[8. ����� NULL :: '����' ��� ���]");
-					entranceFee.add("����");
+					System.out.println("[8. 占쏙옙占쏙옙占� NULL :: '占쏙옙占쏙옙' 占쏙옙占� 占쏙옙占�]");
+					entranceFee.add("占쏙옙占쏙옙");
 					tourTicket.setUsetimefestival(entranceFee);
 
 				} else {
-					System.out.println("[9. ���� �״�� ���]");
+					System.out.println("[9. 占쏙옙占쏙옙 占쌓댐옙占� 占쏙옙占�]");
 					entranceFee.add(priceInfo);
 					tourTicket.setUsetimefestival(entranceFee);
 				}
 
 				
-				System.out.println("[10. ������ �� Ȯ��] ==> " + priceList.toString());
+				System.out.println("[10. 占쏙옙占쏙옙占쏙옙 占쏙옙 확占쏙옙] ==> " + priceList.toString());
 				//*/	
 				
 				tourTicketList.add(tourTicket);
@@ -384,7 +384,7 @@ public class TourApiDaoImpl implements TicketDao {
 		System.out.println("\n[2] ==> " + priceInfo);
 		
 		try {
-			// ���������� ����ִ� �ִٸ�......
+			// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙獵占� 占쌍다몌옙......
 			if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
 				System.out.println("\n[3] ==> " + priceInfo);

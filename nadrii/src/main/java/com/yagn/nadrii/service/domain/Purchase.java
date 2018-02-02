@@ -1,13 +1,13 @@
 package com.yagn.nadrii.service.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Purchase {
 	
 	/// Field
 	private int contentId;			
 	private int contentTypeId;		
-
 
 	private int postNo;			
 	private String ticketTitle;		
@@ -16,7 +16,11 @@ public class Purchase {
 	private String bookingDate;		
 	private String cancelDate;	
 	private String ticketPriceAll;
-	private String flag; 			
+	private String flag; 
+	
+	private String[] ticketCount;
+	private String[] ticketPrice;
+	
 
 	public Purchase() {
 		
@@ -101,15 +105,35 @@ public class Purchase {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+	
+	
+
+	public String[] getTicketCount() {
+		return ticketCount;
+	}
+
+	public void setTicketCount(String[] ticketCount) {
+		this.ticketCount = ticketCount;
+	}
+
+	public String[] getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(String[] ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
 
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
 				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
-				+ ", flag=" + flag + "]";
+				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
+				+ Arrays.toString(ticketPrice) + "]";
 	}
 
+	
 
 	
 	

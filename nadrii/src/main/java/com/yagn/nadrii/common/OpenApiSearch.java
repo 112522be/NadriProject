@@ -15,6 +15,9 @@ public class OpenApiSearch {
 	private int endRowNum;
 	private int startRowNum;
     
+	// listTicket 에서 4가지 정렬방식 (A=제목순, B=조회순, C=수정일순, D=생성일순)
+	private String searchArrange;
+	
 	///Constructor
 	public OpenApiSearch() {
 	}
@@ -57,12 +60,22 @@ public class OpenApiSearch {
 		return (getPageNo()-1)*getNumOfRows()+1;
 	}
 
+	public String getSearchArrange() {
+		return searchArrange;
+	}
+
+	public void setSearchArrange(String searchArrange) {
+		this.searchArrange = searchArrange;
+	}
+
 	@Override
 	public String toString() {
 		return "OpenApiSearch [pageNo=" + pageNo + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", numOfRows=" + numOfRows + ", endRowNum=" + endRowNum + ", startRowNum="
-				+ startRowNum + "]";
+				+ startRowNum + ", searchArrange=" + searchArrange + "]";
 	}
+
+	
 	
 	
 

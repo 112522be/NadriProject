@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,47 +35,49 @@ public class PurchaseRestController {
 		System.out.println(this.getClass());
 	}
 	
-	@RequestMapping(value="json/addPurchase/basket", method=RequestMethod.POST)
+	@RequestMapping(value="json/addBasket", method=RequestMethod.POST)
 	public void addPurchase(
-			@RequestBody JSONObject basket
+			@RequestBody JSONObject basketData
 			) {
 		
-		System.out.println("\n/purchase/json/addPurchase/flag=basket : POST");
+		System.out.println("\n/purchase/json/addBasket : POST");
 		
 		Purchase purchase = new Purchase();
 		
 		try {
 			
-			JSONObject jsonObj = (JSONObject) JSONValue.parse(basket.toJSONString());
-		//	System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
+				System.out.println("[Basket]");
 
-			ObjectMapper objectMapper = new ObjectMapper();
-			purchase = new Purchase();
-			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
+				JSONObject jsonObj = (JSONObject) JSONValue.parse(basketData.toJSONString());
+//				System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
 
-			// cancelDate making algorithm
-			DateFormat df = new SimpleDateFormat("yyyyMMdd");
-			Date bDate = df.parse(purchase.getBookingDate().replaceAll("[^0-9]", ""));
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(bDate);
-			cal.add(Calendar.DATE, -10);
+				ObjectMapper objectMapper = new ObjectMapper();
+				purchase = new Purchase();
+				purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
 
-			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "년 "
-					+ df.format(cal.getTime()).substring(4, 6) + "월 " 
-					+ df.format(cal.getTime()).substring(6) + "일";
-			
-			// cancelDate set
-			purchase.setCancelDate(cancelDate);
-			
-			System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
-			System.out.println("\n");
-			
-			purchaseService.addPurchase(purchase);
+				// cancelDate making algorithm
+				DateFormat df = new SimpleDateFormat("yyyyMMdd");
+				Date bDate = df.parse(purchase.getBookingDate().replaceAll("[^0-9]", ""));
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(bDate);
+				cal.add(Calendar.DATE, -10);
+
+				String cancelDate = df.format(cal.getTime()).substring(0, 4) + "년 "
+						+ df.format(cal.getTime()).substring(4, 6) + "월 " + df.format(cal.getTime()).substring(6) + "일";
+
+				// cancelDate set
+				purchase.setCancelDate(cancelDate);
+
+				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
+				System.out.println("\n");
+
+//				purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("[addPurchase Complete]");
+		
+		System.out.println("[addBasket Complete]");
 	
 	} // end of method
 
