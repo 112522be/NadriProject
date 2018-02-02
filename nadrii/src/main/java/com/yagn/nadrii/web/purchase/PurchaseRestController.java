@@ -1,5 +1,11 @@
 package com.yagn.nadrii.web.purchase;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -39,23 +45,30 @@ public class PurchaseRestController {
 		try {
 			
 			JSONObject jsonObj = (JSONObject) JSONValue.parse(basket.toJSONString());
-			System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
+		//	System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			purchase = new Purchase();
 			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
 
-			System.out.println("\n[purchase.toString()] ==> " + purchase.toString());
+			// cancelDate making algorithm
+			DateFormat df = new SimpleDateFormat("yyyyMMdd");
+			Date bDate = df.parse(purchase.getBookingDate().replaceAll("[^0-9]", ""));
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(bDate);
+			cal.add(Calendar.DATE, -10);
+			String cancelDate = df.format(cal.getTime());
+			// cancelDate set
+			purchase.setCancelDate(cancelDate);
 			
 			
-			//purchaseService.addPurchase(purchase);
+			purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
 	
-	}
+	} // end of method
+
 	
 } // end of class

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 	<!-- javascript -->
-	<script src="/resources/js/jquery.js"></script>
+	<!--<script src="/resources/js/jquery.js"></script>-->
 	<script src="/resources/js/bootstrap.min.js"></script>
 	
 	<!-- css -->
@@ -17,6 +17,17 @@
 	
 	<!-- Theme skin -->
 	<link href="/resources/skins/default.css" rel="stylesheet" />
+	<script type="text/javascript">
+	
+	
+	$( function() {
+		$("a[href='#' ]:contains('나들이 정보')").on("click" , function() {
+			self.location = "../trip/getTheme"
+		});
+	});
+	
+	</script>
+	
 </head>
 <body>
 	<header>
@@ -33,7 +44,7 @@
 				<div class="navbar-collapse collapse ">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="../index.jsp">Home</a></li>
-						<li><a href="/trip/listTrip">나들이 정보</a></li>
+						<li><a href="#">나들이 정보</a></li>
 						<li><a href="/comm/listComm">나만의 나들이</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 <b class=" icon-angle-down"></b></a>

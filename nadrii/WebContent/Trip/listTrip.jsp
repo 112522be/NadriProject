@@ -341,9 +341,10 @@
 	
 	</style>
 	
-	<title>박물관찾기</title>
+	<title>여행지 찾기</title>
 </head>
 <body>
+<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 
 <div class="container">
 
