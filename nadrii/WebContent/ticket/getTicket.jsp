@@ -4,13 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
 <meta charset="EUC-KR">
 
- <head>
 <title>나들이 티켓 상세조회</title>
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -24,7 +22,7 @@
 	
 	<!-- DatePicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css">  -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
@@ -39,18 +37,17 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-$(function(){
-	$("button:contains('장바구니 담기')").bind("click", function(){
-		alert("장바구니 담기")
-//		self.location = "/purchase/addPurchase?prod_no=${ product.prodNo }"
-//			$("form").attr("method", "POST")	
-	});
-});
-
-// ========== '예매하기' Event 연결 ==========
+// ========== '예매하기 / 장바구니 담기' Event 연결 ==========
 $(function(){
 	$("a[href='#']:contains('예매하기')").bind("click", function(){
 		fncAddBooking();
+	});
+});
+
+//========== '예매하기 / 장바구니 담기' Event 연결 ==========
+$(function(){
+	$("button:contains('취 소')").bind("click", function(){
+		self.location = "/ticket/listTicket"
 	});
 });
 
@@ -127,6 +124,8 @@ function fncAddBooking() {
 			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
 			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
 			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+			<input type="hidden" name="eventstartdate" value="${ detailIntro.eventstartdate }">
+			<input type="hidden" name="eventenddate" value="${ detailIntro.eventenddate }">
 
 			<div class="form-group">
 				<h1>
@@ -169,12 +168,12 @@ function fncAddBooking() {
 					<div id="datepicker" >
 						<input type="hidden" name="bookingDate"/>
 					</div><br>
-					
+				
 	  			<button type="button" class="btn btn-success">
-	  				장바구니 담기
+	  				취 소
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">
-	  				예매하기
+	  				예매하기 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> 장바구니 담기
 	  			</a>
 					
 				</div>

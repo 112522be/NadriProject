@@ -24,15 +24,10 @@
 	
 	<!-- ///////////////////////// jQuery Spinner ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css">  -->
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>  -->
 	 
-	<!--  
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	 -->
 
 <!-- //////////////////// CSS //////////////////// -->
 
@@ -45,55 +40,52 @@
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 
-	/// Field
 	var totalTicketCount = "";
 	var ticketPrice = "";
 	var ticketCount = "";
+	var totalTicketPrice = "";
 
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('장바구니 담기')").bind('click', function() {
-//			alert("장바구니 담기")
+			
+				$( ".label.label-warning[name='titleB']" ).append('${ tourTicket.title }');
+			
 				for (var i = 0; i < $(".ticketPrice").length; i++) {	
-					
 					ticketPrice = $(".ticketPrice").eq(i).val();
 					ticketCount = $(".ticketCount").eq(i).val();
-					console.log('3. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
-					totalTicketCount += ticketCount;
+					
+					totalTicketCount += ticketCount * 1;
 					
 					if (ticketCount != 0) {
-//						alert("들어왔어")
+						var sumPriceTicket = (ticketPrice * 1) *  ticketCount;
+						totalTicketPrice = (totalTicketPrice * 1) + (sumPriceTicket * 1);
 						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>￦ "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;장</h2>");
-												
 					}
 				}
+				$( ".label.label-success" ).append("￦ " + totalTicketPrice);
 			})
 		});
-
+</script>
+<script>
+	
 	//=================== "장바구니 내에서 저장하기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('저장하기')").bind("click", function() {
 			var flag = 'basket';
 			fncAddPurchase(flag);
-			alert("저장하기 완료")
+//			alert("저장하기 완료")
 			return;
 			
 		});
 	});
 
-	//=================== "취소" Event 연결 =================== 
 	
+	//=================== "취소" Event 연결 =================== 
 	function goBack() {
     	window.history.back();
 	}
-	/*	
-	$(function() {
-		$("input.btn.btn-default").bind("click", function() {
-//			alert("취소")
-			self.location = "/ticket/listTicket"
-		});
-	});
-	//*/
+	
 	
 	//=================== "결제" Event 연결 =================== 
 	$(function() {
@@ -104,26 +96,27 @@
 		});
 	});
 	
+	
 	//==================== "수량증감" Event 연결 =================== 
 	
 	function fncTicketCount(indexVal, currentVal, countVal) {
 
-		console.log("[fncTicketCount START]")
+//		console.log("[fncTicketCount START]")
 
 		var inputVal = $(".ticketCount").eq(indexVal).val();
-		console.log("[1] inputVal : " + inputVal)
-
 		var textVal = $(".badge").eq(indexVal).text();
+/*
+		console.log("[1] inputVal : " + inputVal)
 		console.log("[2] textVal : " + textVal)
-
+//*/
 		if (countVal == 'plus') {
-			console.log("[Plus]")
+//			console.log("[Plus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
 		}
 
 		if (countVal == 'minus' && currentVal >= 1) {
-			console.log("[Minus]")
+//			console.log("[Minus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
@@ -141,21 +134,20 @@
 			event.preventDefault();
 
 			var indexVal = $("button[name='minus']").index(this);
-			console.log("- 인덱스 값 : " + indexVal)
-
 			var countVal = 'minus';
-			console.log("- 카운트 값 : " + countVal)
-
 			var currentVal = $(".ticketCount").eq(indexVal).val();
-			console.log("- 현재 값 : " + currentVal)
 
+			/*
+			console.log("- 인덱스 값 : " + indexVal)
+			console.log("- 카운트 값 : " + countVal)
+			console.log("- 현재 값 : " + currentVal)
+			//*/
+			
 			if (currentVal <= 0) {
 				alert("티켓 수량을 확인 하시기 바랍니다.")
 			}
 
 			fncTicketCount(indexVal, currentVal, countVal);
-
-			console.log("----------")
 
 		});
 
@@ -164,40 +156,37 @@
 			event.preventDefault();
 
 			var indexVal = $("a[name='plus']").index(this);
-			console.log("+ 인덱스 값 : " + indexVal)
-
 			var countVal = 'plus';
-			console.log("+ 카운트 값 : " + countVal)
-
 			var currentVal = $(".ticketCount").eq(indexVal).val();
+
+			/*
+			console.log("+ 인덱스 값 : " + indexVal)
+			console.log("+ 카운트 값 : " + countVal)
 			console.log("+ 현재 값 : " + currentVal)
+			//*/
 
 			fncTicketCount(indexVal, currentVal, countVal);
-
-			console.log("++++++++++")
-
 		});
 
 	});
 
+	
 	// ===== Form 유효성 검증 후 Navigation =====
 	function fncAddPurchase(flag) {
+/*		
 		var name = $("input[name='name']").val();
 		var phone = $("input[name='phone']").val();
 		
-		
-		
-		
-		/*
 		for (var i = 0; i < $(".ticketPrice").length; i++) {		
 			ticketPrice = $(".ticketPrice").eq(i).val();
 			ticketCount = $(".ticketCount").eq(i).val();
-			console.log('1. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
-			totalTicketCount += ticketCount;
+			console.log('2. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
+			totalTicketCount += ticketCount * 1;
 		}
-		*/
 		
-		if (totalTicketCount == 0) {
+		console.log("티켓 몇장 구매 했니? " + totalTicketPrice)
+		
+		if (totalTicketCount == 0 || totalTicketCount == "") {
 			alert("티켓 수량을 확인하시기 바랍니다.")
 			return;
 		}
@@ -218,19 +207,55 @@
 				}
 			});
 		});
+//*/		
 		if (flag == 'basket') {
+
+			var ticketPriceAll = "";
+			for (var i = 0; i < $(".ticketPrice").length; i++) {	
+				ticketPrice = $(".ticketPrice").eq(i).val();
+				ticketCount = $(".ticketCount").eq(i).val();
+				
+				if (ticketCount != 0) {
+					ticketPriceAll += ticketPrice + "=" + ticketCount + "&";
+				}
+			}
 			
-			$.ajax
-			/*
-			$("form")
-			.attr("method", "POST")
-			.attr("action", "json/purchase/addPurchase/flag=" + flag)
-			.submit();
-			//*/
+			var basketData = {
+				"ticketTitle" : '${ tourTicket.title }' ,
+				"ticketImage" : '${ detailImage.originimgurl }' , 
+				"bookingDate" : '${ bookingDate }' ,
+				"ticketPriceAll" : ticketPriceAll ,
+				"contentId" : '${ tourTicket.contentid }' ,
+				"contentTypeId" : '${ tourTicket.contenttypeid }' ,
+				"flag" : flag
+			}
+			
+			var jsonData = JSON.stringify(basketData);
+			
+			$.ajax (
+					{
+						url : "/purchase/json/addPurchase/" + flag,
+						method : "POST",
+						dataType : "json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						
+						
+					//	ContentType : "application/json" ,
+						data:jsonData,
+						success : function() {
+							alert("저장하기 완료")
+						}
+					});		
 		} else {
+			
+//			alert("flag 값 확인 : " + flag)
+			
 			$("form")
 			.attr("method", "POST")
-			.attr("action", "/purchase/addPurchase/flag=" + flag)
+			.attr("action", "/purchase/addPurchase/" + flag)
 			.submit();
 		}
 	}
@@ -336,21 +361,21 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="name">이 름</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="name" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="name" value="">
 				</div>
 				<br>
 				
 				<div class="input-group">
 					<span class="input-group-addon" id="phone">연락처</span> 
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="phone" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="phone" value="">
 				</div>
 				<br>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="email">@</span> 
 					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" name="email" value="추후에 도메인 객체 설정">
+						aria-describedby="basic-addon1" name="email" value="">
 				</div>
 
 				<!-- Button -->
@@ -362,8 +387,6 @@
   							장바구니 담기
 						</button>
 						 
-					<!-- 	<input class="btn btn-success" type="button" value="장바구니 담기2">  --> 
-					
 						<input class="btn btn-default" type="button" value="취&nbsp;소" onclick="goBack()">
 						
 						<button type="button" class="btn btn-danger">결제하기</button>
@@ -386,9 +409,9 @@
 				</div>
 			
 				<div class="modal-body">
-					<h1><span class="label label-warning">나들이 티켓</span></h1><br>
-					<h2>● 선택한 예매일자 <span class="label label-info">${ bookingDate }</span></h2>
-					<h2>● 총 결제요금 : <span class="label label-success">추후 구현 예정</span>&nbsp;원</h2>
+					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
+					<h2>● 선택한 예매일자 : <span class="label label-info">${ bookingDate }</span></h2>
+					<h2>● 총 결제요금 : <span class="label label-success"></span>&nbsp;원</h2>
 				
 				</div>
 			
