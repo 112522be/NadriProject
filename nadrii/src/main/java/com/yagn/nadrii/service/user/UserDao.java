@@ -31,4 +31,7 @@ public interface UserDao {
 	public String findId(String user) throws Exception;
 	
 	public String findPassword(String user) throws Exception;
+	
+	public void addUserPlus(User user) throws Exception;
+
 }

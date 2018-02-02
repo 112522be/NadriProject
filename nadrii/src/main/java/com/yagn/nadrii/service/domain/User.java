@@ -11,21 +11,20 @@ public class User {
 	private String userName;
 	private String password;
 	private String role;
-	private String ssn;
 	private String phone;
 	private String addr;
 	private String email;
 	private Date regDate;
+	private String birth;
+	private String profiIeimageFile;
+	private String qrcode;
+	private String children;
+	private String gender;
 	/////////////// EL ���� ���� �߰��� Field ///////////
 	private String phone1;
 	private String phone2;
 	private String phone3;
-	/////////////////////////////////email//////////
-	private String subject;
-    private String content;
-    private String receiver;
-    
-	
+
 	///Constructor
 	public User(){
 	}
@@ -54,12 +53,6 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
-	}
-	public String getSsn() {
-		return ssn;
-	}
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
 	}
 	public String getPhone() {
 		return phone;
@@ -91,6 +84,36 @@ public class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	public String getbirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getprofiIeimageFile() {
+		return profiIeimageFile;
+	}
+	public void setProfiIeimageFile(String profiIeimageFile) {
+		this.profiIeimageFile = profiIeimageFile;
+	}
+	public String getqrcode() {
+		return qrcode;
+	}
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
+	}
+	public String getchildren() {
+		return children;
+	}
+	public void setChildren(String children) {
+		this.children = children;
+	}
+	public String getgender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	/////////////// EL ���� ���� �߰��� getter Method ///////////
 	public String getPhone1() {
 		return phone1;
@@ -101,32 +124,13 @@ public class User {
 	public String getPhone3() {
 		return phone3;
 	}
-	/////////////////////////////////email/////////////
-	public String getReceiver() {
-        return receiver;
-    }
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-  
-    public String getSubject() {
-        return subject;
-    }
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-    public String getContent() {
-        return content;
-    }
-    public void setContent(String content) {
-        this.content = content;
-    }
 
 	@Override
 	public String toString() {
 		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate +
-			"[subject]"+subject + "content" + content+"receiver"+receiver;
+			+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + "[profiIeimageFile]" +profiIeimageFile
+			+"[qrcode]" +qrcode + "[children]" + children + "[gender]" + gender;
+			
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////

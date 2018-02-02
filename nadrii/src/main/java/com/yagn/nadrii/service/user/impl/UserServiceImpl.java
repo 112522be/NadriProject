@@ -1,5 +1,9 @@
 package com.yagn.nadrii.service.user.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +16,16 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
+import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
@@ -98,66 +109,55 @@ public class UserServiceImpl implements UserService{
 		return userDao.findPassword(user);
 	}
 	
+	public void addUserPlus(User user) throws Exception{
+		userDao.addUserPlus(user);
+	}
+	
+	////////////////////////////////////////////////////////////////////
 	/*
-	 final String username="kimjh2218@gmail.com";
-	    final String password="god2218923";
-	// 이메일
-		private void sendEmail(String email, String authNum) {
+	private static final Logger logger = LoggerFactory.getLogger(EmailPublisherService.class);
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-			String setfrom = "kimjh2218@gmail.com";
-			String tomail = email;
-			String title = "나들이 관리자";
-			String content = "이메일 인증번호는 " +authNum+ "입니다.";
-			
-			
-			
-			
-			
-			///////////////////   
-			try {
-			Properties props = new Properties(); 
-	        props.put("mail.smtp.user",username); 
-	        props.put("mail.smtp.password", password);
-	        props.put("mail.smtp.host", "smtp.gmail.com"); 
-	        props.put("mail.smtp.port", "465"); 
-	        props.put("mail.smtp.from", title);
-	        props.put("mail.debug", "true"); 
-	        props.put("mail.smtp.auth", "true"); 
-	        props.put("mail.smtp.starttls.enable","true"); 
-	        props.put("mail.smtp.EnableSSL.enable","true");
-	        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
-	        props.setProperty("mail.smtp.socketFactory.fallback", "false");   
-//	        props.setProperty("mail.smtp.port", "587");   
-//	        props.setProperty("mail.smtp.socketFactory.port", "587"); 
-	    
-	        Session session = Session.getInstance(props, 
-	         new javax.mail.Authenticator() { 
-	        protected PasswordAuthentication getPasswordAuthentication() { 
-	        return new PasswordAuthentication(username, password); 
-	        }});
-	        System.out.println("??");
-	        
-	            Message message = new MimeMessage(session); 
-	            message.setFrom(new InternetAddress("kimjh2218@gmail.com"));// 
-	            message.setRecipients(Message.RecipientType.TO,
-	            InternetAddress.parse(email)); 
-	            message.setSubject("Testing Subject");
-	            message.setText("Dear Mail Crawler," 
-	            + "\n\n No spam to my email, please!");//내용 
-	            message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
-	            System.out.println("send!!!");
-	            Transport.send(message); 
-	            System.out.println("SEND");
-	            
-	        } catch(MessagingException e){
-	            e.printStackTrace();
-	        }catch(Exception e) {
-	        	e.printStackTrace();
-	        }
-	      ////////////////////////////////////////////////////////       
-	        */
-	        
-	        
-			
-			  
+    public <T> boolean publish(T report) {
+        logger.debug("Sending report by email...");
+        boolean retVal = false;
+        try {
+            final String emailTo = "to@test.co.kr";
+            final String emailFrom = "from@test.co.kr";
+            final String subject = "test subject";
+            final String message = (String) report;
+
+            javaMailSender.send(new MimeMessagePreparator() {
+
+                @Override
+                public void prepare(MimeMessage paramMimeMessage) throws Exception {
+                    MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(paramMimeMessage, true, "UTF-8");
+
+                    mimeMessageHelper.setTo(emailTo);
+                    mimeMessageHelper.setFrom(emailFrom);
+                    mimeMessageHelper.setSubject(subject);
+                    mimeMessageHelper.setText(message);
+
+                    final File file = new File("test filename");
+
+                    mimeMessageHelper.addAttachment(MimeUtility.encodeText("filename"), new InputStreamSource() {
+
+                        @Override
+                        public InputStream getInputStream() throws IOException {
+                            // TODO Auto-generated method stub
+                            return new FileInputStream(file);
+                        }
+                    });
+
+                };
+            });
+
+            retVal = true;
+        } catch (Exception e) {
+            logger.error("Can't send email... " + e.getMessage(), e);
+        }
+        return retVal;
+    }	
+	*/		  
 }

@@ -45,7 +45,7 @@ $(document).ready(function() {
 	
 	
 });
-/*
+
 //	이메일 인증 
 function check(){
 	var email = $("#email").val();
@@ -58,7 +58,7 @@ function check(){
 		}
 	});
 }
- */
+
  
 ///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
     var idCheckFlag = false;
@@ -198,6 +198,12 @@ function check(){
     		}); 
     	}
     }
+    
+    function delchk(){
+        if(confirm("취소하시겠습니까?")){
+            location.href = "/user/main";
+        }
+    }
 </script>
 </head>
 
@@ -291,14 +297,14 @@ function check(){
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일" oninput="emailValid();">
-		    <!--   <input type="button" value="인증" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()"> -->
+		      <input type="button" value="인증" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
 		    </div>
 		  </div> 
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >가 &nbsp;입</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+			  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >취&nbsp;소</a>
 		    </div>
 		  </div>
 		</form>
