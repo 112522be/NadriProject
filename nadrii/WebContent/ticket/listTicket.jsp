@@ -56,46 +56,33 @@ function fncGetList(pageNo) {
 		$("a[href='#']:contains('제목순')").bind("click", function(event) {
 			alert("제목순")
 			event.preventDefault();
-			var searchArrange = this.val();
-			fncGetTicketSort(searchArrange);
+			var searchArrange = "A";
+			alert(searchArrange)
+//			fncGetTicketSort(searchArrange);
 		})
 	});
 
-	function fncGetTicketSort(searchArrange) {
-		
-		$.ajax (
-				{
-					url : "/ticket/json/listTicket/",
-					method : "POST",
-	//				dataType : "json",
-					headers : {
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},
-					data: searchArrange,
-					success : function() {
-					}
-				});		
-	}
-
 	//=================== "상세조회" Event 연결 ===================
 	$(function() {
-		$("a[href='#' ]:contains('상세조회')").bind("click", function() {
+		$("a[href='#' ]:contains('상세조회')").bind("click", function(event) {
+//			alert("상세조회")
 			
+			event.preventDefault();
+
 			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var title = $( $('input[name="title"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
-			/*
 			console.log('contentId : ' + contentId)
 			console.log('contentTypeId : ' + contentTypeId)
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
-			//*/
+			///*
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
+			//*/
 		});
 	});
 	
@@ -132,10 +119,10 @@ function fncGetList(pageNo) {
 			<!-- Nav tabs -->
 			<ul class="nav nav-pills">
 			<input type="hidden" name="searchArrange" value="">
-				<li role="presentation"><a href="#" value="A">제목순</a></li>
-				<li role="presentation"><a href="#" value="B">조회순</a></li>
-				<li role="presentation"><a href="#" value="C">수정일순</a></li>
-				<li role="presentation"><a href="#" value="D">생성일순</a></li>
+				<li role="presentation"><a href="#">제목순</a></li>
+				<li role="presentation"><a href="#">조회순</a></li>
+				<li role="presentation"><a href="#">수정일순</a></li>
+				<li role="presentation"><a href="#">생성일순</a></li>
 			</ul>
 
 		</div>

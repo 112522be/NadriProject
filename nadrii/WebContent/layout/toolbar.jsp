@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 	<!-- javascript -->
-	<!--<script src="/resources/js/jquery.js"></script>-->
-	<script src="/resources/js/bootstrap.min.js"></script>
+	<!--<script src="/resources/js/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>-->
 	
 	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />

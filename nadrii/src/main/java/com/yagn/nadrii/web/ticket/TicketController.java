@@ -49,11 +49,17 @@ public class TicketController {
 			) throws Exception {
 		
 		System.out.println("\n /ticket/listTicket : GET / POST");
+		
+		System.out.println("\n[openApiSearch domain check] ==> " + openApiSearch.toString());
 
 		if(openApiSearch.getPageNo() == 0 ){
 			openApiSearch.setPageNo(1);
 		} 
 		openApiSearch.setNumOfRows(pageSize);
+		
+		if(openApiSearch.getSearchArrange() == null) {
+			openApiSearch.setSearchArrange("B");
+		}
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
