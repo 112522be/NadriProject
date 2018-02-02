@@ -203,6 +203,9 @@ public class TripController {
 		return "forward:/Trip/listTrip.jsp";
 	}
 	
-	
+	@RequestMapping(value="/getTheme")
+	public String getTheme() {
+		return"forward:/Trip/getTheme.jsp";
+	}
 	
 }

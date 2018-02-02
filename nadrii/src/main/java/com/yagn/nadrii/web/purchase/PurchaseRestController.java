@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.purchase;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,17 +57,25 @@ public class PurchaseRestController {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(bDate);
 			cal.add(Calendar.DATE, -10);
-			String cancelDate = df.format(cal.getTime());
+
+			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "³â "
+					+ df.format(cal.getTime()).substring(4, 6) + "¿ù " 
+					+ df.format(cal.getTime()).substring(6) + "ÀÏ";
+			
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
 			
+			System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
+			System.out.println("\n");
 			
 			purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		System.out.println("[addPurchase Complete]");
 	
 	} // end of method
+
 	
 } // end of class

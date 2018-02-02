@@ -30,22 +30,22 @@
 						cancel_date,	
 						ticket_priceall,
 						content_id,
-						content_type_id,
+						content_typeid,
 						flag_bp,
 						reg_date
 						)
 		VALUES (
 				seq_purchase_post_no.NEXTVAL,
-				#{ticketTitle:VARCHAR},
-				#{ticketImage:VARCHAR},
-				#{bookingDate:VARCHAR},
-				#{cancelDate:VARCHAR},
-				#{ticketPriceAll:VARCHAR},
-				#{contentId:NUMERIC},
-				#{contentTypeId:NUMERIC},
-				#{flag:VARCHAR},
+				#{ticketTitle},
+				#{ticketImage},
+				#{bookingDate},
+				#{cancelDate},
+				#{ticketPriceAll},
+				#{contentId},
+				#{contentTypeId},
+				#{flag},
 				SYSDATE
-				))
+				)
 	</insert>
 
 

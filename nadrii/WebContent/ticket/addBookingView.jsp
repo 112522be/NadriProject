@@ -220,6 +220,7 @@
 				}
 			}
 			
+
 			var basketData = {
 				"ticketTitle" : '${ tourTicket.title }' ,
 				"ticketImage" : '${ detailImage.originimgurl }' , 
@@ -231,6 +232,7 @@
 			}
 			
 			var jsonData = JSON.stringify(basketData);
+
 			
 			$.ajax (
 					{
@@ -241,14 +243,11 @@
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"
 						},
-						
-						
-					//	ContentType : "application/json" ,
 						data:jsonData,
 						success : function() {
-							alert("저장하기 완료")
 						}
 					});		
+					alert("저장하기 완료");
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)

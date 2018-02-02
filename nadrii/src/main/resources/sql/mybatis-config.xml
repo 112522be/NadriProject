@@ -34,6 +34,7 @@
 		<mapper resource="sql/GroupMapper.xml"/>
 		<mapper resource="sql/PurchaseMapper.xml"/> 
 		<mapper resource="sql/JoinMapper.xml"/>
+
 	</mappers>
 	
 
