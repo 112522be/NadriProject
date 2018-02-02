@@ -40,6 +40,7 @@
 		}
         function addThumbnail(filePath) {
 			$('input[name="thumbNailFileName"]').val(filePath);
+			console.log($('input[name="thumbNailFileName"]').val());
 		}
         var hashtagList=",";
         function listHashTag(filePath) {
@@ -75,7 +76,7 @@
  			})
  			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
- 				console.log($(this).attr('src'))
+  				addThumbnail($(this).attr('src'))
  			}) 
 		})
 	</script>
@@ -99,15 +100,17 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat">
-		<input type="hidden" name="lng">
+		<input type="hidden" name="lat" value="37.55127433520228">
+		<input type="hidden" name="lng" value="126.98821931024443">
 		<input type="hidden" name="thumbNailFileName">
-		
+		<div id="cndThumbnail"></div>
+		<br/>
 		<div>
 			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
 		</div>
 		<br/>
 		<div id="cndHashTags"></div>
 		<br/>
+		</form>
 </body>
 </html>
