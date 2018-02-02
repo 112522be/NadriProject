@@ -8,6 +8,7 @@ public class Purchase {
 	private int contentId;			
 	private int contentTypeId;		
 
+
 	private int postNo;			
 	private String ticketTitle;		
 	private String ticketImage;		
@@ -108,6 +109,7 @@ public class Purchase {
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
 				+ ", flag=" + flag + "]";
 	}
+
 
 	
 	

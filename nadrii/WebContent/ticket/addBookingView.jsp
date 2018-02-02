@@ -220,6 +220,7 @@
 				}
 			}
 			
+
 			var basketData = {
 				"ticketTitle" : '${ tourTicket.title }' ,
 				"ticketImage" : '${ detailImage.originimgurl }' , 
@@ -231,6 +232,7 @@
 			}
 			
 			var jsonData = JSON.stringify(basketData);
+
 			
 			$.ajax (
 					{
