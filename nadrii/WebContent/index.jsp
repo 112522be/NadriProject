@@ -117,10 +117,17 @@ body {
 			});
 		});
 		
-		//============= listTicket 화면이동 =============
+		//============= "나들이티켓" 화면이동 =============
 		$( function() {
-			$("a[href='#' ]:contains('나들이티켓')").on("click" , function() {
+			$("a[href='#' ]:contains('나들이티켓')").bind("click" , function() {
 				self.location = "/ticket/listTicket"
+			});
+		});
+		
+		//============= "장바구니" 화면이동 =============
+		$( function() {
+			$("a[href='#' ]:contains('장바구니')").bind("click" , function() {
+				self.location = "/purchase/listBasket"
 			});
 		});
 		
@@ -346,7 +353,8 @@ body {
 					<div class="text-center">
 						<a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
 						<a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
-						<a class="btn btn-success btn-lg" href="#" role="button">나들이티켓</a>
+						<a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
+						<a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
 						<a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
 					</div>
 
