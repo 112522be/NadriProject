@@ -18,45 +18,24 @@
 	<util:properties id="naverApiProperties" 	location="classpath:common/naverApi.properties"/>
 
 	
-	<!--  주현 이메일 인증
+	<!--  주현 이메일 인증 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
+		<property name="host" value="stmp.gmail.com" />
+		<property name="port" value="25" />    587 -
 		<property name="username" value="kimjh2218@gmail.com" />
-		<property name="password" value="god2218923" />
-		<property name="javaMailProperties">
+		<property name="password" value="top0347923" />-->
+		<!-- email 요청시는 SMTP -->
+<!--		<property name="javaMailProperties">
 			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.transport.protocol">gsmtp</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
 	</bean>
--->	
-
-<!-- email 인증 : gmail -->
-    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-        <property name="defaultEncoding" value="utf-8"/>
-        <property name="username" value="구글이메일@gmail.com" />
-        <property name="password" value="구글비밀번호" />
-        
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.smtp.auth">true</prop>
-            </props>
-        </property>
-         
-    </bean>
-     
-    <bean id="user" class="com.yagn.nadrii.service.domain.User">
-    </bean>
-    <bean id="emailSender" class="com.yagn.nadrii.service.user.EmailSender">
-    </bean>	
-    <!-- email 인증 : gmail end-->
+    
+     email 인증 : gmail end-->
 
 
 	<bean id="annotationHandlerMapping"

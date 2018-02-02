@@ -73,4 +73,10 @@ public class UserDaoImpl implements UserDao{
 		System.out.println("비밀번호 찾기" +userPw);
 		return sqlSession.selectOne("UserMapper.faindPassword", userPw);
 	}
+	
+	public void addUserPlus(User user) throws Exception{
+		//user.setGender(user.getgender().replaceAll("","").trim());
+		System.out.println("추가정보 입력..." + user.toString());
+		sqlSession.selectOne("UserMapper.addUserPlus", user);
+	}
 }

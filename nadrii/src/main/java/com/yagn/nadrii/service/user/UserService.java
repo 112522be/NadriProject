@@ -31,4 +31,11 @@ public interface UserService {
 	
 	public String findPassword(String userPw) throws Exception;
 
+	public static void create(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void addUserPlus(User user) throws Exception;
+
 }
