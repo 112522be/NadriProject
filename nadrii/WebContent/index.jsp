@@ -7,7 +7,7 @@
 
 <!-- ///////////////////////////// 로그인시 Forward  /////////////////////////////////////// -->
 <c:if test="${ ! empty user }">
-	<jsp:forward page="main.jsp" />
+   <jsp:forward page="main.jsp" />
 </c:if>
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -24,13 +24,14 @@
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 위치 정보 가져오는 JS -->
+<script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <!-- Facebook Login -->
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
 <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
@@ -40,128 +41,135 @@
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 body {
-	background-image: url(images\\cropped-1920-1080-819582.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+   background-image: url(images\\cropped-1920-1080-819582.jpg);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 
 .row {
-	margin: 100px;
+   margin: 100px;
 }
 
 .jumbotron {
-	color: navy;
-	background-color: rgba(160, 220, 220, 0.7);
+   color: navy;
+   background-color: rgba(160, 220, 220, 0.7);
 }
 
 .jumbotron p {
-	font-weight: bold;
-	font-style: italic;
+   font-weight: bold;
+   font-style: italic;
 }
 
 .jumbotron h1 {
-	font-stretch: wider;
+   font-stretch: wider;
 }
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-		
-		//============= 회원원가입 화면이동 =============
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('회원가입')").on("click" , function() {
-				alert("회원가입")
-				self.location = "/user/addUser"
-			});
-		});
-		
-		//============= 로그인 화면이동 =============
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('로 그 인')").on("click" , function() {
-				self.location = "/user/login"
-			});
-		});
-		
-		//============================== 정보검색 파트 ===================
-		$( function() {
-			$("a[href='#' ]:contains('박물관')").on("click" , function() {
-				self.location = "../trip/listMuseum?pageNo=1"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('전시관')").on("click" , function() {
-				self.location = "../trip/listExhibit?pageNo=1"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('미술관')").on("click" , function() {
-				self.location = "../trip/listGallery?pageNo=1"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('체험관')").on("click" , function() {
-				self.location = "../trip/listExperience?pageNo=1"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('민속마을')").on("click" , function() {
-				self.location = "../trip/listTradition?pageNo=1"
-			});
-		});
-		
-		//============= listTicket 화면이동 =============
-		$( function() {
-			$("a[href='#' ]:contains('나들이티켓')").on("click" , function() {
-				self.location = "/ticket/listTicket"
-			});
-		});
-		
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('종만아')").on("click" , function() {
-				self.location = "/trip/listMuseum?pageNo=1"
-			});
-		});
-		
-		$(function(){
-			$("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
-				if(confirm("로그아웃을 하시겠습니까?")){
-				self.location = "/user/logoutProc";
-				}
-			});
-		});
-		-
-		
+      
+      //============= 회원원가입 화면이동 =============
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('회원가입')").on("click" , function() {
+            alert("회원가입")
+            self.location = "/user/addUser"
+         });
+      });
+      
+      //============= 로그인 화면이동 =============
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('로 그 인')").on("click" , function() {
+            self.location = "/user/login"
+         });
+      });
+      
+      //============================== 정보검색 파트 ===================
+      $( function() {
+         $("a[href='#' ]:contains('박물관')").on("click" , function() {
+            self.location = "../trip/listMuseum?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('전시관')").on("click" , function() {
+            self.location = "../trip/listExhibit?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('미술관')").on("click" , function() {
+            self.location = "../trip/listGallery?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('체험관')").on("click" , function() {
+            self.location = "../trip/listExperience?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('민속마을')").on("click" , function() {
+            self.location = "../trip/listTradition?pageNo=1&area=local"
+         });
+      });
+      
+      //============= "나들이티켓" 화면이동 =============
+      $( function() {
+         $("a[href='#' ]:contains('나들이티켓')").bind("click" , function() {
+            self.location = "/ticket/listTicket"
+         });
+      });
+      
+      //============= "장바구니" 화면이동 =============
+      $( function() {
+         $("a[href='#' ]:contains('장바구니')").bind("click" , function() {
+            self.location = "/purchase/listBasket"
+         });
+      });
+      
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('종만아')").on("click" , function() {
+            self.location = "/trip/listMuseum?pageNo=1&area=local"
+         });
+      });
+      
+      $(function(){
+         $("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
+            if(confirm("로그아웃을 하시겠습니까?")){
+            self.location = "/user/logoutProc";
+            }
+         });
+      });
+      -
+      
 
-	//============= FaceBook 로그인 START =============
+   //============= FaceBook 로그인 START =============
 
-	/*
-	 FirebaseChat.prototype.init = function(){ //...생략
-	  	this.liFacebookBtn = document.getElementById('liFacebookBtn');
-	  } 
-	  // 초기 이벤트 바인딩  
-	 		 FirebaseChat.prototype.initEvent = function(){ 
-		  //...생략
-	  		this.liFacebookBtn.addEventListener('click', this.onFacebookBtnClick.bind(this)); 
-		 }
-		  // 페이스북 로그인 버튼 클릭 / 
-		  FirebaseChat.prototype.onFacebookBtnClick = function(){ 
-			  var facebookProvider = new firebase.auth.FacebookAuthProvider(); 
-			  this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION) 
-			  .then(this.signInWithPopup.bind(this, facebookProvider)).(function(error) { 
-				  console.error('인증 상태 설정 중 에러 발생' , error); 
-				  }); 
-			  }    
-		  //*/
-		  
-	// This is called with the results from from FB.getLoginStatus().
+   /*
+    FirebaseChat.prototype.init = function(){ //...생략
+        this.liFacebookBtn = document.getElementById('liFacebookBtn');
+     } 
+     // 초기 이벤트 바인딩  
+           FirebaseChat.prototype.initEvent = function(){ 
+        //...생략
+           this.liFacebookBtn.addEventListener('click', this.onFacebookBtnClick.bind(this)); 
+       }
+        // 페이스북 로그인 버튼 클릭 / 
+        FirebaseChat.prototype.onFacebookBtnClick = function(){ 
+           var facebookProvider = new firebase.auth.FacebookAuthProvider(); 
+           this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION) 
+           .then(this.signInWithPopup.bind(this, facebookProvider)).(function(error) { 
+              console.error('인증 상태 설정 중 에러 발생' , error); 
+              }); 
+           }    
+        //*/
+        
+   // This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
       console.log('statusChangeCallback');
       console.log(response);
@@ -212,7 +220,7 @@ body {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
       console.log(vm)
-		vm.statusChangeCallback(response);
+      vm.statusChangeCallback(response);
     });
 
     };
@@ -241,9 +249,9 @@ body {
     }
     
     
-	//============= FaceBook 로그인 END =============
+   //============= FaceBook 로그인 END =============
     
-	</script>
+   </script>
 
 
 
@@ -254,163 +262,121 @@ body {
 
     <!-- Custom styles for this template 
     <link href="css/4-col-portfolio.css" rel="stylesheet">
-	-->
+   -->
 
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
+   <!-- ToolBar Start /////////////////////////////////////-->
+<%--    <div class="navbar  navbar-default">
 
-		<div class="container">
+      <div class="container">
 
-			<a class="navbar-brand" href="#">나들이 TEST</a>
+         <a class="navbar-brand" href="#">나들이 TEST</a>
 
-			<!-- toolBar Button Start //////////////////////// -->
-			<div class="navbar-header">
-				<button class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#target">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-			</div>
-			<!-- toolBar Button End //////////////////////// -->
+         <!-- toolBar Button Start //////////////////////// -->
+         <div class="navbar-header">
+            <button class="navbar-toggle collapsed" data-toggle="collapse"
+               data-target="#target">
+               <span class="sr-only">Toggle navigation</span> <span
+                  class="icon-bar"></span> <span class="icon-bar"></span> <span
+                  class="icon-bar"></span>
+            </button>
+         </div>
+         <!-- toolBar Button End //////////////////////// -->
 
-			<div class="collapse navbar-collapse" id="target">
-				<ul class="nav navbar-nav navbar-right">
-					<c:if test="${loginUser eq null }">
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">로 그 인</a></li>
-						<li><a href="#">상품검색</a></li>
-						<li><a href="#">박물관</a></li>
-						<li><a href="#">전시관</a></li>
-						<li><a href="#">미술관</a></li>
-						<li><a href="#">체험관</a></li>
-						<li><a href="#">민속마을</a></li>
-						<li><a href="#">나들이티켓</a></li>
-						<li><a href="#"> 
-						
-						<!--  facebook login --> <script>
-					 		(function(d, s, id) {
-							    var js, fjs = d.getElementsByTagName(s)[0];
-							    if (d.getElementById(id)) return;
-							    js = d.createElement(s); js.id = id;
-							    js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
-							    fjs.parentNode.insertBefore(js, fjs);
-							  }(document, 'script', 'facebook-jssdk'))</script> <fb:login-button
-									scope="public_profile,email" onlogin="checkLoginState();">
-								Facebook Login						
-							</fb:login-button>
+         <div class="collapse navbar-collapse" id="target">
+            <ul class="nav navbar-nav navbar-right">
+               <c:if test="${loginUser eq null }">
+                  <li><a href="#">회원가입</a></li>
+                  <li><a href="#">로 그 인</a></li>
+                  <li><a href="#">상품검색</a></li>
+                  <li><a href="#">박물관</a></li>
+                  <li><a href="#">전시관</a></li>
+                  <li><a href="#">미술관</a></li>
+                  <li><a href="#">체험관</a></li>
+                  <li><a href="#">민속마을</a></li>
+                  <li><a href="#">나들이티켓</a></li>
+                  <li><a href="#"> 
+                  
+                  <!--  facebook login --> <script>
+                      (function(d, s, id) {
+                         var js, fjs = d.getElementsByTagName(s)[0];
+                         if (d.getElementById(id)) return;
+                         js = d.createElement(s); js.id = id;
+                         js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
+                         fjs.parentNode.insertBefore(js, fjs);
+                       }(document, 'script', 'facebook-jssdk'))</script> <fb:login-button
+                           scope="public_profile,email" onlogin="checkLoginState();">
+                        Facebook Login                  
+                     </fb:login-button>
 
-								<div id="status"></div> 
-								<!--  facebook login  end-->
-								
-								
-						</a></li>
-					</c:if>
+                        <div id="status"></div> 
+                        <!--  facebook login  end-->
+                        
+                        
+                  </a></li>
+               </c:if>
 
-					<c:if test="${loginUser ne null }">
-						<li><a href="#">로 그 아 웃</a></li>
-						<li><a href="#">박물관</a></li>
-						<li><a href="#">전시관</a></li>
-						<li><a href="#">미술관</a></li>
-						<li><a href="#">체험관</a></li>
-						<li><a href="#">민속마을</a></li>
-						<li><a href="#">나들이티켓</a></li>
-					</c:if>
-				</ul>
-			</div>
+               <c:if test="${loginUser ne null }">
+                  <li><a href="#">로 그 아 웃</a></li>
+                  <li><a href="#">박물관</a></li>
+                  <li><a href="#">전시관</a></li>
+                  <li><a href="#">미술관</a></li>
+                  <li><a href="#">체험관</a></li>
+                  <li><a href="#">민속마을</a></li>
+                  <li><a href="#">나들이티켓</a></li>
+               </c:if>
+            </ul>
+         </div>
 
-		</div>
-	</div>
-	<!-- ToolBar End /////////////////////////////////////-->
+      </div>
+   </div> --%>
+   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+   <!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+   <!--  화면구성 div Start /////////////////////////////////////-->
+   <div class="container">
 
-		<!-- 다단레이아웃  Start /////////////////////////////////////-->
-		<div class="row">
+      <!-- 다단레이아웃  Start /////////////////////////////////////-->
+      <div class="row">
 
-			<!--  Main start /////////////////////////////////////-->
-			<div class="col-md-9">
-				<div class="jumbotron">
-					<h1>나들이 TEST</h1>
-					<p>If you got some good emotion for about your memory, that was
-						good memory to you.</p>
-					<p>But, if you got some bad emotion, that was good experience
-						to you.</p>
-					<div class="text-center">
-						<a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
-						<a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
-						<a class="btn btn-success btn-lg" href="#" role="button">나들이티켓</a>
-						<a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
-					</div>
+         <!--  Main start /////////////////////////////////////-->
+         <div class="col-md-9">
+            <div class="jumbotron">
+               <h1>나들이 TEST</h1>
+               <p>If you got some good emotion for about your memory, that was
+                  good memory to you.</p>
+               <p>But, if you got some bad emotion, that was good experience
+                  to you.</p>
+               <div class="text-center">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
+                  <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
+                  <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
+               </div>
 
-				</div>
-			</div>
-			<!--  Main end /////////////////////////////////////-->
-
-
-
-			<!--  Menu 구성 Start /////////////////////////////////////-->
-			<div class="col-md-3">
-
-				<!--  회원관리 목록에 제목 -->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<i class="glyphicon glyphicon-heart"></i> 회원관리
-					</div>
-					<!--  회원관리 아이템 -->
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">개인정보조회</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-						<li class="list-group-item"><a href="#">회원정보조회</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-					</ul>
-				</div>
+            </div>
+         </div>
+         <!--  Main end /////////////////////////////////////-->
 
 
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<i class="glyphicon glyphicon-briefcase"></i> 판매상품관리
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">판매상품등록</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-						<li class="list-group-item"><a href="#">판매상품관리</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-					</ul>
-				</div>
+
+         <!--  Menu 구성 Start /////////////////////////////////////-->
+                  <!--  Menu 구성 end /////////////////////////////////////-->
+         <div class="fb-like" data-share="true" data-width="450"
+            data-show-faces="true"></div>
+
+      </div>
+      <!-- 다단레이아웃  end /////////////////////////////////////-->
+
+   </div>
+   <!--  화면구성 div end /////////////////////////////////////-->
 
 
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<i class="glyphicon glyphicon-shopping-cart"></i> 상품구매
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">상품검색</a></li>
-						<li class="list-group-item"><a href="#">구매이력조회</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-						<li class="list-group-item"><a href="#">최근본상품</a> <i
-							class="glyphicon glyphicon-ban-circle"></i></li>
-					</ul>
-				</div>
-
-			</div>
-			<!--  Menu 구성 end /////////////////////////////////////-->
-			<div class="fb-like" data-share="true" data-width="450"
-				data-show-faces="true"></div>
-
-		</div>
-		<!-- 다단레이아웃  end /////////////////////////////////////-->
-
-	</div>
-	<!--  화면구성 div end /////////////////////////////////////-->
-
-
-	
+   
 
 </body>
 

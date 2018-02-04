@@ -21,8 +21,8 @@
 		<typeAlias alias="map" type="java.util.Map" />
 		<typeAlias alias="user" type="com.yagn.nadrii.service.domain.User" />
 		<typeAlias alias="group" type="com.yagn.nadrii.service.domain.Group"/>
-		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.JoinMember"/>
 		<typeAlias alias="purchase" type="com.yagn.nadrii.service.domain.Purchase"/>
+		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.Join"/>
 	</typeAliases>
 	
 	<!-- SQL Definition :: file include -->
@@ -33,6 +33,8 @@
 		<mapper resource="sql/WishMapper.xml"/>
 		<mapper resource="sql/GroupMapper.xml"/>
 		<mapper resource="sql/PurchaseMapper.xml"/> 
+		<mapper resource="sql/JoinMapper.xml"/>
+
 	</mappers>
 	
 

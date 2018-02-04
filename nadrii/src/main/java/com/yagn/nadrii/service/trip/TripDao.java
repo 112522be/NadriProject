@@ -11,7 +11,7 @@ import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
 
 public interface TripDao {
 	
-	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception;
+	public List listTrip(int pageNo,String contentTypeId, String cat1, String cat2, String cat3, String areaCode, String localName) throws Exception;
 	
 	public TourApiDomain getTrip(String contentid, String contentTypeid)throws Exception;
 	
@@ -30,4 +30,8 @@ public interface TripDao {
 	public Trip getTripFromDB(String contentId) throws Exception;
 	
 	public List getClientAddress(String lat, String lng) throws Exception;
+	
+	public String getAreaCode(String placeName, String areaCode) throws Exception;
+	
+	
 }

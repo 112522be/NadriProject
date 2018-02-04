@@ -20,7 +20,8 @@ public class TourAPlListUrlManage {
 	private String pageNoName ="&pageNo=";
 	private String contentIdName ="&contentId=";
 	
-	private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+	//private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+	private String serviceKey = "elArz5Uco6Vjf5eFlDFY225L72%2FKxulUVoQ6ucNpvUkwvvoOZw4Pri%2B3tFJHQXU4CxNyVGp%2BNRzup9HNp4XsMg%3D%3D";
 	private String contentTypeId = "12"; //""
 	private String contentId ="";
 	private String areaCode = "";
@@ -31,7 +32,7 @@ public class TourAPlListUrlManage {
 	private String listYN="Y";
 	private String MoblieOS = "ETC";
 	private String MobileApp = "TourAPI3.0_Guide";
-	private String arrange = "A";
+	private String arrange = "B";
 	private int numOfRows=12;
 	private int pageNo =1;
 		
@@ -175,7 +176,6 @@ public class TourAPlListUrlManage {
 	public void urlClean() {
 		String cleaner = "";
 		this.setType(cleaner);
-		
 		this.setContentId(cleaner);
 		this.setContentTypeId(cleaner);
 		this.setCat1(cleaner);

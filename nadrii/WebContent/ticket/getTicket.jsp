@@ -172,10 +172,17 @@ function fncAddBooking() {
 	  			<button type="button" class="btn btn-success">
 	  				취 소
 	  			</button>
-	  			<a class="btn btn-danger btn" href="#" role="button">
-	  				예매하기 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> 장바구니 담기
+	  			<c:if test="${ detailIntro.usetimefestival eq '무료' }">
+	  			<a class="btn btn-info btn" href="#" role="button">
+	  				무료입장가능
 	  			</a>
-					
+				</c:if>
+				
+				<c:if test="${ detailIntro.usetimefestival ne '무료' }">
+				<a class="btn btn-danger btn" href="#" role="button">
+	  				예매하기 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> 장바구니 담기
+	  			</a>	
+				</c:if>
 				</div>
 
 			</div>

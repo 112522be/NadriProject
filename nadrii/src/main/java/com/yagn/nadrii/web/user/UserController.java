@@ -1,14 +1,19 @@
 package com.yagn.nadrii.web.user;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
+import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,11 +23,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
 
@@ -87,44 +91,47 @@ public class UserController {
 		
 		
 		///////////////////   
-		Properties props = new Properties(); 
-        props.put("mail.smtp.user",username); 
-        props.put("mail.smtp.password", password);
-        props.put("mail.smtp.host", "smtp.gmail.com"); 
-        props.put("mail.smtp.port", "465"); 
-        props.put("mail.debug", "true"); 
-        props.put("mail.smtp.from", title);
-        props.put("mail.smtp.auth", "true"); 
-        props.put("mail.smtp.starttls.enable","true"); 
-        props.put("mail.smtp.EnableSSL.enable","true");
-        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");   
-//        props.setProperty("mail.smtp.port", "587");   
-//        props.setProperty("mail.smtp.socketFactory.port", "587"); 
-    
-        Session session = Session.getInstance(props, 
-         new javax.mail.Authenticator() { 
-        protected PasswordAuthentication getPasswordAuthentication() { 
-        return new PasswordAuthentication(username, password); 
-        }});
-        System.out.println("??");
-        try{
-            Message message = new MimeMessage(session); 
-            message.setFrom(new InternetAddress("kimjh2218@gmail.com"));// 
-            message.setRecipients(Message.RecipientType.TO,
-            InternetAddress.parse(email)); 
-            message.setSubject("Testing Subject");
-            message.setText("Dear Mail Crawler," 
-            + "\n\n No spam to my email, please!");//내용 
-            message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
-            System.out.println("send!!!");
-            //Transport.send(message);
-//            this.MailSender.send(message);
-            System.out.println("SEND");
-            
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+		String to = "abcd@gmail.com";
+
+	      // Sender's email ID needs to be mentioned
+	      String from = "kimjh2218@gmail.com";
+
+	      // Assuming you are sending email from localhost
+	      String host = "localhost";
+
+	      // Get system properties
+	      Properties properties = System.getProperties();
+
+	      // Setup mail server
+	      properties.setProperty("mail.smtp.host", host);
+
+	      // Get the default Session object.
+	      Session session = Session.getDefaultInstance(properties);
+
+	      try{
+	         // Create a default MimeMessage object.
+	         MimeMessage message = new MimeMessage(session);
+
+	         // Set From: header field of the header.
+	         message.setFrom(new InternetAddress(from));
+
+	         // Set To: header field of the header.
+	         message.addRecipient(Message.RecipientType.TO,
+	                                  new InternetAddress(to));
+
+	         // Set Subject: header field
+	         message.setSubject("This is the Subject Line!");
+
+	         // Now set the actual message
+	         message.setText("This is actual message");
+
+	         // Send message
+	         Transport.send(message);
+	         System.out.println("Sent message successfully....");
+	      }catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+	   
       ////////////////////////////////////////////////////////       
         
         
@@ -134,14 +141,7 @@ public class UserController {
     }    
 
 	
-	public String randomNum() {
-	StringBuffer buffer = new StringBuffer();
-	for(int i = 0; i <= 6; i++) {
-		int n = (int) (Math.random() *10);
-		buffer.append(n);
-	}
-	return buffer.toString(); 
-	}
+	
 	
 	
 	/*
@@ -198,51 +198,105 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 	}
 	
-	@RequestMapping(value="/loginProc", method=RequestMethod.POST)
-	@ResponseBody
-	public Object loginProc( User user, HttpServletRequest request) throws Exception{
-		
-		boolean isAdmin = false;
-		
-		User loginUser = userService.loginProc(user);
-		
-		Map<String,String> map =new HashMap<String, String>();
-		
-		if(loginUser == null) {
-			map.put("msg", "failed");
-			return map;
-		}
-		
-		request.getSession().setAttribute("loginUser", loginUser );
-		map.put("msg", "success");
-		
-		if(loginUser.getRole().equals("admin")) {
-			System.out.println("관리자 로그인");
-			isAdmin = true;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}else if(loginUser.getRole().equals("user")) {
-			System.out.println("일반 로그인");
-			isAdmin = false;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}
-		
-		return map;
+	/*
+	@RequestMapping(value="/oauth", method=RequestMethod.POST)
+	public String getKakaoUser(@ModelAttribute("tokenResponse") TokenResponse tokenResponse,
+									@RequestParam String code, HttpSession session) throws Exception {
+		tokenResponse = KakaoLoginRestClient.loginToken(code);
+		System.out.println("카카오 토큰" +code);
+		User user = KakaoLoginRestClient.getUserInfo(tokenResponse.getAccess_token());
+		session.setAttribute("user", user);
+		System.out.println("두번째 카카오" +user);
+		session.setAttribute("token", tokenResponse.getAccess_token());
+		return "redirect:/user/loginView.jsp";
 	}
+*/	
+	
+	@RequestMapping(value="/oauth", produces = "application/json", method= {RequestMethod.GET,RequestMethod.POST})
+	public void kakaologin(@RequestParam("code") HttpServletRequest request, HttpServletResponse httpServlet) throws Exception{	
+		
+		final String AUTH_HOST = "https://kauth.kakao.com";
+	    final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
+
+	    String CLIENT_ID = "[REST API Key]"; // 해당 앱의 REST API KEY 정보. 개발자 웹사이트의 대쉬보드에서 확인 가능
+	    String REDIRECT_URI = "[Redirect uri]"; // 해당 앱의 설정된 uri. 개발자 웹사이트의 대쉬보드에서 확인 및 설정 가능
+	    String code = "[Authorized code]"; // 로그인 과정중 얻은 authorization code 값
+	    System.out.println("code" +code);
+	    
+	    HttpsURLConnection conn = null;
+	    OutputStreamWriter writer = null;
+	    BufferedReader reader = null;
+	    InputStreamReader isr= null;
+
+	    try {
+	      final String params = String.format("grant_type=authorization_code&client_id=%s&redirect_uri=%s&code=%s",
+	                        CLIENT_ID, REDIRECT_URI, code);
+
+	      final URL url = new URL(tokenRequestUrl);
+
+	      conn = (HttpsURLConnection) url.openConnection();
+	      conn.setRequestMethod("POST");
+	      conn.setDoOutput(true);
+
+	      writer = new OutputStreamWriter(conn.getOutputStream());
+	      writer.write(params);
+	      writer.flush();
+
+	      final int responseCode = conn.getResponseCode();
+	      System.out.println("\nSending 'POST' request to URL : " + tokenRequestUrl);
+	      System.out.println("Post parameters : " + params);
+	      System.out.println("Response Code : " + responseCode);
+
+	      isr = new InputStreamReader(conn.getInputStream());
+	      reader = new BufferedReader(isr);
+	      final StringBuffer buffer = new StringBuffer();
+	      String line;
+	      while ((line = reader.readLine()) != null) {
+	        buffer.append(line);
+	      }
+
+	      System.out.println(buffer.toString());
+
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    } finally {
+	        // clear resources
+	        if (writer != null) {
+	          try {
+	              writer.close();
+	           } catch(Exception ignore) {
+	           }
+	        }
+	        if (reader != null) {
+	          try {
+	              reader.close();
+	          } catch(Exception ignore) {
+	          }
+	        }
+	        if (isr != null) {
+	            try {
+	                isr.close();
+	            } catch(Exception ignore) {
+	            }
+	         }
+	    }
+	}
+	
 	
 	/**
 	 * 회원가입 페이지
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="addUser", method= RequestMethod.GET  )
-	public String addUser(HttpServletRequest request, Model model) throws Exception {
 
+	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
+	public String addUser(HttpServletRequest request, Model model) throws Exception{
+		
 		System.out.println("회원가입");
-
-		if (request.getParameter("facebookId") != null) {
-			String fbId = request.getParameter("facebookId");
-			System.out.println("페이스북 아이디 : " + fbId);
-			model.addAttribute("facebookId", fbId);
+		if(request.getParameter("facebookId") != null) {
+		String fbId = request.getParameter("facebookId");		
+		System.out.println("페이스북 아이디 : "+fbId);
+		model.addAttribute("facebookId" , fbId );
 		}
 		return "redirect:/user/addUserView.jsp";
 	}
@@ -253,16 +307,6 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="addUser", method= RequestMethod.POST  )
-	@ResponseBody
-	public Object addUser(User user) throws Exception{
-		//회원가입
-		userService.addUser(user);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "success");
-		return map;
-	}
-	
 	@RequestMapping(value="/logoutProc", method=RequestMethod.GET)
 	public String logoutProc(HttpServletRequest request, HttpSession session) throws Exception{
 	    request.getSession().removeAttribute("loginUser");
@@ -272,26 +316,6 @@ public class UserController {
 		
 		return "redirect:/index.jsp";
 	}
-	
-	/**
-	 * 아이디 중복체크
-	 * @param userId
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "checkId", method=RequestMethod.POST)
-	@ResponseBody
-    public Object idCheck(String userId, Model model) throws Exception {
-
-		System.out.println("[check]");
-		
-		Map<String, String> map = new HashMap<String, String>();
-		int check = userService.checkId(userId);
-
-		map.put("check", String.valueOf(check));
-		return map;
-    }
 	
 	/**
 	 *  아이디 찾기
@@ -306,26 +330,82 @@ public class UserController {
 		return "redirect:/user/findIdUser.jsp";
 	}
 	
-	@RequestMapping(value="findId", method=RequestMethod.POST)
-	@ResponseBody
-	public Object findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
-		System.out.println("아이디 찾기" + userId);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(map.toString());
-		System.out.println(map.get(0));
-		String findEmail = "{\"user_email\":\""+map+"\"}";
-
-		System.out.println(findEmail);
-		
-		return findEmail;
-	}
-	
 	@RequestMapping(value="findPasswordPg", method=RequestMethod.GET)
 	public String findPassword(User user, Model model) throws Exception{
 		System.out.println("비밀번호 찾기");
 		return "redirect:/user/findPasswordUser.jsp";
 	}
 	
+	@RequestMapping(value="addUserPlus", method=RequestMethod.GET)
+	public String addUserPlus() throws Exception{
+		//@RequestParam("userId") String userId, Model model
+		System.out.println("추가정보 입력");
+		
+		//User user = userService.getUser(userId);
+		
+		//model.addAttribute("user",user);
+		
+		return "redirect:/user/addUserViewPlus.jsp";
+	}
+	
+	/*
+	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
+	public String addUserPlus(@RequestParam(value = "checkArray[]")List<String> arrayParams, String userId , Model model , HttpSession session, HttpServletRequest request) throws Exception{
+		System.out.println("추가정보 입력??????");
+		
+		System.out.println("체크박스!!" + arrayParams);
+		
+		User user = userService.getUser(userId);
+		user.setPhone(user.getPhone());
+		
+		System.out.println("추가정보 입력...!!!"+user);
+		model.addAttribute("user",user);
+		
+		return "redirect:/user/addUserViewPlus.jsp";
+	}
+	*/
+	/**
+	 *  추가정보 입력
+	 * @param user
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
+	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
 
+		System.out.println("addUserPlus :: POST");
+		
+		System.out.println("\n[1] ==>" + user);
+		
+		System.out.println("생년 월일 >>" + user.getbirth());
+		System.out.println("프로필 >>" + user.getprofiIeimageFile());
+		System.out.println("핸드폰 번호 >>" + user.getPhone());
+		System.out.println("사용자 이름 >>" + user.getUserName());
+		System.out.println("자녀수 >>" + user.getchildren());
+		System.out.println("성 별 >>" +user.getgender());
+
+		userService.addUserPlus(user);
+		
+		String sessionId=((User)session.getAttribute("user")).getUserId();
+		if(sessionId.equals(user.getUserId())){
+			session.setAttribute("user", user);
+		}
+		
+//		return null;
+		return "forward:/user/addUserViewPlus.jsp";
+	}
+	
+	@RequestMapping( value="getUser", method=RequestMethod.GET )
+	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
+		
+		System.out.println("/user/getUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		
+		return "forward:/user/getUser.jsp";
+	}
 }

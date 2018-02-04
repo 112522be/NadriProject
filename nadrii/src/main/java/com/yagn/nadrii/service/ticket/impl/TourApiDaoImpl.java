@@ -102,13 +102,10 @@ public class TourApiDaoImpl implements TicketDao {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
 			// System.out.println("current date check :: " + simpleDateFormat.format(new Date()));
 
-			StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL(new StringBuilder(
-					searchFestivalURL + essentialURL 
-					+ "&eventStartDate=" + simpleDateFormat.format(new Date())
-							+ "&pageNo=" + openApiSearch.getPageNo() 
-							+ "&numOfRows=" + openApiSearch.getNumOfRows()
-							+ "&arrange=B"			
-							));
+			StringBuilder searchFestivalSB = TourApiDaoImpl.sendGetTourURL
+					(new StringBuilder(searchFestivalURL + essentialURL + "&eventStartDate=" + simpleDateFormat.format(new Date())
+							+ "&pageNo=" + openApiSearch.getPageNo() + "&numOfRows=" + openApiSearch.getNumOfRows()
+							+ "&arrange=" + openApiSearch.getSearchCondition() ));
 
 			JSONObject sfJsonObj = (JSONObject) JSONValue.parse(searchFestivalSB.toString());
 			JSONObject sfResponse = (JSONObject) sfJsonObj.get("response");
@@ -154,81 +151,7 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicket.setEventenddate(searchFestival.getEventenddate());
 				tourTicket.setReadcount(searchFestival.getReadcount());
 				tourTicket.setEventplace(detailIntro.getEventplace());
-
-				/*
-				// searchFestival domain set
-				tourTicket.setFirstimage2(searchFestival.getFirstimage2());
-				tourTicket.setTel(searchFestival.getTel());
-				tourTicket.setAreacode(searchFestival.getAreacode());
-				tourTicket.setSigungucode(searchFestival.getSigungucode());
-
-				// detailIntro domain set
-				tourTicket.setPlaytime(detailIntro.getPlaytime());
-				tourTicket.setAgelimit(detailIntro.getAgelimit());
-				tourTicket.setBookingplace(detailIntro.getBookingplace());
-				tourTicket.setDiscountinfofestival(detailIntro.getDiscountinfofestival());
-				tourTicket.setEventhomepage(detailIntro.getEventhomepage());
-				tourTicket.setFestivalgrade(detailIntro.getFestivalgrade());
-				tourTicket.setPlaceinfo(detailIntro.getPlaceinfo());
-				tourTicket.setProgram(detailIntro.getProgram());
-				tourTicket.setSpendtimefestival(detailIntro.getSpendtimefestival());
-				tourTicket.setSponsor1tel(detailIntro.getSponsor1tel());
-				tourTicket.setSponsor2tel(detailIntro.getSponsor2tel());
-				tourTicket.setSponsor1(detailIntro.getSponsor1());
-				tourTicket.setSponsor2(detailIntro.getSponsor2());
-				tourTicket.setSubevent(detailIntro.getSubevent());
-				
-				//*/
-//				String priceInfo = detailIntro.getUsetimefestival();
-//				List<String> priceList = ticketService.getTicketPrice(detailIntro.getUsetimefestival());
 				tourTicket.setUsetimefestival(ticketService.getTicketPrice(detailIntro.getUsetimefestival()));
-				
-				/*
-				List<String> priceList = new ArrayList<String>();
-				List<String> entranceFee = new ArrayList<String>();
-				
-				System.out.println("\n[2. ����� ���� Ȯ��] ==> " + priceInfo);
-				
-				// ���������� ����ִ� �ִٸ�......
-				if (priceInfo.contains("000") || priceInfo.contains("00")) {
-
-					System.out.println("\n[3. ���ڸ� ������ ���� Ȯ��] ==> " + priceInfo);
-
-					String[] priceSplit = priceInfo.split(" |/");
-					for (int k = 0; k < priceSplit.length; k++) {
-						System.out.println("[4. �Ľ� �� Ȯ��] ==>" + priceSplit[k]);
-
-						// split �� array���� ���������� ����
-						if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
-
-							System.out.println("\n[5. ���� ������ ����ִ� �迭 �� Ȯ��] ==> " + priceSplit[k]);
-							String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-							System.out.println("[6. ��� Ȯ��] ==> " + priceValue);
-
-							priceList.add(priceValue);
-							
-							for (int j = 0; j < priceList.size(); j++) {
-								System.out.println("		[7. ����Ʈ�� ����� ��� �� Ȯ��] ==>" + priceList.get(j));
-								System.out.println("");
-								tourTicket.setUsetimefestival(priceList);
-							}
-						}
-					}
-				
-				} else if (priceInfo.equals("")) {
-					System.out.println("[8. ����� NULL :: '����' ��� ���]");
-					entranceFee.add("����");
-					tourTicket.setUsetimefestival(entranceFee);
-
-				} else {
-					System.out.println("[9. ���� �״�� ���]");
-					entranceFee.add(priceInfo);
-					tourTicket.setUsetimefestival(entranceFee);
-				}
-
-				
-				System.out.println("[10. ������ �� Ȯ��] ==> " + priceList.toString());
-				//*/	
 				
 				tourTicketList.add(tourTicket);
 
@@ -264,52 +187,52 @@ public class TourApiDaoImpl implements TicketDao {
 			detailIntro = objectMapper.readValue(diItem.toJSONString(), DetailIntro.class);
 
 			if (detailIntro.getAgelimit() == "" || detailIntro.getAgelimit() == null) {
-				detailIntro.setAgelimit("There is no Data");
+				detailIntro.setAgelimit("정보 제공 없음");
 			}
 			if (detailIntro.getBookingplace() == "" || detailIntro.getBookingplace() == null) {
-				detailIntro.setBookingplace("There is no Data");
+				detailIntro.setBookingplace("정보 제공 없음");
 			}
 			if (detailIntro.getDiscountinfofestival() == "" || detailIntro.getDiscountinfofestival() == null) {
-				detailIntro.setDiscountinfofestival("There is no Data");
+				detailIntro.setDiscountinfofestival("정보 제공 없음");
 			}
 			if (detailIntro.getEventhomepage() == "" || detailIntro.getEventhomepage() == null) {
-				detailIntro.setEventhomepage("There is no Data");
+				detailIntro.setEventhomepage("정보 제공 없음");
 			}
 			if (detailIntro.getEventplace() == "" || detailIntro.getEventplace() == null) {
-				detailIntro.setEventplace("There is no Data");
+				detailIntro.setEventplace("정보 제공 없음");
 			}
 			if (detailIntro.getFestivalgrade() == "" || detailIntro.getFestivalgrade() == null) {
-				detailIntro.setFestivalgrade("There is no Data");
+				detailIntro.setFestivalgrade("정보 제공 없음");
 			}
 			if (detailIntro.getPlaceinfo() == "" || detailIntro.getPlaceinfo() == null) {
-				detailIntro.setPlaceinfo("There is no Data");
+				detailIntro.setPlaceinfo("정보 제공 없음");
 			}
 			if (detailIntro.getPlaytime() == "" || detailIntro.getPlaytime() == null) {
-				detailIntro.setPlaytime("There is no Data");
+				detailIntro.setPlaytime("정보 제공 없음");
 			}
 			if (detailIntro.getProgram() == "" || detailIntro.getProgram() == null) {
-				detailIntro.setProgram("There is no Data");
+				detailIntro.setProgram("정보 제공 없음");
 			}
 			if (detailIntro.getSpendtimefestival() == "" || detailIntro.getSpendtimefestival() == null) {
-				detailIntro.setSpendtimefestival("There is no Data");
+				detailIntro.setSpendtimefestival("정보 제공 없음");
 			}
 			if (detailIntro.getSponsor1tel() == "" || detailIntro.getSponsor1tel() == null) {
-				detailIntro.setSponsor1tel("There is no Data");
+				detailIntro.setSponsor1tel("정보 제공 없음");
 			}
 			if (detailIntro.getSponsor2tel() == "" || detailIntro.getSponsor2tel() == null) {
-				detailIntro.setSponsor2tel("There is no Data");
+				detailIntro.setSponsor2tel("정보 제공 없음");
 			}
 			if (detailIntro.getSponsor1() == "" || detailIntro.getSponsor1() == null) {
-				detailIntro.setSponsor1("There is no Data");
+				detailIntro.setSponsor1("정보 제공 없음");
 			}
 			if (detailIntro.getSponsor2() == "" || detailIntro.getSponsor2() == null) {
-				detailIntro.setSponsor2("There is no Data");
+				detailIntro.setSponsor2("정보 제공 없음");
 			}
 			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
-				detailIntro.setSubevent("There is no Data");
+				detailIntro.setSubevent("정보 제공 없음");
 			}
 			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
-				detailIntro.setUsetimefestival("Free");
+				detailIntro.setUsetimefestival("무료");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -381,46 +304,46 @@ public class TourApiDaoImpl implements TicketDao {
 		List<String> priceList = new ArrayList<String>();
 		List<String> entranceFee = new ArrayList<String>();
 
-		System.out.println("\n[2] ==> " + priceInfo);
+//		System.out.println("\n[2] ==> " + priceInfo);
 		
 		try {
-			// ���������� ����ִ� �ִٸ�......
+			
 			if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
-				System.out.println("\n[3] ==> " + priceInfo);
+//				System.out.println("\n[3] ==> " + priceInfo);
 
 				String[] priceSplit = priceInfo.split(" |/|:");
 				
-				System.out.println("\n[4]==>"+priceSplit.length);
+//				System.out.println("\n[4]==>"+priceSplit.length);
 				
 				for (int k = 0; k < priceSplit.length; k++) {
-					System.out.println("\n[4] ==>" + priceSplit[k]);
+//					System.out.println("\n[4] ==>" + priceSplit[k]);
 
 					if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
 
-						System.out.println("\n[5] ==> " + priceSplit[k]);
+//						System.out.println("\n[5] ==> " + priceSplit[k]);
 						String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-						System.out.println("\n[6] ==> " + priceValue);
+//						System.out.println("\n[6] ==> " + priceValue);
 
 						priceList.add(priceValue);
-						System.out.println("\n[7]==>" + priceList.size());						
+//						System.out.println("\n[7]==>" + priceList.size());						
 						
 						for (int j = 0; j < priceList.size(); j++) {
-							System.out.println("		[8] ==>" + priceList.get(j));
-							System.out.println("");
+//							System.out.println("		[8] ==>" + priceList.get(j));
+//							System.out.println("");
 							// tourTicket.setUsetimefestival(priceList);
 						}
 					}
 				}
 
 			} else if (priceInfo.equals("")) {
-				System.out.println("[9. if it's Null]");
-				entranceFee.add("Free");
+//				System.out.println("[9. if it's Null]");
+				entranceFee.add("무료");
 				return entranceFee;
 				// tourTicket.setUsetimefestival(entranceFee);
 
 			} else {
-				System.out.println("[10. if it's not Null]");
+//				System.out.println("[10. if it's not Null]");
 				entranceFee.add(priceInfo);
 				return entranceFee;
 				// tourTicket.setUsetimefestival(entranceFee);

@@ -21,15 +21,16 @@
 	<script type="text/javascript">
 	$(function() {
 		$('a#submit').bind('click', function() {
-			self.location="addComm";
+			$('form[name="postData"]').attr("action", "addComm").attr("method", "POST").submit();
 		})
 	})
 	</script>
 </head>
 	<body>
+	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 	<div class="container" align="center">
 	<br/>
-		<form>
+		<form name="postData">
 			<input type="hidden" name="userId" value="test01">
 			<div class="form-group">
 			    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요">
@@ -37,7 +38,7 @@
 			 <div>
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
-		</form>
+		</form> 
 		<div class="box-bottom" >
 			<a id="submit">저장하기</a>
 		</div>

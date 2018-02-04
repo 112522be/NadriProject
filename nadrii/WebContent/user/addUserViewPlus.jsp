@@ -18,108 +18,143 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="/resources/css/style.css">
+	<script src='//code.jquery.com/jquery.min.js'></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
         }
+        
+        .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//============= "가입"  Event 연결 =============
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "button.btn.btn-primary" ).on("click" , function() {
-				fncAddUser();
-			});
-		});	
-		
-		
-		//============= "취소"  Event 처리 및  연결 =============
-		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				$("form")[0].reset();
-			});
-		});	
-
-		//==>"이메일" 유효성Check  Event 처리 및 연결
-		 $(function() {
-			 
-			 $("input[name='email']").on("change" , function() {
-				
-				 var email=$("input[name='email']").val();
-			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("이메일 형식이 아닙니다.");
-			     }
-			});
-			 
-		});	
-		
-		
-	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	   //==> 주민번호 유효성 check 는 이해정도로....
-		function checkSsn() {
-			var ssn1, ssn2; 
-			var nByear, nTyear; 
-			var today; 
-	
-			ssn = document.detailForm.ssn.value;
-			// 유효한 주민번호 형식인 경우만 나이 계산 진행, PortalJuminCheck 함수는 CommonScript.js 의 공통 주민번호 체크 함수임 
-			if(!PortalJuminCheck(ssn)) {
-				alert("잘못된 주민번호입니다.");
-				return false;
-			}
-		}
-	
-		function PortalJuminCheck(fieldValue){
-		    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
-			var num = fieldValue;
-		    if (!pattern.test(num)) return false; 
-		    num = RegExp.$1 + RegExp.$2;
-	
-			var sum = 0;
-			var last = num.charCodeAt(12) - 0x30;
-			var bases = "234567892345";
-			for (var i=0; i<12; i++) {
-				if (isNaN(num.substring(i,i+1))) return false;
-				sum += (num.charCodeAt(i) - 0x30) * (bases.charCodeAt(i) - 0x30);
-			}
-			var mod = sum % 11;
-			return ((11 - mod) % 10 == last) ? true : false;
-		}
-		 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-		 
-		//==>"ID중복확인" Event 처리 및 연결
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $("button.btn.btn-info").on("click" , function() {
-				popWin 
-				= window.open("/user/checkDuplication.jsp",
-											"popWin", 
-											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-			});
-		});	
-		
-		//	체크박스
-		 $("checkbox[name='fruits']").prop('checked', true); // 전체선택하기
-
-		 $("checkbox[name='fruits']").prop('checked', false); // 전체해제하기
-		 
+		// 생일
 		 $( function() {
 			    $( "#datepicker" ).datepicker();
 			  } );
+		 
+		 
+//		 function addUserPlus(){		 
+//			 var check01 = $("#check01").val;
+//			 var checkboxValues = [];
+//			    $("input[name='fruits']:checked").each(function(i) {
+//			        checkboxValues.push($(this).val());
+//			    });
+//			 var allData = {"check01": check01, "checkArray": checkboxValues};
+			 
+//			 var data = "userName=" +$("#userName").val();
+//			 if($("userName").val() == ''){
+//		   			alert("당신 이름이 맞습니까?");
+///		   			$("#userName").focus();
+////		   			return;
+////		   		}
+//			 if(confirm("추가정보를 입력하시겠습니까?")){
+//				 $.ajax({
+//					 data : allData,
+//					 url : "/user/addUserPlus",
+//					 type : "POST",
+////				     contentType : "application; charset=utf-8",
+//					 success : function(data){
+//						 if(result.msg != "success"){
+//							 alert("다시한번 확인해 주세요.");
+//							 window.opener.location.reload();
+//							 return;
+//						 }
+//						 if(result.msg == "success"){
+//							 alert("추가정보 입력되었습니다.");
+//							 window.opener.location.reload();
+//							 self.close();
+//							 locatuin.href="/user/main";
+//						 }						 
+//					 }
+//				 })
+//				 }
+//			 }
+		 
+		 function addUserPlus(){
+//			 var data = "userName=" +$("#userName").val();
+//			 if($("userName").val() == ''){
+//		   			alert("당신 이름이 맞습니까?");
+//		   			$("#userName").focus();
+//		   			return;
+//		   		}
+			
+			var radio = $("input:radio[name='gender']:checked").val();   // checked 없으면 체크한 값이 안나옴...
+			console.log("radiobutton : " + radio)
+			var birth = $("input[name='birth']").val();
+			console.log("생년월일 확인 : " + birth)
+			var name = $("input[name='userName']").val();
+			console.log("사용자 이름 : " + name)
+			var phone = $("hidden[name='phone']").val();
+			console.log("핸드폰번호 : " + phone)
+			var img = $("hidden[name='profiIeimageFile']").val();
+			console.log("프로필 사진 : " + img)
+			
+			var value = "";	
+			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+				var value = $("option:selected").val() + "-" 
+									+ $("input[name='phone2']").val() + "-" 
+									+ $("input[name='phone3']").val();
+			}
 
+			$("input:hidden[name='phone']").val( value );
+			
+			$("form").attr("method" , "POST").attr("action" , "/user/addUserPlus").submit();
+			
+			 }
+		 
+		 $(function() {
+	            $("#imgInput").on('change', function(){
+	                readURL(this);
+	            });
+	        })
+		 
+		 function readURL(input) {
+			 
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			 
+			        reader.onload = function (e) {
+			            $('#image_section').attr('src', e.target.result);
+			        }
+			 
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			 
+			$("#imgInput").change(function(){
+			    readURL(this);
+			});
+		 
+		
+		//	버튼 말풍선
+		 $(document).ready(function(){
+		     $('[data-toggle="popover"]').popover(); 
+		 });
+		
+		
+		// ===== '추가' 버튼 처리 =====
+		$(function() {
+	            $("button:contains('추 가')").bind('click', function(){
+	            	addUserPlus();
+	            })
+	        });
+		 
 	</script>		
     
 </head>
@@ -137,35 +172,44 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">회 원 가 입</h1>
+		<h1 class="bg-primary text-center">추 가 정 보 입 력</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="addUserPlus">
 		
 		  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생 년 월 일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="datepicker" name="birth">
+		      <input type="text" class="form-control" id="datepicker" name="birth" placeholder="생 년 월 일">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
 		  </div>
-		  
-		  <div class="form-group">
+		  <!--  
+		  <form action="/addUserPlus" class="form-group">
 		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀 유 무</label>
 		    <div class="col-sm-4">
+		   	  <input type="hidden" id="check01" value="abcd">
 		      <label><input type="checkbox" name="fruits" value="있음">있음</label>
 			  <label><input type="checkbox" name="fruits" value="없음">없음</label>
+		    </div>
+		  </form>
+		  -->
+		  <div class="form-group">
+		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀수</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
-		      <label><input type="checkbox" name="fruits" value="남">남</label>
-			  <label><input type="checkbox" name="fruits" value="녀">녀</label>
+		      <input type="hidden" id="check02" value="abcd">
+		      <label><input type="radio" name="gender" value="남">남</label>
+			  <label><input type="radio" name="gender" value="여">여</label>
 		    </div>
-		  </div>
+		   </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
@@ -191,12 +235,23 @@
 		    <div class="col-sm-2">
 		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
 		    </div>
-		    <input type="hidden" name="phone"  />
+		    <input type="hidden" name="phone"/>
 		  </div>
 		  
 		  <div class="form-group">
+		  	<label for="profiIeimageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
+			  <div class="col-sm-2">
+				  <form id="form" runat="server">
+				    <input type='file' id="imgInput"  />
+				    <img id="image_section" src="#" alt="your image" />
+				</form>
+		     </div>
+		   </div>
+		  
+		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary cancelbtn"  >추 &nbsp;가</button>
+		      <button type="button" class="btn btn-info cancelbtn" data-toggle="popover"
+		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" >추 가</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>

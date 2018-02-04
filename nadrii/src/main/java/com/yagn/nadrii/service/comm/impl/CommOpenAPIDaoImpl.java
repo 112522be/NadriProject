@@ -177,7 +177,7 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 						return null;
 					}
 
-					System.out.println("[°á°úÈ®ÀÎ]/////////////////////////////////////////////////");
+					System.out.println("[ï¿½ï¿½ï¿½È®ï¿½ï¿½]/////////////////////////////////////////////////");
 
 					// For full list of available annotations, see http://g.co/cloud/vision/docs
 					for (EntityAnnotation annotation : res.getLandmarkAnnotationsList()) {

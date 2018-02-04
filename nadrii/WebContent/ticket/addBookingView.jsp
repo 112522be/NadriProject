@@ -35,6 +35,8 @@
 		body {
             padding-top : 50px;
         }
+        
+        
 	</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -220,36 +222,23 @@
 				}
 			}
 			
-			var basketData = {
-				"ticketTitle" : '${ tourTicket.title }' ,
-				"ticketImage" : '${ detailImage.originimgurl }' , 
-				"bookingDate" : '${ bookingDate }' ,
-				"cancelDate" : "tempCancelDate" ,
-				"ticketPriceAll" : ticketPriceAll ,
-				"contentId" : '${ tourTicket.contentid }' ,
-				"contentTypeId" : '${ tourTicket.contenttypeid }' ,
-				"flag" : flag
-			}
-			
 			var jsonData = JSON.stringify(basketData);
+
 			
 			$.ajax (
 					{
-						url : "/purchase/json/addPurchase/" + flag,
+						url : "/purchase/json/addBasket/",
 						method : "POST",
 						dataType : "json",
 						headers : {
 							"Accept" : "application/json",
 							"Content-Type" : "application/json"
 						},
-						
-						
-					//	ContentType : "application/json" ,
 						data:jsonData,
 						success : function() {
-							alert("저장하기 완료")
 						}
 					});		
+					alert("저장하기 완료");
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)
@@ -283,15 +272,15 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
-		<input type="hidden" name="contentid" value="${ tourTicket.contentid }">
-		<input type="hidden" name="contenttypeid" value="${ tourTicket.contenttypeid }">
+		<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
+		<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
 
-		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
 		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
 		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
 		<input type="hidden" name="bookingDate" value="${ bookingDate }">
 		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
-		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
+		<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
 
 			<div class="col-sm-6">
 				<div class="form-group text-center">
@@ -351,7 +340,10 @@
 
 			</div>
 
+
 			<div class="col-sm-6">
+			<br>
+			<br>
 				<img src="${ detailImage.originimgurl }" alt="There is no image"
 					class="img-responsive img-rounded"> <br>
 
@@ -362,21 +354,21 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="name">이 름</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="name" value="">
+						aria-describedby="basic-addon1" name="name" value="${ purchase.buyerId.userId }">
 				</div>
 				<br>
 				
 				<div class="input-group">
 					<span class="input-group-addon" id="phone">연락처</span> 
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="phone" value="">
+						aria-describedby="basic-addon1" name="phone" value="${ purchase.buyerPhone.phone }">
 				</div>
 				<br>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="email">@</span> 
 					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" name="email" value="">
+						aria-describedby="basic-addon1" name="email" value="${ purchase.buyerEmail.email }">
 				</div>
 
 				<!-- Button -->

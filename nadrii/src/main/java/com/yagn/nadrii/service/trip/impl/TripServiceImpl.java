@@ -37,12 +37,20 @@ public class TripServiceImpl implements TripService {
 
 
 	@Override
-	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception{
+	public Map listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3, String areaCode, String localName) throws Exception{
 		
 		System.out.println("listTrip SerivceImpl");
 		Map map = new HashMap();
 		
-		List list = tripDaoTour.listTrip(pageNo,contentTypeId,cat1,cat2,cat3);
+		List list = tripDaoTour.listTrip(pageNo, contentTypeId,cat1,cat2,cat3,areaCode,localName);
+		
+		
+		/*
+		if(list.size()<12) {
+			list.addAll(tripDaoTour.listTrip(pageNo, contentTypeId, cat1, cat2, cat3, areaCode, ""));
+		}
+		//*/
+		
 		
 		map.put("list", list);
 		return map;
@@ -111,6 +119,14 @@ public class TripServiceImpl implements TripService {
 		System.out.println("주소찾기 서비스단");
 		return tripDaoAddress.getClientAddress(lat, lng);
 		
+	}
+
+
+
+	@Override
+	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		return tripDaoTour.getAreaCode(placeName, areaCode);
+	
 	}
 	
 	

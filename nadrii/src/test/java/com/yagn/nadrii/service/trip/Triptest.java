@@ -30,6 +30,10 @@ public class Triptest {
 	private TripDao tripDao;
 	
 	@Autowired
+	@Qualifier("tripDaoImpl")
+	private TripDao tripDaotour;
+	
+	@Autowired
 	@Qualifier("tripDaoImplAddress")
 	private TripDao tripDaoImpl;
 	
@@ -107,13 +111,35 @@ public class Triptest {
 	
 	@Test
 	public void getAddress()throws Exception{
-		String lat = "36.777078";
-		String lng = "127.272012";
-		
+		String lat = "37.524496";
+		String lng = "128.636357";
+		//36.703287, 128.616741
+		//서울 용산37.535449, 126.955552
 		List locate = tripDaoImpl.getClientAddress(lat, lng);
 		System.out.println(locate);
-		//String results = locate.
+		System.out.println(locate.get(1));
+		System.out.println(locate.get(2));
 		
+//		for (int i = 0; i < locate.size(); i++) {
+//			boolean flag = true;
+//			String temp = (String)locate.get(i);
+//			
+//			
+//			
+//		}
+//		System.out.println(locate);
+//		String placeName =((String)locate.get(5)).trim();
+//		System.out.println("도시명::"+placeName);
+//		if(placeName.equals("서울특별시")) {
+//			placeName = "서울";
+//		}
+//		
+//		String areacode = tripDaotour.getAreaCode(placeName, "");
+//		System.out.println(placeName+"의 지역코드는  "+areacode);
+//		placeName = ((String)locate.get(4)).trim();
+//		String localName = tripDaotour.getAreaCode(placeName, areacode);
+//		System.out.println(localName+"이 필요함");
+//		
 	}
 
 }

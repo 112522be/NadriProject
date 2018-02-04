@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +38,10 @@ public class TripDaoImplTour implements TripDao {
 		System.out.println(this.getClass());		
 	}
 
-	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3) throws Exception {
-		
-		System.out.println("listTrip Dao");
+	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3,String areaCode, String localName) throws Exception {
+
+
+		System.out.println("listTrip Dao parameter areaCode, localName");
 		
 		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
 		tourAPlUrlManage.setPageNo(pageNo);
@@ -47,10 +49,13 @@ public class TripDaoImplTour implements TripDao {
 		tourAPlUrlManage.setCat1(cat1);
 		tourAPlUrlManage.setCat2(cat2);
 		tourAPlUrlManage.setCat3(cat3);
-		
-		
+		tourAPlUrlManage.setAreaCode(areaCode);
+		tourAPlUrlManage.setSigunguCode(localName);
+		tourAPlUrlManage.setType("areaBasedList?");
+
+		System.out.println(tourAPlUrlManage.urlMaking());
 		HttpClient httpClient = new DefaultHttpClient();
-		
+		List list = new ArrayList();
 				
 		HttpGet httpGet = new HttpGet(tourAPlUrlManage.urlMaking()); 
 		
@@ -63,56 +68,79 @@ public class TripDaoImplTour implements TripDao {
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			
-		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
-//		System.out.println("[1 : jsonobj] ==>" + jsonobj);
-//		System.out.println("===================================================");
-		JSONObject response = (JSONObject) jsonobj.get("response");
-//		System.out.println("[2 : response] ==>" + response);
-//		System.out.println("===================================================");
-		JSONObject header = (JSONObject) response.get("header");
-//		System.out.println("[3 : header] ==>" + header);
-//		System.out.println("===================================================");
-		JSONObject body = (JSONObject) response.get("body");
-//		System.out.println("[4 : body] ==>" + body);
-//		System.out.println("===================================================");
-		JSONObject items = (JSONObject) body.get("items");
-//		System.out.println("[5 : items] ==>" + items);
-//		System.out.println("===================================================");
-		JSONArray jsonArray = (JSONArray)items.get("item");
-//		System.out.println(jsonArray);
-		List list = new ArrayList();
-		
-		tripDaoImplImageSearch = new TripDaoImplImageSearch();
 		ObjectMapper objectMapper = new ObjectMapper();
-		for(int i=0;i<jsonArray.size();++i) {
-			JSONObject obj = (JSONObject)jsonArray.get(i);
-			System.out.println(obj);
+		
+		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
+
+		JSONObject response = (JSONObject) jsonobj.get("response");
+
+		JSONObject header = (JSONObject) response.get("header");
+
+		JSONObject body = (JSONObject) response.get("body");
+		System.out.println("[4 : body] ==>" + body);
+		
+		//데이터가 잘 넘어 온 경우
+		if(body.get("items") instanceof JSONObject) {
+			JSONObject items = (JSONObject) body.get("items");
 			
-			TourApiDomain tourDomain = new TourApiDomain();
-			tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-			
-			System.out.println(tourDomain);
-			
-			
-			if(tourDomain.getFirstimage2()==null) {
-				System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
-				String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
-				System.out.println(image);
-				tourDomain.setFirstimage2(image);
+			//데이터가 여러개인 경우
+			if(items.get("item") instanceof JSONArray) {
+				JSONArray jsonArray = (JSONArray)items.get("item");
+				
+				tripDaoImplImageSearch = new TripDaoImplImageSearch();
+						
+				for(int i=0;i<jsonArray.size();++i) {
+					JSONObject obj = (JSONObject)jsonArray.get(i);
+					System.out.println(obj);
+							
+					TourApiDomain tourDomain = new TourApiDomain();
+					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
+					System.out.println(tourDomain);
+					
+					if(tourDomain.getFirstimage2()==null) {
+						System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
+						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+						System.out.println(image);
+						tourDomain.setFirstimage2(image);
+					}
+								
+					list.add(tourDomain);
+					System.out.println(list.get(i));
+				}
+				
+			//데이터가 한개 인경우	
+				
+			}else {
+				JSONObject jsonObject = (JSONObject)items.get("item");
+				TourApiDomain tourDomain = new TourApiDomain();
+				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
+				if(tourDomain.getFirstimage2() ==null) {
+					tripDaoImplImageSearch = new TripDaoImplImageSearch();
+					System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
+					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+					System.out.println(image);
+					tourDomain.setFirstimage2(image);
+				}
+				TourApiDomain lastNotice = new TourApiDomain();
+				lastNotice.setTitle("마지막 여행지");
+				
+				list.add(tourDomain);
+				list.add(lastNotice);
+				
+				
 			}
-			
-			
-			
-			list.add(tourDomain);
-			System.out.println(list.get(i));
-			
+		//전달 데이터가 없는 경우	
+		}else {
+			TourApiDomain lastNotice = new TourApiDomain();
+			lastNotice.setTitle("마지막 여행지");
+			list.add(lastNotice);
 		}
-		
-	
-		
 		return list;
 	}
-
+	
+	
+	
+	
 	@Override
 	public TourApiDomain getTrip(String contentId, String contentTypeId) throws Exception {
 		
@@ -183,6 +211,61 @@ public class TripDaoImplTour implements TripDao {
 				
 		return tourApiDomain;
 	}
+	
+	
+	public String getAreaCode(String placeName, String areaCode) throws Exception{
+		String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode";
+		
+		String myKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+
+		String serviceKey = "?ServiceKey=" + myKey;				
+		String mobileOS = "&MobileOS=ETC"; 						
+		String mobileApp = "&MobileApp=AppTest"; 
+		int numOfRows = 200;
+		
+				
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet( url + serviceKey + mobileOS + mobileApp
+				+ "&areaCode=" + areaCode
+				+ "&numOfRows=" + numOfRows
+				);
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+				
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		
+		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
+//		System.out.println(jsonObject);
+		JSONObject response = (JSONObject) jsonObject.get("response");
+		JSONObject header = (JSONObject) response.get("header");
+		JSONObject body = (JSONObject) response.get("body");
+//		System.out.println(body);
+		JSONObject items = (JSONObject) body.get("items");
+		JSONArray item = (JSONArray)items.get("item");	
+		//System.out.println("[6 : item] ==>" + item);
+		List list = new ArrayList();
+		Map map = new HashMap();
+		
+		for (int i = 0; i < item.size(); i++) {
+			String parameter = ((JSONObject)item.get(i)).get("code").toString();
+			//System.out.println(parameter);
+			String key = ((JSONObject)item.get(i)).get("name").toString();
+			//System.out.println(key+" : "+parameter);
+			map.put(key, parameter);
+		}
+		
+		
+		return (String)map.get(placeName);
+		
+	}
+	
+	
+	
+	
+	
 
 	@Override
 	public String naverImageSearch(String target) throws Exception {

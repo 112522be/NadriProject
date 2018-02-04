@@ -1,6 +1,7 @@
 package com.yagn.nadrii.service.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Purchase {
 	
@@ -15,8 +16,16 @@ public class Purchase {
 	private String bookingDate;		
 	private String cancelDate;	
 	private String ticketPriceAll;
-	private String flag; 			
+	private String flag; 
+	
+	private String[] ticketCount;
+	private String[] ticketPrice;
+	private int totalTicketPrice;
 
+	private User buyerId;
+	private User buyerEmail;
+	private User buyerPhone;
+	
 	public Purchase() {
 		
 	}
@@ -100,14 +109,73 @@ public class Purchase {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+	
+	
+
+	public String[] getTicketCount() {
+		return ticketCount;
+	}
+
+	public void setTicketCount(String[] ticketCount) {
+		this.ticketCount = ticketCount;
+	}
+
+	public String[] getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(String[] ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
+
+	public int getTotalTicketPrice() {
+		return totalTicketPrice;
+	}
+
+	public void setTotalTicketPrice(int totalTicketPrice) {
+		this.totalTicketPrice = totalTicketPrice;
+	}
+
+	public User getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(User buyerId) {
+		this.buyerId = buyerId;
+	}
+
+	public User getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(User buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+
+	public User getBuyerPhone() {
+		return buyerPhone;
+	}
+
+	public void setBuyerPhone(User buyerPhone) {
+		this.buyerPhone = buyerPhone;
+	}
 
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
 				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
-				+ ", flag=" + flag + "]";
+				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
+				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
+				+ ", buyerEmail=" + buyerEmail + ", buyerPhone=" + buyerPhone + "]";
 	}
+
+	
+	
+
+	
+
+	
 
 	
 	

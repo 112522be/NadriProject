@@ -35,7 +35,7 @@ public class TripDaoImplImageSearch implements TripDao {
 	public String naverImageSearch(String target)throws Exception{
 		
 		System.out.println("네이버 이미지 검색");
-		int display = 100;
+		int display = 10;
         String clientId = "YaTN_waxR7h6HvXakGB2";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "dHdqCyawjm";//애플리케이션 클라이언트 시크릿값";
         String text = URLEncoder.encode(target, "UTF-8");
@@ -69,7 +69,7 @@ public class TripDaoImplImageSearch implements TripDao {
 		}
                    
         if(list.size()!=0) {
-        	return ( (NaverImage)list.get(0) ).getLink();
+        	return ( (NaverImage)list.get(2) ).getLink();
         }else {
         	return "이미지 없음";
         }
@@ -108,7 +108,7 @@ public class TripDaoImplImageSearch implements TripDao {
 
 
 	@Override
-	public List listTrip(int pageNo, String contentTypeId, String cat1, String cat2, String cat3) throws Exception {
+	public List listTrip(int pageNo,String contentTypeId, String cat1, String cat2, String cat3,String areaCode, String localName) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -136,5 +136,18 @@ public class TripDaoImplImageSearch implements TripDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
 
 }

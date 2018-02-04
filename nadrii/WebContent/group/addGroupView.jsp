@@ -1,54 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>³×ÀÌ¹ö :: Smart Editor 2 &#8482;</title>
+<title>ë„¤ì´ë²„ :: Smart Editor 2 &#8482;</title>
 <script type="text/javascript" src="/resources/smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 <form name="addGroup" action="../group/addGroup" method="post">
 	<select name="categoryCode" style="width:100px">
-		<option>¸»¸Ó¸® ¼±ÅÃ</option>
-		<option value="1">¸»¸Ó¸®1</option>
-		<option value="2">¸»¸Ó¸®2</option>
-		<option value="3">¸»¸Ó¸®3</option>
-		<option value="4">¸»¸Ó¸®4</option>
+		<option>ë§ë¨¸ë¦¬ ì„ íƒ</option>
+		<option value="1">ë§ë¨¸ë¦¬1</option>
+		<option value="2">ë§ë¨¸ë¦¬2</option>
+		<option value="3">ë§ë¨¸ë¦¬3</option>
+		<option value="4">ë§ë¨¸ë¦¬4</option>
 	</select>
 	<input type="text" name="title" style="width:656px"/>
 	
 	<textarea name="text" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
 	<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
 	<p>
-		<input type="button" onclick="showHTML();" value="º»¹® ³»¿ë °¡Á®¿À±â" />
-		<input type="button" onclick="submitContents(this);" value="¼­¹ö·Î ³»¿ë Àü¼Û" />
+		<input type="button" onclick="showHTML();" value="ë³¸ë¬¸ ë‚´ìš© ê°€ì ¸ì˜¤ê¸°" />
+		<input type="button" onclick="submitContents(this);" value="ì„œë²„ë¡œ ë‚´ìš© ì „ì†¡" />
 	</p>
 </form>
 
 <script type="text/javascript">
 var oEditors = [];
-var sLang = "ko_KR";	// ¾ğ¾î (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
-// Ãß°¡ ±Û²Ã ¸ñ·Ï
+var sLang = "ko_KR";	// ì–¸ì–´ (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
+// ì¶”ê°€ ê¸€ê¼´ ëª©ë¡
 //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: "ir1",
 	sSkinURI: "/resources/smartEditor2/SmartEditor2Skin.html",	
 	htParams : {
-		bUseToolbar : true,				// Åø¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-		bUseVerticalResizer : true,		// ÀÔ·ÂÃ¢ Å©±â Á¶Àı¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-		bUseModeChanger : true,			// ¸ğµå ÅÇ(Editor | HTML | TEXT) »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-		//bSkipXssFilter : true,		// client-side xss filter ¹«½Ã ¿©ºÎ (true:»ç¿ëÇÏÁö ¾ÊÀ½ / ±×¿Ü:»ç¿ë)
-		//aAdditionalFontList : aAdditionalFontSet,		// Ãß°¡ ±Û²Ã ¸ñ·Ï
+		bUseToolbar : true,				// íˆ´ë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+		bUseVerticalResizer : true,		// ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+		bUseModeChanger : true,			// ëª¨ë“œ íƒ­(Editor | HTML | TEXT) ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+		//bSkipXssFilter : true,		// client-side xss filter ë¬´ì‹œ ì—¬ë¶€ (true:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ / ê·¸ì™¸:ì‚¬ìš©)
+		//aAdditionalFontList : aAdditionalFontSet,		// ì¶”ê°€ ê¸€ê¼´ ëª©ë¡
 		fOnBeforeUnload : function(){
-			//alert("¿Ï·á!");
+			//alert("ì™„ë£Œ!");
 		},
 		I18N_LOCALE : sLang
 	}, //boolean
 	fOnAppLoad : function(){
-		//¿¹Á¦ ÄÚµå
-		oEditors.getById["ir1"].exec("PASTE_HTML", ["¸ğÀÓ ÀÌ¸§ <input type='text' name='groupName'></br>"]);
+		//ì˜ˆì œ ì½”ë“œ
+		oEditors.getById["ir1"].exec("PASTE_HTML", ["ëª¨ì„ ì´ë¦„ <input type='text' name='groupName'></br>"]);
 	},
 	fCreator: "createSEditor2"
 });
@@ -59,9 +59,9 @@ function showHTML() {
 }
 	
 function submitContents(elClickedObj) {
-	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// ¿¡µğÅÍÀÇ ³»¿ëÀÌ textarea¿¡ Àû¿ëµË´Ï´Ù.
+	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// ì—ë””í„°ì˜ ë‚´ìš©ì´ textareaì— ì ìš©ë©ë‹ˆë‹¤.
 	
-	// ¿¡µğÅÍÀÇ ³»¿ë¿¡ ´ëÇÑ °ª °ËÁõÀº ÀÌ°÷¿¡¼­ document.getElementById("ir1").value¸¦ ÀÌ¿ëÇØ¼­ Ã³¸®ÇÏ¸é µË´Ï´Ù.
+	// ì—ë””í„°ì˜ ë‚´ìš©ì— ëŒ€í•œ ê°’ ê²€ì¦ì€ ì´ê³³ì—ì„œ document.getElementById("ir1").valueë¥¼ ì´ìš©í•´ì„œ ì²˜ë¦¬í•˜ë©´ ë©ë‹ˆë‹¤.
 	
 	try {
 		elClickedObj.form.submitSave();

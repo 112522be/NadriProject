@@ -5,49 +5,79 @@
 <head>
   <meta charset="UTF-8">
   <title>Summernote</title>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">  -->
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
   <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
-	 	function sendFile(file, editor) {
+	 	function sendFile(file, editor) {              
             // 파일 전송을 위한 폼생성
 	 		data = new FormData();
 	 	    data.append("uploadFile", file);
 	 	    $.ajax({ // ajax를 통해 파일 업로드 처리
 	 	        data : data,
 	 	        type : "POST",
-	 	        url : "./listHashTag",
+	 	        url : "uploadImage",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
-                    console.log(data.listHashTag.length)
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	        	for(i=0;i<data.listHashTag.length;i++){
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data.listHashTag[i]+'">#'+data.listHashTag[i]+'</button>');
-	 	        	}
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
 					alert("파일 업로드에 실패했습니다.")
 				}
 	 	    });
-	 	    
-	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
-	 		   addHashTag($(this).val());
-			})
 	 	}
+        function deleteFile(file) {
+			
+		}
+        function addThumbnail(filePath) {
+			$('input[name="thumbNailFileName"]').val(filePath);
+		}
         var hashtagList=",";
+        function listHashTag(filePath) {
+        	$.ajax({
+        		url : "listHashTag",
+        		type : "POST",
+        		data : {
+        			"filePath" : filePath
+        		},
+        		success : function(data) {
+        			for(i=0;i<data.length;i++){
+        				if(data[i]==("음식")){
+        					data[i] = "맛집"
+        				}
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
+	 	        	}
+				},
+				error : function() {
+					$("#cndHashtags").append("<p>분석 결과를 찾을 수 없습니다.</p>")
+				}
+        	})
+        }
         function addHashTag(value) {
 			$('button.hashtags:contains("'+value+'")').remove();
 			$('#selectedHashTags').append("#"+value+" ")
 			hashtagList+=value+",";
-			$('input[name=hashtag]').val(hashtagList);
+			$('input[name="hashtag"]').val(hashtagList);
 		}
+        $(function() {
+	 	    
+ 	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
+ 	 		   addHashTag($(this).val());
+ 			})
+ 			
+  			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
+ 				console.log($(this).attr('src'))
+ 			}) 
+		})
 	</script>
 </head>
 <body>
@@ -69,11 +99,15 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
+		<input type="hidden" name="lat">
+		<input type="hidden" name="lng">
+		<input type="hidden" name="thumbNailFileName">
+		
 		<div>
-			<textarea id="selectedHashTags" rows="2"></textarea>
+			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
 		</div>
-		<div id="cndHashTags">
-		</div>
+		<br/>
+		<div id="cndHashTags"></div>
 		<br/>
 </body>
 </html>
