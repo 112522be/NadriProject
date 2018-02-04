@@ -32,6 +32,13 @@
 		body {
             padding-top : 50px;
         }
+        
+        .col-sm-3 {
+        	height: 500px;
+        }
+        
+        
+        
 	</style>
 
 
@@ -39,79 +46,96 @@
 <script type="text/javascript">
 
 function fncGetList(pageNo) {
-	
 	$("#pageNo").val(pageNo);
 	$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
 	
 }
 
-	//=================== "조회" Event 연결 =================== 
+	//=================== "4 kind of sorting" Event 연결 =================== 
 	$(function() {
-		$(".btn.btn-primary#option1").bind("click", function() {
-			//			alert("버튼 [1] :: OK")
-			//			alert("제목순 :: " + $("input[name='title']").val())
-			console.log("제목순 :: " + $("input[name='title']").val())
-		});
-
-		$(".btn.btn-primary#option2").bind("click", function() {
-			//			alert("버튼 [2] :: OK")
-			//			alert("조회순 :: " + $("input[name='click']").val())
-			console.log("조회순 :: " + $("input[name='click']").val())
-		});
-
-		$("#option3").bind("click", function() {
-			//			alert("버튼 [3] :: OK")
-			//			alert("수정일순 :: " + $("input[name='modify']").val())
-			console.log("수정일순 :: " + $("input[name='modify']").val())
-		});
-
-		$("#option4").bind("click", function() {
-			//			alert("버튼 [4] :: OK")
-			//			alert("생성일순 :: " + $("input[name='create']").val())
-			console.log("생성일순 :: " + $("input[name='create']").val())
-		});
-
+		$("a[href='#']:contains('제목순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "A";
+			fncGetTicketSort(searchCondition);
+		})
 	});
-
-	//=================== "조회" Event 연결 =================== 
+	
 	$(function() {
-		$("button.btn.btn-primary").bind("click", function() {
-			fncGetTicket();
-		});
+		$("a[href='#']:contains('조회순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "B";
+			fncGetTicketSort(searchCondition);
+		})
 	});
-
-	//=================== "취소" Event 연결 =================== 
+	
 	$(function() {
-		$("a[href='#' ]").bind("click", function() {
-			$("form")[0].reset();
-		});
+		$("a[href='#']:contains('수정일순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "C";
+			fncGetTicketSort(searchCondition);
+		})
 	});
+	
+	$(function() {
+		$("a[href='#']:contains('생성일순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "D";
+			fncGetTicketSort(searchCondition);
+		})
+	});
+	
+	function fncGetTicketSort(searchCondition) {
+		
+//		alert("[value check] ==> " + searchCondition)
+		
+		var data = {
+				"searchCondition" : searchCondition ,
+			}
+		
+		var jsonData = JSON.stringify(data);
+
+		$.ajax (
+				{
+					url : "/ticket/json/listTicket/",
+					method : "POST",
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					data : jsonData,
+					success : function() {
+					}
+				});		
+	}
 
 	//=================== "상세조회" Event 연결 ===================
 	$(function() {
-		$("a[href='#' ]:contains('상세조회')").bind("click", function() {
+		$("a[href='#' ]:contains('상세조회')").bind("click", function(event) {
+//			alert("상세조회")
 			
-			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
-			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
-			var title = $( $('input[name="title"]')[$( ".btn.btn-warning" ).index(this)] ).val();
+			event.preventDefault();
+
+			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-success" ).index(this)] ).val();
+			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-success" ).index(this)] ).val();
+			var title = $( $('input[name="title"]')[$( ".btn.btn-success" ).index(this)] ).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
-			/*
 			console.log('contentId : ' + contentId)
 			console.log('contentTypeId : ' + contentTypeId)
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
-			//*/
+			///*
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
+			//*/
 		});
 	});
 	
 	function fncGetTicket() {
 		$("form").attr("method", "POST").attr("action", "/ticket/testTicket").submit();
 	}
-	
 </script>
 
 </head>
@@ -119,58 +143,39 @@ function fncGetList(pageNo) {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 
-		<div class="page-header">
+		<div class="page-header text-right">
 			<h3 class="text-info">
-				<p class="bg-warning">나들이티켓 테스트</p>
+				<p class="bg-success">나들이티켓</p>
+				<p class="bg-success">${sessionScope.users.userId }</p>
 			</h3>
-			<h5 class="text-muted text-left">
+			<h5 class="text-muted">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
 			</h5>
 		</div>
 
-	<!-- JQUERY TAB Start -->
+	<!-- form Start /////////////////////////////////////-->
+		<form class="form-horizontal">
+
+	<!-- JQUERY nav-pills Start -->
 		<div>
 			<!-- Nav tabs -->
-			<ul class="nav nav-tabs " role="tablist">
-				<li role="presentation" class="active">
-					<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
-				</li>
-				<li role="presentation">
-					<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
-				</li>
-				<li role="presentation">
-					<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
-				</li>
-				<li role="presentation">
-					<a href="#settings"	aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
-				</li>
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="#">제목순</a></li>
+				<li role="presentation"><a href="#">조회순</a></li>
+				<li role="presentation"><a href="#">수정일순</a></li>
+				<li role="presentation"><a href="#">생성일순</a></li>
 			</ul>
 
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="home">...</div>
-				<div role="tabpanel" class="tab-pane" id="profile">...</div>
-				<div role="tabpanel" class="tab-pane" id="messages">...</div>
-				<div role="tabpanel" class="tab-pane" id="settings">...</div>
-			</div>
-			
-			<div class="tab-content">
-  				<div role="tabpanel" class="tab-pane fade in active" id="home">...</div>
-  				<div role="tabpanel" class="tab-pane fade" id="profile">...</div>
- 				<div role="tabpanel" class="tab-pane fade" id="messages">...</div>
-  				<div role="tabpanel" class="tab-pane fade" id="settings">...</div>			
-			</div>
-
 		</div>
-	<!-- JQUERY TAB End -->
+	<!-- JQUERY nav-pills End -->
 
-		<div class="col-md-6 text-left">
+		<div class="col-md-12 text-right">
 			<p class="text-primary">
 				<code>
 				&lt; 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건수 &gt;
@@ -178,72 +183,54 @@ function fncGetList(pageNo) {
 			</p>
 		</div>
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-
-<!-- 
-			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary" id="option1"> 
-					<input type="radio" name="title" value="A" autocomplete="off">
-					제목순
-				</label> 
-				
-				<label class="btn btn-primary active" id="option2"> 
-					<input type="radio" name="click" value="B" autocomplete="off" checked>
-					조회순
-				</label> 
-				
-				<label class="btn btn-primary" id="option3"> 
-					<input type="radio" name="modify" value="Q" autocomplete="off">
-					수정일순
-				</label> 
-				
-				<label class="btn btn-primary" id="option4"> 
-					<input type="radio" name="create" value="R" autocomplete="off">
-					생성일순
-				</label>
-			</div>
--->		
-
 			<hr />
 
-		 	<div class="row">  
-				<c:forEach var="tt" items="${tourTicket}">
+			<div class="row">
+			<c:forEach var="tt" items="${tourTicket}" varStatus="num">
 					<div class="col-sm-3">
-						<h4>
-							<span class="label label-success"> ${ tt.title } </span>
-						</h4>
+					
+						<div class="col-sm-12">
+							<p>
+								<span class="label label-success"> ${ num.count } </span>
+							</p>
+							<h5>&nbsp;${ tt.title }</h5>
+						</div>	
+					
 						<div class="thumbnail">
-						<p class = "text-right">조회수 : ${ tt.readcount }</p>
+						
+							<p class="text-right">조회수 : ${ tt.readcount }</p>
+							
 							<img src="${ tt.firstimage }" class="img-responsive" />
+							
 							<div class="caption">
-								<p> 입장권 : 
-								<c:forEach items="${ tt.usetimefestival }" varStatus="status">
+								<h5>
+								<!-- 
+									입장권 :
+									<c:forEach items="${ tt.usetimefestival }" varStatus="status">
 									${ tt.usetimefestival[status.index] }
-								</c:forEach>
-									<hr/>
-									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-									장&nbsp;소 : ${ tt.eventplace } <br>
-								</p>
+									</c:forEach>
+								 -->	
+								<hr />
+								
+								기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
+								장&nbsp;소 : ${ tt.eventplace } <br>
+								</h5>
+								<br>
 								<p class="text-right">
-									<a href="#" class="btn btn-warning" role="button">
-										상세조회
-										<!-- PageNavigation을 위한 값을 보내는 부분  -->
-										<input type="hidden" name="contentId" value="${ tt.contentid }">
-										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
-										<input type="hidden" name="title" value="${ tt.title }">
-										<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+									<a href="#" class="btn btn-success btn-lg" role="button"> 상세조회 
+									<!-- PageNavigation을 위한 값을 보내는 부분  -->
+										<input type="hidden" name="contentId" value="${ tt.contentid }"> 
+										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }"> 
+										<input type="hidden" name="title" value="${ tt.title }"> 
+										<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }"> 
 										<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
-										
 									</a>
 								</p>
-
 							</div>
 						</div>
-						
+
 					</div>
-				</c:forEach>
-				<br>
+			</c:forEach>
 			</div>
 
 			<hr />
@@ -259,7 +246,6 @@ function fncGetList(pageNo) {
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
-	 -->
 
 </body>
 

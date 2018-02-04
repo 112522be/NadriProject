@@ -89,12 +89,18 @@ public class GroupServiceTest {
 		System.out.println(group);
 	 }
 	
-	//@Test
+	@Test
 	public void testDeleteGroup() throws Exception {
 			
 		Group group = new Group();
+		Join join = new Join();
 		
-	//	joinService.deleteJoin(join);
+		join.setGroupNo(60033);
+		join.setUserId("test01");
+		
+		joinService.deleteJoin(join);
+		
+		group.setJoin(join);
 		
 		groupService.deleteGroup(group);
 	}
