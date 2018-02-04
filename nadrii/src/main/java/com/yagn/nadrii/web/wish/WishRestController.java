@@ -1,5 +1,9 @@
 package com.yagn.nadrii.web.wish;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -81,18 +85,36 @@ public class WishRestController {
 		
 	}
 	
+	
+	//사용처가 있을까??
 	@RequestMapping()
 	public void getWish() {
 		System.out.println("getWish");
 	}
 	
+	
+	
 	@RequestMapping("/json/listWish/{userId}")
-	public void listWish() {
+	public void listWish(HttpSession session, HttpServletRequest request) throws Exception {
 		System.out.println("listWish");
+		session = request.getSession(true);
+				
+		String userId = (String)session.getAttribute("loginUser");
+		
+		Map wishMap = wishService.listWish(userId);
+		
+		Map map = new HashMap();
+		map.put("wishMap", wishMap.get("list"));
+		
+		
 	}
 	
-	public void deleteWish() {
+	
+	@RequestMapping("/json/deleteWish/{wishNo}")
+	public void deleteWish(int wishNo) throws Exception{
 		System.out.println("deleteWish");
+		wishService.deleteWish(wishNo);
+		
 		
 	}
 	

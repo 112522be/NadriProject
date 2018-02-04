@@ -69,6 +69,12 @@ body {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 		
+
+
+
+		
+		
+		
 		//============= 회원원가입 화면이동 =============
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
@@ -124,12 +130,14 @@ body {
 			});
 		});
 		
+		
 		$( function() {
 			//==> 추가된부분 : "addUser"  Event 연결
 			$("a[href='#' ]:contains('종만아')").on("click" , function() {
 				self.location = "/trip/listMuseum?pageNo=1&area=local"
 			});
 		});
+		
 		
 		$(function(){
 			$("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {

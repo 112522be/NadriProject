@@ -40,7 +40,7 @@ public class TripDaoImplTour implements TripDao {
 
 	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3,String areaCode, String localName) throws Exception {
 
-
+		System.out.println(pageNo+ "  DAOIMPLEMENT");
 		System.out.println("listTrip Dao parameter areaCode, localName");
 		
 		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
@@ -54,6 +54,7 @@ public class TripDaoImplTour implements TripDao {
 		tourAPlUrlManage.setType("areaBasedList?");
 
 		System.out.println(tourAPlUrlManage.urlMaking());
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		List list = new ArrayList();
 				
@@ -121,19 +122,15 @@ public class TripDaoImplTour implements TripDao {
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
 				}
-				TourApiDomain lastNotice = new TourApiDomain();
-				lastNotice.setTitle("마지막 여행지");
 				
 				list.add(tourDomain);
-				list.add(lastNotice);
+				
 				
 				
 			}
 		//전달 데이터가 없는 경우	
 		}else {
-			TourApiDomain lastNotice = new TourApiDomain();
-			lastNotice.setTitle("마지막 여행지");
-			list.add(lastNotice);
+			
 		}
 		return list;
 	}
