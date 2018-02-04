@@ -431,6 +431,9 @@
 		height: 400px;
 		
 		}
+		.row1{
+			container :body;
+		}
 		
 		
 	</style>
@@ -441,8 +444,44 @@
 <body>
 <jsp:include page="../layout/toolbar.jsp"></jsp:include>
 
-<div class="container">
+<!--
+<div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+  </div>
 
+ 
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">통합검색</span>
+  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+</div>
+--> 
+<div class="container">
+	
+ 
+	<div class = "row1" align="right">
+	  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." align="right">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" align="right">Go!</button>
+      </span>
+    </div>
+  </div>
+</div>
+ 
+<!-- 
+	<span class="label label-default">Default</span>
+	<input type="text" id="searchKeyword" value=""/>
+	<a href="#" class="btn btn-default" role="button">조회</a>
+-->	
+</br>
+
+</br>
 	<ul class="nav nav-tabs">
 	  <li role="presentation" ><a href="#">시구단위</a></li>
 	</ul>

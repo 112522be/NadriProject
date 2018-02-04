@@ -18,7 +18,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Trip;

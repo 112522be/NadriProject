@@ -51,7 +51,7 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
-			System.out.println("构具 恐 13 其捞瘤具");
+			//System.out.println("构具 恐 13 其捞瘤具");
 		}
 		
 		System.out.println(pageNo+"  RestController");
