@@ -443,23 +443,7 @@
 </head>
 <body>
 <jsp:include page="../layout/toolbar.jsp"></jsp:include>
-
-<!--
-<div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-    </div>
-  </div>
-
  
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">통합검색</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
---> 
 <div class="container">
 	
  
