@@ -20,8 +20,12 @@ public class Purchase {
 	
 	private String[] ticketCount;
 	private String[] ticketPrice;
-	
+	private int totalTicketPrice;
 
+	private User buyerId;
+	private User buyerEmail;
+	private User buyerPhone;
+	
 	public Purchase() {
 		
 	}
@@ -124,14 +128,52 @@ public class Purchase {
 		this.ticketPrice = ticketPrice;
 	}
 
+	public int getTotalTicketPrice() {
+		return totalTicketPrice;
+	}
+
+	public void setTotalTicketPrice(int totalTicketPrice) {
+		this.totalTicketPrice = totalTicketPrice;
+	}
+
+	public User getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(User buyerId) {
+		this.buyerId = buyerId;
+	}
+
+	public User getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(User buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+
+	public User getBuyerPhone() {
+		return buyerPhone;
+	}
+
+	public void setBuyerPhone(User buyerPhone) {
+		this.buyerPhone = buyerPhone;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
 				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
 				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
-				+ Arrays.toString(ticketPrice) + "]";
+				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
+				+ ", buyerEmail=" + buyerEmail + ", buyerPhone=" + buyerPhone + "]";
 	}
+
+	
+	
+
+	
 
 	
 

@@ -26,6 +26,12 @@
 		});
 	});
 	
+	$( function() {
+		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
+			self.location = "../ticket/listTicket"
+		});
+	});
+	
 	</script>
 	
 </head>
@@ -53,7 +59,7 @@
 								<li><a href="/planner/addPlannerView.jsp">플래너 작성</a></li>
 							</ul>
 						</li>
-						<li><a href="/ticket/listTicket">나들이티켓</a></li>
+						<li><a href="#">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>

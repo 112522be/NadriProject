@@ -10,7 +10,10 @@ CREATE TABLE purchase(
  CONTENT_ID          NUMERIC  ,
  CONTENT_TYPEID      NUMERIC ,
  FLAG_BP			 VARCHAR2(20),
- REG_DATE            DATE
+ REG_DATE            DATE,
+ BUYER_ID			 VARCHAR2(50),
+ BUYER_EMAIL		 VARCHAR2(50),
+ BUYER_PHONE		 VARCHAR2(20)
 );
 
 CREATE SEQUENCE SEQ_PURCHASE_POST_NO START WITH 50000 INCREMENT BY 1;
@@ -20,7 +23,4 @@ COMMIT;
 
 
 
-/// 추후 수정 / 추가 할 것들
-1. 예매정보입력 (addBooking)
-  - 이름 / 연락처 / 이메일
   

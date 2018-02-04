@@ -4,6 +4,8 @@ import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,14 +54,17 @@ public class TicketController {
 		
 		System.out.println("\n[openApiSearch domain check] ==> " + openApiSearch.toString());
 
+		
+		
 		if(openApiSearch.getPageNo() == 0 ){
 			openApiSearch.setPageNo(1);
 		} 
 		openApiSearch.setNumOfRows(pageSize);
 		
-		if(openApiSearch.getSearchArrange() == null) {
-			openApiSearch.setSearchArrange("B");
+		if(openApiSearch.getSearchCondition() == null) {
+			openApiSearch.setSearchCondition("B");
 		}
+		
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
@@ -89,7 +94,6 @@ public class TicketController {
 			) throws Exception {
 		
 		System.out.println("\n /ticket/getTicket : GET");
-		System.out.println("[getTicket 확인]==>" + title);
 		
 		String decodeTitle = URLDecoder.decode(title, "UTF-8");
 		
@@ -100,6 +104,13 @@ public class TicketController {
 		tourTicket.setTitle(decodeTitle);
 		tourTicket.setContentid(contentId);
 		tourTicket.setContenttypeid(contentTypeId);
+
+		System.out.println("\n\n[1]==> " + detailIntro.toString());
+		System.out.println("\n\n[2]==> " + detailImage.toString());
+		System.out.println("\n\n[3]==> " + tourTicket.toString());
+		 
+		 
+		
 		
 		model.addAttribute("detailIntro", detailIntro);
 		model.addAttribute("detailImage", detailImage);

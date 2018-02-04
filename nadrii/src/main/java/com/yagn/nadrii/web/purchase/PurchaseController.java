@@ -2,7 +2,9 @@ package com.yagn.nadrii.web.purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +26,37 @@ public class PurchaseController {
 		System.out.println(this.getClass());
 	}
 	
+	/// Page process
+	@Value("#{commonProperties['pageUnit']}")
+	int pageUnit;
+	
+	@Value("#{commonProperties['pageSize']}")
+	int pageSize;
+	
 	@RequestMapping(value="addPurchase/{flag}", method=RequestMethod.POST)
 	public String addBasket(
 			@ModelAttribute("purchase") Purchase purchase,
 			@PathVariable("flag") String flag
 			) {
 		
-		System.out.println("/purchase/addPurchase : POST");
+		System.out.println("\n /purchase/addPurchase : POST");
 	
 		try {
 			
-			System.out.println(purchase.toString());
 			purchase.setFlag(flag);
+
+			int totalTicketPrice = 0;
+			if (purchase.getTicketPrice() != null) {
+				for (int i = 0; i < purchase.getTicketPrice().length; i++) {
+					int price = Integer.parseInt(purchase.getTicketPrice()[i]);
+					int priceCount = Integer.parseInt(purchase.getTicketCount()[i]);
+					
+					totalTicketPrice += price * priceCount;
+				}
+			}
+			purchase.setTotalTicketPrice(totalTicketPrice);	
+			
+			System.out.println(purchase.toString());
 			
 //			purchaseService.addPurchase(purchase);
 			
@@ -43,10 +64,32 @@ public class PurchaseController {
 			System.out.println(e);
 		}
 		
-		System.out.println("[addPurchase Complete]");
-		
-//		return null;
 		return "forward:/purchase/addPurchaseView.jsp";
 	}
+	
+	@RequestMapping(value = "listBasket")
+	public String listBasket(
+			Model model
+			) {
+		
+		System.out.println("\n /purchase/listBasket");
+		
+		
+		try {
+			
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return "forward:/ticket/listBasket.jsp";
+	}
+	
+	
+	
+	
 	
 } // end of class

@@ -7,16 +7,19 @@
 <mapper namespace="PurchaseMapper">
 
 	<resultMap id="purchaseSelectMap" type="purchase" >
-		<result property="postNo" 			column="post_no" 		 	jdbcType="NUMERIC"/>
-		<result property="ticketTitle" 		column="ticket_title" 	 	jdbcType="VARCHAR"/>
-		<result property="ticketImage" 		column="ticket_image"	 	jdbcType="VARCHAR"/>
-		<result property="bookingDate" 		column="booking_date"	 	jdbcType="VARCHAR"/>
-		<result property="cancelDate"		column="cancel_date"	 	jdbcType="VARCHAR"/>
-		<result property="ticketPriceAll"	column="ticket_priceall" 	jdbcType="VARCHAR"/>
-		<result property="contentId" 		column="content_id" 	 	jdbcType="NUMERIC"/>
-		<result property="contentTypeId" 	column="content_typeid" 	jdbcType="NUMERIC"/>
-		<result property="flag" 			column="flag_bp" 	 		jdbcType="VARCHAR"/>
-		<result property="regDate"			column="reg_date" 	 		jdbcType="DATE"/>
+		<result property="postNo" 				column="post_no" 		 	jdbcType="NUMERIC"/>
+		<result property="ticketTitle" 			column="ticket_title" 	 	jdbcType="VARCHAR"/>
+		<result property="ticketImage" 			column="ticket_image"	 	jdbcType="VARCHAR"/>
+		<result property="bookingDate" 			column="booking_date"	 	jdbcType="VARCHAR"/>
+		<result property="cancelDate"			column="cancel_date"	 	jdbcType="VARCHAR"/>
+		<result property="ticketPriceAll"		column="ticket_priceall" 	jdbcType="VARCHAR"/>
+		<result property="contentId" 			column="content_id" 	 	jdbcType="NUMERIC"/>
+		<result property="contentTypeId" 		column="content_typeid" 	jdbcType="NUMERIC"/>
+		<result property="flag" 				column="flag_bp" 	 		jdbcType="VARCHAR"/>
+		<result property="regDate"				column="reg_date" 	 		jdbcType="DATE"/>
+		<result property="buyerId.userId"		column="buyer_id" 	 		jdbcType="VARCHAR"/>
+		<result property="buyerEmail.email"		column="buyer_email"  		jdbcType="VARCHAR"/>
+		<result property="buyerPhone.phone"		column="buyer_phone"  		jdbcType="VARCHAR"/>
 		
 	</resultMap>
 	
@@ -32,7 +35,10 @@
 						content_id,
 						content_typeid,
 						flag_bp,
-						reg_date
+						reg_date,
+						buyer_id,
+						buyer_email,
+						buyer_phone
 						)
 		VALUES (
 				seq_purchase_post_no.NEXTVAL,
@@ -44,7 +50,10 @@
 				#{contentId},
 				#{contentTypeId},
 				#{flag},
-				SYSDATE
+				SYSDATE,
+				#{buyerId.userId},
+				#{buyerEmail.email},
+				#{buyerPhone.phone}
 				)
 	</insert>
 

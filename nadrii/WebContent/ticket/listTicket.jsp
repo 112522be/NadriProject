@@ -51,16 +51,63 @@ function fncGetList(pageNo) {
 	
 }
 
-	//=================== "searchArrange" Event 연결 =================== 
+	//=================== "4 kind of sorting" Event 연결 =================== 
 	$(function() {
 		$("a[href='#']:contains('제목순')").bind("click", function(event) {
-			alert("제목순")
 			event.preventDefault();
-			var searchArrange = "A";
-			alert(searchArrange)
-//			fncGetTicketSort(searchArrange);
+			var searchCondition = "A";
+			fncGetTicketSort(searchCondition);
 		})
 	});
+	
+	$(function() {
+		$("a[href='#']:contains('조회순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "B";
+			fncGetTicketSort(searchCondition);
+		})
+	});
+	
+	$(function() {
+		$("a[href='#']:contains('수정일순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "C";
+			fncGetTicketSort(searchCondition);
+		})
+	});
+	
+	$(function() {
+		$("a[href='#']:contains('생성일순')").bind("click", function(event) {
+			event.preventDefault();
+			var searchCondition = "D";
+			fncGetTicketSort(searchCondition);
+		})
+	});
+	
+	function fncGetTicketSort(searchCondition) {
+		
+//		alert("[value check] ==> " + searchCondition)
+		
+		var data = {
+				"searchCondition" : searchCondition ,
+			}
+		
+		var jsonData = JSON.stringify(data);
+
+		$.ajax (
+				{
+					url : "/ticket/json/listTicket/",
+					method : "POST",
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					data : jsonData,
+					success : function() {
+					}
+				});		
+	}
 
 	//=================== "상세조회" Event 연결 ===================
 	$(function() {
@@ -69,9 +116,9 @@ function fncGetList(pageNo) {
 			
 			event.preventDefault();
 
-			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
-			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
-			var title = $( $('input[name="title"]')[$( ".btn.btn-warning" ).index(this)] ).val();
+			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-success" ).index(this)] ).val();
+			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-success" ).index(this)] ).val();
+			var title = $( $('input[name="title"]')[$( ".btn.btn-success" ).index(this)] ).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			console.log('contentId : ' + contentId)
 			console.log('contentTypeId : ' + contentTypeId)
@@ -105,6 +152,7 @@ function fncGetList(pageNo) {
 		<div class="page-header text-right">
 			<h3 class="text-info">
 				<p class="bg-success">나들이티켓</p>
+				<p class="bg-success">${sessionScope.users.userId }</p>
 			</h3>
 			<h5 class="text-muted">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
@@ -118,7 +166,6 @@ function fncGetList(pageNo) {
 		<div>
 			<!-- Nav tabs -->
 			<ul class="nav nav-pills">
-			<input type="hidden" name="searchArrange" value="">
 				<li role="presentation"><a href="#">제목순</a></li>
 				<li role="presentation"><a href="#">조회순</a></li>
 				<li role="presentation"><a href="#">수정일순</a></li>
@@ -170,7 +217,8 @@ function fncGetList(pageNo) {
 								</h5>
 								<br>
 								<p class="text-right">
-									<a href="#" class="btn btn-success btn-lg" role="button"> 상세조회 <!-- PageNavigation을 위한 값을 보내는 부분  -->
+									<a href="#" class="btn btn-success btn-lg" role="button"> 상세조회 
+									<!-- PageNavigation을 위한 값을 보내는 부분  -->
 										<input type="hidden" name="contentId" value="${ tt.contentid }"> 
 										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }"> 
 										<input type="hidden" name="title" value="${ tt.title }"> 

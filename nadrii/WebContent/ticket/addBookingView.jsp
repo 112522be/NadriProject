@@ -350,7 +350,10 @@
 
 			</div>
 
+
 			<div class="col-sm-6">
+			<br>
+			<br>
 				<img src="${ detailImage.originimgurl }" alt="There is no image"
 					class="img-responsive img-rounded"> <br>
 
@@ -361,21 +364,21 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="name">이 름</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="name" value="">
+						aria-describedby="basic-addon1" name="name" value="${ purchase.buyerId.userId }">
 				</div>
 				<br>
 				
 				<div class="input-group">
 					<span class="input-group-addon" id="phone">연락처</span> 
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="phone" value="">
+						aria-describedby="basic-addon1" name="phone" value="${ purchase.buyerPhone.phone }">
 				</div>
 				<br>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="email">@</span> 
 					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" name="email" value="">
+						aria-describedby="basic-addon1" name="email" value="${ purchase.buyerEmail.email }">
 				</div>
 
 				<!-- Button -->

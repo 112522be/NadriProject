@@ -40,27 +40,16 @@ function fncAddPurchase() {
 }
 
 $( function(){
-	$('button').bind("click", function(){
-		fncAddPurchase();
+	$(".btn:contains('결제하기')").bind("click", function(){
+		alert("결제하기")
+		//fncAddPurchase();
 	});
 });
 
-$( function(){
-	$('div a[href="#"]').bind("click", function(){
-		//history.go(-1);
-		self.location = "/product/getProduct?prodNo=${ product.prodNo }&menu=search"
-	});
-});
-
-//=================== "희망배송일자" Event 연결 ===================
-$(function() {
-	$("#dlvyDate").datepicker({
-		dateFormat: "yymmdd",
-		minDate: 1,
-		changeMonth: true,
-		changeYear: true 
-	});
-});
+//=================== "취소" Event 연결 =================== 
+function goBack() {
+	window.history.back();
+}
 
 
 </script>
@@ -75,105 +64,89 @@ $(function() {
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class="text-info">구매상품 상세조회</h3>
-		<!-- <h5 class="text-muted text-left">
-				판매하실 상품을 <strong class="text-danger">형식에 맞게 </strong>등록해 주세요.
-			</h5>  -->
+			<h3 class="text-info">결제정보입력</h3>
+				<h5 class="text-muted text-left">
+					선택하신 티켓의 결제를 위해 <strong class="text-danger">형식에 맞게 </strong>작성해 주세요.
+				</h5>  
 		</div>
-
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품번호</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
-		</div>
-
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상 품 명</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품상세정보</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodDetail }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>제조일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>가격</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.price }</div>
-		</div>
-
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>등록일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.regDate }</div>
-		</div><hr/>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+
+		<div class="row">
+	  		<div class="col-xs-12 col-md-12">
+	  			<div class="alert alert-info" role="alert">
+	  				<strong>
+	  					<h3 class="text-right">
+	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+	  						티켓정보
+	  					</h3>
+	  				</strong>
+	  			</div>
+	  			
+	  		<h4>[티켓명]</h4>
+	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.ticketTitle }</h4>
+	  		
+	  		<h4>[예매일]</h4>
+	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.bookingDate }</h4>
+
+	  		</div>
+		</div>
+
+		<div class="row">
+	  		<div class="col-xs-12 col-md-12">
+	  		
+	  			<div class="alert alert-info" role="alert">
+	  				<strong>
+	  					<h3 class="text-right">
+	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+	  						구매자정보
+	  					</h3>
+	  				</strong>
+	  			</div>
+	  			
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon" id="sizing-addon1">이 름</span> 
+					<input type="text" class="form-control" placeholder="이름을 입력해 주세요"
+						aria-describedby="sizing-addon1">
+				</div>
+				
+				<br>
+				
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon" id="sizing-addon1">연락처</span> 
+					<input type="text" class="form-control" placeholder="연락처를 입력해 주세요"
+						aria-describedby="sizing-addon1">
+				</div>
+	  		</div>
+		</div>
+		
+		<div class="row">
+	  		<div class="col-xs-12 col-md-12">
+	  			<div class="alert alert-info" role="alert">
+	  				<strong>
+	  					<h3 class="text-right">
+	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+	  						결제정보
+	  					</h3>
+	  				</strong>
+	  			</div>
+				<h4>[선택한 티켓]</h4>
+	  			<c:forEach items="${ purchase.ticketCount }" varStatus="status">
+	  				<h4>&nbsp;￦ ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } 장</h4>
+	  			</c:forEach>
+	  			<hr>
+	  			<h4 class="text-right">[총 결제금액]</h4>
+	  			<h4 class="text-right">￦ ${ purchase.totalTicketPrice }</h4>
+	
+	  		</div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-info btn-lg" data-dismiss="modal">결제하기</button>
+			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">취 소</button>
+		</div>	
 			
-			<input type="hidden" name="prodNo" value="${ product.prodNo }" />
-			
-			<div class="form-group">
-				<label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">구매자 아이디</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="buyerId" name="buyerId" value="${ user.userId }" readonly>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
-				<div class="col-sm-4">
-					<select class="form-control" name="paymentOption">
-						<option value="1">현금구매</option>
-						<option value="2">신용구매</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">받으실분 이름</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="receiverName" name="receiverName" value="${ user.userName }" placeholder="필수입력">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">받으실분 연락처</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${ user.phone }" placeholder="필수입력">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="dlvyAddr" class="col-sm-offset-1 col-sm-3 control-label">받으실분 주소</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="dlvyAddr" name="dlvyAddr" value="${ user.addr }" placeholder="필수입력">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="dlvyRequest" class="col-sm-offset-1 col-sm-3 control-label">구매시 요청사항</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="dlvyRequest" name="dlvyRequest" >
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="dlvyDate" class="col-sm-offset-1 col-sm-3 control-label">배송희망일자</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="dlvyDate" name="dlvyDate" placeholder="미 기입시 입금 확인 후 바로 출고합니다.">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">구&nbsp;매</button>
-					<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-				</div>
-			</div>
 
 		</form>
 		<!-- form Start /////////////////////////////////////-->
