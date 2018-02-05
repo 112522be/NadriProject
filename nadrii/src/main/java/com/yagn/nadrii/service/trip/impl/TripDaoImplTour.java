@@ -95,7 +95,7 @@ public class TripDaoImplTour implements TripDao {
 							
 					TourApiDomain tourDomain = new TourApiDomain();
 					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-					System.out.println(tourDomain);
+					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
 						System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
@@ -105,7 +105,7 @@ public class TripDaoImplTour implements TripDao {
 					}
 								
 					list.add(tourDomain);
-					System.out.println(list.get(i));
+					//System.out.println(list.get(i));
 				}
 				
 			//데이터가 한개 인경우	

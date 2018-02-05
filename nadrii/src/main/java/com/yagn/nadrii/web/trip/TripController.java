@@ -1,5 +1,7 @@
 package com.yagn.nadrii.web.trip;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -7,15 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetDetailUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPIGetUrlManage;
-import com.yagn.nadrii.service.trip.urlmanage.TourAPlListUrlManage;
+import com.yagn.nadrii.service.wish.WishService;
 
 
 @Controller
@@ -26,6 +28,10 @@ public class TripController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
+	@Autowired
+	@Qualifier("wishServiceImpl")
+	private WishService wishService;
+	
 		
 	public TripController() {
 		System.out.println(this.getClass());
@@ -33,31 +39,45 @@ public class TripController {
 
 
 	@RequestMapping(value="listMuseum")	
-	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo, @RequestParam("area")String area, HttpSession session) throws Exception{
+	public String listMuseum(Map map, @RequestParam("pageNo")int pageNo,
+										@RequestParam("area")String area, HttpSession session
+										) throws Exception{
 				
 		System.out.println("/trip/listMuseum");
 				
+		User user = (User)session.getAttribute("loginUser");
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
+		
+		//메뉴에 따른 파라미터 변경
 		if(area.equals("federal")) {
 			localName="";
 		}else if(area.equals("national")) {
 			areaCode ="";
 			localName="";
 		}
-		
-		
+				
 		System.out.println(areaCode +":" +localName);
 		
-		TourAPlListUrlManage tourAPlUrlManage = new TourAPlListUrlManage();
-				
-		System.out.println((tourAPlUrlManage.urlMaking()).trim());
+		 
 		
-		System.out.println("/trip/listMuseum");
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode,localName); 
 		
+		List list =(List)tripMap.get("list");
+		System.out.println("전달받은 개수 ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+						 
+		}
+				//이미 wish에 저장되었는지 체크해서 값 변경해서 주기		
+				
+				
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		

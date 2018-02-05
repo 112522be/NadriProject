@@ -334,7 +334,13 @@
 				"Content-Type" : "application/json"
 			},
 			success:function(){
-				alert("위시리스트에 저장");
+				//alert("위시리스트에 저장");
+				//alert($("a[href='#']:contains('위시리스트')").index(this) );
+				//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
+				
+				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트 취소</a>";
+				
+				//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			}
 		});
 		
@@ -347,17 +353,25 @@
 		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			
-			alert($("a[href='#']:contains('위시리스트')").index(this));
-			alert(contentid);
-			alert(contenttypeid);
-			alert("리스트 위시리스트 클릭");
+			//alert($("a[href='#']:contains('위시리스트')").index(this));
+			//alert(contentid);
+			//alert(contenttypeid);
+			//alert("리스트 위시리스트 클릭");
+			
 			
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
-			addTripToDB(contentid, contenttypeid)
+			addTripToDB(contentid, contenttypeid);
 			
 			//위에서 저장한 것을 위시리스트에 재저장 
 			addWish(contentid);
 			e.preventDefault();
+			
+			//alert($(".row ").index(this));
+			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
+			//alert($("div[class='col-xs-4']").index(this));
+			//alert($("a[href='#']:contains('위시리스트')").index(this));
+			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
+			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
 		});
 	})
 	
@@ -472,11 +486,11 @@
 
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
       	
-	    <input type="hidden" id="pageNo" value="${pageNo}"/>
+	    
 	    <div class="row">
 	
 		<c:forEach var ="list" items="${list}">
-		
+		<input type="hidden" id="pageNo" value="${pageNo}"/>
 		    <div class="col-xs-4">
 		     
 		       	<div class="thumbnail">
@@ -484,17 +498,22 @@
 		          <input type="hidden" name="contentid" value="${list.contentid}"/>
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
-		          	<h3 id="thumbnail-label">${list.title}
-		            	<a class="anchorjs-link" href="#thumbnail-label">
-		            		<span class="anchorjs-icon"></span>
-		            	</a>
-		            </h3>
-		          <p>${list.addr1}</p>
-		          <p> 
-		          	<a href="#" class="btn btn-primary" role="button">공유</a> 
-		            <a href="#" class="btn btn-default" role="button">좋아요</a>
-		            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
-		          </p>
+			      	<h3 id="thumbnail-label">${list.title}
+			        	<a class="anchorjs-link" href="#thumbnail-label">
+			            	<span class="anchorjs-icon"></span>
+			            </a>
+			      	</h3>
+			        <p>${list.addr1}</p>
+			        <p id="buttonTag" name ="buttonTag"> 
+			        	<a href="#" class="btn btn-primary" role="button">공유</a> 
+			        	<a href="#" class="btn btn-default" role="button">좋아요</a>
+			        	<c:if test="${!(list.flag== '1')}">			        	
+			            	<a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>
+			            </c:if>
+			            <c:if test="${!(list.flag=='0')}">			        	
+			            	<a href="#" id="wish" class="btn btn-default" role="button">위시리스트 취소</a>
+			            </c:if>	
+			        </p>
 		        </div>
 			</div>
 		</div>

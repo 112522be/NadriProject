@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -290,17 +293,48 @@ public class UserController {
 	 */
 
 	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
-	public String addUser(HttpServletRequest request, Model model) throws Exception{
+	public String addUser(HttpServletRequest request, Map map) throws Exception{
 		
 		System.out.println("회원가입");
 		if(request.getParameter("facebookId") != null) {
-		String fbId = request.getParameter("facebookId");		
-		System.out.println("페이스북 아이디 : "+fbId);
-		model.addAttribute("facebookId" , fbId );
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("페이스북 아이디 : "+fbId);
+			map.put("facebookId" , fbId );
 		}
 		return "redirect:/user/addUserView.jsp";
 	}
+
 	
+	
+	
+	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
+	//@ResponseBody
+	public String addUser(User user) throws Exception{
+		//회원가입
+		System.out.println("회원가입!!");
+		System.out.println("userId==" +user.getUserId());
+		
+		userService.addUser(user);
+		Map map = new HashMap();
+		
+		
+		
+		return "redirect:/user/addUser.jsp";
+	}
+	
+	
+	/*
+	@RequestMapping(value="/addUser",method=RequestMethod.POST)
+	public String addUser(@RequestBody User user,Map map)throws Exception{
+		System.out.println("회원 정보 저장 시작");
+		System.out.println("Start to save User Data");
+		userService.addUser(user);
+		
+		
+		
+		return "redirect:/user/addUser.jsp";
+	}
+	*/
 	/**
 	 * 회원가입
 	 * @param user
@@ -372,8 +406,9 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	
 	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
-	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+	public String addUserPlus( @ModelAttribute("user")User user, HttpSession session) throws Exception{
 
 		System.out.println("addUserPlus :: POST");
 		
@@ -398,13 +433,13 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
+	public String getUser( @RequestParam("userId") String userId , Map map ) throws Exception {
 		
 		System.out.println("/user/getUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		// Model 과 View 연결
-		model.addAttribute("user", user);
+		
+		map.put("user", user);
 		
 		return "forward:/user/getUser.jsp";
 	}
