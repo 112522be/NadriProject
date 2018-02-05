@@ -59,11 +59,10 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public User loginProc(User user) throws Exception {
-		System.out.println("아이디 비밀번호" +user);
-		return sqlSession.selectOne("UserMapper.loginProc", user);
+	public User loginCheck(User user) throws Exception {
+		return sqlSession.selectOne("UserMapper.loginCheck", user);
 	}
-
+	
 	public String findId(String userId) throws Exception {
 		System.out.println("아이디 찾기" +userId);
 		return sqlSession.selectOne("UserMapper.faindId",userId);

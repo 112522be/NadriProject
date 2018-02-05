@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 	<!-- javascript -->
-	<!--<script src="/resources/js/jquery.js"></script>-->
-	<script src="/resources/js/bootstrap.min.js"></script>
+	<!--<script src="/resources/js/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>-->
 	
 	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
@@ -26,11 +26,19 @@
 		});
 	});
 	
+
 	$(function(){
 		$("a[href='#']:contains('나들이 플래너')").on("click", function(){
 			self.location = "../planner/json/getMyPlannerList"
 		})
 	})
+
+	$( function() {
+		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
+			self.location = "../ticket/listTicket"
+		});
+	});
+
 	
 	</script>
 	
@@ -45,7 +53,7 @@
 	                        <span class="icon-bar"></span>
 	                        <span class="icon-bar"></span>
 	                   	</button>
-					<a class="navbar-brand" href="../index.jsp"><span>Na</span>drii</a>
+					<a class="navbar-brand" href="/index.jsp"><span>Na</span>drii</a>
 				</div>
 				<div class="navbar-collapse collapse ">
 					<ul class="nav navbar-nav">
@@ -59,7 +67,7 @@
 								<li><a href="/planner/addPlannerView.jsp">플래너 작성</a></li>
 							</ul>
 						</li>
-						<li><a href="/ticket/listTicket">나들이티켓</a></li>
+						<li><a href="#">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>

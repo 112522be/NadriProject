@@ -3,7 +3,7 @@ package com.yagn.nadrii.service.domain;
 import java.sql.Date;
 
 
-//==>ȸ�������� �𵨸�(�߻�ȭ/ĸ��ȭ)�� Bean
+
 public class User {
 	
 	///Field
@@ -20,7 +20,7 @@ public class User {
 	private String qrcode;
 	private String children;
 	private String gender;
-	/////////////// EL ���� ���� �߰��� Field ///////////
+
 	private String phone1;
 	private String phone2;
 	private String phone3;

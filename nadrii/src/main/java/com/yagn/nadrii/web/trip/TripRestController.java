@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.trip;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,15 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
+import com.yagn.nadrii.service.wish.WishService;
 
 
 @RestController
 @RequestMapping("/trip/*")
 public class TripRestController {
 	
-	
+	@Autowired
+	@Qualifier("wishServiceImpl")
+	private WishService wishService;
 
 	
 	@Autowired
@@ -36,28 +42,36 @@ public class TripRestController {
 		System.out.println(this.getClass());
 	}
 	
-	
 
-		
 	///*
 	//冠拱包 府胶飘
 	@RequestMapping(value="json/listMuseum/{pageNo}/{areaCode}/{localName}")
-	public Map listMuseum(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName) throws Exception{
+	public Map listMuseum(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName,HttpServletRequest request,HttpSession session) throws Exception{
+		
+		System.out.println("/trip/json/listMuseum");
+		
 		if(areaCode.equals("0")) {
 			areaCode="";
 		}
-		
+				
 		if(localName.equals("0")) {
 			localName ="";
+			//System.out.println("构具 恐 13 其捞瘤具");
 		}
+		
+		System.out.println(pageNo+"  RestController");
 		System.out.println(areaCode +" : "+localName);
 		System.out.println("RestController listMuseum");
 		
 		Map map = new HashMap();
+				
 		
-		System.out.println("/trip/json/listMuseum");
+		User user = (User)session.getAttribute("loginUser");
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
+		List list =(List)tripMap.get("list");
+		
+		
 		
 		
 		map.put("areaCode", areaCode);
@@ -82,6 +96,7 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
+			System.out.println("构具 恐 13 其捞瘤具");
 		}
 		System.out.println(areaCode +" : "+localName);
 		
@@ -112,6 +127,7 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
+			System.out.println("构具 恐 13 其捞瘤具");
 		}
 		System.out.println(areaCode +" : "+localName);
 		
@@ -142,6 +158,8 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
+			System.out.println("构具 恐 13 其捞瘤具");
+			
 		}
 		System.out.println(areaCode +" : "+localName);
 		Map map = new HashMap();
