@@ -41,14 +41,14 @@ public class PlannerController {
 	@RequestMapping(value="addPlanner", method=RequestMethod.POST)
 	public String addPlanner(@ModelAttribute("planner")Planner planner) throws Exception{
 		
-		System.out.println("PlannerController/addPlanner ì ‘ì†");
+		System.out.println("PlannerController/addPlanner Á¢¼Ó");
 		System.out.println("planner :: "+planner);
 		planner.setFlag("pl");
 		planner.setPlannerMakerId("test01");
 		planner.setPhoto("kk");
 		planner.setText("what the fuck");
 		plannerService.addPlanner(planner);
-		System.out.println("PlannerController/addPlanner ìˆ˜í–‰ì™„ë£Œ");
+		System.out.println("PlannerController/addPlanner ¼öÇà¿Ï·á");
 		
 		return "redirect:../planner/json/getMyPlannerList";
 	}
@@ -57,9 +57,9 @@ public class PlannerController {
 	public String getMyPlannerList(@ModelAttribute("search")Search search, User user,
 			HttpServletRequest request, HttpSession session) throws Exception{
 		
-		System.out.println("PlannerController/getMyPlannerList ì ‘ì†");
+		System.out.println("PlannerController/getMyPlannerList Á¢¼Ó");
 		
-		//userId ë¥¼ session ì—ì„œ ë°›ì•„ì™€ ì²˜ë¦¬
+		//userId È£Ãâ session 
 //		user = (User)session.getAttribute("userId");
 //		System.out.println("user :: "+ user);
 //		
@@ -96,7 +96,7 @@ public class PlannerController {
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		
-		System.out.println("PlannerController/getMyPlannerList ì™„ë£Œ");
+		System.out.println("PlannerController/getMyPlannerList ¼öÇà¿Ï·á");
 		
 		return "forward:/planner/listMyPlanner.jsp";
 	}
@@ -104,11 +104,11 @@ public class PlannerController {
 	@RequestMapping(value="getUserPlannerList", method=RequestMethod.GET)
 	public String getUserPlannerList(@RequestParam("search")Search search) throws Exception{
 		
-		System.out.println("PlannerController/getUserPlannerList ì ‘ì†");
+		System.out.println("PlannerController/getUserPlannerList Á¢¼Ó");
 		
 		plannerService.getUserPlannerList(search);
 		
-		System.out.println("PlannerController/getUserPlannerList ì™„ë£Œ");
+		System.out.println("PlannerController/getUserPlannerList ¼öÇà¿Ï·á");
 		
 		return "forward:/planner/listUserPlanner.jsp";
 	}
@@ -116,13 +116,13 @@ public class PlannerController {
 	@RequestMapping(value="getPlanner", method=RequestMethod.GET)
 	public String getPlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
 		
-		System.out.println("PlannerController/getPlanner ì ‘ì†");
+		System.out.println("PlannerController/getPlanner Á¢¼Ó");
 		System.out.println("::::: "+postNo);
 		Planner planner = plannerService.getPlanner(postNo);
 		
 		request.setAttribute("planner", planner);
 		
-		System.out.println("PlannerController/getPlanner ì™„ë£Œ");
+		System.out.println("PlannerController/getPlanner ¼öÇà¿Ï");
 		
 		return "forward:/planner/getPlanner.jsp";
 	}

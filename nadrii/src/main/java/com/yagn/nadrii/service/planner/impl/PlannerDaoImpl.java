@@ -32,14 +32,14 @@ public class PlannerDaoImpl implements PlannerDao{
 	///Method
 	@Override
 	public void addPlanner(Planner planner) throws Exception {
-		System.out.println("PlannerDao/addPlanner 鞝戩啀");
+		System.out.println("PlannerDao/addPlanner 立加");
 		sqlSession.insert("PlannerMapper.addPlanner", planner);
-		System.out.println("PlannerDao/addPlanner 鞕勲");
+		System.out.println("PlannerDao/addPlanner 荐青肯丰");
 	}
 	
 	@Override
 	public List<Planner> getMyPlannerList(Search	search) throws Exception{
-		System.out.println("PlannerDao/getMyPlannerList 鞝戩啀");
+		System.out.println("PlannerDao/getMyPlannerList 立加");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 //		plannerMakerId = "test01";
@@ -52,21 +52,21 @@ public class PlannerDaoImpl implements PlannerDao{
 	@Override
 	public List<Planner> getUserPlannerList(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerDao/getUserPlannerList 鞝戩啀");
+		System.out.println("PlannerDao/getUserPlannerList 立加");
 		return sqlSession.selectList("PlannerMapper.listUserPlanner", search);
 	}
 
 	@Override
 	public Planner getPlanner(int postNo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerDao/getPlanner 鞝戩啀");
+		System.out.println("PlannerDao/getPlanner 立加");
 		return sqlSession.selectOne("PlannerMapper.getPlanner", postNo);
 	}
 
 	@Override
 	public int getTotalCount(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerDao/getTotalCount 鞝戩啀");
+		System.out.println("PlannerDao/getTotalCount 立加");
 		
 		return sqlSession.selectOne("PlannerMapper.getTotalCount", search);
 	}
