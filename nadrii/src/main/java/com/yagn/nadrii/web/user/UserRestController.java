@@ -68,9 +68,13 @@ public class UserRestController extends SupportController {
 	//@ResponseBody
 	public Object loginProc( User user, HttpServletRequest request) throws Exception{
 		
+		System.out.println("[loginProc]");
+		
 		boolean isAdmin = false;
 		
 		User loginUser = userService.loginProc(user);
+		
+		System.out.println("\n[1]::"+loginUser.toString());
 		
 		Map<String,String> map =new HashMap<String, String>();
 		
@@ -80,6 +84,8 @@ public class UserRestController extends SupportController {
 		}
 		
 		request.getSession().setAttribute("loginUser", loginUser );
+		
+		
 		map.put("msg", "success");
 		
 		if(loginUser.getRole().equals("admin")) {

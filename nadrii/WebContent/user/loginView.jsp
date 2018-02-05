@@ -243,6 +243,8 @@ function statusChangeCallback(response) {
 					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
 					      <a class="btn btn-warning btn" role="button" href="#"> 아이디 찾기 </a>
 					      <a class="btn btn-info" role="button" href="#"> 비밀번호 찾기 </a>
+					    
+					    
 					      <!--  facebook login -->
 					 		<script>
 					 		(function(d, s, id) {

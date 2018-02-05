@@ -30,8 +30,9 @@
         }
         
         .media {
-        	background-color: teal;
+        	background-color: #c5dce5;
         }
+        
         
 	</style>
 
@@ -41,7 +42,7 @@
 function fncGetList(pageNo) {
 	
 	$("#pageNo").val(pageNo);
-	$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
+	$("form").attr("method", "POST").attr("action", "/ticket/listBasket").submit();
 	
 }
 </script>
@@ -60,39 +61,39 @@ function fncGetList(pageNo) {
 				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 장바구니</p>
 			</h3>
 			<h5 class="text-muted">
-				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
+				<strong class="text-success">홍길동</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
 			</h5>
 		</div>
 
-	<!-- form Start /////////////////////////////////////-->
-	<form class="form-horizontal">
-
-			<div class="media">
-				<div class="media-left">
-					<a href="#"> 
-						<img class="media-object" src="http://vignette3.wikia.nocookie.net/max-steel-reboot/images/7/72/No_Image_Available.gif" alt="There is no image">
-					</a>
+		<!-- form Start /////////////////////////////////////-->
+		<form class="form-horizontal">
+			<div class="row">
+			<c:forEach var="list" items="${list}" varStatus="num">
+			
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> 
+							<img class="media-object" src="${ list.ticketImage }" alt="There is no image" width=150px, height=150px>
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">${ list.ticketTitle }</h4>
+						<hr>
+						<h5>● 예매일자 : ${ list.bookingDate }</h5>
+						<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
+						<h5>● 구매한 티켓 : ${ list.ticketPriceAll } </h5>
+					</div>
 				</div>
-				<div class="media-body">
-					<h4 class="media-heading">Media heading</h4>
-					<hr>
-					Example Text
-				</div>
-			</div>
+				
+			</c:forEach>
+			</div>	
 
-
-
-
-
-
+			<hr>
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
-			
 	
-	
-	
-	</form>
-	<!-- form End /////////////////////////////////////-->
+		</form>
+		<!-- form End /////////////////////////////////////-->
 
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->

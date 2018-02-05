@@ -98,8 +98,8 @@ function fncAddBooking() {
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class=" text-info text-center">
-				<p class="bg-warning">나들이 티켓 상세조회</p>
+			<h3 class=" text-info text-center bg-warning">
+				나들이 티켓 상세조회
 			</h3>
 		</div>
 
@@ -110,6 +110,9 @@ function fncAddBooking() {
 			<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
 			<input type="hidden" name="contentid" value="${ detailIntro.contentid }">
 			<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
+			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+
+<!-- 
 			<input type="hidden" name="agelimit" value="${ detailIntro.agelimit }">
 			<input type="hidden" name="playtime" value="${ detailIntro.playtime }">
 			<input type="hidden" name="eventplace" value="${ detailIntro.eventplace }">
@@ -123,13 +126,12 @@ function fncAddBooking() {
 			<input type="hidden" name="sponsor2tel" value="${ detailIntro.sponsor2tel }">
 			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
 			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
-			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
 			<input type="hidden" name="eventstartdate" value="${ detailIntro.eventstartdate }">
 			<input type="hidden" name="eventenddate" value="${ detailIntro.eventenddate }">
-
+-->
 			<div class="form-group">
 				<h1>
-					<span class="label label-warning text-left"> ${ tourTicket.title } </span>
+					<span class="label label-warning text-left"> ${ tourTicket.title }</span>
 				</h1>
 				<br>
 			</div>

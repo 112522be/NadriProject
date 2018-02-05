@@ -96,7 +96,11 @@ public class TourApiDaoImpl implements TicketDao {
 		System.out.println("\n[tourApiDaoImpl.java]::getTicketList");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
+		tourTicket = new TourTicket();
+		
+		OpenApiPage openApiPage = new OpenApiPage();
+		
 		try {
 			// Date currentDate = new Date();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -113,10 +117,9 @@ public class TourApiDaoImpl implements TicketDao {
 
 			JSONObject sfBody = (JSONObject) sfResponse.get("body");
 			ObjectMapper sfBodyMapper = new ObjectMapper();
-			OpenApiPage openApiPage = new OpenApiPage();
 			openApiPage = sfBodyMapper.readValue(sfBody.toJSONString(), OpenApiPage.class);
 
-			map.put("totalCount", openApiPage.getTotalCount());
+//			map.put("totalCount", openApiPage.getTotalCount());
 
 			JSONObject sfItems = (JSONObject) sfBody.get("items");
 			JSONArray sfItem = (JSONArray) sfItems.get("item");
@@ -156,11 +159,16 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicketList.add(tourTicket);
 
 				map.put("tourTicketList", tourTicketList);
+//				map.put("totalCount", openApiPage.getTotalCount());
 			}
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		map.put("totalCount", openApiPage.getTotalCount());
+//		map.put("tourTicketList", tourTicketList);
+		
 		return map;
 	}
 
@@ -304,49 +312,49 @@ public class TourApiDaoImpl implements TicketDao {
 		List<String> priceList = new ArrayList<String>();
 		List<String> entranceFee = new ArrayList<String>();
 
-//		System.out.println("\n[2] ==> " + priceInfo);
+		System.out.println("\n[2] ==> " + priceInfo);
 		
 		try {
 			
 			if (priceInfo.contains("000") || priceInfo.contains("00")) {
 
-//				System.out.println("\n[3] ==> " + priceInfo);
+				System.out.println("\n[3] ==> " + priceInfo);
 
 				String[] priceSplit = priceInfo.split(" |/|:");
 				
-//				System.out.println("\n[4]==>"+priceSplit.length);
+				System.out.println("\n[4]==>"+priceSplit.length);
 				
 				for (int k = 0; k < priceSplit.length; k++) {
-//					System.out.println("\n[4] ==>" + priceSplit[k]);
+					System.out.println("\n[4] ==>" + priceSplit[k]);
 
 					if (priceSplit[k].contains("000") || priceSplit[k].contains("00")) {
 
-//						System.out.println("\n[5] ==> " + priceSplit[k]);
+						System.out.println("\n[5] ==> " + priceSplit[k]);
 						String priceValue = priceSplit[k].replaceAll("[^0-9]", "");
-//						System.out.println("\n[6] ==> " + priceValue);
+						System.out.println("\n[6] ==> " + priceValue);
 
 						priceList.add(priceValue);
-//						System.out.println("\n[7]==>" + priceList.size());						
+						System.out.println("\n[7]==>" + priceList.size());						
 						
 						for (int j = 0; j < priceList.size(); j++) {
-//							System.out.println("		[8] ==>" + priceList.get(j));
-//							System.out.println("");
-							// tourTicket.setUsetimefestival(priceList);
+							System.out.println("		[8] ==>" + priceList.get(j));
+							System.out.println("");
+//							tourTicket.setUsetimefestival(priceList);
 						}
 					}
 				}
 
 			} else if (priceInfo.equals("")) {
-//				System.out.println("[9. if it's Null]");
+				System.out.println("[9. if it's Null]");
 				entranceFee.add("무료");
 				return entranceFee;
-				// tourTicket.setUsetimefestival(entranceFee);
+//				tourTicket.setUsetimefestival(entranceFee);
 
 			} else {
-//				System.out.println("[10. if it's not Null]");
+				System.out.println("[10. if it's not Null]");
 				entranceFee.add(priceInfo);
 				return entranceFee;
-				// tourTicket.setUsetimefestival(entranceFee);
+//				tourTicket.setUsetimefestival(entranceFee);
 			}
 		} catch (Exception e) {
 			System.out.println(e);

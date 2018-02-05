@@ -15,7 +15,7 @@
 		<result property="gender" 				column="gender" 			jdbcType="VARCHAR" />
 		<result property="phone" 				column="phone" 				jdbcType="VARCHAR" />
 		<result property="birth" 				column="birth" 				jdbcType="VARCHAR" />
-		<result property="profiIeimageFile" 	column="profi_ieimage_file" jdbcType="VARCHAR" />
+		<result property="profiIeimageFile" 	column="profile_image_file" jdbcType="VARCHAR" />
 		<result property="email" 				column="email" 				jdbcType="VARCHAR"  />
 		<result property="children" 			column="children" 			jdbcType="NUMERIC" />
 		<result property="qrcode" 				column="qr_code" 			jdbcType="VARCHAR" />
@@ -40,21 +40,21 @@
 	 
 	 <select id="loginProc" parameterType="user" resultType="user">
 	 	SELECT
-	 			 USER_ID                 AS userId
-	 			,PASSWORD				 AS password
-	 			,EMAIL					 AS email
-	 			,REG_DATE				 AS regDate
-	 			,ROLE				     AS role
-	 			,NAME				     AS name
-	 			,GENDER					 AS gender
-	 			,BIRTH					 AS birth
-	 			,PHONE                   AS phone
-	 			,PROFILE_IMAGE_FILE      AS profileImageFile
-	 			,CHILDREN				 AS children
-	 			,QR_CODE				 AS qrcode	
+	 			 USER_ID                 
+	 			,PASSWORD				 
+	 			,EMAIL					 
+	 			,REG_DATE				 
+	 			,ROLE				     
+	 			,NAME				     
+	 			,GENDER					 
+	 			,BIRTH					 
+	 			,PHONE                   
+	 			,PROFILE_IMAGE_FILE      
+	 			,CHILDREN				 
+	 			,QR_CODE				 
 	 	FROM users
 	 	WHERE user_id = #{userId}
-	 	  AND password = #{password}	
+	 	AND password = #{password}	
 	 </select>
 	 
 	 <update	id="addUserPlus"	parameterType="user" >
@@ -72,7 +72,7 @@
 	 
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
-		user_id , name , password , birth , role ,  children , gender , phone , qr_code , email , profi_ieimage_file , reg_date 		
+		user_id , name , password , birth , role ,  children , gender , phone , qr_code , email , profile_image_file , reg_date 		
 		FROM users 
 		WHERE user_id = #{value}
 	 </select>

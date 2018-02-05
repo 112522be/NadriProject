@@ -36,9 +36,6 @@
         .col-sm-3 {
         	height: 500px;
         }
-        
-        
-        
 	</style>
 
 
@@ -124,15 +121,17 @@ function fncGetList(pageNo) {
 			console.log('contentTypeId : ' + contentTypeId)
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
+			
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
+			
 		});
 	});
 	
 	function fncGetTicket() {
-		$("form").attr("method", "POST").attr("action", "/ticket/testTicket").submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/getTicket").submit();
 	}
 </script>
 
@@ -150,7 +149,6 @@ function fncGetList(pageNo) {
 		<div class="page-header text-right">
 			<h3 class="text-info">
 				<p class="bg-success">나들이티켓</p>
-				<p class="bg-success">${sessionScope.users.userId }</p>
 			</h3>
 			<h5 class="text-muted">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
