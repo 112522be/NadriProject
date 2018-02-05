@@ -108,7 +108,7 @@ function goBack() {
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon" id="sizing-addon1">이 름</span> 
 					<input type="text" class="form-control" placeholder="이름을 입력해 주세요"
-						aria-describedby="sizing-addon1">
+						aria-describedby="sizing-addon1" value="${ user.userName }">
 				</div>
 				
 				<br>
@@ -116,7 +116,7 @@ function goBack() {
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon" id="sizing-addon1">연락처</span> 
 					<input type="text" class="form-control" placeholder="연락처를 입력해 주세요"
-						aria-describedby="sizing-addon1">
+						aria-describedby="sizing-addon1" value="${ user.phone }">
 				</div>
 	  		</div>
 		</div>

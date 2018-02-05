@@ -9,6 +9,9 @@ public class Purchase {
 	private int contentId;			
 	private int contentTypeId;		
 
+	private int contentid;			
+	private int contenttypeid;		
+
 	private int postNo;			
 	private String ticketTitle;		
 	private String ticketImage;		
@@ -22,9 +25,14 @@ public class Purchase {
 	private String[] ticketPrice;
 	private int totalTicketPrice;
 
-	private User buyerId;
-	private User buyerEmail;
-	private User buyerPhone;
+	private String buyerId;
+	private String buyerName;
+	private String buyerPhone;
+	private String buyerEmail;
+	
+	
+	
+	private User buyer;
 	
 	public Purchase() {
 		
@@ -109,8 +117,6 @@ public class Purchase {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	
-	
 
 	public String[] getTicketCount() {
 		return ticketCount;
@@ -136,28 +142,62 @@ public class Purchase {
 		this.totalTicketPrice = totalTicketPrice;
 	}
 
-	public User getBuyerId() {
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
+
+	public String getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(User buyerId) {
+	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId;
 	}
 
-	public User getBuyerEmail() {
-		return buyerEmail;
+	public String getBuyerName() {
+		return buyerName;
 	}
 
-	public void setBuyerEmail(User buyerEmail) {
-		this.buyerEmail = buyerEmail;
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
 	}
 
-	public User getBuyerPhone() {
+	public String getBuyerPhone() {
 		return buyerPhone;
 	}
 
-	public void setBuyerPhone(User buyerPhone) {
+	public void setBuyerPhone(String buyerPhone) {
 		this.buyerPhone = buyerPhone;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+	
+	
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
 	}
 
 	@Override
@@ -167,15 +207,9 @@ public class Purchase {
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
 				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
 				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
-				+ ", buyerEmail=" + buyerEmail + ", buyerPhone=" + buyerPhone + "]";
+				+ ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer="
+				+ buyer + "]";
 	}
-
-	
-	
-
-	
-
-	
 
 	
 	

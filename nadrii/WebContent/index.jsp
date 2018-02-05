@@ -68,81 +68,87 @@ body {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-		
-		
-		
-		//============= 회원원가입 화면이동 =============
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('회원가입')").on("click" , function() {
-				alert("회원가입")
-				self.location = "/user/addUser"
-			});
-		});
-		
-		//============= 로그인 화면이동 =============
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('로 그 인')").on("click" , function() {
-				self.location = "/user/login"
-			});
-		});
-		
-		//============================== 정보검색 파트 ===================
-		$( function() {
-			$("a[href='#' ]:contains('박물관')").on("click" , function() {
-				self.location = "../trip/listMuseum?pageNo=1&area=local"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('전시관')").on("click" , function() {
-				self.location = "../trip/listExhibit?pageNo=1&area=local"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('미술관')").on("click" , function() {
-				self.location = "../trip/listGallery?pageNo=1&area=local"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('체험관')").on("click" , function() {
-				self.location = "../trip/listExperience?pageNo=1&area=local"
-			});
-		});
-		
-		$( function() {
-			$("a[href='#' ]:contains('민속마을')").on("click" , function() {
-				self.location = "../trip/listTradition?pageNo=1&area=local"
-			});
-		});
-		
-		//============= listTicket 화면이동 =============
-		$( function() {
-			$("a[href='#' ]:contains('나들이티켓')").on("click" , function() {
-				self.location = "/ticket/listTicket"
-			});
-		});
-		
-		
-		$( function() {
-			//==> 추가된부분 : "addUser"  Event 연결
-			$("a[href='#' ]:contains('종만아')").on("click" , function() {
-				self.location = "/trip/listMuseum?pageNo=1&area=local"
-			});
-		});
-		
-		
-		$(function(){
-			$("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
-				if(confirm("로그아웃을 하시겠습니까?")){
-				self.location = "/user/logoutProc";
-				}
-			});
-		});
-		
+      
+      //============= 회원원가입 화면이동 =============
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('회원가입')").on("click" , function() {
+            alert("회원가입")
+            self.location = "/user/addUser"
+         });
+      });
+      
+      //============= 로그인 화면이동 =============
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('로 그 인')").on("click" , function() {
+            self.location = "/user/login"
+         });
+      });
+      
+      //============================== 정보검색 파트 ===================
+      $( function() {
+         $("a[href='#' ]:contains('박물관')").on("click" , function() {
+            self.location = "../trip/listMuseum?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('전시관')").on("click" , function() {
+            self.location = "../trip/listExhibit?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('미술관')").on("click" , function() {
+            self.location = "../trip/listGallery?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('체험관')").on("click" , function() {
+            self.location = "../trip/listExperience?pageNo=1&area=local"
+         });
+      });
+      
+      $( function() {
+         $("a[href='#' ]:contains('민속마을')").on("click" , function() {
+            self.location = "../trip/listTradition?pageNo=1&area=local"
+         });
+      });
+      
+      //============= "나들이티켓" 화면이동 =============
+      $( function() {
+         $("a[href='#' ]:contains('나들이티켓')").bind("click" , function() {
+//       	 alert("나들이티켓")
+            self.location = "/ticket/listTicket"
+         });
+      });
+      
+      //============= "장바구니" 화면이동 =============
+      $( function() {
+         $("a[href='#' ]:contains('장바구니')").bind("click" , function() {
+//        	 alert("장바구니")
+            self.location = "/purchase/listBasket"
+         });
+      });
+      
+      $( function() {
+         //==> 추가된부분 : "addUser"  Event 연결
+         $("a[href='#' ]:contains('종만아')").on("click" , function() {
+            self.location = "/trip/listMuseum?pageNo=1&area=local"
+         });
+      });
+      
+      $(function(){
+         $("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
+            if(confirm("로그아웃을 하시겠습니까?")){
+            self.location = "/user/logoutProc";
+            }
+         });
+      });
+      
+      
 
    //============= FaceBook 로그인 START =============
 
@@ -264,6 +270,7 @@ body {
 
 <body>
 
+   <!-- ToolBar Start /////////////////////////////////////-->
    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    <!-- ToolBar End /////////////////////////////////////-->
 

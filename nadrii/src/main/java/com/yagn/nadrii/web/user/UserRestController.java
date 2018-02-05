@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,35 +56,40 @@ public class UserRestController extends SupportController {
 	 */
 	
 	
-	@RequestMapping(value="loginProc", method=RequestMethod.POST)
-	//@ResponseBody
-	public Map loginProc( User user, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="json/loginCheck", method=RequestMethod.POST)
+	public Map<String, Object> loginCheck( 
+			@ModelAttribute("user") User user,
+			HttpServletRequest request
+			) {
 		
+		System.out.println("/json/loginCheck : POST");
 		
-		boolean isAdmin = false;
+		User loginUser = new User();
 		
-		User loginUser = userService.loginProc(user);
+		Map<String, Object> map =new HashMap<String, Object>();
 		
-		Map<String,String> map =new HashMap<String, String>();
-		
-		//System.out.println("뭐야 어떤거야===>"+loginUser.toString());
-		
-		if(loginUser == null) {
-			map.put("msg", "failed");
-			return map;
-		}
-		
-		request.getSession().setAttribute("loginUser", loginUser );
-		map.put("msg", "success");
-		
-		if(loginUser.getRole().equals("admin")) {
-			System.out.println("관리자 로그인");
-			isAdmin = true;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}else if(loginUser.getRole().equals("user")) {
-			System.out.println("일반 로그인");
-			isAdmin = false;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
+		try {
+			loginUser = userService.loginCheck(user);
+			
+			System.out.println("\n[1]::" + loginUser.toString());
+
+			map = new HashMap<String, Object>();
+
+			if (loginUser.getUserId() == null) {
+				map.put("msg", "failed");
+				
+			} else {
+				map.put("msg", "success");
+				if (loginUser.getUserName() == null) {
+					map.put("welcomeSign", loginUser.getUserId());
+				} else {
+					map.put("welcomeSign", loginUser.getUserName());
+				}
+				request.getSession().setAttribute("loginUser", loginUser);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		
 		return map;
