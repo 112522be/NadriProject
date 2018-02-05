@@ -41,12 +41,21 @@
 			self.location = "../trip/getTheme"
 		});
 	});
+	
 	//========== '나들이 티켓' 버튼 처리 Event ==========
 	$( function() {
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "../ticket/listTicket"
+			self.location = "/ticket/listTicket"
 		});
 	});
+	
+	//============= "장바구니" 화면이동 =============
+    $( function() {
+       $("glyphicon.glyphicon-shopping-cart").bind("click" , function() {
+//      	 alert("장바구니")
+          self.location = "/purchase/listBasket"
+       });
+    });
 	
 	</script>
 	

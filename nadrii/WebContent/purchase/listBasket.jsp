@@ -25,10 +25,6 @@
 	<!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-		body {
-            padding-top : 50px;
-        }
-        
         .media {
         	background-color: #d1e2c9;
         }
@@ -101,14 +97,22 @@ function fncGetList(pageNo) {
 					<!-- /.col-lg-6 -->
 				</c:forEach>
 			</div>
-			
-			
-
-
-
-
 
 			<hr>
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6 text-right">
+					<button type="button" class="btn btn-success">전체결제</button>
+					<button type="button" class="btn btn-warning">선택결제</button>
+					<button type="button" class="btn btn-info">삭 제</button>
+					<button type="button" class="btn btn-danger">Success</button>
+				</div>
+			</div>
+
+
+
+
+
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 	

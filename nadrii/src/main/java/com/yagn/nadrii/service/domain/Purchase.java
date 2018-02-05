@@ -9,6 +9,9 @@ public class Purchase {
 	private int contentId;			
 	private int contentTypeId;		
 
+	private int contentid;			
+	private int contenttypeid;		
+
 	private int postNo;			
 	private String ticketTitle;		
 	private String ticketImage;		
@@ -177,6 +180,24 @@ public class Purchase {
 
 	public void setBuyerEmail(String buyerEmail) {
 		this.buyerEmail = buyerEmail;
+	}
+	
+	
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
 	}
 
 	@Override
