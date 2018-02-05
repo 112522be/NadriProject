@@ -2,7 +2,11 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/heads/master
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//WebContent/Trip/123123123.jsp=UTF-8
+=======
 encoding//SQL/Purchase\ DB\ Table.sql=UTF-8
+>>>>>>> refs/remotes/origin/master
 encoding//WebContent/planner/addPlannerView.jsp=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=EUC-KR
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiSearch.java=EUC-KR

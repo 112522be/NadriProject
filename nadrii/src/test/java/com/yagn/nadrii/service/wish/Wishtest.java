@@ -58,7 +58,7 @@ public class Wishtest {
 		
 		wish.setUserId(userId);
 				
-		wish.setTripNo(trip.getPostNo());
+		//wish.setTripNo(trip.getPostNo());
 		wish.setImageFile("testImage");
 		//wish.setPostNo(0);
 		System.out.println(wish);

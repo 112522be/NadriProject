@@ -16,5 +16,6 @@ public interface WishService {
 	public Map listWish(String userId) throws Exception;
 	
 	public void deleteWish(int wishNo) throws Exception;
-	
+
+	public Wish getWishByTripNo(String UserId, int tripNo) throws Exception;
 }

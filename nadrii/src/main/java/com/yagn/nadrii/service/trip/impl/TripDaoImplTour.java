@@ -18,7 +18,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Trip;
@@ -40,7 +39,7 @@ public class TripDaoImplTour implements TripDao {
 
 	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3,String areaCode, String localName) throws Exception {
 
-
+		System.out.println(pageNo+ "  DAOIMPLEMENT");
 		System.out.println("listTrip Dao parameter areaCode, localName");
 		
 		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
@@ -54,6 +53,7 @@ public class TripDaoImplTour implements TripDao {
 		tourAPlUrlManage.setType("areaBasedList?");
 
 		System.out.println(tourAPlUrlManage.urlMaking());
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		List list = new ArrayList();
 				
@@ -95,7 +95,7 @@ public class TripDaoImplTour implements TripDao {
 							
 					TourApiDomain tourDomain = new TourApiDomain();
 					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-					System.out.println(tourDomain);
+					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
 						System.out.println("이미지가 없음-->>  "+tourDomain.getTitle());
@@ -105,7 +105,7 @@ public class TripDaoImplTour implements TripDao {
 					}
 								
 					list.add(tourDomain);
-					System.out.println(list.get(i));
+					//System.out.println(list.get(i));
 				}
 				
 			//데이터가 한개 인경우	
@@ -121,19 +121,15 @@ public class TripDaoImplTour implements TripDao {
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
 				}
-				TourApiDomain lastNotice = new TourApiDomain();
-				lastNotice.setTitle("마지막 여행지");
 				
 				list.add(tourDomain);
-				list.add(lastNotice);
+				
 				
 				
 			}
 		//전달 데이터가 없는 경우	
 		}else {
-			TourApiDomain lastNotice = new TourApiDomain();
-			lastNotice.setTitle("마지막 여행지");
-			list.add(lastNotice);
+			
 		}
 		return list;
 	}

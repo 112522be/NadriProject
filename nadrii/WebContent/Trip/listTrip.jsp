@@ -27,12 +27,16 @@
 	///*
 	//page할 변수
 	var page = 1;
+	var federalPage = 0;
+	var nationalPage =0;
 	var flag =0;
 	//*/
 	
 	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
 	$(function(){
 		page++;
+		//federalPage++;
+		//nationalPage++;
 	});
 	
 	
@@ -46,6 +50,7 @@
 		
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()& flag ==0) {
 			flag=1;
+			
 			listTrip(page);
 			page++;
 		}
@@ -53,6 +58,7 @@
 	
 	//페이지 네이게이션을 수행하는 JS
 	function listTrip(){
+	
 		var areaCode = "${areaCode}";
 		var localName ="${localName}";
 		if(areaCode ==""){
@@ -62,9 +68,11 @@
 			localName="0";
 		}
 		
+		
 		$.ajax({
 			url:"../trip/json/list"+'${trip}'+"/"+page+"/"+areaCode+"/"+localName,
 			method:"GET",
+			asyn :false,
 			dataType:"json",
 			headers :{
 				"Accept" : "application/json",
@@ -72,31 +80,121 @@
 			},
 						
 			success: function(returnData){
+				
 				var data = returnData.list;
-												
-				for(var a =0; a<data.length;++a){
-					
-					var dpValue =
+				
+				if(data.length != 0){
+					alert("정상작동");	
+																
+					for(var a =0; a<data.length;++a){
 						
-					 "<div class='col-xs-4'>"+
-				        "<div class='thumbnail'>"+
-				          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
-				          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
-				          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
-				          "<div class='caption'>"+
-				            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
-				            "<p>"+data[a].addr1+"</p>"+
-				            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
-				            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
-				            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
-				            "</p>"+
-				          "</div>"+
-				        "</div>"+
-				      "</div>";
-										
-					$(".row").append(dpValue);	
+						var dpValue =
+							
+						 "<div class='col-xs-4'>"+
+					        "<div class='thumbnail'>"+
+					          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+					          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+					          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+					          "<div class='caption'>"+
+					            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+					            "<p>"+data[a].addr1+"</p>"+
+					            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+					            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+					            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+					            "</p>"+
+					          "</div>"+
+					        "</div>"+
+					      "</div>";
+											
+						$(".row").append(dpValue);	
 					}
+				}else{
+					alert("예외발생");
+					federalPage++;
+					$.ajax({
+						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
+						method:"GET",
+						asyn :false,
+						dataType:"json",
+						headers :{
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success: function(returnData){
+							flag =1;
+							var data = returnData.list;
+							if(data.length!=0){
+																											
+								for(var a =0; a<data.length;++a){
+									
+									var dpValue =
+										
+									 "<div class='col-xs-4'>"+
+								        "<div class='thumbnail'>"+
+								          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+								          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+								          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+								          "<div class='caption'>"+
+								            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+								            "<p>"+data[a].addr1+"</p>"+
+								            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+								            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+								            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+								            "</p>"+
+								          "</div>"+
+								        "</div>"+
+								      "</div>";
+								      												
+									$($(".row")[1]).append(dpValue);
+								}
+							}else{
+								alert("예외발생 광역단위");
+								nationalPage++;
+								$.ajax({
+									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
+									method:"GET",
+									asyn :false,
+									dataType:"json",
+									headers :{
+										"Accept" : "application/json",
+										"Content-Type" : "application/json"
+									},
+									success: function(returnData){
+										flag =1;
+										var data = returnData.list;
+										if(data.length!=0){
+																														
+											for(var a =0; a<data.length;++a){
+												
+												var dpValue =
+													
+												 "<div class='col-xs-4'>"+
+											        "<div class='thumbnail'>"+
+											          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+											          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+											          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+											          "<div class='caption'>"+
+											            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+											            "<p>"+data[a].addr1+"</p>"+
+											            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+											            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+											            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+											            "</p>"+
+											          "</div>"+
+											        "</div>"+
+											      "</div>";
+											      												
+												$($(".row")[2]).append(dpValue);
+											}
+										}
+									}
+								});
+										
+							}
+						}
+					});
 				}
+			}
 								
 			
 			
@@ -104,6 +202,10 @@
 	}
 	
 	/////////////////////////////////////////////무한스크롤
+	
+	
+	
+	
 	
 	
 	// 지도 참조 !!!!!!!
@@ -232,7 +334,13 @@
 				"Content-Type" : "application/json"
 			},
 			success:function(){
-				alert("위시리스트에 저장");
+				//alert("위시리스트에 저장");
+				//alert($("a[href='#']:contains('위시리스트')").index(this) );
+				//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
+				
+				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트 취소</a>";
+				
+				//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			}
 		});
 		
@@ -245,17 +353,25 @@
 		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			
-			alert($("a[href='#']:contains('위시리스트')").index(this));
-			alert(contentid);
-			alert(contenttypeid);
-			alert("리스트 위시리스트 클릭");
+			//alert($("a[href='#']:contains('위시리스트')").index(this));
+			//alert(contentid);
+			//alert(contenttypeid);
+			//alert("리스트 위시리스트 클릭");
+			
 			
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
-			addTripToDB(contentid, contenttypeid)
+			addTripToDB(contentid, contenttypeid);
 			
 			//위에서 저장한 것을 위시리스트에 재저장 
 			addWish(contentid);
 			e.preventDefault();
+			
+			//alert($(".row ").index(this));
+			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
+			//alert($("div[class='col-xs-4']").index(this));
+			//alert($("a[href='#']:contains('위시리스트')").index(this));
+			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
+			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
 		});
 	})
 	
@@ -271,20 +387,7 @@
 			e.preventDefault();
 		});
 	})
-	//////////////////////캡쳐
 	
-	function makeShareImage(){
-            element = $("#map").get(0);
-            html2canvas(element, {
-                useCORS: true,
-                allowTaint: false,
-                onrendered : function(canvas) {
-                    getCanvas = canvas;
-//                $.post('/v1/uploadMap', getCanvas.toDataURL("image/png"));
-                    upload();
-                }
-            });
-        }
 	
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
@@ -338,46 +441,79 @@
 		img {
 			cursor: pointer;
 		}
-	
+		.col-xs-4{
+		height: 400px;
+		
+		}
+		.row1{
+			container :body;
+		}
+		
+		
 	</style>
+	
 	
 	<title>여행지 찾기</title>
 </head>
 <body>
 <jsp:include page="../layout/toolbar.jsp"></jsp:include>
-
+ 
 <div class="container">
+	
+ 
+	<div class = "row1" align="right">
+	  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." align="right">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" align="right">Go!</button>
+      </span>
+    </div>
+  </div>
+</div>
+ 
+<!-- 
+	<span class="label label-default">Default</span>
+	<input type="text" id="searchKeyword" value=""/>
+	<a href="#" class="btn btn-default" role="button">조회</a>
+-->	
+</br>
 
+</br>
 	<ul class="nav nav-tabs">
 	  <li role="presentation" ><a href="#">시구단위</a></li>
-	  <li role="presentation" ><a href="#">광역단위</a></li>
-	  <li role="presentation"><a href="#">전국단위</a></li>
 	</ul>
 
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
       	
-	    <input type="hidden" id="pageNo" value="${pageNo}"/>
+	    
 	    <div class="row">
 	
 		<c:forEach var ="list" items="${list}">
-		
+		<input type="hidden" id="pageNo" value="${pageNo}"/>
 		    <div class="col-xs-4">
-	        	<div class="thumbnail">
+		     
+		       	<div class="thumbnail">
 		          <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 		          <input type="hidden" name="contentid" value="${list.contentid}"/>
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
-		          	<h3 id="thumbnail-label">${list.title}
-		            	<a class="anchorjs-link" href="#thumbnail-label">
-		            		<span class="anchorjs-icon"></span>
-		            	</a>
-		            </h3>
-		          <p>${list.addr1}</p>
-		          <p> 
-		          	<a href="#" class="btn btn-primary" role="button">공유</a> 
-		            <a href="#" class="btn btn-default" role="button">좋아요</a>
-		            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
-		          </p>
+			      	<h3 id="thumbnail-label">${list.title}
+			        	<a class="anchorjs-link" href="#thumbnail-label">
+			            	<span class="anchorjs-icon"></span>
+			            </a>
+			      	</h3>
+			        <p>${list.addr1}</p>
+			        <p id="buttonTag" name ="buttonTag"> 
+			        	<a href="#" class="btn btn-primary" role="button">공유</a> 
+			        	<a href="#" class="btn btn-default" role="button">좋아요</a>
+			        	<c:if test="${!(list.flag== '1')}">			        	
+			            	<a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>
+			            </c:if>
+			            <c:if test="${!(list.flag=='0')}">			        	
+			            	<a href="#" id="wish" class="btn btn-default" role="button">위시리스트 취소</a>
+			            </c:if>	
+			        </p>
 		        </div>
 			</div>
 		</div>
@@ -385,8 +521,22 @@
       </c:forEach>
       
     </div>
-      
-     
+    
+    <div class="row">
+    
+	    <ul class="nav nav-tabs">
+		  <li role="presentation" ><a href="#">광역단위</a></li> 
+		</ul>
+	    
+    </div>
+    
+    <div class="row">    
+	    <ul class="nav nav-tabs">
+		  <li role="presentation"><a href="#">전국단위</a></li>
+		</ul>
+	    
+    </div>
+    
   </div>
 </div>  
  

@@ -185,17 +185,9 @@ function check(){
     	}
     	
     	if(confirm("회원가입을 하시겠습니까?")){
-     		$.ajax({
-    			data : data,
-    			url : "/user/addUser",
-    			type : "POST",
-    			success : function(result){
-    				if(result.msg == "success"){
-    					alert("가입이 완료되었습니다.");
-    					location.href="/user/main";
-    				}
-    			}
-    		}); 
+    		$("form").attr("method" ,"POST").attr("action" ,"/user/addUser").submit();
+    		
+    	
     	}
     }
     
