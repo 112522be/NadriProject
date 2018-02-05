@@ -104,17 +104,11 @@ public class PurchaseController {
 			openApiSearch.setNumOfRows(pageSize);
 			
 			user = (User) session.getAttribute("loginUser");
-			System.out.println(user.toString());
-//			String buyerId = user.getUserId();
-			String buyerId = "test01";
-			System.out.println("[Session userId Check]==>" + buyerId);
-			
-//			returnMap = purchaseService.getBasketList(openApiSearch, user.getUserId());
-			returnMap = purchaseService.getBasketList(openApiSearch, buyerId);
+
+			returnMap = purchaseService.getBasketList(openApiSearch, user.getUserId());
 			
 			System.out.println("\n[1]"+returnMap.get("list"));
-			System.out.println("\n[1]"+returnMap.get("totalCount"));
-			
+
 			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
 					pageUnit, pageSize);
 			System.out.println("[resultPage]" + resultPage);

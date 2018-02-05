@@ -41,7 +41,7 @@ public class UserController {
 //    @Autowired
 //    private JavaMailSender mailSender;
 	
-	///Field
+		///Field
 		@Autowired
 		@Qualifier("userServiceImpl")
 		private UserService userService;
@@ -408,4 +408,17 @@ public class UserController {
 		
 		return "forward:/user/getUser.jsp";
 	}
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+} // end of user

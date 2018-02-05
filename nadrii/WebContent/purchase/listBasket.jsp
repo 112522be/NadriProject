@@ -30,9 +30,8 @@
         }
         
         .media {
-        	background-color: #c5dce5;
+        	background-color: #d1e2c9;
         }
-        
         
 	</style>
 
@@ -61,32 +60,53 @@ function fncGetList(pageNo) {
 				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 장바구니</p>
 			</h3>
 			<h5 class="text-muted">
-				<strong class="text-success">홍길동</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
+				<strong class="text-success">${ user.userName }</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
 			</h5>
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+		
 			<div class="row">
-			<c:forEach var="list" items="${list}" varStatus="num">
+				<c:forEach var="list" items="${list}" varStatus="num">
+
+					<input type="hidden" name="contentId" value="${ list.contentid }">
+					<input type="hidden" name="contentTypeId" value="${ list.contenttypeid }">
+
+					<div class="col-sm-6">
+
+						<div class="media">
+
+							<span class="input-group-addon"> 
+								<input type="checkbox" aria-label="...">
+							</span>
+
+							<div class="media-left media-middle">
+								<a href="#"> 
+									<img class="media-object" src="${ list.ticketImage }" alt="There is no image" >
+								</a>
+							</div>
+							
+							<div class="media-body">
+								<h4 class="media-heading">${ list.ticketTitle }</h4>
+								<hr>
+								<h5>● 예매일자 : ${ list.bookingDate }</h5>
+								<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
+								<h5>● 구매한 티켓 : ${ list.ticketPriceAll }</h5>
+							</div>
+							
+						</div>
+						<!-- div class="media" -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</c:forEach>
+			</div>
 			
-				<div class="media">
-					<div class="media-left media-middle">
-						<a href="#"> 
-							<img class="media-object" src="${ list.ticketImage }" alt="There is no image" width=150px, height=150px>
-						</a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">${ list.ticketTitle }</h4>
-						<hr>
-						<h5>● 예매일자 : ${ list.bookingDate }</h5>
-						<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
-						<h5>● 구매한 티켓 : ${ list.ticketPriceAll } </h5>
-					</div>
-				</div>
-				
-			</c:forEach>
-			</div>	
+			
+
+
+
+
 
 			<hr>
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
