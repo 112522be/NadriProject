@@ -7,19 +7,18 @@ public class Comments {
 	private int commentNo;
 	private String userId;
 	private String regDate;
-	private String text;
 	private int postNo;
+	private String text;
 	
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
 	public int getPostNo() {
 		return postNo;
 	}
 
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
-	}
-
-	public Comments() {
-		regDate = Comments.parser(Calendar.getInstance().getTime().toString());
 	}
 	
 	public int getCommentNo() {

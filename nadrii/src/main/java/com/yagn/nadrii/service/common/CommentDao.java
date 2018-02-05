@@ -5,7 +5,7 @@ import java.util.List;
 import com.yagn.nadrii.service.domain.Comments;
 
 public interface CommentDao {
-	public List<Comments> addComment(Comments comment) throws Exception;
+	public void addComment(Comments comment) throws Exception;
 	public List<Comments> listCommentByPost(int postNo)throws Exception;
 	public List<Comments> listCommentById(String userId)throws Exception;
 	public void updateComment(Comments comment)throws Exception;

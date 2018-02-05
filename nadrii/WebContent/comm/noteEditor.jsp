@@ -27,7 +27,7 @@
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -40,6 +40,7 @@
 		}
         function addThumbnail(filePath) {
 			$('input[name="thumbNailFileName"]').val(filePath);
+			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected")
 			console.log($('input[name="thumbNailFileName"]').val());
 		}
         var hashtagList=",";
@@ -55,7 +56,7 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
+	 	        		$("#cndHashTags").prepend('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
 	 	        	}
 				},
 				error : function() {
@@ -85,6 +86,10 @@
 		<form name="textForm">
 		<textarea id="summernote" name="text"></textarea>
         <script>
+        	var addPlace = function() {
+				
+			}
+        
             $(document).ready(function() {
                 $('#summernote').summernote({ // summernote를 사용하기 위한 선언
                     height: 800,

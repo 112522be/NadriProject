@@ -17,7 +17,7 @@
 	<!-- comm의 Create(insert) -->
 	<insert id="addComment" parameterType="com.yagn.nadrii.service.domain.Comments">
 		INSERT INTO comments(comment_no, user_id, post_no, text, reg_date)
-		VALUES(seq_comments_comment_no.nextval, #{userId}, #{postNo}, #{text}, #{regDate}) 
+		VALUES(seq_comments_comment_no.nextval, #{userId}, #{postNo}, #{text}, SYSDATE) 
 	</insert>
 
 	

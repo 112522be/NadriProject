@@ -20,8 +20,8 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 
 	@Override
-	public List<Comments> addComment(Comments comment) throws Exception {
-		return commentDao.addComment(comment);
+	public void addComment(Comments comment) throws Exception {
+		commentDao.addComment(comment);
 	}
 
 	@Override

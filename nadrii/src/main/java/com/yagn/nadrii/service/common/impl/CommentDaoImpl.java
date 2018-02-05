@@ -18,11 +18,8 @@ public class CommentDaoImpl implements CommentDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<Comments> addComment(Comments comment) throws Exception {
-		System.out.println(111);
+	public void addComment(Comments comment) throws Exception {
 		sqlSession.insert("CommentMapper.addComment", comment);
-		System.out.println(222);
-		return sqlSession.selectList("CommentMapper.listCommentByPost", comment.getPostNo());
 	}
 
 	@Override
