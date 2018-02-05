@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<title>Insert title here</title>
 	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -19,17 +18,34 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	
 	<link href="../resources/css/keywordSearch.css?version=1" rel="stylesheet">
+	
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#save").on("click",function(){
+				save();
+				$("input[name='lat']").val(lat);
+				$("input[name='lng']").val(lng);
+				
+				$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+				
+			})
+		})
+	</script>
+	
+	
+	
 		
 </head>
 <body>
+<jsp:include page="/layout/toolbar.jsp" />
 <div class = "container-fulid">
 
 	<div class="row">
 		<div class = "col-lg-11"></div>
-		<div class = "col-lg-1">
-			<input type = "button" value ="저장">
-		</div>
-		
+			<div class = "col-lg-1">
+				<input type = "button" id="save" value ="저장" >
+			</div>
 		<div class = "col-lg-8">
 		 
 			<div class="map_wrap">
@@ -54,40 +70,40 @@
 				<div id="clickLatlng"></div>
 				<form name = "test" method="post">
 					<input type="button" value="경로탐색" onclick="javascript:search1(1)">
-					
 					<input type ="button" value="시외버스" onClick="javascript:search1(1)">
 					<input type ="button" value="고속버스" onClick="javascript:search1(2)">
 					<input type ="button" value="기차" onClick="javascript:search1(3)">
-					
 				</form>
 			</div>
 		</div>
-		
-		<div class = "col-lg-4">
-			
-			<ul id="sortable" class="pointer">
-				
-			</ul>
-				
-			<hr>
-			<div id="roadContent">
-				<div id="roadStartContent"></div>
-				<div id="roadPass1Content"></div>
-				<div id="roadPass2Content"></div>
-				<div id="roadPass3Content"></div>
-				<div id="roadPass4Content"></div>
-				<div id="roadPass5Content"></div>
+		<form name="addPlanner">
+			<div class = "col-lg-4">
+				<div>
+					플래너 제목 : <input type = "text" name="title" value=""/>
+				</div><hr>
+				<ul id="sortable" class="pointer">
+					
+				</ul>
+					
+				<hr>
+				<div id="roadContent">
+					<div id="roadStartContent"></div>
+					<div id="roadPass1Content"></div>
+					<div id="roadPass2Content"></div>
+					<div id="roadPass3Content"></div>
+					<div id="roadPass4Content"></div>
+					<div id="roadPass5Content"></div>
+				</div>
+				<hr>
+					
+				<textarea class="form-control" rows="27" cols="blue"></textarea>
+				<input type="hidden" name="lat" value="">
+				<input type="hidden" name="lng" value="">
 			</div>
-			<hr>
-				
-			<textarea class="form-control" rows="27" cols="blue"></textarea>
-			
-		</div>
-		
+		</form>
 	</div>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 <script language="JavaScript" src="../resources/js/map.js?version=180202.1250"></script>
-
 </body>		

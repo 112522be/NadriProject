@@ -145,7 +145,12 @@ body {
             }
          });
       });
-      -
+      
+      $(function(){
+    	  	$("a[href='#']:contains('플래너')").on("click", function(){
+    	  		self.location = "/planner/addPlannerView.jsp";
+    	  	})
+      });
       
 
    //============= FaceBook 로그인 START =============
@@ -356,6 +361,7 @@ body {
                   <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
                </div>
 
             </div>

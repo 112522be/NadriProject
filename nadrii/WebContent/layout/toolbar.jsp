@@ -26,6 +26,12 @@
 		});
 	});
 	
+	$(function(){
+		$("a[href='#']:contains('나들이 플래너')").on("click", function(){
+			self.location = "../planner/json/getMyPlannerList"
+		})
+	})
+	
 	</script>
 	
 </head>

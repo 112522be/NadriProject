@@ -300,9 +300,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -344,9 +342,7 @@
 				}
 				for(var i=0;i<sort.length;i++){
 
-					if(sort[i] ==null){
-
-					}else{
+					if(sort[i] !=null){
 						geo(i);
 					}
 				}
@@ -363,9 +359,7 @@
 				}
 				for(var i=0;i<sort.length;i++){
 
-					if(sort[i] ==null){
-
-					}else{
+					if(sort[i] !=null){
 						geo(i);
 					}
 				}
@@ -382,9 +376,7 @@
 				}
 				for(var i=0;i<sort.length;i++){
 
-					if(sort[i] ==null){
-
-					}else{
+					if(sort[i] !=null){
 						geo(i);
 					}
 				}
@@ -401,9 +393,7 @@
 				}
 				for(var i=0;i<sort.length;i++){
 
-					if(sort[i] ==null){
-
-					}else{
+					if(sort[i] !=null){
 						geo(i);
 					}
 				}
@@ -420,9 +410,7 @@
 				}
 				for(var i=0;i<sort.length;i++){
 
-					if(sort[i] ==null){
-
-					}else{
+					if(sort[i] !=null){
 						geo(i);
 					}
 				}
@@ -458,9 +446,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -478,9 +464,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -495,9 +479,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -512,9 +494,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -529,9 +509,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -546,9 +524,7 @@
 			}
 			for(var i=0;i<sort.length;i++){
 
-				if(sort[i] ==null){
-
-				}else{
+				if(sort[i] !=null){
 					geo(i);
 				}
 			}
@@ -836,7 +812,7 @@
 									});
 									iwArray[0]=startInfowindow;
 									
-									$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent()+'</div>');
+									$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent().replace('</br>')+'</div>');
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
@@ -845,7 +821,7 @@
 									});
 									iwArray[1]=pass1Infowindow;
 									
-									$("#roadPass1Content").append('<strong>경유1</strong><div>'+iwArray[1].getContent()+'</div>');
+									$("#roadPass1Content").append('<strong>경유1</strong><div>'+iwArray[1].getContent().replace('</br>')+'</div>');
 								}
 								if(k==2){
 									var pass2Infowindow = new daum.maps.InfoWindow({
@@ -854,7 +830,7 @@
 									});
 									iwArray[2]=pass2Infowindow;
 									
-									$("#roadPass2Content").append('<strong>경유2</strong><div>'+iwArray[2].getContent()+'</div>');
+									$("#roadPass2Content").append('<strong>경유2</strong><div>'+iwArray[2].getContent().replace('</br>')+'</div>');
 								}
 								if(k==3){
 									var pass3Infowindow = new daum.maps.InfoWindow({
@@ -862,7 +838,7 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[3]=pass3Infowindow;
-									$("#roadPass3Content").append('<strong>경유3</strong><div>'+iwArray[3].getContent()+'</div>');
+									$("#roadPass3Content").append('<strong>경유3</strong><div>'+iwArray[3].getContent().replace('</br>')+'</div>');
 								}
 								if(k==4){
 									var pass4Infowindow = new daum.maps.InfoWindow({
@@ -870,7 +846,7 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[4]=pass4Infowindow;
-									$("#roadPass4Content").append('<strong>경유4</strong><div>'+iwArray[4].getContent()+'</div>');
+									$("#roadPass4Content").append('<strong>경유4</strong><div>'+iwArray[4].getContent().replace('</br>')+'</div>');
 								}
 								if(k==5){
 									var pass5Infowindow = new daum.maps.InfoWindow({
@@ -878,7 +854,7 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[5]=pass5Infowindow;
-									$("#roadPass5Content").append('<strong>경유5</strong><div>'+iwArray[5].getContent()+'</div>');
+									$("#roadPass5Content").append('<strong>경유5</strong><div>'+iwArray[5].getContent().replace('</br>')+'</div>');
 								}			
 								
 								///////인포윈도우
@@ -979,6 +955,7 @@
 													+returnData.subPathList[i].stationCount+' 정거장 이동 후 '
 													+returnData.subPathList[i].endName+stationFlag+' 하차<br/><br/>'
 													+'</div>';
+								
 								pathIwArray[0]=startContent;
 								
 								var endInfo;
@@ -1009,32 +986,44 @@
 								
 								if(k==0){
 									for(var p=0; p<2;p++){
-										$("#roadStartContent").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadStartContent").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}
 								if(k==1){
 									for(var p=0; p<2;p++){
-										$("#roadPass1Content").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadPass1Content").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}
 								if(k==2){
 									for(var p=0; p<2;p++){
-										$("#roadPass2Content").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadPass2Content").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}
 								if(k==3){
 									for(var p=0; p<2;p++){
-										$("#roadPass3Content").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadPass3Content").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}
 								if(k==4){
 									for(var p=0; p<2;p++){
-										$("#roadPass4Content").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadPass4Content").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}
 								if(k==5){
 									for(var p=0; p<2;p++){
-										$("#roadPass5Content").append('<div>'+pathIwArray[p]+'</div>');
+										if(pathIwArray[p].indexOf("도보 0분") == -1){
+											$("#roadPass5Content").append('<div>'+pathIwArray[p].replace('</br>')+'</div>');
+										}
 									}
 								}	
 								
@@ -1344,9 +1333,8 @@
 		var ey;
 	
 		function search1(flag){
-			
+				
 			deleteRoadContent();		//우측 경로탐색 정보 지우기
-			
 			
 			if(startMarker.getMap() == null){
 				alert("출발지를 지정해주세요!");
@@ -1477,4 +1465,17 @@
 		function showBoundary(i){
 			console.log("boundaryArray["+i+"] 보여주는중");
 			map.setBounds(boundaryArray[i]);
+		}
+		
+		var lng=[];
+		var lat=[];
+		
+		function save(){
+			for(var i=0; i<realMarkerArray.length; i++){
+				lng.push(realMarkerArray[i].getLng());
+				lat.push(realMarkerArray[i].getLat());
+			}
+			alert(lng);
+			alert(lat);
+			
 		}

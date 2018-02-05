@@ -9,11 +9,11 @@ public interface PlannerDao {
 
 	public void addPlanner(Planner planner) throws Exception;
 	
+	public List<Planner> getMyPlannerList(Search search) throws Exception;
+	
+	public List<Planner> getUserPlannerList(Search search) throws Exception;
+	
 	public Planner getPlanner(int postNo) throws Exception;
-	
-	public void updatePlanner(Planner planner) throws Exception;
-	
-	public List<Planner> getPlannerList(Search search) throws Exception;
 	
 	public int getTotalCount(Search search) throws Exception;
 	
