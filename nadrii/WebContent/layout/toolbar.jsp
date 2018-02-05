@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,9 +28,12 @@
 	});
 	
 	$( function() {
+		console.log("세션 정보 : ${session}")
+		
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
 			self.location = "../ticket/listTicket"
 		});
+		
 	});
 	
 	</script>
@@ -40,12 +44,12 @@
 		<div class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	                        <span class="icon-bar"></span>
-	                        <span class="icon-bar"></span>
-	                        <span class="icon-bar"></span>
-	                   	</button>
-					<a class="navbar-brand" href="../index.jsp"><span>Na</span>drii</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                 </button>
+					<a class="navbar-brand" href="../index.jsp"><span>Na</span>drii</a>						
 				</div>
 				<div class="navbar-collapse collapse ">
 					<ul class="nav navbar-nav">
@@ -61,6 +65,13 @@
 						</li>
 						<li><a href="#">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
+						<c:if test="${empty session}">
+							<li><a href="/user/loginView.jsp">Login</a></li>
+							<li><a href="/user/addUserView.jsp">Join</a></li>
+						</c:if>
+						<c:if test="${!empty session}">
+							<li><a href="/user/getUser">MyPage</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

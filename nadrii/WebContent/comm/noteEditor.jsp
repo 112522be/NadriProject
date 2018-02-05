@@ -84,7 +84,7 @@
 </head>
 <body>
 		<form name="textForm">
-		<textarea id="summernote" name="text"></textarea>
+		<textarea id="summernote" name="text">안녕하세요</textarea>
         <script>
         	var addPlace = function (context) {
         	 	var ui = $.summernote.ui;
@@ -97,9 +97,6 @@
 	    				openWin = window.open(popUrl,"",popOption);
 	    			}
 	        	})
-	        	$('button.btn.btn-primary.btn-sm:contains("추가하기")', ).bind('click', function() {
-					console.log($('#context'));
-				})
 	        	return button.render();
         	}
 			var openWin;
@@ -124,12 +121,9 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat" value="37.55127433520228">
-		<input type="hidden" name="lng" value="126.98821931024443">
+		<input type="hidden" name="lat" id="lat">
+		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
-		<input type="hidden" id="content">
-		<input type="hidden" id="x">
-		<input type="hidden" id="y">
 		<div id="cndThumbnail"></div>
 		<br/>
 		<div>

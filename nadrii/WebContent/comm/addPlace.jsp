@@ -56,7 +56,7 @@
 									displayValue += "<li class=\"previous\">"
 													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>이전으로</a></li>"
 								}
-								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4==0&&newerPage<JSONData.meta.total_count/4)){
+								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4))){
 									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">다음으로<span aria-hidden=\"true\">&rarr;</span></a></li>";
 								}
 								  displayValue += "</ul></nav>";
@@ -176,15 +176,21 @@
 		
 		$(function() {
 			$('button.btn.btn-primary.btn-sm:contains("추가하기")').bind('click', function() {
-				$('#content', opener.document).val() = $("#content").val();
-				$('#x', opener.document).val() += ","+$("#x").val();
-				$('#y', opener.document).val() += ","+$("#y").val();
-				window.close();
+				$('#lat', opener.document).val($('#lat', opener.document).val()+","+$("#x").val());
+				$('#lng', opener.document).val($('#lng', opener.document).val()+","+$("#y").val());
+				var editor = $.summernote.eventHandler.getEditor(); 
+				var editable=$('#summernote');
+				var html = $('<button type="button" class="btn btn-default">'+
+						'<div class="col-xs-3" align="left">'+
+						'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
+						'</div>'+
+						'<div class="col-xs-9" align="left">'+content+'</div></button>');
+				editor.insertNode(editable, html);
+				//window.close();
 			})
 		})
 
 	</script>
-	<input type="hidden" id="content">
 	<input type="hidden" id="x">
 	<input type="hidden" id="y">
 </body>
