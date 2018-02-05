@@ -78,8 +78,8 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		HttpClient httpClient = new DefaultHttpClient();
 		String url="https://openapi.naver.com/v1/papago/n2mt";
 		HttpPost httpPost = new HttpPost(url);
-		httpPost.setHeader("X-Naver-Client-Id","hkuEu0FBgOT1dsQixJU3");
-		httpPost.setHeader("X-Naver-Client-Secret", "dm1JX0XXqi");
+		httpPost.setHeader("X-Naver-Client-Id","pNNiwKQrytok28PNE1Ao");
+		httpPost.setHeader("X-Naver-Client-Secret", "VF9Pi9_Bcc");
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 		httpPost.setHeader("Accept", "application/json");
 		
@@ -176,8 +176,6 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 						System.out.println("Error: " + res.getError().getMessage());
 						return null;
 					}
-
-					System.out.println("[���Ȯ��]/////////////////////////////////////////////////");
 
 					// For full list of available annotations, see http://g.co/cloud/vision/docs
 					for (EntityAnnotation annotation : res.getLandmarkAnnotationsList()) {

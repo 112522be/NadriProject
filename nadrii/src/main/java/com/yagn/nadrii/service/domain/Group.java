@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Group {
 	
 	private Join join;
+	private int postNo;
 	private String groupName;
 	private String categoryCode;
 	private String title;
@@ -19,6 +20,10 @@ public class Group {
 	public Group(){
 	}
 		
+	public int getPostNo() {
+		return join.getGroupNo();
+	}
+
 	public Join getJoin() {
 		return join;
 	}
@@ -101,9 +106,9 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [join=" + join + ", groupName=" + groupName + ", categoryCode=" + categoryCode + ", title="
-				+ title + ", text=" + text + ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", lat="
-				+ lat + ", lng=" + lng + ", regDate=" + regDate + "]";
+		return "Group [join=" + join + ", postNo=" + postNo + ", groupName=" + groupName + ", categoryCode="
+				+ categoryCode + ", title=" + title + ", text=" + text + ", meetingDate=" + meetingDate + ", viewCount="
+				+ viewCount + ", lat=" + lat + ", lng=" + lng + ", regDate=" + regDate + "]";
 	}
 	
 }
