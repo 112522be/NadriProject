@@ -184,19 +184,6 @@ function check(){
     		return;
     	}
     	
-    	if(confirm("회원가입을 하시겠습니까?")){
-     		$.ajax({
-    			data : data,
-    			url : "/user/addUser",
-    			type : "POST",
-    			success : function(result){
-    				if(result.msg == "success"){
-    					alert("가입이 완료되었습니다.");
-    					location.href="/user/main";
-    				}
-    			}
-    		}); 
-    	}
     }
     
     function delchk(){
@@ -204,18 +191,24 @@ function check(){
             location.href = "/user/main";
         }
     }
+    
+    function addUser(){
+    	$("body").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+    }
+    
+    $("#signUp").on("click", function(){
+    	alert("가입하러 가자");
+    	addUser();
+    })
+    
+    
 </script>
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->
+	
+	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
@@ -303,8 +296,8 @@ function check(){
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >가 &nbsp;입</button>
-			  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >취&nbsp;소</a>
+		      <button type="button" id="signUp" class="btn btn-success cancelbtn signupCheck signupbtn">가   입</button>
+			  <a class="btn btn-primary btn" id="cancel" href="#" role="button" >취   소</a>
 		    </div>
 		  </div>
 		</form>

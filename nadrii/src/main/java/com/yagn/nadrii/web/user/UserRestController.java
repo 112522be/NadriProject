@@ -53,6 +53,7 @@ public class UserRestController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
+	/*
 	@RequestMapping(value="addUser", method= RequestMethod.POST  )
 	//@ResponseBody
 	public Object addUser(User user) throws Exception{
@@ -63,12 +64,11 @@ public class UserRestController extends SupportController {
 		map.put("msg", "success");
 		return map;
 	}
+	*/
 	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)
 	//@ResponseBody
 	public Object loginProc( User user, HttpServletRequest request) throws Exception{
-		
-		
 		
 		
 		boolean isAdmin = false;
