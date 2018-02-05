@@ -270,10 +270,7 @@ body {
 
 <body>
 
-<<<<<<< HEAD
    <!-- ToolBar Start /////////////////////////////////////-->
-=======
->>>>>>> refs/remotes/origin/master
    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    <!-- ToolBar End /////////////////////////////////////-->
 
