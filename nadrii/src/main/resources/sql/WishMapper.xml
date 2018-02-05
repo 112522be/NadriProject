@@ -9,7 +9,7 @@
 	<resultMap type="wish" id="WishSelectMap">
 		<result property="wishNo" column="wish_no" jdbcType="NUMERIC"/>
 		<result property="userId" column="user_id" jdbcType="VARCHAR"/>
-		<result property="tripNo" column="trip_no" jdbcType="NUMERIC"/>
+		<result property="trip.postNo" column="trip_no" jdbcType="NUMERIC"/>
 		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>		
 	</resultMap>
 	
@@ -22,7 +22,7 @@
 		VALUES(
 		seq_wish_wish_no.nextval,
 		#{userId:VARCHAR},
-		#{tripNo:NUMERIC},
+		#{trip.postNo:NUMERIC},
 		null)
 	
 	</insert>
@@ -35,20 +35,29 @@
 		seq_wish_wish_no.nextval,
 		#{userId:VARCHAR},
 		null,
-		#{postNo:NUMERIC})
+		#{trip.postNo:NUMERIC})
 	
 	</insert>
 	
 	<select id="getWish" parameterType="integer" resultMap="WishSelectMap">
-		SELECT
+		SELECT 
 			wish_no, 
 			user_id, 
 			trip_no, 
 			post_no			
 		FROM wish
 		WHERE wish_no = #{wishNo}	
+	</select>
 	
-	
+	<select id="getWishByTripNo" parameterType="map" resultMap="WishSelectMap">
+		SELECT
+			wish_no,
+			user_id, 
+			trip_no, 
+			post_no
+		FROM wish
+		WHERE user_id = #{userId}
+		AND trip_no = #{tripNo}
 	</select>
 	
 	<select id="listWish" parameterType="string" resultMap="WishSelectMap">
@@ -56,7 +65,7 @@
 			wish_no, 
 			user_id, 
 			trip_no, 
-			post_no			
+			post_no,
 		FROM wish
 		WHERE user_id = #{userId}	
 	

@@ -68,11 +68,16 @@ public class UserRestController extends SupportController {
 	//@ResponseBody
 	public Object loginProc( User user, HttpServletRequest request) throws Exception{
 		
+		
+		
+		
 		boolean isAdmin = false;
 		
 		User loginUser = userService.loginProc(user);
 		
 		Map<String,String> map =new HashMap<String, String>();
+		
+		System.out.println("뭐야 어떤거야===>"+loginUser.toString());
 		
 		if(loginUser == null) {
 			map.put("msg", "failed");

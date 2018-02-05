@@ -45,17 +45,27 @@ public class WishRestController {
 	@RequestMapping("json/addWishFromTrip/{contentId}")
 	public void addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
 		
+		
 		System.out.println("RestController addWishFromTrip");
-		HttpSession session = request.getSession();
+		
+		//유저 정보 찾기
+		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		System.out.println(user);
 		
+		
 		Thread.sleep(1000);
+		
+		//contentId에 해당하는 여행지 찾기
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println(trip);
+		
+		//기존에 저장된 것이 있는지 확인해보기
+		//if()
+		
 		Wish wish = new Wish();
 		wish.setUserId(user.getUserId());
-		wish.setTripNo(trip.getPostNo());
+		wish.setTripNo(trip);
 		System.out.println(wish);
 		
 		wishService.addWishListFromTrip(wish);
@@ -87,9 +97,15 @@ public class WishRestController {
 	
 	
 	//사용처가 있을까??
-	@RequestMapping()
-	public void getWish() {
-		System.out.println("getWish");
+	
+	private Wish getWishByTripNo(HttpSession session,HttpServletRequest request,@PathVariable("tripNo") int tripNo) throws Exception {
+		session =request.getSession(true);
+		User user = (User)session.getAttribute("loginUser");
+		Map map = new HashMap();
+				
+		
+		Wish wish = wishService.getWishByTripNo(user.getUserId(), tripNo);
+		return wish;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.yagn.nadrii.service.wish.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,12 @@ public class WishDaoImpl implements WishDao {
 	@Override
 	public void deleteWish(int wishNo) throws Exception {
 		sqlSession.delete("WishMapper.deleteWish",wishNo);
+	}
+
+	@Override
+	public Wish getWishByTripNo(Map map) throws Exception {
+		
+		return sqlSession.selectOne("WishMapper.getWishByTripNo",map);
 	}
 		
 	

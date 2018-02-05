@@ -17,15 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.domain.Trip;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
+import com.yagn.nadrii.service.wish.WishService;
 
 
 @RestController
 @RequestMapping("/trip/*")
 public class TripRestController {
 	
-	
+	@Autowired
+	@Qualifier("wishServiceImpl")
+	private WishService wishService;
 
 	
 	@Autowired
@@ -37,18 +42,18 @@ public class TripRestController {
 		System.out.println(this.getClass());
 	}
 	
-	
 
-		
 	///*
 	//박물관 리스트
 	@RequestMapping(value="json/listMuseum/{pageNo}/{areaCode}/{localName}")
-	public Map listMuseum(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName,HttpServletRequest request) throws Exception{
+	public Map listMuseum(@PathVariable("pageNo")int pageNo,@PathVariable("areaCode")String areaCode, @PathVariable("localName")String localName,HttpServletRequest request,HttpSession session) throws Exception{
+		
+		System.out.println("/trip/json/listMuseum");
+		
 		if(areaCode.equals("0")) {
 			areaCode="";
 		}
-		
-		
+				
 		if(localName.equals("0")) {
 			localName ="";
 			//System.out.println("뭐야 왜 13 페이지야");
@@ -59,16 +64,15 @@ public class TripRestController {
 		System.out.println("RestController listMuseum");
 		
 		Map map = new HashMap();
+				
 		
-		System.out.println("/trip/json/listMuseum");
+		User user = (User)session.getAttribute("loginUser");
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
-		/*
-		List list = new ArrayList();
-		for (int i = 0; i < ((List)tripMap.get("list")).size(); i++) {
-			
-		}*/
-				
+		List list =(List)tripMap.get("list");
+		
+		
+		
 		
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
