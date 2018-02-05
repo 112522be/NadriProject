@@ -53,22 +53,11 @@ public class UserRestController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	/*
-	@RequestMapping(value="addUser", method= RequestMethod.POST  )
-	//@ResponseBody
-	public Object addUser(User user) throws Exception{
-		//회원가입
-		System.out.println("회원가입!!");
-		userService.addUser(user);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "success");
-		return map;
-	}
-	*/
+	
 	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)
 	//@ResponseBody
-	public Object loginProc( User user, HttpServletRequest request) throws Exception{
+	public Map loginProc( User user, HttpServletRequest request) throws Exception{
 		
 		
 		boolean isAdmin = false;
@@ -77,7 +66,7 @@ public class UserRestController extends SupportController {
 		
 		Map<String,String> map =new HashMap<String, String>();
 		
-		System.out.println("뭐야 어떤거야===>"+loginUser.toString());
+		//System.out.println("뭐야 어떤거야===>"+loginUser.toString());
 		
 		if(loginUser == null) {
 			map.put("msg", "failed");
@@ -109,7 +98,7 @@ public class UserRestController extends SupportController {
 	 */
 	@RequestMapping(value = "checkId", method=RequestMethod.POST)
 	//@ResponseBody
-    public Object idCheck(String userId, Model model) throws Exception {
+    public Map idCheck(String userId, Model model) throws Exception {
 
 		System.out.println("[check]");
 		
@@ -129,17 +118,18 @@ public class UserRestController extends SupportController {
 	 */
 	@RequestMapping(value="findId", method=RequestMethod.POST)
 	//@ResponseBody
-	public Object findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
+	public Map findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
 		System.out.println("아이디 찾기" + userId);
 		
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(map.toString());
-		System.out.println(map.get(0));
+		//System.out.println(map.toString());
+		//System.out.println(map.get(0));
 		String findEmail = "{\"user_email\":\""+map+"\"}";
-
+		
+		map.put("eMail", findEmail);
 		System.out.println(findEmail);
 		
-		return findEmail;
+		return map;
 	}
 	
 
@@ -147,7 +137,7 @@ public class UserRestController extends SupportController {
 	//////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(value="check", method=RequestMethod.POST)
-	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+	public Map emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
 		String email = request.getParameter("email");
 		String authNum= "";
@@ -155,12 +145,12 @@ public class UserRestController extends SupportController {
 		authNum = randomNum();
 		
 		sendEmail(email.toString(), authNum);
+		Map map = new HashMap();
 		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("email",email);
-		mv.addObject("authNum",authNum);
+		map.put("email",email);
+		map.put("authNum",authNum);
 		
-		return mv;
+		return map;
 	}
 
 //	@RequestMapping(value="addUserPlus", method= RequestMethod.POST  )

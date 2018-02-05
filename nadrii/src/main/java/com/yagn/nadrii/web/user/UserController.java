@@ -303,18 +303,23 @@ public class UserController {
 		}
 		return "redirect:/user/addUserView.jsp";
 	}
+
+	
+	
 	
 	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
 	//@ResponseBody
 	public String addUser(User user) throws Exception{
 		//회원가입
 		System.out.println("회원가입!!");
+		System.out.println("userId==" +user.getUserId());
+		
 		userService.addUser(user);
 		Map map = new HashMap();
 		
 		
 		
-		return "redirect:/user/main";
+		return "redirect:/user/addUser.jsp";
 	}
 	
 	
@@ -403,7 +408,7 @@ public class UserController {
 	 */
 	
 	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
-	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+	public String addUserPlus( @ModelAttribute("user")User user, HttpSession session) throws Exception{
 
 		System.out.println("addUserPlus :: POST");
 		
@@ -428,13 +433,13 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser( @RequestParam("userId") String userId , Model model ) throws Exception {
+	public String getUser( @RequestParam("userId") String userId , Map map ) throws Exception {
 		
 		System.out.println("/user/getUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
 		
-		model.addAttribute("user", user);
+		map.put("user", user);
 		
 		return "forward:/user/getUser.jsp";
 	}
