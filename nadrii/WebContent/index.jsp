@@ -33,6 +33,7 @@
 <!-- 위치 정보 가져오는 JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <!-- Facebook Login -->
+
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
 <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
 <script src="https://sdk.accountkit.com/ko_KR/sdk.js"></script>
@@ -86,41 +87,10 @@ body {
          });
       });
       
-      //============================== 정보검색 파트 ===================
-      $( function() {
-         $("a[href='#' ]:contains('박물관')").on("click" , function() {
-            self.location = "../trip/listMuseum?pageNo=1&area=local"
-         });
-      });
-      
-      $( function() {
-         $("a[href='#' ]:contains('전시관')").on("click" , function() {
-            self.location = "../trip/listExhibit?pageNo=1&area=local"
-         });
-      });
-      
-      $( function() {
-         $("a[href='#' ]:contains('미술관')").on("click" , function() {
-            self.location = "../trip/listGallery?pageNo=1&area=local"
-         });
-      });
-      
-      $( function() {
-         $("a[href='#' ]:contains('체험관')").on("click" , function() {
-            self.location = "../trip/listExperience?pageNo=1&area=local"
-         });
-      });
-      
-      $( function() {
-         $("a[href='#' ]:contains('민속마을')").on("click" , function() {
-            self.location = "../trip/listTradition?pageNo=1&area=local"
-         });
-      });
       
       //============= "나들이티켓" 화면이동 =============
       $( function() {
          $("a[href='#' ]:contains('나들이티켓')").bind("click" , function() {
-//       	 alert("나들이티켓")
             self.location = "/ticket/listTicket"
          });
       });
@@ -128,7 +98,6 @@ body {
       //============= "장바구니" 화면이동 =============
       $( function() {
          $("a[href='#' ]:contains('장바구니')").bind("click" , function() {
-//        	 alert("장바구니")
             self.location = "/purchase/listBasket"
          });
       });
@@ -301,7 +270,11 @@ body {
                   <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
+
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
+
+                  <a class="btn btn-warning btn-lg" href="Newindex.jsp" role="button" >새화면</a>
+
                </div>
 
             </div>

@@ -38,7 +38,18 @@
 	</insert>
 	 
 	 <select id="loginCheck" parameterType="user" resultMap="userSelectMap">
-	 	SELECT user_id, password, name				 
+	 	SELECT user_id, 
+	 		password, 
+	 		name, 
+	 		role, 
+	 		gender, 
+	 		phone, 
+	 		birth, 
+	 		profile_image_file, 
+	 		email, 
+	 		children, 
+	 		qr_code, 
+	 		reg_date				 
 	 	FROM users
 	 	WHERE user_id = #{userId}
 	 	AND password = #{password}	

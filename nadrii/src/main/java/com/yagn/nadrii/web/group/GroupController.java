@@ -77,11 +77,13 @@ public class GroupController {
 		
 		System.out.println("/getGroup");
 		
+		groupService.updateViewCount(groupNo);
+		
 		Group group = groupService.getGroup(groupNo);
-			
+		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/getGroup?groupNo="+groupNo;
+		return "forward:/group/getGroup.jsp";
 		
 	}
 	
@@ -117,7 +119,8 @@ public class GroupController {
 		Join join = new Join();
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+	//	join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId("test02");
 		
 		joinService.deleteJoin(join);
 		
@@ -127,30 +130,27 @@ public class GroupController {
 		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/listGroup?groupNo="+groupNo;
+		return "forward:/group/listGroup";
 	}
 	
 	@RequestMapping(value="listGroup")
 	public String listGroup(@ModelAttribute("search") Search search, Model model) throws Exception{
-//		
-//		System.out.println("/listGroup");
-//		
-//		if(search.getCurrentPage() ==0 ){
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-//		
-//		// Business logic ����
-//		Map<String , Object> map=groupService.getGroupList(search);
-//		
-//		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-//		System.out.println("resultPage :: "+resultPage);
-//		
-//		// Model �� View ����
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
-//		
+		
+		System.out.println("/listGroup");
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String , Object> map=groupService.getGroupList(search);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+				
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		
 		return "forward:/group/listGroup.jsp";
 	}
 }

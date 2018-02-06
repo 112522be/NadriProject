@@ -38,8 +38,8 @@ public class GroupServiceTest {
 		Group group = new Group();
 		Join join = new Join();
 		
-		group.setGroupName("모임3");
-		group.setTitle("제목3");
+		group.setGroupName("모임4");
+		group.setTitle("제목1111111111");
 		group.setText("내용3");
 		group.setCategoryCode("a");
 		
@@ -49,7 +49,7 @@ public class GroupServiceTest {
 
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId("test01");
+		join.setUserId("test02");
 		
 		group.setJoin(join);
 		
@@ -89,14 +89,14 @@ public class GroupServiceTest {
 		System.out.println(group);
 	 }
 	
-	@Test
+	//@Test
 	public void testDeleteGroup() throws Exception {
 			
 		Group group = new Group();
 		Join join = new Join();
 		
-		join.setGroupNo(60033);
-		join.setUserId("test01");
+		join.setGroupNo(60044);
+		join.setUserId("test02");
 		
 		joinService.deleteJoin(join);
 		
@@ -141,14 +141,14 @@ public class GroupServiceTest {
 	 	System.out.println(totalCount);
 	 }
 	 
-	//@Test
+	@Test
 	public void testGetGroupListByProdNo() throws Exception{
 		 
 		Search search = new Search();
 		search.setCurrentPage(1);
 		search.setPageSize(3);
-		search.setSearchCondition("0");
-	 	search.setSearchKeyword("10120");
+		search.setSearchCondition("2");
+	 	search.setSearchKeyword("test01");
 	 	Map<String,Object> map = groupService.getGroupList(search);
 	 	
 	 	List<Object> list = (List<Object>)map.get("list");
@@ -164,11 +164,9 @@ public class GroupServiceTest {
 	 	
 	 	search.setSearchCondition("0");
 	 	search.setSearchKeyword(""+System.currentTimeMillis());
-	// 	System.out.println(System.currentTimeMillis());
 	 	map = groupService.getGroupList(search);
 	 	
 	 	list = (List<Object>)map.get("list");
-	 	//Assert.assertEquals(0, list.size());
 	 	
 		//==> console 확占쏙옙
 	 	System.out.println(list);

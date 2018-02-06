@@ -27,22 +27,20 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		body {
-            padding-top : 50px;
-        }
     </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
 function fncAddPurchase() {
-	$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
+	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
 }
 
 $( function(){
-	$(".btn:contains('결제하기')").bind("click", function(){
-		alert("결제하기")
-		//fncAddPurchase();
+	$(".kakaoPay").bind("click", function(){
+//		alert("Kakao")
+		fncAddPurchase(); 
+//		$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
 	});
 });
 
@@ -72,20 +70,49 @@ function goBack() {
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+		
+		<!-- Purchase Info -->
+		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
+		<input type="hidden" name="contentTypeId" 		value="${ purchase.contentTypeId }">
+		<input type="hidden" name="ticketTitle"			value="${ purchase.ticketTitle }">
+		<input type="hidden" name="ticketImage" 		value="${ purchase.ticketImage }">
+		<input type="hidden" name="bookingDate" 		value="${ purchase.bookingDate }">
+		<input type="hidden" name="flag" 				value="${ purchase.flag }">
+		<input type="hidden" name="totalTicketPrice" 	value="${ purchase.totalTicketPrice }">
+		<input type="hidden" name="taxFree"				value="${ purchase.taxFree }">
+		<input type="hidden" name="ticketPayment" 		value="${ purchase.ticketPayment }">
+		<c:forEach items="${ purchase.ticketPrice }" varStatus="status">
+			<input type="hidden" name="ticketCount" value="${ purchase.ticketCount[status.index] }">
+			<input type="hidden" name="ticketPrice" value="${ purchase.ticketPrice[status.index] }">
+		</c:forEach>
+		
+		
+		<!-- KakaoPay API Request -->
+		<input type="hidden" name="cid" 				value="TC0ONETIME">
+		<input type="hidden" name="partner_order_id" 	value="나드리티켓시스템">
+		<input type="hidden" name="partner_user_id" 	value="${ user.userId }">
+		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
+		<input type="hidden" name="quantity" 			value="1">
+		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
+		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
+		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
+		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
+		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/index.jsp">
 
 		<div class="row">
 	  		<div class="col-xs-12 col-md-12">
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
 	  						티켓정보
-	  					</h3>
+	  					</h4>
 	  				</strong>
 	  			</div>
 	  			
 	  		<h4>[티켓명]</h4>
-	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.ticketTitle }</h4>
+	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ purchase.ticketTitle }</h4>
 	  		
 	  		<h4>[예매일]</h4>
 	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.bookingDate }</h4>
@@ -98,26 +125,39 @@ function goBack() {
 	  		
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
 	  						구매자정보
-	  					</h3>
+	  					</h4>
 	  				</strong>
 	  			</div>
+  			</div>
 	  			
-				<div class="input-group input-group-lg">
+	  		<div class="col-xs-12 col-md-6">
+	  			<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">아이디</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerId" value="${ purchase.buyerId }" readonly>
+				</div>
+	  			<br>
+				<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">이 름</span> 
-					<input type="text" class="form-control" placeholder="이름을 입력해 주세요"
-						aria-describedby="sizing-addon1" value="${ user.userName }">
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerName" value="${ purchase.buyerName }" readonly>
 				</div>
-				
 				<br>
-				
-				<div class="input-group input-group-lg">
+				<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">연락처</span> 
-					<input type="text" class="form-control" placeholder="연락처를 입력해 주세요"
-						aria-describedby="sizing-addon1" value="${ user.phone }">
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerPhone" value="${ purchase.buyerPhone }" readonly>
 				</div>
+				<br>
+				<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">E-mail</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerEmail" value="${ purchase.buyerEmail }" readonly>
+				</div>
+				
 	  		</div>
 		</div>
 		
@@ -125,10 +165,10 @@ function goBack() {
 	  		<div class="col-xs-12 col-md-12">
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
 	  						결제정보
-	  					</h3>
+	  					</h4>
 	  				</strong>
 	  			</div>
 				<h4>[선택한 티켓]</h4>
@@ -137,13 +177,20 @@ function goBack() {
 	  			</c:forEach>
 	  			<hr>
 	  			<h4 class="text-right">[총 결제금액]</h4>
-	  			<h4 class="text-right">￦ ${ purchase.totalTicketPrice }</h4>
+	  			<h4 class="text-right">티켓비용 : ￦ ${ purchase.totalTicketPrice }</h4>
+	  			<h4 class="text-right">비과세 : ￦ ${ purchase.taxFree }</h4>
+	  			<hr>
+	  			<h4 class="text-right text-danger">￦ ${ purchase.ticketPayment }</h4>
+	  			
 	
 	  		</div>
 		</div>
 
 		<div class="modal-footer">
-			<button type="button" class="btn btn-info btn-lg" data-dismiss="modal">결제하기</button>
+			
+			<button type="button" class="kakaoPay" data-dismiss="modal">
+				<img src="http://img.yonhapnews.co.kr/etc/inner/EN/2015/09/15/AEN20150915005751320_01_i.jpg" height=30px/>
+			</button>
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">취 소</button>
 		</div>	
 			

@@ -32,11 +32,6 @@
 <!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-		body {
-            padding-top : 50px;
-        }
-        
-        
 	</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -50,24 +45,33 @@
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('장바구니 담기')").bind('click', function() {
-			
-				$( ".label.label-warning[name='titleB']" ).append('${ tourTicket.title }');
-			
-				for (var i = 0; i < $(".ticketPrice").length; i++) {	
-					ticketPrice = $(".ticketPrice").eq(i).val();
-					ticketCount = $(".ticketCount").eq(i).val();
-					
-					totalTicketCount += ticketCount * 1;
-					
-					if (ticketCount != 0) {
-						var sumPriceTicket = (ticketPrice * 1) *  ticketCount;
-						totalTicketPrice = (totalTicketPrice * 1) + (sumPriceTicket * 1);
-						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>￦ "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;장</h2>");
-					}
-				}
-				$( ".label.label-success" ).append("￦ " + totalTicketPrice);
-			})
-		});
+				fncBasketList();
+		})
+	});
+
+	function fncBasketList() {
+		 
+		$(".label.label-warning[name='titleB']").append('${ tourTicket.title }');
+
+		for (var i = 0; i < $(".ticketPrice").length; i++) {
+			ticketPrice = $(".ticketPrice").eq(i).val();
+			ticketCount = $(".ticketCount").eq(i).val();
+
+			totalTicketCount += ticketCount * 1;
+
+			if (ticketCount != 0) {
+				var sumPriceTicket = (ticketPrice * 1) * ticketCount;
+				totalTicketPrice = (totalTicketPrice * 1)
+						+ (sumPriceTicket * 1);
+				$(".modal-body").append("<h2>&nbsp;&nbsp;<code>￦ "
+										+ ticketPrice
+										+ "</code> : <span class='label label-info'>"
+										+ ticketCount + "</span>&nbsp;장</h2>");
+			}
+		}
+		$(".label.label-success").append("￦ " + totalTicketPrice);
+	}
+	
 </script>
 <script>
 	
@@ -95,6 +99,13 @@
 //			alert("결제")
 			var flag = 'purchase';
 			fncAddPurchase(flag);
+		});
+	});
+	
+	//=================== "로그인" Event 연결 =================== 
+	$(function() {
+		$("button:contains('로그인')").bind("click", function() {
+			self.location = "/user/login"
 		});
 	});
 	
@@ -175,9 +186,8 @@
 	
 	// ===== Form 유효성 검증 후 Navigation =====
 	function fncAddPurchase(flag) {
-/*		
-		var name = $("input[name='name']").val();
-		var phone = $("input[name='phone']").val();
+		var name = $("input[name='buyerName']").val();
+		var phone = $("input[name='buyerPhone']").val();
 		
 		for (var i = 0; i < $(".ticketPrice").length; i++) {		
 			ticketPrice = $(".ticketPrice").eq(i).val();
@@ -186,18 +196,34 @@
 			totalTicketCount += ticketCount * 1;
 		}
 		
-		console.log("티켓 몇장 구매 했니? " + totalTicketPrice)
+//		console.log("티켓 몇장 구매 했니? " + totalTicketPrice)
 		
 		if (totalTicketCount == 0 || totalTicketCount == "") {
 			alert("티켓 수량을 확인하시기 바랍니다.")
+/*			
+			history.go(0);
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		if (name == null || name.length < 1) {
 			alert("이름은 반드시 입력해야 합니다.");
+/*
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		if (phone == null || phone.length < 1) {
 			alert("연락처는 반드시 입력해야 합니다.");
+/*	
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		//==>"이메일" 유효성 Check Event 처리 및 연결
@@ -209,7 +235,7 @@
 				}
 			});
 		});
-//*/		
+		
 		if (flag == 'basket') {
 
 			var ticketPriceAll = "";
@@ -297,7 +323,7 @@
 		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
 		<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
 
-			<div class="col-sm-6">
+			<div class="col-md-6">
 				<div class="form-group text-center">
 					<h1>
 						<span class="label label-warning text-center"> ${ tourTicket.title }</span>
@@ -356,7 +382,7 @@
 			</div>
 
 
-			<div class="col-sm-6">
+			<div class="col-md-6">
 			<br>
 			<br>
 				<img src="${ detailImage.originimgurl }" alt="There is no image"
@@ -365,7 +391,13 @@
 				<div class="alert alert-info" role="alert">
 					● <strong>개인정보 입력</strong>
 				</div>
-
+			<c:if test="${ user.userId eq null }">
+				<div class="col-sm-12 text-center">
+					<button type="button" class="btn btn-info btn-lg btn-block">로그인</button>
+				</div>
+			</c:if>	
+			<c:if test="${ user.userId ne null }">
+			
 				<div class="input-group">
 					<span class="input-group-addon">아이디</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
@@ -375,15 +407,27 @@
 				
 				<div class="input-group">
 					<span class="input-group-addon">이 름</span> 
+					<c:if test="${ user.userName eq null }">
+					<input type="text" class="form-control" placeholder="필수입력"
+						aria-describedby="basic-addon1" name="buyerName" value="${ user.userName }">
+					</c:if>
+					<c:if test="${ user.userName ne null }">
 					<input type="text" class="form-control" placeholder="필수입력"
 						aria-describedby="basic-addon1" name="buyerName" value="${ user.userName }" readonly>
+					</c:if>	
 				</div>
 				<br>
 				
 				<div class="input-group">
-					<span class="input-group-addon">연락처</span> 
+					<span class="input-group-addon">연락처</span>
+					<c:if test="${ user.phone eq null }">
+					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
+						aria-describedby="basic-addon1" name="buyerPhone" value="${ user.phone }">
+					</c:if> 
+					<c:if test="${ user.phone ne null }">
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
 						aria-describedby="basic-addon1" name="buyerPhone" value="${ user.phone }" readonly>
+					</c:if> 
 				</div>
 				<br>
 
@@ -398,7 +442,7 @@
 					<div class="col-sm-12 text-center">
 						<br>
 						
-						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
+ 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
   							장바구니 담기
 						</button>
 						 
@@ -407,6 +451,7 @@
 						<button type="button" class="btn btn-danger">결제하기</button>
 					</div>
 				</div>
+			</c:if>		
 			</div>
 
 <!-- Modal -->

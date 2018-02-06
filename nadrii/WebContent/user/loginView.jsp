@@ -108,7 +108,7 @@
 						location.href="/index.jsp";
 					}
 					if(result.msg == "success"){
-						alert(result.userName + " 님, 환영합니다.");
+						alert(result.welcomeSign + " 님, 환영합니다.");
 						location.href="/index.jsp";
 					}
 				}

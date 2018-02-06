@@ -9,6 +9,9 @@ public class Purchase {
 	private int contentId;			
 	private int contentTypeId;		
 
+	private int contentid;			
+	private int contenttypeid;		
+
 	private int postNo;			
 	private String ticketTitle;		
 	private String ticketImage;		
@@ -20,8 +23,11 @@ public class Purchase {
 	
 	private String[] ticketCount;
 	private String[] ticketPrice;
+	
 	private int totalTicketPrice;
-
+	private int taxFree;
+	private int ticketPayment;
+	
 	private String buyerId;
 	private String buyerName;
 	private String buyerPhone;
@@ -178,18 +184,55 @@ public class Purchase {
 	public void setBuyerEmail(String buyerEmail) {
 		this.buyerEmail = buyerEmail;
 	}
+	
+	
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
+	}
+
+	public int getTaxFree() {
+		return taxFree;
+	}
+
+	public void setTaxFree(int taxFree) {
+		this.taxFree = taxFree;
+	}
+
+	public int getTicketPayment() {
+		return ticketPayment;
+	}
+
+	public void setTicketPayment(int ticketPayment) {
+		this.ticketPayment = ticketPayment;
+	}
 
 	@Override
 	public String toString() {
-		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
-				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
-				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
-				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
-				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
-				+ ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer="
-				+ buyer + "]";
+		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", contentid=" + contentid
+				+ ", contenttypeid=" + contenttypeid + ", postNo=" + postNo + ", ticketTitle=" + ticketTitle
+				+ ", ticketImage=" + ticketImage + ", regDate=" + regDate + ", bookingDate=" + bookingDate
+				+ ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll + ", flag=" + flag
+				+ ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice=" + Arrays.toString(ticketPrice)
+				+ ", totalTicketPrice=" + totalTicketPrice + ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment
+				+ ", buyerId=" + buyerId + ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail="
+				+ buyerEmail + ", buyer=" + buyer + "]";
 	}
 
+	
+	
 	
 	
 	

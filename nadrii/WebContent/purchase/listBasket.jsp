@@ -25,10 +25,6 @@
 	<!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-		body {
-            padding-top : 50px;
-        }
-        
         .media {
         	background-color: #d1e2c9;
         }
@@ -60,13 +56,17 @@ function fncGetList(pageNo) {
 				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 장바구니</p>
 			</h3>
 			<h5 class="text-muted">
-				<strong class="text-success">${ user.userName }</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
+				<strong class="text-success">
+				<c:if test="${ user.userName eq null }">
+					${ user.userId }
+				</c:if>
+					${ user.userName }
+				</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
 			</h5>
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
-		
 			<div class="row">
 				<c:forEach var="list" items="${list}" varStatus="num">
 
@@ -101,14 +101,17 @@ function fncGetList(pageNo) {
 					<!-- /.col-lg-6 -->
 				</c:forEach>
 			</div>
-			
-			
-
-
-
-
-
+				<h1 class="text-center text-danger">현재 장바구니에 등록된 티켓이 없습니다.</h1>
 			<hr>
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6 text-right">
+					<button type="button" class="btn btn-success">전체결제</button>
+					<button type="button" class="btn btn-warning">선택결제</button>
+					<button type="button" class="btn btn-info">삭 제</button>
+					<button type="button" class="btn btn-danger">Success</button>
+				</div>
+			</div>
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 	

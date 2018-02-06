@@ -1,5 +1,9 @@
 package com.yagn.nadrii.service.purchase.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.KakaoPayRequest;
+import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseDao;
 import com.yagn.nadrii.service.purchase.PurchaseService;
@@ -25,6 +31,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 			this.purchaseDao = purchaseDao;
 		}
 		
+		@Autowired
+		@Qualifier("purchaseKakaoDaoImpl")
+		private PurchaseDao purchaseKakaoDao;
+		
+		public void setPurchaseKakaoDao(PurchaseDao purchaseKakaoDao) {
+			this.purchaseKakaoDao = purchaseKakaoDao;
+		}
+		
+		
 		/// Constructor
 		public PurchaseServiceImpl() {
 			System.out.println(this.getClass());
@@ -32,6 +47,18 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 		@Override
 		public void addPurchase(Purchase purchase) throws Exception {
+			
+			if (purchase.getTicketPriceAll() == null) {
+				String sumTicketPrice = "";
+				for (int i = 0; i < purchase.getTicketPrice().length; i++) {
+					String ticketCount = purchase.getTicketCount()[i];
+					String ticketPrice = purchase.getTicketPrice()[i];
+					
+					sumTicketPrice += ticketPrice + "=" + ticketCount + "&";
+				} 
+				purchase.setTicketPriceAll(sumTicketPrice);
+			}
+			
 			purchaseDao.addPurchase(purchase);
 		}
 
@@ -54,5 +81,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return map;
 		}
 		
+		@Override
+		public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception {
+			return purchaseKakaoDao.addKakaoPayment(kakaoPayRequest);
+		}
+		
+		@Override
+		public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) throws Exception {
+			return purchaseKakaoDao.addKakaoPayComplete(kakaoPayRequest);
+		}
 		
 }

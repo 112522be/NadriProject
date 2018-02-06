@@ -29,7 +29,7 @@ public class JoinServiceTest {
 
 		Join join = new Join();
 		
-		join.setGroupNo(60033);
+		join.setGroupNo(60036);
 		join.setGroupRole(2);
 		join.setUserId("test02");
 				

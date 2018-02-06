@@ -79,9 +79,12 @@ public class UserRestController extends SupportController {
 				map.put("msg", "failed");
 				
 			} else {
-				
 				map.put("msg", "success");
-				map.put("userName", loginUser.getUserName());
+				if (loginUser.getUserName() == null) {
+					map.put("welcomeSign", loginUser.getUserId());
+				} else {
+					map.put("welcomeSign", loginUser.getUserName());
+				}
 				request.getSession().setAttribute("loginUser", loginUser);
 			}
 			
