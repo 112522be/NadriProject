@@ -70,5 +70,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseKakaoDao.addKakaoPayment(kakaoPayRequest);
 		}
 		
+		@Override
+		public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) throws Exception {
+			return purchaseKakaoDao.addKakaoPayComplete(kakaoPayRequest);
+		}
 		
 }

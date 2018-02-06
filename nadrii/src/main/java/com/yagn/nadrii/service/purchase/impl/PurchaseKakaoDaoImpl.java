@@ -1,9 +1,5 @@
 package com.yagn.nadrii.service.purchase.impl;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -14,21 +10,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.KakaoPayRequest;
 import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseDao;
-import com.yagn.nadrii.service.ticket.impl.KakaoApiDaoImpl;
 
 @Repository("purchaseKakaoDaoImpl")
 public class PurchaseKakaoDaoImpl implements PurchaseDao {
@@ -41,13 +30,19 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 	}
 	
 	/// KakaoPay API properties
-	@Value("#{kakaoApiProperties['kakaoKey']}")
-	private String kakaoKey;
+	@Value("#{kakaoApiProperties['kakaoAdminKey']}")
+	private String kakaoAdminKey;
 	
 	@Value("#{kakaoApiProperties['kakaoPayURL']}")
 	private String kakaoPayURL;
 	
-	public static final KakaoPayResponse sendPostKakaoURL(KakaoPayRequest kakaoPayRequest, String kakaoPayURL, String kakaoKey) throws Exception {
+	@Value("#{kakaoApiProperties['kakaoPayCompleteURL']}")
+	private String kakaoPayCompleteURL;
+	
+	
+	
+	
+	public static final KakaoPayResponse sendPostKakaoURL(KakaoPayRequest kakaoPayRequest, String kakaoPayURL, String kakaoAdminKey) throws Exception {
 		
 		System.out.println("\n[purchaseKakaoDaoImpl.java]::sendPostKakaoURL");
 		
@@ -55,22 +50,47 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		HttpPost httpPost = new HttpPost(kakaoPayURL);
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-		httpPost.setHeader("Authorization", kakaoKey);
+		httpPost.setHeader("Authorization", kakaoAdminKey);
 		
 		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("utf-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
+		System.out.println("\nResponse code: " + httpResponse);
+		
 		KakaoPayResponse kakaoPayResponse = new ObjectMapper().readValue(
 				EntityUtils.toString(httpResponse.getEntity()), KakaoPayResponse.class);
 		
-		System.out.println("[1.Check]==>"+kakaoPayResponse.toString());
+		System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 		
 		return kakaoPayResponse;
 		
 	}
 	
-	
+	public static final KakaoPayResponse sendKakaoPayComplete(KakaoPayRequest kakaoPayRequest, String kakaoPayCompleteURL, String kakaoAdminKey) throws Exception {
+		
+		System.out.println("\n[purchaseKakaoDaoImpl.java]::sendPostKakaoURL");
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost httpPost = new HttpPost(kakaoPayCompleteURL);
+		httpPost.setHeader("Accept", "application/json");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Authorization", kakaoAdminKey);
+		
+		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("utf-8"));
+		httpPost.setEntity(httpEntity);
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+		
+		System.out.println("\nResponse code: " + httpResponse);
+		
+		KakaoPayResponse kakaoPayResponse = new ObjectMapper().readValue(
+				EntityUtils.toString(httpResponse.getEntity()), KakaoPayResponse.class);
+		
+		System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
+		
+		return kakaoPayResponse;
+		
+	}
 
 	@Override
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) {
@@ -80,16 +100,36 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 		
 		try {
-			kakaoPayResponse = PurchaseKakaoDaoImpl.sendPostKakaoURL(kakaoPayRequest, kakaoPayURL, kakaoKey);
+			kakaoPayResponse = PurchaseKakaoDaoImpl.sendPostKakaoURL(kakaoPayRequest, kakaoPayURL, kakaoAdminKey);
 			
-			System.out.println("[2.Check]==>"+kakaoPayResponse.toString());
+			System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 			
 		} catch (Exception e) {
-			
+			System.out.println(e);
 		}
 		
 		return kakaoPayResponse;
 	}
+	
+	@Override
+	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) {
+		
+		System.out.println("\n[purchaseKakaoDaoImpl.java]::addKakaoPayComplete");
+		
+		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		
+		try {
+			kakaoPayResponse = PurchaseKakaoDaoImpl.sendKakaoPayComplete(kakaoPayRequest, kakaoPayCompleteURL, kakaoAdminKey);
+
+			System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return kakaoPayResponse;
+	}
+	
 
 	////////////////////////////////////////////////////////////////////////////////////
 	@Override

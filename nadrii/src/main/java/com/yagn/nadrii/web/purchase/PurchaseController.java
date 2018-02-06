@@ -3,6 +3,7 @@ package com.yagn.nadrii.web.purchase;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
@@ -29,6 +31,10 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
+	
+	/// Field
+	private KakaoPayRequest kakaoPayRequest;
+	
 	
 	/// Constructor
 	public PurchaseController() {
@@ -67,7 +73,7 @@ public class PurchaseController {
 				}
 			}
 			purchase.setTotalTicketPrice(totalTicketPrice);
-			purchase.setTaxFree(totalTicketPrice * 0.05);
+			purchase.setTaxFree((int) (totalTicketPrice * 0.05));
 			purchase.setTicketPayment((int) (totalTicketPrice + purchase.getTaxFree()));
 			
 			user = (User) session.getAttribute("loginUser");
@@ -143,15 +149,46 @@ public class PurchaseController {
 			kakaoPayResponse = purchaseService.addKakaoPayment(kakaoPayRequest);
 			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
 			
+			this.kakaoPayRequest = kakaoPayRequest;
 			
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		
+		System.out.println("\n\n[kakaoPay complete]");
 		
 		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
 	}
 	
+	@RequestMapping(value="kakaoPayComplete")
+	public String kakaoPayComplete(
+			@RequestParam String pg_token, 
+			HttpServletRequest request
+			) {
+		
+		System.out.println("\n /purchase/kakaoPayComplete : POST");
+		
+		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		Purchase purchase = new Purchase();
+		User user = new User();
+
+		try {
+			kakaoPayRequest.setPg_token(pg_token);
+			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
+			
+			purchase = new Purchase();
+			user.setUserId(kakaoPayRequest.getPartner_user_id());
+			purchase.setBuyer(user);
+			
+			request.setAttribute("purchase", purchase);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;	
+//		return "/purchase/addPurchase.jsp";	
+	}
 	
 	
 } // end of class

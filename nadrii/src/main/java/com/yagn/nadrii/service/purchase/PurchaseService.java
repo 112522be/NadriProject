@@ -16,4 +16,6 @@ public interface PurchaseService {
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;
 	
+	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) throws Exception;
+	
 }

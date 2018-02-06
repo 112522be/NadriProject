@@ -25,7 +25,7 @@ public class Purchase {
 	private String[] ticketPrice;
 	
 	private int totalTicketPrice;
-	private double taxFree;
+	private int taxFree;
 	private int ticketPayment;
 	
 	private String buyerId;
@@ -203,11 +203,11 @@ public class Purchase {
 		this.contenttypeid = contenttypeid;
 	}
 
-	public double getTaxFree() {
+	public int getTaxFree() {
 		return taxFree;
 	}
 
-	public void setTaxFree(double taxFree) {
+	public void setTaxFree(int taxFree) {
 		this.taxFree = taxFree;
 	}
 

@@ -53,7 +53,9 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
-	
+	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) {
+		return null;
+	}
 	
 	
 } // end of class
