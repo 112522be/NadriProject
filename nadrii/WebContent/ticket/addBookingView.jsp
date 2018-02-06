@@ -32,11 +32,6 @@
 <!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-		body {
-            padding-top : 50px;
-        }
-        
-        
 	</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -50,24 +45,33 @@
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('장바구니 담기')").bind('click', function() {
-			
-				$( ".label.label-warning[name='titleB']" ).append('${ tourTicket.title }');
-			
-				for (var i = 0; i < $(".ticketPrice").length; i++) {	
-					ticketPrice = $(".ticketPrice").eq(i).val();
-					ticketCount = $(".ticketCount").eq(i).val();
-					
-					totalTicketCount += ticketCount * 1;
-					
-					if (ticketCount != 0) {
-						var sumPriceTicket = (ticketPrice * 1) *  ticketCount;
-						totalTicketPrice = (totalTicketPrice * 1) + (sumPriceTicket * 1);
-						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>￦ "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;장</h2>");
-					}
-				}
-				$( ".label.label-success" ).append("￦ " + totalTicketPrice);
-			})
-		});
+				fncBasketList();
+		})
+	});
+
+	function fncBasketList() {
+		 
+		$(".label.label-warning[name='titleB']").append('${ tourTicket.title }');
+
+		for (var i = 0; i < $(".ticketPrice").length; i++) {
+			ticketPrice = $(".ticketPrice").eq(i).val();
+			ticketCount = $(".ticketCount").eq(i).val();
+
+			totalTicketCount += ticketCount * 1;
+
+			if (ticketCount != 0) {
+				var sumPriceTicket = (ticketPrice * 1) * ticketCount;
+				totalTicketPrice = (totalTicketPrice * 1)
+						+ (sumPriceTicket * 1);
+				$(".modal-body").append("<h2>&nbsp;&nbsp;<code>￦ "
+										+ ticketPrice
+										+ "</code> : <span class='label label-info'>"
+										+ ticketCount + "</span>&nbsp;장</h2>");
+			}
+		}
+		$(".label.label-success").append("￦ " + totalTicketPrice);
+	}
+	
 </script>
 <script>
 	
@@ -196,14 +200,30 @@
 		
 		if (totalTicketCount == 0 || totalTicketCount == "") {
 			alert("티켓 수량을 확인하시기 바랍니다.")
+/*			
+			history.go(0);
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		if (name == null || name.length < 1) {
 			alert("이름은 반드시 입력해야 합니다.");
+/*
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		if (phone == null || phone.length < 1) {
 			alert("연락처는 반드시 입력해야 합니다.");
+/*	
+			$(".label.label-warning[name='titleB']").empty();
+			$(".modal-body").empty();
+			$(".label.label-success").empty();
+//*/			
 			return;
 		}
 		//==>"이메일" 유효성 Check Event 처리 및 연결
@@ -422,7 +442,7 @@
 					<div class="col-sm-12 text-center">
 						<br>
 						
-						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
+ 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
   							장바구니 담기
 						</button>
 						 
