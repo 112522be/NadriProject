@@ -4,11 +4,10 @@ public class Wish {
 	
 	private int wishNo;
 	private String userId;
-	private int TripNo;
+	private Trip trip;
 	private int postNo;
 	private String imageFile;
-	
-	
+		
 	
 	public Wish() {
 		
@@ -26,11 +25,11 @@ public class Wish {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getTripNo() {
-		return TripNo;
+	public Trip getTripNo() {
+		return trip;
 	}
-	public void setTripNo(int tripNo) {
-		TripNo = tripNo;
+	public void setTripNo(Trip trip) {
+		this.trip = trip;
 	}
 	public int getPostNo() {
 		return postNo;
@@ -47,7 +46,7 @@ public class Wish {
 
 	@Override
 	public String toString() {
-		return "Wish [wishNo=" + wishNo + ", userId=" + userId + ", TripNo=" + TripNo + ", postNo=" + postNo
+		return "Wish [wishNo=" + wishNo + ", userId=" + userId + ", TripNo=" + trip + ", postNo=" + postNo
 				+ ", imageFile=" + imageFile + "]";
 	}
 	

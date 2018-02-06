@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,43 +54,42 @@ public class UserRestController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="addUser", method= RequestMethod.POST  )
-	//@ResponseBody
-	public Object addUser(User user) throws Exception{
-		//회원가입
-		System.out.println("회원가입!!");
-		userService.addUser(user);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "success");
-		return map;
-	}
 	
-	@RequestMapping(value="loginProc", method=RequestMethod.POST)
-	//@ResponseBody
-	public Object loginProc( User user, HttpServletRequest request) throws Exception{
+	
+	@RequestMapping(value="json/loginCheck", method=RequestMethod.POST)
+	public Map<String, Object> loginCheck( 
+			@ModelAttribute("user") User user,
+			HttpServletRequest request
+			) {
 		
-		boolean isAdmin = false;
+		System.out.println("/json/loginCheck : POST");
 		
-		User loginUser = userService.loginProc(user);
+		User loginUser = new User();
 		
-		Map<String,String> map =new HashMap<String, String>();
+		Map<String, Object> map =new HashMap<String, Object>();
 		
-		if(loginUser == null) {
-			map.put("msg", "failed");
-			return map;
-		}
-		
-		request.getSession().setAttribute("loginUser", loginUser );
-		map.put("msg", "success");
-		
-		if(loginUser.getRole().equals("admin")) {
-			System.out.println("관리자 로그인");
-			isAdmin = true;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}else if(loginUser.getRole().equals("user")) {
-			System.out.println("일반 로그인");
-			isAdmin = false;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
+		try {
+			loginUser = userService.loginCheck(user);
+			
+			System.out.println("\n[1]::" + loginUser.toString());
+
+			map = new HashMap<String, Object>();
+
+			if (loginUser.getUserId() == null) {
+				map.put("msg", "failed");
+				
+			} else {
+				map.put("msg", "success");
+				if (loginUser.getUserName() == null) {
+					map.put("welcomeSign", loginUser.getUserId());
+				} else {
+					map.put("welcomeSign", loginUser.getUserName());
+				}
+				request.getSession().setAttribute("loginUser", loginUser);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		
 		return map;
@@ -104,7 +104,7 @@ public class UserRestController extends SupportController {
 	 */
 	@RequestMapping(value = "checkId", method=RequestMethod.POST)
 	//@ResponseBody
-    public Object idCheck(String userId, Model model) throws Exception {
+    public Map idCheck(String userId, Model model) throws Exception {
 
 		System.out.println("[check]");
 		
@@ -124,17 +124,18 @@ public class UserRestController extends SupportController {
 	 */
 	@RequestMapping(value="findId", method=RequestMethod.POST)
 	//@ResponseBody
-	public Object findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
+	public Map findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
 		System.out.println("아이디 찾기" + userId);
 		
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(map.toString());
-		System.out.println(map.get(0));
+		//System.out.println(map.toString());
+		//System.out.println(map.get(0));
 		String findEmail = "{\"user_email\":\""+map+"\"}";
-
+		
+		map.put("eMail", findEmail);
 		System.out.println(findEmail);
 		
-		return findEmail;
+		return map;
 	}
 	
 
@@ -142,7 +143,7 @@ public class UserRestController extends SupportController {
 	//////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(value="check", method=RequestMethod.POST)
-	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+	public Map emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
 		String email = request.getParameter("email");
 		String authNum= "";
@@ -150,12 +151,12 @@ public class UserRestController extends SupportController {
 		authNum = randomNum();
 		
 		sendEmail(email.toString(), authNum);
+		Map map = new HashMap();
 		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("email",email);
-		mv.addObject("authNum",authNum);
+		map.put("email",email);
+		map.put("authNum",authNum);
 		
-		return mv;
+		return map;
 	}
 
 //	@RequestMapping(value="addUserPlus", method= RequestMethod.POST  )

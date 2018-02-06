@@ -26,7 +26,7 @@ public interface UserDao {
 	
 	public int checkId(String user) throws Exception;
 	
-	public User loginProc(User user) throws Exception;
+	public User loginCheck(User user) throws Exception;
 	
 	public String findId(String user) throws Exception;
 	

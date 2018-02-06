@@ -94,9 +94,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User loginProc(User user) throws Exception {
-		
-		return userDao.loginProc(user);
+	public User loginCheck(User user) throws Exception {
+		return userDao.loginCheck(user);
 	}
 
 	public String findId(String user) throws Exception {

@@ -5,6 +5,7 @@ public class OpenApiSearch {
 	
 	///Field
 	private int pageNo;
+	// listTicket 에서 4가지 정렬방식 (A=제목순, B=조회순, C=수정일순, D=생성일순)
 	private String searchCondition;
 	private String searchKeyword;
 	private int numOfRows;
@@ -57,12 +58,15 @@ public class OpenApiSearch {
 		return (getPageNo()-1)*getNumOfRows()+1;
 	}
 
+
 	@Override
 	public String toString() {
 		return "OpenApiSearch [pageNo=" + pageNo + ", searchCondition=" + searchCondition + ", searchKeyword="
 				+ searchKeyword + ", numOfRows=" + numOfRows + ", endRowNum=" + endRowNum + ", startRowNum="
 				+ startRowNum + "]";
 	}
+
+	
 	
 	
 

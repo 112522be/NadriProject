@@ -1,6 +1,7 @@
 package com.yagn.nadrii.service.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Purchase {
 	
@@ -8,6 +9,8 @@ public class Purchase {
 	private int contentId;			
 	private int contentTypeId;		
 
+	private int contentid;			
+	private int contenttypeid;		
 
 	private int postNo;			
 	private String ticketTitle;		
@@ -16,8 +19,21 @@ public class Purchase {
 	private String bookingDate;		
 	private String cancelDate;	
 	private String ticketPriceAll;
-	private String flag; 			
+	private String flag; 
+	
+	private String[] ticketCount;
+	private String[] ticketPrice;
+	private int totalTicketPrice;
 
+	private String buyerId;
+	private String buyerName;
+	private String buyerPhone;
+	private String buyerEmail;
+	
+	
+	
+	private User buyer;
+	
 	public Purchase() {
 		
 	}
@@ -102,14 +118,98 @@ public class Purchase {
 		this.flag = flag;
 	}
 
+	public String[] getTicketCount() {
+		return ticketCount;
+	}
+
+	public void setTicketCount(String[] ticketCount) {
+		this.ticketCount = ticketCount;
+	}
+
+	public String[] getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(String[] ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
+
+	public int getTotalTicketPrice() {
+		return totalTicketPrice;
+	}
+
+	public void setTotalTicketPrice(int totalTicketPrice) {
+		this.totalTicketPrice = totalTicketPrice;
+	}
+
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
+
+	public String getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(String buyerId) {
+		this.buyerId = buyerId;
+	}
+
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public String getBuyerPhone() {
+		return buyerPhone;
+	}
+
+	public void setBuyerPhone(String buyerPhone) {
+		this.buyerPhone = buyerPhone;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+	
+	
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
 				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
 				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
-				+ ", flag=" + flag + "]";
+				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
+				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
+				+ ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer="
+				+ buyer + "]";
 	}
-
 
 	
 	
