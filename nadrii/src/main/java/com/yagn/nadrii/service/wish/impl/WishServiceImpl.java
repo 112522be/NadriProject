@@ -67,5 +67,17 @@ public class WishServiceImpl implements WishService{
 		
 	}
 
+
+	@Override
+	public Wish getWishByTripNo(String userId,int tripNo) throws Exception {
+		System.out.println("WishService getWishByTripNo");
+		Map map = new HashMap();
+		map.put("userId", userId);
+		map.put("tripNo", tripNo);
+		System.out.println("¸ÁÇß´Ï?" + wishDao.getWishByTripNo(map));
+		return wishDao.getWishByTripNo(map);
+		
+	}
+
 	
 }

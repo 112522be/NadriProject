@@ -35,6 +35,8 @@
 		body {
             padding-top : 50px;
         }
+        
+        
 	</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -220,23 +222,26 @@
 				}
 			}
 			
-
 			var basketData = {
-				"ticketTitle" : '${ tourTicket.title }' ,
-				"ticketImage" : '${ detailImage.originimgurl }' , 
-				"bookingDate" : '${ bookingDate }' ,
-				"ticketPriceAll" : ticketPriceAll ,
-				"contentId" : '${ tourTicket.contentid }' ,
-				"contentTypeId" : '${ tourTicket.contenttypeid }' ,
-				"flag" : flag
-			}
+					"ticketTitle" : '${ tourTicket.title }' ,
+					"ticketImage" : '${ detailImage.originimgurl }' , 
+					"bookingDate" : '${ bookingDate }' ,
+					"ticketPriceAll" : ticketPriceAll ,
+					"contentId" : '${ tourTicket.contentid }' ,
+					"contentTypeId" : '${ tourTicket.contenttypeid }' ,
+					"flag" : flag,
+					"buyerId" : $("input[name='buyerId']").val() ,
+					"buyerName" : $("input[name='buyerName']").val() ,
+					"buyerPhone" : $("input[name='buyerPhone']").val() ,
+					"buyerEmail" : $("input[name='buyerEmail']").val() ,
+				}
 			
 			var jsonData = JSON.stringify(basketData);
-
+			
 			
 			$.ajax (
 					{
-						url : "/purchase/json/addPurchase/" + flag,
+						url : "/purchase/json/addBasket",
 						method : "POST",
 						dataType : "json",
 						headers : {
@@ -245,6 +250,7 @@
 						},
 						data:jsonData,
 						success : function() {
+							alert("들어온거 확인");
 						}
 					});		
 					alert("저장하기 완료");
@@ -281,15 +287,15 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
-		<input type="hidden" name="contentid" value="${ tourTicket.contentid }">
-		<input type="hidden" name="contenttypeid" value="${ tourTicket.contenttypeid }">
+		<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
+		<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
 
-		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
 		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
 		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
 		<input type="hidden" name="bookingDate" value="${ bookingDate }">
 		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
-		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
+		<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
 
 			<div class="col-sm-6">
 				<div class="form-group text-center">
@@ -349,7 +355,10 @@
 
 			</div>
 
+
 			<div class="col-sm-6">
+			<br>
+			<br>
 				<img src="${ detailImage.originimgurl }" alt="There is no image"
 					class="img-responsive img-rounded"> <br>
 
@@ -358,23 +367,30 @@
 				</div>
 
 				<div class="input-group">
-					<span class="input-group-addon" id="name">이 름</span> 
+					<span class="input-group-addon">아이디</span> 
 					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="name" value="">
+						aria-describedby="basic-addon1" name="buyerId" value="${ user.userId }" readonly>
 				</div>
 				<br>
 				
 				<div class="input-group">
-					<span class="input-group-addon" id="phone">연락처</span> 
+					<span class="input-group-addon">이 름</span> 
+					<input type="text" class="form-control" placeholder="필수입력"
+						aria-describedby="basic-addon1" name="buyerName" value="${ user.userName }" readonly>
+				</div>
+				<br>
+				
+				<div class="input-group">
+					<span class="input-group-addon">연락처</span> 
 					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="phone" value="">
+						aria-describedby="basic-addon1" name="buyerPhone" value="${ user.phone }" readonly>
 				</div>
 				<br>
 
 				<div class="input-group">
-					<span class="input-group-addon" id="email">@</span> 
+					<span class="input-group-addon">@</span> 
 					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" name="email" value="">
+						aria-describedby="basic-addon1" name="buyerEmail" value="${ user.email }" readonly>
 				</div>
 
 				<!-- Button -->

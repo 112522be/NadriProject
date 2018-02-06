@@ -1,5 +1,9 @@
 package com.yagn.nadrii.web.wish;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,17 +45,27 @@ public class WishRestController {
 	@RequestMapping("json/addWishFromTrip/{contentId}")
 	public void addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
 		
+		
 		System.out.println("RestController addWishFromTrip");
-		HttpSession session = request.getSession();
+		
+		//유저 정보 찾기
+		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		System.out.println(user);
 		
+		
 		Thread.sleep(1000);
+		
+		//contentId에 해당하는 여행지 찾기
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println(trip);
+		
+		//기존에 저장된 것이 있는지 확인해보기
+		//if()
+		
 		Wish wish = new Wish();
 		wish.setUserId(user.getUserId());
-		wish.setTripNo(trip.getPostNo());
+		wish.setTripNo(trip);
 		System.out.println(wish);
 		
 		wishService.addWishListFromTrip(wish);
@@ -81,18 +95,42 @@ public class WishRestController {
 		
 	}
 	
-	@RequestMapping()
-	public void getWish() {
-		System.out.println("getWish");
+	
+	//사용처가 있을까??
+	
+	private Wish getWishByTripNo(HttpSession session,HttpServletRequest request,@PathVariable("tripNo") int tripNo) throws Exception {
+		session =request.getSession(true);
+		User user = (User)session.getAttribute("loginUser");
+		Map map = new HashMap();
+				
+		
+		Wish wish = wishService.getWishByTripNo(user.getUserId(), tripNo);
+		return wish;
 	}
+	
+	
 	
 	@RequestMapping("/json/listWish/{userId}")
-	public void listWish() {
+	public void listWish(HttpSession session, HttpServletRequest request) throws Exception {
 		System.out.println("listWish");
+		session = request.getSession(true);
+				
+		String userId = (String)session.getAttribute("loginUser");
+		
+		Map wishMap = wishService.listWish(userId);
+		
+		Map map = new HashMap();
+		map.put("wishMap", wishMap.get("list"));
+		
+		
 	}
 	
-	public void deleteWish() {
+	
+	@RequestMapping("/json/deleteWish/{wishNo}")
+	public void deleteWish(int wishNo) throws Exception{
 		System.out.println("deleteWish");
+		wishService.deleteWish(wishNo);
+		
 		
 	}
 	

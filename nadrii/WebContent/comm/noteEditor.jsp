@@ -27,7 +27,7 @@
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -40,6 +40,8 @@
 		}
         function addThumbnail(filePath) {
 			$('input[name="thumbNailFileName"]').val(filePath);
+			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected")
+			console.log($('input[name="thumbNailFileName"]').val());
 		}
         var hashtagList=",";
         function listHashTag(filePath) {
@@ -54,7 +56,7 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
+	 	        		$("#cndHashTags").prepend('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
 	 	        	}
 				},
 				error : function() {
@@ -75,7 +77,7 @@
  			})
  			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
- 				console.log($(this).attr('src'))
+  				addThumbnail($(this).attr('src'))
  			}) 
 		})
 	</script>
@@ -84,9 +86,32 @@
 		<form name="textForm">
 		<textarea id="summernote" name="text"></textarea>
         <script>
+        	var addPlace = function (context) {
+        	 	var ui = $.summernote.ui;
+
+	        	var button = ui.button({
+	        		contents: '<i class="fa fa-child"/> Place',
+	        		click: function() {
+	        			var popUrl = "addPlace.jsp";
+	    				var popOption = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
+	    				openWin = window.open(popUrl,"",popOption);
+	    			}
+	        	})
+	        	$('button.btn.btn-primary.btn-sm:contains("추가하기")', ).bind('click', function() {
+					console.log($('#context'));
+				})
+	        	return button.render();
+        	}
+			var openWin;
             $(document).ready(function() {
                 $('#summernote').summernote({ // summernote를 사용하기 위한 선언
                     height: 800,
+                    toolbar: [
+                       ['mybutton', ['place']]
+                    ],
+                    buttons: {
+                       place: addPlace
+                    },
 					callbacks: { // 콜백을 사용
                         // 이미지를 업로드할 경우 이벤트를 발생
 					    onImageUpload: function(files, editor, welEditable) {
@@ -99,15 +124,20 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat">
-		<input type="hidden" name="lng">
+		<input type="hidden" name="lat" value="37.55127433520228">
+		<input type="hidden" name="lng" value="126.98821931024443">
 		<input type="hidden" name="thumbNailFileName">
-		
+		<input type="hidden" id="content">
+		<input type="hidden" id="x">
+		<input type="hidden" id="y">
+		<div id="cndThumbnail"></div>
+		<br/>
 		<div>
 			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
 		</div>
 		<br/>
 		<div id="cndHashTags"></div>
 		<br/>
+		</form>
 </body>
 </html>
