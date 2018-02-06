@@ -23,6 +23,7 @@
 		<typeAlias alias="group" type="com.yagn.nadrii.service.domain.Group"/>
 		<typeAlias alias="purchase" type="com.yagn.nadrii.service.domain.Purchase"/>
 		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.Join"/>
+		<typeAlias alias="message" type="com.yagn.nadrii.service.domain.Message"/>
 	</typeAliases>
 	
 	<!-- SQL Definition :: file include -->
@@ -35,6 +36,7 @@
 		<mapper resource="sql/CommentMapper.xml"/>
 		<mapper resource="sql/PurchaseMapper.xml"/> 
 		<mapper resource="sql/JoinMapper.xml"/>
+		<mapper resource="sql/MessageMapper.xml"/>
 	</mappers>
 	
 

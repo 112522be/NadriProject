@@ -149,6 +149,27 @@ body {
       });
       
       
+          	  
+      
+
+      
+      
+      $( function() {
+          //==> 추가된부분 : "addUser"  Event 연결
+          $("a[href='#' ]:contains('메시지')").on("click" , function() {
+        	var recevierId = $("#recevierId").val();
+        	alert(recevierId);
+            self.location = "/message/addMessage?recevierId="+recevierId;
+          });
+       });
+      
+      $( function() {
+          //==> 추가된부분 : "addUser"  Event 연결
+          $("a[href='#' ]:contains('쪽지함')").on("click" , function() {
+             self.location = "/message/listMessage?listType=list";
+          });
+      });
+      
 
    //============= FaceBook 로그인 START =============
 
@@ -289,12 +310,15 @@ body {
                <p>But, if you got some bad emotion, that was good experience
                   to you.</p>
                <div class="text-center">
+               	<input type="hidden" name="recevierId" id="recevierId" value="questsolve"/>
                   <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
-                  <a class="btn btn-warning btn-lg" href="Newindex.jsp" role="button" >새화면</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >새화면</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >메시지</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                </div>
 
             </div>
