@@ -68,7 +68,10 @@
 
 	<form name="getPlanner">
 		${resultPage}<hr>
-		${list }<hr>
+		<c:forEach var="list" items="${list }">
+			${list }<hr>
+		</c:forEach>
+		
 		${search }<hr>
 		
 		<c:forEach var ="list" items="${list }">

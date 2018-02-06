@@ -121,7 +121,21 @@ public class PlannerController {
 		System.out.println("postNo :: "+postNo);
 		Planner planner = plannerService.getPlanner(postNo);
 		
+		//db에 저장된 x,y좌표값을 스플릿으로 나누어 배열에 저장
+		String[] lat = planner.getLat().split(",");
+		String[] lng = planner.getLng().split(",");
+		
+		int latLength = lat.length;
+		
+		System.out.println(latLength);
+		
+		System.out.println("lat :: "+lat);
+		System.out.println("lng :: "+lng);
+		
 		request.setAttribute("planner", planner);
+		request.setAttribute("lat", lat);
+		request.setAttribute("lng", lng);
+		request.setAttribute("latLength", latLength);
 		
 		System.out.println("PlannerController/getPlanner 수행완료");
 		
