@@ -23,6 +23,10 @@ function fncGetList(currentPage){
 
 $(function(){
 	
+	$("#write").bind("click", function(){
+		self.location="../group/addGroup";
+	});
+	
 	$(".fit").on("click", function(){
 		
 		var groupNo = $($("input[id='groupNo']")[$(".fit").index(this)]).val();
@@ -145,6 +149,10 @@ $(function(){
 	border-bottom: 9px solid #F8F8F8;
 }
 
+.button.small {
+    font-size: 13px;
+}
+
 </style>
 
 </head>
@@ -155,15 +163,16 @@ $(function(){
 	<div id="main">
 		<section id="portfolio" class="two">
 			<div class="container">
+			<a href="#" id="write" class="button small write" style="position: relative; float:right; margin-top: -20px; margin-right: -15px;">write</a>
 				<div class="row">
 					<c:set var="i" value="0" />
 					<c:forEach var="group" items="${list}">
 						<c:set var="i" value="${ i+1 }" />
 						<div class="3u 12u$(mobile)">
 							<article class="item">
-								<a href="#" class="image fit"> <input type="hidden"
-									id="groupNo" value="${group.join.groupNo}"> <img
-									src="../resources/assets/images/pic02.jpg" alt="" />
+								<a href="#" class="image fit">
+								<input type="hidden" id="groupNo" value="${group.join.groupNo}">
+								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
 									<h3>

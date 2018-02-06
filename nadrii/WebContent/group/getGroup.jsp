@@ -55,6 +55,10 @@ $(function(){
 		$("#userMenu").css("display","block");
 	}
 	
+	$("#write").bind("click", function(){
+		self.location="../group/addGroup";
+	});
+	
 	$("#list").bind("click", function(){
 		self.location="../group/listGroup";
 	});
@@ -82,6 +86,7 @@ $(function(){
 <div id="main">
 <section class="two">
 	<div class="container">
+	<a href="#" id="write" class="button small write" style="position: relative; float:right; margin-top: -40px; margin-right: 80px">write</a>
 	<a href="#" id="list" class="button small" style="position: relative; float:right; margin-top: -40px;">list</a>
 			<article class="post">
 				<header>

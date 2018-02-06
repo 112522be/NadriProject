@@ -1,81 +1,49 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>네이버 :: Smart Editor 2 &#8482;</title>
-<script type="text/javascript" src="/resources/smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src=""></script>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/skins/default.css"/>
+	<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('a#submit').bind('click', function() {
+			$('form[name="postData"]').attr("action", "addGroup").attr("method", "POST").submit();
+		})
+	})
+	</script>
 </head>
-<body>
-<form name="addGroup" action="../group/addGroup" method="post">
-	<select name="categoryCode" style="width:100px">
-		<option>말머리 선택</option>
-		<option value="1">말머리1</option>
-		<option value="2">말머리2</option>
-		<option value="3">말머리3</option>
-		<option value="4">말머리4</option>
-	</select>
-	<input type="text" name="title" style="width:656px"/>
-	
-	<textarea name="text" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
-	<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
-	<p>
-		<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
-		<input type="button" onclick="submitContents(this);" value="서버로 내용 전송" />
-	</p>
-</form>
-
-<script type="text/javascript">
-var oEditors = [];
-var sLang = "ko_KR";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
-// 추가 글꼴 목록
-//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "ir1",
-	sSkinURI: "/resources/smartEditor2/SmartEditor2Skin.html",	
-	htParams : {
-		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
-		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
-		fOnBeforeUnload : function(){
-			//alert("완료!");
-		},
-		I18N_LOCALE : sLang
-	}, //boolean
-	fOnAppLoad : function(){
-		//예제 코드
-		oEditors.getById["ir1"].exec("PASTE_HTML", ["모임 이름 <input type='text' name='groupName'></br>"]);
-	},
-	fCreator: "createSEditor2"
-});
-
-function showHTML() {
-	var sHTML = oEditors.getById["ir1"].getIR();
-	alert(sHTML);
-}
-	
-function submitContents(elClickedObj) {
-	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-	
-	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-	
-	try {
-		elClickedObj.form.submitSave();
-	} catch(e) {}
-	alert(this);
-}
-
-function submitSave(){
-	alert(this);
-	submitContents(this);
-	
-	$("form").attr("method" , "POST").attr("action" , "/group/addGroup").submit();
-}
-</script>
-
-</body>
+	<body>
+	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+	<div class="container" align="center">
+	<br/>
+		<form name="postData">
+			<input type="hidden" name="userId" value="${loginUser.userId}">
+			<div class="form-group">
+			    <input type="title" class="form-control" name="title" placeholder="������ �Է��ϼ���">
+			 </div>
+			 <div>
+			  	<jsp:include page="noteEditor.jsp"></jsp:include>
+			 </div>
+		</form> 
+		<div class="box-bottom" >
+			<a id="submit">�����ϱ�</a>
+		</div>
+	</div>	
+	</body>
 </html>
