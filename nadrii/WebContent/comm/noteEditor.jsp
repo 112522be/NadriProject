@@ -86,28 +86,56 @@
 		<form name="textForm">
 		<textarea id="summernote" name="text"></textarea>
         <script>
+	        var openDialog = function (uri, name, options, closeCallback) {
+			    var win = window.open(uri, "", options);
+			    var interval = window.setInterval(function() {
+			        try {
+			            if (win == null || win.closed) {
+			                window.clearInterval(interval);
+			                closeCallback(win);
+			            }
+			        }
+			        catch (e) {
+			        }
+			    }, 1000);
+			    return win;
+	        }
         	var addPlace = function (context) {
         	 	var ui = $.summernote.ui;
 
 	        	var button = ui.button({
-	        		contents: '<i class="fa fa-child"/> Place',
+	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
 	        		click: function() {
-	        			var popUrl = "addPlace.jsp";
-	    				var popOption = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
-	    				openWin = window.open(popUrl,"",popOption);
+	    				//openWin = window.open(popUrl,"",popOption);    
+	    				    var uri = "addPlace.jsp";
+		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
+	    				    openDialog(uri, "", options, function(win) {
+	    				    	alert($('#content_pr').val());
+	    				    	alert($('#lat').val());
+	    				    	alert($('#lng').val());
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default">'+
+	    									'<div class="col-xs-3" align="left">'+
+	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
+	    									'</div>'+
+	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>';
+	    				    	$('#summernote').summernote('code', html);
+						})
 	    			}
-	        	})
-	        	$('button.btn.btn-primary.btn-sm:contains("추가하기")', ).bind('click', function() {
-					console.log($('#context'));
-				})
+	        	}) 
 	        	return button.render();
         	}
 			var openWin;
             $(document).ready(function() {
-                $('#summernote').summernote({ // summernote를 사용하기 위한 선언
+                $('#summernote').summernote({
                     height: 800,
                     toolbar: [
-                       ['mybutton', ['place']]
+                    	['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['insert', ['picture']],
+                    	['mybutton', ['place']]
                     ],
                     buttons: {
                        place: addPlace
@@ -124,12 +152,10 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat" value="37.55127433520228">
-		<input type="hidden" name="lng" value="126.98821931024443">
+		<input type="hidden" name="lat" id="lat">
+		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
-		<input type="hidden" id="content">
-		<input type="hidden" id="x">
-		<input type="hidden" id="y">
+		<input type="hidden" id="content_pr">
 		<div id="cndThumbnail"></div>
 		<br/>
 		<div>

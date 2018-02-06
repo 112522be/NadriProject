@@ -73,8 +73,6 @@ public class PurchaseRestController {
 				purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 				
 				System.out.println("\n[purchase.buyer check] ==> " + purchase.getBuyer() );
-				
-
 				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
 				System.out.println("\n");
 

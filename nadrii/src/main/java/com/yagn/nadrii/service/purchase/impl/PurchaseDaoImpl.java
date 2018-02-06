@@ -6,9 +6,12 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.KakaoPayRequest;
+import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseDao;
 
@@ -28,7 +31,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public PurchaseDaoImpl() {
 		System.out.println(this.getClass());
 	}
-
+	
 	@Override
 	public void addPurchase(Purchase purchase) throws Exception {
 		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
@@ -44,4 +47,15 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId);
 	}
 	
-}
+
+	/////////////////////////////////////////////////////////////////////////////
+	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) {
+		return null;
+	}
+	
+	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) {
+		return null;
+	}
+	
+	
+} // end of class
