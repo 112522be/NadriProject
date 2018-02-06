@@ -21,13 +21,12 @@
 	<!-- comm의 Create(insert) -->
 	<insert id="addComm" parameterType="com.yagn.nadrii.service.domain.Community">
 		INSERT INTO post(post_no, user_id, title, text, thumbnail_image_file, reg_date, lat, lng, hashtag, flag_pu) 
-		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, SYSDATE, #{lat}, #{lng}, #{hashtag}, 'UC') 
+		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS'), #{lat}, #{lng}, #{hashtag}, 'UC') 
 	</insert>
-
 	
 	<!-- comm의 Read(select) -->
 	<select id="getPostNo" parameterType="com.yagn.nadrii.service.domain.Community" resultType="int">
-		SELECT post_no FROM post WHERE title=#{title} AND text=#{text}
+		SELECT post_no FROM post WHERE title=#{title} AND reg_date=TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS')
 	</select>
 	
 	<select id="getComm" parameterType="int" resultMap="communitySelectMap">

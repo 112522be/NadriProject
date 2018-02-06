@@ -33,7 +33,7 @@
 	<div class="container" align="center">
 	<br/>
 		<form name="postData">
-			<input type="hidden" name="userId" value="test01">
+			<input type="hidden" name="userId" value="${loginUser.userId}">
 			<div class="form-group">
 			    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요">
 			 </div>

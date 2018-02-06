@@ -84,7 +84,7 @@
 </head>
 <body>
 		<form name="textForm">
-		<textarea id="summernote" name="text">æ»≥Á«œººø‰</textarea>
+		<textarea id="summernote" name="text"></textarea>
         <script>
 	        var openDialog = function (uri, name, options, closeCallback) {
 			    var win = window.open(uri, "", options);

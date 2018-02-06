@@ -17,7 +17,7 @@
 </head>
 <body>
 	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
-	<div class="container">
+	<div class="container" align="center">
 		<div align="center">
 			<h3>${community.title}</h3>
 		</div>

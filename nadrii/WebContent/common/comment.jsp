@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<style type="text/css">
+<!-- <style type="text/css">
 	img {
 	    width: 100px;
 	    height:100px;
@@ -25,7 +25,7 @@
 		 font-weight: bold;
 		 text-align: center;
 	}
-</style>
+</style> -->
 <script type="text/javascript"> 
 	function listComment() {
 		var postNo = $('input[name="postNo"]').val()
@@ -70,7 +70,7 @@
 </script>
 </head>
 <body onload="listComment()">
-	<div class="container">
+	<div class="container" align="center">
 		<p/>
 		<br/>
 		<div>
