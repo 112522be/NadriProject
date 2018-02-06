@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.KakaoPayRequest;
+import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.purchase.PurchaseService;
@@ -48,7 +50,7 @@ public class PurchaseController {
 			Map<String, Object> map
 			) {
 		
-		System.out.println("\n /purchase/addPurchase : POST");
+		System.out.println("\n /purchase/addPurchase/" + flag + " : POST");
 	
 		User user = new User();		
 		try {
@@ -64,14 +66,15 @@ public class PurchaseController {
 					totalTicketPrice += price * priceCount;
 				}
 			}
-			purchase.setTotalTicketPrice(totalTicketPrice);	
+			purchase.setTotalTicketPrice(totalTicketPrice);
+			purchase.setTaxFree(totalTicketPrice * 0.05);
+			purchase.setTicketPayment((int) (totalTicketPrice + purchase.getTaxFree()));
 			
 			user = (User) session.getAttribute("loginUser");
-			
-			System.out.println(purchase.toString());
+			System.out.println("\n[1]==>"+user.toString());
+			System.out.println("\n[2]==>"+purchase.toString());
 			
 //			purchaseService.addPurchase(purchase);
-			
 			
 			
 		} catch (Exception e) {
@@ -126,7 +129,28 @@ public class PurchaseController {
 		return "forward:/purchase/listBasket.jsp";
 	}
 	
-	
+	@RequestMapping(value="kakaoPay", method=RequestMethod.POST)
+	public String kakaoPay(
+			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest
+			) {
+		
+		System.out.println("\n /purchase/kakaoPay : POST");
+		
+		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		
+		try {
+			
+			kakaoPayResponse = purchaseService.addKakaoPayment(kakaoPayRequest);
+			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
+			
+			
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
+	}
 	
 	
 	

@@ -23,8 +23,11 @@ public class Purchase {
 	
 	private String[] ticketCount;
 	private String[] ticketPrice;
+	
 	private int totalTicketPrice;
-
+	private double taxFree;
+	private int ticketPayment;
+	
 	private String buyerId;
 	private String buyerName;
 	private String buyerPhone;
@@ -200,17 +203,36 @@ public class Purchase {
 		this.contenttypeid = contenttypeid;
 	}
 
-	@Override
-	public String toString() {
-		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", postNo=" + postNo
-				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
-				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
-				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
-				+ Arrays.toString(ticketPrice) + ", totalTicketPrice=" + totalTicketPrice + ", buyerId=" + buyerId
-				+ ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer="
-				+ buyer + "]";
+	public double getTaxFree() {
+		return taxFree;
 	}
 
+	public void setTaxFree(double taxFree) {
+		this.taxFree = taxFree;
+	}
+
+	public int getTicketPayment() {
+		return ticketPayment;
+	}
+
+	public void setTicketPayment(int ticketPayment) {
+		this.ticketPayment = ticketPayment;
+	}
+
+	@Override
+	public String toString() {
+		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", contentid=" + contentid
+				+ ", contenttypeid=" + contenttypeid + ", postNo=" + postNo + ", ticketTitle=" + ticketTitle
+				+ ", ticketImage=" + ticketImage + ", regDate=" + regDate + ", bookingDate=" + bookingDate
+				+ ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll + ", flag=" + flag
+				+ ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice=" + Arrays.toString(ticketPrice)
+				+ ", totalTicketPrice=" + totalTicketPrice + ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment
+				+ ", buyerId=" + buyerId + ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail="
+				+ buyerEmail + ", buyer=" + buyer + "]";
+	}
+
+	
+	
 	
 	
 	

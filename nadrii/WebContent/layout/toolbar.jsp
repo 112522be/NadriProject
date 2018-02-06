@@ -9,10 +9,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>나들이</title>
 	<!-- javascript -->
 	<!--<script src="/resources/js/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>-->
+	
+	<!-- JQUERY Dialog -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
@@ -51,7 +57,8 @@
 	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-       $("glyphicon.glyphicon-shopping-cart").bind("click" , function() {
+    	
+       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
 //      	 alert("장바구니")
           self.location = "/purchase/listBasket"
        });

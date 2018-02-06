@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.OpenApiSearch;
+import com.yagn.nadrii.service.domain.KakaoPayRequest;
+import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseDao;
 import com.yagn.nadrii.service.purchase.PurchaseService;
@@ -24,6 +26,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 		public void setPurchaseDao(PurchaseDao purchaseDao) {
 			this.purchaseDao = purchaseDao;
 		}
+		
+		@Autowired
+		@Qualifier("purchaseKakaoDaoImpl")
+		private PurchaseDao purchaseKakaoDao;
+		
+		public void setPurchaseKakaoDao(PurchaseDao purchaseKakaoDao) {
+			this.purchaseKakaoDao = purchaseKakaoDao;
+		}
+		
 		
 		/// Constructor
 		public PurchaseServiceImpl() {
@@ -52,6 +63,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 			map.put("totalCount", new Integer(totalCount));
 			
 			return map;
+		}
+		
+		@Override
+		public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception {
+			return purchaseKakaoDao.addKakaoPayment(kakaoPayRequest);
 		}
 		
 		
