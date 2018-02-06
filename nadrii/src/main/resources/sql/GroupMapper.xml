@@ -46,6 +46,14 @@
 				AND j.group_role = 1
 				AND g.group_no = #{value}
 	</select>
+	
+	<update	id="updateViewCount"		parameterType="group" >
+		UPDATE groups
+	   	<set>
+	   		view_count = #{viewCount}+1
+	   	</set>
+	   	WHERE group_no = #{join.groupNo}
+	</update>
 	 
 	 <!-- SQL : UPDATE -->
 	<update	id="updateGroup"		parameterType="group" >
@@ -73,54 +81,23 @@
 	<select  id="getGroupList"  parameterType="search"	resultMap="groupSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  				FROM		(	SELECT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, 
-	  										 p.price, p.image_file, p.reg_date, t.tran_status_code 
-									FROM group p, transaction t 
-									WHERE p.prod_no=t.prod_no(+) 
+	  				FROM		(	SELECT
+									j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+									FROM groups g, join j
+									WHERE g.group_no = j.group_no
+											AND j.group_role = 1
 									<if test="searchCondition != null">
 										<if test="searchCondition == 0 and searchKeyword !='' ">
-											AND p.prod_no = #{searchKeyword}
+											AND g.title LIKE '%${searchKeyword}%'
 										</if>
 										<if test="searchCondition == 1 and searchKeyword !='' ">
-											AND p.prod_name LIKE '%${searchKeyword}%'
+											AND g.text LIKE '%${searchKeyword}%'
 										</if>
 										<if test="searchCondition == 2 and searchKeyword !='' ">
-											AND p.price = #{searchKeyword}
+											AND j.user_id = #{searchKeyword}
 										</if>
 									</if>
-									
-									<if test="code != null">
-										<if test="code == 0">
-											AND t.tran_status_code IS NULL
-										</if>
-										<if test="code == 1">
-											AND t.tran_status_code=1
-										</if>
-										<if test="code == 2">
-											AND t.tran_status_code=2
-										</if>
-										<if test="code == 3">
-											AND t.tran_status_code=3
-										</if>
-									</if>
-									<if test="code == 9">
-									</if>
-									
-									<if test="sort != null">								
-										<if test="sort == 'priceASC'">
-											ORDER BY p.price ASC
-										</if>
-										<if test="sort == 'priceDESC'">
-											ORDER BY p.price DESC
-										</if>
-										<if test="sort == 'old'">
-											ORDER BY p.reg_date ASC
-										</if>
-										<if test="sort == 'recent'">
-											ORDER BY p.reg_date DESC
-										</if>
-									</if>
-									) inner_table
+									ORDER BY g.reg_date DESC ) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -138,48 +115,22 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT p.prod_no, p.prod_name, p.prod_detail, p.manufacture_day, 
-	  										 p.price, p.image_file, p.reg_date, t.tran_status_code 
-					FROM group p, transaction t 
-					WHERE p.prod_no=t.prod_no(+) 
-					<if test="searchCondition != null">
-						<if test="searchCondition == 0 and searchKeyword !='' ">
-							AND p.prod_no = #{searchKeyword}
-						</if>
-						<if test="searchCondition == 1 and searchKeyword !='' ">
-							AND p.prod_name LIKE '%${searchKeyword}%'
-						</if>
-						<if test="searchCondition == 2 and searchKeyword !='' ">
-							AND p.price = #{searchKeyword}
-						</if>
-					</if>	
-					
-					<if test="code != null">
-						<if test="code == 0">
-							AND t.tran_status_code IS NULL
-						</if>
-						<if test="code == 1">
-							AND t.tran_status_code=1
-						</if>
-						<if test="code == 2">
-							AND t.tran_status_code=2
-						</if>
-						<if test="code == 3">
-							AND t.tran_status_code=3
-						</if>
-					</if>
-			
-					<if test="sort != null">	
-						<if test="sort == 'priceASC'">
-							ORDER BY p.price ASC
-						</if>
-						<if test="sort == 'priceDESC'">
-							ORDER BY p.price DESC
-						</if>
-						<if test="sort == 'recent'">
-							ORDER BY p.reg_date DESC
-						</if>
-					</if>
+	  	FROM  (	SELECT
+					j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+					FROM groups g, join j
+					WHERE g.group_no = j.group_no
+							AND j.group_role = 1
+							<if test="searchCondition != null">
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+									AND g.title LIKE '%${searchKeyword}%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+									AND g.text LIKE '%${searchKeyword}%'
+								</if>
+								<if test="searchCondition == 2 and searchKeyword !='' ">
+									AND j.user_id = #{searchKeyword}
+								</if>
+							</if>
 					 ) countTable				
 							
 	 </select>

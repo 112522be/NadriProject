@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 	<!-- javascript -->
 	<!--<script src="/resources/js/jquery.js"></script>-->
-	<script src="/resources/js/bootstrap.min.js"></script>
-	
 	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
