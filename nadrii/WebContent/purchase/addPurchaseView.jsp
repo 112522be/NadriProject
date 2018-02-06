@@ -71,6 +71,22 @@ function goBack() {
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
+		<!-- Purchase Info -->
+		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
+		<input type="hidden" name="contentTypeId" 		value="${ purchase.contentTypeId }">
+		<input type="hidden" name="ticketTitle"			value="${ purchase.ticketTitle }">
+		<input type="hidden" name="ticketImage" 		value="${ purchase.ticketImage }">
+		<input type="hidden" name="bookingDate" 		value="${ purchase.bookingDate }">
+		<input type="hidden" name="flag" 				value="${ purchase.flag }">
+		<input type="hidden" name="totalTicketPrice" 	value="${ purchase.totalTicketPrice }">
+		<input type="hidden" name="taxFree"				value="${ purchase.taxFree }">
+		<input type="hidden" name="ticketPayment" 		value="${ purchase.ticketPayment }">
+		<c:forEach items="${ purchase.ticketPrice }" varStatus="status">
+			<input type="hidden" name="ticketCount" value="${ purchase.ticketCount[status.index] }">
+			<input type="hidden" name="ticketPrice" value="${ purchase.ticketPrice[status.index] }">
+		</c:forEach>
+		
+		
 		<!-- KakaoPay API Request -->
 		<input type="hidden" name="cid" 				value="TC0ONETIME">
 		<input type="hidden" name="partner_order_id" 	value="나드리티켓시스템">
@@ -78,6 +94,7 @@ function goBack() {
 		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
+		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
 		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
 		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
@@ -95,7 +112,7 @@ function goBack() {
 	  			</div>
 	  			
 	  		<h4>[티켓명]</h4>
-	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.ticketTitle }</h4>
+	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ purchase.ticketTitle }</h4>
 	  		
 	  		<h4>[예매일]</h4>
 	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.bookingDate }</h4>
@@ -120,25 +137,25 @@ function goBack() {
 	  			<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">아이디</span> 
 					<input type="text" class="form-control" 
-						aria-describedby="sizing-addon1" value="${ purchase.buyerId }" readonly>
+						aria-describedby="sizing-addon1" name="buyerId" value="${ purchase.buyerId }" readonly>
 				</div>
 	  			<br>
 				<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">이 름</span> 
 					<input type="text" class="form-control" 
-						aria-describedby="sizing-addon1" value="${ purchase.buyerName }" readonly>
+						aria-describedby="sizing-addon1" name="buyerName" value="${ purchase.buyerName }" readonly>
 				</div>
 				<br>
 				<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">연락처</span> 
 					<input type="text" class="form-control" 
-						aria-describedby="sizing-addon1" value="${ purchase.buyerPhone }" readonly>
+						aria-describedby="sizing-addon1" name="buyerPhone" value="${ purchase.buyerPhone }" readonly>
 				</div>
 				<br>
 				<div class="input-group">
 					<span class="input-group-addon" id="sizing-addon1">E-mail</span> 
 					<input type="text" class="form-control" 
-						aria-describedby="sizing-addon1" value="${ purchase.buyerEmail }" readonly>
+						aria-describedby="sizing-addon1" name="buyerEmail" value="${ purchase.buyerEmail }" readonly>
 				</div>
 				
 	  		</div>

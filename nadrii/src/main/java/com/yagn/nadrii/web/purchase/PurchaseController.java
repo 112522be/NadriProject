@@ -1,5 +1,9 @@
 package com.yagn.nadrii.web.purchase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +27,7 @@ import com.yagn.nadrii.service.domain.KakaoPayResponse;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.purchase.PurchaseService;
+import com.yagn.nadrii.service.user.UserService;
 
 @Controller
 @RequestMapping("/purchase/*")
@@ -32,6 +37,10 @@ public class PurchaseController {
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
 	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+
 	/// Field
 	private KakaoPayRequest kakaoPayRequest;
 	
@@ -137,57 +146,71 @@ public class PurchaseController {
 	
 	@RequestMapping(value="kakaoPay", method=RequestMethod.POST)
 	public String kakaoPay(
-			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest
+			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
+			@ModelAttribute("purchase") Purchase purchase,
+			HttpSession session
 			) {
 		
 		System.out.println("\n /purchase/kakaoPay : POST");
-		
+//		System.out.println("\n[kakaoPayRequest]==>" + kakaoPayRequest.toString());
+//		System.out.println("\n[purchase]==>" + purchase.toString());
+
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 		
 		try {
 			
 			kakaoPayResponse = purchaseService.addKakaoPayment(kakaoPayRequest);
 			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
-			
 			this.kakaoPayRequest = kakaoPayRequest;
 			
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		
-		System.out.println("\n\n[kakaoPay complete]");
+		session.setAttribute("purchase", purchase);
 		
 		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
 	}
 	
 	@RequestMapping(value="kakaoPayComplete")
 	public String kakaoPayComplete(
-			@RequestParam String pg_token, 
-			HttpServletRequest request
+			@RequestParam String pg_token,
+			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
+			HttpSession session
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayComplete : POST");
 		
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 		Purchase purchase = new Purchase();
-		User user = new User();
-
+		
 		try {
 			kakaoPayRequest.setPg_token(pg_token);
 			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
 			
-			purchase = new Purchase();
-			user.setUserId(kakaoPayRequest.getPartner_user_id());
-			purchase.setBuyer(user);
+			purchase = (Purchase) session.getAttribute("purchase");
 			
-			request.setAttribute("purchase", purchase);
+			// cancelDate making algorithm
+			DateFormat df = new SimpleDateFormat("yyyyMMdd");
+			Date bDate = df.parse(purchase.getBookingDate().replaceAll("[^0-9]", ""));
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(bDate);
+			cal.add(Calendar.DATE, -10);
 
+			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "³â "
+					+ df.format(cal.getTime()).substring(4, 6) + "¿ù " + df.format(cal.getTime()).substring(6) + "ÀÏ";
+
+			// cancelDate set
+			purchase.setCancelDate(cancelDate);
+			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
+			
+			purchaseService.addPurchase(purchase);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		
-		return null;	
-//		return "/purchase/addPurchase.jsp";	
+		return "/index.jsp";	
 	}
 	
 	

@@ -56,12 +56,8 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		System.out.println("\nResponse code: " + httpResponse);
-		
 		KakaoPayResponse kakaoPayResponse = new ObjectMapper().readValue(
 				EntityUtils.toString(httpResponse.getEntity()), KakaoPayResponse.class);
-		
-		System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 		
 		return kakaoPayResponse;
 		
@@ -69,7 +65,7 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 	
 	public static final KakaoPayResponse sendKakaoPayComplete(KakaoPayRequest kakaoPayRequest, String kakaoPayCompleteURL, String kakaoAdminKey) throws Exception {
 		
-		System.out.println("\n[purchaseKakaoDaoImpl.java]::sendPostKakaoURL");
+		System.out.println("\n[purchaseKakaoDaoImpl.java]::sendKakaoPayComplete");
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(kakaoPayCompleteURL);
@@ -81,12 +77,8 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		System.out.println("\nResponse code: " + httpResponse);
-		
 		KakaoPayResponse kakaoPayResponse = new ObjectMapper().readValue(
 				EntityUtils.toString(httpResponse.getEntity()), KakaoPayResponse.class);
-		
-		System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 		
 		return kakaoPayResponse;
 		
@@ -101,8 +93,6 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		
 		try {
 			kakaoPayResponse = PurchaseKakaoDaoImpl.sendPostKakaoURL(kakaoPayRequest, kakaoPayURL, kakaoAdminKey);
-			
-			System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -120,12 +110,12 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		
 		try {
 			kakaoPayResponse = PurchaseKakaoDaoImpl.sendKakaoPayComplete(kakaoPayRequest, kakaoPayCompleteURL, kakaoAdminKey);
-
-			System.out.println("\n[Check]==>"+kakaoPayResponse.toString());
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		
 		
 		return kakaoPayResponse;
 	}

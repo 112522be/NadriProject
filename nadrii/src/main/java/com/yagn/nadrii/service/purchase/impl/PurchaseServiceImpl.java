@@ -1,5 +1,9 @@
 package com.yagn.nadrii.service.purchase.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +47,18 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 		@Override
 		public void addPurchase(Purchase purchase) throws Exception {
+			
+			if (purchase.getTicketPriceAll() == null) {
+				String sumTicketPrice = "";
+				for (int i = 0; i < purchase.getTicketPrice().length; i++) {
+					String ticketCount = purchase.getTicketCount()[i];
+					String ticketPrice = purchase.getTicketPrice()[i];
+					
+					sumTicketPrice += ticketPrice + "=" + ticketCount + "&";
+				} 
+				purchase.setTicketPriceAll(sumTicketPrice);
+			}
+			
 			purchaseDao.addPurchase(purchase);
 		}
 
