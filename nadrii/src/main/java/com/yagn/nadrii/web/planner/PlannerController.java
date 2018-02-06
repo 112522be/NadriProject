@@ -59,13 +59,16 @@ public class PlannerController {
 		
 		System.out.println("PlannerController/getMyPlannerList 접속");
 		
-		//userId 호출 session 
-//		user = (User)session.getAttribute("userId");
-//		System.out.println("user :: "+ user);
-//		
+		//session 저장된 userId 호출
+		user = (User)session.getAttribute("loginUser");
+		System.out.println("user :: "+ user);
 		
+		//비로그인 체크
+		if(user == null) {
+			System.out.println("비로그인으로 접속하였습니다.");
+			return "forward:/user/loginView.jsp";
+		}
 		
-		//
 		if(search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
@@ -89,8 +92,6 @@ public class PlannerController {
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		System.out.println("Page :: "+resultPage);
-		
-		System.out.println("::::::   "+map.get("list"));
 		
 		request.setAttribute("list", map.get("list"));
 		request.setAttribute("resultPage", resultPage);
@@ -117,12 +118,12 @@ public class PlannerController {
 	public String getPlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
 		
 		System.out.println("PlannerController/getPlanner 접속");
-		System.out.println("::::: "+postNo);
+		System.out.println("postNo :: "+postNo);
 		Planner planner = plannerService.getPlanner(postNo);
 		
 		request.setAttribute("planner", planner);
 		
-		System.out.println("PlannerController/getPlanner 수행완");
+		System.out.println("PlannerController/getPlanner 수행완료");
 		
 		return "forward:/planner/getPlanner.jsp";
 	}

@@ -45,30 +45,30 @@
 		
 	</insert>
 	
-	<select  id="getTotalCount"  parameterType="com.yagn.nadrii.common.Search"	 resultType="int">
+	<select  id="getTotalCount"  parameterType="map"	 resultType="int">
 		SELECT COUNT(*)
 	  	FROM(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, lat, lng, reg_date
 	  									FROM post
 										<where>
 											<if test="searchCondition != null">
 												<if test="searchCondition == 0 and searchKeyword !='' ">
-						 							title LIKE '%${searchKeyword}%' AND
+						 							title LIKE '%${search.searchKeyword}%' AND
 												</if>
 												<if test="searchCondition == 1 and searchKeyword !='' ">
-						 							text LIKE '%${searchKeyword}%' AND
+						 							text LIKE '%${search.searchKeyword}%' AND
 												</if>
 												<if test="searchCondition == 2 and searchKeyword !='' ">
-						 							hashtag LIKE '%${searchKeyword}%' AND
+						 							hashtag LIKE '%${search.searchKeyword}%' AND
 												</if>
 											</if>
 											flag_pu='pl'
-											AND user_id in 'test01'
+											AND user_id in #{plannerMakerId}
 											
 										</where>
 						) countTable						
 	</select>
 	
-	<select id="listMyPlanner" parameterType="com.yagn.nadrii.common.Search" resultMap="plannerSelectMap">
+	<select id="listMyPlanner" parameterType="map" resultMap="plannerSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag, lat, lng
@@ -76,21 +76,21 @@
 										<where>
 											<if test="searchCondition != null">
 												<if test="searchCondition == 0 and searchKeyword !='' ">
-						 							title LIKE '%${searchKeyword}%' AND
+						 							title LIKE '%${search.searchKeyword}%' AND
 												</if>
 												<if test="searchCondition == 1 and searchKeyword !='' ">
-						 							text LIKE '%${searchKeyword}%' AND
+						 							text LIKE '%${search.searchKeyword}%' AND
 												</if>
 												<if test="searchCondition == 2 and searchKeyword !='' ">
-						 							hashtag LIKE '%${searchKeyword}%' AND
+						 							hashtag LIKE '%${search.searchKeyword}%' AND
 												</if>
 											</if>
-											flag_pu='pl' AND user_id in 'test01'
+											flag_pu='pl' AND user_id in #{plannerMakerId}
 											ORDER BY reg_date DESC
 										</where>
 										) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	</select>
 	
 	

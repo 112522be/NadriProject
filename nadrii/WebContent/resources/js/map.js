@@ -249,6 +249,7 @@
 			
 		} );
 
+		//좌표를 주소로 바꿔주는 geo 호출
 		function geo(i){
 			$.ajax({
 				url : "https://dapi.kakao.com/v2/local/geo/coord2address.json",
@@ -263,7 +264,23 @@
 				},
 				success : function(returnData){
 					console.log(returnData.documents[0].address.address_name);
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'">'+returnData.documents[0].address.address_name+'</li>')
+					if(i == 0){
+						$("#subPointer").append('<div style="height:31px">출발</div>')
+					}else if(i == 1){
+						$("#subPointer").append('<div style="height:31px">경유지1</div>')
+					}else if(i == 2){
+						$("#subPointer").append('<div style="height:31px">경유지2</div>')
+					}else if(i == 3){
+						$("#subPointer").append('<div style="height:31px">경유지3</div>')
+					}else if(i == 4){
+						$("#subPointer").append('<div style="height:31px">경유지4</div>')
+					}else if(i == 5){
+						$("#subPointer").append('<div style="height:31px">경유지5</div>')
+					}else if(i == 6){
+						$("#subPointer").append('<div style="height:31px">도착</div>')
+					}
+					
+					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'" style="width:300px">'+returnData.documents[0].address.address_name+'</li>');
 				}
 			})
 		}
@@ -295,8 +312,13 @@
 			startMarker.setPosition(sort[0]);
 			startMarker.setMap(map);
 			
+			//sortable 기존에있는거 지우기
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
+			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
 			}
 			for(var i=0;i<sort.length;i++){
 
@@ -340,6 +362,10 @@
 				if($(".pointer").length > 0){
 					$(".pointer").empty();
 				}
+				//출발,경유,도착 글자 지우기
+				if($("#subPointer").length > 0){
+					$("#subPointer").empty();
+				}
 				for(var i=0;i<sort.length;i++){
 
 					if(sort[i] !=null){
@@ -356,6 +382,10 @@
 				
 				if($(".pointer").length > 0){
 					$(".pointer").empty();
+				}
+				//출발,경유,도착 글자 지우기
+				if($("#subPointer").length > 0){
+					$("#subPointer").empty();
 				}
 				for(var i=0;i<sort.length;i++){
 
@@ -374,6 +404,10 @@
 				if($(".pointer").length > 0){
 					$(".pointer").empty();
 				}
+				//출발,경유,도착 글자 지우기
+				if($("#subPointer").length > 0){
+					$("#subPointer").empty();
+				}
 				for(var i=0;i<sort.length;i++){
 
 					if(sort[i] !=null){
@@ -391,6 +425,10 @@
 				if($(".pointer").length > 0){
 					$(".pointer").empty();
 				}
+				//출발,경유,도착 글자 지우기
+				if($("#subPointer").length > 0){
+					$("#subPointer").empty();
+				}
 				for(var i=0;i<sort.length;i++){
 
 					if(sort[i] !=null){
@@ -407,6 +445,10 @@
 	
 				if($(".pointer").length > 0){
 					$(".pointer").empty();
+				}
+				//출발,경유,도착 글자 지우기
+				if($("#subPointer").length > 0){
+					$("#subPointer").empty();
 				}
 				for(var i=0;i<sort.length;i++){
 
@@ -444,6 +486,10 @@
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
 			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
+			}
 			for(var i=0;i<sort.length;i++){
 
 				if(sort[i] !=null){
@@ -462,6 +508,10 @@
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
 			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
+			}
 			for(var i=0;i<sort.length;i++){
 
 				if(sort[i] !=null){
@@ -476,6 +526,10 @@
 			sort[2] = null;
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
+			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
 			}
 			for(var i=0;i<sort.length;i++){
 
@@ -492,6 +546,10 @@
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
 			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
+			}
 			for(var i=0;i<sort.length;i++){
 
 				if(sort[i] !=null){
@@ -507,6 +565,10 @@
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
 			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
+			}
 			for(var i=0;i<sort.length;i++){
 
 				if(sort[i] !=null){
@@ -521,6 +583,10 @@
 			sort[5] = null;
 			if($(".pointer").length > 0){
 				$(".pointer").empty();
+			}
+			//출발,경유,도착 글자 지우기
+			if($("#subPointer").length > 0){
+				$("#subPointer").empty();
 			}
 			for(var i=0;i<sort.length;i++){
 

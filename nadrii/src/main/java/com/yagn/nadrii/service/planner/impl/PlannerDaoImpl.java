@@ -38,15 +38,15 @@ public class PlannerDaoImpl implements PlannerDao{
 	}
 	
 	@Override
-	public List<Planner> getMyPlannerList(Search	search) throws Exception{
+	public List<Planner> getMyPlannerList(Search	search, String plannerMakerId) throws Exception{
 		System.out.println("PlannerDao/getMyPlannerList 立加");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		plannerMakerId = "test01";
-//		map.put("search", search);
-//		map.put("plannerMakerId", plannerMakerId);
+
+		map.put("search", search);
+		map.put("plannerMakerId", plannerMakerId);
 		
-		return sqlSession.selectList("PlannerMapper.listMyPlanner", search);
+		return sqlSession.selectList("PlannerMapper.listMyPlanner", map);
 	}
 
 	@Override
@@ -64,11 +64,15 @@ public class PlannerDaoImpl implements PlannerDao{
 	}
 
 	@Override
-	public int getTotalCount(Search search) throws Exception {
+	public int getTotalCount(Search search, String plannerMakerId) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("PlannerDao/getTotalCount 立加");
 		
-		return sqlSession.selectOne("PlannerMapper.getTotalCount", search);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("plannerMakerId", plannerMakerId);
+		
+		return sqlSession.selectOne("PlannerMapper.getTotalCount", map);
 	}
 
 }

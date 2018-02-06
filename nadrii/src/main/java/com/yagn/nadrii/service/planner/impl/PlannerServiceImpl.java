@@ -43,9 +43,9 @@ public class PlannerServiceImpl implements PlannerService{
 		// TODO Auto-generated method stub
 		System.out.println("PlannerService/getMyPlannerList Á¢¼Ó");
 		
-		List<Planner> list = plannerDao.getMyPlannerList(search);
+		List<Planner> list = plannerDao.getMyPlannerList(search, plannerMakerId);
 		Map<String, Object> map = new HashMap<String, Object>();
-		int totalCount = plannerDao.getTotalCount(search);
+		int totalCount = plannerDao.getTotalCount(search, plannerMakerId);
 		
 		map.put("list", list);
 		map.put("search", search);
