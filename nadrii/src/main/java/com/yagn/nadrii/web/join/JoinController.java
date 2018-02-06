@@ -45,7 +45,7 @@ public class JoinController {
 	
 		join.setGroupNo(groupNo);
 		join.setGroupRole(2);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		joinService.addJoin(join);
 		
@@ -75,7 +75,7 @@ public class JoinController {
 		}
 		search.setPageSize(pageSize);
 		
-		User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("loginUser");
 		
 		join.setUserId(user.getUserId());
 		search.setSearchKeyword(join.getUserId());
@@ -98,7 +98,7 @@ public class JoinController {
 		System.out.println("/deleteJoin");
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		joinService.deleteJoin(join);
 		

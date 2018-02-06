@@ -7,10 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="../resources/assets/js/jquery.min.js"></script>
-<script src="../resources/assets/js/skel.min.js"></script>
-<script src="../resources/assets/js/util.js"></script>
-<script src="../resources/assets/js/main.js"></script>
+<script src="../resources/assets/js/1jquery.min.js"></script>
+<script src="../resources/assets/js/1skel.min.js"></script>
+<script src="../resources/assets/js/1util.js"></script>
+<script src="../resources/assets/js/1main.js"></script>
 <style type="text/css">
 footer a{
 	color: #555 !important;
@@ -18,6 +18,10 @@ footer a{
 .post > footer {
 	background : #ffff;
 }
+
+.navbar {
+    margin-bottom: 0px !important;
+	}
 
 #groupName {
 					display: inline-block;
@@ -45,7 +49,11 @@ footer a{
 
 </style>
 <script>
+
 $(function(){
+	if("${loginUser.userId}" == "${group.join.userId}"){
+		$("#userMenu").css("display","block");
+	}
 	
 	$("#list").bind("click", function(){
 		self.location="../group/listGroup";
@@ -54,7 +62,6 @@ $(function(){
 	$("#modify").bind("click", function(){
 		self.location="../group/updateGroup?groupNo=${group.join.groupNo}";
 	});
-	
 	
 	$("#delete").bind("click", function(){
 		if(confirm("삭제하시겠습니까?")==true){
@@ -109,7 +116,7 @@ $(function(){
 						<li><a href="#" class="icon fa-comment">128</a></li>
 					</ul>
 				</footer>
-				<div style="float: right; margin-top: -3em;">
+				<div id="userMenu" style="float: right; margin-top: -3em; display: none;">
 					<a href="#" id="modify" class="button small modify">modify</a>
 					<a href="#" id="delete" class="button small delete">delete</a>
 				</div>

@@ -39,9 +39,9 @@ $(function(){
 			
 	});
 	
-	$("header .author").on("click", function(){
-		
-		var userId = $($("input[id='userId']")[$("header .author").index(this)]).val();
+	$(".author h5").on("click", function(){
+	
+		var userId = $($("input[id='userId']")[$(".author h5").index(this)]).val();
 		
 		//self.location="../user/getUserProfile?userId="+userId;
 			
@@ -171,10 +171,10 @@ $(function(){
 									</h3>
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									<span class="author">
-										<input type="hidden" id="userId" value="${group.join.userId}">
 										<img src="../resources/assets/images/avatar.jpg" alt="" />
 									</span>
 									<a href="#" class="author">
+										<input type="hidden" id="userId" value="${group.join.userId}">
 										<h5>${group.join.userId}</h5>
 									</a>
 									
