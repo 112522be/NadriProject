@@ -28,10 +28,12 @@
 	
 	<select id="listCommentByPost" parameterType="int" resultMap="communitySelectMap">
 		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE post_no=#{postNo}
+		ORDER BY reg_date DESC
  	</select>
  	
  	<select id="listCommentById" parameterType="int" resultMap="communitySelectMap">
 		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE user_id=#{userId}
+ 		ORDER BY reg_date DESC
  	</select>
 	
 	<!-- comm의 Update(update) -->

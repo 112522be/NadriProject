@@ -5,18 +5,17 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Daum 지도 시작하기</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 	<script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		var content='';
 		var x='';
 		var y='';
 		function getSearchResult(keyword, page){
@@ -69,6 +68,8 @@
 							x = ""+documents[index].x;
 							y = ""+documents[index].y;
 							map.setCenter(new daum.maps.LatLng(y, x))
+							$("#x").val(x);
+							$("#y").val(y);
 							marker.setMap(null);
 							marker = new daum.maps.Marker({ 
 							    // 지도 중심좌표에 마커를 생성합니다 
@@ -81,10 +82,11 @@
 						            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
 						            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>' : '';
 						            
-						            content = '<div class="bAddr">' +
+						            var content = '<div class="bAddr">' +
 						            				buildingName+
 						                            detailAddr + 
 						                        '</div>';
+						            $('#content').val(content)
 
 						            var resultDiv = document.getElementById('clickLatlng'); 
 								    resultDiv.innerHTML = content;
@@ -145,7 +147,11 @@
 		            				buildingName+
 		                            detailAddr + 
 		                        '</div>';
-
+		            $("#content").val(content);
+		            
+		            var latlng = mouseEvent.latLng;
+					$('#x').val(latlng.getLat());
+					$('#y').val(latlng.getLng());
 		            var resultDiv = document.getElementById('clickLatlng'); 
 				    resultDiv.innerHTML = content;
 		        }   
@@ -178,19 +184,14 @@
 			$('button.btn.btn-primary.btn-sm:contains("추가하기")').bind('click', function() {
 				$('#lat', opener.document).val($('#lat', opener.document).val()+","+$("#x").val());
 				$('#lng', opener.document).val($('#lng', opener.document).val()+","+$("#y").val());
-				var editor = $.summernote.eventHandler.getEditor(); 
-				var editable=$('#summernote');
-				var html = $('<button type="button" class="btn btn-default">'+
-						'<div class="col-xs-3" align="left">'+
-						'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-						'</div>'+
-						'<div class="col-xs-9" align="left">'+content+'</div></button>');
-				editor.insertNode(editable, html);
-				//window.close();
+				$('#content_pr', opener.document).val($("#content").val());
+
+				window.close();
 			})
 		})
 
 	</script>
+	<input type="hidden" id="content">
 	<input type="hidden" id="x">
 	<input type="hidden" id="y">
 </body>
