@@ -75,7 +75,7 @@ public class MessageController {
 	}
 	
 	
-	@RequestMapping("/listMessage/")
+	@RequestMapping("listMessage")
 	public String listMessage(@RequestParam("listType")String listType, HttpSession session, HttpServletRequest request, Map map) throws Exception{
 		System.out.println(this.getClass()+"  listMessage");
 		

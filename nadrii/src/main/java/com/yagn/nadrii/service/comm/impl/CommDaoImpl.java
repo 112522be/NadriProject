@@ -49,5 +49,10 @@ public class CommDaoImpl implements CommDao {
 	public int getTotalCount(Search search) {
 		return sqlSession.selectOne("CommMapper.getTotalCount", search);
 	}
+
+	@Override
+	public List<String> getHashtags(String keyword) {
+		return sqlSession.selectList("CommMapper.getHashtags", keyword);
+	}
 	
 }

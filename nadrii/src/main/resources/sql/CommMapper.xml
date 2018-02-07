@@ -57,6 +57,10 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 	
+	<select id="getHashtags" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT hashtag FROM post WHERE flag_pu='UC' AND hashtag LIKE '%${value}%'
+	</select>
+	
 	<!-- comm의 Update(update) -->
 	
 	<update id="updateComm" parameterType="com.yagn.nadrii.service.domain.Community">

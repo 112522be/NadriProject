@@ -53,4 +53,9 @@ public class CommRestController {
 		return hashTags;
 		
 	}
+	
+	@RequestMapping("getHashtags")
+	public List<String> getHashTags(@RequestParam String keyword) throws Exception{
+		return commService.getHashtags(keyword);
+	}
 }

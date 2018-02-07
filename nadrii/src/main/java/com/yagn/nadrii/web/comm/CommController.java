@@ -33,7 +33,7 @@ public class CommController {
 	public String addComm(@ModelAttribute Community community) {
 		System.out.println("--------"+community);
 		int postNo = commService.addComm(community);
-		return "forward:/comm/getComm?postNo="+postNo;
+		return "redirect:/comm/getComm?postNo="+postNo;
 	}
 	
 	@RequestMapping("getComm")
