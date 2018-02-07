@@ -166,10 +166,10 @@ header .navbar {
     min-height: 100px;
 }
 
-header .navbar-nav > li  {
+/* header .navbar-nav > li  {
     padding-bottom: 30px;
     padding-top: 30px;
-}
+} */
 
 header  .navbar-nav > li > a {
     padding-bottom: 6px;
