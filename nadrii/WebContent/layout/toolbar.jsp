@@ -55,15 +55,23 @@
 		
 	});
 
+	$( function() {
+        $(".glyphicon.glyphicon-envelope").bind("click" , function() {
+        	//alert("쪽지함")
+      		self.location = "/message/listMessage"
+        });
+    });
 	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-    	
-       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
+         $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
 //      	 alert("장바구니")
           self.location = "/purchase/listBasket"
        });
     });
+	
+	
+	
 	
 	</script>
 	
@@ -103,6 +111,11 @@
 							<li>
 								<a href="#">
 									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>

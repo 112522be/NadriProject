@@ -124,25 +124,21 @@ body {
     	  	})
       });
 
-      
-          	  
-      
 
       
-      
       $( function() {
-          //==> 추가된부분 : "addUser"  Event 연결
           $("a[href='#' ]:contains('메시지')").on("click" , function() {
         	var recevierId = $("#recevierId").val();
         	alert(recevierId);
-            self.location = "/message/addMessage?recevierId="+recevierId;
+        	window.open("/message/addMessage?recevierId="+recevierId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
           });
-       });
+      });
+      
       
       $( function() {
-          //==> 추가된부분 : "addUser"  Event 연결
           $("a[href='#' ]:contains('쪽지함')").on("click" , function() {
-             self.location = "/message/listMessage?listType=list";
+            alert("쪽지함"); 
+        	self.location = "/message/listMessage";
           });
       });
       
