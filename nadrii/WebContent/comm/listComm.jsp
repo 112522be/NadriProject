@@ -1,58 +1,203 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE HTML>
+<html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- css -->
-	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="/resources/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
-	<link href="/resources/css/flexslider.css" rel="stylesheet" />
-	<link href="/resources/css/style.css" rel="stylesheet" />
+<title>Prologue by HTML5 UP</title>
+<meta charset="EUC-KR" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	
+function fncGetList(currentPage){
+	$("#currentPage").val(currentPage)
+	$("form").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
+}
 
+$(function(){
+	
+	$(".fit").on("click", function(){
+		
+		var groupNo = $($("input[id='groupNo']")[$(".fit").index(this)]).val();
+		
+		self.location="../group/getGroup?groupNo="+groupNo;
+			
+	});
+	
+	$("header h3").on("click", function(){
+		
+		var groupNo = $($("input[id='groupNo']")[$("header h3").index(this)]).val();
+		
+		self.location="../group/getGroup?groupNo="+groupNo;
+			
+	});
+	
+	$("header .author").on("click", function(){
+		
+		var userId = $($("input[id='userId']")[$("header .author").index(this)]).val();
+		
+		//self.location="../user/getUserProfile?userId="+userId;
+			
+	});
+	/*
+	$(".author h5").on("click", function(){
+		
+		 function runEffect() {
+		      // Run the effect
+		      $( ".menu" ).toggle( "blind", 300 );
+		    };
+		 
+		    // Set effect from select menu value
+		    $( ".author h5" ).on( "click", function() {
+		      runEffect();
+		    });
+	});
+	*/
+});
 
-	<!-- Theme skin -->
-	<link href="/resources/skins/default.css" rel="stylesheet" />
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+$(function() {
+	console.log("${totalCount}")
+})
+</script>
+<style type="text/css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+.row {
+	margin: -20px 0 -1px -20px;
+}
+
+@media screen and (max-width: 736px) {
+	section > :last-child,
+				section > .container, section:last-child, article > :last-child,
+				article > .container, article:last-child {
+					margin-bottom: 40%;
+				}
+}
+.cog
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 5px;
+	margin-top: 5px;
+	margin-right: 6px;
+	border: none;
+	color: #f5fafa;
+	font-size: 20px;
+}
+
+.admin-text:hover, .cog:hover { cursor: pointer; color: #555555; }
+
+.menu a
+{
+	display: block;
+	background: #F8F8F8;
+	width: 120px;
+	height: 40px;
+	padding: 0 0 0 10px;
+/* 	font: bold 13px Helvetica, sans-serif; */
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #000000;
+	color: rgba( 0, 0, 0, 0.7 );
+	line-height: 40px;
+	box-shadow: 0 1px 1px rgba( 0, 0, 0, 0.2 );
+}
+
+.menu a:nth-child( 2 )
+{
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.menu a:last-child
+{
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.menu a:hover { color: #555555; }
+
+.menu a:hover > .octicon { color: #555555; }
+
+.glyphicon
+{
+	float: right;
+	margin-top: 12px;
+	margin-right: 12px;
+	font-size: 15px;
+	color: #000000;
+	color: rgba( 0, 0, 0, 0.7 );
+	opacity: 0.8;
+}
+
+.arrow
+{
+	width: 0;
+	height: 0;
+	margin-left: 15px;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 9px solid #F8F8F8;
+}
+
+</style>
+
 </head>
 <body>
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<div class="container">
-		<div class="clearfix"></div>
-		<div class="row">
-			<section id="projects">
-				<ul id="thumbs" class="portfolio">
-					<li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="/comm/getComm?postNo=30003">
-							<span class="overlay-img"></span>
-							<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="/resources/images/img1.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-					</li>
-					
-					<li class="item-thumbs col-lg-3 design" data-id="id-0" data-type="web">
-						<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-						<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="getComm.jsp">
-							<span class="overlay-img"></span>
-							<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-						<!-- Thumb Image and Description -->
-						<img src="/resources/images/img1.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-					</li>
-				</ul>
-			</section>
-		</div>
+	<header>
+		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	</header>
+	<div id="main">
+		<section id="portfolio" class="two">
+			<div class="container">
+				<div class="row">
+					<c:set var="i" value="0" />
+					<c:forEach var="community" items="${list}">
+						<c:set var="i" value="${i+1}" />
+						<div class="3u 12u$(mobile)">
+							<article class="item">
+								<a href="#" class="image fit"> 
+								<input type="hidden" name="groupNo" value="${community.postNo}"> 
+								<img src="${thumbnailImage}" alt="" />
+								</a>
+								<header>
+									<h3>
+										<a href="#">${community.title}</a>
+									</h3>
+									<time class="published" datetime="${community.regDate}">${community.regDate}</time>
+									<span class="author">
+										<input type="hidden" id="userId" value="${community.userId}">
+										<img src="../resources/assets/images/avatar.jpg" alt="" />
+									</span>
+									<a href="#" class="author">
+										<h5>${community.userId}</h5>
+									</a>
+									
+								</header>
+							</article>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
 	</div>
+
+
+	<!-- Scripts -->
+	<script src="../resources/assets/js/jquery.min.js"></script>
+	<script src="../resources/assets/js/jquery.scrolly.min.js"></script>
+	<script src="../resources/assets/js/jquery.scrollzer.min.js"></script>
+	<script src="../resources/assets/js/skel.min.js"></script>
+	<script src="../resources/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="../resources/assets/js/main.js"></script>
+
 </body>
 </html>

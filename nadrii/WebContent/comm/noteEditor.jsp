@@ -117,7 +117,7 @@
 	    									'<div class="col-xs-3" align="left">'+
 	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 	    									'</div>'+
-	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>';
+	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button><p></p>';
 	    				    	$('#summernote').summernote('code', html);
 						})
 	    			}
