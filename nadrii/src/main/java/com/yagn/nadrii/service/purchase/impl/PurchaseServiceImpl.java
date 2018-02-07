@@ -1,9 +1,6 @@
 package com.yagn.nadrii.service.purchase.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,13 +63,35 @@ public class PurchaseServiceImpl implements PurchaseService {
 		public Map<String, Object> getBasketList(OpenApiSearch openApiSearch, String buyerId) throws Exception {
 			Map<String, Object> map = new HashMap<String, Object>();
 			
-			System.out.println("\n[serviceImpl]::" + openApiSearch.toString());
-			System.out.println("\n[serviceImpl]::" + buyerId);
-			
 			map.put("openApiSearch", openApiSearch);
 			map.put("buyerId", buyerId);
 			
 			List<Purchase> list =  purchaseDao.getBasketList(map);
+			List<String> count = new ArrayList<>();
+			List<String> price = new ArrayList<>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
+				
+				price = new ArrayList<>();	
+				count = new ArrayList<>();
+				
+				for (int j = 0; j < firstParseArr.length; j++) {
+					String secondParseArr[] = firstParseArr[j].split("=");
+
+					for (int k = 0; k < secondParseArr.length; k++) {
+						
+						if (k == 0) {
+							price.add(secondParseArr[k].toString());
+						} else if (k == 1) {
+							count.add(secondParseArr[k].toString());
+						}
+					}
+				}
+				list.get(i).setTicketC(count);
+				list.get(i).setTicketP(price);
+			}
+			
 			int totalCount = purchaseDao.getTotalCount(buyerId);
 			
 			map.put("list", list);

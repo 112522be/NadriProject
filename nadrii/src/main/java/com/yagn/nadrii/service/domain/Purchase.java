@@ -2,6 +2,7 @@ package com.yagn.nadrii.service.domain;
 
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.List;
 
 public class Purchase {
 	
@@ -24,6 +25,9 @@ public class Purchase {
 	private String[] ticketCount;
 	private String[] ticketPrice;
 	
+	private List<String> ticketC;
+	private List<String> ticketP;
+	
 	private int totalTicketPrice;
 	private int taxFree;
 	private int ticketPayment;
@@ -32,8 +36,6 @@ public class Purchase {
 	private String buyerName;
 	private String buyerPhone;
 	private String buyerEmail;
-	
-	
 	
 	private User buyer;
 	
@@ -55,6 +57,22 @@ public class Purchase {
 
 	public void setContentTypeId(int contentTypeId) {
 		this.contentTypeId = contentTypeId;
+	}
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getContenttypeid() {
+		return contenttypeid;
+	}
+
+	public void setContenttypeid(int contenttypeid) {
+		this.contenttypeid = contenttypeid;
 	}
 
 	public int getPostNo() {
@@ -145,12 +163,20 @@ public class Purchase {
 		this.totalTicketPrice = totalTicketPrice;
 	}
 
-	public User getBuyer() {
-		return buyer;
+	public int getTaxFree() {
+		return taxFree;
 	}
 
-	public void setBuyer(User buyer) {
-		this.buyer = buyer;
+	public void setTaxFree(int taxFree) {
+		this.taxFree = taxFree;
+	}
+
+	public int getTicketPayment() {
+		return ticketPayment;
+	}
+
+	public void setTicketPayment(int ticketPayment) {
+		this.ticketPayment = ticketPayment;
 	}
 
 	public String getBuyerId() {
@@ -184,39 +210,31 @@ public class Purchase {
 	public void setBuyerEmail(String buyerEmail) {
 		this.buyerEmail = buyerEmail;
 	}
+
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
+
 	
 	
-
-	public int getContentid() {
-		return contentid;
+	public List<String> getTicketC() {
+		return ticketC;
 	}
 
-	public void setContentid(int contentid) {
-		this.contentid = contentid;
+	public void setTicketC(List<String> ticketC) {
+		this.ticketC = ticketC;
 	}
 
-	public int getContenttypeid() {
-		return contenttypeid;
+	public List<String> getTicketP() {
+		return ticketP;
 	}
 
-	public void setContenttypeid(int contenttypeid) {
-		this.contenttypeid = contenttypeid;
-	}
-
-	public int getTaxFree() {
-		return taxFree;
-	}
-
-	public void setTaxFree(int taxFree) {
-		this.taxFree = taxFree;
-	}
-
-	public int getTicketPayment() {
-		return ticketPayment;
-	}
-
-	public void setTicketPayment(int ticketPayment) {
-		this.ticketPayment = ticketPayment;
+	public void setTicketP(List<String> ticketP) {
+		this.ticketP = ticketP;
 	}
 
 	@Override
@@ -226,12 +244,12 @@ public class Purchase {
 				+ ", ticketImage=" + ticketImage + ", regDate=" + regDate + ", bookingDate=" + bookingDate
 				+ ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll + ", flag=" + flag
 				+ ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice=" + Arrays.toString(ticketPrice)
-				+ ", totalTicketPrice=" + totalTicketPrice + ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment
-				+ ", buyerId=" + buyerId + ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail="
-				+ buyerEmail + ", buyer=" + buyer + "]";
+				+ ", ticketC=" + ticketC + ", ticketP=" + ticketP + ", totalTicketPrice=" + totalTicketPrice
+				+ ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment + ", buyerId=" + buyerId + ", buyerName="
+				+ buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer=" + buyer + "]";
 	}
 
-	
+
 	
 	
 	

@@ -110,8 +110,9 @@ public class PurchaseController {
 		
 		System.out.println("\n /purchase/listBasket");
 		
-		User user = new User();
 		OpenApiPage resultPage = new OpenApiPage();
+
+		User user = new User();
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		try {
@@ -125,8 +126,8 @@ public class PurchaseController {
 
 			returnMap = purchaseService.getBasketList(openApiSearch, user.getUserId());
 			
-			System.out.println("\n[1]"+returnMap.get("list"));
-
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
 			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
 					pageUnit, pageSize);
 			System.out.println("[resultPage]" + resultPage);

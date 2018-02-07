@@ -79,6 +79,16 @@
 	FROM PURCHASE
 	WHERE BUYER_ID = #{buyerId}
 	</select>
+	
+	<delete id="delBasketList">
+	DELETE FROM purchase
+	WHERE buyer_id = #{buyerId}
+	AND post_no IN 
+	<foreach collection="">
+	
+	
+	</foreach>
+	</delete>
 
 <!-- SQL : SELECT ROW Count -->
 	<select id="getTotalCount" parameterType="string" resultType="int">
