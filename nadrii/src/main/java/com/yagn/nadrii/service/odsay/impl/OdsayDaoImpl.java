@@ -51,7 +51,7 @@ public class OdsayDaoImpl implements OdsayDao {
 		
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
 		
 		HttpResponse res = httpclient.execute(httpGet);
 		
@@ -61,7 +61,7 @@ public class OdsayDaoImpl implements OdsayDao {
 		HttpEntity httpEntity = res.getEntity();
 		
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		List list = new ArrayList();
 		

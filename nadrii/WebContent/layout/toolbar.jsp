@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
   	<!-- Latest compiled and minified CSS -->
@@ -37,27 +37,27 @@
 
 	<script type="text/javascript">
 	
-	//========== '³ªµéÀÌ Á¤º¸' ¹öÆ° Ã³¸® Event ==========
+	//========== 'ë‚˜ë“¤ì´ ì •ë³´' ë²„íŠ¼ ì²˜ë¦¬ Event ==========
 	$( function() {
-		$("a[href='#' ]:contains('³ªµéÀÌ Á¤º¸')").on("click" , function() {
+		$("a[href='#' ]:contains('ë‚˜ë“¤ì´ ì •ë³´')").on("click" , function() {
 			self.location = "../trip/getTheme"
 		});
 	});
 	
-	//========== '³ªµéÀÌ Æ¼ÄÏ' ¹öÆ° Ã³¸® Event ==========
+	//========== 'ë‚˜ë“¤ì´ í‹°ì¼“' ë²„íŠ¼ ì²˜ë¦¬ Event ==========
 	$( function() {
-		console.log("¼¼¼Ç Á¤º¸ : ${session}")
+		console.log("ì„¸ì…˜ ì •ë³´ : ${session}")
 		
-		$("a[href='#' ]:contains('³ªµéÀÌ Æ¼ÄÏ')").bind("click" , function() {
+		$("a[href='#' ]:contains('ë‚˜ë“¤ì´ í‹°ì¼“')").bind("click" , function() {
 			self.location = "/ticket/listTicket"
 		});
 		
 	});
 	
-	//============= "Àå¹Ù±¸´Ï" È­¸éÀÌµ¿ =============
+	//============= "ì¥ë°”êµ¬ë‹ˆ" í™”ë©´ì´ë™ =============
     $( function() {
        $("glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-//      	 alert("Àå¹Ù±¸´Ï")
+//      	 alert("ì¥ë°”êµ¬ë‹ˆ")
           self.location = "/purchase/listBasket"
        });
     });
@@ -93,7 +93,7 @@
 										${ loginUser.userId }
 									</c:if>
 										${ loginUser.userName }
-										´Ô È¯¿µÇÕ´Ï´Ù.
+										ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.
 								</span>
 								</a>
 							</li>
@@ -114,19 +114,19 @@
 			
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="../index.jsp">Home</a></li>
-						<li><a href="#">³ªµéÀÌ Á¤º¸</a></li>
-						<li><a href="/comm/listComm">³ª¸¸ÀÇ ³ªµéÀÌ</a></li>
+						<li><a href="#">ë‚˜ë“¤ì´ ì •ë³´</a></li>
+						<li><a href="/comm/listComm">ë‚˜ë§Œì˜ ë‚˜ë“¤ì´</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">³ªµéÀÌ ÇÃ·¡³Ê 
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">ë‚˜ë“¤ì´ í”Œë˜ë„ˆ 
 								<b class=" icon-angle-down"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="/planner/listPlanner">ÇÃ·¡³Ê °Ô½ÃÆÇ</a></li>
-								<li><a href="/planner/addPlannerView.jsp">ÇÃ·¡³Ê ÀÛ¼º</a></li>
+								<li><a href="/planner/listPlanner">í”Œë˜ë„ˆ ê²Œì‹œíŒ</a></li>
+								<li><a href="/planner/addPlannerView.jsp">í”Œë˜ë„ˆ ì‘ì„±</a></li>
 							</ul>
 						</li>
-						<li><a href="#">³ªµéÀÌ Æ¼ÄÏ</a></li>
-						<li><a href="/group/listGroup">³ªµéÀÌ¸ğÀÓ</a></li>
+						<li><a href="#">ë‚˜ë“¤ì´ í‹°ì¼“</a></li>
+						<li><a href="/group/listGroup">ë‚˜ë“¤ì´ëª¨ì„</a></li>
 					</ul>
 				</div>
 

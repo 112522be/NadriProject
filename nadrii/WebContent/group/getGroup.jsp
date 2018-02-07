@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="../resources/assets/js/1jquery.min.js"></script>
 <script src="../resources/assets/js/1skel.min.js"></script>
@@ -15,8 +15,14 @@
 footer a{
 	color: #555 !important;
 }
-.post > footer {
-	background : #ffff;
+
+footer{
+	background: #ffffff !important;
+}
+
+.button.fit {
+	margin-top: 10px !important; 
+	font-size: 1em;
 }
 
 .navbar {
@@ -47,10 +53,19 @@ footer a{
 					float: right;
 				}
 
+table {
+	float: left !important;
+}
+table td {
+	font-size: 0.6em;
+    padding: 0.05em 1.3em !important;
+}
+
 </style>
 <script>
 
 $(function(){
+	
 	if("${loginUser.userId}" == "${group.join.userId}"){
 		$("#userMenu").css("display","block");
 	}
@@ -75,9 +90,9 @@ $(function(){
 			return;	
 		}		
 	});
-	
-	
+		
 });
+
 
 </script>
 </head>
@@ -108,13 +123,55 @@ $(function(){
 						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
 					</div>
 				</header>
-				
-				
-				<a href="#" class="image featured">
-					<img src="../resources/assets/images/pic01.jpg" alt=""/>
-				</a>
-				<p>${group.text}</p>
-				
+
+				<div class="table-wrapper" style="width: 30%">
+					<jsp:include page="./join.jsp"></jsp:include>	
+				</div>
+				<br/>
+				<div>
+				<p>${group.text}
+				1. 동해물과 백두산이 마르고 닳도록 
+하느님이 보우하사 우리나라 만세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+2. 남산 위에 저 소나무 철갑을 두른 듯 
+바람 서리 불변함은 우리 기상일세
+무궁화 삼천리 화려 강산 
+대한 사람 대한으로 길이 보전하세
+
+3. 가을 하늘 공활한데 높고 구름 없이 
+밝은 달은 우리 가슴 일편단심일세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+4. 이 기상과 이 맘으로 충성을 다하여 
+괴로우나 즐거우나 나라 사랑하세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+1. 동해물과 백두산이 마르고 닳도록 
+하느님이 보우하사 우리나라 만세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+2. 남산 위에 저 소나무 철갑을 두른 듯 
+바람 서리 불변함은 우리 기상일세
+무궁화 삼천리 화려 강산 
+대한 사람 대한으로 길이 보전하세
+
+3. 가을 하늘 공활한데 높고 구름 없이 
+밝은 달은 우리 가슴 일편단심일세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+4. 이 기상과 이 맘으로 충성을 다하여 
+괴로우나 즐거우나 나라 사랑하세
+무궁화 삼천리 화려 강산
+대한 사람 대한으로 길이 보전하세
+
+				</p>
+				</div>
 				<footer>
 					<ul class="stats">
 						<li><a href="#" class="icon fa-heart">28</a></li>
@@ -130,5 +187,6 @@ $(function(){
 	</section>
 	</div>
 </body>
+
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
 </html>

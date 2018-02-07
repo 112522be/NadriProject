@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <title>Prologue by HTML5 UP</title>
-<meta charset="EUC-KR" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>

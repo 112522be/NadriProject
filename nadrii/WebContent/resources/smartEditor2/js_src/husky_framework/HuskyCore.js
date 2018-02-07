@@ -341,7 +341,7 @@ if (!nhn.husky){nhn.husky = {};}
 						// 다음 파일을 로딩한다.
 						this._loadLazyFiles(sMsg, aArgs, oEvent, aFilenames, nIdx+1);
 					}, this).bind(sMsg, aArgs, oEvent, aFilenames, nIdx),
-					"utf-8"
+					"UTF-8"
 				);
 			}
 		},

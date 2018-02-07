@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -8,11 +8,11 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>Àå¹Ù±¸´Ï ¸ñ·Ï</title>
+<title>ì¥ë°”êµ¬ë‹ˆ ëª©ë¡</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -53,10 +53,10 @@ function fncGetList(pageNo) {
 
 		<div class="page-header text-right">
 			<h3 class="text-info">
-				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Àå¹Ù±¸´Ï</p>
+				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> ì¥ë°”êµ¬ë‹ˆ</p>
 			</h3>
 			<h5 class="text-muted">
-				<strong class="text-success">${ user.userName }</strong> È¸¿ø´ÔÀÇ  <strong class="text-danger">Àå¹Ù±¸´Ï</strong> ¸ñ·Ï ÀÔ´Ï´Ù.
+				<strong class="text-success">${ user.userName }</strong> íšŒì›ë‹˜ì˜  <strong class="text-danger">ì¥ë°”êµ¬ë‹ˆ</strong> ëª©ë¡ ì…ë‹ˆë‹¤.
 			</h5>
 		</div>
 
@@ -86,9 +86,9 @@ function fncGetList(pageNo) {
 							<div class="media-body">
 								<h4 class="media-heading">${ list.ticketTitle }</h4>
 								<hr>
-								<h5>¡Ü ¿¹¸ÅÀÏÀÚ : ${ list.bookingDate }</h5>
-								<h5>¡Ü Ãë¼Ò °¡´ÉÀÏÀÚ : ${ list.cancelDate } ±îÁö</h5>
-								<h5>¡Ü ±¸¸ÅÇÑ Æ¼ÄÏ : ${ list.ticketPriceAll }</h5>
+								<h5>â— ì˜ˆë§¤ì¼ì : ${ list.bookingDate }</h5>
+								<h5>â— ì·¨ì†Œ ê°€ëŠ¥ì¼ì : ${ list.cancelDate } ê¹Œì§€</h5>
+								<h5>â— êµ¬ë§¤í•œ í‹°ì¼“ : ${ list.ticketPriceAll }</h5>
 							</div>
 							
 						</div>
@@ -102,9 +102,9 @@ function fncGetList(pageNo) {
 			<div class="row">
 				<div class="col-md-6"></div>
 				<div class="col-md-6 text-right">
-					<button type="button" class="btn btn-success">ÀüÃ¼°áÁ¦</button>
-					<button type="button" class="btn btn-warning">¼±ÅÃ°áÁ¦</button>
-					<button type="button" class="btn btn-info">»è Á¦</button>
+					<button type="button" class="btn btn-success">ì „ì²´ê²°ì œ</button>
+					<button type="button" class="btn btn-warning">ì„ íƒê²°ì œ</button>
+					<button type="button" class="btn btn-info">ì‚­ ì œ</button>
 					<button type="button" class="btn btn-danger">Success</button>
 				</div>
 			</div>
@@ -113,14 +113,14 @@ function fncGetList(pageNo) {
 
 
 
-			<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+			<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 	
 		</form>
 		<!-- form End /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
 	
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
