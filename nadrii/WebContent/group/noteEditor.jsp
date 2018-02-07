@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -12,26 +12,26 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
   <script type="text/javascript">
-        /* summernote¿¡¼­ ÀÌ¹ÌÁö ¾÷·Îµå½Ã ½ÇÇàÇÒ ÇÔ¼ö */
+        /* summernoteì—ì„œ ì´ë¯¸ì§€ ì—…ë¡œë“œì‹œ ì‹¤í–‰í•  í•¨ìˆ˜ */
 	 	function sendFile(file, editor) {              
-            // ÆÄÀÏ Àü¼ÛÀ» À§ÇÑ Æû»ı¼º
+            // íŒŒì¼ ì „ì†¡ì„ ìœ„í•œ í¼ìƒì„±
 	 		data = new FormData();
 	 	    data.append("uploadFile", file);
-	 	    $.ajax({ // ajax¸¦ ÅëÇØ ÆÄÀÏ ¾÷·Îµå Ã³¸®
+	 	    $.ajax({ // ajaxë¥¼ í†µí•´ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 	 	        data : data,
 	 	        type : "POST",
 	 	        url : "uploadImage",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
-	 	        success : function(data) { // Ã³¸®°¡ ¼º°øÇÒ °æ¿ì
-                    // ¿¡µğÅÍ¿¡ ÀÌ¹ÌÁö Ãâ·Â
+	 	        success : function(data) { // ì²˜ë¦¬ê°€ ì„±ê³µí•  ê²½ìš°
+                    // ì—ë””í„°ì— ì´ë¯¸ì§€ ì¶œë ¥
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
-					alert("ÆÄÀÏ ¾÷·Îµå¿¡ ½ÇÆĞÇß½À´Ï´Ù.")
+					alert("íŒŒì¼ ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.")
 				}
 	 	    });
 	 	}
@@ -110,8 +110,8 @@
                     buttons: {
                        place: addPlace
                     },
-					callbacks: { // Äİ¹éÀ» »ç¿ë
-                        // ÀÌ¹ÌÁö¸¦ ¾÷·ÎµåÇÒ °æ¿ì ÀÌº¥Æ®¸¦ ¹ß»ı
+					callbacks: { // ì½œë°±ì„ ì‚¬ìš©
+                        // ì´ë¯¸ì§€ë¥¼ ì—…ë¡œë“œí•  ê²½ìš° ì´ë²¤íŠ¸ë¥¼ ë°œìƒ
 					    onImageUpload: function(files, editor, welEditable) {
 					    	for(i=0;i<files.length;i++){
 					    		sendFile(files[i], this);
@@ -128,4 +128,41 @@
 		<div id="cndThumbnail"></div>
 		</form>
 </body>
+	<style type="text/css">
+		input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button,
+	.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-webkit-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-ms-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		background-color: #FFFFFF;
+		border: 0;
+		box-shadow: inset 0 0 0 1px rgba(160, 160, 160, 0.3);
+		color: #3c3b3b;
+		cursor: pointer;
+		display: inline-block;
+		font-family: "Raleway", Helvetica, sans-serif;
+		font-size: 0.6em;
+		font-weight: 800;
+		width: 4em !important;
+		height: 2.8125em;
+		letter-spacing: 0.25em;
+		line-height: 2.8125em;
+		padding: 0;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	.note-mybutton > .note-btn{
+		width: 8em !important;
+	}
+	</style>
 </html>

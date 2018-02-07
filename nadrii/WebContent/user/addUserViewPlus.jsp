@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -43,7 +43,7 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		// »ıÀÏ
+		// ìƒì¼
 		 $( function() {
 			    $( "#datepicker" ).datepicker();
 			  } );
@@ -59,24 +59,24 @@
 			 
 //			 var data = "userName=" +$("#userName").val();
 //			 if($("userName").val() == ''){
-//		   			alert("´ç½Å ÀÌ¸§ÀÌ ¸Â½À´Ï±î?");
+//		   			alert("ë‹¹ì‹  ì´ë¦„ì´ ë§ìŠµë‹ˆê¹Œ?");
 ///		   			$("#userName").focus();
 ////		   			return;
 ////		   		}
-//			 if(confirm("Ãß°¡Á¤º¸¸¦ ÀÔ·ÂÇÏ½Ã°Ú½À´Ï±î?")){
+//			 if(confirm("ì¶”ê°€ì •ë³´ë¥¼ ì…ë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
 //				 $.ajax({
 //					 data : allData,
 //					 url : "/user/addUserPlus",
 //					 type : "POST",
-////				     contentType : "application; charset=utf-8",
+////				     contentType : "application; charset=UTF-8",
 //					 success : function(data){
 //						 if(result.msg != "success"){
-//							 alert("´Ù½ÃÇÑ¹ø È®ÀÎÇØ ÁÖ¼¼¿ä.");
+//							 alert("ë‹¤ì‹œí•œë²ˆ í™•ì¸í•´ ì£¼ì„¸ìš”.");
 //							 window.opener.location.reload();
 //							 return;
 //						 }
 //						 if(result.msg == "success"){
-//							 alert("Ãß°¡Á¤º¸ ÀÔ·ÂµÇ¾ú½À´Ï´Ù.");
+//							 alert("ì¶”ê°€ì •ë³´ ì…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
 //							 window.opener.location.reload();
 //							 self.close();
 //							 locatuin.href="/user/main";
@@ -89,21 +89,21 @@
 		 function addUserPlus(){
 //			 var data = "userName=" +$("#userName").val();
 //			 if($("userName").val() == ''){
-//		   			alert("´ç½Å ÀÌ¸§ÀÌ ¸Â½À´Ï±î?");
+//		   			alert("ë‹¹ì‹  ì´ë¦„ì´ ë§ìŠµë‹ˆê¹Œ?");
 //		   			$("#userName").focus();
 //		   			return;
 //		   		}
 			
-			var radio = $("input:radio[name='gender']:checked").val();   // checked ¾øÀ¸¸é Ã¼Å©ÇÑ °ªÀÌ ¾È³ª¿È...
+			var radio = $("input:radio[name='gender']:checked").val();   // checked ì—†ìœ¼ë©´ ì²´í¬í•œ ê°’ì´ ì•ˆë‚˜ì˜´...
 			console.log("radiobutton : " + radio)
 			var birth = $("input[name='birth']").val();
-			console.log("»ı³â¿ùÀÏ È®ÀÎ : " + birth)
+			console.log("ìƒë…„ì›”ì¼ í™•ì¸ : " + birth)
 			var name = $("input[name='userName']").val();
-			console.log("»ç¿ëÀÚ ÀÌ¸§ : " + name)
+			console.log("ì‚¬ìš©ì ì´ë¦„ : " + name)
 			var phone = $("hidden[name='phone']").val();
-			console.log("ÇÚµåÆù¹øÈ£ : " + phone)
+			console.log("í•¸ë“œí°ë²ˆí˜¸ : " + phone)
 			var img = $("hidden[name='profiIeimageFile']").val();
-			console.log("ÇÁ·ÎÇÊ »çÁø : " + img)
+			console.log("í”„ë¡œí•„ ì‚¬ì§„ : " + img)
 			
 			var value = "";	
 			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
@@ -142,15 +142,15 @@
 			});
 		 
 		
-		//	¹öÆ° ¸»Ç³¼±
+		//	ë²„íŠ¼ ë§í’ì„ 
 		 $(document).ready(function(){
 		     $('[data-toggle="popover"]').popover(); 
 		 });
 		
 		
-		// ===== 'Ãß°¡' ¹öÆ° Ã³¸® =====
+		// ===== 'ì¶”ê°€' ë²„íŠ¼ ì²˜ë¦¬ =====
 		$(function() {
-	            $("button:contains('Ãß °¡')").bind('click', function(){
+	            $("button:contains('ì¶” ê°€')").bind('click', function(){
 	            	addUserPlus();
 	            })
 	        });
@@ -169,57 +169,57 @@
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">Ãß °¡ Á¤ º¸ ÀÔ ·Â</h1>
+		<h1 class="bg-primary text-center">ì¶” ê°€ ì • ë³´ ì… ë ¥</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" action="addUserPlus">
 		
 		  <div class="form-group">
-		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">»ı ³â ¿ù ÀÏ</label>
+		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">ìƒ ë…„ ì›” ì¼</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="datepicker" name="birth" placeholder="»ı ³â ¿ù ÀÏ">
+		      <input type="text" class="form-control" id="datepicker" name="birth" placeholder="ìƒ ë…„ ì›” ì¼">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
 		  </div>
 		  <!--  
 		  <form action="/addUserPlus" class="form-group">
-		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">ÀÚ³à À¯ ¹«</label>
+		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">ìë…€ ìœ  ë¬´</label>
 		    <div class="col-sm-4">
 		   	  <input type="hidden" id="check01" value="abcd">
-		      <label><input type="checkbox" name="fruits" value="ÀÖÀ½">ÀÖÀ½</label>
-			  <label><input type="checkbox" name="fruits" value="¾øÀ½">¾øÀ½</label>
+		      <label><input type="checkbox" name="fruits" value="ìˆìŒ">ìˆìŒ</label>
+			  <label><input type="checkbox" name="fruits" value="ì—†ìŒ">ì—†ìŒ</label>
 		    </div>
 		  </form>
 		  -->
 		  <div class="form-group">
-		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">ÀÚ³à¼ö</label>
+		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">ìë…€ìˆ˜</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="children" name="children" placeholder="ÀÚ³à¼ö">
+		      <input type="text" class="form-control" id="children" name="children" placeholder="ìë…€ìˆ˜">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">¼º º°</label>
+		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">ì„± ë³„</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label><input type="radio" name="gender" value="³²">³²</label>
-			  <label><input type="radio" name="gender" value="¿©">¿©</label>
+		      <label><input type="radio" name="gender" value="ë‚¨">ë‚¨</label>
+			  <label><input type="radio" name="gender" value="ì—¬">ì—¬</label>
 		    </div>
 		   </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸§</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ì´ë¦„</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="È¸¿øÀÌ¸§">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="íšŒì›ì´ë¦„">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÈŞ´ëÀüÈ­¹øÈ£</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">íœ´ëŒ€ì „í™”ë²ˆí˜¸</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -230,16 +230,16 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <input type="hidden" name="phone"/>
 		  </div>
 		  
 		  <div class="form-group">
-		  	<label for="profiIeimageFile" class="col-sm-offset-1 col-sm-3 control-label">ÇÁ·ÎÇÊ »çÁø</label>
+		  	<label for="profiIeimageFile" class="col-sm-offset-1 col-sm-3 control-label">í”„ë¡œí•„ ì‚¬ì§„</label>
 			  <div class="col-sm-2">
 				  <form id="form" runat="server">
 				    <input type='file' id="imgInput"  />
@@ -251,15 +251,15 @@
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-info cancelbtn" data-toggle="popover"
-		      data-trigger="hover"data-placement="bottom" data-content="ÀÌ¸§, ÇÚµåÆù¹øÈ£ ´Ù½Ã È®ÀÎ!" >Ãß °¡</button>
-			  <a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+		      data-trigger="hover"data-placement="bottom" data-content="ì´ë¦„, í•¸ë“œí°ë²ˆí˜¸ ë‹¤ì‹œ í™•ì¸!" >ì¶” ê°€</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 		    </div>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
  	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

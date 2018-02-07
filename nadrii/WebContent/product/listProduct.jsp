@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,11 +8,11 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <title>listProduct.jsp</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -27,13 +27,13 @@
 <!-- Bootstrap Dropdown Hover JS -->
 <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
-<!-- jQuery UI »ç¿ë CSS-->
+<!-- jQuery UI ì‚¬ìš© CSS-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!-- JQuery tabs »ç¿ë -->
+<!-- JQuery tabs ì‚¬ìš© -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -50,7 +50,7 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-//°Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+//ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘ Form ì „ì†¡ì„ ìœ„í•´ JavaScrpt ì´ìš©  
 function fncGetList(currentPage) {
 	
 	$("#currentPage").val(currentPage);
@@ -75,13 +75,13 @@ function fncHighPrice(currentPage) {
 }
 
 $(function(){
-	$( "button.btn.btn-default:contains('°Ë»ö')").bind("click", function(){
+	$( "button.btn.btn-default:contains('ê²€ìƒ‰')").bind("click", function(){
 		fncGetList('${ search.currentPage }');
 	});
 });
 
 $(function(){
-	$("button:contains('³·Àº°¡°İ¼ø')").bind("click", function(){
+	$("button:contains('ë‚®ì€ê°€ê²©ìˆœ')").bind("click", function(){
 		fncLowPrice('${ search.currentPage }');
 	});
 });
@@ -114,13 +114,13 @@ $(function(){
 							},
 							success : function(JSONData , status) {
 								var displayValue = "<h5><pre>"
-													+"»ó Ç° ¹ø È£  : " + JSONData.prodNo + "<br/>"
-													+"»ó  Ç°  ¸í : " + JSONData.prodName + "<br/>"
-													+"»óÇ° ÀÌ¹ÌÁö : " + JSONData.fileName + "<br/>"
-													+"»óÇ°»ó¼¼Á¤º¸ : " + JSONData.prodDetail + "<br/>"
-													+"Á¦ Á¶ ÀÏ ÀÚ : " + JSONData.manuDate + "<br/>"
-													+"°¡  °İ : " + JSONData.price + " ¿ø <br/>"
-													+"µî ·Ï ÀÏ ÀÚ : " + JSONData.regDate + "<br/>"
+													+"ìƒ í’ˆ ë²ˆ í˜¸  : " + JSONData.prodNo + "<br/>"
+													+"ìƒ  í’ˆ  ëª… : " + JSONData.prodName + "<br/>"
+													+"ìƒí’ˆ ì´ë¯¸ì§€ : " + JSONData.fileName + "<br/>"
+													+"ìƒí’ˆìƒì„¸ì •ë³´ : " + JSONData.prodDetail + "<br/>"
+													+"ì œ ì¡° ì¼ ì : " + JSONData.manuDate + "<br/>"
+													+"ê°€  ê²© : " + JSONData.price + " ì› <br/>"
+													+"ë“± ë¡ ì¼ ì : " + JSONData.regDate + "<br/>"
 													+ "</pre></h5>";
 
 								$("h4").remove();
@@ -145,16 +145,16 @@ $(function(){
 								"Content-Type" : "application/json"
 							},
 							success : function(JSONData , status) {
-								var displayValue = '<h4><font color="red">' + "ÇØ´ç»óÇ°Àº ÇöÀç ±¸¸ÅÇÏ½Ç ¼ö ¾ø½À´Ï´Ù. [Àç°í¾øÀ½]" 
+								var displayValue = '<h4><font color="red">' + "í•´ë‹¹ìƒí’ˆì€ í˜„ì¬ êµ¬ë§¤í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. [ì¬ê³ ì—†ìŒ]" 
 													+ "</font></h4><br/>"
 													+ "<h5><pre>"
-													+"»ó Ç° ¹ø È£ : " + JSONData.prodNo + "<br/>"
-													+"»ó  Ç°  ¸í : " + JSONData.prodName + "<br/>"
-													+"»óÇ° ÀÌ¹ÌÁö : " + JSONData.fileName + "<br/>"
-													+"»óÇ°»ó¼¼Á¤º¸ : " + JSONData.prodDetail + "<br/>"
-													+"Á¦ Á¶ ÀÏ ÀÚ : " + JSONData.manuDate + "<br/>"
-													+"°¡  °İ : " + JSONData.price + " ¿ø <br/>"
-													+"µî ·Ï ÀÏ ÀÚ : " + JSONData.regDate + "<br/>"
+													+"ìƒ í’ˆ ë²ˆ í˜¸ : " + JSONData.prodNo + "<br/>"
+													+"ìƒ  í’ˆ  ëª… : " + JSONData.prodName + "<br/>"
+													+"ìƒí’ˆ ì´ë¯¸ì§€ : " + JSONData.fileName + "<br/>"
+													+"ìƒí’ˆìƒì„¸ì •ë³´ : " + JSONData.prodDetail + "<br/>"
+													+"ì œ ì¡° ì¼ ì : " + JSONData.manuDate + "<br/>"
+													+"ê°€  ê²© : " + JSONData.price + " ì› <br/>"
+													+"ë“± ë¡ ì¼ ì : " + JSONData.regDate + "<br/>"
 													+ "</pre></h5>";
 													
 								$("h4").remove();
@@ -179,7 +179,7 @@ $(function(){
 			if (proTranCode == '' || proTranCode == null) {
 				self.location ="/product/getProduct?prodNo=" + prodNo + "&menu=${ menu }";
 			} else {
-				alert("ÇØ´ç»óÇ°Àº ÇöÀç ±¸¸ÅÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.")
+				alert("í•´ë‹¹ìƒí’ˆì€ í˜„ì¬ êµ¬ë§¤í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.")
 			}
 		} else {
 			self.location ="/product/getProduct?prodNo=" + prodNo + "&menu=${ menu }";
@@ -190,7 +190,7 @@ $(function(){
 
 
 $(function(){
-	$( "tbody td:nth-child(5):contains('¹è¼ÛÇÏ±â')" ).bind("click" , function() {
+	$( "tbody td:nth-child(5):contains('ë°°ì†¡í•˜ê¸°')" ).bind("click" , function() {
 		
 		var prodNo = $( $('input[name="prodNo"]')[$( "tbody td:nth-child(5)" ).index(this)] ).val();
 			
@@ -253,11 +253,11 @@ $( function() {
 
 	
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>${ menu == 'manage' ? "ÆÇ¸Å»óÇ°°ü¸®" : "ÆÇ¸Å»óÇ°¸ñ·Ï" }</h3>
+	       <h3>${ menu == 'manage' ? "íŒë§¤ìƒí’ˆê´€ë¦¬" : "íŒë§¤ìƒí’ˆëª©ë¡" }</h3>
 	    </div>
 
 
@@ -286,12 +286,12 @@ $( function() {
 
 
 
-	<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+	<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 	    <div class="row">
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		ÀüÃ¼  ${resultPage.totalCount } °Ç¼ö, ÇöÀç ${resultPage.currentPage} ÆäÀÌÁö
+		    		ì „ì²´  ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬ ${resultPage.currentPage} í˜ì´ì§€
 		    	</p>
 		    </div>
 
@@ -300,24 +300,24 @@ $( function() {
 			    
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>»óÇ°¹øÈ£</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>»óÇ°¸í</option>
-						<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>»óÇ°°¡°İ</option>
+						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>ìƒí’ˆë²ˆí˜¸</option>
+						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>ìƒí’ˆëª…</option>
+						<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>ìƒí’ˆê°€ê²©</option>
 					</select>
 				  </div>
 				  
 				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">°Ë»ö¾î</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="°Ë»ö¾î"
+				    <label class="sr-only" for="searchKeyword">ê²€ìƒ‰ì–´</label>
+				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="ê²€ìƒ‰ì–´"
 				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 				  </div>
 				  
-				  <button type="button" class="btn btn-default">°Ë»ö</button>
+				  <button type="button" class="btn btn-default">ê²€ìƒ‰</button>
 				  
-				  <!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+				  <!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
-				  <!-- °¡°İÁ¤·Ä¿¡ ´ëÇÑ °ªÀ» º¸³»´Â ºÎºĞ -->
+				  <!-- ê°€ê²©ì •ë ¬ì— ëŒ€í•œ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 				  <input type="hidden" class="lowPrice" id="lowPriceSearch" name="lowPriceCondition" value=""/>
 				  <input type="hidden" class="highPrice" id="highPriceSearch" name="highPriceCondition" value=""/>
 				  
@@ -327,18 +327,18 @@ $( function() {
     	<div class="col-md-6 text-left">
     		<p>
 	  			<button type="button" class="btn btn-info btn-xs" >
-	  				<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> ³·Àº°¡°İ¼ø
+	  				<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> ë‚®ì€ê°€ê²©ìˆœ
 	  			</button> 
    		  		<a class="btn btn-info btn-xs" href="#" role="button">
    		  			<span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-   		  				³ôÀº°¡°İ¼ø
+   		  				ë†’ì€ê°€ê²©ìˆœ
    		  		</a>
 			</p>
 		</div>
 
     	</div>
     	
-    	<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+    	<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 		
 		
       <!--  table Start /////////////////////////////////////-->
@@ -347,11 +347,11 @@ $( function() {
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left">»óÇ°ÀÌ¹ÌÁö</th>
-            <th align="left">»óÇ°¸í</th>
-            <th align="left">°¡°İ</th>
-            <th align="left">${ menu == 'manage' ? "¹è¼ÛÇöÈ²" : "ÆÇ¸ÅÇöÈ²" }</th>
-            <th align="left">°£·«Á¤º¸</th>
+            <th align="left">ìƒí’ˆì´ë¯¸ì§€</th>
+            <th align="left">ìƒí’ˆëª…</th>
+            <th align="left">ê°€ê²©</th>
+            <th align="left">${ menu == 'manage' ? "ë°°ì†¡í˜„í™©" : "íŒë§¤í˜„í™©" }</th>
+            <th align="left">ê°„ëµì •ë³´</th>
           </tr>
         </thead>
        
@@ -372,7 +372,7 @@ $( function() {
 				</c:if>
 			  </td>
 			  
-		  	  <td align="left" title="´õºíÅ¬¸¯ : »óÇ°Á¤º¸ È®ÀÎ">
+		  	  <td align="left" title="ë”ë¸”í´ë¦­ : ìƒí’ˆì •ë³´ í™•ì¸">
 					${ product.prodName }
 		  	  </td>
 		  	  
@@ -380,16 +380,16 @@ $( function() {
 			  
 			  <td align="left">
 			  	<c:if test = "${ menu == 'search' }">
-					<c:if test = "${ product.proTranCode == null }">ÆÇ¸ÅÁß</c:if> 
-					<c:if test = "${ product.proTranCode != null }">Àç°í ¾øÀ½</c:if>
+					<c:if test = "${ product.proTranCode == null }">íŒë§¤ì¤‘</c:if> 
+					<c:if test = "${ product.proTranCode != null }">ì¬ê³  ì—†ìŒ</c:if>
 				</c:if>
 				<c:if test = "${ menu == 'manage' }">
-					<c:if test = "${ product.proTranCode == null }">ÆÇ¸ÅÁß</c:if>
-					<c:if test = "${ product.proTranCode == '0' }">±¸¸Å¿Ï·á 
-						<input type="hidden" name="prodNo" value="${ product.prodNo }">¹è¼ÛÇÏ±â
+					<c:if test = "${ product.proTranCode == null }">íŒë§¤ì¤‘</c:if>
+					<c:if test = "${ product.proTranCode == '0' }">êµ¬ë§¤ì™„ë£Œ 
+						<input type="hidden" name="prodNo" value="${ product.prodNo }">ë°°ì†¡í•˜ê¸°
 					</c:if>
-					<c:if test = "${ product.proTranCode == '1' }">¹è¼ÛÁß</c:if>
-					<c:if test = "${ product.proTranCode == '2' }">¹è¼Û¿Ï·á</c:if>
+					<c:if test = "${ product.proTranCode == '1' }">ë°°ì†¡ì¤‘</c:if>
+					<c:if test = "${ product.proTranCode == '2' }">ë°°ì†¡ì™„ë£Œ</c:if>
 				</c:if>
 			  </td>
 			  
@@ -409,7 +409,7 @@ $( function() {
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
  	
  	<!-- PageNavigation Start... -->

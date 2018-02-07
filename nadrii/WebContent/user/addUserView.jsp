@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	
 });
 
-//	ÀÌ¸ŞÀÏ ÀÎÁõ 
+//	ì´ë©”ì¼ ì¸ì¦ 
 function check(){
 	var email = $("#email").val();
 	$.ajax({
@@ -60,10 +60,10 @@ function check(){
 }
 
  
-///     ¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾ÊÀ» °æ¿ì °¡ÀÔ¹öÆ° ºñÈ°¼ºÈ­¸¦ À§ÇÑ º¯¼ö¼³Á¤
+///     ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•Šì„ ê²½ìš° ê°€ì…ë²„íŠ¼ ë¹„í™œì„±í™”ë¥¼ ìœ„í•œ ë³€ìˆ˜ì„¤ì •
     var idCheckFlag = false;
     var pwdCheck = false;
-    //¾ÆÀÌµğ Ã¼Å©ÇÏ¿© °¡ÀÔ¹öÆ° ºñÈ°¼ºÈ­, Áßº¹È®ÀÎ.
+    //ì•„ì´ë”” ì²´í¬í•˜ì—¬ ê°€ì…ë²„íŠ¼ ë¹„í™œì„±í™”, ì¤‘ë³µí™•ì¸.
      
     function checkId() {
     
@@ -75,19 +75,19 @@ function check(){
             
             success : function(result) {
             	if(result.check == 1){
-            		//alert("¾ÆÀÌµğ°¡ Áßº¹µÇ¾ú½À´Ï´Ù.");
+            		//alert("ì•„ì´ë””ê°€ ì¤‘ë³µë˜ì—ˆìŠµë‹ˆë‹¤.");
             		idCheckFlag = false;
             		$("#userId").css("background-color", "#FFCECE");
             		$(".signupbtn").prop("disabled", true);
 	                $(".signupbtn").css("background-color", "#aaaaaa");
-	                $("#htmlId").html("¾ÆÀÌµğ Áßº¹ÀÔ´Ï´Ù.").css('color','red');
+	                $("#htmlId").html("ì•„ì´ë”” ì¤‘ë³µì…ë‹ˆë‹¤.").css('color','red');
             		return;
             	}else{
-            		//alert("»ç¿ë °¡´ÉÇÕ´Ï´Ù.");
+            		//alert("ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.");
             		idCheckFlag = true;
             		$("#userId").css("background-color", "#B0F6AC");
             		$(".signupbtn").prop("disabled", false);
-            		$("#htmlId").html("»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğ ÀÔ´Ï´Ù.").css('color','blue');
+            		$("#htmlId").html("ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë”” ì…ë‹ˆë‹¤.").css('color','blue');
             	}
             }
         });    
@@ -104,7 +104,7 @@ function check(){
 
 //		str3.submit();
 
-//		alert("°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.")
+//		alert("ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.")
 //   }
     
 	function checkPwd(){
@@ -145,13 +145,13 @@ function check(){
     	data += "&password=" + $("#password").val(); 
    		data += "&email=" + $("#email").val();
     	if($("#userId").val() == ''){
-    		alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+    		alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
     		$("#userId").focus();
     		return;
     	}
    		
    		if(idCheckFlag == false){
-    		alert("¾ÆÀÌµğ°¡ »ç¿ëÁßÀÔ´Ï´Ù.");
+    		alert("ì•„ì´ë””ê°€ ì‚¬ìš©ì¤‘ì…ë‹ˆë‹¤.");
     		$("#userId").val('');
     		$("#userId").focus();
     		$("#userId").css("background-color", "#B0F6AC");
@@ -159,19 +159,19 @@ function check(){
     	}
    		
    		if($("#password").val() == ''){
-   			alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+   			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
    			$("#password").focus();
    			return;
    		}
    		
    		if($("#password2").val() == ''){
-   			alert("ºñ¹Ğ¹øÈ£ È®ÀÎÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+   			alert("ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
    			$("#password2").focus();
    			return;
    		}
     	
     	if($("#password").val() != $("#password2").val()){
-    		alert("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+    		alert("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
     		$("#password").val('');
     		$("#password2").val('');
     		$("#password").focus();
@@ -179,12 +179,12 @@ function check(){
     	}
     	
     	if($("#email").val() == ''){
-    		alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+    		alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
     		$("#email").focus();
     		return;
     	}
     	
-    	if(confirm("È¸¿ø°¡ÀÔÀ» ÇÏ½Ã°Ú½À´Ï±î?")){
+    	if(confirm("íšŒì›ê°€ì…ì„ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
     		$("form").attr("method" ,"POST").attr("action" ,"/user/addUser").submit();
     		
     	
@@ -192,7 +192,7 @@ function check(){
     }
     
     function delchk(){
-        if(confirm("Ãë¼ÒÇÏ½Ã°Ú½À´Ï±î?")){
+        if(confirm("ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
             location.href = "/user/main";
         }
     }
@@ -209,16 +209,16 @@ function check(){
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-success text-center">È¸ ¿ø °¡ ÀÔ</h1>
+		<h1 class="bg-success text-center">íšŒ ì› ê°€ ì…</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">¾Æ ÀÌ µğ</label>
+		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">ì•„ ì´ ë””</label>
 		    <div class="col-sm-4">
 		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${facebookId}" oninput="checkId();" autofocus>
 		      <span id = "chkMsg"></span>
@@ -227,46 +227,46 @@ function check(){
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£</label>
+		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control password" id="password" name="password" placeholder="ºñ¹Ğ¹øÈ£">
+		      <input type="password" class="form-control password" id="password" name="password" placeholder="ë¹„ë°€ë²ˆí˜¸">
 		    </div>
 		    <div id="htmlId"></div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£ È®ÀÎ</label>
+		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎ" oninput="checkPwd();">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸" oninput="checkPwd();">
 		    </div>
 		  </div>
 <!-- 	  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸§</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ì´ë¦„</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="È¸¿øÀÌ¸§">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="íšŒì›ì´ë¦„">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÁÖ¹Î¹øÈ£</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì£¼ë¯¼ë²ˆí˜¸</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="ÁÖ¹Î¹øÈ£">
+		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="ì£¼ë¯¼ë²ˆí˜¸">
 		      <span id="helpBlock" class="help-block">
-		      	 <strong class="text-danger">" -  " Á¦¿Ü 13ÀÚ¸®ÀÔ·ÂÇÏ¼¼¿ä</strong>
+		      	 <strong class="text-danger">" -  " ì œì™¸ 13ìë¦¬ì…ë ¥í•˜ì„¸ìš”</strong>
 		      </span>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÁÖ¼Ò</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì£¼ì†Œ</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="ÁÖ¼Ò">
+		      <input type="text" class="form-control" id="addr" name="addr" placeholder="ì£¼ì†Œ">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÈŞ´ëÀüÈ­¹øÈ£</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">íœ´ëŒ€ì „í™”ë²ˆí˜¸</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -277,26 +277,26 @@ function check(){
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <input type="hidden" name="phone"  />
 		  </div>
 		  -->
 		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸ŞÀÏ</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì´ë©”ì¼</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" placeholder="ÀÌ¸ŞÀÏ" oninput="emailValid();">
-		      <input type="button" value="ÀÎÁõ" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
+		      <input type="text" class="form-control" id="email" name="email" placeholder="ì´ë©”ì¼" oninput="emailValid();">
+		      <input type="button" value="ì¸ì¦" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
 		    </div>
 		  </div> 
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >°¡ &nbsp;ÀÔ</button>
-			  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >Ãë&nbsp;¼Ò</a>
+		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >ê°€ &nbsp;ì…</button>
+			  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >ì·¨&nbsp;ì†Œ</a>
 		    </div>
 		  </div>
 		</form>
@@ -304,7 +304,7 @@ function check(){
 
 		
  	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 
 </body>

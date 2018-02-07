@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -32,12 +32,12 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-		//============= "·Î±×ÀÎ"  Event ¿¬°á =============
+		//============= "ë¡œê·¸ì¸"  Event ì—°ê²° =============
 		$( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button").on("click" , function() {
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
@@ -45,13 +45,13 @@
 //				alert(id +"/"+ pw)
 				
 				if(id == null || id.length <1) {
-					alert('ID ¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.');
+					alert('ID ë¥¼ ì…ë ¥í•˜ì§€ ì•Šìœ¼ì…¨ìŠµë‹ˆë‹¤.');
 					$("#userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.');
+					alert('íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì§€ ì•Šìœ¼ì…¨ìŠµë‹ˆë‹¤.');
 					$("#password").focus();
 					return;
 				}
@@ -62,36 +62,36 @@
 			});
 		});	
 		
-		//============= È¸¿ø¿ø°¡ÀÔÈ­¸éÀÌµ¿ =============
+		//============= íšŒì›ì›ê°€ì…í™”ë©´ì´ë™ =============
 		$( function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 				self.location = "/user/addUser"
 			});
 		}); 
 		
-		//============= ¾ÆÀÌµğ Ã£±â È­¸éÀÌµ¿ =============
+		//============= ì•„ì´ë”” ì°¾ê¸° í™”ë©´ì´ë™ =============
 		$( function() {
-			$("a[href='#' ]:contains('¾ÆÀÌµğ Ã£±â')").on("click" , function() {
+			$("a[href='#' ]:contains('ì•„ì´ë”” ì°¾ê¸°')").on("click" , function() {
 				self.location = "/user/findIdPg"
 			});
 		});
 		
-		//============= ºñ¹Ğ¹øÈ£ Ã£±â È­¸éÀÌµ¿ =============
+		//============= ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í™”ë©´ì´ë™ =============
 		$( function() {
-			$("a[href='#' ]:contains('ºñ¹Ğ¹øÈ£ Ã£±â')").on("click" , function() {
+			$("a[href='#' ]:contains('ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°')").on("click" , function() {
 				self.location = "/user/findPasswordPg"
 			});
 		});
-		//============= '·Î±×ÀÎ' ¹öÆ° Å¬¸¯ Event Ã³¸® =============
+		//============= 'ë¡œê·¸ì¸' ë²„íŠ¼ í´ë¦­ Event ì²˜ë¦¬ =============
 		$( function() {
-			$(".btn.btn-primary:contains('·Î ±× ÀÎ')").bind("click" , function() {
+			$(".btn.btn-primary:contains('ë¡œ ê·¸ ì¸')").bind("click" , function() {
 				fncLoginCheck();
 				//self.location = "/user/findPasswordPg"
 			});
 		});
 		
-		//========== fncLoginProc Event Ã³¸® ==========
+		//========== fncLoginProc Event ì²˜ë¦¬ ==========
 		function fncLoginCheck(id, pw) {
 //			var userId = $("#userId").val();
 //			var password = $("#password").val();
@@ -104,18 +104,18 @@
 				data : loginData,
 				success : function(result){
 					if(result.msg == "failed"){
-						alert("µî·ÏµÈ ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+						alert("ë“±ë¡ëœ ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
 						location.href="/index.jsp";
 					}
 					if(result.msg == "success"){
-						alert(result.welcomeSign + " ´Ô, È¯¿µÇÕ´Ï´Ù.");
+						alert(result.welcomeSign + " ë‹˜, í™˜ì˜í•©ë‹ˆë‹¤.");
 						location.href="/index.jsp";
 					}
 				}
 			});
 		}
 		
-		//============= FaceBook ·Î±×ÀÎ =============
+		//============= FaceBook ë¡œê·¸ì¸ =============
 
 		function statusChangeCallback(response) {
 			console.log('statusChangeCallback');
@@ -187,7 +187,7 @@
 		    });
 		  }
 		 */
-		//============= FaceBook ·Î±×ÀÎ =============
+		//============= FaceBook ë¡œê·¸ì¸ =============
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id))
@@ -197,7 +197,7 @@
 			js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'))
-		//============= kakao ·Î±×ÀÎ =============
+		//============= kakao ë¡œê·¸ì¸ =============
 	</script>		
 	
 </head>
@@ -214,7 +214,7 @@
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
@@ -232,23 +232,23 @@
 						<div class="form-group">
 							<label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" name="userId" id="userId" placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.">
+								<input type="text" class="form-control" name="userId" id="userId" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="password" class="col-sm-4 control-label">PASSWORD</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" name="password"	id="password" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä">
+								<input type="password" class="form-control" name="password"	id="password" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-6 text-center">
-								<button type="button" class="btn btn-primary">·Î ±× ÀÎ</button>
-								<a class="btn btn-primary btn" href="#" role="button">È¸¿ø°¡ÀÔ</a> 
-								<a class="btn btn-warning btn" role="button" href="#">¾ÆÀÌµğ Ã£±â</a> 
-								<a class="btn btn-info" role="button" href="#">ºñ¹Ğ¹øÈ£ Ã£±â</a>
+								<button type="button" class="btn btn-primary">ë¡œ ê·¸ ì¸</button>
+								<a class="btn btn-primary btn" href="#" role="button">íšŒì›ê°€ì…</a> 
+								<a class="btn btn-warning btn" role="button" href="#">ì•„ì´ë”” ì°¾ê¸°</a> 
+								<a class="btn btn-info" role="button" href="#">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
 							</div>
 
 							<div class="col-sm-offset-4 col-sm-6 text-center">
@@ -275,7 +275,7 @@
   	 	<!--  row Start /////////////////////////////////////-->
   	 	
  	</div>
- 	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

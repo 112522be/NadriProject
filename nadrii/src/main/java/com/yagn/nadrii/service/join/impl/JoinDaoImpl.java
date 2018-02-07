@@ -50,17 +50,20 @@ public class JoinDaoImpl implements JoinDao{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public int getTotalCount(Search search) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTotalJoinCount(Search search) throws Exception {
+		return sqlSession.selectOne("JoinMapper.getTotalJoinCount", search);
+	}
+	
+	@Override
+	public int getTotalMemberCount(Search search) throws Exception {
+		return sqlSession.selectOne("JoinMapper.getTotalMemberCount", search);
 	}
 
 	@Override
-	public Join getJoin(int joinNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Join> getJoinMemberList(Search search) throws Exception {
+		return sqlSession.selectList("JoinMapper.getJoinMemberList", search);
 	}
 	
 }

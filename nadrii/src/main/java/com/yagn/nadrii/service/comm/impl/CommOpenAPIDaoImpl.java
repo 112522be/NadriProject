@@ -91,7 +91,7 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		httpEntity = response.getEntity();
 		
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		JSONObject message = (JSONObject)object.get("message");

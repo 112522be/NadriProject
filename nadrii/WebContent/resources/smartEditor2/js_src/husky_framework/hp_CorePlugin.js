@@ -128,7 +128,7 @@ nhn.husky.CorePlugin = jindo.$Class({
 				this._loadFullPlugin(aFilenames, sClassName, sMsgName, oThisRef, oArguments, nIdx+1);
 			}, this).bind(aFilenames, sClassName, sMsgName, oThisRef, oArguments, nIdx),
 			
-			"utf-8"
+			"UTF-8"
 		);
 	},
 	
