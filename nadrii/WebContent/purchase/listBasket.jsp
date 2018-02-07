@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
@@ -10,9 +10,9 @@
 <head>
 <meta charset="EUC-KR">
 
-<title>Àå¹Ù±¸´Ï ¸ñ·Ï</title>
+<title>ì¥ë°”êµ¬ë‹ˆ ëª©ë¡</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -37,9 +37,9 @@ function fncGetList(pageNo) {
 }
 
 
-//=================== "ÀüÃ¼Æ¼ÄÏ°áÁ¦" ¹öÆ° Event ¿¬°á =================== 
+//=================== "ì „ì²´í‹°ì¼“ê²°ì œ" ë²„íŠ¼ Event ì—°ê²° =================== 
 $(function() {
-	$("button:contains('ÀüÃ¼Æ¼ÄÏ°áÁ¦')").bind("click", function() {
+	$("button:contains('ì „ì²´í‹°ì¼“ê²°ì œ')").bind("click", function() {
 
 		$("input[name='postNo']").prop("checked", true);
 
@@ -58,14 +58,14 @@ $(function() {
 		})
 	});
 	
-//=================== "¼±ÅÃÆ¼ÄÏ°áÁ¦" ¹öÆ° Event ¿¬°á ===================
+//=================== "ì„ íƒí‹°ì¼“ê²°ì œ" ë²„íŠ¼ Event ì—°ê²° ===================
 	$(function() { 
-		$("button:contains('¼±ÅÃÆ¼ÄÏ°áÁ¦')").bind("click", function() {
+		$("button:contains('ì„ íƒí‹°ì¼“ê²°ì œ')").bind("click", function() {
 			
 			
 			var postCount = $("input[name='postNo']:checked").length;
 			if (postCount == 0 ) {
-				alert("¼±ÅÃµÈ Æ¼ÄÏÀÌ ¾ø½À´Ï´Ù.")
+				alert("ì„ íƒëœ í‹°ì¼“ì´ ì—†ìŠµë‹ˆë‹¤.")
 			}
 			
 			var sumPostNo = "";
@@ -83,14 +83,46 @@ $(function() {
 		})
 	});
 	
-	//=================== "¼±ÅÃÆ¼ÄÏ°áÁ¦" ¹öÆ° Event ¿¬°á ===================
+	//=================== "ì„ íƒí‹°ì¼“ì‚­ì œ" ë²„íŠ¼ Event ì—°ê²° ===================
 	$(function() { 
-		$("button:contains('°áÁ¦¿¹¸ÅÁ¤º¸ ÆäÀÌÁö·Î ÀÌµ¿')").bind("click", function() {
+		$("button:contains('ì„ íƒí‹°ì¼“ì‚­ì œ')").bind("click", function() {
+			
+			var postCount = $("input[name='postNo']:checked").length;
+			if (postCount == 0 ) {
+				alert("ì„ íƒëœ í‹°ì¼“ì´ ì—†ìŠµë‹ˆë‹¤.")
+			}
+			
+			var sumPostNo = "";
+			
+			for (var i = 0; i < postCount; i++) {
+				if (i != postCount - 1) {
+					var postNo = $( $("input[name='postNo']")[i] ).val() + ",";
+				} else {
+					var postNo = $( $("input[name='postNo']")[i] ).val();
+				}
+				sumPostNo += postNo;
+			}
+			alert(sumPostNo + "ì„ íƒí‹°ì¼“ì‚­ì œ ì½œ?")
+//			alert(sumPostNo)
+		})
+	});
+	
+	
+	//=================== "ê²°ì œì˜ˆë§¤ì •ë³´ í˜ì´ì§€ë¡œ ì´ë™" ë²„íŠ¼ Event ì—°ê²° ===================
+	$(function() { 
+		$("button:contains('ê²°ì œì˜ˆë§¤ì •ë³´ í˜ì´ì§€ë¡œ ì´ë™')").bind("click", function() {
 			fncAddPurchasList(); 
 		})
 	});
 	
-	//=================== "¼±ÅÃÆ¼ÄÏ°áÁ¦" ¹öÆ° Event ¿¬°á ===================	
+	//=================== "ì·¨ì†Œ" ë²„íŠ¼ Event ì—°ê²° ===================
+	$(function() { 
+		$("button:contains('ì·¨ ì†Œ')").bind("click", function() {
+			$("span[name='ticketCount']").empty();
+		})
+	});
+	
+	//=================== "fncAddPurchasList()" ë²„íŠ¼ Event ì—°ê²° ===================	
 	function fncAddPurchasList() {
 		$("form")
 		.attr("method", "POST")
@@ -112,7 +144,7 @@ $(function() {
 
 		<div class="page-header text-right">
 			<h3 class="text-info">
-				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Àå¹Ù±¸´Ï</p>
+				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> ì¥ë°”êµ¬ë‹ˆ</p>
 			</h3>
 			<h5 class="text-muted">
 				<strong class="text-success">
@@ -120,7 +152,7 @@ $(function() {
 					${ user.userId }
 				</c:if>
 					${ user.userName }
-				</strong> È¸¿ø´ÔÀÇ  <strong class="text-danger">Àå¹Ù±¸´Ï</strong> ¸ñ·Ï ÀÔ´Ï´Ù.
+				</strong> íšŒì›ë‹˜ì˜  <strong class="text-danger">ì¥ë°”êµ¬ë‹ˆ</strong> ëª©ë¡ ì…ë‹ˆë‹¤.
 			</h5>
 		</div>
 
@@ -130,10 +162,10 @@ $(function() {
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>¹øÈ£</th>
-						<th>Æ¼ÄÏÀÌ¹ÌÁö</th>
-						<th>Æ¼ÄÏ¸í</th>
-						<th>»ó¼¼Á¤º¸</th>
+						<th>ë²ˆí˜¸</th>
+						<th>í‹°ì¼“ì´ë¯¸ì§€</th>
+						<th>í‹°ì¼“ëª…</th>
+						<th>ìƒì„¸ì •ë³´</th>
 					</tr>
 				</thead>
 				
@@ -145,7 +177,7 @@ $(function() {
 							
 								<label class="btn btn-info">
 									<input type="checkbox" name="postNo" value="${ list.postNo }"> 
-									¼±ÅÃÇÏ±â
+									ì„ íƒí•˜ê¸°
 								</label>
 							
 							</th>
@@ -156,10 +188,10 @@ $(function() {
 							<input type="hidden" name="contentTypeId" value="${ list.contenttypeid }">
 						</td>
 						<td>
-							<h5>¡Ü ¿¹¸ÅÀÏÀÚ : ${ list.bookingDate }</h5>
-							<h5>¡Ü Ãë¼Ò °¡´ÉÀÏÀÚ : ${ list.cancelDate } ±îÁö</h5>
+							<h5>â— ì˜ˆë§¤ì¼ì : ${ list.bookingDate }</h5>
+							<h5>â— ì·¨ì†Œ ê°€ëŠ¥ì¼ì : ${ list.cancelDate } ê¹Œì§€</h5>
 							<button type="button" class="btn btn-default btn-lg btn-block">
-								<h3>¿¹¸ÅÆ¼ÄÏº¸±â</h3>
+								<h3>ì˜ˆë§¤í‹°ì¼“ë³´ê¸°</h3>
 							</button>
 						</td>
 				</tbody>
@@ -170,17 +202,17 @@ $(function() {
 			<div class="row">
 				<div class="col-md-6"></div>
 				<div class="col-md-6 text-right">
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#allTicketPayment">ÀüÃ¼Æ¼ÄÏ°áÁ¦</button>
-					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#selectedTicketPayment">¼±ÅÃÆ¼ÄÏ°áÁ¦</button>
-					<button type="button" class="btn btn-info">¼±ÅÃÆ¼ÄÏ»èÁ¦</button>
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#allTicketPayment">ì „ì²´í‹°ì¼“ê²°ì œ</button>
+					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#selectedTicketPayment">ì„ íƒí‹°ì¼“ê²°ì œ</button>
+					<button type="button" class="btn btn-info">ì„ íƒí‹°ì¼“ì‚­ì œ</button>
 					<button type="button" class="btn btn-danger">Success</button>
 
 				</div>
 			</div>
-			<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+			<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 
-			<!-- 'ÀüÃ¼Æ¼ÄÏ°áÁ¦' Modal -->
+			<!-- 'ì „ì²´í‹°ì¼“ê²°ì œ' Modal -->
 			<div class="modal fade" id="allTicketPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -188,25 +220,25 @@ $(function() {
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">ÀüÃ¼°áÁ¦</h4>
+							<h4 class="modal-title" id="myModalLabel">ì „ì²´ê²°ì œ</h4>
 						</div>
 						<div class="modal-body">
-							<h2 class="text-center">Àå¹Ù±¸´Ï¿¡ ÀÖ´Â ¸ğµç Æ¼ÄÏÀ»</h2> 
-							<h2 class="text-center text-danger">°áÁ¦ ÇÏ½Ã°Ú½À´Ï±î?</h2>
+							<h2 class="text-center">ì¥ë°”êµ¬ë‹ˆì— ìˆëŠ” ëª¨ë“  í‹°ì¼“ì„</h2> 
+							<h2 class="text-center text-danger">ê²°ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</h2>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
-								Ãë ¼Ò
+								ì·¨ ì†Œ
 							</button>
 							<button type="button" class="btn btn-danger">
-								°áÁ¦¿¹¸ÅÁ¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+								ê²°ì œì˜ˆë§¤ì •ë³´ í˜ì´ì§€ë¡œ ì´ë™
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<!-- 'ÀüÃ¼Æ¼ÄÏ°áÁ¦' Modal -->
+			<!-- 'ì „ì²´í‹°ì¼“ê²°ì œ' Modal -->
 			<div class="modal fade" id="selectedTicketPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -214,18 +246,18 @@ $(function() {
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel">¼±ÅÃ°áÁ¦</h4>
+							<h4 class="modal-title" id="myModalLabel">ì„ íƒê²°ì œ</h4>
 						</div>
 						<div class="modal-body">
-							<h2 class="text-center">¼±ÅÃÇÏ½Å <span class="label label-warning" name='ticketCount'></span> ÀåÀÇ Æ¼ÄÏÀ»</h2> 
-							<h2 class="text-center text-danger">°áÁ¦ ÇÏ½Ã°Ú½À´Ï±î?</h2>
+							<h2 class="text-center">ì„ íƒí•˜ì‹  <span class="label label-warning" name='ticketCount'></span> ì¥ì˜ í‹°ì¼“ì„</h2> 
+							<h2 class="text-center text-danger">ê²°ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</h2>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
-								Ãë ¼Ò
+								ì·¨ ì†Œ
 							</button>
 							<button type="button" class="btn btn-danger">
-								°áÁ¦¿¹¸ÅÁ¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+								ê²°ì œì˜ˆë§¤ì •ë³´ í˜ì´ì§€ë¡œ ì´ë™
 							</button>
 						</div>
 					</div>
@@ -236,7 +268,7 @@ $(function() {
 		<!-- form End /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
 	
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
