@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -11,14 +11,14 @@
 	img {
 	    width: 100px;
 	    height:100px;
-	    border-radius: 50px; /* ÀÌ¹ÌÁö ¹İÅ©±â¸¸Å­ ¹İ°æÀ» Àâ±â*/
+	    border-radius: 50px; /* ì´ë¯¸ì§€ ë°˜í¬ê¸°ë§Œí¼ ë°˜ê²½ì„ ì¡ê¸°*/
 	}	
 	
 	.radius-box {
 		 width: 100px;
 		 height: 100px;
-		 background-image:url("¹è°æÀÌ¹ÌÁö°æ·Î");
-		 border-radius: 150px; /* ·¹ÀÌ¾î ¹İÅ©±â¸¸Å­ ¹İ°æÀ» Àâ±â*/    
+		 background-image:url("ë°°ê²½ì´ë¯¸ì§€ê²½ë¡œ");
+		 border-radius: 150px; /* ë ˆì´ì–´ ë°˜í¬ê¸°ë§Œí¼ ë°˜ê²½ì„ ì¡ê¸°*/    
 		 display: table-cell;
 		 vertical-align: middle;
 		 color: #ffffff;
@@ -58,7 +58,7 @@
 						listComment();
 					},
 					error: function() {
-						alert("¾Ë ¼ö ¾ø´Â ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.")
+						alert("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.")
 					}
 		})
 	}
@@ -78,11 +78,11 @@
 				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
 				<div class="col-xs-10">
-						<input type="text" name="text" class="form-control" rows="3" placeholder="´ñ±ÛÀ» ÀÔ·ÂÇÏ¼¼¿ä...">
+						<input type="text" name="text" class="form-control" rows="3" placeholder="ëŒ“ê¸€ì„ ì…ë ¥í•˜ì„¸ìš”...">
 				</div>
 			</form>
 			<div class="col-xs-2">
-				<button align="right" type="button" class="btn btn-info" name="submitComment">Àú Àå</button>
+				<button align="right" type="button" class="btn btn-info" name="submitComment">ì € ì¥</button>
 			</div>
 			<div id="commentContainer"></div>
 		</div>

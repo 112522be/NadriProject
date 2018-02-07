@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>addPurchase.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -27,11 +27,11 @@
 <script type="text/javascript">
 
 var tranNo = ${ purchase.tranNo };
-	console.log("tranNo È®ÀÎ : " + tranNo)
+	console.log("tranNo í™•ì¸ : " + tranNo)
 $("form").attr("method", "POST").attr("action", "/purchase/updatePurchase?tranNo=${ purchase.tranNo }")
 
 $(function(){
-	$( "button:contains('°è¼Ó¼îÇÎÇÏ±â')" ).bind("click", function(){
+	$( "button:contains('ê³„ì†ì‡¼í•‘í•˜ê¸°')" ).bind("click", function(){
 		self.location = "/product/listProduct?menu=search"
 	});
 });
@@ -44,63 +44,63 @@ $(function(){
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info">±¸¸Å³»¿ªÈ®ÀÎ</h3>
-	       <h5 class="text-muted">´ÙÀ½°ú °°ÀÌ <strong class="text-danger">±¸¸Å°¡ ¿Ï·á</strong> µÇ¾ú½À´Ï´Ù.</h5>
+	       <h3 class=" text-info">êµ¬ë§¤ë‚´ì—­í™•ì¸</h3>
+	       <h5 class="text-muted">ë‹¤ìŒê³¼ ê°™ì´ <strong class="text-danger">êµ¬ë§¤ê°€ ì™„ë£Œ</strong> ë˜ì—ˆìŠµë‹ˆë‹¤.</h5>
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>¹°Ç°¹øÈ£</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ë¬¼í’ˆë²ˆí˜¸</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.purchaseProd.prodNo }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸ÅÀÚ¾ÆÀÌµğ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ìì•„ì´ë””</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.buyer.userId}</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸Å¹æ¹ı</strong></div>
-			<div class="col-xs-8 col-md-4">${ purchase.paymentOption == '1' ? "Çö±İ±¸¸Å" : "½Å¿ë±¸¸Å" }</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ë°©ë²•</strong></div>
+			<div class="col-xs-8 col-md-4">${ purchase.paymentOption == '1' ? "í˜„ê¸ˆêµ¬ë§¤" : "ì‹ ìš©êµ¬ë§¤" }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ÀÌ¸§</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì´ë¦„</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.receiverName }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ¿¬¶ôÃ³</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì—°ë½ì²˜</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.receiverPhone }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ÁÖ¼Ò</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì£¼ì†Œ</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyAddr }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸Å½Ã ¿äÃ»»çÇ×</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ì‹œ ìš”ì²­ì‚¬í•­</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyRequest }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹è¼ÛÈñ¸ÁÀÏÀÚ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°°ì†¡í¬ë§ì¼ì</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyDate }</div>
 		</div><hr/>
 		
 		<div class="row">
 		    <div class="col-md-12 text-center">
-		      <button type="button" class="btn btn-primary">°è¼Ó¼îÇÎÇÏ±â</button>
+		      <button type="button" class="btn btn-primary">ê³„ì†ì‡¼í•‘í•˜ê¸°</button>
 		    </div>
 		  </div>
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
 </body>
 

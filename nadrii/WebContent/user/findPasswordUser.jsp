@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page pageEncoding="utf-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
 	
-	<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
+	<!-- Ï∞∏Ï°∞ : http://getbootstrap.com/css/   Ï∞∏Ï°∞ -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -31,24 +31,24 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-		//============= "∑Œ±◊¿Œ"  Event ø¨∞· =============
+		//============= "Î°úÍ∑∏Ïù∏"  Event Ïó∞Í≤∞ =============
 		/* $( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button").on("click" , function() {
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
 				if(id == null || id.length <1) {
-					alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('ID Î•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
 					$("#userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('Ìå®Ïä§ÏõåÎìúÎ•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
 					$("#password").focus();
 					return;
 				}
@@ -61,7 +61,7 @@
 		
 		
 /**
- * æ∆¿Ãµ √£±‚
+ * ÏïÑÏù¥Îîî Ï∞æÍ∏∞
  */
  
  $(document).ready(function() { 
@@ -80,24 +80,24 @@ function faindPasswordUser(){
 	data += "&userName=" + userName;
 	data += "&email" +email;
 	if($("#userId").val() == ''){
-		alert("æ∆¿Ãµ∏¶ ¿‘∑¬«ÿ¡÷ººø‰.");
+		alert("ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
 		$("#userId").focus();
 		return;
 	}
 	if(idCheckFlag == false){
-		alert("æ¯¥¬ æ∆¿Ãµ ¿‘¥œ¥Ÿ.");
+		alert("ÏóÜÎäî ÏïÑÏù¥Îîî ÏûÖÎãàÎã§.");
 		$("#userId").val('');
 		$("#userId").focus();
 		$("#userId").css("background-color", "#B0F6AC");
 		return;
 	}
 	if(userName ==''){
-		alert("¿Ã∏ß¿ª ¿‘∑¬«ÿ¡÷ººø‰.");
+		alert("Ïù¥Î¶ÑÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
 		$("#userName").focus();
 		return;
 	}
 	if(email ==''){
-		alert("¿Ã∏ﬁ¿œ¿ª ¿‘∑¬«ÿ¡÷ººø‰.");
+		alert("Ïù¥Î©îÏùºÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
 		$("#email").focus();
 		return;
 	
@@ -108,7 +108,7 @@ function faindPasswordUser(){
 		type : "POST",
 		success : function(result){
 			if(result.msg == "failed"){
-				alert("æ∆¿Ãµ ∂«¥¬ ¿Ã∏ﬁ¿œ¿ª »Æ¿Œ«ÿ¡÷ººø‰.");
+				alert("ÏïÑÏù¥Îîî ÎòêÎäî Ïù¥Î©îÏùºÏùÑ ÌôïÏù∏Ìï¥Ï£ºÏÑ∏Ïöî.");
 				return;
 			}
 			if(result.msg == "success"){
@@ -129,13 +129,13 @@ function faindPasswordUser(){
 				url : "/user/checkId",
 				success : function(result) {
         	if(result.check == 1){
-        		//alert("æ∆¿Ãµ∞° ¡ﬂ∫πµ«æ˙Ω¿¥œ¥Ÿ.");
+        		//alert("ÏïÑÏù¥ÎîîÍ∞Ä Ï§ëÎ≥µÎêòÏóàÏäµÎãàÎã§.");
         		idCheckFlag = true;
         		$("#userId").css("background-color", "#B0F6AC");
         		$(".signupbtn").prop("disabled", false);
         		return;
         	}else{
-        		//alert("ªÁøÎ ∞°¥…«’¥œ¥Ÿ.");
+        		//alert("ÏÇ¨Ïö© Í∞ÄÎä•Ìï©ÎãàÎã§.");
         		idCheckFlag = false;
         		$("#userId").css("background-color", "#FFCECE");
         		$(".signupbtn").prop("disabled", true);
@@ -175,7 +175,7 @@ function faindPasswordUser(){
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
-	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
+	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div Start /////////////////////////////////////-->
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
@@ -187,34 +187,34 @@ function faindPasswordUser(){
 		 	 	<br/>
 				
 				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center">∫Ò&nbsp;π–&nbsp;π¯&nbsp;»£&nbsp;√£&nbsp;±‚</h1>
+		 	 		<h1 class="text-center">ÎπÑ&nbsp;Î∞Ä&nbsp;Î≤à&nbsp;Ìò∏&nbsp;Ï∞æ&nbsp;Í∏∞</h1>
 
 			        <form class="form-horizontal">
 		  
 					  <div class="form-group">
-					    <label for="userName" class="col-sm-4 control-label">¿Ã&nbsp;∏ß</label>
+					    <label for="userName" class="col-sm-4 control-label">Ïù¥&nbsp;Î¶Ñ</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userName" id="userName"  placeholder="¿Ã∏ß" >
+					      <input type="text" class="form-control" name="userName" id="userName"  placeholder="Ïù¥Î¶Ñ" >
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="userId" class="col-sm-4 control-label">æ∆&nbsp;¿Ã&nbsp;µ</label>
+					    <label for="userId" class="col-sm-4 control-label">ÏïÑ&nbsp;Ïù¥&nbsp;Îîî</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="æ∆¿Ãµ" oninput="checkId();">
+					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="ÏïÑÏù¥Îîî" oninput="checkId();">
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="email" class="col-sm-4 control-label">¿Ã&nbsp;∏ﬁ&nbsp;¿œ</label>
+					    <label for="email" class="col-sm-4 control-label">Ïù¥&nbsp;Î©î&nbsp;Ïùº</label>
 					    <div class="col-sm-6">
-					      <input type="email" class="form-control" name="email" id="email" placeholder="¿Ã∏ﬁ¿œ" oninput="emailValid();">
+					      <input type="email" class="form-control" name="email" id="email" placeholder="Ïù¥Î©îÏùº" oninput="emailValid();">
 					    </div>
 					  </div>
 					  
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					      <button type="button" class="btn btn-primary signupbtn" onclick="faindPasswordUser()">¥Ÿ&nbsp;¿Ω</button>
+					      <button type="button" class="btn btn-primary signupbtn" onclick="faindPasswordUser()">Îã§&nbsp;Ïùå</button>
 					    </div>
 					  </div>
 			
@@ -227,7 +227,7 @@ function faindPasswordUser(){
   	 	<!--  row Start /////////////////////////////////////-->
   	 	
  	</div>
- 	<!--  »≠∏È±∏º∫ div end /////////////////////////////////////-->
+ 	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div end /////////////////////////////////////-->
 
 </body>
 

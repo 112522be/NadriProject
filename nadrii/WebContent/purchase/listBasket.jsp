@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 
 <title>장바구니 목록</title>
 

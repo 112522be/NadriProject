@@ -1,31 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div id="map" style="width:400px;height:400px;"></div>
  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
 	  <script type="text/javascript">
-		var container = document.getElementById('map'); //Áöµµ¸¦ ´ãÀ» ¿µ¿ªÀÇ DOM ·¹ÆÛ·±½º
-		var options = { //Áöµµ¸¦ »ı¼ºÇÒ ¶§ ÇÊ¿äÇÑ ±âº» ¿É¼Ç
+		var container = document.getElementById('map'); //ì§€ë„ë¥¼ ë‹´ì„ ì˜ì—­ì˜ DOM ë ˆí¼ëŸ°ìŠ¤
+		var options = { //ì§€ë„ë¥¼ ìƒì„±í•  ë•Œ í•„ìš”í•œ ê¸°ë³¸ ì˜µì…˜
 				center: new daum.maps.LatLng(33.450701, 126.570667),
-		level: 3 //ÁöµµÀÇ ·¹º§(È®´ë, Ãà¼Ò Á¤µµ)
+		level: 3 //ì§€ë„ì˜ ë ˆë²¨(í™•ëŒ€, ì¶•ì†Œ ì •ë„)
 		};
 	
-		var map = new daum.maps.Map(container, options); //Áöµµ »ı¼º ¹× °´Ã¼ ¸®ÅÏ
+		var map = new daum.maps.Map(container, options); //ì§€ë„ ìƒì„± ë° ê°ì²´ ë¦¬í„´
 	  
 		var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
 	
-		//¸¶Ä¿¸¦ »ı¼ºÇÕ´Ï´Ù
+		//ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 		var marker = new daum.maps.Marker({
 		   position: markerPosition
 		});
 		
-		//¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+		//ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
 		marker.setMap(map);
 	</script>
 </body>

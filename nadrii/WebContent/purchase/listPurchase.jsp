@@ -1,12 +1,12 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>listPurchase.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -25,7 +25,7 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-//°Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+//ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘ Form ì „ì†¡ì„ ìœ„í•´ JavaScrpt ì´ìš©  
 function fncGetList(currentPage) {
 	$("#currentPage").val(currentPage)
 	$('form').attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
@@ -76,33 +76,33 @@ $( function(){
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>±¸¸Å¸ñ·ÏÁ¶È¸</h3>
+	       <h3>êµ¬ë§¤ëª©ë¡ì¡°íšŒ</h3>
 	    </div>
 
-	<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+	<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 	    <div class="row">
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		ÀüÃ¼  ${resultPage.totalCount } °Ç¼ö, ÇöÀç ${resultPage.currentPage} ÆäÀÌÁö
+		    		ì „ì²´  ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬ ${resultPage.currentPage} í˜ì´ì§€
 		    	</p>
 		    </div>
 
 			<div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 			    
-				  <!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+				  <!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
 				</form>
 	    	</div>
     	</div>
     	
-    	<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+    	<!-- table ìœ„ìª½ ê²€ìƒ‰ Start /////////////////////////////////////-->
 		
 		
       <!--  table Start /////////////////////////////////////-->
@@ -111,11 +111,11 @@ $( function(){
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left">±¸¸ÅÈ¸¿øID</th>
-            <th align="left">¹ŞÀ¸½ÇºĞ ÀÌ¸§</th>
-            <th align="left">¹ŞÀ¸½ÇºĞ ÀüÈ­¹øÈ£</th>
-            <th align="left">¹è¼ÛÇöÈ²</th>
-            <th align="left">Á¤º¸¼öÁ¤</th>
+            <th align="left">êµ¬ë§¤íšŒì›ID</th>
+            <th align="left">ë°›ìœ¼ì‹¤ë¶„ ì´ë¦„</th>
+            <th align="left">ë°›ìœ¼ì‹¤ë¶„ ì „í™”ë²ˆí˜¸</th>
+            <th align="left">ë°°ì†¡í˜„í™©</th>
+            <th align="left">ì •ë³´ìˆ˜ì •</th>
           </tr>
         </thead>
        
@@ -137,21 +137,21 @@ $( function(){
 			  
 			  <td align="left">${ purchase.receiverPhone }</td>
 			  
-			  <td align="left">ÇöÀç
+			  <td align="left">í˜„ì¬
 				<c:if test="${ purchase.tranCode == '0' }">
-					±¸¸Å¿Ï·á
+					êµ¬ë§¤ì™„ë£Œ
 				</c:if>
 				<c:if test="${ purchase.tranCode == '1' }">
-					¹è¼ÛÁß
+					ë°°ì†¡ì¤‘
 				</c:if>
 				<c:if test="${ purchase.tranCode == '2' }">
-					¹è¼Û¿Ï·á
-				</c:if> »óÅÂ ÀÔ´Ï´Ù.
+					ë°°ì†¡ì™„ë£Œ
+				</c:if> ìƒíƒœ ì…ë‹ˆë‹¤.
 			  </td>
 			  
 			  <td align="left">
 			  	<c:if test="${ purchase.tranCode == '1' }">
-					<input type="hidden" name="tranNo" value="${ purchase.tranNo }">¹°°ÇµµÂø
+					<input type="hidden" name="tranNo" value="${ purchase.tranNo }">ë¬¼ê±´ë„ì°©
 				</c:if>
 			  </td>
 			</tr>
@@ -163,7 +163,7 @@ $( function(){
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
  	
  	<!-- PageNavigation Start... -->
