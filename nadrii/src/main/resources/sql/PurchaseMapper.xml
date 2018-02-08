@@ -60,6 +60,18 @@
 				)
 	</insert>
 	
+	<update id="updateBasketPurchase" parameterType="list">
+		UPDATE purchase 
+		<set>
+			flag_bp = 'purchase'
+		</set>
+		WHERE post_no IN
+	<foreach collection="list" item="postNo" index="index"
+      open="(" separator="," close=")">
+        #{postNo}
+  	</foreach>
+	</update>
+	
 	<select id="getBasketList" parameterType="map" resultMap="purchaseSelectMap">
 	SELECT
 			post_no,

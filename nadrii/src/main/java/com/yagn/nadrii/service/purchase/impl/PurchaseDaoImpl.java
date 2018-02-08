@@ -52,6 +52,16 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return sqlSession.selectList("PurchaseMapper.getBasketTicket", sendPostNo);
 	}
 	
+	@Override
+	public void updateBasketPurchase(List<Integer> postNo) throws Exception {
+		sqlSession.insert("PurchaseMapper.updateBasketPurchase", postNo);
+	}
+	
+	@Override
+	public void deleteBasketList(List<Integer> postNo) throws Exception {
+		sqlSession.insert("PurchaseMapper.deleteBasketList", postNo);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////
 	@Override
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) {

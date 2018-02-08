@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
@@ -86,5 +87,32 @@ public class PurchaseRestController {
 	
 	} // end of method
 
+	
+	@RequestMapping(value="json/deleteBasketList", method=RequestMethod.POST) 
+	public void deleteBasketList(
+			@RequestBody JSONObject basketData
+			) {
+		
+		System.out.println("\n /purchase/json/deleteBasketList : POST");
+		
+		Purchase purchase = new Purchase();
+		
+		try {
+			
+			JSONObject jsonObj = (JSONObject) JSONValue.parse(basketData.toJSONString());
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			purchase = new Purchase();
+			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
+			
+			purchaseService.deleteBasketList(purchase);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+	
+	
 	
 } // end of class

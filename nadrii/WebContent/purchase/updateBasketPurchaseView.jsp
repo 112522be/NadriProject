@@ -32,14 +32,14 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-function fncAddPurchase() {
+function fncUpdateBasketPurchase() {
 	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
 }
 
 $( function(){
 	$(".kakaoPay").bind("click", function(){
 //		alert("Kakao")
-		fncAddPurchase(); 
+		fncUpdateBasketPurchase(); 
 //		$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
 	});
 });
@@ -71,7 +71,9 @@ function goBack() {
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
-		<!-- Purchase Info -->
+		<input type="hidden" name="sumPostNo" value="${ purchase.sumPostNo }">
+		
+		<!-- Purchase Info 
 		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
 		<input type="hidden" name="contentTypeId" 		value="${ purchase.contentTypeId }">
 		<input type="hidden" name="ticketTitle"			value="${ purchase.ticketTitle }">
@@ -85,17 +87,17 @@ function goBack() {
 			<input type="hidden" name="ticketCount" value="${ purchase.ticketCount[status.index] }">
 			<input type="hidden" name="ticketPrice" value="${ purchase.ticketPrice[status.index] }">
 		</c:forEach>
-		
+		-->
 		
 		<!-- KakaoPay API Request -->
 		<input type="hidden" name="cid" 				value="TC0ONETIME">
-		<input type="hidden" name="partner_order_id" 	value="나드리티켓시스템">
-		<input type="hidden" name="partner_user_id" 	value="${ user.userId }">
+		<input type="hidden" name="partner_order_id" 	value="㈜나들이">
+		<input type="hidden" name="partner_user_id" 	value="${ list[0].buyer.userId }">
 		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayCompleteB">
 		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
 		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/index.jsp">
 
@@ -179,8 +181,11 @@ function goBack() {
 				<h4>[선택한 티켓]</h4>
 	  				<c:forEach var="list" items="${list}" varStatus="num">
 	  					<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ list.ticketTitle }</h4>
-	  					<h4 class="text-warning">&nbsp;&nbsp;&nbsp;&nbsp; 해당티켓 총 결제금액
-	  					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" ></span> ￦ ${ list.totalTicketPrice }</h4>
+		  				<c:forEach var="ticket" items="${list.ticketP}" varStatus="num">
+	  						<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;￦ ${ ticket } : ${ list.ticketC[num.index] } 장</h5>
+	  					</c:forEach>
+	  					<h4 class="text-warning">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" ></span> 
+	  					해당티켓 총 결제금액 : ￦ ${ list.totalTicketPrice }</h4>
 	  				</c:forEach>
 	  			<hr>
 	  			<h4 class="text-right">[총 결제금액]</h4>

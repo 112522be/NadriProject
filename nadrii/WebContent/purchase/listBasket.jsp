@@ -42,7 +42,7 @@ function fncGetList(pageNo) {
 	$(function() {
 		$("button:contains('전체티켓결제')").bind("click", function() {
 			
-			alert("전체티켓결제 버튼")
+//			alert("전체티켓결제 버튼")
 			
 			$("input[name='postNo']").prop("checked", true);
 
@@ -57,7 +57,7 @@ function fncGetList(pageNo) {
 				}
 				sumPostNo += postNo;
 			}
-			alert(sumPostNo)
+//			alert(sumPostNo)
 			$("input[name='sumPostNo']").val(sumPostNo);
 		})
 	});
@@ -94,7 +94,7 @@ function fncGetList(pageNo) {
 							}
 							sumPostNo += postNo;
 						}
-						alert("선택티켓결제 " + sumPostNo)
+//						alert("선택티켓결제 " + sumPostNo)
 						$("input[name='sumPostNo']").val(sumPostNo);
 						$("span[name='ticketCount']").append(postCount);
 					}
@@ -121,7 +121,7 @@ function fncGetList(pageNo) {
 				}
 				sumPostNo += postNo;
 			}
-			alert(sumPostNo)
+//			alert(sumPostNo)
 			$("input[name='sumPostNo']").val(sumPostNo);
 			$("span[name='ticketCount']").append(postCount);
 		})
@@ -130,7 +130,7 @@ function fncGetList(pageNo) {
 	//=================== "장바구니에서 삭제" 버튼 Event 연결 ===================
 	$(function() {
 		$("button:contains('장바구니에서 삭제')").bind("click", function() {
-			alert("장바구니에서 삭제")
+//			alert("장바구니에서 삭제")
 			fncDeleteBasketList();
 		})
 	});
@@ -138,8 +138,8 @@ function fncGetList(pageNo) {
 	//=================== "결제예매정보 페이지로 이동" 버튼 Event 연결 ===================
 	$(function() {
 		$("button:contains('결제예매정보 페이지로 이동')").bind("click", function() {
-			alert("결제예매정보 페이지로 이동")
-			fncAddBasketPurchase();
+//			alert("결제예매정보 페이지로 이동")
+			fncUpdateBasketPurchase();
 		})
 	});
 
@@ -147,7 +147,7 @@ function fncGetList(pageNo) {
 	$(function() {
 		$("#selectedTicketDelete button:contains('취 소')").bind("click",
 				function() {
-					alert("선택티켓삭제 취소")
+//					alert("선택티켓삭제 취소")
 					$("span[name='ticketCount']").empty();
 				})
 	});
@@ -156,7 +156,7 @@ function fncGetList(pageNo) {
 	$(function() {
 		$("#selectedTicketPayment button:contains('취 소')").bind("click",
 				function() {
-					alert("선택티켓결제 취소")
+//					alert("선택티켓결제 취소")
 					$("span[name='ticketCount']").empty();
 				})
 	});
@@ -164,24 +164,47 @@ function fncGetList(pageNo) {
 	//=================== "전체선택티켓 취소" 버튼 Event 연결 ===================
 	$(function() {
 		$("#allTicketPayment button:contains('취 소')").bind("click", function() {
-			alert("전체선택티켓 취소")
+//			alert("전체선택티켓 취소")
 			$("input[name='postNo']").prop("checked", false);
 		})
 	});
 
 	//=================== "fncAddBasketPurchase()" 버튼 Event 연결 ===================	
-	function fncAddBasketPurchase() {
-		alert("fncAddBasketPurchase()")
-		$("form").attr("method", "POST").attr("action",	"/purchase/addBasketPurchase/").submit();
+	function fncUpdateBasketPurchase() {
+//		alert("fncUpdateBasketPurchase()")
+		$("form").attr("method", "POST").attr("action",	"/purchase/updateBasketPurchase/").submit();
 	}
 
 	//=================== "fncDelBasketList()" 버튼 Event 연결 ===================	
 	function fncDeleteBasketList() {
-		alert("fncDeleteBasketList()")
-		
-		// ajax 로 구현할것
+//		alert("fncDeleteBasketList()")
 		
 //		$("form").attr("method", "POST").attr("action",	"/purchase/deleteBasketList/").submit();
+		
+		// ajax 로 구현할것
+
+		var basketData = {
+				"sumPostNo" : $("input[name='sumPostNo']").val()
+		}
+		
+		var jsonData = JSON.stringify(basketData);
+		
+		$.ajax (
+				{
+					url : "/purchase/json/deleteBasketList",
+					method : "POST",
+					dataType : "json",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					data:jsonData,
+					success : function() {
+			//			alert("들어온거 확인");
+					}
+				})
+		alert("선택하신 티켓이 장바구니에서 삭제 되었습니다.");
+		location.reload();
 	}
 	
 	

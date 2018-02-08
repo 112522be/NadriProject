@@ -153,7 +153,7 @@ public class PurchaseController {
 		
 		System.out.println("\n /purchase/kakaoPay : POST");
 //		System.out.println("\n[kakaoPayRequest]==>" + kakaoPayRequest.toString());
-//		System.out.println("\n[purchase]==>" + purchase.toString());
+		System.out.println("\n[purchase]==>" + purchase.toString());
 
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 		
@@ -190,6 +190,8 @@ public class PurchaseController {
 			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
+			System.out.println("\n[check] ==> " + purchase.toString());
+			
 			// cancelDate making algorithm
 			DateFormat df = new SimpleDateFormat("yyyyMMdd");
 			Date bDate = df.parse(purchase.getBookingDate().replaceAll("[^0-9]", ""));
@@ -213,14 +215,45 @@ public class PurchaseController {
 		return "/index.jsp";	
 	}
 	
+	@RequestMapping(value="kakaoPayCompleteB")
+	public String kakaoPayCompleteB(
+			@RequestParam String pg_token,
+			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
+			HttpSession session
+			) {
+		
+		System.out.println("\n /purchase/kakaoPayCompleteB : POST");
+		
+		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		Purchase purchase = new Purchase();
+		
+		try {
+			kakaoPayRequest.setPg_token(pg_token);
+			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
+			
+			purchase = (Purchase) session.getAttribute("purchase");
+			
+			System.out.println("\n[check] ==> " + purchase.toString());
+			
+			purchaseService.updateBasketPurchase(purchase);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return "/index.jsp";	
+	}
+	
+	
+	
 	// Purchasing via basket
-	@RequestMapping(value="addBasketPurchase", method=RequestMethod.POST)
+	@RequestMapping(value="updateBasketPurchase", method=RequestMethod.POST)
 	public String addBasketPurchase(
 			@RequestParam("sumPostNo") String sumPostNo,
 			Map<String, Object> map
 			) {
 
-		System.out.println("\n /purchase/addBasketPurchaseView : POST");
+		System.out.println("\n /purchase/updateBasketPurchaseView : POST");
 		System.out.println("\n[sumPostNo]==>" + sumPostNo.toString());
 		
 		Purchase purchase = new Purchase();
@@ -235,7 +268,7 @@ public class PurchaseController {
 			System.out.println("\n[purchase]==>"+purchase);
 
 			list = purchaseService.addBasketTicket(purchase);
-			///*
+			/*
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println("//[1]=====" + i);
 				System.out.println(list.get(i));
@@ -265,29 +298,45 @@ public class PurchaseController {
 				list.get(i).setTicketC(count);
 				list.get(i).setTicketP(price);
 				
-				System.out.println("//[2]==========" + i);
-				System.out.println(list.get(i).toString());
+//				System.out.println("//[2]==========" + i);
+//				System.out.println(list.get(i).toString());
 			}
 			
 			// ticketPrice & ticket Count sorting
-			int totalTicketPrice = 0;
 			for (int i = 0; i < list.size(); i++) {
+
+				System.out.println("");
+				System.out.println("			[list size()]=" + list.size());
 				
-				String[] ticketPrice = list.get(i).getTicketP().toArray(new String[i]);
-				String[] ticketCount = list.get(i).getTicketC().toArray(new String[i]);
+				int totalTicketPrice = 0;
+				String[] ticketPrice;
+				String[] ticketCount;
 				
-				int ticketPriceInt = Integer.parseInt(ticketPrice[i]);
-				int ticketCountInt = Integer.parseInt(ticketCount[i]);
+				for (int j = 0; j < list.get(i).getTicketC().size(); j++) {
+					
+					System.out.println("");
+					System.out.println("				[list.get(i).getTicketC().size()]??" + list.get(i).getTicketC().size());
+					
+					ticketPrice = list.get(i).getTicketP().toArray(new String[j]);
+					ticketCount = list.get(i).getTicketC().toArray(new String[j]);
+					
+					int ticketPriceInt = Integer.parseInt(ticketPrice[j]);
+					int ticketCountInt = Integer.parseInt(ticketCount[j]);
+					
+					System.out.println("");
+					System.out.println("				[ticketPriceInt]??" + ticketPriceInt);
+					System.out.println("				[ticketCountInt]??" + ticketCountInt);
+					
+					
+					totalTicketPrice += ticketPriceInt * ticketCountInt;
+					
+					list.get(i).setTotalTicketPrice(totalTicketPrice);
+					list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
+					list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(j).getTaxFree()));
 				
-				totalTicketPrice += ticketPriceInt * ticketCountInt;
-				
-				list.get(i).setTotalTicketPrice(totalTicketPrice);
-				list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
-				list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(i).getTaxFree()));
-				
-				System.out.println("//[3]==========" + i);
+				}
+				System.out.println("\n//[3]==========" + i);
 				System.out.println(list.get(i).toString());
-				
 			}
 
 			int totalTicketPrice2 = 0;
@@ -303,6 +352,7 @@ public class PurchaseController {
 			if (list.size() > 1 ) {
 				purchase.setTicketTitle(list.get(0).getTicketTitle() + " ¿Ü " + (list.size() - 1) + " °Ç");
 			} 
+			
 			System.out.println("\n[Purchase]");
 			System.out.println(purchase.toString());
 			
@@ -310,35 +360,14 @@ public class PurchaseController {
 			System.out.println(e);
 		}
 		
+		
 		map.put("purchase", purchase);
 		map.put("list", list);
 		
-		return "forward:/purchase/addBasketPurchaseView.jsp";
+		return "forward:/purchase/updateBasketPurchaseView.jsp";
 	}
 	
 	
-	/*
-	@RequestMapping(value="getBasketPurchase", method=RequestMethod.GET) 
-	public String getBasketPurchase(
-			@RequestParam("postNo") String postNo,
-			@RequestParam("sumPostNo") String sumPostNo,
-			Map<String, Object> map
-			) {
-		
-		System.out.println("\n /purchase/getBasketPurchase : GET");
-
-		System.out.println("\n[postNo] ==> " + postNo);
-		System.out.println("\n[sumPostNo] ==> " + sumPostNo);
-		
-		
-		try {
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		
-		return null;
-	}
-	//*/
+	
 	
 } // end of class

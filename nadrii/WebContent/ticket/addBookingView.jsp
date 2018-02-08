@@ -276,10 +276,11 @@
 						},
 						data:jsonData,
 						success : function() {
-							alert("들어온거 확인");
+					//		alert("들어온거 확인");
 						}
 					});		
 					alert("저장하기 완료");
+					location.reload();
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)

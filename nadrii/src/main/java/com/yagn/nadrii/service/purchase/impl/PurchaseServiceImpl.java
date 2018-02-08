@@ -123,4 +123,31 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseDao.addBasketTicket(list);
 		}
 		
+		public void updateBasketPurchase(Purchase purchase) throws Exception {
+			
+			List<Integer> list = new ArrayList<Integer>();
+			
+			String[] postNo = purchase.getSumPostNo().split(",");
+			for (String postNoValue : postNo) {
+				int postNoInt = Integer.parseInt(postNoValue);
+				list.add(postNoInt);
+			}
+			
+			purchaseDao.updateBasketPurchase(list);
+		}
+		
+		public void deleteBasketList(Purchase purchase) throws Exception {
+			
+			List<Integer> list = new ArrayList<Integer>();
+			
+			String[] postNo = purchase.getSumPostNo().split(",");
+			for (String postNoValue : postNo) {
+				int postNoInt = Integer.parseInt(postNoValue);
+				list.add(postNoInt);
+			}
+			
+			purchaseDao.deleteBasketList(list);
+		}
+		
+		
 }

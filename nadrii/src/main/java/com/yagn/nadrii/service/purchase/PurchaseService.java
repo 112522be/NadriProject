@@ -16,6 +16,10 @@ public interface PurchaseService {
 	
 	public List<Purchase> addBasketTicket(Purchase purchase) throws Exception;
 	
+	public void updateBasketPurchase(Purchase purchase) throws Exception; 
+	
+	public void deleteBasketList(Purchase purchase) throws Exception;
+	
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;
 	

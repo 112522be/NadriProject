@@ -17,6 +17,9 @@ public interface PurchaseDao {
 	
 	public List<Purchase> addBasketTicket(List<Integer> sendPostNo) throws Exception ;
 	
+	public void updateBasketPurchase(List<Integer> postNo) throws Exception ;
+	
+	public void deleteBasketList(List<Integer> postNo) throws Exception ;
 	
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;

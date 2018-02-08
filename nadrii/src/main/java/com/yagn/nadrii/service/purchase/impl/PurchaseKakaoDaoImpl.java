@@ -142,7 +142,13 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
+	@Override
+	public void updateBasketPurchase(List<Integer> postNo) throws Exception {
+	}
 	
+	@Override
+	public void deleteBasketList(List<Integer> postNo) throws Exception {
+	}
 	
 	
 } // end of class
