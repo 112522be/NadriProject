@@ -47,12 +47,17 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId);
 	}
 	
-
+	@Override
+	public List<Purchase> addBasketTicket(List<Integer> sendPostNo) throws Exception {
+		return sqlSession.selectList("PurchaseMapper.getBasketTicket", sendPostNo);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////
+	@Override
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) {
 		return null;
 	}
-	
+	@Override
 	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) {
 		return null;
 	}

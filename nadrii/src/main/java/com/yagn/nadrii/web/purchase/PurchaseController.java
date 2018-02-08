@@ -2,12 +2,13 @@ package com.yagn.nadrii.web.purchase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class PurchaseController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	// Directly purchasing without basket
 	@RequestMapping(value="addPurchase/{flag}", method=RequestMethod.POST)
 	public String addBasket(
 			@ModelAttribute("purchase") Purchase purchase,
@@ -65,7 +67,7 @@ public class PurchaseController {
 			Map<String, Object> map
 			) {
 		
-		System.out.println("\n /purchase/addPurchase/" + flag + " : POST");
+		System.out.println("\n /purchase/addPurchaseView/" + flag + " : POST");
 	
 		User user = new User();		
 		try {
@@ -88,9 +90,6 @@ public class PurchaseController {
 			user = (User) session.getAttribute("loginUser");
 			System.out.println("\n[1]==>"+user.toString());
 			System.out.println("\n[2]==>"+purchase.toString());
-			
-//			purchaseService.addPurchase(purchase);
-			
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -214,5 +213,122 @@ public class PurchaseController {
 		return "/index.jsp";	
 	}
 	
+	// Purchasing via basket
+	@RequestMapping(value="addBasketPurchase", method=RequestMethod.POST)
+	public String addBasketPurchase(
+			@RequestParam("sumPostNo") String sumPostNo,
+			Map<String, Object> map
+			) {
+
+		System.out.println("\n /purchase/addBasketPurchaseView : POST");
+		System.out.println("\n[sumPostNo]==>" + sumPostNo.toString());
+		
+		Purchase purchase = new Purchase();
+		List<Purchase> list = new ArrayList<Purchase>();
+		List<String> count = new ArrayList<>();
+		List<String> price = new ArrayList<>();
+		
+		try {
+			purchase.setSumPostNo(sumPostNo);
+			
+			System.out.println("\n[purchase]==>"+purchase);
+			
+			list = purchaseService.addBasketTicket(purchase);
+			
+			for (int i = 0; i < list.size(); i++) {
+				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
+				
+				price = new ArrayList<>();	
+				count = new ArrayList<>();
+				
+				for (int j = 0; j < firstParseArr.length; j++) {
+					String secondParseArr[] = firstParseArr[j].split("=");
+
+					for (int k = 0; k < secondParseArr.length; k++) {
+						
+						if (k == 0) {
+							price.add(secondParseArr[k].toString());
+						} else if (k == 1) {
+							count.add(secondParseArr[k].toString());
+						}
+					}
+				}
+				list.get(i).setTicketC(count);
+				list.get(i).setTicketP(price);
+				
+				System.out.println("\n[list value check]");
+				System.out.println(list.get(i).toString());
+			}
+			
+			int totalTicketPrice = 0;
+			for (int i = 0; i < list.size(); i++) {
+				
+				String[] ticketPrice = list.get(i).getTicketP().toArray(new String[i]);
+				String[] ticketCount = list.get(i).getTicketC().toArray(new String[i]);
+				
+				int ticketPriceInt = Integer.parseInt(ticketPrice[i]);
+				int ticketCountInt = Integer.parseInt(ticketCount[i]);
+				
+				totalTicketPrice += ticketPriceInt * ticketCountInt;
+				
+				list.get(i).setTotalTicketPrice(totalTicketPrice);
+				list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
+				list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(i).getTaxFree()));
+				
+				System.out.println("\n[list value check]");
+				System.out.println(list.get(i).toString());
+				
+			}
+
+			int totalTicketPrice2 = 0;
+			for (int i = 0; i < list.size(); i++) {
+				int totalPrice = list.get(i).getTotalTicketPrice();
+				totalTicketPrice2 += totalPrice;
+			}
+			
+			purchase.setTotalTicketPrice(totalTicketPrice2);
+			purchase.setTaxFree( (int) (totalTicketPrice2 * 0.05) );
+			purchase.setTicketPayment((int) (totalTicketPrice2 + purchase.getTaxFree()));
+			purchase.setTicketTitle(list.get(0).getTicketTitle());
+			if (list.size() > 1 ) {
+				purchase.setTicketTitle(list.get(0).getTicketTitle() + " ¿Ü " + (list.size() - 1) + " °Ç");
+			} 
+			System.out.println("\n[Purchase]");
+			System.out.println(purchase.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("purchase", purchase);
+		map.put("list", list);
+		
+		return "forward:/purchase/addBasketPurchaseView.jsp";
+	}
+	
+	
+	/*
+	@RequestMapping(value="getBasketPurchase", method=RequestMethod.GET) 
+	public String getBasketPurchase(
+			@RequestParam("postNo") String postNo,
+			@RequestParam("sumPostNo") String sumPostNo,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/getBasketPurchase : GET");
+
+		System.out.println("\n[postNo] ==> " + postNo);
+		System.out.println("\n[sumPostNo] ==> " + sumPostNo);
+		
+		
+		try {
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	//*/
 	
 } // end of class

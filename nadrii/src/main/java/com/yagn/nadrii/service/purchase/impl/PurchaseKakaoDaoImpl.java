@@ -137,7 +137,10 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		return 0;
 	}
 	
-	
+	@Override
+	public List<Purchase> addBasketTicket(List<Integer> sendPostNo) throws Exception {
+		return null;
+	}
 	
 	
 	

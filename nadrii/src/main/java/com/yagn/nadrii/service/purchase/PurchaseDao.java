@@ -15,6 +15,8 @@ public interface PurchaseDao {
 	
 	public int getTotalCount(String buyerId) throws Exception ;
 	
+	public List<Purchase> addBasketTicket(List<Integer> sendPostNo) throws Exception ;
+	
 	
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;

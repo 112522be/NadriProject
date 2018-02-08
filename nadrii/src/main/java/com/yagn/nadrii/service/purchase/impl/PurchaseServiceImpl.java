@@ -110,4 +110,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseKakaoDao.addKakaoPayComplete(kakaoPayRequest);
 		}
 		
+		public List<Purchase> addBasketTicket(Purchase purchase) throws Exception {
+			
+			String[] postNoParsing = purchase.getSumPostNo().split(",");
+			
+			List<Integer> list = new ArrayList<Integer>();
+			for (String postNo : postNoParsing) {
+				String sendPostNo = postNo;
+				list.add(Integer.parseInt(sendPostNo));
+			}			
+
+			return purchaseDao.addBasketTicket(list);
+		}
+		
 }

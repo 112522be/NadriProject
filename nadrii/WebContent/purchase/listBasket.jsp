@@ -51,18 +51,19 @@ function fncGetList(pageNo) {
 
 			for (var i = 0; i < postCount; i++) {
 				if (i != postCount - 1) {
-					var postNo = $($("input[name='postNo']")[i]).val() + ",";
+					var postNo = $($("input[name='postNo']:checked")[i]).val() + ",";
 				} else {
-					var postNo = $($("input[name='postNo']")[i]).val();
+					var postNo = $($("input[name='postNo']:checked")[i]).val();
 				}
 				sumPostNo += postNo;
 			}
+			alert(sumPostNo)
+			$("input[name='sumPostNo']").val(sumPostNo);
 		})
 	});
 
-<!--	
 	
-	//=================== "전체티켓결제" 버튼 Event 연결 =================== 
+	//=================== "전체선택취소" 버튼 Event 연결 =================== 
 	$(function() {
 		$("button:contains('전체선택취소')").bind("click", function() {
 			$("input[name='postNo']").prop("checked", false);
@@ -72,12 +73,11 @@ function fncGetList(pageNo) {
 	//=================== "선택티켓결제" 버튼 Event 연결 ===================
 
 	$(function() {
-		$("button:contains('선택티켓결제')").bind(
-				"click",
-				function() {
+		$("button:contains('선택티켓결제')").bind("click", function() {
 
 					var postCount = $("input[name='postNo']:checked").length;
-
+					var postNoCheck = $("input[name='postNo']:checked").val();
+					
 					if (postCount == 0) {
 						alert("선택된 티켓이 없습니다.")
 						return false;
@@ -87,18 +87,16 @@ function fncGetList(pageNo) {
 						var sumPostNo = "";
 
 						for (var i = 0; i < postCount; i++) {
-							if (i != postCount - 1) {
-								var postNo = $($("input[name='postNo']")[i])
-										.val()
-										+ ",";
+							if (i != (postCount - 1)) {
+								var postNo = $($("input[name='postNo']:checked")[i]).val()	+ ",";
 							} else {
-								var postNo = $($("input[name='postNo']")[i])
-										.val();
+								var postNo = $($("input[name='postNo']:checked")[i]).val();
 							}
 							sumPostNo += postNo;
 						}
-						//			alert(sumPostNo)
-						$("span[name='ticketCount']").append(postCount)
+						alert("선택티켓결제 " + sumPostNo)
+						$("input[name='sumPostNo']").val(sumPostNo);
+						$("span[name='ticketCount']").append(postCount);
 					}
 				})
 	});
@@ -123,22 +121,25 @@ function fncGetList(pageNo) {
 				}
 				sumPostNo += postNo;
 			}
-			//			alert(sumPostNo)
-			$("span[name='ticketCount']").append(postCount)
+			alert(sumPostNo)
+			$("input[name='sumPostNo']").val(sumPostNo);
+			$("span[name='ticketCount']").append(postCount);
 		})
 	});
 
 	//=================== "장바구니에서 삭제" 버튼 Event 연결 ===================
 	$(function() {
 		$("button:contains('장바구니에서 삭제')").bind("click", function() {
-			fncDelBasketList();
+			alert("장바구니에서 삭제")
+			fncDeleteBasketList();
 		})
 	});
 
 	//=================== "결제예매정보 페이지로 이동" 버튼 Event 연결 ===================
 	$(function() {
 		$("button:contains('결제예매정보 페이지로 이동')").bind("click", function() {
-			fncAddPurchasList();
+			alert("결제예매정보 페이지로 이동")
+			fncAddBasketPurchase();
 		})
 	});
 
@@ -146,7 +147,7 @@ function fncGetList(pageNo) {
 	$(function() {
 		$("#selectedTicketDelete button:contains('취 소')").bind("click",
 				function() {
-					//			alert("선택 취소")
+					alert("선택티켓삭제 취소")
 					$("span[name='ticketCount']").empty();
 				})
 	});
@@ -155,7 +156,7 @@ function fncGetList(pageNo) {
 	$(function() {
 		$("#selectedTicketPayment button:contains('취 소')").bind("click",
 				function() {
-					//			alert("선택 취소")
+					alert("선택티켓결제 취소")
 					$("span[name='ticketCount']").empty();
 				})
 	});
@@ -163,25 +164,27 @@ function fncGetList(pageNo) {
 	//=================== "전체선택티켓 취소" 버튼 Event 연결 ===================
 	$(function() {
 		$("#allTicketPayment button:contains('취 소')").bind("click", function() {
-			//			alert("전체 취소")
+			alert("전체선택티켓 취소")
 			$("input[name='postNo']").prop("checked", false);
 		})
 	});
 
-	//=================== "fncAddPurchasList()" 버튼 Event 연결 ===================	
-	function fncAddPurchasList() {
-		$("form").attr("method", "POST").attr("action",
-				"/purchase/addPurchaseList/").submit();
+	//=================== "fncAddBasketPurchase()" 버튼 Event 연결 ===================	
+	function fncAddBasketPurchase() {
+		alert("fncAddBasketPurchase()")
+		$("form").attr("method", "POST").attr("action",	"/purchase/addBasketPurchase/").submit();
 	}
 
 	//=================== "fncDelBasketList()" 버튼 Event 연결 ===================	
-	function fncDelBasketList() {
-		$("form").attr("method", "POST").attr("action",
-				"/purchase/delBasketList/").submit();
+	function fncDeleteBasketList() {
+		alert("fncDeleteBasketList()")
+		
+		// ajax 로 구현할것
+		
+//		$("form").attr("method", "POST").attr("action",	"/purchase/deleteBasketList/").submit();
 	}
 	
 	
--->	
 </script>
 
 </head>
@@ -235,8 +238,6 @@ function fncGetList(pageNo) {
 						<td><img class="media-object" src="${ list.ticketImage }" alt="There is no image" ></td>
 						<td>
 							<h3>${ list.ticketTitle }</h3>
-							<input type="hidden" name="contentId" value="${ list.contentid }">
-							<input type="hidden" name="contentTypeId" value="${ list.contenttypeid }">
 						</td>
 						<td>
 							<h5>● 예매일자 : ${ list.bookingDate }</h5>
@@ -256,17 +257,21 @@ function fncGetList(pageNo) {
 				</tbody>
 				</c:forEach>
 			</table>
-
+			
+			<input type="hidden" name="sumPostNo">
+			
 			<hr>
 			<div class="row">
-				<div class="col-md-6"></div>
-				<div class="col-md-6 text-right">
+				<div class="col-xs-6 text-left">
 					<button type="button" class="btn btn-danger">전체선택취소</button>
+				</div>
+				<div class="col-xs-6 text-right">
 					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</button>
 					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</button>
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</button>
 				</div>
 			</div>
+			
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 

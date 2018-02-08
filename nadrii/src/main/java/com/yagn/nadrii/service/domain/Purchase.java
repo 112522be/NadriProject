@@ -13,7 +13,9 @@ public class Purchase {
 	private int contentid;			
 	private int contenttypeid;		
 
-	private int postNo;			
+	private int postNo;	
+	private String sumPostNo;
+	
 	private String ticketTitle;		
 	private String ticketImage;		
 	private Date regDate;			
@@ -237,18 +239,26 @@ public class Purchase {
 		this.ticketP = ticketP;
 	}
 
+	public String getSumPostNo() {
+		return sumPostNo;
+	}
+
+	public void setSumPostNo(String sumPostNo) {
+		this.sumPostNo = sumPostNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", contentid=" + contentid
-				+ ", contenttypeid=" + contenttypeid + ", postNo=" + postNo + ", ticketTitle=" + ticketTitle
-				+ ", ticketImage=" + ticketImage + ", regDate=" + regDate + ", bookingDate=" + bookingDate
-				+ ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll + ", flag=" + flag
-				+ ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice=" + Arrays.toString(ticketPrice)
-				+ ", ticketC=" + ticketC + ", ticketP=" + ticketP + ", totalTicketPrice=" + totalTicketPrice
-				+ ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment + ", buyerId=" + buyerId + ", buyerName="
-				+ buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail + ", buyer=" + buyer + "]";
+				+ ", contenttypeid=" + contenttypeid + ", postNo=" + postNo + ", sumPostNo=" + sumPostNo
+				+ ", ticketTitle=" + ticketTitle + ", ticketImage=" + ticketImage + ", regDate=" + regDate
+				+ ", bookingDate=" + bookingDate + ", cancelDate=" + cancelDate + ", ticketPriceAll=" + ticketPriceAll
+				+ ", flag=" + flag + ", ticketCount=" + Arrays.toString(ticketCount) + ", ticketPrice="
+				+ Arrays.toString(ticketPrice) + ", ticketC=" + ticketC + ", ticketP=" + ticketP + ", totalTicketPrice="
+				+ totalTicketPrice + ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment + ", buyerId="
+				+ buyerId + ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail
+				+ ", buyer=" + buyer + "]";
 	}
-
 
 	
 	
