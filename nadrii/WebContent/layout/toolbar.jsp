@@ -74,12 +74,9 @@
 	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-<<<<<<< HEAD
-         $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-=======
-    	
+
        $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
->>>>>>> refs/remotes/origin/master
+
 //      	 alert("장바구니")
           self.location = "/purchase/listBasket"
        });
