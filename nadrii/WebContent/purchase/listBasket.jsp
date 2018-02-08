@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 
 <title>장바구니 목록</title>
 
@@ -37,100 +37,151 @@ function fncGetList(pageNo) {
 }
 
 
-//=================== "전체티켓결제" 버튼 Event 연결 =================== 
-$(function() {
-	$("button:contains('전체티켓결제')").bind("click", function() {
 
-		$("input[name='postNo']").prop("checked", true);
+	//=================== "전체티켓결제" 버튼 Event 연결 =================== 
+	$(function() {
+		$("button:contains('전체티켓결제')").bind("click", function() {
+			
+			alert("전체티켓결제 버튼")
+			
+			$("input[name='postNo']").prop("checked", true);
 
-		var postCount = $("input[name='postNo']:checked").length;
-		var sumPostNo = "";
-		
-		for (var i = 0; i < postCount; i++) {
-			if (i != postCount - 1) {
-				var postNo = $( $("input[name='postNo']")[i] ).val() + ",";
-			} else {
-				var postNo = $( $("input[name='postNo']")[i] ).val();
-			}
-			sumPostNo += postNo;
-		}
-//		alert(sumPostNo)		
-		})
-	});
-	
-//=================== "선택티켓결제" 버튼 Event 연결 ===================
-	$(function() { 
-		$("button:contains('선택티켓결제')").bind("click", function() {
-			
-			
 			var postCount = $("input[name='postNo']:checked").length;
-			if (postCount == 0 ) {
-				alert("선택된 티켓이 없습니다.")
-			}
-			
 			var sumPostNo = "";
-			
+
 			for (var i = 0; i < postCount; i++) {
 				if (i != postCount - 1) {
-					var postNo = $( $("input[name='postNo']")[i] ).val() + ",";
+					var postNo = $($("input[name='postNo']")[i]).val() + ",";
 				} else {
-					var postNo = $( $("input[name='postNo']")[i] ).val();
+					var postNo = $($("input[name='postNo']")[i]).val();
 				}
 				sumPostNo += postNo;
 			}
-//			alert(sumPostNo)
+		})
+	});
+
+<!--	
+	
+	//=================== "전체티켓결제" 버튼 Event 연결 =================== 
+	$(function() {
+		$("button:contains('전체선택취소')").bind("click", function() {
+			$("input[name='postNo']").prop("checked", false);
+		})
+	});
+
+	//=================== "선택티켓결제" 버튼 Event 연결 ===================
+
+	$(function() {
+		$("button:contains('선택티켓결제')").bind(
+				"click",
+				function() {
+
+					var postCount = $("input[name='postNo']:checked").length;
+
+					if (postCount == 0) {
+						alert("선택된 티켓이 없습니다.")
+						return false;
+
+					} else if (postCount != 0) {
+
+						var sumPostNo = "";
+
+						for (var i = 0; i < postCount; i++) {
+							if (i != postCount - 1) {
+								var postNo = $($("input[name='postNo']")[i])
+										.val()
+										+ ",";
+							} else {
+								var postNo = $($("input[name='postNo']")[i])
+										.val();
+							}
+							sumPostNo += postNo;
+						}
+						//			alert(sumPostNo)
+						$("span[name='ticketCount']").append(postCount)
+					}
+				})
+	});
+
+	//=================== "선택티켓삭제" 버튼 Event 연결 ===================
+	$(function() {
+		$("button:contains('선택티켓삭제')").bind("click", function() {
+
+			var postCount = $("input[name='postNo']:checked").length;
+			if (postCount == 0) {
+				alert("선택된 티켓이 없습니다.")
+				return false;
+			}
+
+			var sumPostNo = "";
+
+			for (var i = 0; i < postCount; i++) {
+				if (i != postCount - 1) {
+					var postNo = $($("input[name='postNo']")[i]).val() + ",";
+				} else {
+					var postNo = $($("input[name='postNo']")[i]).val();
+				}
+				sumPostNo += postNo;
+			}
+			//			alert(sumPostNo)
 			$("span[name='ticketCount']").append(postCount)
 		})
 	});
-	
-	//=================== "선택티켓삭제" 버튼 Event 연결 ===================
-	$(function() { 
-		$("button:contains('선택티켓삭제')").bind("click", function() {
-			
-			var postCount = $("input[name='postNo']:checked").length;
-			if (postCount == 0 ) {
-				alert("선택된 티켓이 없습니다.")
-			}
-			
-			var sumPostNo = "";
-			
-			for (var i = 0; i < postCount; i++) {
-				if (i != postCount - 1) {
-					var postNo = $( $("input[name='postNo']")[i] ).val() + ",";
-				} else {
-					var postNo = $( $("input[name='postNo']")[i] ).val();
-				}
-				sumPostNo += postNo;
-			}
-			alert(sumPostNo + "선택티켓삭제 콜?")
-//			alert(sumPostNo)
+
+	//=================== "장바구니에서 삭제" 버튼 Event 연결 ===================
+	$(function() {
+		$("button:contains('장바구니에서 삭제')").bind("click", function() {
+			fncDelBasketList();
 		})
 	});
-	
-	
+
 	//=================== "결제예매정보 페이지로 이동" 버튼 Event 연결 ===================
-	$(function() { 
+	$(function() {
 		$("button:contains('결제예매정보 페이지로 이동')").bind("click", function() {
-			fncAddPurchasList(); 
+			fncAddPurchasList();
 		})
 	});
-	
-	//=================== "취소" 버튼 Event 연결 ===================
-	$(function() { 
-		$("button:contains('취 소')").bind("click", function() {
-			$("span[name='ticketCount']").empty();
+
+	//=================== "선택티켓삭제 취소" 버튼 Event 연결 ===================
+	$(function() {
+		$("#selectedTicketDelete button:contains('취 소')").bind("click",
+				function() {
+					//			alert("선택 취소")
+					$("span[name='ticketCount']").empty();
+				})
+	});
+
+	//=================== "선택티켓결제 취소" 버튼 Event 연결 ===================
+	$(function() {
+		$("#selectedTicketPayment button:contains('취 소')").bind("click",
+				function() {
+					//			alert("선택 취소")
+					$("span[name='ticketCount']").empty();
+				})
+	});
+
+	//=================== "전체선택티켓 취소" 버튼 Event 연결 ===================
+	$(function() {
+		$("#allTicketPayment button:contains('취 소')").bind("click", function() {
+			//			alert("전체 취소")
+			$("input[name='postNo']").prop("checked", false);
 		})
 	});
-	
+
 	//=================== "fncAddPurchasList()" 버튼 Event 연결 ===================	
 	function fncAddPurchasList() {
-		$("form")
-		.attr("method", "POST")
-		.attr("action", "/purchase/addPurchaseList/")
-		.submit();
+		$("form").attr("method", "POST").attr("action",
+				"/purchase/addPurchaseList/").submit();
+	}
+
+	//=================== "fncDelBasketList()" 버튼 Event 연결 ===================	
+	function fncDelBasketList() {
+		$("form").attr("method", "POST").attr("action",
+				"/purchase/delBasketList/").submit();
 	}
 	
 	
+-->	
 </script>
 
 </head>
@@ -173,7 +224,7 @@ $(function() {
 				<tbody>
 					<tr>
 						<th scope="row">
-							<h4>${ num.count }</h4>
+							<h4>${ num.count }. [NO:${ list.postNo }]</h4>
 							
 								<label class="btn btn-info">
 									<input type="checkbox" name="postNo" value="${ list.postNo }"> 
@@ -190,9 +241,17 @@ $(function() {
 						<td>
 							<h5>● 예매일자 : ${ list.bookingDate }</h5>
 							<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
-							<button type="button" class="btn btn-default btn-lg btn-block">
-								<h3>예매티켓보기</h3>
-							</button>
+							<a class="btn btn-default btn-lg btn-block" role="button" data-toggle="collapse"
+								href="#${ num.index }" aria-expanded="false" aria-controls="collapseExample">
+									<h4>예매티켓정보</h4>
+							</a>
+							<div class="collapse" id="${ num.index }">
+								<div class="well text-center">
+								<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+									<h5 class="text-danger">￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장</h5>								
+								</c:forEach>
+								</div>
+							</div>
 						</td>
 				</tbody>
 				</c:forEach>
@@ -202,11 +261,10 @@ $(function() {
 			<div class="row">
 				<div class="col-md-6"></div>
 				<div class="col-md-6 text-right">
+					<button type="button" class="btn btn-danger">전체선택취소</button>
 					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</button>
 					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</button>
-					<button type="button" class="btn btn-info">선택티켓삭제</button>
-					<button type="button" class="btn btn-danger">Success</button>
-
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</button>
 				</div>
 			</div>
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
@@ -237,8 +295,8 @@ $(function() {
 					</div>
 				</div>
 			</div>
-			
-			<!-- '전체티켓결제' Modal -->
+
+			<!-- '선택티켓결제' Modal --> 
 			<div class="modal fade" id="selectedTicketPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -258,6 +316,32 @@ $(function() {
 							</button>
 							<button type="button" class="btn btn-danger">
 								결제예매정보 페이지로 이동
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- '선택티켓삭제' Modal --> 
+			<div class="modal fade" id="selectedTicketDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">선택티켓삭제</h4>
+						</div>
+						<div class="modal-body">
+							<h2 class="text-center">선택하신 <span class="label label-warning" name='ticketCount'></span> 장의 티켓을</h2> 
+							<h2 class="text-center text-danger">삭제 하시겠습니까?</h2>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								취 소
+							</button>
+							<button type="button" class="btn btn-danger">
+								장바구니에서 삭제
 							</button>
 						</div>
 					</div>
