@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,7 +23,7 @@
 		$('textarea.form-control').bind('click', function() {
 			$(this).empty();
 		})
-		$('button.btn.btn-info:contains("´ñ ±Û")').bind('click', function() {
+		$('button.btn.btn-info:contains("ëŒ“ ê¸€")').bind('click', function() {
 			var comment=$('textarea.form-control').val();
 			addComment(comment);
 		})
@@ -36,10 +36,10 @@
 		<hr/>
 		<div>
 			<div class="col-md-11">
-				<textarea class="form-control" rows="3" >´ñ±ÛÀ» ÀÔ·ÂÇÏ¼¼¿ä</textarea>
+				<textarea class="form-control" rows="3" >ëŒ“ê¸€ì„ ì…ë ¥í•˜ì„¸ìš”</textarea>
 			</div>
 			<div class="col-md-1">
-				<button align="right" type="button" class="btn btn-info" name="submitComment">´ñ ±Û<p/>Àú Àå</button>
+				<button align="right" type="button" class="btn btn-info" name="submitComment">ëŒ“ ê¸€<p/>ì € ì¥</button>
 			</div>
 		</div>
 	</div>

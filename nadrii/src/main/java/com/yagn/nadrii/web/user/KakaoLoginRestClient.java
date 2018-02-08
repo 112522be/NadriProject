@@ -35,17 +35,17 @@ public class KakaoLoginRestClient {
 		String url = "https://kauth.kakao.com/oauth/token";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 		TokenRequest tokenRequest = new TokenRequest();
 		tokenRequest.setCode(code);
 		
-		HttpEntity httpEntity = new ByteArrayEntity(tokenRequest.toString().getBytes("utf-8"));
+		HttpEntity httpEntity = new ByteArrayEntity(tokenRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
 		httpEntity = httpResponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		ObjectMapper objectMapper = new ObjectMapper();
 		
@@ -59,13 +59,13 @@ public class KakaoLoginRestClient {
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Authorization", token);
-		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
 		System.out.println(httpResponse);
 		
 		HttpEntity httpEntity = httpResponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		
 		return object.toString();
@@ -77,13 +77,13 @@ public class KakaoLoginRestClient {
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Authorization", "Bearer "+token);
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 //		JSONObject properties = new JSONObject();
 //		properties.put("age", "23");
 //		properties.put("gender", "female");
 //		
-//		HttpEntity httpEntity01 = new StringEntity(properties.toString(),"utf-8");
+//		HttpEntity httpEntity01 = new StringEntity(properties.toString(),"UTF-8");
 //
 //		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -114,7 +114,7 @@ public class KakaoLoginRestClient {
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
 		httpPost.setHeader("Authorization", "Bearer "+token);
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 		JSONArray propertyKeys = new JSONArray();
 		propertyKeys.add("kaccount_email");
@@ -122,7 +122,7 @@ public class KakaoLoginRestClient {
 		propertyKeys.add("thumbnail_image");
 //		properties.put("gender", "female");
 //		
-		HttpEntity httpEntity01 = new StringEntity(propertyKeys.toString(),"utf-8");
+		HttpEntity httpEntity01 = new StringEntity(propertyKeys.toString(),"UTF-8");
 
 		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -158,7 +158,7 @@ public class KakaoLoginRestClient {
 		String url = "https://nid.naver.com/oauth2.0/token";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 		NaverLoginRequest loginRequest = new NaverLoginRequest();
 		loginRequest.setCode(code);
@@ -167,12 +167,12 @@ public class KakaoLoginRestClient {
 		loginRequest.setClient_secret("dm1JX0XXqi");
 		loginRequest.setState(state);
 		
-		HttpEntity httpEntity = new ByteArrayEntity(loginRequest.toString().getBytes("utf-8"));
+		HttpEntity httpEntity = new ByteArrayEntity(loginRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		System.out.println("두번 찍히는지 확인");
 		httpEntity = httpResponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		ObjectMapper objectMapper = new ObjectMapper();
 		NaverLoginResponse loginResponse = objectMapper.readValue(object.toString(), NaverLoginResponse.class);
@@ -185,13 +185,13 @@ public class KakaoLoginRestClient {
 		String url = "https://openapi.naver.com/v1/nid/me";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		httpPost.setHeader("Authorization", tokenInfo.getToken_type()+" "+tokenInfo.getAccess_token());
 		
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		System.out.println("두번 찍히는지 확인");
 		HttpEntity httpEntity = httpResponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		ObjectMapper objectMapper = new ObjectMapper();
 		UserResponse response = objectMapper.readValue(object.get("response").toString(), UserResponse.class);
@@ -208,12 +208,12 @@ public class KakaoLoginRestClient {
 		String url = "https://kapi.kakao.com/v1/user/logout";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		httpPost.setHeader("Authorization", "Bearer "+token);
 		
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		HttpEntity httpEntity = httpResponse.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String id = object.toString().split(":")[0];

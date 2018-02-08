@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,8 +16,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('button.btn.btn-default:contains("ÂÊÁöº¸³»±â")').bind('click', function() {
-			alert("ÂÊÁöº¸³»±â!");
+		$('button.btn.btn-default:contains("ìª½ì§€ë³´ë‚´ê¸°")').bind('click', function() {
+			alert("ìª½ì§€ë³´ë‚´ê¸°!");
 		})
 	})
 </script>
@@ -39,7 +39,7 @@
 		Profile
 		<h3 style="bold">${user.userId}</h3>
 		<p>${user.email}<p/>
-		<button type="button" class="btn btn-default">ÂÊÁöº¸³»±â</button>
+		<button type="button" class="btn btn-default">ìª½ì§€ë³´ë‚´ê¸°</button>
 	</div>
 	<jsp:include page="../common/comment.jsp"></jsp:include>
 </body>

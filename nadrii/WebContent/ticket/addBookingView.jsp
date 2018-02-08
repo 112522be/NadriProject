@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,11 +9,11 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>¿¹¸ÅÁ¤º¸ÀÔ·Â</title>
+<title>ì˜ˆë§¤ì •ë³´ì…ë ¥</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -45,9 +45,9 @@
 	var ticketCount = "";
 	var totalTicketPrice = "";
 
-	//=================== "Àå¹Ù±¸´Ï ´ã±â" Event ¿¬°á =================== 
+	//=================== "ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°" Event ì—°ê²° =================== 
 	$(function() {
-		$("button:contains('Àå¹Ù±¸´Ï ´ã±â')").bind('click', function() {
+		$("button:contains('ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°')").bind('click', function() {
 			
 				$( ".label.label-warning[name='titleB']" ).append('${ tourTicket.title }');
 			
@@ -60,44 +60,44 @@
 					if (ticketCount != 0) {
 						var sumPriceTicket = (ticketPrice * 1) *  ticketCount;
 						totalTicketPrice = (totalTicketPrice * 1) + (sumPriceTicket * 1);
-						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>£Ü "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;Àå</h2>");
+						$( ".modal-body" ).append("<h2>&nbsp;&nbsp;<code>ï¿¦ "+ticketPrice+"</code> : <span class='label label-info'>"+ticketCount+"</span>&nbsp;ì¥</h2>");
 					}
 				}
-				$( ".label.label-success" ).append("£Ü " + totalTicketPrice);
+				$( ".label.label-success" ).append("ï¿¦ " + totalTicketPrice);
 			})
 		});
 </script>
 <script>
 	
-	//=================== "Àå¹Ù±¸´Ï ³»¿¡¼­ ÀúÀåÇÏ±â" Event ¿¬°á =================== 
+	//=================== "ì¥ë°”êµ¬ë‹ˆ ë‚´ì—ì„œ ì €ì¥í•˜ê¸°" Event ì—°ê²° =================== 
 	$(function() {
-		$("button:contains('ÀúÀåÇÏ±â')").bind("click", function() {
+		$("button:contains('ì €ì¥í•˜ê¸°')").bind("click", function() {
 			var flag = 'basket';
 			fncAddPurchase(flag);
-//			alert("ÀúÀåÇÏ±â ¿Ï·á")
+//			alert("ì €ì¥í•˜ê¸° ì™„ë£Œ")
 			return;
 			
 		});
 	});
 
 	
-	//=================== "Ãë¼Ò" Event ¿¬°á =================== 
+	//=================== "ì·¨ì†Œ" Event ì—°ê²° =================== 
 	function goBack() {
     	window.history.back();
 	}
 	
 	
-	//=================== "°áÁ¦" Event ¿¬°á =================== 
+	//=================== "ê²°ì œ" Event ì—°ê²° =================== 
 	$(function() {
 		$("button.btn.btn-danger").bind("click", function() {
-//			alert("°áÁ¦")
+//			alert("ê²°ì œ")
 			var flag = 'purchase';
 			fncAddPurchase(flag);
 		});
 	});
 	
 	
-	//==================== "¼ö·®Áõ°¨" Event ¿¬°á =================== 
+	//==================== "ìˆ˜ëŸ‰ì¦ê°" Event ì—°ê²° =================== 
 	
 	function fncTicketCount(indexVal, currentVal, countVal) {
 
@@ -120,12 +120,12 @@
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
 			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
-			console.log("[Æ¼ÄÏ ¼ö·®ÀÌ 0 º¸´Ù ÀÛÀ½]")
+			console.log("[í‹°ì¼“ ìˆ˜ëŸ‰ì´ 0 ë³´ë‹¤ ì‘ìŒ]")
 		}
 		
 	}
 
-	//==================== + / - ¹öÆ° Ã³¸® ====================
+	//==================== + / - ë²„íŠ¼ ì²˜ë¦¬ ====================
 
 	$(function() {
 
@@ -138,13 +138,13 @@
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
 			/*
-			console.log("- ÀÎµ¦½º °ª : " + indexVal)
-			console.log("- Ä«¿îÆ® °ª : " + countVal)
-			console.log("- ÇöÀç °ª : " + currentVal)
+			console.log("- ì¸ë±ìŠ¤ ê°’ : " + indexVal)
+			console.log("- ì¹´ìš´íŠ¸ ê°’ : " + countVal)
+			console.log("- í˜„ì¬ ê°’ : " + currentVal)
 			//*/
 			
 			if (currentVal <= 0) {
-				alert("Æ¼ÄÏ ¼ö·®À» È®ÀÎ ÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.")
+				alert("í‹°ì¼“ ìˆ˜ëŸ‰ì„ í™•ì¸ í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.")
 			}
 
 			fncTicketCount(indexVal, currentVal, countVal);
@@ -160,9 +160,9 @@
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
 			/*
-			console.log("+ ÀÎµ¦½º °ª : " + indexVal)
-			console.log("+ Ä«¿îÆ® °ª : " + countVal)
-			console.log("+ ÇöÀç °ª : " + currentVal)
+			console.log("+ ì¸ë±ìŠ¤ ê°’ : " + indexVal)
+			console.log("+ ì¹´ìš´íŠ¸ ê°’ : " + countVal)
+			console.log("+ í˜„ì¬ ê°’ : " + currentVal)
 			//*/
 
 			fncTicketCount(indexVal, currentVal, countVal);
@@ -171,7 +171,7 @@
 	});
 
 	
-	// ===== Form À¯È¿¼º °ËÁõ ÈÄ Navigation =====
+	// ===== Form ìœ íš¨ì„± ê²€ì¦ í›„ Navigation =====
 	function fncAddPurchase(flag) {
 /*		
 		var name = $("input[name='name']").val();
@@ -180,30 +180,30 @@
 		for (var i = 0; i < $(".ticketPrice").length; i++) {		
 			ticketPrice = $(".ticketPrice").eq(i).val();
 			ticketCount = $(".ticketCount").eq(i).val();
-			console.log('2. Æ¼ÄÏ ±¸¸Å¼ö·® È®ÀÎ : ' + ticketPrice + " = " + ticketCount)
+			console.log('2. í‹°ì¼“ êµ¬ë§¤ìˆ˜ëŸ‰ í™•ì¸ : ' + ticketPrice + " = " + ticketCount)
 			totalTicketCount += ticketCount * 1;
 		}
 		
-		console.log("Æ¼ÄÏ ¸îÀå ±¸¸Å Çß´Ï? " + totalTicketPrice)
+		console.log("í‹°ì¼“ ëª‡ì¥ êµ¬ë§¤ í–ˆë‹ˆ? " + totalTicketPrice)
 		
 		if (totalTicketCount == 0 || totalTicketCount == "") {
-			alert("Æ¼ÄÏ ¼ö·®À» È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.")
+			alert("í‹°ì¼“ ìˆ˜ëŸ‰ì„ í™•ì¸í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.")
 			return;
 		}
 		if (name == null || name.length < 1) {
-			alert("ÀÌ¸§Àº ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+			alert("ì´ë¦„ì€ ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
 			return;
 		}
 		if (phone == null || phone.length < 1) {
-			alert("¿¬¶ôÃ³´Â ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+			alert("ì—°ë½ì²˜ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
 			return;
 		}
-		//==>"ÀÌ¸ŞÀÏ" À¯È¿¼º Check Event Ã³¸® ¹× ¿¬°á
+		//==>"ì´ë©”ì¼" ìœ íš¨ì„± Check Event ì²˜ë¦¬ ë° ì—°ê²°
 		$(function() {
 			$("input[name='email']").bind( "change", function() {
 				var email = $("input[name='email']").val();
 				if (email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)) {
-					alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
+					alert("ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
 				}
 			});
 		});
@@ -247,10 +247,10 @@
 						success : function() {
 						}
 					});		
-					alert("ÀúÀåÇÏ±â ¿Ï·á");
+					alert("ì €ì¥í•˜ê¸° ì™„ë£Œ");
 		} else {
 			
-//			alert("flag °ª È®ÀÎ : " + flag)
+//			alert("flag ê°’ í™•ì¸ : " + flag)
 			
 			$("form")
 			.attr("method", "POST")
@@ -268,13 +268,13 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 	<div class="page-header">
-		<h3 class="text-info text-center">¿¹¸ÅÁ¤º¸ÀÔ·Â</h3>
+		<h3 class="text-info text-center">ì˜ˆë§¤ì •ë³´ì…ë ¥</h3>
 		<h5 class="text-muted text-center">
-			±¸¸ÅÇÏ½Ç Æ¼ÄÏ¿¡ ´ëÇÑ °³ÀÎÁ¤º¸¸¦ <strong class="text-danger">Çü½Ä¿¡ ¸Â°Ô </strong>ÀÔ·ÂÇØ ÁÖ¼¼¿ä.
+			êµ¬ë§¤í•˜ì‹¤ í‹°ì¼“ì— ëŒ€í•œ ê°œì¸ì •ë³´ë¥¼ <strong class="text-danger">í˜•ì‹ì— ë§ê²Œ </strong>ì…ë ¥í•´ ì£¼ì„¸ìš”.
 		</h5>
 	</div>
 
@@ -301,22 +301,22 @@
 				
 				<!-- #1 -->
 				<div class="alert alert-success" role="alert">
-					¡Ü <strong>¿¹¸ÅÀÏÀÚ</strong><br> 
-					&nbsp;- ¼±ÅÃÇÏ½Å ¿¹¸ÅÀÏÀÚ¸¦ È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
+					â— <strong>ì˜ˆë§¤ì¼ì</strong><br> 
+					&nbsp;- ì„ íƒí•˜ì‹  ì˜ˆë§¤ì¼ìë¥¼ í™•ì¸í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.
 				</div>
 					<p>${ bookingDate }</p><br>
 					
 				<!-- #2 -->
 				<div class="alert alert-warning" role="alert">
-					¡Ü <strong>ÀÌ¿ë¿ä±İ</strong><br> 
-					&nbsp;- ¾Æ·¡ ÀÌ¿ë¿ä±İÀ» È®ÀÎÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
+					â— <strong>ì´ìš©ìš”ê¸ˆ</strong><br> 
+					&nbsp;- ì•„ë˜ ì´ìš©ìš”ê¸ˆì„ í™•ì¸í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.
 				</div>
 					<p>${ detailIntro.usetimefestival }</p><br>
 					
 				<!-- #3 -->
 				<div class="alert alert-danger" role="alert">
-					¡Ü <strong>ÀÔÀå±Ç ±¸¸Å ¾È³»</strong><br> 
-					&nbsp;- ±¸¸Å ¼ö·®À» ¼±ÅÃÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
+					â— <strong>ì…ì¥ê¶Œ êµ¬ë§¤ ì•ˆë‚´</strong><br> 
+					&nbsp;- êµ¬ë§¤ ìˆ˜ëŸ‰ì„ ì„ íƒí•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.
 				</div>
 				
 				<c:forEach items="${ priceList }" varStatus="status">
@@ -328,11 +328,11 @@
 						<li role="presentation" class="active">
 							<a href="#"	value="${ priceList[status.index] }"> 
 								<span class="glyphicon glyphicon-barcode" aria-hidden="true"> </span>&nbsp;
-										${ priceList[status.index] } £Ü <span class="badge">0</span> 
+										${ priceList[status.index] } ï¿¦ <span class="badge">0</span> 
 							</a>
 						</li>
 						&nbsp;&nbsp;
-						<!-- ¼ö·®Áõ°¨ ¹öÆ° -->
+						<!-- ìˆ˜ëŸ‰ì¦ê° ë²„íŠ¼ -->
 						<div class="btn-group" role="group" aria-label="...">
 							<button type="button" class="btn btn-default" name="minus" value="minus">
 								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
@@ -354,19 +354,19 @@
 					class="img-responsive img-rounded"> <br>
 
 				<div class="alert alert-info" role="alert">
-					¡Ü <strong>°³ÀÎÁ¤º¸ ÀÔ·Â</strong>
+					â— <strong>ê°œì¸ì •ë³´ ì…ë ¥</strong>
 				</div>
 
 				<div class="input-group">
-					<span class="input-group-addon" id="name">ÀÌ ¸§</span> 
-					<input type="text" class="form-control" placeholder="ÇÊ¼öÀÔ·Â"
+					<span class="input-group-addon" id="name">ì´ ë¦„</span> 
+					<input type="text" class="form-control" placeholder="í•„ìˆ˜ì…ë ¥"
 						aria-describedby="basic-addon1" name="name" value="">
 				</div>
 				<br>
 				
 				<div class="input-group">
-					<span class="input-group-addon" id="phone">¿¬¶ôÃ³</span> 
-					<input type="text" class="form-control" placeholder="' - ' ¾øÀÌ ¹øÈ£¸¸ ÀÔ·Â"
+					<span class="input-group-addon" id="phone">ì—°ë½ì²˜</span> 
+					<input type="text" class="form-control" placeholder="' - ' ì—†ì´ ë²ˆí˜¸ë§Œ ì…ë ¥"
 						aria-describedby="basic-addon1" name="phone" value="">
 				</div>
 				<br>
@@ -383,12 +383,12 @@
 						<br>
 						
 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
-  							Àå¹Ù±¸´Ï ´ã±â
+  							ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°
 						</button>
 						 
-						<input class="btn btn-default" type="button" value="Ãë&nbsp;¼Ò" onclick="goBack()">
+						<input class="btn btn-default" type="button" value="ì·¨&nbsp;ì†Œ" onclick="goBack()">
 						
-						<button type="button" class="btn btn-danger">°áÁ¦ÇÏ±â</button>
+						<button type="button" class="btn btn-danger">ê²°ì œí•˜ê¸°</button>
 					</div>
 				</div>
 			</div>
@@ -403,20 +403,20 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
 						<span class="glyphicon glyphicon-copy" aria-hidden="true"> </span>
-						Àå¹Ù±¸´Ï¿¡ ÀúÀå ÇÏ½Ã°Ú½À´Ï±î?
+						ì¥ë°”êµ¬ë‹ˆì— ì €ì¥ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?
 					</h4>
 				</div>
 			
 				<div class="modal-body">
 					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
-					<h2>¡Ü ¼±ÅÃÇÑ ¿¹¸ÅÀÏÀÚ : <span class="label label-info">${ bookingDate }</span></h2>
-					<h2>¡Ü ÃÑ °áÁ¦¿ä±İ : <span class="label label-success"></span>&nbsp;¿ø</h2>
+					<h2>â— ì„ íƒí•œ ì˜ˆë§¤ì¼ì : <span class="label label-info">${ bookingDate }</span></h2>
+					<h2>â— ì´ ê²°ì œìš”ê¸ˆ : <span class="label label-success"></span>&nbsp;ì›</h2>
 				
 				</div>
 			
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">ÀúÀåÇÏ±â</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Ãë ¼Ò</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">ì €ì¥í•˜ê¸°</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">ì·¨ ì†Œ</button>
 				</div>
 			</div>
 		</div>
@@ -428,7 +428,7 @@
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-		<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+		<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 	
 

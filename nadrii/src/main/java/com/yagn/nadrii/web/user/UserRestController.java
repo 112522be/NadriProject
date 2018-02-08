@@ -1,20 +1,7 @@
 package com.yagn.nadrii.web.user;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,15 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
@@ -53,10 +35,15 @@ public class UserRestController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="addUser", method= RequestMethod.POST  )
+	@RequestMapping(value="addUser", method= RequestMethod.GET  )
 	//@ResponseBody
-	public Object addUser(User user) throws Exception{
+	public Object addUser(User user, @RequestParam String uid,
+			@RequestParam String accessToken) throws Exception{
 		//회원가입
+		
+		System.out.println("userID :   "+ uid);
+		System.out.println("토큰  :   "+ accessToken);
+		
 		System.out.println("회원가입!!");
 		userService.addUser(user);
 		Map<String, String> map = new HashMap<String, String>();
@@ -66,12 +53,12 @@ public class UserRestController extends SupportController {
 	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)
 	//@ResponseBody
-	public Object loginProc( User user, HttpServletRequest request) throws Exception{
+	public Object loginProc( User user, HttpServletRequest request, Model model) throws Exception{
 		
 		boolean isAdmin = false;
 		
-		User loginUser = userService.loginProc(user);
-		
+		System.out.println("회원 정보" + user.toString());	
+		User loginUser = userService.loginProc(user);	
 		Map<String,String> map =new HashMap<String, String>();
 		
 		if(loginUser == null) {
@@ -137,10 +124,14 @@ public class UserRestController extends SupportController {
 		return findEmail;
 	}
 	
+	////////////////////////////////////////kakaoLoing///	
+	@RequestMapping("/oauth/*")
+	public class KakaoLoginRestController {
 
+	}
 
 	//////////////////////////////////////////////////////////////////
-	
+	/*		
 	@RequestMapping(value="check", method=RequestMethod.POST)
 	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
@@ -179,9 +170,9 @@ public class UserRestController extends SupportController {
 //		System.out.println("추가정보 입력이다" +map);
 //		return map;
 //	}
-	
+
 	private void sendEmail(String email, String authNum) throws UnsupportedEncodingException {
-		 /*  
+		   
 		String setfrom = "kimjh2218@gmail.com";
 		String tomail = email;
 		String title = "나들이 관리자";
@@ -246,8 +237,8 @@ public class UserRestController extends SupportController {
 	   
       ////////////////////////////////////////////////////////       
         
-        */
-	/*
+        
+	
 	private void sendEmail(String email, String authNum) {
 	 Properties p = new Properties();
 	  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Google계정@gmail.com으로 설정
@@ -282,7 +273,7 @@ public class UserRestController extends SupportController {
 	   mex.printStackTrace();
 	  }
 	
-      */  
+        
 	
 			String host = "smtp.gmail.com";
 			String subject = "나들이 이메일 인증번호";
@@ -297,7 +288,7 @@ public class UserRestController extends SupportController {
 		//		MimeMessage message = mailSender.createMimeMessage();
 				Properties props = new Properties();
 				
-/*				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.starttls.enable", "true");
 				props.put("mail.smtp.debug", "true");
 				props.put("mail.smtp.starttls.enable","true");
 				props.put("mail.transport.protocol", "smtp");
@@ -313,12 +304,12 @@ public class UserRestController extends SupportController {
 			    props.put("mail.smtp.socketFactory.fallback", "false");
 			    props.put("mail.smtp.socketFactory.port", "465");
 			    props.put("mail.smtp.starttls.enable", "true");
-	*/		    
-/*				props.put("mail.smtp.starttls.enable", "true");     // gmail은 무조건 true 고정
+			    
+				props.put("mail.smtp.starttls.enable", "true");     // gmail은 무조건 true 고정
 				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp 서버 주소
 				props.put("mail.smtp.auth","true");                 // gmail은 무조건 true 고정
 				props.put("mail.smtp.port", "587");                 // gmail 포트
-				*/
+				
 				props.setProperty("mail.transport.protocol", "smtp");
 		        props.setProperty("mail.host", host);
 		        props.put("mail.transport.protocol", "smtp");
@@ -350,7 +341,7 @@ public class UserRestController extends SupportController {
 						address);
 				message.setSentDate(new java.util.Date());
 				message.setSubject(subject);
-				message.setContent(content,"text/html; charset=euc-kr");
+				message.setContent(content,"text/html; charset=UTF-8");
 //				message.setText("Dear Mail Crawler," +
 //						"\n\n No spam to my email, please!");
 			    System.out.println("message" + message);
@@ -375,5 +366,5 @@ public class UserRestController extends SupportController {
 			buffer.append(n);
 		}
 		return buffer.toString(); 
-		}
+		}*/
 }

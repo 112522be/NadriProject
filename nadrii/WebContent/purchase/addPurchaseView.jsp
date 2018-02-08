@@ -1,15 +1,15 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <title>addPurchaseView.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -52,7 +52,7 @@ $( function(){
 	});
 });
 
-//=================== "Èñ¸Á¹è¼ÛÀÏÀÚ" Event ¿¬°á ===================
+//=================== "í¬ë§ë°°ì†¡ì¼ìž" Event ì—°ê²° ===================
 $(function() {
 	$("#dlvyDate").datepicker({
 		dateFormat: "yymmdd",
@@ -71,43 +71,43 @@ $(function() {
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class="text-info">±¸¸Å»óÇ° »ó¼¼Á¶È¸</h3>
+			<h3 class="text-info">êµ¬ë§¤ìƒí’ˆ ìƒì„¸ì¡°íšŒ</h3>
 		<!-- <h5 class="text-muted text-left">
-				ÆÇ¸ÅÇÏ½Ç »óÇ°À» <strong class="text-danger">Çü½Ä¿¡ ¸Â°Ô </strong>µî·ÏÇØ ÁÖ¼¼¿ä.
+				íŒë§¤í•˜ì‹¤ ìƒí’ˆì„ <strong class="text-danger">í˜•ì‹ì— ë§žê²Œ </strong>ë“±ë¡í•´ ì£¼ì„¸ìš”.
 			</h5>  -->
 		</div>
 
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»óÇ°¹øÈ£</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ìƒí’ˆë²ˆí˜¸</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
 		</div>
 
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»ó Ç° ¸í</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ìƒ í’ˆ ëª…</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
 		</div>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°»ó¼¼Á¤º¸</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆìƒì„¸ì •ë³´</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodDetail }</div>
 		</div>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>Á¦Á¶ÀÏÀÚ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ì œì¡°ì¼ìž</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
 		</div>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>°¡°Ý</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ê°€ê²©</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.price }</div>
 		</div>
 
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>µî·ÏÀÏÀÚ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë“±ë¡ì¼ìž</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.regDate }</div>
 		</div><hr/>
 
@@ -117,61 +117,61 @@ $(function() {
 			<input type="hidden" name="prodNo" value="${ product.prodNo }" />
 			
 			<div class="form-group">
-				<label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">±¸¸ÅÀÚ ¾ÆÀÌµð</label>
+				<label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">êµ¬ë§¤ìž ì•„ì´ë””</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="buyerId" name="buyerId" value="${ user.userId }" readonly>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">±¸¸Å¹æ¹ý</label>
+				<label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">êµ¬ë§¤ë°©ë²•</label>
 				<div class="col-sm-4">
 					<select class="form-control" name="paymentOption">
-						<option value="1">Çö±Ý±¸¸Å</option>
-						<option value="2">½Å¿ë±¸¸Å</option>
+						<option value="1">í˜„ê¸ˆêµ¬ë§¤</option>
+						<option value="2">ì‹ ìš©êµ¬ë§¤</option>
 					</select>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">¹ÞÀ¸½ÇºÐ ÀÌ¸§</label>
+				<label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">ë°›ìœ¼ì‹¤ë¶„ ì´ë¦„</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="receiverName" name="receiverName" value="${ user.userName }" placeholder="ÇÊ¼öÀÔ·Â">
+					<input type="text" class="form-control" id="receiverName" name="receiverName" value="${ user.userName }" placeholder="í•„ìˆ˜ìž…ë ¥">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">¹ÞÀ¸½ÇºÐ ¿¬¶ôÃ³</label>
+				<label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">ë°›ìœ¼ì‹¤ë¶„ ì—°ë½ì²˜</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${ user.phone }" placeholder="ÇÊ¼öÀÔ·Â">
+					<input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${ user.phone }" placeholder="í•„ìˆ˜ìž…ë ¥">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="dlvyAddr" class="col-sm-offset-1 col-sm-3 control-label">¹ÞÀ¸½ÇºÐ ÁÖ¼Ò</label>
+				<label for="dlvyAddr" class="col-sm-offset-1 col-sm-3 control-label">ë°›ìœ¼ì‹¤ë¶„ ì£¼ì†Œ</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="dlvyAddr" name="dlvyAddr" value="${ user.addr }" placeholder="ÇÊ¼öÀÔ·Â">
+					<input type="text" class="form-control" id="dlvyAddr" name="dlvyAddr" value="${ user.addr }" placeholder="í•„ìˆ˜ìž…ë ¥">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="dlvyRequest" class="col-sm-offset-1 col-sm-3 control-label">±¸¸Å½Ã ¿äÃ»»çÇ×</label>
+				<label for="dlvyRequest" class="col-sm-offset-1 col-sm-3 control-label">êµ¬ë§¤ì‹œ ìš”ì²­ì‚¬í•­</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="dlvyRequest" name="dlvyRequest" >
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="dlvyDate" class="col-sm-offset-1 col-sm-3 control-label">¹è¼ÛÈñ¸ÁÀÏÀÚ</label>
+				<label for="dlvyDate" class="col-sm-offset-1 col-sm-3 control-label">ë°°ì†¡í¬ë§ì¼ìž</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="dlvyDate" name="dlvyDate" placeholder="¹Ì ±âÀÔ½Ã ÀÔ±Ý È®ÀÎ ÈÄ ¹Ù·Î Ãâ°íÇÕ´Ï´Ù.">
+					<input type="text" class="form-control" id="dlvyDate" name="dlvyDate" placeholder="ë¯¸ ê¸°ìž…ì‹œ ìž…ê¸ˆ í™•ì¸ í›„ ë°”ë¡œ ì¶œê³ í•©ë‹ˆë‹¤.">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">±¸&nbsp;¸Å</button>
-					<a class="btn btn-primary btn" href="#" role="button">Ãë&nbsp;¼Ò</a>
+					<button type="button" class="btn btn-primary">êµ¬&nbsp;ë§¤</button>
+					<a class="btn btn-primary btn" href="#" role="button">ì·¨&nbsp;ì†Œ</a>
 				</div>
 			</div>
 
@@ -179,7 +179,7 @@ $(function() {
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

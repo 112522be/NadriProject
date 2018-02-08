@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- ///////////////////////////// ·Î±×ÀÎ½Ã Forward  /////////////////////////////////////// -->
+<!-- ///////////////////////////// ë¡œê·¸ì¸ì‹œ Forward  /////////////////////////////////////// -->
 <c:if test="${ ! empty user }">
    <jsp:forward page="main.jsp" />
 </c:if>
@@ -17,9 +17,9 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -30,7 +30,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- À§Ä¡ Á¤º¸ °¡Á®¿À´Â JS -->
+<!-- ìœ„ì¹˜ ì •ë³´ ê°€ì ¸ì˜¤ëŠ” JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <!-- Facebook Login -->
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
@@ -69,78 +69,78 @@ body {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
       
-      //============= È¸¿ø¿ø°¡ÀÔ È­¸éÀÌµ¿ =============
+      //============= íšŒì›ì›ê°€ì… í™”ë©´ì´ë™ =============
       $( function() {
-         //==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-         $("a[href='#' ]:contains('È¸¿ø°¡ÀÔ')").on("click" , function() {
-            alert("È¸¿ø°¡ÀÔ")
+         //==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+         $("a[href='#' ]:contains('íšŒì›ê°€ì…')").on("click" , function() {
+            alert("íšŒì›ê°€ì…")
             self.location = "/user/addUser"
          });
       });
       
-      //============= ·Î±×ÀÎ È­¸éÀÌµ¿ =============
+      //============= ë¡œê·¸ì¸ í™”ë©´ì´ë™ =============
       $( function() {
-         //==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-         $("a[href='#' ]:contains('·Î ±× ÀÎ')").on("click" , function() {
+         //==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+         $("a[href='#' ]:contains('ë¡œ ê·¸ ì¸')").on("click" , function() {
             self.location = "/user/login"
          });
       });
       
-      //============================== Á¤º¸°Ë»ö ÆÄÆ® ===================
+      //============================== ì •ë³´ê²€ìƒ‰ íŒŒíŠ¸ ===================
       $( function() {
-         $("a[href='#' ]:contains('¹Ú¹°°ü')").on("click" , function() {
+         $("a[href='#' ]:contains('ë°•ë¬¼ê´€')").on("click" , function() {
             self.location = "../trip/listMuseum?pageNo=1&area=local"
          });
       });
       
       $( function() {
-         $("a[href='#' ]:contains('Àü½Ã°ü')").on("click" , function() {
+         $("a[href='#' ]:contains('ì „ì‹œê´€')").on("click" , function() {
             self.location = "../trip/listExhibit?pageNo=1&area=local"
          });
       });
       
       $( function() {
-         $("a[href='#' ]:contains('¹Ì¼ú°ü')").on("click" , function() {
+         $("a[href='#' ]:contains('ë¯¸ìˆ ê´€')").on("click" , function() {
             self.location = "../trip/listGallery?pageNo=1&area=local"
          });
       });
       
       $( function() {
-         $("a[href='#' ]:contains('Ã¼Çè°ü')").on("click" , function() {
+         $("a[href='#' ]:contains('ì²´í—˜ê´€')").on("click" , function() {
             self.location = "../trip/listExperience?pageNo=1&area=local"
          });
       });
       
       $( function() {
-         $("a[href='#' ]:contains('¹Î¼Ó¸¶À»')").on("click" , function() {
+         $("a[href='#' ]:contains('ë¯¼ì†ë§ˆì„')").on("click" , function() {
             self.location = "../trip/listTradition?pageNo=1&area=local"
          });
       });
       
-      //============= "³ªµéÀÌÆ¼ÄÏ" È­¸éÀÌµ¿ =============
+      //============= "ë‚˜ë“¤ì´í‹°ì¼“" í™”ë©´ì´ë™ =============
       $( function() {
-         $("a[href='#' ]:contains('³ªµéÀÌÆ¼ÄÏ')").bind("click" , function() {
+         $("a[href='#' ]:contains('ë‚˜ë“¤ì´í‹°ì¼“')").bind("click" , function() {
             self.location = "/ticket/listTicket"
          });
       });
       
-      //============= "Àå¹Ù±¸´Ï" È­¸éÀÌµ¿ =============
+      //============= "ì¥ë°”êµ¬ë‹ˆ" í™”ë©´ì´ë™ =============
       $( function() {
-         $("a[href='#' ]:contains('Àå¹Ù±¸´Ï')").bind("click" , function() {
+         $("a[href='#' ]:contains('ì¥ë°”êµ¬ë‹ˆ')").bind("click" , function() {
             self.location = "/purchase/listBasket"
          });
       });
       
       $( function() {
-         //==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-         $("a[href='#' ]:contains('Á¾¸¸¾Æ')").on("click" , function() {
+         //==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+         $("a[href='#' ]:contains('ì¢…ë§Œì•„')").on("click" , function() {
             self.location = "/trip/listMuseum?pageNo=1&area=local"
          });
       });
       
       $(function(){
-         $("a[href='#' ]:contains('·Î ±× ¾Æ ¿ô')").on("click" , function() {
-            if(confirm("·Î±×¾Æ¿ôÀ» ÇÏ½Ã°Ú½À´Ï±î?")){
+         $("a[href='#' ]:contains('ë¡œ ê·¸ ì•„ ì›ƒ')").on("click" , function() {
+            if(confirm("ë¡œê·¸ì•„ì›ƒì„ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
             self.location = "/user/logoutProc";
             }
          });
@@ -148,23 +148,23 @@ body {
       -
       
 
-   //============= FaceBook ·Î±×ÀÎ START =============
+   //============= FaceBook ë¡œê·¸ì¸ START =============
 
    /*
-    FirebaseChat.prototype.init = function(){ //...»ı·«
+    FirebaseChat.prototype.init = function(){ //...ìƒëµ
         this.liFacebookBtn = document.getElementById('liFacebookBtn');
      } 
-     // ÃÊ±â ÀÌº¥Æ® ¹ÙÀÎµù  
+     // ì´ˆê¸° ì´ë²¤íŠ¸ ë°”ì¸ë”©  
            FirebaseChat.prototype.initEvent = function(){ 
-        //...»ı·«
+        //...ìƒëµ
            this.liFacebookBtn.addEventListener('click', this.onFacebookBtnClick.bind(this)); 
        }
-        // ÆäÀÌ½ººÏ ·Î±×ÀÎ ¹öÆ° Å¬¸¯ / 
+        // í˜ì´ìŠ¤ë¶ ë¡œê·¸ì¸ ë²„íŠ¼ í´ë¦­ / 
         FirebaseChat.prototype.onFacebookBtnClick = function(){ 
            var facebookProvider = new firebase.auth.FacebookAuthProvider(); 
            this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION) 
            .then(this.signInWithPopup.bind(this, facebookProvider)).(function(error) { 
-              console.error('ÀÎÁõ »óÅÂ ¼³Á¤ Áß ¿¡·¯ ¹ß»ı' , error); 
+              console.error('ì¸ì¦ ìƒíƒœ ì„¤ì • ì¤‘ ì—ëŸ¬ ë°œìƒ' , error); 
               }); 
            }    
         //*/
@@ -249,7 +249,7 @@ body {
     }
     
     
-   //============= FaceBook ·Î±×ÀÎ END =============
+   //============= FaceBook ë¡œê·¸ì¸ END =============
     
    </script>
 
@@ -273,7 +273,7 @@ body {
 
       <div class="container">
 
-         <a class="navbar-brand" href="#">³ªµéÀÌ TEST</a>
+         <a class="navbar-brand" href="#">ë‚˜ë“¤ì´ TEST</a>
 
          <!-- toolBar Button Start //////////////////////// -->
          <div class="navbar-header">
@@ -289,15 +289,15 @@ body {
          <div class="collapse navbar-collapse" id="target">
             <ul class="nav navbar-nav navbar-right">
                <c:if test="${loginUser eq null }">
-                  <li><a href="#">È¸¿ø°¡ÀÔ</a></li>
-                  <li><a href="#">·Î ±× ÀÎ</a></li>
-                  <li><a href="#">»óÇ°°Ë»ö</a></li>
-                  <li><a href="#">¹Ú¹°°ü</a></li>
-                  <li><a href="#">Àü½Ã°ü</a></li>
-                  <li><a href="#">¹Ì¼ú°ü</a></li>
-                  <li><a href="#">Ã¼Çè°ü</a></li>
-                  <li><a href="#">¹Î¼Ó¸¶À»</a></li>
-                  <li><a href="#">³ªµéÀÌÆ¼ÄÏ</a></li>
+                  <li><a href="#">íšŒì›ê°€ì…</a></li>
+                  <li><a href="#">ë¡œ ê·¸ ì¸</a></li>
+                  <li><a href="#">ìƒí’ˆê²€ìƒ‰</a></li>
+                  <li><a href="#">ë°•ë¬¼ê´€</a></li>
+                  <li><a href="#">ì „ì‹œê´€</a></li>
+                  <li><a href="#">ë¯¸ìˆ ê´€</a></li>
+                  <li><a href="#">ì²´í—˜ê´€</a></li>
+                  <li><a href="#">ë¯¼ì†ë§ˆì„</a></li>
+                  <li><a href="#">ë‚˜ë“¤ì´í‹°ì¼“</a></li>
                   <li><a href="#"> 
                   
                   <!--  facebook login --> <script>
@@ -320,13 +320,13 @@ body {
                </c:if>
 
                <c:if test="${loginUser ne null }">
-                  <li><a href="#">·Î ±× ¾Æ ¿ô</a></li>
-                  <li><a href="#">¹Ú¹°°ü</a></li>
-                  <li><a href="#">Àü½Ã°ü</a></li>
-                  <li><a href="#">¹Ì¼ú°ü</a></li>
-                  <li><a href="#">Ã¼Çè°ü</a></li>
-                  <li><a href="#">¹Î¼Ó¸¶À»</a></li>
-                  <li><a href="#">³ªµéÀÌÆ¼ÄÏ</a></li>
+                  <li><a href="#">ë¡œ ê·¸ ì•„ ì›ƒ</a></li>
+                  <li><a href="#">ë°•ë¬¼ê´€</a></li>
+                  <li><a href="#">ì „ì‹œê´€</a></li>
+                  <li><a href="#">ë¯¸ìˆ ê´€</a></li>
+                  <li><a href="#">ì²´í—˜ê´€</a></li>
+                  <li><a href="#">ë¯¼ì†ë§ˆì„</a></li>
+                  <li><a href="#">ë‚˜ë“¤ì´í‹°ì¼“</a></li>
                </c:if>
             </ul>
          </div>
@@ -336,26 +336,26 @@ body {
    <jsp:include page="/layout/toolbar.jsp"></jsp:include>
    <!-- ToolBar End /////////////////////////////////////-->
 
-   <!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
    <div class="container">
 
-      <!-- ´Ù´Ü·¹ÀÌ¾Æ¿ô  Start /////////////////////////////////////-->
+      <!-- ë‹¤ë‹¨ë ˆì´ì•„ì›ƒ  Start /////////////////////////////////////-->
       <div class="row">
 
          <!--  Main start /////////////////////////////////////-->
          <div class="col-md-9">
             <div class="jumbotron">
-               <h1>³ªµéÀÌ TEST</h1>
+               <h1>ë‚˜ë“¤ì´ TEST</h1>
                <p>If you got some good emotion for about your memory, that was
                   good memory to you.</p>
                <p>But, if you got some bad emotion, that was good experience
                   to you.</p>
                <div class="text-center">
-                  <a class="btn btn-primary btn-lg" href="#" role="button">È¸¿ø°¡ÀÔ</a>
-                  <a class="btn btn-warning btn-lg" href="#" role="button">·Î ±× ÀÎ</a>
-                  <a class="btn btn-danger btn-lg" href="#" role="button">³ªµéÀÌÆ¼ÄÏ</a>
-                  <a class="btn btn-danger btn-lg" href="#" role="button">Àå¹Ù±¸´Ï</a>
-                  <a class="btn btn-warning btn-lg" href="#" role="button">Á¾¸¸¾Æ</a>
+                  <a class="btn btn-primary btn-lg" href="#" role="button">íšŒì›ê°€ì…</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button">ë¡œ ê·¸ ì¸</a>
+                  <a class="btn btn-danger btn-lg" href="#" role="button">ë‚˜ë“¤ì´í‹°ì¼“</a>
+                  <a class="btn btn-danger btn-lg" href="#" role="button">ì¥ë°”êµ¬ë‹ˆ</a>
+                  <a class="btn btn-warning btn-lg" href="#" role="button">ì¢…ë§Œì•„</a>
                </div>
 
             </div>
@@ -364,16 +364,16 @@ body {
 
 
 
-         <!--  Menu ±¸¼º Start /////////////////////////////////////-->
-                  <!--  Menu ±¸¼º end /////////////////////////////////////-->
+         <!--  Menu êµ¬ì„± Start /////////////////////////////////////-->
+                  <!--  Menu êµ¬ì„± end /////////////////////////////////////-->
          <div class="fb-like" data-share="true" data-width="450"
             data-show-faces="true"></div>
 
       </div>
-      <!-- ´Ù´Ü·¹ÀÌ¾Æ¿ô  end /////////////////////////////////////-->
+      <!-- ë‹¤ë‹¨ë ˆì´ì•„ì›ƒ  end /////////////////////////////////////-->
 
    </div>
-   <!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+   <!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 
    

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -12,26 +12,26 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   
   <script type="text/javascript">
-        /* summernote¿¡¼­ ÀÌ¹ÌÁö ¾÷·Îµå½Ã ½ÇÇàÇÒ ÇÔ¼ö */
+        /* summernoteì—ì„œ ì´ë¯¸ì§€ ì—…ë¡œë“œì‹œ ì‹¤í–‰í•  í•¨ìˆ˜ */
 	 	function sendFile(file, editor) {              
-            // ÆÄÀÏ Àü¼ÛÀ» À§ÇÑ Æû»ı¼º
+            // íŒŒì¼ ì „ì†¡ì„ ìœ„í•œ í¼ìƒì„±
 	 		data = new FormData();
 	 	    data.append("uploadFile", file);
-	 	    $.ajax({ // ajax¸¦ ÅëÇØ ÆÄÀÏ ¾÷·Îµå Ã³¸®
+	 	    $.ajax({ // ajaxë¥¼ í†µí•´ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 	 	        data : data,
 	 	        type : "POST",
 	 	        url : "uploadImage",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
-	 	        success : function(data) { // Ã³¸®°¡ ¼º°øÇÒ °æ¿ì
-                    // ¿¡µğÅÍ¿¡ ÀÌ¹ÌÁö Ãâ·Â
+	 	        success : function(data) { // ì²˜ë¦¬ê°€ ì„±ê³µí•  ê²½ìš°
+                    // ì—ë””í„°ì— ì´ë¯¸ì§€ ì¶œë ¥
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
-					alert("ÆÄÀÏ ¾÷·Îµå¿¡ ½ÇÆĞÇß½À´Ï´Ù.")
+					alert("íŒŒì¼ ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.")
 				}
 	 	    });
 	 	}
@@ -51,14 +51,14 @@
         		},
         		success : function(data) {
         			for(i=0;i<data.length;i++){
-        				if(data[i]==("À½½Ä")){
-        					data[i] = "¸ÀÁı"
+        				if(data[i]==("ìŒì‹")){
+        					data[i] = "ë§›ì§‘"
         				}
 	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
 	 	        	}
 				},
 				error : function() {
-					$("#cndHashtags").append("<p>ºĞ¼® °á°ú¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.</p>")
+					$("#cndHashtags").append("<p>ë¶„ì„ ê²°ê³¼ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</p>")
 				}
         	})
         }
@@ -85,10 +85,10 @@
 		<textarea id="summernote" name="text"></textarea>
         <script>
             $(document).ready(function() {
-                $('#summernote').summernote({ // summernote¸¦ »ç¿ëÇÏ±â À§ÇÑ ¼±¾ğ
+                $('#summernote').summernote({ // summernoteë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ì„ ì–¸
                     height: 800,
-					callbacks: { // Äİ¹éÀ» »ç¿ë
-                        // ÀÌ¹ÌÁö¸¦ ¾÷·ÎµåÇÒ °æ¿ì ÀÌº¥Æ®¸¦ ¹ß»ı
+					callbacks: { // ì½œë°±ì„ ì‚¬ìš©
+                        // ì´ë¯¸ì§€ë¥¼ ì—…ë¡œë“œí•  ê²½ìš° ì´ë²¤íŠ¸ë¥¼ ë°œìƒ
 					    onImageUpload: function(files, editor, welEditable) {
 					    	for(i=0;i<files.length;i++){
 					    		sendFile(files[i], this);

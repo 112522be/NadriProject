@@ -15,7 +15,7 @@
 		<result property="gender" 				column="gender" 			jdbcType="VARCHAR" />
 		<result property="phone" 				column="phone" 				jdbcType="VARCHAR" />
 		<result property="birth" 				column="birth" 				jdbcType="VARCHAR" />
-		<result property="profiIeimageFile" 	column="profi_ieimage_file" jdbcType="VARCHAR" />
+		<result property="profileimageFile" 	column="PROFILE_IMAGE_FILE" jdbcType="VARCHAR" />
 		<result property="email" 				column="email" 				jdbcType="VARCHAR"  />
 		<result property="children" 			column="children" 			jdbcType="NUMERIC" />
 		<result property="qrcode" 				column="qr_code" 			jdbcType="VARCHAR" />
@@ -58,21 +58,19 @@
 	 </select>
 	 
 	 <update	id="addUserPlus"	parameterType="user" >
-	   	UPDATE users
-	   	<set>
-	   		NAME 	= #{userName, jdbcType=VARCHAR} ,
-			PHONE	= #{phone, jdbcType=VARCHAR},
-			GENDER 	= #{gender, jdbcType=VARCHAR} ,
-			BIRTH	=	#{birth, jdbcType=VARCHAR},
-			PROFI_IEIMAGE_FILE  = #{profiIeimageFile, jdbcType=VARCHAR},
-			CHILDREN  = #{children, jdbcType=NUMERIC}
-	   	</set>
+	   	UPDATE users SET
+	   		NAME 	= #{userName} ,
+			PHONE	= #{phone},
+			GENDER 	= #{gender} ,
+			BIRTH	=	#{birth},
+  			PROFILE_IMAGE_FILE  = #{profileimageFile}, 
+			CHILDREN  = #{children}
 	   	WHERE user_id = #{userId}
 	 </update>	
 	 
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
-		user_id , name , password , birth , role ,  children , gender , phone , qr_code , email , profi_ieimage_file , reg_date 		
+		user_id , name , password , birth , role ,  children , gender , phone , qr_code , email , reg_date ,   profile_image_file  		
 		FROM users 
 		WHERE user_id = #{value}
 	 </select>

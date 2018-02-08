@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,11 +10,11 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>³ªµéÀÌ Æ¼ÄÏ ¸ñ·Ï</title>
+<title>ë‚˜ë“¤ì´ í‹°ì¼“ ëª©ë¡</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -23,7 +23,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- ¹«ÇÑ½ºÅ©·Ñ -->
+	<!-- ë¬´í•œìŠ¤í¬ë¡¤ -->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- //////////////////// CSS //////////////////// -->
@@ -45,51 +45,51 @@ function fncGetList(pageNo) {
 	
 }
 
-	//=================== "Á¶È¸" Event ¿¬°á =================== 
+	//=================== "ì¡°íšŒ" Event ì—°ê²° =================== 
 	$(function() {
 		$(".btn.btn-primary#option1").bind("click", function() {
-			//			alert("¹öÆ° [1] :: OK")
-			//			alert("Á¦¸ñ¼ø :: " + $("input[name='title']").val())
-			console.log("Á¦¸ñ¼ø :: " + $("input[name='title']").val())
+			//			alert("ë²„íŠ¼ [1] :: OK")
+			//			alert("ì œëª©ìˆœ :: " + $("input[name='title']").val())
+			console.log("ì œëª©ìˆœ :: " + $("input[name='title']").val())
 		});
 
 		$(".btn.btn-primary#option2").bind("click", function() {
-			//			alert("¹öÆ° [2] :: OK")
-			//			alert("Á¶È¸¼ø :: " + $("input[name='click']").val())
-			console.log("Á¶È¸¼ø :: " + $("input[name='click']").val())
+			//			alert("ë²„íŠ¼ [2] :: OK")
+			//			alert("ì¡°íšŒìˆœ :: " + $("input[name='click']").val())
+			console.log("ì¡°íšŒìˆœ :: " + $("input[name='click']").val())
 		});
 
 		$("#option3").bind("click", function() {
-			//			alert("¹öÆ° [3] :: OK")
-			//			alert("¼öÁ¤ÀÏ¼ø :: " + $("input[name='modify']").val())
-			console.log("¼öÁ¤ÀÏ¼ø :: " + $("input[name='modify']").val())
+			//			alert("ë²„íŠ¼ [3] :: OK")
+			//			alert("ìˆ˜ì •ì¼ìˆœ :: " + $("input[name='modify']").val())
+			console.log("ìˆ˜ì •ì¼ìˆœ :: " + $("input[name='modify']").val())
 		});
 
 		$("#option4").bind("click", function() {
-			//			alert("¹öÆ° [4] :: OK")
-			//			alert("»ı¼ºÀÏ¼ø :: " + $("input[name='create']").val())
-			console.log("»ı¼ºÀÏ¼ø :: " + $("input[name='create']").val())
+			//			alert("ë²„íŠ¼ [4] :: OK")
+			//			alert("ìƒì„±ì¼ìˆœ :: " + $("input[name='create']").val())
+			console.log("ìƒì„±ì¼ìˆœ :: " + $("input[name='create']").val())
 		});
 
 	});
 
-	//=================== "Á¶È¸" Event ¿¬°á =================== 
+	//=================== "ì¡°íšŒ" Event ì—°ê²° =================== 
 	$(function() {
 		$("button.btn.btn-primary").bind("click", function() {
 			fncGetTicket();
 		});
 	});
 
-	//=================== "Ãë¼Ò" Event ¿¬°á =================== 
+	//=================== "ì·¨ì†Œ" Event ì—°ê²° =================== 
 	$(function() {
 		$("a[href='#' ]").bind("click", function() {
 			$("form")[0].reset();
 		});
 	});
 
-	//=================== "»ó¼¼Á¶È¸" Event ¿¬°á ===================
+	//=================== "ìƒì„¸ì¡°íšŒ" Event ì—°ê²° ===================
 	$(function() {
-		$("a[href='#' ]:contains('»ó¼¼Á¶È¸')").bind("click", function() {
+		$("a[href='#' ]:contains('ìƒì„¸ì¡°íšŒ')").bind("click", function() {
 			
 			var contentId = $( $('input[name="contentId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$( ".btn.btn-warning" ).index(this)] ).val();
@@ -122,15 +122,15 @@ function fncGetList(pageNo) {
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
 			<h3 class="text-info">
-				<p class="bg-warning">³ªµéÀÌÆ¼ÄÏ Å×½ºÆ®</p>
+				<p class="bg-warning">ë‚˜ë“¤ì´í‹°ì¼“ í…ŒìŠ¤íŠ¸</p>
 			</h3>
 			<h5 class="text-muted text-left">
-				Á¶È¸ÇÏ½Ç Æ¼ÄÏ Á¤º¸¸¦ <strong class="text-danger">¼±ÅÃ</strong>ÇØ ÁÖ¼¼¿ä.
+				ì¡°íšŒí•˜ì‹¤ í‹°ì¼“ ì •ë³´ë¥¼ <strong class="text-danger">ì„ íƒ</strong>í•´ ì£¼ì„¸ìš”.
 			</h5>
 		</div>
 
@@ -173,7 +173,7 @@ function fncGetList(pageNo) {
 		<div class="col-md-6 text-left">
 			<p class="text-primary">
 				<code>
-				&lt; ÇöÀç ${ resultPage.pageNo } ÆäÀÌÁö / ÀüÃ¼ ${ resultPage.totalCount } °Ç¼ö &gt;
+				&lt; í˜„ì¬ ${ resultPage.pageNo } í˜ì´ì§€ / ì „ì²´ ${ resultPage.totalCount } ê±´ìˆ˜ &gt;
 				</code>
 			</p>
 		</div>
@@ -185,22 +185,22 @@ function fncGetList(pageNo) {
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary" id="option1"> 
 					<input type="radio" name="title" value="A" autocomplete="off">
-					Á¦¸ñ¼ø
+					ì œëª©ìˆœ
 				</label> 
 				
 				<label class="btn btn-primary active" id="option2"> 
 					<input type="radio" name="click" value="B" autocomplete="off" checked>
-					Á¶È¸¼ø
+					ì¡°íšŒìˆœ
 				</label> 
 				
 				<label class="btn btn-primary" id="option3"> 
 					<input type="radio" name="modify" value="Q" autocomplete="off">
-					¼öÁ¤ÀÏ¼ø
+					ìˆ˜ì •ì¼ìˆœ
 				</label> 
 				
 				<label class="btn btn-primary" id="option4"> 
 					<input type="radio" name="create" value="R" autocomplete="off">
-					»ı¼ºÀÏ¼ø
+					ìƒì„±ì¼ìˆœ
 				</label>
 			</div>
 -->		
@@ -214,21 +214,21 @@ function fncGetList(pageNo) {
 							<span class="label label-success"> ${ tt.title } </span>
 						</h4>
 						<div class="thumbnail">
-						<p class = "text-right">Á¶È¸¼ö : ${ tt.readcount }</p>
+						<p class = "text-right">ì¡°íšŒìˆ˜ : ${ tt.readcount }</p>
 							<img src="${ tt.firstimage }" class="img-responsive" />
 							<div class="caption">
-								<p> ÀÔÀå±Ç : 
+								<p> ì…ì¥ê¶Œ : 
 								<c:forEach items="${ tt.usetimefestival }" varStatus="status">
 									${ tt.usetimefestival[status.index] }
 								</c:forEach>
 									<hr/>
-									±â&nbsp;°£ : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-									Àå&nbsp;¼Ò : ${ tt.eventplace } <br>
+									ê¸°&nbsp;ê°„ : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
+									ì¥&nbsp;ì†Œ : ${ tt.eventplace } <br>
 								</p>
 								<p class="text-right">
 									<a href="#" class="btn btn-warning" role="button">
-										»ó¼¼Á¶È¸
-										<!-- PageNavigationÀ» À§ÇÑ °ªÀ» º¸³»´Â ºÎºĞ  -->
+										ìƒì„¸ì¡°íšŒ
+										<!-- PageNavigationì„ ìœ„í•œ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„  -->
 										<input type="hidden" name="contentId" value="${ tt.contentid }">
 										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
 										<input type="hidden" name="title" value="${ tt.title }">
@@ -247,14 +247,14 @@ function fncGetList(pageNo) {
 			</div>
 
 			<hr />
-			<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+			<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 			
 		</form>
 		<!-- form End /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
 	
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>

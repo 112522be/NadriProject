@@ -59,7 +59,7 @@ public class OdsayServiceImpl implements OdsayService{
 
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
 
 		HttpResponse res = httpclient.execute(httpGet);
 
@@ -69,7 +69,7 @@ public class OdsayServiceImpl implements OdsayService{
 		HttpEntity httpEntity = res.getEntity();
 
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
 		List listX = new ArrayList();
 		List listY = new ArrayList();
@@ -136,7 +136,7 @@ public class OdsayServiceImpl implements OdsayService{
 		
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
 		
 		HttpResponse res = httpclient.execute(httpGet);
 		
@@ -146,7 +146,7 @@ public class OdsayServiceImpl implements OdsayService{
 		HttpEntity httpEntity = res.getEntity();
 
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
 		List subPathList = new ArrayList();
 		List laneList = new ArrayList();
@@ -231,7 +231,7 @@ public class OdsayServiceImpl implements OdsayService{
 		
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Content-Type", "application/json;charset=utf-8");
+		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
 		
 		HttpResponse res = httpclient.execute(httpGet);
 		
@@ -241,7 +241,7 @@ public class OdsayServiceImpl implements OdsayService{
 		HttpEntity httpEntity = res.getEntity();
 
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
 		JSONObject result = (JSONObject)jsonobj.get("result");

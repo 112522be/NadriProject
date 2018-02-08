@@ -47,12 +47,11 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() { 
-	$("#userId").val('');
+	$("#email").val('');
 	idCheckFlag = false;
 	$(".signupbtn").prop("disabled", true);
-	
-	$("#userId").val($("#uid").val());
-	$("#email").val($("#uid").val());
+	$("#userId").val($("params").val());
+	$("#email").val($("params").val());
 	
 });
 
@@ -300,7 +299,7 @@ function checkSuccess(){
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" oninput="checkId();" autofocus>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" oninput="checkId();" autofocus>
 		      <span id = "chkMsg"></span>
 		    </div>
 			<div id="htmlId"></div>
@@ -388,8 +387,31 @@ function checkSuccess(){
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 	
-	<!--<input type="hidden" id="uid" value="${uid}" />  facebook 로그인 -->
+	<input type="hidden" id="email" value="${email}" /> <!-- facebook 로그인 -->
 	
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

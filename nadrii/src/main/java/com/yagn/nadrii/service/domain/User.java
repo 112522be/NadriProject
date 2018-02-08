@@ -16,7 +16,7 @@ public class User {
 	private String email;
 	private Date regDate;
 	private String birth;
-	private String profiIeimageFile;
+	private String profileImageFile;
 	private String qrcode;
 	private String children;
 	private String gender;
@@ -24,7 +24,7 @@ public class User {
 	private String phone1;
 	private String phone2;
 	private String phone3;
-
+	private String checkSuccess;
 	///Constructor
 	public User(){
 	}
@@ -90,11 +90,11 @@ public class User {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getprofiIeimageFile() {
-		return profiIeimageFile;
+	public String getprofileimageFile() {
+		return profileImageFile;
 	}
-	public void setProfiIeimageFile(String profiIeimageFile) {
-		this.profiIeimageFile = profiIeimageFile;
+	public void setProfiIeimageFile(String profileImageFile) {
+		this.profileImageFile = profileImageFile;
 	}
 	public String getqrcode() {
 		return qrcode;
@@ -128,7 +128,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + "[profiIeimageFile]" +profiIeimageFile
+			+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + "[profileImageFile]" +profileImageFile
 			+"[qrcode]" +qrcode + "[children]" + children + "[gender]" + gender;
 			
 	}
@@ -148,4 +148,12 @@ public class User {
 		this.phone3 = phone3;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////
+
+	public String getCheckSuccess() {
+		return checkSuccess;
+	}
+
+	public void setCheckSuccess(String checkSuccess) {
+		this.checkSuccess = checkSuccess;
+	}
 }

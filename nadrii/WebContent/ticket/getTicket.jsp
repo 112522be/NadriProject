@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,11 +7,11 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>³ªµéÀÌ Æ¼ÄÏ »ó¼¼Á¶È¸</title>
+<title>ë‚˜ë“¤ì´ í‹°ì¼“ ìƒì„¸ì¡°íšŒ</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -37,36 +37,36 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-// ========== '¿¹¸ÅÇÏ±â / Àå¹Ù±¸´Ï ´ã±â' Event ¿¬°á ==========
+// ========== 'ì˜ˆë§¤í•˜ê¸° / ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°' Event ì—°ê²° ==========
 $(function(){
-	$("a[href='#']:contains('¿¹¸ÅÇÏ±â')").bind("click", function(){
+	$("a[href='#']:contains('ì˜ˆë§¤í•˜ê¸°')").bind("click", function(){
 		fncAddBooking();
 	});
 });
 
-//========== '¿¹¸ÅÇÏ±â / Àå¹Ù±¸´Ï ´ã±â' Event ¿¬°á ==========
+//========== 'ì˜ˆë§¤í•˜ê¸° / ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°' Event ì—°ê²° ==========
 $(function(){
-	$("button:contains('Ãë ¼Ò')").bind("click", function(){
+	$("button:contains('ì·¨ ì†Œ')").bind("click", function(){
 		self.location = "/ticket/listTicket"
 	});
 });
 
-// ========== "DatePicker" Event ¿¬°á  ==========
+// ========== "DatePicker" Event ì—°ê²°  ==========
 $(function() {
 	$("#datepicker").datepicker({
 		
 		dateFormat: "yymmdd",
 		changeMonth: true,
 		changeYear: true,
-		dayNamesMin: ["¿ù", "È­", "¼ö", "¸ñ", "±İ", "Åä", "ÀÏ"],
-		monthNamesShort: ["1¿ù", "2¿ù", "3¿ù", "4¿ù", "5¿ù", "6¿ù", "7¿ù", "8¿ù", "9¿ù", "10¿ù", "11¿ù", "12¿ù"],
+		dayNamesMin: ["ì›”", "í™”", "ìˆ˜", "ëª©", "ê¸ˆ", "í† ", "ì¼"],
+		monthNamesShort: ["1ì›”", "2ì›”", "3ì›”", "4ì›”", "5ì›”", "6ì›”", "7ì›”", "8ì›”", "9ì›”", "10ì›”", "11ì›”", "12ì›”"],
 		showMonthAfterYear: true,
 		
 		minDate: '${ detailIntro.eventstartdate }',
 		maxDate: '${ detailIntro.eventenddate }', 
 	
 		onSelect: function(){
-			var bookingDate = $.datepicker.formatDate("yy³â mm¿ù ddÀÏ", $(this).datepicker('getDate'));
+			var bookingDate = $.datepicker.formatDate("yyë…„ mmì›” ddì¼", $(this).datepicker('getDate'));
   			$('input[name="bookingDate"]').val(bookingDate);
 		}
 	})
@@ -76,7 +76,7 @@ function fncAddBooking() {
 	var bookingDate = $('input[name="bookingDate"]').val();
 	
 	if (bookingDate == null || bookingDate.length < 1) {
-		alert("¿¹¸ÅÀÏÀÚ¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
+		alert("ì˜ˆë§¤ì¼ìë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”");
 		return;
 	}
 	
@@ -94,12 +94,12 @@ function fncAddBooking() {
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
    	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
 			<h3 class=" text-info text-center">
-				<p class="bg-warning">³ªµéÀÌ Æ¼ÄÏ »ó¼¼Á¶È¸</p>
+				<p class="bg-warning">ë‚˜ë“¤ì´ í‹°ì¼“ ìƒì„¸ì¡°íšŒ</p>
 			</h3>
 		</div>
 
@@ -136,44 +136,44 @@ function fncAddBooking() {
 
 			<div class="form-inline row">
 
-				<!-- 1st :: »çÁø -->
+				<!-- 1st :: ì‚¬ì§„ -->
 				<div class="col-sm-4">
 					<img src="${ detailImage.originimgurl }" alt="There is no image" class="img-responsive img-rounded">
 				</div>
 
-				<!-- 2rd :: »ó¼¼Á¤º¸ -->
+				<!-- 2rd :: ìƒì„¸ì •ë³´ -->
 				<div class="col-sm-4">
-					¡Ü °ü¶÷¿¬·É : ${ detailIntro.agelimit }<br>
+					â— ê´€ëŒì—°ë ¹ : ${ detailIntro.agelimit }<br>
 					<hr>
-					¡Ü Çà»ç±â°£ : ${ detailIntro.playtime }<br>
-					¡Ü Çà»çÀå¼Ò : ${ detailIntro.eventplace }<br> 
-					¡Ü ÃàÁ¦µî±Ş : ${ detailIntro.festivalgrade }<br>
-					¡Ü Çà»çÀå À§Ä¡ ¾È³» : ${ detailIntro.placeinfo }<br> 
-					¡Ü °ü¶÷ ¼Ò¿ä½Ã°£ : ${ detailIntro.spendtimefestival }<br> 
-					¡Ü ºÎ´ëÇà»ç : ${ detailIntro.subevent }<br>
+					â— í–‰ì‚¬ê¸°ê°„ : ${ detailIntro.playtime }<br>
+					â— í–‰ì‚¬ì¥ì†Œ : ${ detailIntro.eventplace }<br> 
+					â— ì¶•ì œë“±ê¸‰ : ${ detailIntro.festivalgrade }<br>
+					â— í–‰ì‚¬ì¥ ìœ„ì¹˜ ì•ˆë‚´ : ${ detailIntro.placeinfo }<br> 
+					â— ê´€ëŒ ì†Œìš”ì‹œê°„ : ${ detailIntro.spendtimefestival }<br> 
+					â— ë¶€ëŒ€í–‰ì‚¬ : ${ detailIntro.subevent }<br>
 					<hr>
-					¡Ü ÁÖÃÖ : ${ detailIntro.sponsor1 } / ${ detailIntro.sponsor2 }<br>
-					¡Ü ÁÖ°ü»ç ¿¬¶ôÃ³ ¨ç : ${ detailIntro.sponsor1tel }<br> 
-					¡Ü ÁÖ°ü»ç ¿¬¶ôÃ³ ¨è : ${ detailIntro.sponsor2tel }<br> 
+					â— ì£¼ìµœ : ${ detailIntro.sponsor1 } / ${ detailIntro.sponsor2 }<br>
+					â— ì£¼ê´€ì‚¬ ì—°ë½ì²˜ â‘  : ${ detailIntro.sponsor1tel }<br> 
+					â— ì£¼ê´€ì‚¬ ì—°ë½ì²˜ â‘¡ : ${ detailIntro.sponsor2tel }<br> 
 					<hr>
-					¡Ü Çà»ç È¨ÆäÀÌÁö : ${ detailIntro.eventhomepage }<br>
+					â— í–‰ì‚¬ í™ˆí˜ì´ì§€ : ${ detailIntro.eventhomepage }<br>
 					<hr>
-					¡Ü ÇÒÀÎÁ¤º¸ : ${ detailIntro.discountinfofestival }<br> 
-					¡Ü ÀÌ¿ë¿ä±İ : ${ detailIntro.usetimefestival }
+					â— í• ì¸ì •ë³´ : ${ detailIntro.discountinfofestival }<br> 
+					â— ì´ìš©ìš”ê¸ˆ : ${ detailIntro.usetimefestival }
 				</div>
 
-				<!-- 3nd :: ¿¹¸ÅÀÏÀÚ ÀÔ·Â -->
+				<!-- 3nd :: ì˜ˆë§¤ì¼ì ì…ë ¥ -->
 				<div class="col-sm-4">
-					<p>¿¹¸ÅÀÏÀÚ ¼±ÅÃ</p>
+					<p>ì˜ˆë§¤ì¼ì ì„ íƒ</p>
 					<div id="datepicker" >
 						<input type="hidden" name="bookingDate"/>
 					</div><br>
 				
 	  			<button type="button" class="btn btn-success">
-	  				Ãë ¼Ò
+	  				ì·¨ ì†Œ
 	  			</button>
 	  			<a class="btn btn-danger btn" href="#" role="button">
-	  				¿¹¸ÅÇÏ±â <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> Àå¹Ù±¸´Ï ´ã±â
+	  				ì˜ˆë§¤í•˜ê¸° <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> </span> ì¥ë°”êµ¬ë‹ˆ ë‹´ê¸°
 	  			</a>
 					
 				</div>
@@ -194,7 +194,7 @@ function fncAddBooking() {
 		<!-- form End /////////////////////////////////////-->
 		
  	</div>
- 	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 
 </body>
 
