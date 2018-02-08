@@ -61,6 +61,10 @@ table td {
     padding: 0.05em 1.3em !important;
 }
 
+section > :last-child, section > .container, section:last-child, article > :last-child, article > .container, article:last-child {
+    margin-bottom: -35px !important;
+}
+
 </style>
 <script>
 
@@ -90,8 +94,25 @@ $(function(){
 			return;	
 		}		
 	});
-		
+	
+	$('[data-toggle="popover"]').popover(
+			{ html: true,
+			 container: 'body',
+			 content: '<a href="#" class="profile" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+			 placement: 'bottom',
+			 }
+			);	
+	
 });
+
+function clickProfile(){
+	alert('${group.join.userId}');
+}
+
+function clickMessage(){
+	
+	window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+}
 
 
 </script>
@@ -119,7 +140,7 @@ $(function(){
 					
 					<div class="meta">
 						<time class="published" datetime="${group.regDate}">${group.regDate}</time>
-						<a href="#" class="author"><span class="name">${group.join.userId}</span>
+						<a href="#" class="author"><span class="name" data-container="body" data-toggle="popover">${group.join.userId}</span>
 						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
 					</div>
 				</header>
@@ -182,11 +203,15 @@ $(function(){
 					<a href="#" id="modify" class="button small modify">modify</a>
 					<a href="#" id="delete" class="button small delete">delete</a>
 				</div>
+	
 			</article>
+	
 	</div>
+	<jsp:include page="../common/comment.jsp"></jsp:include>
 	</section>
+	
 	</div>
+	
 </body>
-
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
 </html>

@@ -1,6 +1,5 @@
 package com.yagn.nadrii.web.group;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -142,6 +141,7 @@ public class GroupController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+	//	search.setSearchKeyword(searchKeyword);
 		
 		Map<String , Object> map=groupService.getGroupList(search);
 		

@@ -1744,7 +1744,7 @@ hr {
 		background: #fff;
 		background: rgba(255, 255, 255, 0.75);
 		width: 100%;
-		border-radius: 0.35em;
+		border-radius: 0em;
 		padding: 0.75em 1em 0.75em 1em;
 		box-shadow: inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
 		border: solid 1px rgba(0, 0, 0, 0.15);
@@ -1884,6 +1884,7 @@ hr {
 		transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 		background-color: #FFFFFF;
 		border: 0;
+		
 		box-shadow: inset 0 0 0 1px rgba(160, 160, 160, 0.3);
 		color: #3c3b3b;
 		cursor: pointer;
@@ -2036,6 +2037,7 @@ hr {
 				position: relative;
 				top: 0;
 				font-size: 1.2em;
+				margin-top: 10px;
 			}
 		
 		.item header .published {

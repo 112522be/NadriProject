@@ -8,12 +8,7 @@
 <title>Insert title here</title>
 <script>
 
-// var userId = '${group.join.userId}';
 var groupNo = ${group.join.groupNo};
-
-$(function(){
-	
-});
 
 function addJoin(){
 	
@@ -40,6 +35,23 @@ function deleteJoin(){
 	});	
 }
 
+function clickProfile1(){
+	alert($($("input[type='hidden']")[memberIndex]).val());
+}
+
+function clickMessage1(){
+	window.open("/message/addMessage?recevierId="+$($("input[type='hidden']")[memberIndex]).val(),"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+//	alert($($("input[type='hidden']")[memberIndex]).val());
+}
+
+var memberIndex;
+
+function trClick(tr) {
+
+	memberIndex = tr.rowIndex - 1;
+
+}
+
 function getMemberList(){
 	
 	$.ajax({
@@ -50,20 +62,32 @@ function getMemberList(){
 			
 			$('.totalCount').empty();
 			$(".totalCount").append("<sub>총 참여자 수 "+returnData.totalCount+"명</sub>");
-			
+									
 			for(var i=0; i<returnData.totalCount; i++){
-				$(".userIdContainer").append("<tr><td>"+returnData.list[i].userId+"</td></tr>");
 				
-				if( ( JSON.stringify(returnData) ).indexOf( '${loginUser.userId}' ) != -1){
+				$(".userIdContainer").append('<tr onclick="javascript:trClick(this);"><td><input type="hidden" class="member" value="'+returnData.list[i].userId+'"><a href="#" class="joinMemberId" data-container="body" data-toggle="popover">'+returnData.list[i].userId+'</a></td></tr>');
+				
+				if( returnData.list[i].userId == '${loginUser.userId}' ){
 					$('.joinButtonContainer').empty();
-					$(".joinButtonContainer").append('<a href="#" class="button fit delete" name="concel" style="float: right">join concel</a>');
+					$(".joinButtonContainer").append('<a href="#" class="button fit delete" name="concel" style="float: right">concel</a>');
 				}else{
 					$('.joinButtonContainer').empty();
 					$(".joinButtonContainer").append('<a href="#" class="button fit modify" name="join" style="float: right">join</a>');
 				}
 				
+				if( '${group.join.userId}' == returnData.list[i].userId ){
+					$(".joinMemberId").append(" (master)");					
+				}
 				
 			}
+			
+			$('[data-toggle="popover"]').popover(
+					{ html: true,
+					 container: 'body',
+					 content: '<a href="#" class="profile" onclick="javascript:clickProfile1()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage1()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+					 placement: 'bottom',
+					 }
+					);	
 			
 			$("a[name='join']").on("click", function(){
 				addJoin();
@@ -71,7 +95,7 @@ function getMemberList(){
 			
 			$("a[name='concel']").on("click", function(){
 				if(returnData.totalCount == 1){
-					alert("모임 마스터는 모임 참여를 취소할 수 없습니다.");
+					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
 				if(confirm("참여를 취소하시겠습니까?")==true){

@@ -1,12 +1,10 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=refs/heads/master
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//WebContent/Trip/123123123.jsp=UTF-8
-=======
 encoding//SQL/Purchase\ DB\ Table.sql=UTF-8
->>>>>>> refs/remotes/origin/master
+encoding//WebContent/Trip/123123123.jsp=UTF-8
+encoding//WebContent/group/popover.jsp=UTF-8
 encoding//WebContent/planner/addPlannerView.jsp=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiSearch.java=UTF-8
@@ -18,4 +16,4 @@ encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketController.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketRestController.java=UTF-8
 encoding//src/test/java/com/yagn/nadrii/service/group/GroupServiceTest.java=UTF-8
 encoding//src/test/java/com/yagn/nadrii/service/join/JoinServiceTest.java=UTF-8
-encoding/<project>=EUC_KR
+encoding/<project>=UTF-8
