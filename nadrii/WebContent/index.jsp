@@ -286,14 +286,6 @@ body {
                <p>But, if you got some bad emotion, that was good experience
                   to you.</p>
                <div class="text-center">
-<<<<<<< HEAD
-                  <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
-                  <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
-                  <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
-                  <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
-                  <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
-                  <a class="btn btn-warning btn-lg" href="Newindex.jsp" role="button" >새화면</a>
-=======
                	<input type="hidden" name="recevierId" id="recevierId" value="questsolve"/>
                   <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
@@ -306,7 +298,6 @@ body {
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
 
->>>>>>> refs/remotes/origin/master
                </div>
 
             </div>

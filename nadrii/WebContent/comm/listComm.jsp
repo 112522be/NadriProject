@@ -23,7 +23,6 @@
 	})
 </script>
 <style type="text/css">
->>>>>>> refs/remotes/origin/master
 
 .icon{
 	padding: 5px;
