@@ -54,5 +54,11 @@ public class CommDaoImpl implements CommDao {
 	public List<String> getHashtags(String keyword) {
 		return sqlSession.selectList("CommMapper.getHashtags", keyword);
 	}
+
+	@Override
+	public void updateViewCount(Community community) {
+		sqlSession.update("CommMapper.updateViewCount", community);
+	}
+	
 	
 }

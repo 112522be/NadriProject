@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -22,12 +22,12 @@
 						<div id="errormessage"></div>
 						<form action="" method="post" role="form" class="contactForm">
 							<div class="alert alert-info" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
-							    <strong>º¸³»´Â »ç¶÷ : </strong>
+							    <strong>ë³´ë‚´ëŠ” ì‚¬ëžŒ : </strong>
 							    	${message.senderId}
 							    	
 							<!-- 
 								<button class="btn btn-primary" type="button">
-  									<span class="badge">º¸³»´Â »ç¶÷ : </span>
+  									<span class="badge">ë³´ë‚´ëŠ” ì‚¬ëžŒ : </span>
 								</button>
 							 -->	
     						</div>
@@ -37,28 +37,28 @@
 							</div>
 							<div class="form-group">
 								<div class="alert alert-warning" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
-							    <strong>¹Þ´Â »ç¶÷ : </strong>
+							    <strong>ë°›ëŠ” ì‚¬ëžŒ : </strong>
 							    	${message.receiverId}
 							<!-- 
 								<button class="btn btn-primary" type="button">
-  									<span class="badge">º¸³»´Â »ç¶÷ : </span>
+  									<span class="badge">ë³´ë‚´ëŠ” ì‚¬ëžŒ : </span>
 								</button>
 							 -->	
     						</div>
 								<div class="validation"></div>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="title" id="subject" placeholder="Á¦¸ñ" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+								<input type="text" class="form-control" name="title" id="subject" placeholder="ì œëª©" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
 								<div class="validation"></div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="text" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="¸Þ½ÃÁö¸¦ ÀÛ¼ºÇÏ¼¼¿ä"></textarea>
+								<textarea class="form-control" name="text" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="ë©”ì‹œì§€ë¥¼ ìž‘ì„±í•˜ì„¸ìš”"></textarea>
 								<div class="validation"></div>
 							</div>
 
 							<div class="text-center">
-								<button type="submit" class="btn btn-theme">º¸³»±â</button>
-								<button type="cancel" class="btn btn-theme">Ãë¼Ò</button>
+								<button type="submit" class="btn btn-theme">ë³´ë‚´ê¸°</button>
+								<button type="cancel" class="btn btn-theme">ì·¨ì†Œ</button>
 							</div>							
 						</form>
 					</div>

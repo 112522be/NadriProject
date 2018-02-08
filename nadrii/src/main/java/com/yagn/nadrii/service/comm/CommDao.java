@@ -14,4 +14,5 @@ public interface CommDao {
 	public void deleteComm(int postNo);
 	public int getTotalCount(Search search);
 	public List<String> getHashtags(String keyword);
+	public void updateViewCount(Community community);
 }

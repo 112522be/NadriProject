@@ -3,6 +3,7 @@ package com.yagn.nadrii.web.comm;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,7 +39,11 @@ public class CommController {
 	
 	@RequestMapping("getComm")
 	public String getComm(@RequestParam int postNo, 
-							HttpServletRequest request) {
+							HttpServletRequest request,
+							HttpSession session) {
+		if(session.getAttribute("loginUser") == null) {
+			return "/user/loginView.jsp";
+		}
 		Community community = commService.getComm(postNo);
 		request.setAttribute("community", community);
 		return "forward:/comm/getComm.jsp";
@@ -60,15 +65,11 @@ public class CommController {
 			pageSize = search.getPageSize();
 		}
 		
-		// Business logic 수행
 		Map<String , Object> map=commService.listComm(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
-		System.out.println("Page :: "+resultPage);
-		
-		// Model 과 View 연결
-		request.setAttribute("list", map.get("list"));
+		request.setAttribute("list", map.get("listComm"));
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		return "forward:/comm/listComm.jsp";

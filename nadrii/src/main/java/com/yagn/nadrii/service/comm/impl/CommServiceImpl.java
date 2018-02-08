@@ -33,7 +33,10 @@ public class CommServiceImpl implements CommService {
 
 	@Override
 	public Community getComm(int postNo) {
-		return commDao.getComm(postNo);
+		Community community = commDao.getComm(postNo);
+		community.setViewCount(community.getViewCount()+1);
+		commDao.updateViewCount(community);
+		return community;
 	}
 
 	@Override

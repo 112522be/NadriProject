@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,11 +7,11 @@
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <title>updateProductView.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-   <!-- »óÇ°Á¦Á¶ÀÏÀÚ Calendar Event -->
+   <!-- ìƒí’ˆì œì¡°ì¼ì Calendar Event -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -39,26 +39,26 @@
 
 function fncUpdateProduct(){
 	
-	//Form À¯È¿¼º °ËÁõ
+	//Form ìœ íš¨ì„± ê²€ì¦
 	var name=$("input[name='prodName']").val();
 	var detail=$("input[name='prodDetail']").val();
 	var manuDate=$("input[name='manuDate']").val();
 	var price=$("input[name='price']").val();
 
 	if(name == null || name.length<1){
-		alert("»óÇ°¸íÀº ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		alert("ìƒí’ˆëª…ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		return;
 	}
 	if(detail == null || detail.length<1){
-		alert("»óÇ°»ó¼¼Á¤º¸´Â ¹İµå½Ã ÀÔ·ÂÇÏ¿©¾ß ÇÕ´Ï´Ù.");
+		alert("ìƒí’ˆìƒì„¸ì •ë³´ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.");
 		return;
 	}
 	if(manuDate == null || manuDate.length<1){
-		alert("Á¦Á¶ÀÏÀÚ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		alert("ì œì¡°ì¼ìëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		return;
 	}
 	if(price == null || price.length<1){
-		alert("°¡°İÀº ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+		alert("ê°€ê²©ì€ ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 		return;
 	}
 		
@@ -79,7 +79,7 @@ $( function(){
 	});
 });
 
-//=================== "»óÇ°Á¦Á¶ÀÏÀÚ" Event ¿¬°á ===================
+//=================== "ìƒí’ˆì œì¡°ì¼ì" Event ì—°ê²° ===================
 $(function() {
 	$("#manuDate").datepicker({
 		dateFormat: "yymmdd",
@@ -97,12 +97,12 @@ $(function() {
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-center">
-	       <h3 class=" text-info">»óÇ°Á¤º¸¼öÁ¤</h3>
-	       <h5 class="text-muted">»óÇ° Á¤º¸¸¦ <strong class="text-danger">ÃÖ½ÅÁ¤º¸·Î °ü¸®</strong>ÇØ ÁÖ¼¼¿ä.</h5>
+	       <h3 class=" text-info">ìƒí’ˆì •ë³´ìˆ˜ì •</h3>
+	       <h5 class="text-muted">ìƒí’ˆ ì •ë³´ë¥¼ <strong class="text-danger">ìµœì‹ ì •ë³´ë¡œ ê´€ë¦¬</strong>í•´ ì£¼ì„¸ìš”.</h5>
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
@@ -111,61 +111,61 @@ $(function() {
 		<input type="hidden" name="prodNo" value="${ product.prodNo }"/>
 		
 		  <div class="form-group">
-		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°¹øÈ£</label>
+		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">ìƒí’ˆë²ˆí˜¸</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodNo" name="prodNo" value="${ product.prodNo }" placeholder="Áßº¹È®ÀÎÇÏ¼¼¿ä"  readonly>
+		      <input type="text" class="form-control" id="prodNo" name="prodNo" value="${ product.prodNo }" placeholder="ì¤‘ë³µí™•ì¸í•˜ì„¸ìš”"  readonly>
 		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">»óÇ°¹øÈ£´Â ¼öÁ¤ºÒ°¡</strong>
+		      	<strong class="text-danger">ìƒí’ˆë²ˆí˜¸ëŠ” ìˆ˜ì •ë¶ˆê°€</strong>
 		      </span>
 		    </div>
 		  </div>
 		
 		  <div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°¸í</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">ìƒí’ˆëª…</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodName" name="prodName" value="${ product.prodName }" placeholder="»óÇ°¸í">
+		      <input type="text" class="form-control" id="prodName" name="prodName" value="${ product.prodName }" placeholder="ìƒí’ˆëª…">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°»ó¼¼Á¤º¸</label>
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">ìƒí’ˆìƒì„¸ì •ë³´</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" value="${ product.prodDetail }" placeholder="»óÇ°»ó¼¼Á¤º¸">
+		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" value="${ product.prodDetail }" placeholder="ìƒí’ˆìƒì„¸ì •ë³´">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°Á¦Á¶ÀÏÀÚ</label>
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">ìƒí’ˆì œì¡°ì¼ì</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="manuDate" name="manuDate" value="${ product.manuDate }" placeholder="Á¦Á¶ÀÏÀÚ">
+		      <input type="text" class="form-control" id="manuDate" name="manuDate" value="${ product.manuDate }" placeholder="ì œì¡°ì¼ì">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">°¡°İ</label>
+		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">ê°€ê²©</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="price" name="price" value="${ product.price }" placeholder="°¡°İ">
+		      <input type="text" class="form-control" id="price" name="price" value="${ product.price }" placeholder="ê°€ê²©">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="fileNames" class="col-sm-offset-1 col-sm-3 control-label">»óÇ°ÀÌ¹ÌÁö</label>
+		    <label for="fileNames" class="col-sm-offset-1 col-sm-3 control-label">ìƒí’ˆì´ë¯¸ì§€</label>
 		    <div class="col-sm-4">
-		      <input type="file" class="form-control" id="fileNames" name="fileNames" value="${ product.fileNames }" placeholder="»óÇ°ÀÌ¹ÌÁö">
+		      <input type="file" class="form-control" id="fileNames" name="fileNames" value="${ product.fileNames }" placeholder="ìƒí’ˆì´ë¯¸ì§€">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >¼ö &nbsp;Á¤</button>
-			  <a class="btn btn-primary btn" href="#" role="button">Ãë &nbsp;¼Ò</a>
+		      <button type="button" class="btn btn-primary"  >ìˆ˜ &nbsp;ì •</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì·¨ &nbsp;ì†Œ</a>
 		    </div>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 	    
  	</div>
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
  	
 </body>
 

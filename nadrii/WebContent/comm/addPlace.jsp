@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Daum Áöµµ ½ÃÀÛÇÏ±â</title>
+	<title>Daum ì§€ë„ ì‹œì‘í•˜ê¸°</title>
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -37,14 +37,14 @@
 					success : function(JSONData, status) {
 						var documents = JSONData.documents;
 						if(documents.length == 0){
-							alert("°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù."); 
+							alert("ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤."); 
 							return;
 						}
 						for( i=0;i<documents.length;i++){
 							var displayValue = "<div class=\"result\"><hr/>"+
 												"<h5>"+documents[i].place_name+"</h5>"+
-												"<h6>Áö¹ø "+documents[i].address_name+"</h6>"+
-												"<h6>µµ·Î¸í "+documents[i].road_address_name+"</h6>"+
+												"<h6>ì§€ë²ˆ "+documents[i].address_name+"</h6>"+
+												"<h6>ë„ë¡œëª… "+documents[i].road_address_name+"</h6>"+
 												"</div>";
 							if(i==documents.length-1){
 								displayValue += "<nav aria-label=\"...\">"
@@ -53,10 +53,10 @@
 								var newerPage = page+1;
 								if(olderPage>0){
 									displayValue += "<li class=\"previous\">"
-													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>ÀÌÀüÀ¸·Î</a></li>"
+													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>ì´ì „ìœ¼ë¡œ</a></li>"
 								}
 								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4))){
-									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">´ÙÀ½À¸·Î<span aria-hidden=\"true\">&rarr;</span></a></li>";
+									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">ë‹¤ìŒìœ¼ë¡œ<span aria-hidden=\"true\">&rarr;</span></a></li>";
 								}
 								  displayValue += "</ul></nav>";
 							}
@@ -72,14 +72,14 @@
 							$("#y").val(y);
 							marker.setMap(null);
 							marker = new daum.maps.Marker({ 
-							    // Áöµµ Áß½ÉÁÂÇ¥¿¡ ¸¶Ä¿¸¦ »ı¼ºÇÕ´Ï´Ù 
+							    // ì§€ë„ ì¤‘ì‹¬ì¢Œí‘œì— ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤ 
 							    position: map.getCenter(),
 							}); 
 							marker.setClickable(false);
 							marker.setMap(map);
 							searchDetailAddrFromCoords(marker.getPosition(), function(result, status) {
 						        if (status === daum.maps.services.Status.OK) {
-						            var detailAddr = '<div>Áö¹ø ÁÖ¼Ò : ' + result[0].address.address_name + '</div>';
+						            var detailAddr = '<div>ì§€ë²ˆ ì£¼ì†Œ : ' + result[0].address.address_name + '</div>';
 						            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>' : '';
 						            
 						            var content = '<div class="bAddr">' +
@@ -97,7 +97,7 @@
 				})
 		}
 		$(function() {
-			$('button.btn.btn-default:contains("°Ë»ö")').bind('click', function() {
+			$('button.btn.btn-default:contains("ê²€ìƒ‰")').bind('click', function() {
 				var keyword = $('#keyword').val(); 
 				getSearchResult(keyword, 1);
 			})
@@ -110,10 +110,10 @@
 		<div class="col-sm-5">
 			<form class="navbar-form navbar-left" role="search">
 				<div class="col-sm-10">
-					<input id="keyword" type="text" class="form-control" placeholder="Å°¿öµå ÀÔ·Â">
+					<input id="keyword" type="text" class="form-control" placeholder="í‚¤ì›Œë“œ ì…ë ¥">
 				</div>
 				<div class="col-sm-2">
-					<button type="button" class="btn btn-default">°Ë»ö</button>
+					<button type="button" class="btn btn-default">ê²€ìƒ‰</button>
 				</div> 
 			</form>
 			<hr/>
@@ -126,7 +126,7 @@
 				<div id="clickLatlng"></div>
 				<div align="right">
 					<br/>
-					<p><button type="button" class="btn btn-primary btn-sm">Ãß°¡ÇÏ±â</button></p>
+					<p><button type="button" class="btn btn-primary btn-sm">ì¶”ê°€í•˜ê¸°</button></p>
 				</div>
 			</div> 
 		</div>
@@ -136,11 +136,11 @@
 	<script type="text/javascript" src="/resources/js/map_2.js"></script>
 	<script>
 		var geocoder = new daum.maps.services.Geocoder();
-		// Áöµµ¸¦ Å¬¸¯ÇßÀ» ¶§ Å¬¸¯ À§Ä¡ ÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥½ÃÇÏµµ·Ï ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
+		// ì§€ë„ë¥¼ í´ë¦­í–ˆì„ ë•Œ í´ë¦­ ìœ„ì¹˜ ì¢Œí‘œì— ëŒ€í•œ ì£¼ì†Œì •ë³´ë¥¼ í‘œì‹œí•˜ë„ë¡ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•©ë‹ˆë‹¤
 		daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 		    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 		        if (status === daum.maps.services.Status.OK) {
-		            var detailAddr = '<div>Áö¹ø ÁÖ¼Ò : ' + result[0].address.address_name + '</div>';
+		            var detailAddr = '<div>ì§€ë²ˆ ì£¼ì†Œ : ' + result[0].address.address_name + '</div>';
 		            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + result[0].road_address.building_name + '</h3></div>' : '';
 		            
 		            content = '<div class="bAddr">' +
@@ -158,22 +158,22 @@
 		    });
 		});
 
-		// Áß½É ÁÂÇ¥³ª È®´ë ¼öÁØÀÌ º¯°æµÆÀ» ¶§ Áöµµ Áß½É ÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼Ò Á¤º¸¸¦ Ç¥½ÃÇÏµµ·Ï ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
+		// ì¤‘ì‹¬ ì¢Œí‘œë‚˜ í™•ëŒ€ ìˆ˜ì¤€ì´ ë³€ê²½ëì„ ë•Œ ì§€ë„ ì¤‘ì‹¬ ì¢Œí‘œì— ëŒ€í•œ ì£¼ì†Œ ì •ë³´ë¥¼ í‘œì‹œí•˜ë„ë¡ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•©ë‹ˆë‹¤
 		daum.maps.event.addListener(map, 'idle', function() {
 		    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 		});
 
 		function searchAddrFromCoords(coords, callback) {
-		    // ÁÂÇ¥·Î ÇàÁ¤µ¿ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
+		    // ì¢Œí‘œë¡œ í–‰ì •ë™ ì£¼ì†Œ ì •ë³´ë¥¼ ìš”ì²­í•©ë‹ˆë‹¤
 		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 		}
 
 		function searchDetailAddrFromCoords(coords, callback) {
-		    // ÁÂÇ¥·Î ¹ıÁ¤µ¿ »ó¼¼ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
+		    // ì¢Œí‘œë¡œ ë²•ì •ë™ ìƒì„¸ ì£¼ì†Œ ì •ë³´ë¥¼ ìš”ì²­í•©ë‹ˆë‹¤
 		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 		}
 
-		// Áöµµ ÁÂÃø»ó´Ü¿¡ Áöµµ Áß½ÉÁÂÇ¥¿¡ ´ëÇÑ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥ÃâÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
+		// ì§€ë„ ì¢Œì¸¡ìƒë‹¨ì— ì§€ë„ ì¤‘ì‹¬ì¢Œí‘œì— ëŒ€í•œ ì£¼ì†Œì •ë³´ë¥¼ í‘œì¶œí•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
 		function displayCenterInfo(result, status) {
 		    if (status === daum.maps.services.Status.OK) {
 		        var infoDiv = document.getElementById('centerAddr');
@@ -181,7 +181,7 @@
 		}
 		
 		$(function() {
-			$('button.btn.btn-primary.btn-sm:contains("Ãß°¡ÇÏ±â")').bind('click', function() {
+			$('button.btn.btn-primary.btn-sm:contains("ì¶”ê°€í•˜ê¸°")').bind('click', function() {
 				$('#lat', opener.document).val($('#lat', opener.document).val()+","+$("#x").val());
 				$('#lng', opener.document).val($('#lng', opener.document).val()+","+$("#y").val());
 				$('#content_pr', opener.document).val($("#content").val());

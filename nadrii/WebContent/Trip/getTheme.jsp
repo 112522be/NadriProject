@@ -1,39 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
 	$( function() {
-		$("button[type='button' ]:contains('¹Ú¹°°ü')").on("click" , function() {
+		$("button[type='button' ]:contains('ë°•ë¬¼ê´€')").on("click" , function() {
 			self.location = "../trip/listMuseum?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
-		$("button[type='button'  ]:contains('Àü½Ã°ü')").on("click" , function() {
+		$("button[type='button'  ]:contains('ì „ì‹œê´€')").on("click" , function() {
 			self.location = "../trip/listExhibit?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
-		$("button[type='button' ]:contains('¹Ì¼ú°ü')").on("click" , function() {
+		$("button[type='button' ]:contains('ë¯¸ìˆ ê´€')").on("click" , function() {
 			self.location = "../trip/listGallery?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
-		$("button[type='button'  ]:contains('Ã¼Çè°ü')").on("click" , function() {
+		$("button[type='button'  ]:contains('ì²´í—˜ê´€')").on("click" , function() {
 			self.location = "../trip/listExperience?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
-		$("button[type='button'  ]:contains('¹Î¼Ó¸¶À»')").on("click" , function() {
+		$("button[type='button'  ]:contains('ë¯¼ì†ë§ˆì„')").on("click" , function() {
 			self.location = "../trip/listTradition?pageNo=1&area=local"
 		});
 	});
@@ -48,21 +48,21 @@
 	
 	
 	<!-- Contextual button for informational alert messages -->
-	<button type="button" class="btn btn-info">¹Ú¹°°ü</button>
+	<button type="button" class="btn btn-info">ë°•ë¬¼ê´€</button>
 	<!-- 
-	<button type="button" class="btn btn-info"><a href="#">¹Ú¹°°ü</a></button>
+	<button type="button" class="btn btn-info"><a href="#">ë°•ë¬¼ê´€</a></button>
 	 -->
 	<!-- Indicates a successful or positive action -->
-	<button type="button" class="btn btn-success">Àü½Ã°ü</button>
+	<button type="button" class="btn btn-success">ì „ì‹œê´€</button>
 	
 	<!-- Indicates caution should be taken with this action -->
-	<button type="button" class="btn btn-warning">¹Ì¼ú°ü</button>
+	<button type="button" class="btn btn-warning">ë¯¸ìˆ ê´€</button>
 	
 	<!-- Indicates a dangerous or potentially negative action -->
-	<button type="button" class="btn btn-danger">Ã¼Çè°ü</button>
+	<button type="button" class="btn btn-danger">ì²´í—˜ê´€</button>
 	
 	<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
-	<button type="button" class="btn btn-default">¹Î¼Ó¸¶À»</button>
+	<button type="button" class="btn btn-default">ë¯¼ì†ë§ˆì„</button>
 
 </div>
 </body>

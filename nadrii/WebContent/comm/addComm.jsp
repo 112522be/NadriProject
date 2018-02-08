@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
 	<meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <title>jQuery UI Autocomplete - Default functionality</title>
-  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
- 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<title>jQuery UI Autocomplete - Default functionality</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="/resources/skins/default.css"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script>
 	$(function() {
+		$(document).ready(function() {
+			if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
+				alert("ë¡œê·¸ì¸ í›„ ì´ìš©í•´ì£¼ì„¸ìš”")
+				self.location="../user/loginView.jsp"
+			}
+		})
 		$('a#submit').bind('click', function() {
 			var hashtags=',';
 			$('button.selectedhashtagButtons').each(function() {
@@ -41,12 +41,12 @@
 		<form name="postData">
 			<input type="hidden" name="userId" value="${loginUser.userId}">
 			<div class="form-group">
-			    <input type="title" class="form-control" name="title" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä">
+			    <input type="title" class="form-control" name="title" placeholder="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”">
 			 </div>
 			 <div>
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
-			 <h5 align="left">ÇØ½ÃÅÂ±×</h5>
+			 <h5 align="left">í•´ì‹œíƒœê·¸</h5>
 			 <div class="ui-widget">
 			 <div class="input-group">
 	    	 	<span class="input-group-addon">#</span>
@@ -58,7 +58,7 @@
 			 <br/>	
 		</form> 
 		<div class="box-bottom" >
-			<a id="submit">ÀúÀåÇÏ±â</a>
+			<a id="submit">ì €ì¥í•˜ê¸°</a>
 		</div>
 		<br/>
 	</div>	
@@ -81,11 +81,14 @@
 					 });
 				},
 				error: function() {
-					alert("¿À·ù")
+					alert("ì˜¤ë¥˜")
 				}
 			})
 	 	})
 	})
 	</script>
+	<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/skins/default.css"/>
 	</body>
 </html>

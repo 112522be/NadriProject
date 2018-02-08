@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <title>Prologue by HTML5 UP</title>
-<meta charset="EUC-KR" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -15,58 +15,18 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
-	
-function fncGetList(currentPage){
-	$("#currentPage").val(currentPage)
-	$("form").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
-}
-
-$(function(){
-	
-	$(".fit").on("click", function(){
-		
-		var groupNo = $($("input[id='groupNo']")[$(".fit").index(this)]).val();
-		
-		self.location="../group/getGroup?groupNo="+groupNo;
-			
-	});
-	
-	$("header h3").on("click", function(){
-		
-		var groupNo = $($("input[id='groupNo']")[$("header h3").index(this)]).val();
-		
-		self.location="../group/getGroup?groupNo="+groupNo;
-			
-	});
-	
-	$("header .author").on("click", function(){
-		
-		var userId = $($("input[id='userId']")[$("header .author").index(this)]).val();
-		
-		//self.location="../user/getUserProfile?userId="+userId;
-			
-	});
-	/*
-	$(".author h5").on("click", function(){
-		
-		 function runEffect() {
-		      // Run the effect
-		      $( ".menu" ).toggle( "blind", 300 );
-		    };
-		 
-		    // Set effect from select menu value
-		    $( ".author h5" ).on( "click", function() {
-		      runEffect();
-		    });
-	});
-	*/
-});
-
-$(function() {
-	console.log("${totalCount}")
-})
+	$(function() {
+		$('.item').on('click', function() {
+			var postNo = $($('input[name="postNo"]')[$('.item').index(this)]).val()
+			self.location = "getComm?postNo="+postNo;
+		})
+	})
 </script>
 <style type="text/css">
+
+.icon{
+	padding: 5px;
+}
 
 .row {
 	margin: -20px 0 -1px -20px;
@@ -148,15 +108,19 @@ $(function() {
 }
 
 </style>
-
 </head>
 <body>
 	<header>
 		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	</header>
-	<div id="main">
+	<div class="container">
+		<nav class="container">
 		<section id="portfolio" class="two">
 			<div class="container">
+				<div align="right">
+					<img class="icon" src="">
+					
+				</div>
 				<div class="row">
 					<c:set var="i" value="0" />
 					<c:forEach var="community" items="${list}">
@@ -164,8 +128,8 @@ $(function() {
 						<div class="3u 12u$(mobile)">
 							<article class="item">
 								<a href="#" class="image fit"> 
-								<input type="hidden" name="groupNo" value="${community.postNo}"> 
-								<img src="${thumbnailImage}" alt="" />
+								<input type="hidden" name="postNo" value="${community.postNo}"> 
+								<img src="${community.thumbNailFileName}" alt="" />
 								</a>
 								<header>
 									<h3>
@@ -179,12 +143,13 @@ $(function() {
 									<a href="#" class="author">
 										<h5>${community.userId}</h5>
 									</a>
-									
 								</header>
 							</article>
 						</div>
 					</c:forEach>
 				</div>
+				<link href="../css/floating.css" rel="stylesheet">
+				<a class="buttons" href="addComm.jsp" tooltip="게시물 작성"><span><span class="rotate"></span></span></a></nav>
 			</div>
 		</section>
 	</div>

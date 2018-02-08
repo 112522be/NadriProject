@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
-  <meta charset="EUC-KR">
+  <meta charset="UTF-8">
   <title>Summernote</title>
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"><!--    -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
@@ -35,26 +35,26 @@
 	}
   </style>
   <script type="text/javascript">
-        /* summernote¿¡¼­ ÀÌ¹ÌÁö ¾÷·Îµå½Ã ½ÇÇàÇÒ ÇÔ¼ö */
+        /* summernoteì—ì„œ ì´ë¯¸ì§€ ì—…ë¡œë“œì‹œ ì‹¤í–‰í•  í•¨ìˆ˜ */
 	 	function sendFile(file, editor) {              
-            // ÆÄÀÏ Àü¼ÛÀ» À§ÇÑ Æû»ı¼º
+            // íŒŒì¼ ì „ì†¡ì„ ìœ„í•œ í¼ìƒì„±
 	 		data = new FormData();
 	 	    data.append("uploadFile", file);
-	 	    $.ajax({ // ajax¸¦ ÅëÇØ ÆÄÀÏ ¾÷·Îµå Ã³¸®
+	 	    $.ajax({ // ajaxë¥¼ í†µí•´ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 	 	        data : data,
 	 	        type : "POST",
 	 	        url : "uploadImage",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
-	 	        success : function(data) { // Ã³¸®°¡ ¼º°øÇÒ °æ¿ì
-                    // ¿¡µğÅÍ¿¡ ÀÌ¹ÌÁö Ãâ·Â
+	 	        success : function(data) { // ì²˜ë¦¬ê°€ ì„±ê³µí•  ê²½ìš°
+                    // ì—ë””í„°ì— ì´ë¯¸ì§€ ì¶œë ¥
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
-					alert("ÆÄÀÏ ¾÷·Îµå¿¡ ½ÇÆĞÇß½À´Ï´Ù.")
+					alert("íŒŒì¼ ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.")
 				}
 	 	    });
 	 	}
@@ -71,14 +71,14 @@
         		},
         		success : function(data) {
         			for(i=0;i<data.length;i++){
-        				if(data[i]==("À½½Ä")){
-        					data[i] = "¸ÀÁı"
+        				if(data[i]==("ìŒì‹")){
+        					data[i] = "ë§›ì§‘"
         				}
 	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
 	 	        	}
 				},
 				error : function() {
-					$("#cndHashtags").append("<p>ºĞ¼® °á°ú¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.</p>")
+					$("#cndHashtags").append("<p>ë¶„ì„ ê²°ê³¼ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</p>")
 				}
         	})
         }
@@ -140,7 +140,7 @@
 	    				    	alert($('#content_pr').val());
 	    				    	alert($('#lat').val());
 	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default">'+
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">'+
 	    									'<div class="col-xs-3" align="left">'+
 	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 	    									'</div>'+
@@ -167,8 +167,8 @@
                     buttons: {
                        place: addPlace
                     },
-					callbacks: { // Äİ¹éÀ» »ç¿ë
-                        // ÀÌ¹ÌÁö¸¦ ¾÷·ÎµåÇÒ °æ¿ì ÀÌº¥Æ®¸¦ ¹ß»ı
+					callbacks: { // ì½œë°±ì„ ì‚¬ìš©
+                        // ì´ë¯¸ì§€ë¥¼ ì—…ë¡œë“œí•  ê²½ìš° ì´ë²¤íŠ¸ë¥¼ ë°œìƒ
 					    onImageUpload: function(files, editor, welEditable) {
 					    	for(i=0;i<files.length;i++){
 					    		sendFile(files[i], this);
@@ -183,7 +183,7 @@
 		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
 		<input type="hidden" id="content_pr">
-		<h5 align="left">½æ³×ÀÏÀ»  ¼±ÅÃÇØÁÖ¼¼¿ä</h5>
+		<h5 align="left">ì¸ë„¤ì¼ì„  ì„ íƒí•´ì£¼ì„¸ìš”</h5>
 		<div id="cndThumbnail"></div>
 		<br/>
 		</form>

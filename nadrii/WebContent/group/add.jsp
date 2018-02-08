@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,18 +19,18 @@
 <td>
   <div class="form-group">
     <select class="form-control">
-      <option>╦╩╦с╦╝ ╪╠ец</option>
-	  <option>╦╩╦с╦╝ ╪╠ец 1</option>
-	  <option>╦╩╦с╦╝ ╪╠ец 2</option>
-	  <option>╦╩╦с╦╝ ╪╠ец 3</option>
-	  <option>╦╩╦с╦╝ ╪╠ец 4</option>
-	  <option>╦╩╦с╦╝ ╪╠ец 5</option>
+      <option>К╖░К╗╦К╕╛ Л└═М┐²</option>
+	  <option>К╖░К╗╦К╕╛ Л└═М┐² 1</option>
+	  <option>К╖░К╗╦К╕╛ Л└═М┐² 2</option>
+	  <option>К╖░К╗╦К╕╛ Л└═М┐² 3</option>
+	  <option>К╖░К╗╦К╕╛ Л└═М┐² 4</option>
+	  <option>К╖░К╗╦К╕╛ Л└═М┐² 5</option>
 	</select>
   </div>
 </td>
 <td>  
   <div class="form-group">
-    <input type="password" class="form-control" id="title" placeholder="╠ш а╕╦Я">
+    <input type="password" class="form-control" id="title" placeholder="Й╦─ Л═°К╙╘">
   </div>
 </td>  
 </form>
