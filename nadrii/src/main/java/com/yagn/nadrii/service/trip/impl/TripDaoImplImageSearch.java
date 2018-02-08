@@ -34,14 +34,14 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	public String naverImageSearch(String target)throws Exception{
 		
-		System.out.println("³×ÀÌ¹ö ÀÌ¹ÌÁö °Ë»ö");
+		System.out.println("ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½");
 		int display = 10;
-        String clientId = "YaTN_waxR7h6HvXakGB2";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ðÆ® ¾ÆÀÌµð°ª";
-        String clientSecret = "dHdqCyawjm";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ðÆ® ½ÃÅ©¸´°ª";
+        String clientId = "YaTN_waxR7h6HvXakGB2";//ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ï¿½Ìµï¿½";
+        String clientSecret = "dHdqCyawjm";//ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½";
         String text = URLEncoder.encode(target, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json °á°ú
+        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json ï¿½ï¿½ï¿½
         
-        //naver ÀÌ¹ÌÁö °Ë»ö ½ÇÇà
+        //naver ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½
         URL url = new URL(apiURL);
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
@@ -71,7 +71,7 @@ public class TripDaoImplImageSearch implements TripDao {
         if(list.size()!=0) {
         	return ( (NaverImage)list.get(2) ).getLink();
         }else {
-        	return "ÀÌ¹ÌÁö ¾øÀ½";
+        	return "ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
         }
 	}
 
