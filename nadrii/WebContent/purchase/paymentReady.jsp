@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Ä«Ä«¿ÀÆäÀÌ</title>
+<title>ì¹´ì¹´ì˜¤íŽ˜ì´</title>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
@@ -11,7 +11,7 @@
 <script src="/assets/libs/jquery-1.10.2.min.js"></script>
 <style type="text/css">
 /* <![CDATA[ */
-@charset "utf-8";
+@charset "UTF-8";
 /* reset */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
 	form, fieldset, legend, textarea, p, blockquote, th, td, input, select,
@@ -80,7 +80,7 @@ body {
 body, th, td, input, select, textarea, button {
 	font-size: 14px;
 	line-height: 1.5;
-	font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '¸¼Àº °íµñ', sans-serif;
+	font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'ë§‘ì€ ê³ ë”•', sans-serif;
 	color: #1e1e1e
 }
 
@@ -217,28 +217,28 @@ article, aside, footer, header, hgroup, main, nav, section {
 </head>
 <body style="">
 	<div id="kakaoIndex">
-		<a href="#kakaoBody"> º»¹® ¹Ù·Î°¡±â </a>
+		<a href="#kakaoBody"> ë³¸ë¬¸ ë°”ë¡œê°€ê¸° </a>
 	</div>
 	<div id="kakaoWrap" class="wrap_demo">
 		<header id="kakaoHead">
-		<h1 class="tit_kakaopay">Ä«Ä«¿ÀÆäÀÌ</h1>
+		<h1 class="tit_kakaopay">ì¹´ì¹´ì˜¤íŽ˜ì´</h1>
 		<hr class="hide">
 		<main id="kakaoContent"> <article id="mArticle">
 		<h2 id="kakaoBody" class="tit_demo">Payment Demo</h2>
 		<p class="txt_demo">
-			API¸¦ È°¿ëÇÑ Ä«Ä«¿ÀÆäÀÌ °áÁ¦¸¦ Ã¼ÇèÇØº¸¼¼¿ä. <br> (½ÇÁ¦ °áÁ¦´Â ÀÏ¾î³ªÁö ¾Ê½À´Ï´Ù)
+			APIë¥¼ í™œìš©í•œ ì¹´ì¹´ì˜¤íŽ˜ì´ ê²°ì œë¥¼ ì²´í—˜í•´ë³´ì„¸ìš”. <br> (ì‹¤ì œ ê²°ì œëŠ” ì¼ì–´ë‚˜ì§€ ì•ŠìŠµë‹ˆë‹¤)
 		</p>
 		<div class="pay_btn">
 		
 			<button type="button" class="btn_pay btn_pay_hover" id="web"
-				onclick="payment('web');">PC °áÁ¦</button>
+				onclick="payment('web');">PC ê²°ì œ</button>
 				
 			<button type="button" class="btn_pay" id="mobile"
 				onclick="payment('mobile');" disabled="disabled"
-				style="cursor: no-drop;">¸ð¹ÙÀÏ °áÁ¦</button>
+				style="cursor: no-drop;">ëª¨ë°”ì¼ ê²°ì œ</button>
 				
 		</div>
-		<p class="txt_append">¸ð¹ÙÀÏ °áÁ¦´Â ¸ð¹ÙÀÏ ±â±â·Î Á¢¼Ó½Ã °¡´ÉÇÕ´Ï´Ù.</p>
+		<p class="txt_append">ëª¨ë°”ì¼ ê²°ì œëŠ” ëª¨ë°”ì¼ ê¸°ê¸°ë¡œ ì ‘ì†ì‹œ ê°€ëŠ¥í•©ë‹ˆë‹¤.</p>
 		</article> </main> </header>
 	</div>
 	<script type="text/javascript">

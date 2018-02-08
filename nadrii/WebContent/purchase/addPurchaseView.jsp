@@ -1,15 +1,15 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>°áÁ¦Á¤º¸ÀÔ·Â</title>
+<title>ê²°ì œì •ë³´ì…ë ¥</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -44,7 +44,7 @@ $( function(){
 	});
 });
 
-//=================== "Ãë¼Ò" Event ¿¬°á =================== 
+//=================== "ì·¨ì†Œ" Event ì—°ê²° =================== 
 function goBack() {
 	window.history.back();
 }
@@ -58,13 +58,13 @@ function goBack() {
 		<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class="text-info">°áÁ¦Á¤º¸ÀÔ·Â</h3>
+			<h3 class="text-info">ê²°ì œì •ë³´ì…ë ¥</h3>
 				<h5 class="text-muted text-left">
-					¼±ÅÃÇÏ½Å Æ¼ÄÏÀÇ °áÁ¦¸¦ À§ÇØ <strong class="text-danger">Çü½Ä¿¡ ¸Â°Ô </strong>ÀÛ¼ºÇØ ÁÖ¼¼¿ä.
+					ì„ íƒí•˜ì‹  í‹°ì¼“ì˜ ê²°ì œë¥¼ ìœ„í•´ <strong class="text-danger">í˜•ì‹ì— ë§ê²Œ </strong>ì‘ì„±í•´ ì£¼ì„¸ìš”.
 				</h5>  
 		</div>
 
@@ -89,7 +89,7 @@ function goBack() {
 		
 		<!-- KakaoPay API Request -->
 		<input type="hidden" name="cid" 				value="TC0ONETIME">
-		<input type="hidden" name="partner_order_id" 	value="³ªµå¸®Æ¼ÄÏ½Ã½ºÅÛ">
+		<input type="hidden" name="partner_order_id" 	value="ë‚˜ë“œë¦¬í‹°ì¼“ì‹œìŠ¤í…œ">
 		<input type="hidden" name="partner_user_id" 	value="${ user.userId }">
 		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
 		<input type="hidden" name="quantity" 			value="1">
@@ -106,15 +106,15 @@ function goBack() {
 	  				<strong>
 	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						Æ¼ÄÏÁ¤º¸
+	  						í‹°ì¼“ì •ë³´
 	  					</h4>
 	  				</strong>
 	  			</div>
 	  			
-	  		<h4>[Æ¼ÄÏ¸í]</h4>
+	  		<h4>[í‹°ì¼“ëª…]</h4>
 	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ purchase.ticketTitle }</h4>
 	  		
-	  		<h4>[¿¹¸ÅÀÏ]</h4>
+	  		<h4>[ì˜ˆë§¤ì¼]</h4>
 	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.bookingDate }</h4>
 
 	  		</div>
@@ -127,7 +127,7 @@ function goBack() {
 	  				<strong>
 	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						±¸¸ÅÀÚÁ¤º¸
+	  						êµ¬ë§¤ìì •ë³´
 	  					</h4>
 	  				</strong>
 	  			</div>
@@ -135,19 +135,19 @@ function goBack() {
 	  			
 	  		<div class="col-xs-12 col-md-6">
 	  			<div class="input-group">
-					<span class="input-group-addon" id="sizing-addon1">¾ÆÀÌµğ</span> 
+					<span class="input-group-addon" id="sizing-addon1">ì•„ì´ë””</span> 
 					<input type="text" class="form-control" 
 						aria-describedby="sizing-addon1" name="buyerId" value="${ purchase.buyerId }" readonly>
 				</div>
 	  			<br>
 				<div class="input-group">
-					<span class="input-group-addon" id="sizing-addon1">ÀÌ ¸§</span> 
+					<span class="input-group-addon" id="sizing-addon1">ì´ ë¦„</span> 
 					<input type="text" class="form-control" 
 						aria-describedby="sizing-addon1" name="buyerName" value="${ purchase.buyerName }" readonly>
 				</div>
 				<br>
 				<div class="input-group">
-					<span class="input-group-addon" id="sizing-addon1">¿¬¶ôÃ³</span> 
+					<span class="input-group-addon" id="sizing-addon1">ì—°ë½ì²˜</span> 
 					<input type="text" class="form-control" 
 						aria-describedby="sizing-addon1" name="buyerPhone" value="${ purchase.buyerPhone }" readonly>
 				</div>
@@ -167,20 +167,20 @@ function goBack() {
 	  				<strong>
 	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						°áÁ¦Á¤º¸
+	  						ê²°ì œì •ë³´
 	  					</h4>
 	  				</strong>
 	  			</div>
-				<h4>[¼±ÅÃÇÑ Æ¼ÄÏ]</h4>
+				<h4>[ì„ íƒí•œ í‹°ì¼“]</h4>
 	  			<c:forEach items="${ purchase.ticketCount }" varStatus="status">
-	  				<h4>&nbsp;£Ü ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } Àå</h4>
+	  				<h4>&nbsp;ï¿¦ ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } ì¥</h4>
 	  			</c:forEach>
 	  			<hr>
-	  			<h4 class="text-right">[ÃÑ °áÁ¦±İ¾×]</h4>
-	  			<h4 class="text-right">Æ¼ÄÏºñ¿ë : £Ü ${ purchase.totalTicketPrice }</h4>
-	  			<h4 class="text-right">ºñ°ú¼¼ : £Ü ${ purchase.taxFree }</h4>
+	  			<h4 class="text-right">[ì´ ê²°ì œê¸ˆì•¡]</h4>
+	  			<h4 class="text-right">í‹°ì¼“ë¹„ìš© : ï¿¦ ${ purchase.totalTicketPrice }</h4>
+	  			<h4 class="text-right">ë¹„ê³¼ì„¸ : ï¿¦ ${ purchase.taxFree }</h4>
 	  			<hr>
-	  			<h4 class="text-right text-danger">£Ü ${ purchase.ticketPayment }</h4>
+	  			<h4 class="text-right text-danger">ï¿¦ ${ purchase.ticketPayment }</h4>
 	  			
 	
 	  		</div>
@@ -191,7 +191,7 @@ function goBack() {
 			<button type="button" class="kakaoPay" data-dismiss="modal">
 				<img src="http://img.yonhapnews.co.kr/etc/inner/EN/2015/09/15/AEN20150915005751320_01_i.jpg" height=30px/>
 			</button>
-			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">Ãë ¼Ò</button>
+			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">ì·¨ ì†Œ</button>
 		</div>	
 			
 
@@ -199,7 +199,7 @@ function goBack() {
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

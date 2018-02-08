@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -35,14 +35,14 @@
 		<form name="postData">
 			<input type="hidden" name="userId" value="${loginUser.userId}">
 			<div class="form-group">
-			    <input type="title" class="form-control" name="title" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä">
+			    <input type="title" class="form-control" name="title" placeholder="ì œëª©ì„ ìž…ë ¥í•˜ì„¸ìš”">
 			 </div>
 			 <div>
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
 		</form> 
 		<div class="box-bottom" >
-			<a id="submit">ÀúÀåÇÏ±â</a>
+			<a id="submit">ì €ìž¥í•˜ê¸°</a>
 		</div>
 	</div>	
 	</body>

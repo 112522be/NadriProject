@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("a[href='#']:contains('´äÀå')").on("click",function(){
+		$("a[href='#']:contains('ë‹µìž¥')").on("click",function(){
 			var receiverId = $("input[name='senderId']").val();
 			alert(receiverId)
 			self.location="/message/addMessage?recevierId="+receiverId;
@@ -34,12 +34,12 @@
 						<div id="errormessage"></div>
 						<form>
 							<div class="alert alert-info" role="alert" style="padding-top: 5px;padding-bottom: 5px; margin-bottom: 0px;">
-							    <strong>º¸³»´Â »ç¶÷ : </strong>
+							    <strong>ë³´ë‚´ëŠ” ì‚¬ëžŒ : </strong>
 							    	${message.senderId}
 							    	<input type="hidden" name="senderId" value="${message.senderId}"/>
 							<!-- 
 								<button class="btn btn-primary" type="button">
-  									<span class="badge">º¸³»´Â »ç¶÷ : </span>
+  									<span class="badge">ë³´ë‚´ëŠ” ì‚¬ëžŒ : </span>
 								</button>
 							 -->	
     						</div>
@@ -47,13 +47,13 @@
 							
 							<div class="form-group">
 								<div class="alert alert-warning" role="alert" style="padding-top: 5px;padding-bottom: 5px;margin-bottom: 0px;">
-							    <strong>¹Þ´Â »ç¶÷ : </strong>
+							    <strong>ë°›ëŠ” ì‚¬ëžŒ : </strong>
 							    	${message.receiverId}
 							    	<input type="hidden" name="receiverId" value="${message.receiverId}"/>
 							    	
 							<!-- 
 								<button class="btn btn-primary" type="button">
-  									<span class="badge">º¸³»´Â »ç¶÷ : </span>
+  									<span class="badge">ë³´ë‚´ëŠ” ì‚¬ëžŒ : </span>
 								</button>
 							 -->	
     						</div>
@@ -66,8 +66,8 @@
 							</div>
 
 							<div class="text-center">
-								<a class="btn btn-default btn-md" href="#" role="button">´äÀå</a>
-								<a class="btn btn-default btn-md" href="#" role="button">Ãë¼Ò</a>
+								<a class="btn btn-default btn-md" href="#" role="button">ë‹µìž¥</a>
+								<a class="btn btn-default btn-md" href="#" role="button">ì·¨ì†Œ</a>
 							</div>							
 						</form>
 					</div>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -13,25 +13,25 @@
 <script type="text/javascript">
 
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$(".list-group-item:contains('¹ŞÀº ÂÊÁöÇÔ')").on("click" , function() {
-			//alert("¹ŞÀº ÂÊÁöÇÔ")
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$(".list-group-item:contains('ë°›ì€ ìª½ì§€í•¨')").on("click" , function() {
+			//alert("ë°›ì€ ìª½ì§€í•¨")
 			self.location= "/message/listMessage"
 		});
 	});
 	
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$(".list-group-item:contains('º¸³½ ÂÊÁöÇÔ')").on("click" , function() {
-			//alert("º¸³½ ÂÊÁöÇÔ")
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$(".list-group-item:contains('ë³´ë‚¸ ìª½ì§€í•¨')").on("click" , function() {
+			//alert("ë³´ë‚¸ ìª½ì§€í•¨")
 			self.location ="/message/listSendMessage"
 		});
 	});
 	
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$(".list-group-item:contains('ÀĞÀ» ÂÊÁöÇÔ')").on("click" , function() {
-			//alert("ÀĞÀ» ÂÊÁöÇÔ")
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$(".list-group-item:contains('ì½ì„ ìª½ì§€í•¨')").on("click" , function() {
+			//alert("ì½ì„ ìª½ì§€í•¨")
 			self.location ="/message/listMessageToRead"
 		});
 	});
@@ -41,7 +41,7 @@
 			var messageNo = $($("input[name='messageNo']")[$("tr td:nth-child(4)").index(this)]).val();
 			self.location="/message/getMessage?messageNo="+messageNo
 			//alert($("tr td:nth-child(3)").index(this));
-			//alert("°Ù¸Ş½ÃÁö");
+			//alert("ê²Ÿë©”ì‹œì§€");
 			
 			//alert(messageNo);
 		});
@@ -58,7 +58,7 @@
 	});
 	
 	$(function(){
-		$("a[href='#']:contains('»èÁ¦')").on("click", function(){
+		$("a[href='#']:contains('ì‚­ì œ')").on("click", function(){
 			var checkedMessage = $("input[name=checkbox]").length;
 			var checkedMessageCount = $("input[name=checkbox]:checked").length;
 			var messageNoList="";
@@ -91,7 +91,7 @@
 			},						
 			success: function(returnData){
 				var count = returnData.count;
-				alert(count+"°³ÀÇ ¸Ş½ÃÁö°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
+				alert(count+"ê°œì˜ ë©”ì‹œì§€ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤");
 			}
 			
 		});
@@ -108,16 +108,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-2" align="center" style="padding-left: 0px; padding-right: 0px;">
-				<li class="list-group-item list-group-item-warning" >¹ŞÀº ÂÊÁöÇÔ</li>
-				<li class="list-group-item list-group-item-success" >º¸³½ ÂÊÁöÇÔ</li>
-				<li class="list-group-item list-group-item-info" >ÀĞÀ» ÂÊÁöÇÔ</li>
+				<li class="list-group-item list-group-item-warning" >ë°›ì€ ìª½ì§€í•¨</li>
+				<li class="list-group-item list-group-item-success" >ë³´ë‚¸ ìª½ì§€í•¨</li>
+				<li class="list-group-item list-group-item-info" >ì½ì„ ìª½ì§€í•¨</li>
 			</div>
 			<div class="col-xs-1"></div>
 			<div class="col-xs-9" align="center" style="padding-left: 0px; padding-right: 0px;">
 				
 		<div class="panel panel-warning" >
 	      <!-- Default panel contents -->
-	      <div class="panel-heading"style="padding-bottom: 0px;padding-top: 0px;">ÂÊÁöÇÔ ³»¿ë</div>
+	      <div class="panel-heading"style="padding-bottom: 0px;padding-top: 0px;">ìª½ì§€í•¨ ë‚´ìš©</div>
 	      <div class="panel-body" style="padding-bottom: 0px;padding-top: 0px; height: 0px"></div>
 	
 	      <!-- Table -->
@@ -125,10 +125,10 @@
 	        <thead>
 	          <tr>
 	            <th></th>
-	            <th>º¸³½ »ç¶÷</th>
-	            <th>¹Ş´Â »ç¶÷</th>
-	            <th>³»¿ë</th>
-	            <th>º¸³½ ½Ã°£</th>
+	            <th>ë³´ë‚¸ ì‚¬ëŒ</th>
+	            <th>ë°›ëŠ” ì‚¬ëŒ</th>
+	            <th>ë‚´ìš©</th>
+	            <th>ë³´ë‚¸ ì‹œê°„</th>
 	          </tr>
 	        </thead>
 	        <div class="widget">
@@ -143,7 +143,7 @@
 		        	</td>		        	
 		        	
 		        	
-		        	<!-- ÀÌ³ğ Å¬¸¯½Ã ´äÀå º¸³»±â -->
+		        	<!-- ì´ë†ˆ í´ë¦­ì‹œ ë‹µì¥ ë³´ë‚´ê¸° -->
 		        	<td>
 		        	<c:if test="${! empty list.senderId}">
 		        	${list.senderId}
@@ -159,7 +159,7 @@
 		            
 		            </td>
 		            
-		            <!-- ÀÌ³ğ Å¬¸¯½Ã ³»¿ë º¸±â -->
+		            <!-- ì´ë†ˆ í´ë¦­ì‹œ ë‚´ìš© ë³´ê¸° -->
 		            <td>
 		            <c:if test="${! empty list.text}">
 		            	${list.text}
@@ -179,16 +179,16 @@
 		        </tbody>
 		      </table>
 		   </div>
-		   <a class="btn btn-default btn-md" href="#" role="button">»èÁ¦</a>
-		   <a class="btn btn-default btn-md" href="#" role="button">Ã¢ ´İ±â</a>
+		   <a class="btn btn-default btn-md" href="#" role="button">ì‚­ì œ</a>
+		   <a class="btn btn-default btn-md" href="#" role="button">ì°½ ë‹«ê¸°</a>
     	</div>
 	</div>			
-		<!-- row ³¡ -->
+		<!-- row ë -->
 		
 		</div>
 		
 	
-	<!-- ÄÁÅ×ÀÌ³Ê ³¡ -->
+	<!-- ì»¨í…Œì´ë„ˆ ë -->
 	</div>
 
 </body>

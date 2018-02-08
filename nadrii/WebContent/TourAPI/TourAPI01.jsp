@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,19 +15,19 @@
 	var xhr = new XMLHttpRequest();
 	var url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon'; /*URL*/
 	var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'TXwTxp6UgYcwVcjkfbd9ADOmCH5gqN3dBN1uTJxIhpQ8yIKcZ9eQQzWkMrrFR2%2FsJoZAOrPvydYKOeK8G1VtQw%3D%3D'; /*Service Key*/
-	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10); /*ÇÑ ÆäÀÌÁö °á°ú ¼ö*/
-	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1); /*ÇöÀç ÆäÀÌÁö ¹øÈ£*/
-	queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC); /*IOS(¾ÆÀÌÆù),AND(¾Èµå·ÎÀÌµå),WIN(¿øµµ¿ìÆù),ETC*/
-	queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest); /*¼­ºñ½º¸í=¾îÇÃ¸í*/
-	queryParams += '&' + encodeURIComponent('contentId') + '=' + encodeURIComponent('126508); /*ÄÜÅÙÃ÷ ID*/
-	queryParams += '&' + encodeURIComponent('contentTypeId') + '=' + encodeURIComponent('); /*°ü±¤Å¸ÀÔ(°ü±¤Áö, ¼÷¹Ú µî) ID*/
-	queryParams += '&' + encodeURIComponent('defaultYN') + '=' + encodeURIComponent('); /*±âº»Á¤º¸ Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('firstImageYN') + '=' + encodeURIComponent('Y); /*¿øº», ½æ³×ÀÏ ´ëÇ¥ÀÌ¹ÌÁö Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('areacodeYN') + '=' + encodeURIComponent('Y); /*Áö¿ªÄÚµå, ½Ã±º±¸ÄÚµå Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('catcodeYN') + '=' + encodeURIComponent('Y); /*¼­ºñ½ººĞ·ùÄÚµå(´ë,Áß,¼Ò ÄÚµå) Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('addrinfoYN') + '=' + encodeURIComponent('Y); /*ÁÖ¼Ò, »ó¼¼ÁÖ¼Ò Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('mapinfoYN') + '=' + encodeURIComponent('Y); /*ÁÂÇ¥ X,Y Á¶È¸¿©ºÎ*/
-	queryParams += '&' + encodeURIComponent('overviewYN') + '=' + encodeURIComponent('Y); /*ÄÜÅÙÃ÷ °³¿ä Á¶È¸¿©ºÎ*/
+	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10); /*í•œ í˜ì´ì§€ ê²°ê³¼ ìˆ˜*/
+	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1); /*í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸*/
+	queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC); /*IOS(ì•„ì´í°),AND(ì•ˆë“œë¡œì´ë“œ),WIN(ì›ë„ìš°í°),ETC*/
+	queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest); /*ì„œë¹„ìŠ¤ëª…=ì–´í”Œëª…*/
+	queryParams += '&' + encodeURIComponent('contentId') + '=' + encodeURIComponent('126508); /*ì½˜í…ì¸  ID*/
+	queryParams += '&' + encodeURIComponent('contentTypeId') + '=' + encodeURIComponent('); /*ê´€ê´‘íƒ€ì…(ê´€ê´‘ì§€, ìˆ™ë°• ë“±) ID*/
+	queryParams += '&' + encodeURIComponent('defaultYN') + '=' + encodeURIComponent('); /*ê¸°ë³¸ì •ë³´ ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('firstImageYN') + '=' + encodeURIComponent('Y); /*ì›ë³¸, ì¸ë„¤ì¼ ëŒ€í‘œì´ë¯¸ì§€ ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('areacodeYN') + '=' + encodeURIComponent('Y); /*ì§€ì—­ì½”ë“œ, ì‹œêµ°êµ¬ì½”ë“œ ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('catcodeYN') + '=' + encodeURIComponent('Y); /*ì„œë¹„ìŠ¤ë¶„ë¥˜ì½”ë“œ(ëŒ€,ì¤‘,ì†Œ ì½”ë“œ) ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('addrinfoYN') + '=' + encodeURIComponent('Y); /*ì£¼ì†Œ, ìƒì„¸ì£¼ì†Œ ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('mapinfoYN') + '=' + encodeURIComponent('Y); /*ì¢Œí‘œ X,Y ì¡°íšŒì—¬ë¶€*/
+	queryParams += '&' + encodeURIComponent('overviewYN') + '=' + encodeURIComponent('Y); /*ì½˜í…ì¸  ê°œìš” ì¡°íšŒì—¬ë¶€*/
 	queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json);
 	xhr.open('GET', url + queryParams);
 	xhr.onreadystatechange = function () {

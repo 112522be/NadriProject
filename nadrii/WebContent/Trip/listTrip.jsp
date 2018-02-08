@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
@@ -18,21 +18,21 @@
 	
 	<script type="text/javascript">
 	
-// ¹«ÇÑ ½ºÅ©·Ñ ±¸Çö, getTheme.jsp ´ë½Å ´ÙÀÌ¾ó·Î±× Ã¢À¸·Î È­¸é ±¸¼ºÇÔ
-// ¹ÌºñÁ¡ : ÇöÀç ´ÙÀÌ¾ó·Î±× Ã¢¿¡¼­ Áöµµ¸¦ º¸¿© ÁÖ´Â ¹æ½ÄÀº ±âÁ¸Á¸ÀçÇß´ø Áöµµ À§¿¡ µ¡ºÙÀÌ´Â ¹æ¹ı. È­¸é»ó µå·¡±×½Ã ±×´ë·Î ³ëÃâµÊ.
-// »çÀ¯ : Áöµµ °ø°£, È£Ãâ CDN, È£Ãâ ´ë»óÀ» ¸ğµÎ ºĞ¸®ÇØ¼­ ÄÚµùÇß´õ´Ï ±âÁ¸¿¡ Áöµµ¿¡ µ¡ºÙ´Â ¹æ¹ıÀ¸·Î È£ÃâµÇ°í, ´ÙÀÌ¾ó·Î±× tag¿Í Ãæµ¹ÇÏ¸é¼­ Áöµµ°¡ ±úÁö´Â Çö»ó ¹ß»ı. 
-// ÀÓ½Ã ÇØ°á¹æ¹ı : ÀçÂ÷ È£ÃâÀÇ °æ¿ì ¹®Á¦ ¾øÀÌ È£ÃâµÇ´Â °ÍÀ» È®ÀÎÇØ¼­ ¸Ê»ı¼º, ´ÙÀÌ¾ó·Î±× »ı¼ºÀ» °¢°¢ 2¹ø¾¿ È£ÃâÇÔ(¿ìÈ¸ ÄÚµù)
+// ë¬´í•œ ìŠ¤í¬ë¡¤ êµ¬í˜„, getTheme.jsp ëŒ€ì‹  ë‹¤ì´ì–¼ë¡œê·¸ ì°½ìœ¼ë¡œ í™”ë©´ êµ¬ì„±í•¨
+// ë¯¸ë¹„ì  : í˜„ì¬ ë‹¤ì´ì–¼ë¡œê·¸ ì°½ì—ì„œ ì§€ë„ë¥¼ ë³´ì—¬ ì£¼ëŠ” ë°©ì‹ì€ ê¸°ì¡´ì¡´ì¬í–ˆë˜ ì§€ë„ ìœ„ì— ë§ë¶™ì´ëŠ” ë°©ë²•. í™”ë©´ìƒ ë“œë˜ê·¸ì‹œ ê·¸ëŒ€ë¡œ ë…¸ì¶œë¨.
+// ì‚¬ìœ  : ì§€ë„ ê³µê°„, í˜¸ì¶œ CDN, í˜¸ì¶œ ëŒ€ìƒì„ ëª¨ë‘ ë¶„ë¦¬í•´ì„œ ì½”ë”©í–ˆë”ë‹ˆ ê¸°ì¡´ì— ì§€ë„ì— ë§ë¶™ëŠ” ë°©ë²•ìœ¼ë¡œ í˜¸ì¶œë˜ê³ , ë‹¤ì´ì–¼ë¡œê·¸ tagì™€ ì¶©ëŒí•˜ë©´ì„œ ì§€ë„ê°€ ê¹¨ì§€ëŠ” í˜„ìƒ ë°œìƒ. 
+// ì„ì‹œ í•´ê²°ë°©ë²• : ì¬ì°¨ í˜¸ì¶œì˜ ê²½ìš° ë¬¸ì œ ì—†ì´ í˜¸ì¶œë˜ëŠ” ê²ƒì„ í™•ì¸í•´ì„œ ë§µìƒì„±, ë‹¤ì´ì–¼ë¡œê·¸ ìƒì„±ì„ ê°ê° 2ë²ˆì”© í˜¸ì¶œí•¨(ìš°íšŒ ì½”ë”©)
 	
-	///////////////////¹«ÇÑ ½ºÅ©·Ñ ½ÃÀÛ
+	///////////////////ë¬´í•œ ìŠ¤í¬ë¡¤ ì‹œì‘
 	///*
-	//pageÇÒ º¯¼ö
+	//pageí•  ë³€ìˆ˜
 	var page = 1;
 	var federalPage = 0;
 	var nationalPage =0;
 	var flag =0;
 	//*/
 	
-	//onload ½Ã page º¯È¯ Ãâ·Â ÆäÀÌÁö´Â 1, ÇöÀç page´Â 2
+	//onload ì‹œ page ë³€í™˜ ì¶œë ¥ í˜ì´ì§€ëŠ” 1, í˜„ì¬ pageëŠ” 2
 	$(function(){
 		page++;
 		//federalPage++;
@@ -42,7 +42,7 @@
 	
 	
 	
-	//½ºÅ©·ÑÀÌ ³¡¿¡ ´êÀ» ¶§¸¦ Ä³Ä¡
+	//ìŠ¤í¬ë¡¤ì´ ëì— ë‹¿ì„ ë•Œë¥¼ ìºì¹˜
 	$(window).scroll(function() { 
 		if($(window).scrollTop() == $(document).height() - $(window).height() & flag ==1){
 			flag=0;
@@ -56,7 +56,7 @@
 		}
 	});
 	
-	//ÆäÀÌÁö ³×ÀÌ°ÔÀÌ¼ÇÀ» ¼öÇàÇÏ´Â JS
+	//í˜ì´ì§€ ë„¤ì´ê²Œì´ì…˜ì„ ìˆ˜í–‰í•˜ëŠ” JS
 	function listTrip(){
 	
 		var areaCode = "${areaCode}";
@@ -84,23 +84,23 @@
 				var data = returnData.list;
 				
 				if(data.length != 0){
-					alert("Á¤»óÀÛµ¿");	
+					//alert("ì •ìƒì‘ë™");	
 																
 					for(var a =0; a<data.length;++a){
 						
 						var dpValue =
 							
-						 "<div class='col-xs-4'>"+
+						 "<div class='col-md-4'>"+
 					        "<div class='thumbnail'>"+
 					          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 					          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 					          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 					          "<div class='caption'>"+
-					            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+					            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 					            "<p>"+data[a].addr1+"</p>"+
-					            "<p> <a href='#' class='btn btn-primary' role='button'>°øÀ¯</a>"+ 
-					            	"<a href='#' class='btn btn-default' role='button'>ÁÁ¾Æ¿ä</a>"+
-					            	"<a href='#'id='wish' class='btn btn-danger' role='button'>À§½Ã¸®½ºÆ®</a>"+	
+					            "<p> <a href='#' class='btn btn-primary' role='button'>ê³µìœ </a>"+ 
+					            	"<a href='#' class='btn btn-default' role='button'>ì¢‹ì•„ìš”</a>"+
+					            	"<a href='#'id='wish' class='btn btn-danger' role='button'>ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>"+	
 					            "</p>"+
 					          "</div>"+
 					        "</div>"+
@@ -109,7 +109,7 @@
 						$(".row").append(dpValue);	
 					}
 				}else{
-					alert("¿¹¿Ü¹ß»ı");
+					//alert("ì˜ˆì™¸ë°œìƒ");
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -129,17 +129,17 @@
 									
 									var dpValue =
 										
-									 "<div class='col-xs-4'>"+
+									 "<div class='col-md-4'>"+
 								        "<div class='thumbnail'>"+
 								          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 								          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 								          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 								          "<div class='caption'>"+
-								            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+								            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 								            "<p>"+data[a].addr1+"</p>"+
-								            "<p> <a href='#' class='btn btn-primary' role='button'>°øÀ¯</a>"+ 
-								            	"<a href='#' class='btn btn-default' role='button'>ÁÁ¾Æ¿ä</a>"+
-								            	"<a href='#'id='wish' class='btn btn-danger' role='button'>À§½Ã¸®½ºÆ®</a>"+	
+								            "<p> <a href='#' class='btn btn-primary' role='button'>ê³µìœ </a>"+ 
+								            	"<a href='#' class='btn btn-default' role='button'>ì¢‹ì•„ìš”</a>"+
+								            	"<a href='#'id='wish' class='btn btn-danger' role='button'>ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>"+	
 								            "</p>"+
 								          "</div>"+
 								        "</div>"+
@@ -148,7 +148,7 @@
 									$($(".row")[1]).append(dpValue);
 								}
 							}else{
-								alert("¿¹¿Ü¹ß»ı ±¤¿ª´ÜÀ§");
+								alert("ì˜ˆì™¸ë°œìƒ ê´‘ì—­ë‹¨ìœ„");
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -168,17 +168,17 @@
 												
 												var dpValue =
 													
-												 "<div class='col-xs-4'>"+
+												 "<div class='col-md-4'>"+
 											        "<div class='thumbnail'>"+
 											          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 											          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 											          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 											          "<div class='caption'>"+
-											            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+											            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 											            "<p>"+data[a].addr1+"</p>"+
-											            "<p> <a href='#' class='btn btn-primary' role='button'>°øÀ¯</a>"+ 
-											            	"<a href='#' class='btn btn-default' role='button'>ÁÁ¾Æ¿ä</a>"+
-											            	"<a href='#'id='wish' class='btn btn-danger' role='button'>À§½Ã¸®½ºÆ®</a>"+	
+											            "<p> <a href='#' class='btn btn-primary' role='button'>ê³µìœ </a>"+ 
+											            	"<a href='#' class='btn btn-default' role='button'>ì¢‹ì•„ìš”</a>"+
+											            	"<a href='#'id='wish' class='btn btn-danger' role='button'>ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>"+	
 											            "</p>"+
 											          "</div>"+
 											        "</div>"+
@@ -201,20 +201,20 @@
 		});
 	}
 	
-	/////////////////////////////////////////////¹«ÇÑ½ºÅ©·Ñ
+	/////////////////////////////////////////////ë¬´í•œìŠ¤í¬ë¡¤
 	
 	
 	
 	
 	
 	
-	// Áöµµ ÂüÁ¶ !!!!!!!
+	// ì§€ë„ ì°¸ì¡° !!!!!!!
 	function makeDialog(){
 		 $('#dialog').dialog({
 				//draggable: false,
 			    autoOpen: false,
 			    resizable: false,
-			    //Å©±â Á¶Àı
+			    //í¬ê¸° ì¡°ì ˆ
 			    width: 800,
 		});
 	}
@@ -228,7 +228,7 @@
 	    
 		contenttypeid =$(this).next().next().val();
 		contentid = $(this).next().val();
-		alert(111);
+		//alert(111);
 		
 		getTheme(contentid, contenttypeid);
 			
@@ -238,8 +238,8 @@
 	
 	///*
 	
-	// getTrip ´ë½Å¿¡ »ı°Ü³­ ´ÙÀÌ¾ó·Î±× È­¸é(ajax ½ÇÇà ÈÄÀÇ µ¥ÀÌÅÍ¸¦ ´ÙÀÌ¾ó·Î±×·Î ¼ÛÃâ)
-	// ajax·Î ³ª¿Â ÁÂÇ¥°ªÀ» ±âÁ¸¿¡ »ı¼ºÇß´ø Áöµµ·Î ¿Å±â±â À§ÇÑ Àü¿ª º¯¼ö
+	// getTrip ëŒ€ì‹ ì— ìƒê²¨ë‚œ ë‹¤ì´ì–¼ë¡œê·¸ í™”ë©´(ajax ì‹¤í–‰ í›„ì˜ ë°ì´í„°ë¥¼ ë‹¤ì´ì–¼ë¡œê·¸ë¡œ ì†¡ì¶œ)
+	// ajaxë¡œ ë‚˜ì˜¨ ì¢Œí‘œê°’ì„ ê¸°ì¡´ì— ìƒì„±í–ˆë˜ ì§€ë„ë¡œ ì˜®ê¸°ê¸° ìœ„í•œ ì „ì—­ ë³€ìˆ˜
 	var mapx;
 	var mapy;
 	
@@ -263,33 +263,61 @@
 				//alert(contenttypeid);
 				//alert(contentid);
 				
-				$("#string").remove();
-				var dpValue = "<div id ='string'>"; 
-					if(common.firstimage2 !=null){
-						dpValue += "<img src='"+common.firstimage2+"'/>";	
-					}
+				$("#tourName").remove();
+				$("#tourImg").remove();
+				$("#tourAddress").remove();
+				$("#tourCharge").remove();
+				$("#tourOverView").remove();
 				
-					if(common.title != null){
-						dpValue	+= "<p>"+ common.title+"</p>";
-					}
-										
-					if(common.addr1!=null){
-						dpValue +="<p>"+common.addr1+"</p>";
-					}
+				
+				var tourName = "";
+				var tourImage = "";
+				var tourAddress ="";
+				var tourCharge ="";
+				var tourOverView ="";
+				
+				
+				if(common.firstimage2 !=null){
+					tourImage = "<img id ='tourImg' src='"+common.firstimage2+"' style='width:300px; height:200px;'/>";
+				}else{
+					tourImage = "<h5 id ='tourImg'> ì œê³µì‚¬ì§„ ì—†ìŒ </h5>";
+				}				
+				
+				if(common.title != null){
+					tourName= "<h5 id='tourName'> "+ common.title+"</h5>";
+				}else{
+					tourName= "<h5 id='tourName'> ì œê³µì •ë³´ ì—†ìŒ </h5>";
+				}
+				
+				if(common.addr1 != null){
+					tourAddress= "<h5 id='tourAddress'>"+ common.addr1+"</h5>";
+				}else{
+					tourAddress= "<h5 id='tourAddress'> ì œê³µì •ë³´ ì—†ìŒ </h5>";
+				}
+				
+				if(fee.usefee != null){
+					tourCharge= "<h5 id='tourCharge'>"+ fee.usefee+"</h5>";
+				}else{
+					tourCharge= "<h5 id='tourCharge'> ì œê³µì •ë³´ ì—†ìŒ </h5>";
+				}
+				
+				if(common.overview != null){
+					tourOverView= "<h5 id='tourOverView'>"+ common.overview+"</h5>";
+				}else{
+					tourOverView= "<h5 id='tourOverView'> ì œê³µì •ë³´ ì—†ìŒ </h5>";
+				}
+				
+				$("#imageSpace").append(tourImage);
+				$("#titleName").append(tourName);	
+				$("#address").append(tourAddress);
+				$("#fee").append(tourCharge);
+				$("#description").append(tourOverView);
 					
-					if(fee.usefee!=null){
-						dpValue +="<p>"+fee.usefee+"</p>";
-					}
-					
-					if(common.overview!=null){
-						dpValue += "<h5>"+common.overview+"</h5>";	
-					}
 					
 					
-					dpValue += "</div>";
 					//*/
 				
-				$("#dialog").append(dpValue);
+			
 				
 				makeMap();
 				makeDialog();
@@ -305,7 +333,7 @@
 		});
 	}
 	
-	//¿ì¸® µğºñ¿¡ µ¥ÀÌÅÍ¸¦ È£ÃâÇÏ°í ÀúÀåÇÒ ¶§ È£Ãâ
+	//ìš°ë¦¬ ë””ë¹„ì— ë°ì´í„°ë¥¼ í˜¸ì¶œí•˜ê³  ì €ì¥í•  ë•Œ í˜¸ì¶œ
 	function addTripToDB(contentid, contenttypeid){
 		$.ajax({
 			url:"../trip/json/getTrip/"+contentid+"/"+contenttypeid+"",
@@ -317,12 +345,12 @@
 				"Content-Type" : "application/json"
 			},
 			success:function(){
-				alert("¼±ÀúÀå");
+				alert("ì„ ì €ì¥");
 			}
 		})
 	}
 	
-	//À§½Ã¸®½ºÆ®¿¡ ÀúÀåÇÒ ¶§ »ç¿ë
+	//ìœ„ì‹œë¦¬ìŠ¤íŠ¸ì— ì €ì¥í•  ë•Œ ì‚¬ìš©
 	function addWish(contentid){
 		$.ajax({
 			url:"../wish/json/addWishFromTrip/"+contentid+"",
@@ -334,54 +362,50 @@
 				"Content-Type" : "application/json"
 			},
 			success:function(){
-				//alert("À§½Ã¸®½ºÆ®¿¡ ÀúÀå");
-				//alert($("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this) );
-				//$($("#wish")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).remove();
+				//alert("ìœ„ì‹œë¦¬ìŠ¤íŠ¸ì— ì €ì¥");
+				//alert($("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this) );
+				//$($("#wish")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).remove();
 				
-				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >À§½Ã¸®½ºÆ® Ãë¼Ò</a>";
+				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >ìœ„ì‹œë¦¬ìŠ¤íŠ¸ ì·¨ì†Œ</a>";
 				
-				//$($("#buttonTag")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).append(CancelAppend);
+				//$($("#buttonTag")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).append(CancelAppend);
 			}
 		});
 		
 	}
 	
 	
-	//¸®½ºÆ®¿¡ ÀÖ´Â À§½Ã¸®½ºÆ® Å¬¸¯½Ã ¹ß»ıÇÏ´Â ÀÌº¥Æ®
+	//ë¦¬ìŠ¤íŠ¸ì— ìˆëŠ” ìœ„ì‹œë¦¬ìŠ¤íŠ¸ í´ë¦­ì‹œ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸
 	$(function() {
 	  $(document).on("click","#wish", function(e){
-		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).val();
-			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).val();
+		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).val();
+			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).val();
 			
-			//alert($("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this));
-			//alert(contentid);
-			//alert(contenttypeid);
-			//alert("¸®½ºÆ® À§½Ã¸®½ºÆ® Å¬¸¯");
+		
 			
-			
-			//ÇØ´ç ÄÁÅÙÃ÷¾ÆÀÌµğ¿¡ ÀÖ´Â ¿©ÇàÁö¸¦ È£Ãâ¾øÀ¸¸é ÀúÀå, ÀÖÀ¸¸é ¾÷µ¥ÀÌÆ® Ä«¿îÆ®
+			//í•´ë‹¹ ì»¨í…ì¸ ì•„ì´ë””ì— ìˆëŠ” ì—¬í–‰ì§€ë¥¼ í˜¸ì¶œì—†ìœ¼ë©´ ì €ì¥, ìˆìœ¼ë©´ ì—…ë°ì´íŠ¸ ì¹´ìš´íŠ¸
 			addTripToDB(contentid, contenttypeid);
 			
-			//À§¿¡¼­ ÀúÀåÇÑ °ÍÀ» À§½Ã¸®½ºÆ®¿¡ ÀçÀúÀå 
+			//ìœ„ì—ì„œ ì €ì¥í•œ ê²ƒì„ ìœ„ì‹œë¦¬ìŠ¤íŠ¸ì— ì¬ì €ì¥ 
 			addWish(contentid);
 			e.preventDefault();
 			
 			//alert($(".row ").index(this));
-			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >À§½Ã¸®½ºÆ®</a>";
-			//alert($("div[class='col-xs-4']").index(this));
-			//alert($("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this));
-			//$($("#buttonTag")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).append(CancelAppend);
-			//$($("#wish")[$("a[href='#']:contains('À§½Ã¸®½ºÆ®')").index(this)]).remove();
+			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>";
+			//alert($("div[class='col-md-4']").index(this));
+			//alert($("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this));
+			//$($("#buttonTag")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).append(CancelAppend);
+			//$($("#wish")[$("a[href='#']:contains('ìœ„ì‹œë¦¬ìŠ¤íŠ¸')").index(this)]).remove();
 		});
 	})
 	
 		
-	//getTheme ³»¿¡ ÀÖ´Â À§½Ã¸®½ºÆ® Å¬¸¯½Ã ¹ß»ıÇÏ´Â ÀÌº¥Æ®
+	//getTheme ë‚´ì— ìˆëŠ” ìœ„ì‹œë¦¬ìŠ¤íŠ¸ í´ë¦­ì‹œ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸
 	$(function(){
 		$("#wishList").on("click",function(e){
 			alert(contentid);
 			alert(contenttypeid);
-			alert("´ÙÀÌ¾ó·Î±× À§½Ã¸®½ºÆ® Å¬¸¯");
+			alert("ë‹¤ì´ì–¼ë¡œê·¸ ìœ„ì‹œë¦¬ìŠ¤íŠ¸ í´ë¦­");
 			addTripToDB(contentid, contenttypeid);
 			addWish(contentid);
 			e.preventDefault();
@@ -390,49 +414,49 @@
 	
 	
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$("a[href='#' ]:contains('½Ã±¸´ÜÀ§')").on("click" , function() {
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$("a[href='#' ]:contains('ì‹œêµ¬ë‹¨ìœ„')").on("click" , function() {
 			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=local"
 		});
 	});
 		
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$("a[href='#' ]:contains('±¤¿ª´ÜÀ§')").on("click" , function() {
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$("a[href='#' ]:contains('ê´‘ì—­ë‹¨ìœ„')").on("click" , function() {
 			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=federal"
 		});
 	});
 	
 	$( function() {
-		//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-		$("a[href='#' ]:contains('Àü±¹´ÜÀ§')").on("click" , function() {
+		//==> ì¶”ê°€ëœë¶€ë¶„ : "addUser"  Event ì—°ê²°
+		$("a[href='#' ]:contains('ì „êµ­ë‹¨ìœ„')").on("click" , function() {
 			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=national"
 		});
 	});
 	
 		
 	</script>
-	<!-- Áöµµ »ı¼ºÇÏ´Â CDN ¹× ¸Ê¿¡ ´ãÀ» ³»¿ë È®ÀÎ -->
+	<!-- ì§€ë„ ìƒì„±í•˜ëŠ” CDN ë° ë§µì— ë‹´ì„ ë‚´ìš© í™•ì¸ -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
 	  <script type="text/javascript">
 	  function makeMap(){
-		var container = document.getElementById('map'); //Áöµµ¸¦ ´ãÀ» ¿µ¿ªÀÇ DOM ·¹ÆÛ·±½º
-		var options = { //Áöµµ¸¦ »ı¼ºÇÒ ¶§ ÇÊ¿äÇÑ ±âº» ¿É¼Ç
-		center: new daum.maps.LatLng(mapy,mapx), //ÁöµµÀÇ Áß½ÉÁÂÇ¥.
-		level: 3 //ÁöµµÀÇ ·¹º§(È®´ë, Ãà¼Ò Á¤µµ)
+		var container = document.getElementById('map'); //ì§€ë„ë¥¼ ë‹´ì„ ì˜ì—­ì˜ DOM ë ˆí¼ëŸ°ìŠ¤
+		var options = { //ì§€ë„ë¥¼ ìƒì„±í•  ë•Œ í•„ìš”í•œ ê¸°ë³¸ ì˜µì…˜
+		center: new daum.maps.LatLng(mapy,mapx), //ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ.
+		level: 3 //ì§€ë„ì˜ ë ˆë²¨(í™•ëŒ€, ì¶•ì†Œ ì •ë„)
 		//draggable : false;
 		};
 	
-		var map = new daum.maps.Map(container, options); //Áöµµ »ı¼º ¹× °´Ã¼ ¸®ÅÏ
+		var map = new daum.maps.Map(container, options); //ì§€ë„ ìƒì„± ë° ê°ì²´ ë¦¬í„´
 	  
 		var markerPosition  = new daum.maps.LatLng(mapy,mapx); 
 	
-		//¸¶Ä¿¸¦ »ı¼º
+		//ë§ˆì»¤ë¥¼ ìƒì„±
 		var marker = new daum.maps.Marker({
 		   position: markerPosition
 		});
 		
-		//¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½Ã
+		//ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œ
 		marker.setMap(map);
 	  }
 	</script>
@@ -441,7 +465,7 @@
 		img {
 			cursor: pointer;
 		}
-		.col-xs-4{
+		.col-md-4{
 		height: 400px;
 		
 		}
@@ -453,7 +477,7 @@
 	</style>
 	
 	
-	<title>¿©ÇàÁö Ã£±â</title>
+	<title>ì—¬í–‰ì§€ ì°¾ê¸°</title>
 </head>
 <body>
 <jsp:include page="../layout/toolbar.jsp"></jsp:include>
@@ -475,13 +499,13 @@
 <!-- 
 	<span class="label label-default">Default</span>
 	<input type="text" id="searchKeyword" value=""/>
-	<a href="#" class="btn btn-default" role="button">Á¶È¸</a>
+	<a href="#" class="btn btn-default" role="button">ì¡°íšŒ</a>
 -->	
 </br>
 
 </br>
 	<ul class="nav nav-tabs">
-	  <li role="presentation" ><a href="#">½Ã±¸´ÜÀ§</a></li>
+	  <li role="presentation" ><a href="#">ì‹œêµ¬ë‹¨ìœ„</a></li>
 	</ul>
 
 	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
@@ -491,27 +515,27 @@
 	
 		<c:forEach var ="list" items="${list}">
 		<input type="hidden" id="pageNo" value="${pageNo}"/>
-		    <div class="col-xs-4">
+		    <div class="col-md-4">
 		     
 		       	<div class="thumbnail">
 		          <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 		          <input type="hidden" name="contentid" value="${list.contentid}"/>
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
-			      	<h3 id="thumbnail-label">${list.title}
+			      	<h5 id="thumbnail-label">${list.title}
 			        	<a class="anchorjs-link" href="#thumbnail-label">
 			            	<span class="anchorjs-icon"></span>
 			            </a>
-			      	</h3>
+			      	</h5>
 			        <p>${list.addr1}</p>
 			        <p id="buttonTag" name ="buttonTag"> 
-			        	<a href="#" class="btn btn-primary" role="button">°øÀ¯</a> 
-			        	<a href="#" class="btn btn-default" role="button">ÁÁ¾Æ¿ä</a>
+			        	<a href="#" class="btn btn-primary" role="button">ê³µìœ </a> 
+			        	<a href="#" class="btn btn-default" role="button">ì¢‹ì•„ìš”</a>
 			        	<c:if test="${!(list.flag== '1')}">			        	
-			            	<a href="#" id="wish" class="btn btn-danger" role="button">À§½Ã¸®½ºÆ®</a>
+			            	<a href="#" id="wish" class="btn btn-danger" role="button">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>
 			            </c:if>
 			            <c:if test="${!(list.flag=='0')}">			        	
-			            	<a href="#" id="wish" class="btn btn-default" role="button">À§½Ã¸®½ºÆ® Ãë¼Ò</a>
+			            	<a href="#" id="wish" class="btn btn-default" role="button">ìœ„ì‹œë¦¬ìŠ¤íŠ¸ ì·¨ì†Œ</a>
 			            </c:if>	
 			        </p>
 		        </div>
@@ -525,14 +549,14 @@
     <div class="row">
     
 	    <ul class="nav nav-tabs">
-		  <li role="presentation" ><a href="#">±¤¿ª´ÜÀ§</a></li> 
+		  <li role="presentation" ><a href="#">ê´‘ì—­ë‹¨ìœ„</a></li> 
 		</ul>
 	    
     </div>
     
     <div class="row">    
 	    <ul class="nav nav-tabs">
-		  <li role="presentation"><a href="#">Àü±¹´ÜÀ§</a></li>
+		  <li role="presentation"><a href="#">ì „êµ­ë‹¨ìœ„</a></li>
 		</ul>
 	    
     </div>
@@ -544,15 +568,52 @@
 
    
 <div id="dialog" title="" >
-	<!--  Áöµµ¸¦ ´ã´Â °ø°£ -->
-  <div id="map" style="width:400px;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript"></script>
+	<!--  ì§€ë„ë¥¼ ë‹´ëŠ” ê³µê°„ -->
+	<table class="table">
+      
+      
+      <tbody>
+        <tr>
+        	<td>
+	          <div id="map" style="width:400px;height:200px;"></div>
+	  		  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+	  	  	  <script type="text/javascript"></script>
+        	</td>
+        	
+        	<td id="imageSpace">
+        		
+        	</td>
+        </tr>
+        
+        
+        <tr >
+        
+          	<td id="titleName"> </td>
+          	<td></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td id="address"></td>
+          	<td></td>
+        </tr>
+        <tr >
+        
+          	<td colspan="2"  id="fee"></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td colspan="2"   id="description"></td>
+          	
+        </tr>
+      </tbody>
+    </table>
+      
     
-    
- 	<a href="#" class="btn btn-primary" role="button">°øÀ¯</a> 
-    <a href="#" class="btn btn-default" role="button">ÁÁ¾Æ¿ä</a>
-    <a href="#" id="wishList" class="btn btn-danger" role="button">À§½Ã¸®½ºÆ®</a>
+ 	<a href="#" class="btn btn-primary" role="button">ê³µìœ </a> 
+    <a href="#" class="btn btn-default" role="button">ì¢‹ì•„ìš”</a>
+    <a href="#" id="wishList" class="btn btn-danger" role="button">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>
 
 </div>	
  

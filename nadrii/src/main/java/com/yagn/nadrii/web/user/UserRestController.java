@@ -351,7 +351,7 @@ public class UserRestController extends SupportController {
 						address);
 				message.setSentDate(new java.util.Date());
 				message.setSubject(subject);
-				message.setContent(content,"text/html; charset=euc-kr");
+				message.setContent(content,"text/html; charset=UTF-8");
 //				message.setText("Dear Mail Crawler," +
 //						"\n\n No spam to my email, please!");
 			    System.out.println("message" + message);

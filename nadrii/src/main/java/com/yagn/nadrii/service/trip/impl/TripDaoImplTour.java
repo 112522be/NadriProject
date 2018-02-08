@@ -79,11 +79,11 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject body = (JSONObject) response.get("body");
 		System.out.println("[4 : body] ==>" + body);
 		
-		//µ¥ÀÌÅÍ°¡ Àß ³Ñ¾î ¿Â °æ¿ì
+		//ë¦¬í„´ ê°’ì´ ìžˆëŠ” ê²½ìš°
 		if(body.get("items") instanceof JSONObject) {
 			JSONObject items = (JSONObject) body.get("items");
 			
-			//µ¥ÀÌÅÍ°¡ ¿©·¯°³ÀÎ °æ¿ì
+			//ë¦¬í„´ ê°’ì´ ë°°ì—´ì¸ ê²½ìš°
 			if(items.get("item") instanceof JSONArray) {
 				JSONArray jsonArray = (JSONArray)items.get("item");
 				
@@ -98,7 +98,7 @@ public class TripDaoImplTour implements TripDao {
 					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
-						System.out.println("ÀÌ¹ÌÁö°¡ ¾øÀ½-->>  "+tourDomain.getTitle());
+						System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
 						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 						System.out.println(image);
 						tourDomain.setFirstimage2(image);
@@ -108,7 +108,7 @@ public class TripDaoImplTour implements TripDao {
 					//System.out.println(list.get(i));
 				}
 				
-			//µ¥ÀÌÅÍ°¡ ÇÑ°³ ÀÎ°æ¿ì	
+			//ë¦¬í„´ê°’ì´ 1ê°œì¸ ê²½ìš°
 				
 			}else {
 				JSONObject jsonObject = (JSONObject)items.get("item");
@@ -116,7 +116,7 @@ public class TripDaoImplTour implements TripDao {
 				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
 				if(tourDomain.getFirstimage2() ==null) {
 					tripDaoImplImageSearch = new TripDaoImplImageSearch();
-					System.out.println("ÀÌ¹ÌÁö°¡ ¾øÀ½-->>  "+tourDomain.getTitle());
+					System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
 					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
@@ -127,7 +127,7 @@ public class TripDaoImplTour implements TripDao {
 				
 				
 			}
-		//Àü´Þ µ¥ÀÌÅÍ°¡ ¾ø´Â °æ¿ì	
+		//
 		}else {
 			
 		}
@@ -146,7 +146,7 @@ public class TripDaoImplTour implements TripDao {
 		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
 		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
-		//±âº» Á¤º¸°¡Á®¿À±â
+		//
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetUrlManage.urlMaking()); 
 		
@@ -174,7 +174,7 @@ public class TripDaoImplTour implements TripDao {
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
 
-		//¿ä±ÝÁ¤º¸ °¡Á®¿À±â
+		//
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
 		tourAPIGetDetailUrlManage.setContentId(contentId);

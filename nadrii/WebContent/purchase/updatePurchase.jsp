@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <title>updatePurchase.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -50,55 +50,55 @@ $(function(){
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info">±¸¸Å»ó¼¼Á¶È¸</h3>
+	       <h3 class=" text-info">êµ¬ë§¤ìƒì„¸ì¡°íšŒ</h3>
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>¹°Ç°¹øÈ£</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ë¬¼í’ˆë²ˆí˜¸</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.purchaseProd.prodNo }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸ÅÀÚ¾ÆÀÌµğ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ìì•„ì´ë””</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.buyer.userId }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸Å¹æ¹ı</strong></div>
-			<div class="col-xs-8 col-md-4">${ purchase.paymentOption == '1' ? "Çö±İ±¸¸Å" : "½Å¿ë±¸¸Å" }</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ë°©ë²•</strong></div>
+			<div class="col-xs-8 col-md-4">${ purchase.paymentOption == '1' ? "í˜„ê¸ˆêµ¬ë§¤" : "ì‹ ìš©êµ¬ë§¤" }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ÀÌ¸§</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì´ë¦„</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.receiverName }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ¿¬¶ôÃ³</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì—°ë½ì²˜</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.receiverPhone }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹ŞÀ¸½ÇºĞ ÁÖ¼Ò</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°›ìœ¼ì‹¤ë¶„ ì£¼ì†Œ</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyAddr }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>±¸¸Å¿äÃ»»çÇ×</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>êµ¬ë§¤ìš”ì²­ì‚¬í•­</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyRequest }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>¹è¼ÛÈñ¸ÁÀÏ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë°°ì†¡í¬ë§ì¼</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.dlvyDate }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>ÁÖ¹®ÀÏ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ì£¼ë¬¸ì¼</strong></div>
 			<div class="col-xs-8 col-md-4">${ purchase.orderDate }</div>
 		</div><hr/>
 		
@@ -108,14 +108,14 @@ $(function(){
 		
 		<div class="row">
 		    <div class="col-md-12 text-center">
-		      <button type="button" class="btn btn-primary">´Ù½Ã¼öÁ¤</button>
-		      <a class="btn btn-primary btn" href="#" role="button">È®ÀÎ</a>
+		      <button type="button" class="btn btn-primary">ë‹¤ì‹œìˆ˜ì •</button>
+		      <a class="btn btn-primary btn" href="#" role="button">í™•ì¸</a>
 		    </div>
 		  </div>
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
 </body>
 
