@@ -41,16 +41,17 @@ public class CommRestController {
 		}
 		
 		uploadPath += fileName;
-		JSONObject jobj = new JSONObject();
+		JSONObject jobj = new JSONObject();	
+		String filePath = "../resources/images/uploadedImages/"+fileName;
 		jobj.put("url", uploadPath);
-		
+		jobj.put("relativeUrl", filePath);
 		return jobj;
 	}
 
 	@RequestMapping("listHashTag")
-	public List<String> listHashTag(@RequestParam String filePath) throws Exception {
-		
+	public List<String> listHashTag(@RequestParam String filePath, HttpServletRequest request) throws Exception {
 		List<String> hashTags = commService.listHasgTag(filePath);
+
 		return hashTags;
 		
 	}
