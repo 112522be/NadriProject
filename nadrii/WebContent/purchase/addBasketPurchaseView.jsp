@@ -95,7 +95,6 @@ function goBack() {
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
 		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
 		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
 		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/index.jsp">
@@ -180,7 +179,8 @@ function goBack() {
 				<h4>[선택한 티켓]</h4>
 	  				<c:forEach var="list" items="${list}" varStatus="num">
 	  					<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ list.ticketTitle }</h4>
-	  					<h4 class="text-warning">&nbsp;&nbsp;&nbsp;&nbsp;￦ ${ list.totalTicketPrice }</h4>
+	  					<h4 class="text-warning">&nbsp;&nbsp;&nbsp;&nbsp; 해당티켓 총 결제금액
+	  					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" ></span> ￦ ${ list.totalTicketPrice }</h4>
 	  				</c:forEach>
 	  			<hr>
 	  			<h4 class="text-right">[총 결제금액]</h4>
@@ -196,7 +196,7 @@ function goBack() {
 		<div class="modal-footer">
 			
 			<button type="button" class="kakaoPay" data-dismiss="modal">
-				<img src="/resources/ticket/kakaoPay_image1.jpg" height=30px/>
+				<img src="/resources/images/ticket/kakaoPay_image1.jpg" height=30px/>
 			</button>
 			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">취 소</button>
 		</div>	

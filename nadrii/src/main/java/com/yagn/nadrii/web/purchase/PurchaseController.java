@@ -58,48 +58,6 @@ public class PurchaseController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	// Directly purchasing without basket
-	@RequestMapping(value="addPurchase/{flag}", method=RequestMethod.POST)
-	public String addBasket(
-			@ModelAttribute("purchase") Purchase purchase,
-			@PathVariable("flag") String flag,
-			HttpSession session,
-			Map<String, Object> map
-			) {
-		
-		System.out.println("\n /purchase/addPurchaseView/" + flag + " : POST");
-	
-		User user = new User();		
-		try {
-			
-			purchase.setFlag(flag);
-
-			int totalTicketPrice = 0;
-			if (purchase.getTicketPrice() != null) {
-				for (int i = 0; i < purchase.getTicketPrice().length; i++) {
-					int price = Integer.parseInt(purchase.getTicketPrice()[i]);
-					int priceCount = Integer.parseInt(purchase.getTicketCount()[i]);
-					
-					totalTicketPrice += price * priceCount;
-				}
-			}
-			purchase.setTotalTicketPrice(totalTicketPrice);
-			purchase.setTaxFree((int) (totalTicketPrice * 0.05));
-			purchase.setTicketPayment((int) (totalTicketPrice + purchase.getTaxFree()));
-			
-			user = (User) session.getAttribute("loginUser");
-			System.out.println("\n[1]==>"+user.toString());
-			System.out.println("\n[2]==>"+purchase.toString());
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		
-		map.put("user", user);
-		
-		return "forward:/purchase/addPurchaseView.jsp";
-	}
-	
 	@RequestMapping(value = "listBasket")
 	public String listBasket(
 			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
@@ -142,6 +100,48 @@ public class PurchaseController {
 		
 		
 		return "forward:/purchase/listBasket.jsp";
+	}
+	
+	// Directly purchasing without basket
+	@RequestMapping(value="addPurchase/{flag}", method=RequestMethod.POST)
+	public String addBasket(
+			@ModelAttribute("purchase") Purchase purchase,
+			@PathVariable("flag") String flag,
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/addPurchaseView/" + flag + " : POST");
+	
+		User user = new User();		
+		try {
+			
+			purchase.setFlag(flag);
+
+			int totalTicketPrice = 0;
+			if (purchase.getTicketPrice() != null) {
+				for (int i = 0; i < purchase.getTicketPrice().length; i++) {
+					int price = Integer.parseInt(purchase.getTicketPrice()[i]);
+					int priceCount = Integer.parseInt(purchase.getTicketCount()[i]);
+					
+					totalTicketPrice += price * priceCount;
+				}
+			}
+			purchase.setTotalTicketPrice(totalTicketPrice);
+			purchase.setTaxFree((int) (totalTicketPrice * 0.05));
+			purchase.setTicketPayment((int) (totalTicketPrice + purchase.getTaxFree()));
+			
+			user = (User) session.getAttribute("loginUser");
+			System.out.println("\n[1]==>"+user.toString());
+			System.out.println("\n[2]==>"+purchase.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("user", user);
+		
+		return "forward:/purchase/addPurchaseView.jsp";
 	}
 	
 	@RequestMapping(value="kakaoPay", method=RequestMethod.POST)
@@ -225,17 +225,26 @@ public class PurchaseController {
 		
 		Purchase purchase = new Purchase();
 		List<Purchase> list = new ArrayList<Purchase>();
+		
 		List<String> count = new ArrayList<>();
 		List<String> price = new ArrayList<>();
 		
 		try {
+			
 			purchase.setSumPostNo(sumPostNo);
-			
 			System.out.println("\n[purchase]==>"+purchase);
-			
+
 			list = purchaseService.addBasketTicket(purchase);
-			
+			///*
 			for (int i = 0; i < list.size(); i++) {
+				System.out.println("//[1]=====" + i);
+				System.out.println(list.get(i));
+			}
+			//*/
+			
+			// ticketPrice split
+			for (int i = 0; i < list.size(); i++) {
+
 				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
 				
 				price = new ArrayList<>();	
@@ -256,10 +265,11 @@ public class PurchaseController {
 				list.get(i).setTicketC(count);
 				list.get(i).setTicketP(price);
 				
-				System.out.println("\n[list value check]");
+				System.out.println("//[2]==========" + i);
 				System.out.println(list.get(i).toString());
 			}
 			
+			// ticketPrice & ticket Count sorting
 			int totalTicketPrice = 0;
 			for (int i = 0; i < list.size(); i++) {
 				
@@ -275,7 +285,7 @@ public class PurchaseController {
 				list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
 				list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(i).getTaxFree()));
 				
-				System.out.println("\n[list value check]");
+				System.out.println("//[3]==========" + i);
 				System.out.println(list.get(i).toString());
 				
 			}
