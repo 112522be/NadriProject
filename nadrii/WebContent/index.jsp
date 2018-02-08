@@ -137,6 +137,7 @@ body {
       //*/
       
       $( function() {
+
           $("a[href='#' ]:contains('쪽지함')").on("click" , function() {
             alert("쪽지함"); 
         	self.location = "/message/listMessage";
@@ -291,7 +292,9 @@ body {
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
 
                   <a class="btn btn-warning btn-lg" href="#" role="button" >새화면</a>
+
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지 보내기</a>
+
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
 

@@ -66,13 +66,15 @@
 							</div>
 							
 							<div class="form-group">
+
 								<textarea class="form-control" name="text" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="메시지를 작성하세요"></textarea>
 								<div class="validation"></div>
 							</div>
 
 							<div class="text-center">
-								<a class="btn btn-default btn-md" href="#" role="button">보내기</a>
-								<a class="btn btn-default btn-md" href="#" role="button">취소</a>
+								<button type="submit" class="btn btn-theme">보내기</button>
+								<button type="cancel" class="btn btn-theme">취소</button>
+
 							</div>							
 						</form>
 					</div>

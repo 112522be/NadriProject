@@ -1,5 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -84,7 +85,11 @@
 				var data = returnData.list;
 				
 				if(data.length != 0){
+<<<<<<< HEAD
 					//alert("정상작동");	
+=======
+					alert("정상작동");	
+>>>>>>> refs/remotes/origin/master
 																
 					for(var a =0; a<data.length;++a){
 						
@@ -109,7 +114,11 @@
 						$(".row").append(dpValue);	
 					}
 				}else{
+<<<<<<< HEAD
 					//alert("예외발생");
+=======
+					alert("예외발생");
+>>>>>>> refs/remotes/origin/master
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -360,18 +369,33 @@
 			
 			
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
+<<<<<<< HEAD
 			addTripToDB(contentid, contenttypeid);
+=======
+			//addTripToDB(contentid, contenttypeid);
+>>>>>>> refs/remotes/origin/master
 			
 			//위에서 저장한 것을 위시리스트에 재저장 
+<<<<<<< HEAD
 			addWish(contentid);
+=======
+			//addWish(contentid);
+>>>>>>> refs/remotes/origin/master
 			e.preventDefault();
 			
 			//alert($(".row ").index(this));
+<<<<<<< HEAD
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
 			//alert($("div[class='col-xs-4']").index(this));
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
+=======
+			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='Wish' >위시리스트</a>";
+			alert($("input[name='contentid']").index(this));
+			//$($(".thumbnail")[$(".row thumbnail:nth-child(1)").index(this)]).append(CancelAppend);
+			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).hide();
+>>>>>>> refs/remotes/origin/master
 		});
 	})
 	
@@ -507,12 +531,16 @@
 			        <p id="buttonTag" name ="buttonTag"> 
 			        	<a href="#" class="btn btn-primary" role="button">공유</a> 
 			        	<a href="#" class="btn btn-default" role="button">좋아요</a>
+<<<<<<< HEAD
 			        	<c:if test="${!(list.flag== '1')}">			        	
 			            	<a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>
 			            </c:if>
 			            <c:if test="${!(list.flag=='0')}">			        	
 			            	<a href="#" id="wish" class="btn btn-default" role="button">위시리스트 취소</a>
 			            </c:if>	
+=======
+			            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
+>>>>>>> refs/remotes/origin/master
 			        </p>
 		        </div>
 			</div>

@@ -26,7 +26,8 @@ public class CommRestController {
 	
 	@RequestMapping("uploadImage")
 	public JSONObject uploadImage(HttpServletRequest request) {
-		String uploadPath ="C:\\Users\\"+System.getProperty("user.name")+"\\git\\NadriiProject\\nadrii\\WebContent\\resources\\images\\uploadedImages\\";
+		String rootPath = request.getSession().getServletContext().getRealPath("/");  
+	    String uploadPath = rootPath+"resources\\images\\uploadedImages\\";
 		String fileName = "";
 		
 		int size = 10 * 1024 * 1024;
@@ -40,17 +41,23 @@ public class CommRestController {
 		}
 		
 		uploadPath += fileName;
-		JSONObject jobj = new JSONObject();
+		JSONObject jobj = new JSONObject();	
+		String filePath = "../resources/images/uploadedImages/"+fileName;
 		jobj.put("url", uploadPath);
-		
+		jobj.put("relativeUrl", filePath);
 		return jobj;
 	}
 
 	@RequestMapping("listHashTag")
-	public List<String> listHashTag(@RequestParam String filePath) throws Exception {
-		
+	public List<String> listHashTag(@RequestParam String filePath, HttpServletRequest request) throws Exception {
 		List<String> hashTags = commService.listHasgTag(filePath);
+
 		return hashTags;
 		
+	}
+	
+	@RequestMapping("getHashtags")
+	public List<String> getHashTags(@RequestParam String keyword) throws Exception{
+		return commService.getHashtags(keyword);
 	}
 }

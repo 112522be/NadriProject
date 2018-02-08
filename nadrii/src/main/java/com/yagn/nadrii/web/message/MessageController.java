@@ -52,7 +52,7 @@ public class MessageController {
 	
 	
 	
-	//»õ·Ó°Ô ¿­¸° À©µµ¿ì¿¡¼­ ÀÛ¼ºÇÑ ¸Þ½ÃÁö¸¦ ½ÇÁ¦·Î Àü¼ÛÇÏ´Â °Í¿¡ ´ëÀÀÇÏ´Â ¸Þ¼Òµå
+	//ï¿½ï¿½ï¿½Ó°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	@RequestMapping(value="addMessage", method=RequestMethod.POST)
 	public String addMessage(@ModelAttribute Message message,Map map)throws Exception {
 		System.out.println(this.getClass()+"/message/addMessage/");
@@ -79,9 +79,10 @@ public class MessageController {
 	}
 	
 	
+
 	@RequestMapping(value="listMessage",method=RequestMethod.GET)
 	public String listMessage(HttpSession session, HttpServletRequest request, Map map) throws Exception{
-		
+
 		System.out.println(this.getClass()+"  listMessage");
 		
 		session= request.getSession(true);
@@ -106,7 +107,7 @@ public class MessageController {
 		return "forward:/message/listMessage.jsp";
 	}
 	
-	//·¹½ºÆ®·Î ÀÌµ¿??
+	//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ìµï¿½??
 	private void updateReadFlag(int messageNo) throws Exception{
 		System.out.println(this.getClass()+"  updateReadFlag");
 		
