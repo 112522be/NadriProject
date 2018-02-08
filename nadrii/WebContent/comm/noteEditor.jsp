@@ -49,8 +49,8 @@
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
-	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -140,7 +140,7 @@
 	    				    	alert($('#content_pr').val());
 	    				    	alert($('#lat').val());
 	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left" data-html="true" data-content="<div id=\"map\" style=\"width:300px;height:240px;\"></div>">'+
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left">'+
 	    									'<div class="col-xs-3" align="left">'+
 	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 	    									'</div>'+
