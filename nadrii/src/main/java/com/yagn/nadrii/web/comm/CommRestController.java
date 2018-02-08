@@ -26,7 +26,8 @@ public class CommRestController {
 	
 	@RequestMapping("uploadImage")
 	public JSONObject uploadImage(HttpServletRequest request) {
-		String uploadPath ="C:\\Users\\"+System.getProperty("user.name")+"\\git\\NadriiProject\\nadrii\\WebContent\\resources\\images\\uploadedImages\\";
+		String rootPath = request.getSession().getServletContext().getRealPath("/");  
+	    String uploadPath = rootPath+"resources\\images\\uploadedImages\\";
 		String fileName = "";
 		
 		int size = 10 * 1024 * 1024;
