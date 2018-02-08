@@ -13,4 +13,5 @@ public interface CommService {
 	public void updateComm(Community community); 
 	public void deleteComm(int postNo);
 	public List<String> listHasgTag(String fileName) throws Exception;
+	public List<String> getHashtags(String keyword)throws Exception;
 }

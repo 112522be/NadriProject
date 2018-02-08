@@ -74,10 +74,12 @@ public class Search {
 		return (curruntPage-1)*pageSize+1;
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "Search [curruntPage=" + curruntPage + ", searchCondition=" + searchCondition + ", searchKeyword="
-				+ searchKeyword + ", pageSize=" + pageSize + ", ordering=" + ordering + "]";
+				+ searchKeyword + ", pageSize=" + pageSize + ", ordering=" + ordering + ", endRowNum=" + endRowNum
+				+ ", startRowNum=" + startRowNum + "]";
 	}
+
 }

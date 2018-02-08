@@ -9,10 +9,10 @@ public interface PlannerService {
 
 	public void addPlanner(Planner planner) throws Exception;
 	
+	public Map<String, Object> getMyPlannerList(Search search, String plannerMakerId) throws Exception;
+	
+	public Map<String, Object> getUserPlannerList(Search search) throws Exception;
+	
 	public Planner getPlanner(int postNo) throws Exception;
-	
-	public Map<String , Object > getPlannerList(Search search) throws Exception;
-	
-	public void updatePlanner(Planner planner) throws Exception;
 	
 }

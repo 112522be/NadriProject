@@ -49,7 +49,7 @@ public class UserRestController extends SupportController {
 	}
 	
 	/**
-	 * È¸¿ø°¡ÀÔ
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param user
 	 * @return
 	 * @throws Exception
@@ -96,7 +96,7 @@ public class UserRestController extends SupportController {
 	}
 	
 	/**
-	 * ¾ÆÀÌµð Áßº¹Ã¼Å©
+	 * ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½Ã¼Å©
 	 * @param userId
 	 * @param model
 	 * @return
@@ -125,7 +125,7 @@ public class UserRestController extends SupportController {
 	@RequestMapping(value="findId", method=RequestMethod.POST)
 	//@ResponseBody
 	public Map findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
-		System.out.println("¾ÆÀÌµð Ã£±â" + userId);
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½" + userId);
 		
 		Map<String, String> map = new HashMap<String, String>();
 		//System.out.println(map.toString());
@@ -173,11 +173,11 @@ public class UserRestController extends SupportController {
 //		} catch(Exception e){
 //			e.printStackTrace();
 //		}	
-//		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â!!");
+//		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½!!");
 //		userService.addUserPlus(user);
 //		Map<String, String> map = new HashMap<String, String>();
 //		map.put("msg", "success");
-//		System.out.println("Ãß°¡Á¤º¸ ÀÔ·ÂÀÌ´Ù" +map);
+//		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ì´ï¿½" +map);
 //		return map;
 //	}
 	
@@ -185,8 +185,8 @@ public class UserRestController extends SupportController {
 		 /*  
 		String setfrom = "kimjh2218@gmail.com";
 		String tomail = email;
-		String title = "³ªµéÀÌ °ü¸®ÀÚ";
-		String content = "ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£´Â " +authNum+ "ÀÔ´Ï´Ù.";
+		String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+		String content = "ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ " +authNum+ "ï¿½Ô´Ï´ï¿½.";
 		
 		
 		
@@ -251,7 +251,7 @@ public class UserRestController extends SupportController {
 	/*
 	private void sendEmail(String email, String authNum) {
 	 Properties p = new Properties();
-	  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Google°èÁ¤@gmail.comÀ¸·Î ¼³Á¤
+	  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Googleï¿½ï¿½ï¿½ï¿½@gmail.comï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  p.put("mail.smtp.host", "smtp.gmail.com");
 	  p.put("mail.smtp.port", "465");
 	  p.put("mail.smtp.starttls.enable","true");
@@ -267,16 +267,16 @@ public class UserRestController extends SupportController {
 	  try {
 	  // Authenticator auth = new SMTPAuthenticator();
 	   Session session = Session.getInstance(p, auth);
-	   session.setDebug(true); // ¸ÞÀÏÀ» Àü¼ÛÇÒ ¶§ »ó¼¼ÇÑ »óÈ²À» ÄÜ¼Ö¿¡ Ãâ·ÂÇÑ´Ù.
+	   session.setDebug(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½Ü¼Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	 
 	   //session = Session.getDefaultInstance(p);
 	   MimeMessage msg = new MimeMessage(session);
-	   String message = "Gmail SMTP ¼­¹ö¸¦ ÀÌ¿ëÇÑ JavaMail Å×½ºÆ®";
-	   msg.setSubject("Gmail SMTP ¼­¹ö¸¦ ÀÌ¿ëÇÑ JavaMail Å×½ºÆ®");
+	   String message = "Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®";
+	   msg.setSubject("Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®");
 	   msg.setContent(message, "text/plain;charset=KSC5601");
 	   System.out.println("Message: " + msg.getContent());
 	   Transport.send(msg);
-	   System.out.println("Gmail SMTP¼­¹ö¸¦ ÀÌ¿ëÇÑ ¸ÞÀÏº¸³»±â ¼º°ø");
+	   System.out.println("Gmail SMTPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 	  }
 	  catch (Exception mex) { // Prints all nested (chained) exceptions as well
 	   System.out.println("I am here??? ");
@@ -286,13 +286,13 @@ public class UserRestController extends SupportController {
       */  
 	
 			String host = "smtp.gmail.com";
-			String subject = "³ªµéÀÌ ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£";
-			String fromName="³ªµéÀÌ °ü¸®ÀÚ";
+			String subject = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£";
+			String fromName="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			String from="kimjh2218@gmail.net";
 			String password = "top0347923";
 			String to01 = email;
 			
-			String content= "ÀÎÁõ¹øÈ£ ["+ authNum +"]";
+			String content= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ["+ authNum +"]";
 			
 			try {
 		//		MimeMessage message = mailSender.createMimeMessage();
@@ -315,10 +315,10 @@ public class UserRestController extends SupportController {
 			    props.put("mail.smtp.socketFactory.port", "465");
 			    props.put("mail.smtp.starttls.enable", "true");
 	*/		    
-/*				props.put("mail.smtp.starttls.enable", "true");     // gmailÀº ¹«Á¶°Ç true °íÁ¤
-				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ¼­¹ö ÁÖ¼Ò
-				props.put("mail.smtp.auth","true");                 // gmailÀº ¹«Á¶°Ç true °íÁ¤
-				props.put("mail.smtp.port", "587");                 // gmail Æ÷Æ®
+/*				props.put("mail.smtp.starttls.enable", "true");     // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+				props.put("mail.smtp.auth","true");                 // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+				props.put("mail.smtp.port", "587");                 // gmail ï¿½ï¿½Æ®
 				*/
 				props.setProperty("mail.transport.protocol", "smtp");
 		        props.setProperty("mail.host", host);
@@ -340,7 +340,7 @@ public class UserRestController extends SupportController {
 					 return new PasswordAuthentication(from, password );
 				}
 				});
-				System.out.println("·£´ý"+content);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½"+content);
 				MimeMessage message = new MimeMessage(mailSession);
 				//message.setFrom(new InternetAddress("from@no-spam.com"));
 				message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName,"UTF-8","B")));
@@ -351,7 +351,7 @@ public class UserRestController extends SupportController {
 						address);
 				message.setSentDate(new java.util.Date());
 				message.setSubject(subject);
-				message.setContent(content,"text/html; charset=utf-8");
+				message.setContent(content,"text/html; charset=UTF-8");
 //				message.setText("Dear Mail Crawler," +
 //						"\n\n No spam to my email, please!");
 			    System.out.println("message" + message);

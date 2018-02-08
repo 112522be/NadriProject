@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page pageEncoding="utf-8"%>
+=======
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
+>>>>>>> refs/remotes/origin/master
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,7 +12,11 @@
 <html lang="ko">
 
 <head>
+<<<<<<< HEAD
 <meta charset="utf-8">
+=======
+<meta charset="UTF-8">
+>>>>>>> refs/remotes/origin/master
 
 <title>getProduct.jsp</title>
 

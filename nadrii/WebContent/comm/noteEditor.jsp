@@ -1,16 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>Summernote</title>
-  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">  -->
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"><!--    -->
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-  
+  <style type="text/css">
+  	.selectedhashtagButtons {
+			  height: 30px;
+			  font-size:15px;
+			  font-family: 'Nanum Gothic';
+			  color: white;
+			  text-align: center;
+			  background: #2fade2;
+			  border: solid 2px #2fade2;
+			  border-radius: 30px;
+	}
+	.hashtagButtons {
+			  height: 30px;
+			  font-size:15px;
+			  font-family: 'Nanum Gothic';
+			  color: black;
+			  text-align: center;
+			  background: #edeeef;
+			  border: solid 2px #edeeef;
+			  border-radius: 30px;
+	}
+	#selectedThumbnail{
+		border: solid 2px red;
+	}
+  </style>
   <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
 	 	function sendFile(file, editor) {              
@@ -26,8 +49,8 @@
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
-	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -37,11 +60,6 @@
 	 	}
         function deleteFile(file) {
 			
-		}
-        function addThumbnail(filePath) {
-			$('input[name="thumbNailFileName"]').val(filePath);
-			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected")
-			console.log($('input[name="thumbNailFileName"]').val());
 		}
         var hashtagList=",";
         function listHashTag(filePath) {
@@ -56,7 +74,7 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").prepend('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
 	 	        	}
 				},
 				error : function() {
@@ -65,20 +83,29 @@
         	})
         }
         function addHashTag(value) {
-			$('button.hashtags:contains("'+value+'")').remove();
-			$('#selectedHashTags').append("#"+value+" ")
-			hashtagList+=value+",";
-			$('input[name="hashtag"]').val(hashtagList);
+        	$('button.hashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-ok');
+			$('button.hashtagButtons[value="'+value+'"]').attr('class', 'selectedhashtagButtons');
+		}
+        function deleteHashTag(value) {
+        	$('button.selectedhashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-plus');
+			$('button.selectedhashtagButtons[value="'+value+'"]').attr('class', 'hashtagButtons');
 		}
         $(function() {
 	 	    
- 	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
+ 	 	   $('div#cndHashTags').on('click', 'button.hashtagButtons', function() {
  	 		   addHashTag($(this).val());
  			})
  			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
-  				addThumbnail($(this).attr('src'))
+  				$('div#cndThumbnail>img').removeAttr("id")
+  				$('input[name="thumbNailFileName"]').val($(this).attr('src'));
+  				$(this).attr("id", "selectedThumbnail");
+  				console.log($('input[name="thumbNailFileName"]').val());
  			}) 
+ 			
+ 			$('div#cndHashTags').on('click', 'button.selectedhashtagButtons', function() {
+ 	 		   deleteHashTag($(this).val());
+ 			})
 		})
 	</script>
 </head>
@@ -113,11 +140,11 @@
 	    				    	alert($('#content_pr').val());
 	    				    	alert($('#lat').val());
 	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default">'+
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left">'+
 	    									'<div class="col-xs-3" align="left">'+
 	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 	    									'</div>'+
-	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>';
+	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button><p></p>';
 	    				    	$('#summernote').summernote('code', html);
 						})
 	    			}
@@ -156,13 +183,8 @@
 		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
 		<input type="hidden" id="content_pr">
+		<h5 align="left">썸네일을  선택해주세요</h5>
 		<div id="cndThumbnail"></div>
-		<br/>
-		<div>
-			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
-		</div>
-		<br/>
-		<div id="cndHashTags"></div>
 		<br/>
 		</form>
 </body>

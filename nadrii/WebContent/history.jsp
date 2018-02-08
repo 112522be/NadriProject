@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
 <head>
@@ -13,8 +13,8 @@
 <br>
 <br>
 <%
-	request.setCharacterEncoding("utf-8");
-	response.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
 	String history = null;
 	Cookie[] cookies = request.getCookies();
 	if (cookies!=null && cookies.length > 0) {

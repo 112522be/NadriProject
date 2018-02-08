@@ -8,7 +8,6 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
@@ -19,7 +18,7 @@ import com.yagn.nadrii.service.domain.Community;
 
 @Service("commServiceImpl")
 public class CommServiceImpl implements CommService {
-	
+
 	@Autowired
 	@Qualifier("commDaoImpl")
 	private CommDao commDao;
@@ -34,7 +33,10 @@ public class CommServiceImpl implements CommService {
 
 	@Override
 	public Community getComm(int postNo) {
-		return commDao.getComm(postNo);
+		Community community = commDao.getComm(postNo);
+		community.setViewCount(community.getViewCount()+1);
+		commDao.updateViewCount(community);
+		return community;
 	}
 
 	@Override
@@ -82,6 +84,22 @@ public class CommServiceImpl implements CommService {
 				str+=temp[i];
 		}
 		return str;
+	}
+	
+	@Override
+	public List<String> getHashtags(String keyword) throws Exception {
+		List<String> tags = commDao.getHashtags(keyword);
+		List<String> result = new ArrayList<>();
+		for(int i=0;i<tags.size();i++) {
+			String[] temp = tags.get(i).split(",");
+			for(int n=1;n<temp.length-1;n++) {
+				if(result.toString().indexOf(temp[n]) == -1) {
+					result.add(temp[n]);
+				}
+			}
+		}
+		System.out.println(result);
+		return result;
 	}
 
 }
