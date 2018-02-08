@@ -140,7 +140,7 @@
 	    				    	alert($('#content_pr').val());
 	    				    	alert($('#lat').val());
 	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">'+
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left" data-html="true" data-content="<div id=\"map\" style=\"width:300px;height:240px;\"></div>">'+
 	    									'<div class="col-xs-3" align="left">'+
 	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 	    									'</div>'+
