@@ -78,7 +78,9 @@ public class TripDaoImplgetAddress implements TripDao {
 	@Override
 	public List getClientAddress(String lat, String lng) throws Exception {
 		
-		System.out.println("�ּ� ã��");
+
+		System.out.println("getClientAddress");
+
 		
 		String location = lat+","+lng;
 		System.out.println(location);
@@ -119,6 +121,12 @@ public class TripDaoImplgetAddress implements TripDao {
 
 	@Override
 	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

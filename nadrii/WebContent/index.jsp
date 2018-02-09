@@ -32,6 +32,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- 위치 정보 가져오는 JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
+<script type="text/javascript" src="../resources/js/addMessage.js"></script>
 <!-- Facebook Login -->
 
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
@@ -117,6 +118,32 @@ body {
          });
       });
       
+
+
+      $(function(){
+    	  	$("a[href='#']:contains('플래너')").on("click", function(){
+    	  		self.location = "/planner/addPlannerView.jsp";
+    	  	})
+      });
+
+
+      /*
+      $( function() {
+          $("a[href='#' ]:contains('쪽지 보내기')").on("click" , function() {
+        	var recevierId = $("#recevierId").val();
+        	alert(recevierId);
+        	window.open("/message/addMessage?recevierId="+recevierId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+          });
+      });
+      //*/
+      
+      $( function() {
+
+          $("a[href='#' ]:contains('쪽지함')").on("click" , function() {
+            alert("쪽지함"); 
+        	self.location = "/message/listMessage";
+          });
+      });
 
       
 
@@ -259,15 +286,20 @@ body {
                <p>But, if you got some bad emotion, that was good experience
                   to you.</p>
                <div class="text-center">
+
+               	<input type="hidden" name="recevierId" id="recevierId" value="questsolve"/>
+
                   <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
 
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지 보내기</a>
+
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
 
-                  <a class="btn btn-warning btn-lg" href="Newindex.jsp" role="button" >새화면</a>
 
                </div>
 

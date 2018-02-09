@@ -64,6 +64,8 @@
 	<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
 	<button type="button" class="btn btn-default">민속마을</button>
 
+
+	
 </div>
 </body>
 

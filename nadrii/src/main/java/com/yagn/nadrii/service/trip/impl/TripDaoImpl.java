@@ -112,6 +112,13 @@ public class TripDaoImpl implements TripDao {
 	}
 
 
+	@Override
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 	
