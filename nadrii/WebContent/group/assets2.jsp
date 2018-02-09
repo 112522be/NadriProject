@@ -7,7 +7,7 @@
 <html>
 <head>
 <title>Prologue by HTML5 UP</title>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--[if lte IE 8]><script src="../resources/assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="../resources/assets/css/main.css" />

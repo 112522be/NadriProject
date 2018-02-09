@@ -47,7 +47,7 @@
 	
 	<select  id="getTotalCount"  parameterType="map"	 resultType="int">
 		SELECT COUNT(*)
-	  	FROM(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, lat, lng, reg_date
+	  	FROM(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, lat, lng
 	  									FROM post
 										<where>
 											<if test="searchCondition != null">
@@ -61,14 +61,15 @@
 						 							hashtag LIKE '%${search.searchKeyword}%' AND
 												</if>
 											</if>
-											flag_pu='pl'
-											AND user_id in #{plannerMakerId}
-											
+											<if test="plannerMakerId != null">
+											 	user_id in #{plannerMakerId} AND
+											</if>
+											flag_pu='pl'											
 										</where>
 						) countTable						
 	</select>
 	
-	<select id="listMyPlanner" parameterType="map" resultMap="plannerSelectMap">
+	<select id="listPlanner" parameterType="map" resultMap="plannerSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag, lat, lng
@@ -85,8 +86,11 @@
 						 							hashtag LIKE '%${search.searchKeyword}%' AND
 												</if>
 											</if>
-											flag_pu='pl' AND user_id in #{plannerMakerId}
-											ORDER BY reg_date DESC
+											<if test="plannerMakerId != null">
+											 	user_id in #{plannerMakerId} AND
+											</if>
+											flag_pu='pl'
+											ORDER BY post_no DESC
 										</where>
 										) inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
@@ -94,37 +98,17 @@
 	</select>
 	
 	
-	<select id="listUserPlanner" parameterType="search" resultMap="plannerSelectMap">
-		SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag, lat, lng
-	  									FROM post
-										<where>
-											<if test="searchCondition != null">
-												<if test="searchCondition == 0 and searchKeyword !='' ">
-						 							title LIKE '%${searchKeyword}%' AND
-												</if>
-												<if test="searchCondition == 1 and searchKeyword !='' ">
-						 							text LIKE '%${searchKeyword}%' AND
-												</if>
-												<if test="searchCondition == 2 and searchKeyword !='' ">
-						 							hashtag LIKE '%${searchKeyword}%' AND
-												</if>
-											</if>
-											flag_pu='pl'
-											ORDER BY reg_date DESC
-										</where>
-										) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
-	</select>
-	
-	
 	<select id="getPlanner" parameterType="int" resultMap = "plannerSelectMap">
 		SELECT * 
 		FROM post
-		where post_no in #{postNo}
+		WHERE post_no in #{postNo}
 	</select>
+	
+	<delete id="deletePlanner" parameterType="int">
+		DELETE
+		FROM post
+		WHERE post_no in #{postNo}
+	</delete>
 	
  	 
 </mapper>

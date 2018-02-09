@@ -199,8 +199,8 @@ public class PurchaseController {
 			cal.setTime(bDate);
 			cal.add(Calendar.DATE, -10);
 
-			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "³â "
-					+ df.format(cal.getTime()).substring(4, 6) + "¿ù " + df.format(cal.getTime()).substring(6) + "ÀÏ";
+			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "ï¿½ï¿½ "
+					+ df.format(cal.getTime()).substring(4, 6) + "ï¿½ï¿½ " + df.format(cal.getTime()).substring(6) + "ï¿½ï¿½";
 
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
@@ -327,14 +327,15 @@ public class PurchaseController {
 					System.out.println("				[ticketPriceInt]??" + ticketPriceInt);
 					System.out.println("				[ticketCountInt]??" + ticketCountInt);
 					
-					
 					totalTicketPrice += ticketPriceInt * ticketCountInt;
 					
-					list.get(i).setTotalTicketPrice(totalTicketPrice);
-					list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
-					list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(j).getTaxFree()));
 				
 				}
+				
+				list.get(i).setTotalTicketPrice(totalTicketPrice);
+				list.get(i).setTaxFree( (int) (totalTicketPrice * 0.05) );
+				list.get(i).setTicketPayment((int) (totalTicketPrice + list.get(i).getTaxFree()));
+
 				System.out.println("\n//[3]==========" + i);
 				System.out.println(list.get(i).toString());
 			}
@@ -350,7 +351,7 @@ public class PurchaseController {
 			purchase.setTicketPayment((int) (totalTicketPrice2 + purchase.getTaxFree()));
 			purchase.setTicketTitle(list.get(0).getTicketTitle());
 			if (list.size() > 1 ) {
-				purchase.setTicketTitle(list.get(0).getTicketTitle() + " ¿Ü " + (list.size() - 1) + " °Ç");
+				purchase.setTicketTitle(list.get(0).getTicketTitle() + " ì™¸" + (list.size() - 1) + " ê±´");
 			} 
 			
 			System.out.println("\n[Purchase]");

@@ -95,9 +95,9 @@ function goBack() {
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
-		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
-		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/index.jsp">
+		<input type="hidden" name="approval_url" 		value="http://192.168.0.24:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="cancel_url" 			value="http://192.168.0.24:8080/index.jsp">
+		<input type="hidden" name="fail_url" 			value="http://192.168.0.24:8080/index.jsp">
 
 		<div class="row">
 	  		<div class="col-xs-12 col-md-12">
@@ -177,11 +177,7 @@ function goBack() {
 	  			<hr>
 	  			<h4 class="text-right">[총 결제금액]</h4>
 	  			<h4 class="text-right">티켓비용 : ￦ ${ purchase.totalTicketPrice }</h4>
-<<<<<<< HEAD
 	  			<h4 class="text-right">결제대행비 : ￦ ${ purchase.taxFree }</h4>
-=======
-	  			<h4 class="text-right">비과세 : ￦ ${ purchase.taxFree }</h4>
->>>>>>> refs/remotes/origin/master
 	  			<hr>
 	  			<h4 class="text-right text-danger">￦ ${ purchase.ticketPayment }</h4>
 	  			

@@ -49,7 +49,7 @@ public class UserController {
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 //		JavaMailSender mailSender;
-		//setter Method ±¸Çö ¾ÊÀ½
+		//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 		public UserController(){
 			System.out.println(this.getClass());
@@ -69,25 +69,25 @@ public class UserController {
 	    final String password="god2218923";
 	
 	    /**
-	     * ¸ÞÀÎÆäÀÌÁö
+	     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	     * @return
 	     * @throws Exception
 	     */
 		@RequestMapping(value="/main")
 		public String main()throws Exception{
-			System.out.println("¸ÞÀÎÆäÀÌÁö!!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			return "redirect:/index.jsp";
 		}
 
 
-	// ÀÌ¸ÞÀÏ
+	// ï¿½Ì¸ï¿½ï¿½ï¿½
 	@SuppressWarnings("unused")
 	private void sendEmail(String email, String authNum) {
 
 		String setfrom = "kimjh2218@gmail.com";
 		String tomail = email;
-		String title = "³ªµéÀÌ °ü¸®ÀÚ";
-		String content = "ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£´Â " +authNum+ "ÀÔ´Ï´Ù.";
+		String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+		String content = "ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ " +authNum+ "ï¿½Ô´Ï´ï¿½.";
 		
 		
 		
@@ -149,7 +149,7 @@ public class UserController {
 	
 	/*
 	@RequestMapping(value="/emailAuth", method = RequestMethod.POST)
-	@ResponseBody	//		ajax ¹Þ°í ³Ñ±æ¶§, ¸¸¾à ÆäÀÌÁö ¸®ÅÏÇÒ¶§ ResponseBody
+	@ResponseBody	//		ajax ï¿½Þ°ï¿½ ï¿½Ñ±æ¶§, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ResponseBody
 	private Map emailAuth(HttpServletRequest request, String email) throws Exception{
 	String randomNum = randomNum();
 	System.out.println(email);
@@ -192,7 +192,7 @@ public class UserController {
 	
 	
 	/**
-	 *  login ÆäÀÌÁö
+	 *  login ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
@@ -206,10 +206,10 @@ public class UserController {
 	public String getKakaoUser(@ModelAttribute("tokenResponse") TokenResponse tokenResponse,
 									@RequestParam String code, HttpSession session) throws Exception {
 		tokenResponse = KakaoLoginRestClient.loginToken(code);
-		System.out.println("Ä«Ä«¿À ÅäÅ«" +code);
+		System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½Å«" +code);
 		User user = KakaoLoginRestClient.getUserInfo(tokenResponse.getAccess_token());
 		session.setAttribute("user", user);
-		System.out.println("µÎ¹øÂ° Ä«Ä«¿À" +user);
+		System.out.println("ï¿½Î¹ï¿½Â° Ä«Ä«ï¿½ï¿½" +user);
 		session.setAttribute("token", tokenResponse.getAccess_token());
 		return "redirect:/user/loginView.jsp";
 	}
@@ -221,9 +221,9 @@ public class UserController {
 		final String AUTH_HOST = "https://kauth.kakao.com";
 	    final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
 
-	    String CLIENT_ID = "[REST API Key]"; // ÇØ´ç ¾ÛÀÇ REST API KEY Á¤º¸. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ °¡´É
-	    String REDIRECT_URI = "[Redirect uri]"; // ÇØ´ç ¾ÛÀÇ ¼³Á¤µÈ uri. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ ¹× ¼³Á¤ °¡´É
-	    String code = "[Authorized code]"; // ·Î±×ÀÎ °úÁ¤Áß ¾òÀº authorization code °ª
+	    String CLIENT_ID = "[REST API Key]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ REST API KEY ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String REDIRECT_URI = "[Redirect uri]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uri. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String code = "[Authorized code]"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ authorization code ï¿½ï¿½
 	    System.out.println("code" +code);
 	    
 	    HttpsURLConnection conn = null;
@@ -287,7 +287,7 @@ public class UserController {
 	
 	
 	/**
-	 * È¸¿ø°¡ÀÔ ÆäÀÌÁö
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
@@ -295,10 +295,10 @@ public class UserController {
 	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
 	public String addUser(HttpServletRequest request, Map map) throws Exception{
 		
-		System.out.println("È¸¿ø°¡ÀÔ");
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		if(request.getParameter("facebookId") != null) {
 			String fbId = request.getParameter("facebookId");		
-			System.out.println("ÆäÀÌ½ººÏ ¾ÆÀÌµð : "+fbId);
+			System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
 			map.put("facebookId" , fbId );
 		}
 		return "redirect:/user/addUserView.jsp";
@@ -310,8 +310,8 @@ public class UserController {
 	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
 	//@ResponseBody
 	public String addUser(User user) throws Exception{
-		//È¸¿ø°¡ÀÔ
-		System.out.println("È¸¿ø°¡ÀÔ!!");
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 		System.out.println("userId==" +user.getUserId());
 		
 		userService.addUser(user);
@@ -326,7 +326,7 @@ public class UserController {
 	/*
 	@RequestMapping(value="/addUser",method=RequestMethod.POST)
 	public String addUser(@RequestBody User user,Map map)throws Exception{
-		System.out.println("È¸¿ø Á¤º¸ ÀúÀå ½ÃÀÛ");
+		System.out.println("È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		System.out.println("Start to save User Data");
 		userService.addUser(user);
 		
@@ -336,7 +336,7 @@ public class UserController {
 	}
 	*/
 	/**
-	 * È¸¿ø°¡ÀÔ
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param user
 	 * @return
 	 * @throws Exception
@@ -346,13 +346,13 @@ public class UserController {
 	    request.getSession().removeAttribute("loginUser");
 		session.invalidate();
 	   
-		System.out.println("·Î±×¾Æ¿ô : " + request.getSession().getAttribute("loginUser"));
+		System.out.println("ï¿½Î±×¾Æ¿ï¿½ : " + request.getSession().getAttribute("loginUser"));
 		
 		return "redirect:/index.jsp";
 	}
 	
 	/**
-	 *  ¾ÆÀÌµð Ã£±â
+	 *  ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	 * @param userName
 	 * @param userId
 	 * @return
@@ -360,20 +360,20 @@ public class UserController {
 	 */
 	@RequestMapping(value="findIdPg", method=RequestMethod.GET)
 	public String faindIdPg() throws Exception{
-		System.out.println("¾ÆÀÌµð Ã£±â");
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½");
 		return "redirect:/user/findIdUser.jsp";
 	}
 	
 	@RequestMapping(value="findPasswordPg", method=RequestMethod.GET)
 	public String findPassword(User user, Model model) throws Exception{
-		System.out.println("ºñ¹Ð¹øÈ£ Ã£±â");
+		System.out.println("ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½");
 		return "redirect:/user/findPasswordUser.jsp";
 	}
 	
 	@RequestMapping(value="addUserPlus", method=RequestMethod.GET)
 	public String addUserPlus() throws Exception{
 		//@RequestParam("userId") String userId, Model model
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â");
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
 		
 		//User user = userService.getUser(userId);
 		
@@ -385,21 +385,21 @@ public class UserController {
 	/*
 	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
 	public String addUserPlus(@RequestParam(value = "checkArray[]")List<String> arrayParams, String userId , Model model , HttpSession session, HttpServletRequest request) throws Exception{
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â??????");
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½??????");
 		
-		System.out.println("Ã¼Å©¹Ú½º!!" + arrayParams);
+		System.out.println("Ã¼Å©ï¿½Ú½ï¿½!!" + arrayParams);
 		
 		User user = userService.getUser(userId);
 		user.setPhone(user.getPhone());
 		
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â...!!!"+user);
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½...!!!"+user);
 		model.addAttribute("user",user);
 		
 		return "redirect:/user/addUserViewPlus.jsp";
 	}
 	*/
 	/**
-	 *  Ãß°¡Á¤º¸ ÀÔ·Â
+	 *  ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	 * @param user
 	 * @param model
 	 * @param session
@@ -414,12 +414,12 @@ public class UserController {
 		
 		System.out.println("\n[1] ==>" + user);
 		
-		System.out.println("»ý³â ¿ùÀÏ >>" + user.getbirth());
-		System.out.println("ÇÁ·ÎÇÊ >>" + user.getprofiIeimageFile());
-		System.out.println("ÇÚµåÆù ¹øÈ£ >>" + user.getPhone());
-		System.out.println("»ç¿ëÀÚ ÀÌ¸§ >>" + user.getUserName());
-		System.out.println("ÀÚ³à¼ö >>" + user.getchildren());
-		System.out.println("¼º º° >>" +user.getgender());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ >>" + user.getbirth());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >>" + user.getprofiIeimageFile());
+		System.out.println("ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½È£ >>" + user.getPhone());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ >>" + user.getUserName());
+		System.out.println("ï¿½Ú³ï¿½ï¿½ >>" + user.getchildren());
+		System.out.println("ï¿½ï¿½ ï¿½ï¿½ >>" +user.getgender());
 
 		userService.addUserPlus(user);
 		

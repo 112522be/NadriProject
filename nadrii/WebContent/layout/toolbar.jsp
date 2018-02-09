@@ -4,13 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나들이</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+  	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
@@ -18,13 +16,11 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<!-- css -->
+
+	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
 	<link href="/resources/css/flexslider.css" rel="stylesheet" />
@@ -51,16 +47,6 @@
 			self.location = "../trip/getTheme"
 		});
 	});
-	
-
-	$(function(){
-		$("a[href='#']:contains('나들이 플래너')").on("click", function(){
-			self.location = "../planner/json/getMyPlannerList"
-		})
-	})
-
-
-	//========== '나들이 티켓' 버튼 처리 Event ==========
 
 	$( function() {
 		console.log("세션 정보 : ${session}")
@@ -68,18 +54,27 @@
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
 			self.location = "/ticket/listTicket"
 		});
-		
+
 	});
 
+	$( function() {
+        $(".glyphicon.glyphicon-envelope").bind("click" , function() {
+        	//alert("쪽지함")
+      		self.location = "/message/listMessage"
+        });
+    });
 	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-    	
        $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
+
 //      	 alert("장바구니")
           self.location = "/purchase/listBasket"
        });
     });
+	
+	
+	
 	
 	</script>
 	
@@ -121,6 +116,11 @@
 									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 								</a>
 							</li>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+								</a>
+							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
@@ -140,17 +140,16 @@
 								<b class=" icon-angle-down"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="/planner/listPlanner">플래너 게시판</a></li>
-								<li><a href="/planner/addPlannerView.jsp">플래너 작성</a></li>
+
+								<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
+								<li><a href="/planner/addPlannerView">플래너 작성</a></li>
+								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
 							</ul>
 						</li>
 						<li><a href="#">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>
-
-
-			</div>
 			<!-- Container End -->
 		</nav>
 		<!-- navbar End -->

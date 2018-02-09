@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -49,8 +50,10 @@
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
+
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
+
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {

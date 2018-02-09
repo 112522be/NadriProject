@@ -108,9 +108,9 @@ function fncGetList(pageNo) {
 
 			for (var i = 0; i < postCount; i++) {
 				if (i != postCount - 1) {
-					var postNo = $($("input[name='postNo']")[i]).val() + ",";
+					var postNo = $($("input[name='postNo']:checked")[i]).val() + ",";
 				} else {
-					var postNo = $($("input[name='postNo']")[i]).val();
+					var postNo = $($("input[name='postNo']:checked")[i]).val();
 				}
 				sumPostNo += postNo;
 			}
@@ -287,6 +287,7 @@ function fncGetList(pageNo) {
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</button>
 				</div>
 			</div>
+			
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 

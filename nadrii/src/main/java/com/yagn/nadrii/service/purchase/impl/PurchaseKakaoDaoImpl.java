@@ -49,10 +49,10 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(kakaoPayURL);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		httpPost.setHeader("Authorization", kakaoAdminKey);
 		
-		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("utf-8"));
+		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
@@ -70,10 +70,10 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(kakaoPayCompleteURL);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		httpPost.setHeader("Authorization", kakaoAdminKey);
 		
-		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("utf-8"));
+		HttpEntity httpEntity = new ByteArrayEntity(kakaoPayRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		

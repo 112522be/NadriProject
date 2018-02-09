@@ -68,7 +68,7 @@
 //					 data : allData,
 //					 url : "/user/addUserPlus",
 //					 type : "POST",
-////				     contentType : "application; charset=utf-8",
+////				     contentType : "application; charset=UTF-8",
 //					 success : function(data){
 //						 if(result.msg != "success"){
 //							 alert("다시한번 확인해 주세요.");
