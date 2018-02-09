@@ -4,25 +4,37 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.log4j.Logger;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +42,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
 
@@ -48,8 +62,9 @@ public class UserController {
 		@Autowired
 		@Qualifier("userServiceImpl")
 		private UserService userService;
+
 //		JavaMailSender mailSender;
-		//setter Method ±¸Çö ¾ÊÀ½
+		//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 		public UserController(){
 			System.out.println(this.getClass());
@@ -69,147 +84,360 @@ public class UserController {
 	    final String password="god2218923";
 	
 	    /**
-	     * ¸ÞÀÎÆäÀÌÁö
+	     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	     * @return
 	     * @throws Exception
 	     */
 		@RequestMapping(value="/main")
 		public String main()throws Exception{
-			System.out.println("¸ÞÀÎÆäÀÌÁö!!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			return "redirect:/index.jsp";
 		}
 
 
-	// ÀÌ¸ÞÀÏ
-	@SuppressWarnings("unused")
-	private void sendEmail(String email, String authNum) {
-
-		String setfrom = "kimjh2218@gmail.com";
-		String tomail = email;
-		String title = "³ªµéÀÌ °ü¸®ÀÚ";
-		String content = "ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£´Â " +authNum+ "ÀÔ´Ï´Ù.";
+	// ï¿½Ì¸ï¿½ï¿½ï¿½
+		/*@RequestMapping(value="check", method=RequestMethod.POST)
+		@ResponseBody
+		//public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+		public Map<String,Object> emailAuth(HttpServletResponse response, HttpServletRequest request)throws Exception{	
+			String email = request.getParameter("email");
+			String authNum= "";
+			
+			authNum = randomNum();							//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+			System.out.println("authNum : "+authNum);
+			User user = new User();
+			user.setCheckSuccess(authNum);
+				System.out.println("email : "+email);
+			sendEmail(email.toString(), authNum);			//ï¿½ï¿½ï¿½Ï¹ß¼ï¿½
+			request.getSession().setAttribute("confirmNum", authNum);
+			Map<String, Object> mv = new HashMap<String, Object>();
+			mv.put("email",email);
+			mv.put("authNum",authNum);
+			return mv;
+		}
+		*/
 		
+		@RequestMapping(value="check", method=RequestMethod.POST)
+		@ResponseBody
+		//public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+		public Map<String,Object> emailAuth(HttpServletResponse response, HttpServletRequest request, HttpSession session)throws Exception{	
+			String email = request.getParameter("email");
+			String authNum= "";
+			
+			authNum = randomNum();							//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+			System.out.println("authNum : "+authNum);
+			User user = new User();
+			user.setCheckSuccess(authNum);
+				System.out.println("email : "+email);
+			sendEmail(email.toString(), authNum);			//ï¿½ï¿½ï¿½Ï¹ß¼ï¿½
+			request.getSession().setAttribute("confirmNum", authNum);
+			Map<String, Object> mv = new HashMap<String, Object>();
+			mv.put("email",email);
+			mv.put("authNum",authNum);
+			return mv;
+		}
 		
+		/*@RequestMapping(value="checkSuccess", method=RequestMethod.POST)
+		@ResponseBody
+		//public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+		public Map<String,Object> checkSuccess(HttpServletResponse response, HttpServletRequest request)throws Exception{	
+			String confirmNum = request.getParameter("confirmNum");
+			
+			Map<String, Object> mv = new HashMap<String, Object>();
+			
+			System.out.println("confirmNum : "+confirmNum);			// userï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+			System.out.println("userVo.getCheckSuccess() : "+user.getCheckSuccess());
+			if(confirmNum.equals(user.getCheckSuccess())) {		// equals Å¸ï¿½ï¿½ï¿½ï¿½ object 
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
+				mv.put("result","success");
+			}else {
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½È¸ï¿½ï¿½ï¿½");
+				mv.put("result","fail");
+			}
+			return mv;
+		}*/
 		
-		
-		
-		///////////////////   
-		String to = "abcd@gmail.com";
+		@RequestMapping(value="checkSuccess", method=RequestMethod.POST)
+		@ResponseBody
+		//public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+		public Map<String,Object> checkSuccess(HttpServletResponse response, HttpServletRequest request)throws Exception{	
+			String confirmNum = request.getParameter("confirmNum");
+			
+			Map<String, Object> mv = new HashMap<String, Object>();
+			
+			System.out.println("confirmNum : "+confirmNum);			// userï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+//			System.out.println("user.getCheckSuccess() : "+user.getCheckSuccess());
+//			if(confirmNum.equals(user.getCheckSuccess())) {	
+			if(confirmNum.equals(request.getSession().getAttribute("confirmNum"))) {
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
+				mv.put("result","success");
+			}else {
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½È¸ï¿½ï¿½ï¿½");
+				mv.put("result","fail");
+			}
+			return mv;
+		}
 
-	      // Sender's email ID needs to be mentioned
-	      String from = "kimjh2218@gmail.com";
-
-	      // Assuming you are sending email from localhost
-	      String host = "localhost";
-
-	      // Get system properties
-	      Properties properties = System.getProperties();
-
-	      // Setup mail server
-	      properties.setProperty("mail.smtp.host", host);
-
-	      // Get the default Session object.
-	      Session session = Session.getDefaultInstance(properties);
-
-	      try{
-	         // Create a default MimeMessage object.
-	         MimeMessage message = new MimeMessage(session);
-
-	         // Set From: header field of the header.
-	         message.setFrom(new InternetAddress(from));
-
-	         // Set To: header field of the header.
-	         message.addRecipient(Message.RecipientType.TO,
-	                                  new InternetAddress(to));
-
-	         // Set Subject: header field
-	         message.setSubject("This is the Subject Line!");
-
-	         // Now set the actual message
-	         message.setText("This is actual message");
-
-	         // Send message
-	         Transport.send(message);
-	         System.out.println("Sent message successfully....");
-	      }catch (MessagingException mex) {
-	         mex.printStackTrace();
-	      }
-	   
-      ////////////////////////////////////////////////////////       
-        
-        
-	
-        
-        
-    }    
-
-	
-	
-	
-	
-	/*
-	@RequestMapping(value="/emailAuth", method = RequestMethod.POST)
-	@ResponseBody	//		ajax ¹Þ°í ³Ñ±æ¶§, ¸¸¾à ÆäÀÌÁö ¸®ÅÏÇÒ¶§ ResponseBody
-	private Map emailAuth(HttpServletRequest request, String email) throws Exception{
-	String randomNum = randomNum();
-	System.out.println(email);
-	sendEmail(email, randomNum);
-	request.getSession().setAttribute("confirmNum", randomNum);
-	Map<String, String> map = new HashMap<String, String>(); 
-	
-	map.put("msg", "success");
-	
-	
-	return map;
-	}
-	*/
-	
-//	@RequestMapping(value = "check", method=RequestMethod.POST)
-//	@ResponseBody
-//	public ModelAndView enmailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
-//		
-//		String email = request.getParameter("email");
-//		String authNum = "";
-//		
-//		authNum = randomNum();
-//		
-//		sendEmail(email.toString(), authNum);
-//		
-//
-//		
-//		return mv;
-//	}
-	
-//	public String randomNum() {
-//		StringBuffer buffer = new StringBuffer();
-//		for (int i = 0; i <= 6 ; i++) {
-//			int n = (int) (Math.random() *10);
-//			buffer.append(n);
+//		@RequestMapping(value="addUserPlus", method= RequestMethod.POST  )
+//		public Object addUserPlus(User user, ModelMap model , HttpServletRequest request) throws Exception{
+	//
+//			try{
+//				int cnt = Integer.parseInt(request.getParameter("cnt"));
+	//
+//		           for(int j = 1; j <= cnt ; j++ ){
+//					for(int i = 0; i < request.getParameterValues("ch" + String.valueOf(j)).length ; i++){
+//						System.out.println(request.getParameterValues("ch" + String.valueOf(j))[i]);
+//					}
+//				}	
+//			} catch(Exception e){
+//				e.printStackTrace();
+//			}	
+//			System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½!!");
+//			userService.addUserPlus(user);
+//			Map<String, String> map = new HashMap<String, String>();
+//			map.put("msg", "success");
+//			System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ì´ï¿½" +map);
+//			return map;
 //		}
-//		return buffer.toString();
-//	}
+		
+		private void sendEmail(String email, String authNum) throws UnsupportedEncodingException {
+			 /*  
+			String setfrom = "kimjh2218@gmail.com";
+			String tomail = email;
+			String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			String content = "ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ " +authNum+ "ï¿½Ô´Ï´ï¿½.";
+			
+			
+			
+			
+			///////////////////   
+			String to = "abcd@gmail.com";
+
+		      // Sender's email ID needs to be mentioned
+		      String from = "kimjh2218@gmail.com";
+
+		      // Assuming you are sending email from localhost
+		      String host = "localhost";
+
+		      // Get system properties
+		      
+		      MimeMessage message = mailSender.createMimeMessage();
+				Properties props = new Properties();
+		        
+		      try{
+		    	  Properties properties = System.getProperties();
+		    	  Properties props = new Properties();
+		      // Setup mail server
+		      properties.setProperty("mail.smtp.host", host);
+
+		      // Get the default Session object.
+//		      Session session = Session.getDefaultInstance(properties);
+
+		      
+		    	  Session mailSession = Session.getInstance(props,
+		    			  new javax.mail.Authenticator() {
+		    		  protected PasswordAuthentication getPasswordAuthentication() {
+		    			  return new PasswordAuthentication(requestingPrompt, requestingPrompt);
+		    			  
+		    		  }
+		    	  })
+		         // Create a default MimeMessage object.
+		         Message message = new MimeMessage(mailSession);
+
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(from));
+
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+
+		         // Set Subject: header field
+		         message.setSubject("This is the Subject Line!");
+
+		         // Now set the actual message
+		         message.setText("This is actual message");
+
+		         // Send message
+		         Transport.send(message);
+		         System.out.println("Sent message successfully....");
+		      }catch (MessagingException mex) {
+		         mex.printStackTrace();
+		      }
+		   
+	      ////////////////////////////////////////////////////////       
+	        
+	        */
+		/*
+		private void sendEmail(String email, String authNum) {
+		 Properties p = new Properties();
+		  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Googleï¿½ï¿½ï¿½ï¿½@gmail.comï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		  p.put("mail.smtp.host", "smtp.gmail.com");
+		  p.put("mail.smtp.port", "465");
+		  p.put("mail.smtp.starttls.enable","true");
+		  p.put( "mail.smtp.auth", "true");
+		 
+		  p.put("mail.smtp.debug", "true");
+		  p.put("mail.smtp.socketFactory.port", "465");
+		  p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		  p.put("mail.smtp.socketFactory.fallback", "false");
+		 
+		  //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+		 
+		  try {
+		  // Authenticator auth = new SMTPAuthenticator();
+		   Session session = Session.getInstance(p, auth);
+		   session.setDebug(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½Ü¼Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		 
+		   //session = Session.getDefaultInstance(p);
+		   MimeMessage msg = new MimeMessage(session);
+		   String message = "Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®";
+		   msg.setSubject("Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®");
+		   msg.setContent(message, "text/plain;charset=KSC5601");
+		   System.out.println("Message: " + msg.getContent());
+		   Transport.send(msg);
+		   System.out.println("Gmail SMTPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		  }
+		  catch (Exception mex) { // Prints all nested (chained) exceptions as well
+		   System.out.println("I am here??? ");
+		   mex.printStackTrace();
+		  }
+		
+	      */  
+		
+				String host = "smtp.gmail.com";
+				String subject = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£";
+				String fromName="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+				String from="kimjh2218@gmail.com";
+				String password = "top0347923";
+//				String to01 = email;
+				
+				String content= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ["+ authNum +"]";
+				
+				try {
+			//		MimeMessage message = mailSender.createMimeMessage();
+					Properties props = new Properties();
+					
+	/*				props.put("mail.smtp.starttls.enable", "true");
+					props.put("mail.smtp.debug", "true");
+					props.put("mail.smtp.starttls.enable","true");
+					props.put("mail.transport.protocol", "smtp");
+					props.put("mail.smtp.host", host);
+					props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+					props.put("mail.smtp.port", "465");
+					props.put("mail.smtp.starttls.enable", "true");
+					props.put("mail.smtp.user", from);
+					props.put("mail.smtp.auth", "true");
+					props.put("mail.smtp.ssl.enable", "true");
+					props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+					props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				    props.put("mail.smtp.socketFactory.fallback", "false");
+				    props.put("mail.smtp.socketFactory.port", "465");
+				    props.put("mail.smtp.starttls.enable", "true");
+		*/		    
+	/*				props.put("mail.smtp.starttls.enable", "true");     // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+					props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+					props.put("mail.smtp.auth","true");                 // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+					props.put("mail.smtp.port", "587");                 // gmail ï¿½ï¿½Æ®
+					*/
+					/*props.setProperty("mail.transport.protocol", "smtp");
+			        props.setProperty("mail.host", host);
+			        props.put("mail.transport.protocol", "smtp");
+			        props.put("mail.smtp.auth", "true");
+			        props.put("mail.smtp.port", "587");
+			        props.setProperty( "mail.smtp.starttls.enable", "true" );
+			        props.setProperty("mail.smtp.socketFactory.port", "587");
+			        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			        props.put("mail.smtp.socketFactory.fallback", "false");
+			        props.setProperty("mail.smtp.quitwait", "false");
+			        props.put("mail.smtp.trust", "mail.myHost.com");
+					props.put("mail.smtp.user", from);
+					props.put("mail.smtp.password", password);*/
+					
+					props.put("mail.smtp.auth", "true");
+					props.put("mail.smtp.starttls.enable", "true");
+					props.put("mail.smtp.ssl.trust", host);
+					props.put("mail.smtp.host", host);
+					props.put("mail.smtp.port", "587");
+
+					Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+							 
+						protected PasswordAuthentication getPasswordAuthentication() {
+						 return new PasswordAuthentication(from, password );
+					}
+					});
+					System.out.println("ï¿½ï¿½ï¿½ï¿½"+content);
+					MimeMessage message = new MimeMessage(mailSession);
+					//message.setFrom(new InternetAddress("from@no-spam.com"));
+					message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName,"UTF-8","B")));
+					System.out.println("message!!" + message);
+					InternetAddress[] address = {new InternetAddress(email,authNum)};
+					System.out.println("address1" + address);
+					message.setRecipients(Message.RecipientType.TO,
+							address);
+					message.setSentDate(new java.util.Date());
+					message.setSubject(subject);
+					message.setContent(content,"text/html; charset=UTF-8");
+//					message.setText("Dear Mail Crawler," +
+//							"\n\n No spam to my email, please!");
+				    System.out.println("message" + message);
+					Transport.send(message);
+					System.out.println("Transport!!");
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+	        
+	    }
+		
+
+
+		
+		
+		public String randomNum() {
+			StringBuffer buffer = new StringBuffer();
+			for(int i = 0; i <= 6; i++) {
+				int n = (int) (Math.random() *10);
+				buffer.append(n);
+			}
+			return buffer.toString(); 
+			}
+	
+	
+	////////////////////////////////////////////////
 	
 	
 	
 	/**
-	 *  login ÆäÀÌÁö
+	 *  login ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() throws Exception {
+		System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return "redirect:/user/loginView.jsp";
 	}
-	
+		
+	//Ä«Ä«ï¿½ï¿½
+/*	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+	*/
 	/*
 	@RequestMapping(value="/oauth", method=RequestMethod.POST)
 	public String getKakaoUser(@ModelAttribute("tokenResponse") TokenResponse tokenResponse,
 									@RequestParam String code, HttpSession session) throws Exception {
 		tokenResponse = KakaoLoginRestClient.loginToken(code);
-		System.out.println("Ä«Ä«¿À ÅäÅ«" +code);
+		System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½Å«" +code);
 		User user = KakaoLoginRestClient.getUserInfo(tokenResponse.getAccess_token());
 		session.setAttribute("user", user);
-		System.out.println("µÎ¹øÂ° Ä«Ä«¿À" +user);
+		System.out.println("ï¿½Î¹ï¿½Â° Ä«Ä«ï¿½ï¿½" +user);
 		session.setAttribute("token", tokenResponse.getAccess_token());
 		return "redirect:/user/loginView.jsp";
 	}
@@ -221,9 +449,9 @@ public class UserController {
 		final String AUTH_HOST = "https://kauth.kakao.com";
 	    final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
 
-	    String CLIENT_ID = "[REST API Key]"; // ÇØ´ç ¾ÛÀÇ REST API KEY Á¤º¸. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ °¡´É
-	    String REDIRECT_URI = "[Redirect uri]"; // ÇØ´ç ¾ÛÀÇ ¼³Á¤µÈ uri. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ ¹× ¼³Á¤ °¡´É
-	    String code = "[Authorized code]"; // ·Î±×ÀÎ °úÁ¤Áß ¾òÀº authorization code °ª
+	    String CLIENT_ID = "[REST API Key]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ REST API KEY ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String REDIRECT_URI = "[Redirect uri]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uri. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String code = "[Authorized code]"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ authorization code ï¿½ï¿½
 	    System.out.println("code" +code);
 	    
 	    HttpsURLConnection conn = null;
@@ -284,34 +512,135 @@ public class UserController {
 	         }
 	    }
 	}
-	
-	
+
 	/**
-	 * È¸¿ø°¡ÀÔ ÆäÀÌÁö
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
 
+	 //@Cacheable(value = "users", key = "#userId")
+	@RequestMapping(value="addUser", method=RequestMethod.GET  )
+	public String addUser(HttpServletRequest request, @ModelAttribute User params ) throws Exception{
+		/*
+=======
+
 	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
 	public String addUser(HttpServletRequest request, Map map) throws Exception{
 		
-		System.out.println("È¸¿ø°¡ÀÔ");
+<<<<<<< HEAD
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+=======
+>>>>>>> refs/remotes/origin/master
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+params);		
+>>>>>>> refs/remotes/origin/master
 		if(request.getParameter("facebookId") != null) {
+<<<<<<< HEAD
+		String fbId = request.getParameter("facebookId");		
+		System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
+		model.addAttribute("facebookId" , fbId );
+=======
 			String fbId = request.getParameter("facebookId");		
-			System.out.println("ÆäÀÌ½ººÏ ¾ÆÀÌµð : "+fbId);
+			System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
 			map.put("facebookId" , fbId );
+>>>>>>> refs/remotes/origin/master
 		}
+		//*/
 		return "redirect:/user/addUserView.jsp";
 	}
 
 	
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/addUserFacebook" )
+	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
+		,@ModelAttribute User params 
+		) throws Exception{
+		
+		System.out.println("facebookÈ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		
+		//String str = URLDecoder.decode(params, "UTF-8");
+		
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+params);		
+//	if(uid != null && accessToken != null) {
+			
+		/*if(email != null) {
+			
+		System.out.println("uid : " +  uid);
+			System.out.println("ï¿½ï¿½Å« : " + accessToken );
+			System.out.println("email : " +email);
+			
+//			model.addAttribute("uid" , uid);
+//			model.addAttribute("accessToken", accessToken);
+			
+			session.setAttribute("uid", uid);
+			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("email", email);
+			
+		}*/
+		
+		if(request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
+			model.addAttribute("facebookId" , fbId );
+			}
+	
+	/*if(uid == "" && accessToken == "") {
+	}*/
+		return "forward:/user/addUserFacebook.jsp";
+	}
+	
+	/**
+	 * 
+	 * @param uid
+	 * @param accessToke
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
+/*	@RequestMapping(value="addUserFacebook", method = RequestMethod.GET)
+	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session) throws Exception{
+		
+		System.out.println("facebookÈ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		
+				if(uid != null && accessToken != null) {
+			
+			System.out.println("uid" +uid);
+			System.out.println("ï¿½ï¿½Å« : " + accessToken );
+			
+//			model.addAttribute("uid" , uid);
+//			model.addAttribute("accessToken", accessToken);
+			
+			session.setAttribute("uid", uid);
+			session.setAttribute("accessToken", accessToken);
+		}
+		
+		return "forword:/user/addUserFacebook.jsp";
+	}*/
 	
 	
+	@RequestMapping(value="/view", method = RequestMethod.GET)
+	public String view (HttpServletRequest request, HttpSession seeion) throws Exception{
+		System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½Ò¿ï¿½ï¿½ï¿½");
+		
+		return "forward:/user/listUser.jsp";
+	}
+		
 	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
 	//@ResponseBody
 	public String addUser(User user) throws Exception{
-		//È¸¿ø°¡ÀÔ
-		System.out.println("È¸¿ø°¡ÀÔ!!");
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 		System.out.println("userId==" +user.getUserId());
 		
 		userService.addUser(user);
@@ -326,7 +655,7 @@ public class UserController {
 	/*
 	@RequestMapping(value="/addUser",method=RequestMethod.POST)
 	public String addUser(@RequestBody User user,Map map)throws Exception{
-		System.out.println("È¸¿ø Á¤º¸ ÀúÀå ½ÃÀÛ");
+		System.out.println("È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		System.out.println("Start to save User Data");
 		userService.addUser(user);
 		
@@ -335,24 +664,27 @@ public class UserController {
 		return "redirect:/user/addUser.jsp";
 	}
 	*/
+
 	/**
-	 * È¸¿ø°¡ÀÔ
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param user
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/logoutProc", method=RequestMethod.GET)
-	public String logoutProc(HttpServletRequest request, HttpSession session) throws Exception{
+	public String logoutProc(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 	    request.getSession().removeAttribute("loginUser");
 		session.invalidate();
 	   
-		System.out.println("·Î±×¾Æ¿ô : " + request.getSession().getAttribute("loginUser"));
+		System.out.println("ï¿½Î±×¾Æ¿ï¿½ : " + request.getSession().getAttribute("loginUser"));
 		
 		return "redirect:/index.jsp";
 	}
 	
+	
+	
 	/**
-	 *  ¾ÆÀÌµð Ã£±â
+	 *  ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	 * @param userName
 	 * @param userId
 	 * @return
@@ -360,46 +692,37 @@ public class UserController {
 	 */
 	@RequestMapping(value="findIdPg", method=RequestMethod.GET)
 	public String faindIdPg() throws Exception{
-		System.out.println("¾ÆÀÌµð Ã£±â");
-		return "redirect:/user/findIdUser.jsp";
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		return "forward:/user/findIdUser.jsp";
 	}
+	
+	/*@RequestMapping(value="findId", method=RequestMethod.POST)
+	public String faindId(@ModelAttribute("userId") String userId) throws Exception{
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½");
+		return "forward:/user/findUser.jsp";
+	}*/
 	
 	@RequestMapping(value="findPasswordPg", method=RequestMethod.GET)
 	public String findPassword(User user, Model model) throws Exception{
-		System.out.println("ºñ¹Ð¹øÈ£ Ã£±â");
-		return "redirect:/user/findPasswordUser.jsp";
+		System.out.println("ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½");
+		return "forward:/user/findPasswordUser.jsp";
 	}
 	
-	@RequestMapping(value="addUserPlus", method=RequestMethod.GET)
-	public String addUserPlus() throws Exception{
-		//@RequestParam("userId") String userId, Model model
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â");
-		
-		//User user = userService.getUser(userId);
-		
-		//model.addAttribute("user",user);
-		
-		return "redirect:/user/addUserViewPlus.jsp";
-	}
-	
-	/*
-	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
-	public String addUserPlus(@RequestParam(value = "checkArray[]")List<String> arrayParams, String userId , Model model , HttpSession session, HttpServletRequest request) throws Exception{
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â??????");
-		
-		System.out.println("Ã¼Å©¹Ú½º!!" + arrayParams);
-		
-		User user = userService.getUser(userId);
-		user.setPhone(user.getPhone());
-		
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â...!!!"+user);
-		model.addAttribute("user",user);
-		
-		return "redirect:/user/addUserViewPlus.jsp";
-	}
-	*/
 	/**
-	 *  Ãß°¡Á¤º¸ ÀÔ·Â
+	 * 	ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+	 * @param userId
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="addUserPlus", method=RequestMethod.GET)
+	public String addUserPlus(String userId, Model model) throws Exception{
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		return "forward:/user/addUserViewPlus.jsp";
+	}
+	
+	/**
+	 *  ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	 * @param user
 	 * @param model
 	 * @param session
@@ -414,33 +737,39 @@ public class UserController {
 		
 		System.out.println("\n[1] ==>" + user);
 		
-		System.out.println("»ý³â ¿ùÀÏ >>" + user.getbirth());
-		System.out.println("ÇÁ·ÎÇÊ >>" + user.getprofiIeimageFile());
-		System.out.println("ÇÚµåÆù ¹øÈ£ >>" + user.getPhone());
-		System.out.println("»ç¿ëÀÚ ÀÌ¸§ >>" + user.getUserName());
-		System.out.println("ÀÚ³à¼ö >>" + user.getchildren());
-		System.out.println("¼º º° >>" +user.getgender());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ >>" + user.getbirth());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >>" + user.getprofileimageFile());
+		System.out.println("ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½È£ >>" + user.getPhone());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ >>" + user.getUserName());
+		System.out.println("ï¿½Ú³ï¿½ï¿½ >>" + user.getchildren());
+		System.out.println("ï¿½ï¿½ ï¿½ï¿½ >>" +user.getgender());
 
-		userService.addUserPlus(user);
+		user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
 		
-		String sessionId=((User)session.getAttribute("user")).getUserId();
-		if(sessionId.equals(user.getUserId())){
-			session.setAttribute("user", user);
+		System.out.println(user);
+		
+		if(user.getgender() == null) {
+			user.setGender("");
 		}
 		
+		userService.addUserPlus(user);
+		
 //		return null;
-		return "forward:/user/addUserViewPlus.jsp";
+		//return "forward:/user/getUser?userId="+user.getUserId();
+		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
-	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser( @RequestParam("userId") String userId , Map map ) throws Exception {
-		
+
+		//	@RequestParam("userId") String userId , Model model 
+	public String getUser( @RequestParam("userId") String userId , Map map, User user) throws Exception {
 		System.out.println("/user/getUser : GET");
-		//Business Logic
+/*		//Business Logic
 		User user = userService.getUser(userId);
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
+		model.addAttribute("user", user);
+		*/
 		
 		map.put("user", user);
-		
 		return "forward:/user/getUser.jsp";
 	}
 	

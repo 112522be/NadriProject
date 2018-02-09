@@ -26,6 +26,7 @@
   -ms-transform: scale(1.2);
   -o-transform: scale(1.2);
 }
+
 .img {width:100%; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
 </style>
 <title>Insert title here</title>
@@ -60,6 +61,7 @@
 						<h4>This sunset would be the best one among what you see ever.</h4>
 					</div>
 				</div>
+
 
 				<div class="item">
 					<div class="img">

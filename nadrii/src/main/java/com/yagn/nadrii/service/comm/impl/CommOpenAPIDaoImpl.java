@@ -176,7 +176,7 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 						System.out.println("Error: " + res.getError().getMessage());
 						return null;
 					}
-
+					
 					// For full list of available annotations, see http://g.co/cloud/vision/docs
 					for (EntityAnnotation annotation : res.getLandmarkAnnotationsList()) {
 						LocationInfo info = annotation.getLocationsList().listIterator().next();

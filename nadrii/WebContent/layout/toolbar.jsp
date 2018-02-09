@@ -98,6 +98,7 @@
 				
 				
 				<div class="navbar-collapse collapse ">
+
 					<ul class="nav navbar-nav navbar-right">
 					<c:if test="${ ! empty loginUser }">
 							<li>
