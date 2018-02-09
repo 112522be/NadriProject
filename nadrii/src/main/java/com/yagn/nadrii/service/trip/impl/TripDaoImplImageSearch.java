@@ -34,14 +34,14 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	public String naverImageSearch(String target)throws Exception{
 		
-		System.out.println("³×ÀÌ¹ö ÀÌ¹ÌÁö °Ë»ö");
+		System.out.println("ì´ë¯¸ì§€ ê²€ìƒ‰");
 		int display = 10;
-        String clientId = "YaTN_waxR7h6HvXakGB2";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ¾ÆÀÌµğ°ª";
-        String clientSecret = "dHdqCyawjm";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ½ÃÅ©¸´°ª";
+        String clientId = "YaTN_waxR7h6HvXakGB2";
+        String clientSecret = "dHdqCyawjm";
         String text = URLEncoder.encode(target, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json °á°ú
+        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json ï¿½ï¿½ï¿½
         
-        //naver ÀÌ¹ÌÁö °Ë»ö ½ÇÇà
+        //naver
         URL url = new URL(apiURL);
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
@@ -71,7 +71,7 @@ public class TripDaoImplImageSearch implements TripDao {
         if(list.size()!=0) {
         	return ( (NaverImage)list.get(2) ).getLink();
         }else {
-        	return "ÀÌ¹ÌÁö ¾øÀ½";
+        	return "ì´ë¯¸ì§€ ì—†ìŒ";
         }
 	}
 
@@ -141,6 +141,14 @@ public class TripDaoImplImageSearch implements TripDao {
 
 	@Override
 	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

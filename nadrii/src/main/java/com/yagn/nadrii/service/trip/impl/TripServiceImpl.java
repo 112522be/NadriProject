@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.trip.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +117,7 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List getClientAddress(String lat, String lng) throws Exception {
-		System.out.println("ÁÖ¼ÒÃ£±â ¼­ºñ½º´Ü");
+		System.out.println("ì£¼ì†Œ ê²€ìƒ‰ì‹œìž‘");
 		return tripDaoAddress.getClientAddress(lat, lng);
 		
 	}
@@ -127,6 +128,17 @@ public class TripServiceImpl implements TripService {
 	public String getAreaCode(String placeName, String areaCode) throws Exception {
 		return tripDaoTour.getAreaCode(placeName, areaCode);
 	
+	}
+
+
+
+	@Override
+	public Map listTourBySearch(int pageNo, String keyword) throws Exception {
+		System.out.println("listTourBySearch tripServiceIpl");
+		Map map = new HashMap();
+		List list = tripDaoTour.listTourBySearch(pageNo,keyword);
+		map.put("list", list);
+		return map;
 	}
 	
 	

@@ -40,7 +40,7 @@ public class TourApiDomain {
 	private String telname;
 	private String homepage;
 	
-	//¿ä±ÝÁ¤º¸ º¸´Â JSON
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSON
 	
 	private String restdateculture;
 	private String spendtime;
@@ -57,7 +57,7 @@ public class TourApiDomain {
 	private String discountinfo;
 	
 	
-	//Ã¼Çè°ü ÇÊµå
+	//Ã¼ï¿½ï¿½ï¿½ ï¿½Êµï¿½
 	private String chkpet;
 	private String expagerange;
 	private String parking;
@@ -73,8 +73,23 @@ public class TourApiDomain {
 	private String usetime;
 	private String chkbabycarriage;
 	
-	
+	////
 	private int flag;
+	
+	////
+	private String sponser2tel;
+	
+	public String getSponser2tel() {
+		return sponser2tel;
+	}
+
+
+	public void setSponser2tel(String sponser2tel) {
+		this.sponser2tel = sponser2tel;
+	}
+
+
+	
 	
 	
 	public int getFlag() {

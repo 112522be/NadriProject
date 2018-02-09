@@ -32,6 +32,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- 위치 정보 가져오는 JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
+<script type="text/javascript" src="../resources/js/addMessage.js"></script>
 <!-- Facebook Login -->
 
 <!-- HTTPS required. HTTP will give a 403 forbidden response -->
@@ -155,25 +156,12 @@ body {
     	  	})
       });
 
-      
-          	  
-      
 
-      
-      
       $( function() {
-          //==> 추가된부분 : "addUser"  Event 연결
-          $("a[href='#' ]:contains('메시지')").on("click" , function() {
-        	var recevierId = $("#recevierId").val();
-        	alert(recevierId);
-            self.location = "/message/addMessage?recevierId="+recevierId;
-          });
-       });
-      
-      $( function() {
-          //==> 추가된부분 : "addUser"  Event 연결
+
           $("a[href='#' ]:contains('쪽지함')").on("click" , function() {
-             self.location = "/message/listMessage?listType=list";
+            alert("쪽지함"); 
+        	self.location = "/message/listMessage";
           });
       });
       
@@ -330,7 +318,9 @@ body {
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button" >새화면</a>
-                  <a class="btn btn-warning btn-lg" href="#" role="button" >메시지</a>
+
+                  <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지 보내기</a>
+
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
                </div>

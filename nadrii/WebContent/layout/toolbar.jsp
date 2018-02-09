@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나들이</title>
   	<!-- Latest compiled and minified CSS -->
@@ -14,6 +15,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 
 	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
@@ -59,17 +61,28 @@
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
 			self.location = "/ticket/listTicket"
 		});
-		
-	}); 
 
+	});
+
+	$( function() {
+        $(".glyphicon.glyphicon-envelope").bind("click" , function() {
+        	//alert("쪽지함")
+      		self.location = "/message/listMessage"
+        });
+    });
+	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-    	
+
        $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
+
 //      	 alert("장바구니")
           self.location = "/purchase/listBasket"
        });
     });
+	
+	
+	
 	
 	</script>
 	
@@ -109,6 +122,11 @@
 							<li>
 								<a href="#">
 									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>

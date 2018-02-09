@@ -1,11 +1,27 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page pageEncoding="UTF-8"%>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 
 <!DOCTYPE HTML>
 <html lang="ko">
+
 <head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- css -->
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/resources/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
+	<link href="/resources/css/flexslider.css" rel="stylesheet" />
+	<link href="/resources/css/style.css" rel="stylesheet" />
+
 <title>Prologue by HTML5 UP</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +39,7 @@
 	})
 </script>
 <style type="text/css">
+
 
 .icon{
 	padding: 5px;

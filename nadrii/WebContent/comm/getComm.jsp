@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
->>>>>>> refs/remotes/origin/team/yr
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,13 +13,15 @@
 		$('button.btn.btn-default:contains("쪽지보내기")').bind('click', function() {
 			alert("쪽지보내기!");
 		})
+	})
+
 		
-		$(function () {
-		  $('button.btn.btn-default').bind('click', function() {
+	$(function () {
+		$('button.btn.btn-default').bind('click', function() {
 			$(this).popover()
-		  })
 		})
 	})
+
 </script>
 </head>
 <body>

@@ -34,8 +34,8 @@ public class TripDaoImplImageSearchKakao implements TripDao{
         
         try {
             String text = URLEncoder.encode(target, "UTF-8");
-            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=80"; // json °á°ú
-            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml °á°ú
+            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=80"; // json ï¿½ï¿½ï¿½
+            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml ï¿½ï¿½ï¿½
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
@@ -43,9 +43,9 @@ public class TripDaoImplImageSearchKakao implements TripDao{
             
             int responseCode = con.getResponseCode();
             BufferedReader br;
-            if(responseCode==200) { // Á¤»ó È£Ãâ
+            if(responseCode==200) { // ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
                 br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
-            } else {  // ¿¡·¯ ¹ß»ý
+            } else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
             }
             
@@ -75,14 +75,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 				System.out.println(kakaoImage.getImage_url());
 			}
             	
-            //https://developers.kakao.com/docs/restapi/search#ÀÌ¹ÌÁö-°Ë»ö
+            //https://developers.kakao.com/docs/restapi/search#ï¿½Ì¹ï¿½ï¿½ï¿½-ï¿½Ë»ï¿½
         } catch (Exception e) {
             System.out.println(e);
         }
         if(list.size()!=0) {
         	return ( (KakaoImage)list.get(0) ).getImage_url();
         }else {
-        	return "ÀÌ¹ÌÁö ¾øÀ½";
+        	return "ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
         }
     }
 
@@ -154,6 +154,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 
 	@Override
 	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
