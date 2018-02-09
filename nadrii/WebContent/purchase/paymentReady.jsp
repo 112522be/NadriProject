@@ -11,7 +11,7 @@
 <script src="/assets/libs/jquery-1.10.2.min.js"></script>
 <style type="text/css">
 /* <![CDATA[ */
-@charset "utf-8";
+@charset "UTF-8";
 /* reset */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
 	form, fieldset, legend, textarea, p, blockquote, th, td, input, select,

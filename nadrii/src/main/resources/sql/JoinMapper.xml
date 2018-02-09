@@ -29,6 +29,13 @@
 					WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
+	
+	<select id="getJoinMemberList"		parameterType="Search"	resultMap="joinSelectMap">
+		SELECT join_no, group_no, user_id, group_role
+		FROM join
+		WHERE group_no = #{searchKeyword}
+		ORDER BY join_no ASC
+	</select>
 		
 	<delete id="deleteJoin"	parameterType="join">
 	 	DELETE FROM join
@@ -37,5 +44,21 @@
 	 	</where>
 	 </delete>
 	 
+	 <select  id="getTotalJoinCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role
+					FROM join
+					WHERE user_id = #{searchKeyword}
+					 ) countTable		
+	 </select>
+	 
+	 <select  id="getTotalMemberCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role
+					FROM join
+					WHERE group_no = #{searchKeyword}
+					ORDER BY join_no ASC
+					 ) countTable		
+	 </select>
 	 
 </mapper>

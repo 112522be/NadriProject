@@ -33,15 +33,15 @@ public class PlannerServiceImpl implements PlannerService{
 	@Override
 	public void addPlanner(Planner planner) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerService/addPlanner 立加");
+		System.out.println("PlannerService/addPlanner 鞝戩啀");
 		plannerDao.addPlanner(planner);
-		System.out.println("PlannerService/addPlanner 荐青肯丰");
+		System.out.println("PlannerService/addPlanner 靾橅枆鞕勲");
 	}
 
 	@Override
 	public Map<String, Object> getMyPlannerList(Search search, String plannerMakerId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerService/getMyPlannerList 立加");
+		System.out.println("PlannerService/getMyPlannerList 鞝戩啀");
 		
 		List<Planner> list = plannerDao.getMyPlannerList(search, plannerMakerId);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -51,22 +51,25 @@ public class PlannerServiceImpl implements PlannerService{
 		map.put("search", search);
 		map.put("totalCount", totalCount);
 		
-		System.out.println("PlannerService/getMyPlannerList 荐青肯丰");
+		System.out.println("PlannerService/getMyPlannerList 靾橅枆鞕勲");
 		
 		return map;
 	}
 
 	@Override
-	public Map<String, Object> getUserPlannerList(Search search) throws Exception {
+	public Map<String, Object> getUserPlannerList(Search search, String plannerMakerId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerService/getUserPlannerList 立加");
+		System.out.println("PlannerService/getUserPlannerList 鞝戩啀");
 		
-		List<Planner> list = plannerDao.getUserPlannerList(search);
+		List<Planner> list = plannerDao.getUserPlannerList(search, plannerMakerId);
 		Map<String, Object> map = new HashMap<String, Object>();
+		int totalCount = plannerDao.getTotalCount(search, plannerMakerId);
 		
 		map.put("list", list);
+		map.put("search", search);
+		map.put("totalCount", totalCount);
 		
-		System.out.println("PlannerService/getUserPlannerList 荐青肯丰");
+		System.out.println("PlannerService/getUserPlannerList 靾橅枆鞕勲");
 		
 		return map;
 	}
@@ -74,9 +77,19 @@ public class PlannerServiceImpl implements PlannerService{
 	@Override
 	public Planner getPlanner(int postNo) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("PlannerService/getPlanner 立加");
+		System.out.println("PlannerService/getPlanner 鞝戩啀");
 		
 		return plannerDao.getPlanner(postNo);
+	}
+
+	@Override
+	public void deletePlanner(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("PlannerService/deletePlanner 鞝戩啀");
+		
+		plannerDao.deletePlanner(postNo);
+		
+		System.out.println("PlannerService/deletePlanner 鞕勲");
 	}
 
 }

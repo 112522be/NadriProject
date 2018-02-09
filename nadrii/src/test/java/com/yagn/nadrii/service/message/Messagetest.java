@@ -31,12 +31,12 @@ public class Messagetest {
 	private MessageService messageService;
 	
 	
-	//@Test
+	@Test
 	public void addMessageTest() throws Exception {
 		message = new Message();
 		message.setReceiverId("test01");
 		message.setSenderId("questsolve");
-		message.setText("test입니다");
+		message.setText("ssdsdsdssstest입니다");
 		System.out.println(message);
 		messageService.addMessage(message);
 

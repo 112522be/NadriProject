@@ -3,6 +3,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
@@ -112,7 +114,7 @@
 					</div>
 
 					<div class="col-md-12">
-						<textarea class="form-control" rows="27" cols="blue"></textarea>
+						<textarea class="form-control" rows="27" cols="blue" name="text"></textarea>
 					</div>
 
 					<input type="hidden" name="lat" value=""> <input
@@ -125,8 +127,7 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 
-	<script language="JavaScript"
-		src="../resources/js/map.js?version=180202.480"></script>
+	<jsp:include page="../planner/plannerSub/mapAndRoadSearch.jsp" />
 
 </body>
 </html>

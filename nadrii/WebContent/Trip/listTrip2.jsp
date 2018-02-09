@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -87,8 +88,9 @@
 				var data = returnData.list;
 				
 				if(data.length != 0){
+
 					alert("정상작동");	
-																
+							
 					for(var a =0; a<data.length;++a){
 						
 						var dpValue =
@@ -112,6 +114,7 @@
 						$(".row").append(dpValue);	
 					}
 				}else{
+
 					alert("예외발생");
 					federalPage++;
 					$.ajax({
@@ -360,17 +363,24 @@
 			//alert("리스트 위시리스트 클릭");
 
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
+
+			addTripToDB(contentid, contenttypeid);
+
 			//addTripToDB(contentid, contenttypeid);
+
 			
 			//위에서 저장한 것을 위시리스트에 재저장 
-			//addWish(contentid);
+
 			e.preventDefault();
 			
 			//alert($(".row ").index(this));
+
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='Wish' >위시리스트</a>";
 			alert($("input[name='contentid']").index(this));
 			//$($(".thumbnail")[$(".row thumbnail:nth-child(1)").index(this)]).append(CancelAppend);
+
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).hide();
+
 		});
 	})
 	
@@ -508,7 +518,10 @@
 			        <p id="buttonTag" name ="buttonTag"> 
 			        	<a href="#" class="btn btn-primary" role="button">공유</a> 
 			        	<a href="#" class="btn btn-default" role="button">좋아요</a>
+
 			            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
+
+
 			        </p>
 		        </div>
 			</div>

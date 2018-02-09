@@ -1,6 +1,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -51,8 +51,14 @@
 		
 		if ($(window).scrollTop() >= $(document).height() - $(window).height()& flag ==0) {
 			flag=1;
-			
 			listTrip(page);
+			/*
+			if("${trip}" == "Search"){
+				listSearch(page);
+			}else{
+				listTrip(page);
+			}
+			*/
 			page++;
 		}
 	});
@@ -67,11 +73,11 @@
 		}
 		if(localName==""){
 			localName="0";
-		}
-		
+		}	
 		
 		$.ajax({
 			url:"../trip/json/list"+'${trip}'+"/"+page+"/"+areaCode+"/"+localName,
+			
 			method:"GET",
 			asyn :false,
 			dataType:"json",
@@ -85,19 +91,20 @@
 				var data = returnData.list;
 				
 				if(data.length != 0){
-					alert("정상작동");	
+
+					//alert("정상작동");
 																
 					for(var a =0; a<data.length;++a){
 						
 						var dpValue =
 							
-						 "<div class='col-xs-4'>"+
+						 "<div class='col-md-4'>"+
 					        "<div class='thumbnail'>"+
 					          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 					          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 					          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 					          "<div class='caption'>"+
-					            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+					            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 					            "<p>"+data[a].addr1+"</p>"+
 					            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 					            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
@@ -109,8 +116,9 @@
 											
 						$(".row").append(dpValue);	
 					}
+
 				}else{
-					alert("예외발생");
+					//alert("예외발생");
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -130,13 +138,13 @@
 									
 									var dpValue =
 										
-									 "<div class='col-xs-4'>"+
+									 "<div class='col-md-4'>"+
 								        "<div class='thumbnail'>"+
 								          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 								          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 								          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 								          "<div class='caption'>"+
-								            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+								            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 								            "<p>"+data[a].addr1+"</p>"+
 								            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 								            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
@@ -149,7 +157,7 @@
 									$($(".row")[1]).append(dpValue);
 								}
 							}else{
-								alert("예외발생 광역단위");
+								//alert("예외발생 광역단위");
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -169,13 +177,13 @@
 												
 												var dpValue =
 													
-												 "<div class='col-xs-4'>"+
+												 "<div class='col-md-4'>"+
 											        "<div class='thumbnail'>"+
 											          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
 											          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
 											          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 											          "<div class='caption'>"+
-											            "<h3 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h3>"+
+											            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
 											            "<p>"+data[a].addr1+"</p>"+
 											            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
 											            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
@@ -203,8 +211,159 @@
 	}
 	
 	/////////////////////////////////////////////무한스크롤
+
+	/*
+	function listSearch(page){
+		
+		var keyword ="${keyword}";
+		var areaCode = "${areaCode}";
+		var localName ="${localName}";
+		if(areaCode ==""){
+			areaCode ="0";
+		}
+		if(localName==""){
+			localName="0";
+		}
+		
+		var restJSON = {
+			"pageNo" : pageNo,
+			"areaCode":areaCode,
+			"localName":localName,
+			"keyword":keyword		 
+		}
+		
+		
 	
+<<<<<<< HEAD
 	
+=======
+		$.ajax({
+					
+			url:"../trip/json/listSearch/",
+			method:"POST",
+			asyn :false,
+			dataType:"json",
+			data: restJSON,
+			contentType: "application/json",
+			success: function(returnData){
+				var data = returnData.list;
+				
+				if(data.length != 0){
+					//alert("정상작동");	
+																
+					for(var a =0; a<data.length;++a){
+						
+						var dpValue =
+							
+						 "<div class='col-md-4'>"+
+					        "<div class='thumbnail'>"+
+					          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+					          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+					          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+					          "<div class='caption'>"+
+					            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+					            "<p>"+data[a].addr1+"</p>"+
+					            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+					            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+					            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+					            "</p>"+
+					          "</div>"+
+					        "</div>"+
+					      "</div>";
+											
+						$(".row").append(dpValue);	
+					}
+				}else{
+					//alert("예외발생");
+					localName ="0";
+					alert(restJSON);
+					federalPage++;
+					$.ajax({
+						url:"../trip/json/listSearch/",
+						method:"POST",
+						asyn :false,
+						dataType:"json",
+						data: restJSON,
+						contentType: "application/json",
+						success: function(returnData){
+							flag =1;
+							var data = returnData.list;
+							if(data.length!=0){
+																											
+								for(var a =0; a<data.length;++a){
+									
+									var dpValue =
+										
+									 "<div class='col-md-4'>"+
+								        "<div class='thumbnail'>"+
+								          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+								          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+								          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+								          "<div class='caption'>"+
+								            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+								            "<p>"+data[a].addr1+"</p>"+
+								            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+								            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+								            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+								            "</p>"+
+								          "</div>"+
+								        "</div>"+
+								      "</div>";
+								      												
+									$($(".row")[1]).append(dpValue);
+								}
+							}else{
+								//alert("예외발생 광역단위");
+								areaCode= "0";
+								nationalPage++;
+								$.ajax({
+									url:"../trip/json/listSearch/",
+									method:"POST",
+									asyn :false,
+									dataType:"json",
+									data: restJSON,
+									contentType: "application/json",
+									success: function(returnData){
+										flag =1;
+										var data = returnData.list;
+										if(data.length!=0){
+																														
+											for(var a =0; a<data.length;++a){
+												
+												var dpValue =
+													
+												 "<div class='col-md-4'>"+
+											        "<div class='thumbnail'>"+
+											          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+											          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+											          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+											          "<div class='caption'>"+
+											            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+											            "<p>"+data[a].addr1+"</p>"+
+											            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+											            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+											            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+											            "</p>"+
+											          "</div>"+
+											        "</div>"+
+											      "</div>";
+											      												
+												$($(".row")[2]).append(dpValue);
+											}
+										}
+									}
+								});
+										
+							}
+						}
+					});
+				}
+			}
+		});
+	}
+	
+	//*/
+
 	// 지도 참조 !!!!!!!
 	function makeDialog(){
 		 $('#dialog').dialog({
@@ -225,7 +384,7 @@
 	    
 		contenttypeid =$(this).next().next().val();
 		contentid = $(this).next().val();
-		alert(111);
+		//alert(111);
 		
 		getTheme(contentid, contenttypeid);
 			
@@ -260,33 +419,61 @@
 				//alert(contenttypeid);
 				//alert(contentid);
 				
-				$("#string").remove();
-				var dpValue = "<div id ='string'>"; 
-					if(common.firstimage2 !=null){
-						dpValue += "<img src='"+common.firstimage2+"'/>";	
-					}
+				$("#tourName").remove();
+				$("#tourImg").remove();
+				$("#tourAddress").remove();
+				$("#tourCharge").remove();
+				$("#tourOverView").remove();
 				
-					if(common.title != null){
-						dpValue	+= "<p>"+ common.title+"</p>";
-					}
-										
-					if(common.addr1!=null){
-						dpValue +="<p>"+common.addr1+"</p>";
-					}
+				
+				var tourName = "";
+				var tourImage = "";
+				var tourAddress ="";
+				var tourCharge ="";
+				var tourOverView ="";
+				
+				
+				if(common.firstimage2 !=null){
+					tourImage = "<img id ='tourImg' src='"+common.firstimage2+"' style='width:300px; height:200px;'/>";
+				}else{
+					tourImage = "<h5 id ='tourImg'> 제공사진 없음 </h5>";
+				}				
+				
+				if(common.title != null){
+					tourName= "<h5 id='tourName'> "+ common.title+"</h5>";
+				}else{
+					tourName= "<h5 id='tourName'> 제공정보 없음 </h5>";
+				}
+				
+				if(common.addr1 != null){
+					tourAddress= "<h5 id='tourAddress'>"+ common.addr1+"</h5>";
+				}else{
+					tourAddress= "<h5 id='tourAddress'> 제공정보 없음 </h5>";
+				}
+				
+				if(fee.usefee != null){
+					tourCharge= "<h5 id='tourCharge'>"+ fee.usefee+"</h5>";
+				}else{
+					tourCharge= "<h5 id='tourCharge'> 제공정보 없음 </h5>";
+				}
+				
+				if(common.overview != null){
+					tourOverView= "<h5 id='tourOverView'>"+ common.overview+"</h5>";
+				}else{
+					tourOverView= "<h5 id='tourOverView'> 제공정보 없음 </h5>";
+				}
+				
+				$("#imageSpace").append(tourImage);
+				$("#titleName").append(tourName);	
+				$("#address").append(tourAddress);
+				$("#fee").append(tourCharge);
+				$("#description").append(tourOverView);
 					
-					if(fee.usefee!=null){
-						dpValue +="<p>"+fee.usefee+"</p>";
-					}
-					
-					if(common.overview!=null){
-						dpValue += "<h5>"+common.overview+"</h5>";	
-					}
 					
 					
-					dpValue += "</div>";
 					//*/
 				
-				$("#dialog").append(dpValue);
+			
 				
 				makeMap();
 				makeDialog();
@@ -356,7 +543,6 @@
 			//alert(contentid);
 			//alert(contenttypeid);
 			//alert("리스트 위시리스트 클릭");
-			
 
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
 			addTripToDB(contentid, contenttypeid);
@@ -367,7 +553,9 @@
 			
 			//alert($(".row ").index(this));
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
+
 			//alert($("div[class='col-xs-4']").index(this));
+
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
@@ -408,6 +596,20 @@
 		});
 	});
 	
+	/*
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$(".btn.btn-default:contains('Go')").on("click" , function() {
+			var keyword = $(".form-control").val();
+			$("form input:nth-child(2)").val(page-1);
+			//alert($("form input:nth-child(2)").val());
+			$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
+			//self.location = "/trip/listSearch?pageNo=1&keyword="+keyword
+			//alert(keyword);
+		});
+	});
+	//*/
 		
 	</script>
 	<!-- 지도 생성하는 CDN 및 맵에 담을 내용 확인 -->
@@ -439,7 +641,7 @@
 		img {
 			cursor: pointer;
 		}
-		.col-xs-4{
+		.col-md-4{
 		height: 400px;
 		
 		}
@@ -457,18 +659,24 @@
  
 <div class="container">
 	
- 
+  <form>
 	<div class = "row1" align="right">
 	  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." align="right">
+ 	   <div class="input-group">
+   
+      <input type="text" class="form-control" name="keyword" placeholder="통합 검색" align="right" value="">
+      <input type="hidden" name="pageNo" value=""/>
+      <input type="hidden" name="areaCode" value="${areaCode}"/>
+      <input type="hidden" name="localName" value="${localName}"/>
+      
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" align="right">Go!</button>
+        <button class="btn btn-default" type="button" align="right">Go</button>
       </span>
+    
     </div>
   </div>
 </div>
- 
+   </form>
 <!-- 
 	<span class="label label-default">Default</span>
 	<input type="text" id="searchKeyword" value=""/>
@@ -488,7 +696,7 @@
 	
 		<c:forEach var ="list" items="${list}">
 		<input type="hidden" id="pageNo" value="${pageNo}"/>
-		    <div class="col-xs-4">
+		    <div class="col-md-4">
 		     
 		       	<div class="thumbnail">
 		          <img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="${list.firstimage2 }" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
@@ -496,11 +704,11 @@
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
 
-			      	<h3 id="thumbnail-label">${list.title}
+			      	<h5 id="thumbnail-label">${list.title}
 			        	<a class="anchorjs-link" href="#thumbnail-label">
 			            	<span class="anchorjs-icon"></span>
 			            </a>
-			      	</h3>
+			      	</h5>
 			        <p>${list.addr1}</p>
 			        <p id="buttonTag" name ="buttonTag"> 
 			        	<a href="#" class="btn btn-primary" role="button">공유</a> 
@@ -542,12 +750,50 @@
 
    
 <div id="dialog" title="" >
+
 	<!--  지도를 담는 공간 -->
-  <div id="map" style="width:400px;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript"></script>
-    
-    
+
+	<table class="table">
+      
+      
+      <tbody>
+        <tr>
+        	<td>
+	          <div id="map" style="width:400px;height:200px;"></div>
+	  		  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+	  	  	  <script type="text/javascript"></script>
+        	</td>
+        	
+        	<td id="imageSpace">
+        		
+        	</td>
+        </tr>
+        
+        
+        <tr >
+        
+          	<td id="titleName"> </td>
+          	<td></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td id="address"></td>
+          	<td></td>
+        </tr>
+        <tr >
+        
+          	<td colspan="2"  id="fee"></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td colspan="2"   id="description"></td>
+          	
+        </tr>
+      </tbody>
+    </table>
+      
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>

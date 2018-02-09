@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yagn.nadrii.service.domain.Trip;
@@ -50,7 +52,7 @@ public class TripController {
 		String localName = (String)session.getAttribute("localName");		
 		
 		
-		//¸Þ´º¿¡ µû¸¥ ÆÄ¶ó¹ÌÅÍ º¯°æ
+		//
 		if(area.equals("federal")) {
 			localName="";
 		}else if(area.equals("national")) {
@@ -66,7 +68,7 @@ public class TripController {
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode,localName); 
 		
 		List list =(List)tripMap.get("list");
-		System.out.println("Àü´Þ¹ÞÀº °³¼ö ====>"+list.size());
+		System.out.println("size of list ====>"+list.size());
 		
 		for (int i = 0; i < list.size(); i++) {
 			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
@@ -75,7 +77,7 @@ public class TripController {
 			System.out.println(trip);
 						 
 		}
-				//ÀÌ¹Ì wish¿¡ ÀúÀåµÇ¾ú´ÂÁö Ã¼Å©ÇØ¼­ °ª º¯°æÇØ¼­ ÁÖ±â		
+		
 				
 				
 		map.put("trip", "Museum");
@@ -226,6 +228,22 @@ public class TripController {
 	@RequestMapping(value="/getTheme")
 	public String getTheme() {
 		return"forward:/Trip/getTheme.jsp";
+	}
+	
+	
+	@RequestMapping(value="/listSearch", method=RequestMethod.POST)
+	public String listSearch(int pageNo, String keyword, String areaCode, String localName, Map map) throws Exception{
+		
+		System.out.println("/trip/listSearch");
+		System.out.println("ì „ë‹¬ ë©”ì‹œì§€ ---->" +keyword);
+		
+		Map searchMap = tripService.listTourBySearch(pageNo, keyword);
+		map.put("trip", "Search");
+		map.put("list", searchMap.get("list"));
+		map.put("pageNo", pageNo);
+		
+		
+		return "forward:/Trip/listTrip.jsp";
 	}
 	
 }

@@ -88,22 +88,22 @@ public class KakaoLoginRestClient {
 //		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		//==> Response È®ÀÎ
+		//==> Response È®ï¿½ï¿½
 		System.out.println(httpResponse);
 		System.out.println();
 
-		//==> Response Áß entity(DATA) È®ÀÎ
+		//==> Response ï¿½ï¿½ entity(DATA) È®ï¿½ï¿½
 		HttpEntity httpEntity = httpResponse.getEntity();
 		
-		//==> InputStream »ý¼º
+		//==> InputStream ï¿½ï¿½ï¿½ï¿½
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 		
-		System.out.println("[ Server ¿¡¼­ ¹ÞÀº Data È®ÀÎ ] ");
+		System.out.println("[ Server ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Data È®ï¿½ï¿½ ] ");
 		String serverData = br.readLine();
 		System.out.println(serverData);
 		
-		//==> ³»¿ëÀÐ±â(JSON Value È®ÀÎ)
+		//==> ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½(JSON Value È®ï¿½ï¿½)
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(serverData);
 		System.out.println(jsonobj);
 	}
@@ -127,22 +127,22 @@ public class KakaoLoginRestClient {
 		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		//==> Response È®ÀÎ
+		//==> Response È®ï¿½ï¿½
 		System.out.println(httpResponse);
 		System.out.println();
 
-		//==> Response Áß entity(DATA) È®ÀÎ
+		//==> Response ï¿½ï¿½ entity(DATA) È®ï¿½ï¿½
 		HttpEntity httpEntity = httpResponse.getEntity();
 		
-		//==> InputStream »ý¼º
+		//==> InputStream ï¿½ï¿½ï¿½ï¿½
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 		
-		System.out.println("[ Server ¿¡¼­ ¹ÞÀº Data È®ÀÎ ] ");
+		System.out.println("[ Server ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Data È®ï¿½ï¿½ ] ");
 		String serverData = br.readLine();
 		System.out.println(serverData);
 		
-		//==> ³»¿ëÀÐ±â(JSON Value È®ÀÎ)
+		//==> ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½(JSON Value È®ï¿½ï¿½)
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(serverData);
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -170,7 +170,7 @@ public class KakaoLoginRestClient {
 		HttpEntity httpEntity = new ByteArrayEntity(loginRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
-		System.out.println("µÎ¹ø ÂïÈ÷´ÂÁö È®ÀÎ");
+		System.out.println("ï¿½Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½");
 		httpEntity = httpResponse.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
@@ -189,7 +189,7 @@ public class KakaoLoginRestClient {
 		httpPost.setHeader("Authorization", tokenInfo.getToken_type()+" "+tokenInfo.getAccess_token());
 		
 		HttpResponse httpResponse = httpClient.execute(httpPost);
-		System.out.println("µÎ¹ø ÂïÈ÷´ÂÁö È®ÀÎ");
+		System.out.println("ï¿½Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½");
 		HttpEntity httpEntity = httpResponse.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);

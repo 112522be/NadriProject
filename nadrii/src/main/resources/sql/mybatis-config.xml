@@ -25,6 +25,7 @@
 		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.Join"/>
 		<typeAlias alias="message" type="com.yagn.nadrii.service.domain.Message"/>
 		<typeAlias alias="planner" type="com.yagn.nadrii.service.domain.Planner"/>
+		<typeAlias alias="searchContent" type="com.yagn.nadrii.service.domain.SearchContent"/>
 
 	</typeAliases>
 	
@@ -40,6 +41,7 @@
 		<mapper resource="sql/JoinMapper.xml"/>
 		<mapper resource="sql/MessageMapper.xml"/>
 		<mapper resource="sql/PlannerMapper.xml"/>
+		<mapper resource="sql/SearchContentsMapper.xml"/>
 	</mappers>
 	
 

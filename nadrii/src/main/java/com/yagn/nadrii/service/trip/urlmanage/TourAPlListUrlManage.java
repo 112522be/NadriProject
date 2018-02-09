@@ -19,6 +19,7 @@ public class TourAPlListUrlManage {
 	private String numOfRowsName = "&numOfRows=";
 	private String pageNoName ="&pageNo=";
 	private String contentIdName ="&contentId=";
+	private String kewordName ="&keyword=";
 	
 	//private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	private String serviceKey = "elArz5Uco6Vjf5eFlDFY225L72%2FKxulUVoQ6ucNpvUkwvvoOZw4Pri%2B3tFJHQXU4CxNyVGp%2BNRzup9HNp4XsMg%3D%3D";
@@ -35,10 +36,20 @@ public class TourAPlListUrlManage {
 	private String arrange = "B";
 	private int numOfRows=12;
 	private int pageNo =1;
-		
+	private String keyword ="";
 	
+
+
 	public TourAPlListUrlManage() {
 		
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public String getServiceKey() {
@@ -165,7 +176,7 @@ public class TourAPlListUrlManage {
 
 	public String urlMaking() {
 		String urlcomplete = url+type+serviceKeyName+serviceKey+contentTypeIdName+contentTypeId+
-									contentIdName+contentId+
+									contentIdName+contentId+kewordName+keyword+
 									areaCodeName+areaCode+sigunguCodeName+sigunguCode+
 									cat1Name+cat1+cat2Name+cat2+cat3Name+cat3+listYNName+listYN+
 									MobileOSName+MoblieOS+MobileAppName+MobileApp+arrangeName+arrange+
