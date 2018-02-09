@@ -95,9 +95,9 @@ function goBack() {
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
-		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/index.jsp">
-		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/index.jsp">
+		<input type="hidden" name="approval_url" 		value="http://192.168.0.24:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="cancel_url" 			value="http://192.168.0.24:8080/index.jsp">
+		<input type="hidden" name="fail_url" 			value="http://192.168.0.24:8080/index.jsp">
 
 		<div class="row">
 	  		<div class="col-xs-12 col-md-12">
