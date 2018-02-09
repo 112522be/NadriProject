@@ -47,13 +47,13 @@
 	
 
 
-
+///*
 	$(function(){
 		$("a[href='#']:contains('나들이 플래너')").on("click", function(){
-			self.location = "../planner/json/getMyPlannerList"
+			//self.location = "../planner/getMyPlannerList"
 		})
 	})
-
+//*/
 
 	//========== '나들이 티켓' 버튼 처리 Event ==========
 

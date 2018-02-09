@@ -119,7 +119,7 @@ body {
       });
       
 
-
+      /*
       $(function(){
     	  	$("a[href='#']:contains('플래너')").on("click", function(){
     	  		self.location = "/planner/addPlannerView.jsp";
@@ -127,7 +127,7 @@ body {
       });
 
 
-      /*
+      
       $( function() {
           $("a[href='#' ]:contains('쪽지 보내기')").on("click" , function() {
         	var recevierId = $("#recevierId").val();
