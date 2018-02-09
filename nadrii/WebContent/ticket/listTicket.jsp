@@ -205,15 +205,7 @@ function fncGetList(pageNo) {
 								<!-- 
 									입장권 :
 									<c:forEach items="${ tt.usetimefestival }" varStatus="status">
->>>>>>> refs/remotes/origin/master
 									${ tt.usetimefestival[status.index] }
-<<<<<<< HEAD
-								</c:forEach>
-									<hr/>
-									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-									장&nbsp;소 : ${ tt.eventplace } <br>
-								</p>
-=======
 									</c:forEach>
 								 -->	
 								<hr />
