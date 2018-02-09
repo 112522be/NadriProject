@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+<script src="/resources/js/tripLocation.js"></script>
 
 
 
@@ -50,7 +51,7 @@
 				<div class="item active">
 				<div class="img">
    					<div class="scale">	
-   						<img src="/images/chicago01.jpg" alt="chicago01" style="width: 100%;">
+   						<img src="/resources/basic/images/chicago01.jpg" alt="chicago01" style="width: 100%;">
    					</div>
 				</div>
    						
@@ -63,7 +64,7 @@
 				<div class="item">
 					<div class="img">
    						<div class="scale">
-							<img src="/images/chicago02.jpg" alt="chicago02" style="width: 100%;">
+							<img src="/resources/basic/images/chicago02.jpg" alt="chicago02" style="width: 100%;">
 						</div>
 					</div>
 					<div class="carousel-caption">
@@ -75,7 +76,7 @@
 				<div class="item">
 					<div class="img">
    						<div class="scale">
-							<img src="/images/chicago03.jpg" alt="chicago03" style="width: 100%;">
+							<img src="/resources/basic/images/chicago03.jpg" alt="chicago03" style="width: 100%;">
 						</div>
 					</div>
 					<div class="carousel-caption">
@@ -103,7 +104,7 @@
 			       	<div class="thumbnail">
 			       	<div class="img">
    						<div class="scale">
-			        	<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/images/uploadFiles/testImage1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        	<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        	</div>
 			        </div>
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
@@ -123,7 +124,7 @@
 			       	<div class="thumbnail">
 			       		<div class="img">
    							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/images/uploadFiles/testImage2.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage2.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        		</div>
 			        	</div>
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
@@ -143,7 +144,7 @@
 			       	<div class="thumbnail">
 			        	<div class="img">
    							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/images/uploadFiles/testImage3.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage3.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        		</div>
 			        	</div>		
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>

@@ -29,9 +29,9 @@
 <!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-        .col-sm-3 {
-        	height: 500px;
-        }
+	.col-sm-3 {
+		height: 500px;
+	}
 	</style>
 
 
@@ -192,7 +192,7 @@ function fncGetList(pageNo) {
 						
 							<p class="text-right">조회수 : ${ tt.readcount }</p>
 							
-							<img src="${ tt.firstimage }" class="img-responsive" />
+							<img src="${ tt.firstimage }" />
 							
 							<div class="caption">
 								<h5>
