@@ -38,8 +38,8 @@ public class GroupServiceTest {
 		Group group = new Group();
 		Join join = new Join();
 		
-		group.setGroupName("모임4");
-		group.setTitle("제목1111111111");
+		group.setGroupName("GROUP NAME1");
+		group.setTitle("모임 참여하기111");
 		group.setText("내용3");
 		group.setCategoryCode("a");
 		
@@ -49,7 +49,7 @@ public class GroupServiceTest {
 
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId("test02");
+		join.setUserId("test01");
 		
 		group.setJoin(join);
 		

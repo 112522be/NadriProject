@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.join;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -45,26 +46,32 @@ public class JoinController {
 	
 		join.setGroupNo(groupNo);
 		join.setGroupRole(2);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		joinService.addJoin(join);
 		
 		return "forward:/group/getGroup?groupNo="+groupNo;
 	}
 	
-	@RequestMapping(value="getJoin", method=RequestMethod.GET)
-	public String getJoin(@RequestParam("joinNo") int joinNo, Model model) throws Exception {
+	@RequestMapping(value="getJoinMemberList", method=RequestMethod.GET)
+	public String getJoinMemberList(@ModelAttribute("join") Join join, @ModelAttribute("search") Search search, Model model) throws Exception {
 		
 		System.out.println("/getJoin");
 		
-		Join join = joinService.getJoin(joinNo);
-	
-		model.addAttribute("join", join);
+		Map<String , Object> map=joinService.getJoinMemberList(search);
 		
-		return "forward:/join/getJoin?joinNo="+joinNo;
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+				
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		
+		//map.put("list", joinService.getJoinMemeberList(groupNo));
+	
+		return "forward:/join/getJoinMemberList?groupNo=";
 		
 	}
-	
+		
 	@RequestMapping(value="listJoin")
 	public String listJoin(@ModelAttribute("join") Join join, @ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception{
 		
@@ -75,7 +82,7 @@ public class JoinController {
 		}
 		search.setPageSize(pageSize);
 		
-		User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("loginUser");
 		
 		join.setUserId(user.getUserId());
 		search.setSearchKeyword(join.getUserId());
@@ -98,7 +105,7 @@ public class JoinController {
 		System.out.println("/deleteJoin");
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		joinService.deleteJoin(join);
 		

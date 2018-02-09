@@ -1,9 +1,6 @@
 package com.yagn.nadrii.service.purchase.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,13 +63,35 @@ public class PurchaseServiceImpl implements PurchaseService {
 		public Map<String, Object> getBasketList(OpenApiSearch openApiSearch, String buyerId) throws Exception {
 			Map<String, Object> map = new HashMap<String, Object>();
 			
-			System.out.println("\n[serviceImpl]::" + openApiSearch.toString());
-			System.out.println("\n[serviceImpl]::" + buyerId);
-			
 			map.put("openApiSearch", openApiSearch);
 			map.put("buyerId", buyerId);
 			
 			List<Purchase> list =  purchaseDao.getBasketList(map);
+			List<String> count = new ArrayList<>();
+			List<String> price = new ArrayList<>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
+				
+				price = new ArrayList<>();	
+				count = new ArrayList<>();
+				
+				for (int j = 0; j < firstParseArr.length; j++) {
+					String secondParseArr[] = firstParseArr[j].split("=");
+
+					for (int k = 0; k < secondParseArr.length; k++) {
+						
+						if (k == 0) {
+							price.add(secondParseArr[k].toString());
+						} else if (k == 1) {
+							count.add(secondParseArr[k].toString());
+						}
+					}
+				}
+				list.get(i).setTicketC(count);
+				list.get(i).setTicketP(price);
+			}
+			
 			int totalCount = purchaseDao.getTotalCount(buyerId);
 			
 			map.put("list", list);
@@ -90,5 +109,45 @@ public class PurchaseServiceImpl implements PurchaseService {
 		public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) throws Exception {
 			return purchaseKakaoDao.addKakaoPayComplete(kakaoPayRequest);
 		}
+		
+		public List<Purchase> addBasketTicket(Purchase purchase) throws Exception {
+			
+			String[] postNoParsing = purchase.getSumPostNo().split(",");
+			
+			List<Integer> list = new ArrayList<Integer>();
+			for (String postNo : postNoParsing) {
+				String sendPostNo = postNo;
+				list.add(Integer.parseInt(sendPostNo));
+			}			
+
+			return purchaseDao.addBasketTicket(list);
+		}
+		
+		public void updateBasketPurchase(Purchase purchase) throws Exception {
+			
+			List<Integer> list = new ArrayList<Integer>();
+			
+			String[] postNo = purchase.getSumPostNo().split(",");
+			for (String postNoValue : postNo) {
+				int postNoInt = Integer.parseInt(postNoValue);
+				list.add(postNoInt);
+			}
+			
+			purchaseDao.updateBasketPurchase(list);
+		}
+		
+		public void deleteBasketList(Purchase purchase) throws Exception {
+			
+			List<Integer> list = new ArrayList<Integer>();
+			
+			String[] postNo = purchase.getSumPostNo().split(",");
+			for (String postNoValue : postNo) {
+				int postNoInt = Integer.parseInt(postNoValue);
+				list.add(postNoInt);
+			}
+			
+			purchaseDao.deleteBasketList(list);
+		}
+		
 		
 }

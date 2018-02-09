@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
-<title>Prologue by HTML5 UP</title>
+<title>나들이 :: 모임 게시판</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
@@ -17,11 +17,19 @@
 <script type="text/javascript">
 	
 function fncGetList(currentPage){
-	$("#currentPage").val(currentPage)
-	$("form").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
+	$("#currentPage").val(currentPage);
+	$("form .search").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
+}
+
+function a(){
+	var groupNo = $($("input[id='groupNo']")[$(".fit").index(this)]).val();
 }
 
 $(function(){
+	
+	$("#write").bind("click", function(){
+		self.location="../group/addGroup";
+	});
 	
 	$(".fit").on("click", function(){
 		
@@ -39,32 +47,46 @@ $(function(){
 			
 	});
 	
-	$("header .author").on("click", function(){
-		
-		var userId = $($("input[id='userId']")[$("header .author").index(this)]).val();
+	$(".author h5").on("click", function(){
+	
+		var userId = $($("input[id='userId']")[$(".author h5").index(this)]).val();
 		
 		//self.location="../user/getUserProfile?userId="+userId;
 			
 	});
-	/*
-	$(".author h5").on("click", function(){
-		
-		 function runEffect() {
-		      // Run the effect
-		      $( ".menu" ).toggle( "blind", 300 );
-		    };
-		 
-		    // Set effect from select menu value
-		    $( ".author h5" ).on( "click", function() {
-		      runEffect();
-		    });
-	});
-	*/
+	
+	$('[data-toggle="popover"]').popover(
+			{ html: true,
+			 container: 'body',
+			 content: '<a href="#" class="profile" onclick="javascript:clickProfile()">프로필 조회<span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기</a>',
+			 placement: 'bottom',
+			 }
+			);	
+
 });
+
+function clickProfile(){
+	alert(userId);
+}
+
+function clickMessage(){
+	window.open("/message/addMessage?recevierId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+}
+
+var userId;
+
+function getIndex(k){
+	userId = $($("input[id='userId']")[$(".author h5").index(k)]).val();
+}
 
 
 </script>
 <style type="text/css">
+
+form.search > input:first-child {
+    padding-left: 2.5em;
+    margin-right: -20px;
+}
 
 .row {
 	margin: -20px 0 -1px -20px;
@@ -145,6 +167,15 @@ $(function(){
 	border-bottom: 9px solid #F8F8F8;
 }
 
+.button.small {
+    font-size: 13px;
+    box-shadow: 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
+}
+
+.author .name {
+	margin: 5px 0 0 0;
+}
+
 </style>
 
 </head>
@@ -155,15 +186,21 @@ $(function(){
 	<div id="main">
 		<section id="portfolio" class="two">
 			<div class="container">
+			<section style="position: relative;">
+				<form class="search">
+					<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" placeholder="Search" />
+				</form>
+			</section>
+			<a href="#" id="write" class="button small write" style="position: relative; float:left; margin-top: -7px; margin-left: 6px;">write</a>
 				<div class="row">
 					<c:set var="i" value="0" />
 					<c:forEach var="group" items="${list}">
 						<c:set var="i" value="${ i+1 }" />
 						<div class="3u 12u$(mobile)">
 							<article class="item">
-								<a href="#" class="image fit"> <input type="hidden"
-									id="groupNo" value="${group.join.groupNo}"> <img
-									src="../resources/assets/images/pic02.jpg" alt="" />
+								<a href="#" class="image fit">
+								<input type="hidden" id="groupNo" value="${group.join.groupNo}">
+								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
 									<h3>
@@ -171,13 +208,12 @@ $(function(){
 									</h3>
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									<span class="author">
-										<input type="hidden" id="userId" value="${group.join.userId}">
 										<img src="../resources/assets/images/avatar.jpg" alt="" />
 									</span>
 									<a href="#" class="author">
-										<h5>${group.join.userId}</h5>
+										<input type="hidden" id="userId" value="${group.join.userId}">
+										<h5 class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">${group.join.userId}</h5>
 									</a>
-									
 								</header>
 							</article>
 						</div>
@@ -189,13 +225,12 @@ $(function(){
 
 
 	<!-- Scripts -->
-	<script src="../resources/assets/js/jquery.min.js"></script>
 	<script src="../resources/assets/js/jquery.scrolly.min.js"></script>
 	<script src="../resources/assets/js/jquery.scrollzer.min.js"></script>
 	<script src="../resources/assets/js/skel.min.js"></script>
 	<script src="../resources/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="../resources/assets/js/main.js"></script>
-
+	<script src="../resources/assets/js/1main.js"></script>
 </body>
 </html>

@@ -40,17 +40,31 @@ public class JoinServiceImpl implements JoinService{
 		return joinDao.getGroupMaster(groupNo);
 	}
 	
-	public Join getJoin(int joinNo) throws Exception {
-		return joinDao.getJoin(joinNo);
+	public Map<String, Object> getJoinMemberList(Search search) throws Exception {
+		
+		List<Join> list= joinDao.getJoinMemberList(search);
+		int totalCount = joinDao.getTotalMemberCount(search); 
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		
+		System.out.println(map);
+		
+		return map;
 	}
 
 	public Map<String , Object > getJoinList(Search search) throws Exception {
 		List<Join> list= joinDao.getJoinList(search);
-		int totalCount = joinDao.getTotalCount(search);
+		int totalCount = joinDao.getTotalJoinCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("list", list );
 		map.put("totalCount", new Integer(totalCount));
+		
+		System.out.println(map);
 		
 		return map;
 	}
