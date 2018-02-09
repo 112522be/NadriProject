@@ -23,13 +23,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- 위치 정보 가져오는 JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <script type="text/javascript" src="../resources/js/addMessage.js"></script>
@@ -119,12 +115,6 @@ body {
       });
       
 
-      $(function(){
-    	  	$("a[href='#']:contains('플래너')").on("click", function(){
-    	  		self.location = "/planner/addPlannerView.jsp";
-    	  	})
-      });
-
 
       /*
       $( function() {
@@ -143,6 +133,7 @@ body {
         	self.location = "/message/listMessage";
           });
       });
+
       
 
    //============= FaceBook 로그인 START =============
@@ -284,19 +275,20 @@ body {
                <p>But, if you got some bad emotion, that was good experience
                   to you.</p>
                <div class="text-center">
+
                	<input type="hidden" name="recevierId" id="recevierId" value="questsolve"/>
+
                   <a class="btn btn-primary btn-lg" href="#" role="button">회원가입</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">로 그 인</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">나들이티켓</a>
                   <a class="btn btn-danger btn-lg" href="#" role="button">장바구니</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">종만아</a>
 
-                  <a class="btn btn-warning btn-lg" href="#" role="button" >새화면</a>
-
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지 보내기</a>
 
                   <a class="btn btn-warning btn-lg" href="#" role="button" >쪽지함</a>
                   <a class="btn btn-warning btn-lg" href="#" role="button">플래너</a>
+
 
                </div>
 

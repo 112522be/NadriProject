@@ -78,7 +78,9 @@ public class TripDaoImplgetAddress implements TripDao {
 	@Override
 	public List getClientAddress(String lat, String lng) throws Exception {
 		
+
 		System.out.println("getClientAddress");
+
 		
 		String location = lat+","+lng;
 		System.out.println(location);

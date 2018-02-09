@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,6 +92,7 @@ pageEncoding="UTF-8"%>
 				
 				if(data.length != 0){
 
+
 					//alert("정상작동");	
 																
 					for(var a =0; a<data.length;++a){
@@ -116,6 +118,7 @@ pageEncoding="UTF-8"%>
 						$(".row").append(dpValue);	
 					}
 				}else{
+
 
 					//alert("예외발생");
 					federalPage++;
@@ -156,6 +159,7 @@ pageEncoding="UTF-8"%>
 									$($(".row")[1]).append(dpValue);
 								}
 							}else{
+
 
 								//alert("예외발생 광역단위");
 								nationalPage++;
@@ -360,10 +364,6 @@ pageEncoding="UTF-8"%>
 	}
 	
 	//*/
-	
-	
-	
-	
 
 	// 지도 참조 !!!!!!!
 	function makeDialog(){
@@ -537,12 +537,10 @@ pageEncoding="UTF-8"%>
 	  $(document).on("click","#wish", function(e){
 		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
-		
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//alert(contentid);
 			//alert(contenttypeid);
 			//alert("리스트 위시리스트 클릭");
-
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
 			addTripToDB(contentid, contenttypeid);
 			
@@ -793,9 +791,6 @@ pageEncoding="UTF-8"%>
     </table>
       
 
-  <div id="map" style="width:400px;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript"></script>
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>

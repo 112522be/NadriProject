@@ -1,375 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="../resources/assets/js/jquery.min.js"></script>
-<script src="../resources/assets/js/skel.min.js"></script>
-<script src="../resources/assets/js/util.js"></script>
-<script src="../resources/assets/js/main.js"></script>
-
-<!-- ----------------------  Map관련부분 -----------------------------  -->
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link href="../resources/css/keywordSearch.css?version=1" rel="stylesheet">
-<!-- ----------------------  Map관련부분 -----------------------------  -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
-<style type="text/css">
-	footer a {
-		color: #555 !important;
-	}
-	
-	.post>footer {
-		background: #ffff;
-	}
-	
-	#groupName {
-		display: inline-block;
-		font-family: "Raleway", Helvetica, sans-serif;
-		font-size: 0.6em;
-		font-weight: 400;
-		letter-spacing: 0.25em;
-		line-height: 1;
-		margin: 0 0 0 0em;
-		padding: 0 2em 0 0em;
-		float: left;
-	}
-	
-	#count {
-		display: inline-block;
-		font-family: "Raleway", Helvetica, sans-serif;
-		font-size: 0.6em;
-		font-weight: 400;
-		letter-spacing: 0.25em;
-		line-height: 1;
-		margin: 0 0 0 2em;
-		padding: 10px 2em 0 2em;
-		float: right;
-	}
-	
-	#pathImg {
-		text-align: center;
-		word-break: keep-all;
-		position: absolute;
-		width: 992px;
-	}
-	
-	#markerImg {
-		display: inline-block;
-		width: 100px;
-		font-size: 17px;
-		line-height: 23px;
-		vertical-align: middle;
-		text-align: center;
-		margin: 14px;
-		margin-top: 4px;
-	}
-	
-	#path {
-		text-align: center;
-		word-break: keep-all;
-		position: absolute;
-		width: 992px;
-	}
-	
-	#address {
-		display: inline-block;
-		width: 100px;
-		font-size: 17px;
-		line-height: 23px;
-		vertical-align: middle;
-		text-align: center;
-		margin: 14px;
-	}
-	
-	
-	/************************애니메이션 종료위치를 설정하기 위해 변수별로 따로 css지정***************************/
-	.transport1 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove1 3s infinite;
-		margin-top: -20px;
-	}
-	
-	
-	.transport1 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove1 {
-		from {left: 0px;
-		}
-		
-		to {
-			left: 128px;
-		}
-	}
-	
-	.transport2 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove2 6s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport2 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove2 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 200px;
-		}
-	}
-	
-	.transport3 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove3 9s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport3 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove3 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 338px;
-		}
-	}
-	
-	.transport4 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove4 12s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport4 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove4 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 466px;
-		}
-	}
-	
-	.transport5 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove5 15s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport5 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove5 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 594px;
-		}
-	}
-	
-	.transport6 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove6 18s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport6 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove6 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 720px;
-		}
-	}
-	
-	.transport7 {
-		display: inline-block;
-		width: 75px;
-		height: 57px;
-		font-size: 16px;
-		line-height: 20px;
-		vertical-align: middle;
-		text-align: center;
-		position: relative;
-		animation: mymove7 21s infinite;
-		margin-top: -20px;
-	}
-	
-	.transport7 {
-		animation-timing-function: linear;
-	}
-	
-	@keyframes mymove7 {
-		from {left: -40px;
-		}
-		
-		to {
-			left: 848px;
-		}
-	}
-
-	
-</style>
-<script>
-$(function(){
-	
-	$("#list").bind("click", function(){
-		self.location="/planner/getMyPlannerList";
-	});
-	
-	$("#modify").bind("click", function(){
-		self.location="../group/updateGroup?groupNo=${group.join.groupNo}";
-	});
-	
-	
-	$("#delete").bind("click", function(){
-		if(confirm("삭제하시겠습니까?")==true){
-			self.location="/planner/deletePlanner?postNo=${planner.postNo}";
-			alert("삭제되었습니다.");
-		}else{
-			return;	
-		}		
-	});
-	
-	
-});
-
-/*******************toggle 사용**********************/
-$(function () {
-	$('[data-toggle="popover"]').popover({html: true})
-})
-
-
-</script>
+<link href="../resources/css/keywordSearch.css?version=1"
+	rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	<div id="main">
-		<section class="two">
-		<div class="container">
-			<a href="#" id="list" class="button small"
-				style="position: relative; float: right; margin-top: -40px;">list</a>
-			<article class="post"> <header>
-				<div class="title" style="overflow: hidden">
-					<h2>${planner.title}</h2>
-					<div>
-						<ul id="groupName" style="overflow: hidden">
-							<li>${planner.plannerMakerId}</li>
-						</ul>
-						<ul id="count">
-							<li>view : ${planner.viewCount}</li>
-						</ul>
-					</div>
-				</div>
-	
-				<div class="meta">
-					<time class="published" datetime="${planner.regDate}">${planner.regDate}</time>
-					<a href="#" class="author"><span class="name">${planner.plannerMakerId}</span>
-						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
-				</div>
-				</header>
-				<div id="map" style="width: 100%; height: 350px;"></div>
-				<div class="boundryButton"></div>
-				<div id=pathImg></div><br>
-				<div id="path"></div><br><br>
-				
-				<div>${planner.text}</div>
 
-				<footer>
-				<ul class="stats">
-					<li><a href="#" class="icon fa-heart">28</a></li>
-					<li><a href="#" class="icon fa-comment">128</a></li>
-				</ul>
-				</footer>
-				<div style="float: right; margin-top: -3em;">
-					<a href="#" id="modify" class="button small modify">modify</a> 
-					<a href="#" id="delete" class="button small delete">delete</a>	
-				</div>
-			</article>
-			
-		</div>
-		</section>
-	</div>
+	<jsp:include page="/layout/toolbar.jsp" />
 
-	<!--	--------------------------------Map관련----------------------------------------->
+	<div id="map" style="width: 100%; height: 350px;"></div>
 
-	
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
+	<script>
 		
-	<script type="text/javascript">
-	
 		/*******************Array insert 사용**********************/
 		Array.prototype.insert = function ( index, item ) {
 	    		this.splice( index, 0, item );
@@ -394,7 +58,7 @@ $(function () {
 							};
 							
 		var startImage = new daum.maps.MarkerImage(startSrc, markerSize, markerOption);
-		var startPosition = new daum.maps.LatLng('${lat[0]}','${lng[0]}');	
+		var startPosition = new daum.maps.LatLng(${lat[0]},${lng[0]});	
 		
 		var startMarker = new daum.maps.Marker({
 			position: startPosition,
@@ -413,7 +77,6 @@ $(function () {
 		//출발 도착지를 뺀 남은 갯수가 패스카운트
 		var passCount = ${latLength}-2
 		
-		// setMap(null)처리를 위해 보이지 않는 passMarker 5개 생성
 		for(i=1; i<6; i++){
 			
 			passSrc[i] = 'http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_'+i+'.png';
@@ -426,84 +89,27 @@ $(function () {
 				image: passImage[i]
 			});
 		}
-		
-		
-		
-		//passMarker passMarker위치를 DB에서 받은 정보 위치로 변경
-		for(var i=0; i<passCount; i++){
-			if(i==0){
-				passPosition[1] = new daum.maps.LatLng('${lat[1]}', '${lng[1]}');
-				passMarker[1] = new daum.maps.Marker({
 	
-					position: passPosition[1],
-					image: passImage[1]
-				});				
-			}else if(i==1){
-				passPosition[2] = new daum.maps.LatLng('${lat[2]}', '${lng[2]}');
-				passMarker[2] = new daum.maps.Marker({
-	
-					position: passPosition[2],
-					image: passImage[2]
-				});
-			}else if(i==2){
-				passPosition[3] = new daum.maps.LatLng('${lat[3]}', '${lng[3]}');
-				passMarker[3] = new daum.maps.Marker({
-	
-					position: passPosition[3],
-					image: passImage[3]
-				});
-			}else if(i==3){
-				passPosition[4] = new daum.maps.LatLng('${lat[4]}', '${lng[4]}');
-				passMarker[4] = new daum.maps.Marker({
-	
-					position: passPosition[4],
-					image: passImage[4]
-				});
-			}else if(i==4){
-				passPosition[5] = new daum.maps.LatLng('${lat[5]}', '${lng[5]}');
-				passMarker[5] = new daum.maps.Marker({
-	
-					position: passPosition[5],
-					image: passImage[5]
-				});
-			}
+		for(var i=1; i<=passCount; i++){
+			passPosition[i] = new daum.maps.LatLng(${lat[i+1]}, ${lng[i+1]});	
+				
+			passMarker[i] = new daum.maps.Marker({
+
+				position: passPosition[i],
+				image: passImage[i]
+			});
 			
 		}
-		
-		//passMarker를 지도에 출력
-		if(passCount == 1){
-			passMarker[1].setMap(map);	
-			
-		}
-		if(passCount == 2){
-			passMarker[1].setMap(map);	
-			passMarker[2].setMap(map);
-		}
-		if(passCount == 3){
-			passMarker[1].setMap(map);	
-			passMarker[2].setMap(map);
-			passMarker[3].setMap(map);	
-		}
-		if(passCount == 4){
-			passMarker[1].setMap(map);	
-			passMarker[2].setMap(map);
-			passMarker[3].setMap(map);
-			passMarker[4].setMap(map);
-		}
-		if(passCount == 5){
-			passMarker[1].setMap(map);	
-			passMarker[2].setMap(map);
-			passMarker[3].setMap(map);
-			passMarker[4].setMap(map);
-			passMarker[5].setMap(map);	
-		}
 	
+		passMarker[1].setMap(map);
+		
+		
 		
 		//endMarker 생성 및 지도에 선언
 		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지의 주소입니다    
 
 		var endImage = new daum.maps.MarkerImage(endSrc, markerSize, markerOption);
-		var endPosition = new daum.maps.LatLng('${lat[latLength-1]}', '${lng[latLength-1]}');	
+		var endPosition = new daum.maps.LatLng(${lat[latLength-1]}, ${lng[latLength-1]});	
 		
 		var endMarker = new daum.maps.Marker({
 			position: endPosition,
@@ -512,167 +118,19 @@ $(function () {
 		endMarker.setMap(map);
 		
 		
-		var geoPosition =[];		//마커위치를 배열에 담아 줌이동과 주소append에 활용
+		//경로가 다 보이게 화면이동
+		var zoomMove=[startMarker.getPosition(), passMarker[1].getPosition(),endMarker.getPosition()];
 		
-		function geoStart(){
-			
-			geoPosition.push(startMarker.getPosition());
-			if(passMarker[1].getMap() != null){
-				geoPosition.push(passMarker[1].getPosition());	
-			}
-			if(passMarker[2].getMap() != null){
-				geoPosition.push(passMarker[2].getPosition());	
-			}
-			if(passMarker[3].getMap() != null){
-				geoPosition.push(passMarker[3].getPosition());	
-			}
-			if(passMarker[4].getMap() != null){
-				geoPosition.push(passMarker[4].getPosition());	
-			}
-			if(passMarker[5].getMap() != null){
-				geoPosition.push(passMarker[5].getPosition());	
-			}
-			geoPosition.push(endMarker.getPosition());
-			
-			var k=0;
-			for(var i=0; i<geoPosition.length; i++){	
-				geo(i);
-			}
-		}
+		var bounds = new daum.maps.LatLngBounds();
 		
-		//좌표를 주소로 바꿔주는 geo 호출
-		function geo(i){
-			$.ajax({
-				url : "https://dapi.kakao.com/v2/local/geo/coord2address.json",
-				async : false,
-				method : "GET",
-				headers : {
-					"Authorization":"KakaoAK 162ee19a901cbbe89c0c4b261ddecca3"
-				},
-				data : {
-					"x": geoPosition[i].getLng(),
-					"y": geoPosition[i].getLat()
-				},
-				success : function(returnData){
-					console.log(returnData.documents[0].address.address_name); 
-					
-					//출발지를 출력하면서 애니메이션 효과의 길이 설정을 위해 geoPosition의 개수별로 조건문을 처리함
-					if(i==0 && geoPosition.length == 2){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px" onclick="javascript:kk()"></button>'
-								+'<img class="transport1" src="../resources/images/planner/transport.gif"></div>');
-						$(".boundryButton").append('<input type="button" value="wjs" style="width:45px; height:20px; float:right;">') //map줌인하는 버튼생성
-					}
-					if(i==0 && geoPosition.length == 3){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport2" src="../resources/images/planner/transport.gif"></div>');
-					}
-					if(i==0 && geoPosition.length == 4){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport3" src="../resources/images/planner/transport.gif"></div>');
-					}
-					if(i==0 && geoPosition.length == 5){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport4" src="../resources/images/planner/transport.gif"></div>');	
-					}
-					if(i==0 && geoPosition.length == 6){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport5" src="../resources/images/planner/transport.gif"></div>');
-					}
-					if(i==0 && geoPosition.length == 7){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport6" src="../resources/images/planner/transport.gif"></div>');
-					}
-					
-					//경유지와 도착지를 설정
-					if(i == 1 && i != geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="경유지1" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[1]+'" style="width:50px; height:45px"></div>');
-					}else if( i==1 && i == geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-					
-					if(i == 2 && i != geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="경유지2" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[2]+'" style="width:50px; height:45px"></div>');
-					}else if( i==2 && i == geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-					
-					if(i == 3 && i != geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="경유지3" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[3]+'" style="width:50px; height:45px"></div>');	
-					}else if( i==3 && i == geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-					
-					if(i == 4 && i != geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="경유지4" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[4]+'" style="width:50px; height:45px"></div>');
-					}else if( i==4 && i == geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-					
-					if(i == 5 && i != geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="경유지5" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[5]+'" style="width:50px; height:45px"></div>');
-					}else if( i==5 && i == geoPosition.length-1){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-					
-					if(i == 6){
-						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
-								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
-					}
-				}
-			})
-		}
+		for(var i=0; i<zoomMove.length; i++){
+			bounds.extend(zoomMove[i]);				
+		}		
+		map.setBounds(bounds);
+		//경로 줌이동 화면이동 완료
 		
-		geoStart(); //지도바로 아래 정보생성
+		
+		
 		
 		///////////////////////////////////////////////////
 		
@@ -722,6 +180,7 @@ $(function () {
 						
 					}else{
 						
+						alert("시내 success");
 						callMapObjApiAJAX(returnData.info.mapObj);
 									
 						var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -750,6 +209,7 @@ $(function () {
 									});
 									iwArray[0]=startInfowindow;
 									
+									$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent().replace('</br>')+'</div>');
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
@@ -971,6 +431,7 @@ $(function () {
 					
 						for( var z=0; z<arrayStart.length ; z++){
 							
+							console.log(":::::   "+arrayStart);
 							arrayStart[z].setMap(map);
 							kk.push(arrayStart[z]);
 							arrayEnd[z].setMap(map);
@@ -1119,6 +580,8 @@ $(function () {
 							          	);
 						
 						boundaryArray.push(boundary);
+						
+						alert("폴리라인 success");
 						
 					}
 				}
@@ -1293,25 +756,12 @@ $(function () {
 			
 		} // search끝
 		
+		
 		search1(1);
 		///////////////////////////////////////////////////
+		
+		
 
-		//경로가 다 보이게 화면이동//
-		var zoomMove = geoPosition;
-		
-		var bounds = new daum.maps.LatLngBounds();
-		
-		for(var i=0; i<zoomMove.length; i++){
-			bounds.extend(zoomMove[i]);				
-		}		
-		map.setBounds(bounds);
-		//경로 줌이동 화면이동 완료//
-		
-		
 	</script>
-
-	<!--	--------------------------------Map관련----------------------------------------->
 </body>
-<link rel="stylesheet"
-	href="../resources/assets/css/main.css?version=0206455" />
 </html>

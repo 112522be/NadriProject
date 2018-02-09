@@ -112,7 +112,7 @@
 					</div>
 
 					<div class="col-md-12">
-						<textarea class="form-control" rows="27" cols="blue"></textarea>
+						<textarea class="form-control" rows="27" cols="blue" name="text"></textarea>
 					</div>
 
 					<input type="hidden" name="lat" value=""> <input
@@ -125,8 +125,7 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 
-	<script language="JavaScript"
-		src="../resources/js/map.js?version=180202.480"></script>
+	<jsp:include page="../planner/plannerSub/mapAndRoadSearch.jsp" />
 
 </body>
 </html>

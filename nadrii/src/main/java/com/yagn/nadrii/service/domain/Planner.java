@@ -1,6 +1,6 @@
 package com.yagn.nadrii.service.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Planner {
 	
@@ -83,7 +83,9 @@ public class Planner {
 	@Override
 	public String toString() {
 		return "Planner [postNo=" + postNo + ", plannerMakerId=" + plannerMakerId + ", title=" + title + ", lat=" + lat
-				+ ", lng=" + lng + ", regDate=" + regDate + "]";
+				+ ", lng=" + lng + ", regDate=" + regDate + ", viewCount=" + viewCount + ", flag=" + flag + ", photo="
+				+ photo + ", text=" + text + "]";
 	}
+	
 }
 

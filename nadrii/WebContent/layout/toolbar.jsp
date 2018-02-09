@@ -46,12 +46,13 @@
 	});
 	
 
+/* 
 
 	$(function(){
 		$("a[href='#']:contains('나들이 플래너')").on("click", function(){
 			self.location = "../planner/json/getMyPlannerList"
 		})
-	})
+	}) */
 
 
 	//========== '나들이 티켓' 버튼 처리 Event ==========
@@ -149,17 +150,16 @@
 								<b class=" icon-angle-down"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="/planner/listPlanner">플래너 게시판</a></li>
-								<li><a href="/planner/addPlannerView.jsp">플래너 작성</a></li>
+
+								<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
+								<li><a href="/planner/addPlannerView">플래너 작성</a></li>
+								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
 							</ul>
 						</li>
 						<li><a href="#">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>
-
-
-			</div>
 			<!-- Container End -->
 		</nav>
 		<!-- navbar End -->
