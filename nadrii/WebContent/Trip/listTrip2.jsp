@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -113,7 +112,6 @@ pageEncoding="UTF-8"%>
 				}else{
 
 					alert("예외발생");
-
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -372,7 +370,6 @@ pageEncoding="UTF-8"%>
 			
 			//위에서 저장한 것을 위시리스트에 재저장 
 
-
 			e.preventDefault();
 			
 			//alert($(".row ").index(this));
@@ -380,6 +377,7 @@ pageEncoding="UTF-8"%>
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='Wish' >위시리스트</a>";
 			alert($("input[name='contentid']").index(this));
 			//$($(".thumbnail")[$(".row thumbnail:nth-child(1)").index(this)]).append(CancelAppend);
+
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).hide();
 
 		});

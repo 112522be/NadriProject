@@ -177,11 +177,7 @@ function goBack() {
 	  			<hr>
 	  			<h4 class="text-right">[총 결제금액]</h4>
 	  			<h4 class="text-right">티켓비용 : ￦ ${ purchase.totalTicketPrice }</h4>
-<<<<<<< HEAD
 	  			<h4 class="text-right">결제대행비 : ￦ ${ purchase.taxFree }</h4>
-=======
-	  			<h4 class="text-right">비과세 : ￦ ${ purchase.taxFree }</h4>
->>>>>>> refs/remotes/origin/master
 	  			<hr>
 	  			<h4 class="text-right text-danger">￦ ${ purchase.ticketPayment }</h4>
 	  			

@@ -28,7 +28,6 @@
 }
 .img {width:100%; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
 </style>
-
 <title>Insert title here</title>
 </head>
 

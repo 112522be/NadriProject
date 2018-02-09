@@ -54,16 +54,17 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="addGroup", method=RequestMethod.POST)
-	public String addGroup(@ModelAttribute("group") Group group, 
-											@ModelAttribute("join") Join join, 	HttpSession session) throws Exception {
+	public String addGroup(@ModelAttribute("group") Group group, HttpSession session) throws Exception {
 
 		System.out.println("/addGroup");
 		
 		int groupNo = groupService.addGroup(group);
 		
+		Join join = new Join();
+		
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		group.setJoin(join);
 		
@@ -72,7 +73,7 @@ public class GroupController {
 		return "forward:/group/getGroup?groupNo="+groupNo;
 	}
 	
-	@RequestMapping(value="getGroup", method=RequestMethod.GET)
+	@RequestMapping(value="getGroup")
 	public String getGroup(@RequestParam("groupNo") int groupNo, Model model) throws Exception {
 		
 		System.out.println("/getGroup");
@@ -119,9 +120,8 @@ public class GroupController {
 		Join join = new Join();
 		
 		join.setGroupNo(groupNo);
-	//	join.setUserId(((User)session.getAttribute("user")).getUserId());
-		join.setUserId("test02");
-		
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+				
 		joinService.deleteJoin(join);
 		
 		group.setJoin(join);
@@ -142,6 +142,7 @@ public class GroupController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+	//	search.setSearchKeyword(searchKeyword);
 		
 		Map<String , Object> map=groupService.getGroupList(search);
 		
