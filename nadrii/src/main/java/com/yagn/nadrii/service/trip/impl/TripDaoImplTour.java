@@ -80,10 +80,13 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject body = (JSONObject) response.get("body");
 		System.out.println("[4 : body] ==>" + body);
 		
+
 		//리턴 값이 있는 경우
+
 		if(body.get("items") instanceof JSONObject) {
 			JSONObject items = (JSONObject) body.get("items");
 			
+
 			//리턴 값이 배열인 경우
 			if(items.get("item") instanceof JSONArray) {
 				JSONArray jsonArray = (JSONArray)items.get("item");
@@ -99,7 +102,9 @@ public class TripDaoImplTour implements TripDao {
 					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
+
 						System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
+
 						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 						System.out.println(image);
 						tourDomain.setFirstimage2(image);
@@ -109,7 +114,9 @@ public class TripDaoImplTour implements TripDao {
 					//System.out.println(list.get(i));
 				}
 				
+
 			//리턴값이 1개인 경우
+
 				
 			}else {
 				JSONObject jsonObject = (JSONObject)items.get("item");
@@ -117,7 +124,9 @@ public class TripDaoImplTour implements TripDao {
 				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
 				if(tourDomain.getFirstimage2() ==null) {
 					tripDaoImplImageSearch = new TripDaoImplImageSearch();
+
 					System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
+
 					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
@@ -125,10 +134,8 @@ public class TripDaoImplTour implements TripDao {
 				
 				list.add(tourDomain);
 				
-				
-				
 			}
-		//
+
 		}else {
 			
 		}
@@ -147,7 +154,6 @@ public class TripDaoImplTour implements TripDao {
 		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
 		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
-		//
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetUrlManage.urlMaking()); 
 		
@@ -175,7 +181,6 @@ public class TripDaoImplTour implements TripDao {
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
 
-		//
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
 		tourAPIGetDetailUrlManage.setContentId(contentId);
@@ -344,23 +349,17 @@ public class TripDaoImplTour implements TripDao {
 				
 				list.add(tourDomain);
 				
-				
-				
 			}
 
 		}else {
 			
 		}
 		return list;
-		
-				
 				
 		
 	}
 	
 	
-	
-
 	@Override
 	public String naverImageSearch(String target) throws Exception {
 		// TODO Auto-generated method stub
@@ -402,8 +401,5 @@ public class TripDaoImplTour implements TripDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
 	
 }

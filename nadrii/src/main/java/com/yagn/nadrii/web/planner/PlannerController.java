@@ -38,34 +38,60 @@ public class PlannerController {
 		System.out.println(this.getClass());
 	}
 	
-	@RequestMapping(value="addPlanner", method=RequestMethod.POST)
-	public String addPlanner(@ModelAttribute("planner")Planner planner) throws Exception{
+	@RequestMapping("addPlannerView")
+	public String addPlannerView(User user, HttpSession session) throws Exception{
 		
-		System.out.println("PlannerController/addPlanner Á¢¼Ó");
-		System.out.println("planner :: "+planner);
-		planner.setFlag("pl");
-		planner.setPlannerMakerId("test01");
-		planner.setPhoto("kk");
-		planner.setText("what the fuck");
-		plannerService.addPlanner(planner);
-		System.out.println("PlannerController/addPlanner ¼öÇà¿Ï·á");
+		System.out.println("PlannerController/addPlannerView ì ‘ì†");
+		//session ì— ì €ì¥ëœ userId ê°’ì„ ê°€ì ¸ì˜´
+		user = (User)session.getAttribute("loginUser");
+		System.out.println("user :: "+ user);
+				
+		//userê°€ ì ‘ì†í–ˆëŠ”ì§€ í™•ì¸
+		if(user == null) {
+			System.out.println("ë¡œê·¸ì¸í•œ íšŒì›ë§Œ ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			return "forward:/user/loginView.jsp";
+		}
 		
-		return "redirect:../planner/json/getMyPlannerList";
+		System.out.println("addPlannerViewë¡œ ì´ë™");
+		
+		return "forward:../planner/addPlannerView.jsp";
 	}
 	
-	@RequestMapping(value="json/getMyPlannerList", method=RequestMethod.GET)
+	@RequestMapping(value="addPlanner", method=RequestMethod.POST)
+	public String addPlanner(@ModelAttribute("planner")Planner planner, User user, HttpSession session) throws Exception{
+		
+		System.out.println("PlannerController/addPlanner ì ‘ì†");
+		
+		user = (User)session.getAttribute("loginUser");
+		String plannerMakerId = user.getUserId();
+		System.out.println("ë¡œê·¸ì¸í•œ ìœ ì € ID : "+plannerMakerId);
+		
+		planner.setFlag("pl");
+		planner.setPlannerMakerId(plannerMakerId);
+		planner.setPhoto("kk");
+		
+		System.out.println("planner :: "+planner);
+		
+		plannerService.addPlanner(planner);
+		
+		System.out.println("PlannerController/addPlanner ì ‘ì†ì™„ë£Œ");
+		
+		return "redirect:/planner/getMyPlannerList";
+	}
+	
+	@RequestMapping(value="getMyPlannerList", method=RequestMethod.GET)
 	public String getMyPlannerList(@ModelAttribute("search")Search search, User user,
 			HttpServletRequest request, HttpSession session) throws Exception{
 		
-		System.out.println("PlannerController/getMyPlannerList Á¢¼Ó");
+		System.out.println("PlannerController/getMyPlannerList ì ‘ì†");
 		
-		//session ÀúÀåµÈ userId È£Ãâ
+		//session ì— ì €ì¥ëœ userId ê°’ì„ ê°€ì ¸ì˜´
 		user = (User)session.getAttribute("loginUser");
 		System.out.println("user :: "+ user);
 		
-		//ºñ·Î±×ÀÎ Ã¼Å©
+		//userê°€ ì ‘ì†í–ˆëŠ”ì§€ í™•ì¸
 		if(user == null) {
-			System.out.println("ºñ·Î±×ÀÎÀ¸·Î Á¢¼ÓÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ë¡œê·¸ì¸í•œ íšŒì›ë§Œ ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 			return "forward:/user/loginView.jsp";
 		}
 		
@@ -86,30 +112,56 @@ public class PlannerController {
 		String plannerMakerId = user.getUserId();
 		System.out.println("UserId :: " + plannerMakerId);
 		
-
 		Map<String , Object> map = plannerService.getMyPlannerList(search, plannerMakerId);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		System.out.println("Page :: "+resultPage);
+		System.out.println("list ::" +map.get("list"));
 		
 		request.setAttribute("list", map.get("list"));
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		
-		System.out.println("PlannerController/getMyPlannerList ¼öÇà¿Ï·á");
+		System.out.println("PlannerController/getMyPlannerList ì ‘ì†ì™„ë£Œ");
 		
 		return "forward:/planner/listMyPlanner.jsp";
 	}
 	
 	@RequestMapping(value="getUserPlannerList", method=RequestMethod.GET)
-	public String getUserPlannerList(@RequestParam("search")Search search) throws Exception{
+	public String getUserPlannerList(@ModelAttribute("search")Search search, String plannerMakerId, 
+			HttpServletRequest request) throws Exception{
 		
-		System.out.println("PlannerController/getUserPlannerList Á¢¼Ó");
+		System.out.println("PlannerController/getUserPlannerList ì ‘ì†");
 		
-		plannerService.getUserPlannerList(search);
+		plannerMakerId = null;
 		
-		System.out.println("PlannerController/getUserPlannerList ¼öÇà¿Ï·á");
+		if(search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		
+		System.out.println("currentPage :: " + search.getCurrentPage());
+		System.out.println("pageSize :: " + pageSize);
+		System.out.println("pageUnit ::" + pageUnit);
+		
+		if(search.getPageSize() == 0) {
+			search.setPageSize(pageSize);
+		}else {
+			pageSize = search.getPageSize();
+		}
+		
+		Map<String , Object> map = plannerService.getUserPlannerList(search, plannerMakerId);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		System.out.println("Page :: "+resultPage);
+		System.out.println("list ::" +map.get("list"));
+		
+		request.setAttribute("list", map.get("list"));
+		request.setAttribute("resultPage", resultPage);
+		request.setAttribute("search", search);
+		
+		System.out.println("PlannerController/getUserPlannerList ì ‘ì†ì™„ë£Œ");
 		
 		return "forward:/planner/listUserPlanner.jsp";
 	}
@@ -117,11 +169,11 @@ public class PlannerController {
 	@RequestMapping(value="getPlanner", method=RequestMethod.GET)
 	public String getPlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
 		
-		System.out.println("PlannerController/getPlanner Á¢¼Ó");
+		System.out.println("PlannerController/getPlanner ì ‘ì†");
 		System.out.println("postNo :: "+postNo);
 		Planner planner = plannerService.getPlanner(postNo);
 		
-		//db¿¡ ÀúÀåµÈ x,yÁÂÇ¥°ªÀ» ½ºÇÃ¸´À¸·Î ³ª´©¾î ¹è¿­¿¡ ÀúÀå
+		//dbì—ì„œ ê°€ì ¸ì˜¨ x,yì¢Œí‘œë¥¼ íŒŒì‹±í•˜ì—¬ ì €ì¥
 		String[] lat = planner.getLat().split(",");
 		String[] lng = planner.getLng().split(",");
 		
@@ -137,10 +189,21 @@ public class PlannerController {
 		request.setAttribute("lng", lng);
 		request.setAttribute("latLength", latLength);
 		
-		System.out.println("PlannerController/getPlanner ¼öÇà¿Ï·á");
+		System.out.println("PlannerController/getPlanner ì ‘ì†ì™„ë£Œ");
 		
 		return "forward:/planner/getPlanner.jsp";
 	}
 	
+	@RequestMapping(value="deletePlanner", method=RequestMethod.GET)
+	public String deletePlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
+		
+		System.out.println("PlannerController/deletePlanner ì ‘ì†");
+		
+		plannerService.deletePlanner(postNo);
+		
+		System.out.println("PlannerController/deletePlanner ì™„ë£Œ");
+		
+		return "forward:/planner/getMyPlannerList";
+	}
 
 }
