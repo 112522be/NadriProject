@@ -117,11 +117,11 @@
 	}
 	
 	@keyframes mymove1 {
-		from {left: 0px;
+		from {left: -45px;
 		}
 		
 		to {
-			left: 128px;
+			left: 60px;
 		}
 	}
 	
@@ -281,6 +281,58 @@
 		}
 	}
 
+	/* 길 이미지 크기조절 */
+	.road1 {
+		width: 135px;
+		position: relative;
+		text-align: center;
+		margin-bottom: -10px;
+		margin-left: -113px;
+	}
+	
+	.road2 {
+	    width: 262px;
+	    height: 9px;
+	    position: relative;
+	    text-align: center;
+	    margin-bottom: -10px;
+	    margin-left: -113px;
+	}
+	
+	.road3 {
+		width: 390px;
+		height: 10px;
+		position: relative;
+		text-align: center;
+		margin-bottom: -10px;
+		margin-left: -113px;
+	}
+	
+	.road4 {
+		width: 135px;
+		position: relative;
+		text-align: center;
+		margin-bottom: -10px;
+		margin-left: -113px;
+	}
+	
+	.road5 {
+		width: 647px;
+	    height: 10px;
+	    position: relative;
+	    text-align: center;
+	    margin-bottom: -10px;
+	    margin-left: -113px;
+	}
+	
+	.road6 {
+	    width: 775px;
+	    height: 10px;
+	    position: relative;
+	    text-align: center;
+	    margin-bottom: -10px;
+	    margin-left: -113px;
+	}
 	
 </style>
 <script>
@@ -342,7 +394,7 @@ $(function () {
 				</div>
 				</header>
 				<div id="map" style="width: 100%; height: 350px;"></div>
-				<div class="boundryButton"></div>
+				
 				<div id=pathImg></div><br>
 				<div id="path"></div><br><br>
 				
@@ -561,44 +613,49 @@ $(function () {
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px" onclick="javascript:kk()"></button>'
-								+'<img class="transport1" src="../resources/images/planner/transport.gif"></div>');
-						$(".boundryButton").append('<input type="button" value="wjs" style="width:45px; height:20px; float:right;">') //map줌인하는 버튼생성
+								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img class="transport1" src="../resources/images/planner/transport.gif">'
+								+'<img class="road1" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 3){
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
 								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport2" src="../resources/images/planner/transport.gif"></div>');
+								+'<img class="transport2" src="../resources/images/planner/transport.gif">'
+								+'<img class="road2" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 4){
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
 								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport3" src="../resources/images/planner/transport.gif"></div>');
+								+'<img class="transport3" src="../resources/images/planner/transport.gif">'
+								+'<img class="road3" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 5){
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
 								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport4" src="../resources/images/planner/transport.gif"></div>');	
+								+'<img class="transport4" src="../resources/images/planner/transport.gif">'
+								+'<img class="road4" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 6){
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
 								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport5" src="../resources/images/planner/transport.gif"></div>');
+								+'<img class="transport5" src="../resources/images/planner/transport.gif">'
+								+'<img class="road5" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 7){
 						$("#pathImg").append('<div id="markerImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
 								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
 								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
-								+'<img class="transport6" src="../resources/images/planner/transport.gif"></div>');
+								+'<img class="transport6" src="../resources/images/planner/transport.gif">'
+								+'<img class="road6" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					
 					//경유지와 도착지를 설정
