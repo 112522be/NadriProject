@@ -1,14 +1,22 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<<<<<<< HEAD
+<%@ page contentType="text/html; charset=utf-8" %>
+=======
+<%@ page contentType="text/html; charset=UTF-8" %>
+>>>>>>> refs/remotes/origin/master
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<<<<<<< HEAD
+<meta charset="utf-8">
+=======
+<meta charset="UTF-8">
+>>>>>>> refs/remotes/origin/master
 
 <title>updateProduct.jsp</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -17,7 +25,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-	<!-- »óÇ°Á¦Á¶ÀÏÀÚ Calendar Event -->
+	<!-- ìƒí’ˆì œì¡°ì¼ì Calendar Event -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -49,25 +57,25 @@ $(function(){
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info">»óÇ°»ó¼¼Á¶È¸</h3>
+	       <h3 class=" text-info">ìƒí’ˆìƒì„¸ì¡°íšŒ</h3>
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»óÇ°¹øÈ£</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ìƒí’ˆë²ˆí˜¸</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°¸í</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆëª…</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°ÀÌ¹ÌÁö</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆì´ë¯¸ì§€</strong></div>
 			<div class="col-xs-8 col-md-4">
 			<c:if test = "${ product.fileName == null }">
 				<img src="http://placehold.it/300X300" />
@@ -79,24 +87,24 @@ $(function(){
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>°¡°İ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ê°€ê²©</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.price }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>µî·ÏÀÏÀÚ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ë“±ë¡ì¼ì</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.regDate }</div>
 		</div><hr/>
 		
 		<div class="row">
 		    <div class="col-md-12 text-center">
-		      <button type="button" class="btn btn-primary">È®&nbsp;ÀÎ</button>
+		      <button type="button" class="btn btn-primary">í™•&nbsp;ì¸</button>
 		    </div>
 		  </div>
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
 </body>
 </html>

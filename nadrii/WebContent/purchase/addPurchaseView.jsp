@@ -1,15 +1,15 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>°áÁ¦Á¤º¸ÀÔ·Â</title>
+<title>ê²°ì œì •ë³´ì…ë ¥</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -27,26 +27,24 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		body {
-            padding-top : 50px;
-        }
     </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
 function fncAddPurchase() {
-	$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
+	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
 }
 
 $( function(){
-	$(".btn:contains('°áÁ¦ÇÏ±â')").bind("click", function(){
-		alert("°áÁ¦ÇÏ±â")
-		//fncAddPurchase();
+	$(".kakaoPay").bind("click", function(){
+//		alert("Kakao")
+		fncAddPurchase(); 
+//		$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
 	});
 });
 
-//=================== "Ãë¼Ò" Event ¿¬°á =================== 
+//=================== "ì·¨ì†Œ" Event ì—°ê²° =================== 
 function goBack() {
 	window.history.back();
 }
@@ -60,34 +58,62 @@ function goBack() {
 		<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header">
-			<h3 class="text-info">°áÁ¦Á¤º¸ÀÔ·Â</h3>
+			<h3 class="text-info">ê²°ì œì •ë³´ì…ë ¥</h3>
 				<h5 class="text-muted text-left">
-					¼±ÅÃÇÏ½Å Æ¼ÄÏÀÇ °áÁ¦¸¦ À§ÇØ <strong class="text-danger">Çü½Ä¿¡ ¸Â°Ô </strong>ÀÛ¼ºÇØ ÁÖ¼¼¿ä.
+					ì„ íƒí•˜ì‹  í‹°ì¼“ì˜ ê²°ì œë¥¼ ìœ„í•´ <strong class="text-danger">í˜•ì‹ì— ë§ê²Œ </strong>ì‘ì„±í•´ ì£¼ì„¸ìš”.
 				</h5>  
 		</div>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+		
+		<!-- Purchase Info -->
+		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
+		<input type="hidden" name="contentTypeId" 		value="${ purchase.contentTypeId }">
+		<input type="hidden" name="ticketTitle"			value="${ purchase.ticketTitle }">
+		<input type="hidden" name="ticketImage" 		value="${ purchase.ticketImage }">
+		<input type="hidden" name="bookingDate" 		value="${ purchase.bookingDate }">
+		<input type="hidden" name="flag" 				value="${ purchase.flag }">
+		<input type="hidden" name="totalTicketPrice" 	value="${ purchase.totalTicketPrice }">
+		<input type="hidden" name="taxFree"				value="${ purchase.taxFree }">
+		<input type="hidden" name="ticketPayment" 		value="${ purchase.ticketPayment }">
+		<c:forEach items="${ purchase.ticketPrice }" varStatus="status">
+			<input type="hidden" name="ticketCount" value="${ purchase.ticketCount[status.index] }">
+			<input type="hidden" name="ticketPrice" value="${ purchase.ticketPrice[status.index] }">
+		</c:forEach>
+		
+		
+		<!-- KakaoPay API Request -->
+		<input type="hidden" name="cid" 				value="TC0ONETIME">
+		<input type="hidden" name="partner_order_id" 	value="ë‚˜ë“œë¦¬í‹°ì¼“ì‹œìŠ¤í…œ">
+		<input type="hidden" name="partner_user_id" 	value="${ user.userId }">
+		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
+		<input type="hidden" name="quantity" 			value="1">
+		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
+		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
+		<input type="hidden" name="approval_url" 		value="http://192.168.0.24:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="cancel_url" 			value="http://192.168.0.24:8080/index.jsp">
+		<input type="hidden" name="fail_url" 			value="http://192.168.0.24:8080/index.jsp">
 
 		<div class="row">
 	  		<div class="col-xs-12 col-md-12">
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						Æ¼ÄÏÁ¤º¸
-	  					</h3>
+	  						í‹°ì¼“ì •ë³´
+	  					</h4>
 	  				</strong>
 	  			</div>
 	  			
-	  		<h4>[Æ¼ÄÏ¸í]</h4>
-	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.ticketTitle }</h4>
+	  		<h4>[í‹°ì¼“ëª…]</h4>
+	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true" ></span> ${ purchase.ticketTitle }</h4>
 	  		
-	  		<h4>[¿¹¸ÅÀÏ]</h4>
+	  		<h4>[ì˜ˆë§¤ì¼]</h4>
 	  		<h4>&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ${ purchase.bookingDate }</h4>
 
 	  		</div>
@@ -98,26 +124,39 @@ function goBack() {
 	  		
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						±¸¸ÅÀÚÁ¤º¸
-	  					</h3>
+	  						êµ¬ë§¤ìì •ë³´
+	  					</h4>
 	  				</strong>
 	  			</div>
+  			</div>
 	  			
-				<div class="input-group input-group-lg">
-					<span class="input-group-addon" id="sizing-addon1">ÀÌ ¸§</span> 
-					<input type="text" class="form-control" placeholder="ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä"
-						aria-describedby="sizing-addon1">
+	  		<div class="col-xs-12 col-md-6">
+	  			<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">ì•„ì´ë””</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerId" value="${ purchase.buyerId }" readonly>
 				</div>
-				
+	  			<br>
+				<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">ì´ ë¦„</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerName" value="${ purchase.buyerName }" readonly>
+				</div>
 				<br>
-				
-				<div class="input-group input-group-lg">
-					<span class="input-group-addon" id="sizing-addon1">¿¬¶ôÃ³</span> 
-					<input type="text" class="form-control" placeholder="¿¬¶ôÃ³¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä"
-						aria-describedby="sizing-addon1">
+				<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">ì—°ë½ì²˜</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerPhone" value="${ purchase.buyerPhone }" readonly>
 				</div>
+				<br>
+				<div class="input-group">
+					<span class="input-group-addon" id="sizing-addon1">E-mail</span> 
+					<input type="text" class="form-control" 
+						aria-describedby="sizing-addon1" name="buyerEmail" value="${ purchase.buyerEmail }" readonly>
+				</div>
+				
 	  		</div>
 		</div>
 		
@@ -125,26 +164,33 @@ function goBack() {
 	  		<div class="col-xs-12 col-md-12">
 	  			<div class="alert alert-info" role="alert">
 	  				<strong>
-	  					<h3 class="text-right">
+	  					<h4 class="text-right">
 	  						<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-	  						°áÁ¦Á¤º¸
-	  					</h3>
+	  						ê²°ì œì •ë³´
+	  					</h4>
 	  				</strong>
 	  			</div>
-				<h4>[¼±ÅÃÇÑ Æ¼ÄÏ]</h4>
+				<h4>[ì„ íƒí•œ í‹°ì¼“]</h4>
 	  			<c:forEach items="${ purchase.ticketCount }" varStatus="status">
-	  				<h4>&nbsp;£Ü ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } Àå</h4>
+	  				<h4>&nbsp;ï¿¦ ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } ì¥</h4>
 	  			</c:forEach>
 	  			<hr>
-	  			<h4 class="text-right">[ÃÑ °áÁ¦±İ¾×]</h4>
-	  			<h4 class="text-right">£Ü ${ purchase.totalTicketPrice }</h4>
+	  			<h4 class="text-right">[ì´ ê²°ì œê¸ˆì•¡]</h4>
+	  			<h4 class="text-right">í‹°ì¼“ë¹„ìš© : ï¿¦ ${ purchase.totalTicketPrice }</h4>
+	  			<h4 class="text-right">ê²°ì œëŒ€í–‰ë¹„ : ï¿¦ ${ purchase.taxFree }</h4>
+	  			<hr>
+	  			<h4 class="text-right text-danger">ï¿¦ ${ purchase.ticketPayment }</h4>
+	  			
 	
 	  		</div>
 		</div>
 
 		<div class="modal-footer">
-			<button type="button" class="btn btn-info btn-lg" data-dismiss="modal">°áÁ¦ÇÏ±â</button>
-			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">Ãë ¼Ò</button>
+			
+			<button type="button" class="kakaoPay" data-dismiss="modal">
+				<img src="http://img.yonhapnews.co.kr/etc/inner/EN/2015/09/15/AEN20150915005751320_01_i.jpg" height=30px/>
+			</button>
+			<button type="button" class="btn btn-default btn-lg" data-dismiss="modal" onclick="goBack()">ì·¨ ì†Œ</button>
 		</div>	
 			
 
@@ -152,7 +198,7 @@ function goBack() {
 		<!-- form Start /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

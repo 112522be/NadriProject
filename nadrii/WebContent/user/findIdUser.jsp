@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,13 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+<<<<<<< HEAD
+	<meta charset="UTF-8"r>
+=======
+	<meta charset="UTF-8">
+>>>>>>> refs/remotes/origin/master
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -31,24 +35,24 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-		//============= "·Î±×ÀÎ"  Event ¿¬°á =============
+		//============= "ë¡œê·¸ì¸"  Event ì—°ê²° =============
 		/* $( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button").on("click" , function() {
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
 				if(id == null || id.length <1) {
-					alert('ID ¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.');
+					alert('ID ë¥¼ ì…ë ¥í•˜ì§€ ì•Šìœ¼ì…¨ìŠµë‹ˆë‹¤.');
 					$("#userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.');
+					alert('íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì§€ ì•Šìœ¼ì…¨ìŠµë‹ˆë‹¤.');
 					$("#password").focus();
 					return;
 				}
@@ -58,25 +62,16 @@
 		});	
 		
 		*/
-		//============= È¸¿ø¿ø°¡ÀÔÈ­¸éÀÌµ¿ =============
-		$( function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				self.location = "/user/addUser"
-			});
-		}); 
-		
-		//============= ¾ÆÀÌµğ Ã£±â È­¸éÀÌµ¿ =============
-		$( function() {
-			$("a[href='#' ]:contains('¾ÆÀÌµğ Ã£±â')").on("click" , function() {
-				self.location = "/user/faindIdUser"
-			});
-		});
 		
 		
 /**
- * ·Î±×ÀÎ
+<<<<<<< HEAD
+ * ì•„ì´ë”” ì°¾ê¸°
+=======
+ * ë¡œê·¸ì¸
+>>>>>>> refs/remotes/origin/master
  */
+
 function fainId(){
 	var data = "userName=" + $("#userName").val;
 	data += "&email=" + $("#email").val;
@@ -86,12 +81,12 @@ function fainId(){
 	
 	
 	if(userName == ''){
-		alert("ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 		$("#userName").focus();
 		return;
 	}
 	if(email ==''){
-		alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+		alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 		$("#email").focus();
 		return;
 	}
@@ -102,7 +97,7 @@ function fainId(){
 		type : "POST",
 		success : function(result){
 			if(result.msg == "failed"){
-				alert("ÀÌ¸ŞÀÏÀ» È®ÀÎÇØÁÖ¼¼¿ä.");
+				alert("ì´ë©”ì¼ì„ í™•ì¸í•´ì£¼ì„¸ìš”.");
 				return;
 			}
 			if(result.msg == "success"){
@@ -126,7 +121,109 @@ function fainId(){
 			$("#email").css("background-color", "#B0F6AC");
 		}
 	}
+ 
+//	ì´ë©”ì¼ ì¸ì¦ 
+	function checkSend(){
+		var email = $("#email").val();
+		var frm = $("#frm").serialize();
+		if(email !=""){
+			$.ajax({
+				type:"POST",
+				dataType : "json",
+				url:"/user/check",
+				async: false,
+				data:frm,     //    onclick();
+				success :function(result){
+					
+					$("#btn_submit").hide();
+					$("#btn_chkSuccess").css("display","block");
+					$("#confirmNum").css("display","block");
+				},
+				error:function(request,status,error){
+		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+			});
+		}else{
+			alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
+			$("#email").focus();
+			return false;
+		}
 		
+	}
+
+	//ì´ë©”ì¼ ì¸ì¦ ë²ˆí˜¸ í™•ì¸
+	function checkSuccess(){
+		var confirmNum = $("#confirmNum").val();
+		var frm = $("#frm").serialize();
+		if(confirmNum !=""){
+			$.ajax({
+				type:"POST",
+				dataType : "json",
+				url:"/user/checkSuccess",
+				async: false,
+				data:frm,     //    onclick();
+				success :function(result){
+					if(result.result == "success"){
+						alert("ì¸ì¦ í™•ì¸ë˜ì—ˆìŠµë‹ˆë‹¤.");
+						$("$checkNumStatus").val("Y");
+					}else{
+						alert("ì¸ì¦ ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
+						$("$checkNumStatus").val("N");
+					}
+				},
+				error:function(request,status,error){
+		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+			});
+		}else{
+			alert("ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
+			$("#confirmNum").focus();
+			return false;
+		}
+	}
+
+ 
+ 
+ 
+function fainId(){
+	var data = "&email=" + $("#email").val();
+	if($("#email").val() == ""){
+		alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
+		$("#email").focus();
+		return;
+	}
+	
+	if($("#confirmNum").val() == ""){
+		alert("ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
+		$("#confirmNum").focus();
+		return false;
+	}
+	
+	if($("#checkNumStatus").val() != "N"){
+		alert("ì´ë©”ì¼ ì¸ì¦ì´ ì‹¤íŒ¨ ë˜ì—ˆìŠµë‹ˆë‹¤. \n ì¬ì¸ì¦ í•´ì£¼ì„¸ìš”");
+		return;
+	}
+	
+	if(confirm("ì•„ì´ë””ë¥¼ ì°¾ìœ¼ì‹œê² ìŠµë‹ˆê¹Œ?")){
+	$.ajax({
+		data :data,
+		url : "/user/loginProc",
+		type : "POST",
+		success : function(result){
+			if(result.msg == "success"){
+				alert("ì´ë©”ì¼ ì¸ì¦ë˜ì—ˆìŠµë‹ˆë‹¤.");
+				location.href="/user/loginView";
+			}
+		 }
+	});	
+}
+}
+		
+	function delchk(){
+        if(confirm("ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
+            location.href = "/user/main";
+        }
+    }
 		
 	</script>		
 	
@@ -142,7 +239,7 @@ function fainId(){
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
@@ -154,27 +251,50 @@ function fainId(){
 		 	 	<br/>
 				
 				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center">¾Æ&nbsp;ÀÌ&nbsp;ÀÌ&nbsp;µğ&nbsp;Ã£&nbsp;±â</h1>
+		 	 		<h1 class="text-center">ì•„&nbsp;ì´&nbsp;ì´&nbsp;ë””&nbsp;ì°¾&nbsp;ê¸°</h1>
 
-			        <form class="form-horizontal">
+			        <form id ="frm" class="form-horizontal">
 		  
+
+					  <!-- <div class="form-group">
+					    <label for="userId" class="col-sm-4 control-label">ì•„&nbsp;ì´&nbsp;ë””</label>
+=======
 					  <div class="form-group">
-					    <label for="userName" class="col-sm-4 control-label">ÀÌ&nbsp;¸§</label>
+					    <label for="userName" class="col-sm-4 control-label">ì´&nbsp;ë¦„</label>
+>>>>>>> refs/remotes/origin/master
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userName" id="userName"  placeholder="ÀÌ¸§" >
+<<<<<<< HEAD
+					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="ì•„ì´ë””" >
+=======
+					      <input type="text" class="form-control" name="userName" id="userName"  placeholder="ì´ë¦„" >
+>>>>>>> refs/remotes/origin/master
 					    </div>
-					  </div>
+					  </div> -->
 					  
 					  <div class="form-group">
-					    <label for="email" class="col-sm-4 control-label">ÀÌ&nbsp;¸Ş&nbsp;ÀÏ</label>
+
+					    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì´ë©”ì¼</label>
+					    <div class="col-sm-4">
+					      <input type="text" class="form-control" id="email" name="email" placeholder="ì´ë©”ì¼" oninput="emailValid();">
+					      <input type="button" value="ì¸ì¦ë°œì†¡" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
+					      <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
+					      <input type="button" value="ì¸ì¦" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" 
+					       onClick="checkSuccess();">
+					       <input type="text" style="display:none;" class="form-control" id="userId" name="userId" placeholder="${ user.userId }">
+
+					    <label for="email" class="col-sm-4 control-label">ì´&nbsp;ë©”&nbsp;ì¼</label>
 					    <div class="col-sm-6">
-					      <input type="email" class="form-control" name="email" id="email" placeholder="ÀÌ¸ŞÀÏ" oninput="emailValid();">
+					      <input type="email" class="form-control" name="email" id="email" placeholder="ì´ë©”ì¼" oninput="emailValid();">
+
 					    </div>
-					  </div>
+					  </div> 
 					  
 					  <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					      <button type="button" class="btn btn-primary signupbtn" onclick="fainId();" >´Ù&nbsp;À½</button>
+					      <button type="button" class="btn btn-primary signupbtn" onclick="fainId();" >ë‹¤&nbsp;ìŒ</button>
+
+					   	  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >ì·¨&nbsp;ì†Œ</a>
+
 					    </div>
 					  </div>
 			
@@ -187,7 +307,7 @@ function fainId(){
   	 	<!--  row Start /////////////////////////////////////-->
   	 	
  	</div>
- 	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 
 </body>
 

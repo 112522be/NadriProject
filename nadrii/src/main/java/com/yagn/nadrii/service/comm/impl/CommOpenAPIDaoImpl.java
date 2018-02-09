@@ -91,7 +91,7 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 		httpEntity = response.getEntity();
 		
 		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		JSONObject message = (JSONObject)object.get("message");
@@ -176,9 +176,7 @@ public class CommOpenAPIDaoImpl implements CommOpenAPIDao {
 						System.out.println("Error: " + res.getError().getMessage());
 						return null;
 					}
-
-					System.out.println("[���Ȯ��]/////////////////////////////////////////////////");
-
+					
 					// For full list of available annotations, see http://g.co/cloud/vision/docs
 					for (EntityAnnotation annotation : res.getLandmarkAnnotationsList()) {
 						LocationInfo info = annotation.getLocationsList().listIterator().next();

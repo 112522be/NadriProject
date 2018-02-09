@@ -10,8 +10,8 @@
 		<result property="postNo" column="post_no" jdbcType="NUMERIC" />
 		<result property="userId" column="user_id" jdbcType="VARCHAR" />
 		<result property="title" column="title" jdbcType="VARCHAR" />
-		<result property="thumbNailFileName" column="thumbnail_file_name" jdbcType="VARCHAR" />
-		<result property="text" column="text" jdbcType="VARCHAR" />
+		<result property="thumbNailFileName" column="thumbnail_image_file" jdbcType="VARCHAR" />
+		<result property="text" column="text" jdbcType="CLOB" />
 		<result property="hashtag" column="hashtag" jdbcType="VARCHAR" />
 		<result property="viewCount" column="view_count" jdbcType="NUMERIC" />
 		<result property="lat" column="lat" jdbcType="VARCHAR" />
@@ -21,13 +21,12 @@
 	<!-- comm의 Create(insert) -->
 	<insert id="addComm" parameterType="com.yagn.nadrii.service.domain.Community">
 		INSERT INTO post(post_no, user_id, title, text, thumbnail_image_file, reg_date, lat, lng, hashtag, flag_pu) 
-		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, SYSDATE, #{lat}, #{lng}, #{hashtag}, 'UC') 
+		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS'), #{lat}, #{lng}, #{hashtag}, 'UC') 
 	</insert>
-
 	
 	<!-- comm의 Read(select) -->
 	<select id="getPostNo" parameterType="com.yagn.nadrii.service.domain.Community" resultType="int">
-		SELECT post_no FROM post WHERE title=#{title} AND text=#{text}
+		SELECT post_no FROM post WHERE title=#{title} AND reg_date=TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS')
 	</select>
 	
 	<select id="getComm" parameterType="int" resultMap="communitySelectMap">
@@ -58,11 +57,21 @@
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 	
+	<select id="getHashtags" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT hashtag FROM post WHERE flag_pu='UC' AND hashtag LIKE '%${value}%'
+	</select>
+	
 	<!-- comm의 Update(update) -->
 	
 	<update id="updateComm" parameterType="com.yagn.nadrii.service.domain.Community">
 		UPDATE post
 		SET title=#{title}, text=#{text}, thumbnail_image_file=#{thumbNailFileName}, reg_date=SYSDATE, lat=#{lat}, lng=#{lng}, hashtag=#{hashtag}
+		WHERE post_no=#{postNo}
+	</update>
+	
+	<update id="updateViewCount" parameterType="com.yagn.nadrii.service.domain.Community">
+		UPDATE post
+		SET view_count=#{viewCount}
 		WHERE post_no=#{postNo}
 	</update>
 	

@@ -3,6 +3,7 @@ package com.yagn.nadrii.service.trip.impl;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Trip;
@@ -40,7 +40,7 @@ public class TripDaoImplTour implements TripDao {
 
 	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3,String areaCode, String localName) throws Exception {
 
-
+		System.out.println(pageNo+ "  DAOIMPLEMENT");
 		System.out.println("listTrip Dao parameter areaCode, localName");
 		
 		TourAPlListUrlManage tourAPlUrlManage= new TourAPlListUrlManage();
@@ -54,6 +54,7 @@ public class TripDaoImplTour implements TripDao {
 		tourAPlUrlManage.setType("areaBasedList?");
 
 		System.out.println(tourAPlUrlManage.urlMaking());
+		
 		HttpClient httpClient = new DefaultHttpClient();
 		List list = new ArrayList();
 				
@@ -79,11 +80,14 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject body = (JSONObject) response.get("body");
 		System.out.println("[4 : body] ==>" + body);
 		
-		//µ¥ÀÌÅÍ°¡ Àß ³Ñ¾î ¿Â °æ¿ì
+
+		//ë¦¬í„´ ê°’ì´ ìˆëŠ” ê²½ìš°
+
 		if(body.get("items") instanceof JSONObject) {
 			JSONObject items = (JSONObject) body.get("items");
 			
-			//µ¥ÀÌÅÍ°¡ ¿©·¯°³ÀÎ °æ¿ì
+
+			//ë¦¬í„´ ê°’ì´ ë°°ì—´ì¸ ê²½ìš°
 			if(items.get("item") instanceof JSONArray) {
 				JSONArray jsonArray = (JSONArray)items.get("item");
 				
@@ -95,20 +99,24 @@ public class TripDaoImplTour implements TripDao {
 							
 					TourApiDomain tourDomain = new TourApiDomain();
 					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-					System.out.println(tourDomain);
+					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
-						System.out.println("ÀÌ¹ÌÁö°¡ ¾øÀ½-->>  "+tourDomain.getTitle());
+
+						System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
+
 						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 						System.out.println(image);
 						tourDomain.setFirstimage2(image);
 					}
 								
 					list.add(tourDomain);
-					System.out.println(list.get(i));
+					//System.out.println(list.get(i));
 				}
 				
-			//µ¥ÀÌÅÍ°¡ ÇÑ°³ ÀÎ°æ¿ì	
+
+			//ë¦¬í„´ê°’ì´ 1ê°œì¸ ê²½ìš°
+
 				
 			}else {
 				JSONObject jsonObject = (JSONObject)items.get("item");
@@ -116,24 +124,20 @@ public class TripDaoImplTour implements TripDao {
 				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
 				if(tourDomain.getFirstimage2() ==null) {
 					tripDaoImplImageSearch = new TripDaoImplImageSearch();
-					System.out.println("ÀÌ¹ÌÁö°¡ ¾øÀ½-->>  "+tourDomain.getTitle());
+
+					System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
+
 					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
 				}
-				TourApiDomain lastNotice = new TourApiDomain();
-				lastNotice.setTitle("¸¶Áö¸· ¿©ÇàÁö");
 				
 				list.add(tourDomain);
-				list.add(lastNotice);
-				
 				
 			}
-		//Àü´Ş µ¥ÀÌÅÍ°¡ ¾ø´Â °æ¿ì	
+
 		}else {
-			TourApiDomain lastNotice = new TourApiDomain();
-			lastNotice.setTitle("¸¶Áö¸· ¿©ÇàÁö");
-			list.add(lastNotice);
+			
 		}
 		return list;
 	}
@@ -150,7 +154,6 @@ public class TripDaoImplTour implements TripDao {
 		tourAPIGetUrlManage.setContentTypeId(contentTypeId);
 		System.out.println(tourAPIGetUrlManage.urlMaking());
 		
-		//±âº» Á¤º¸°¡Á®¿À±â
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(tourAPIGetUrlManage.urlMaking()); 
 		
@@ -178,7 +181,6 @@ public class TripDaoImplTour implements TripDao {
 	@Override
 	public TourApiDomain getTripDetail(String contentId, String contentTypeId) throws Exception {
 
-		//¿ä±İÁ¤º¸ °¡Á®¿À±â
 		TourAPIGetDetailUrlManage tourAPIGetDetailUrlManage = new TourAPIGetDetailUrlManage();
 		tourAPIGetDetailUrlManage.urlClean();
 		tourAPIGetDetailUrlManage.setContentId(contentId);
@@ -236,6 +238,7 @@ public class TripDaoImplTour implements TripDao {
 		HttpEntity httpEntity = httpResponse.getEntity();
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		Map map = new HashMap();
 		
 		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
 //		System.out.println(jsonObject);
@@ -243,30 +246,120 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject header = (JSONObject) response.get("header");
 		JSONObject body = (JSONObject) response.get("body");
 //		System.out.println(body);
-		JSONObject items = (JSONObject) body.get("items");
-		JSONArray item = (JSONArray)items.get("item");	
-		//System.out.println("[6 : item] ==>" + item);
-		List list = new ArrayList();
-		Map map = new HashMap();
 		
-		for (int i = 0; i < item.size(); i++) {
-			String parameter = ((JSONObject)item.get(i)).get("code").toString();
-			//System.out.println(parameter);
-			String key = ((JSONObject)item.get(i)).get("name").toString();
-			//System.out.println(key+" : "+parameter);
-			map.put(key, parameter);
-		}
+			JSONObject items = (JSONObject) body.get("items");
+			JSONArray item = (JSONArray)items.get("item");	
+			//System.out.println("[6 : item] ==>" + item);
+			List list = new ArrayList();
+			
+			
+			for (int i = 0; i < item.size(); i++) {
+				String parameter = ((JSONObject)item.get(i)).get("code").toString();
+				//System.out.println(parameter);
+				String key = ((JSONObject)item.get(i)).get("name").toString();
+				//System.out.println(key+" : "+parameter);
+				map.put(key, parameter);
+			}
 		
 		
 		return (String)map.get(placeName);
 		
 	}
 	
-	
-	
-	
-	
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
+		String text = URLEncoder.encode(keyword, "UTF-8");
+		
+		TourAPlListUrlManage tourAPlListUrlManage= new TourAPlListUrlManage();
+		tourAPlListUrlManage.urlClean();
+		tourAPlListUrlManage.setType("searchKeyword?");
+		tourAPlListUrlManage.setCat1("A02");
+		tourAPlListUrlManage.setCat2("A0206");
+		tourAPlListUrlManage.setPageNo(pageNo);
+		
+		tourAPlListUrlManage.setKeyword(text);
+		System.out.println(tourAPlListUrlManage.urlMaking());
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		List list = new ArrayList();
+				
+		HttpGet httpGet = new HttpGet(tourAPlListUrlManage.urlMaking()); 
+		
+		httpGet.setHeader("Accept", "application/json");
+		httpGet.setHeader("Content-Type", "application/json");
+		
+		HttpResponse httpResponse = httpClient.execute(httpGet);
+				
+		HttpEntity httpEntity = httpResponse.getEntity();
+		InputStream is = httpEntity.getContent();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
+		System.out.println(jsonobj);
+		JSONObject response = (JSONObject) jsonobj.get("response");
 
+		JSONObject header = (JSONObject) response.get("header");
+
+		JSONObject body = (JSONObject) response.get("body");
+		System.out.println("[4 : body] ==>" + body);
+		
+		//ë¦¬í„´ ê°’ì´ ìˆëŠ” ê²½ìš°
+		if(body.get("items") instanceof JSONObject) {
+			JSONObject items = (JSONObject) body.get("items");
+			
+			//ë¦¬í„´ ê°’ì´ ë°°ì—´ì¸ ê²½ìš°
+			if(items.get("item") instanceof JSONArray) {
+				JSONArray jsonArray = (JSONArray)items.get("item");
+				
+				tripDaoImplImageSearch = new TripDaoImplImageSearch();
+						
+				for(int i=0;i<jsonArray.size();++i) {
+					JSONObject obj = (JSONObject)jsonArray.get(i);
+					System.out.println(obj);
+							
+					TourApiDomain tourDomain = new TourApiDomain();
+					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
+					//System.out.println(tourDomain);
+					
+					if(tourDomain.getFirstimage2()==null) {
+						System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
+						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+						System.out.println(image);
+						tourDomain.setFirstimage2(image);
+					}
+								
+					list.add(tourDomain);
+					//System.out.println(list.get(i));
+				}
+				
+			//ë¦¬í„´ê°’ì´ 1ê°œì¸ ê²½ìš°
+				
+			}else {
+				JSONObject jsonObject = (JSONObject)items.get("item");
+				TourApiDomain tourDomain = new TourApiDomain();
+				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
+				if(tourDomain.getFirstimage2() ==null) {
+					tripDaoImplImageSearch = new TripDaoImplImageSearch();
+					System.out.println("ì´ë¯¸ì§€ ì—†ìŒ-->>  "+tourDomain.getTitle());
+					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+					System.out.println(image);
+					tourDomain.setFirstimage2(image);
+				}
+				
+				list.add(tourDomain);
+				
+			}
+
+		}else {
+			
+		}
+		return list;
+				
+		
+	}
+	
+	
 	@Override
 	public String naverImageSearch(String target) throws Exception {
 		// TODO Auto-generated method stub
@@ -308,8 +401,5 @@ public class TripDaoImplTour implements TripDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
 	
 }

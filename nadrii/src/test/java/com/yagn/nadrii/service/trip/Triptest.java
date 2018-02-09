@@ -41,16 +41,16 @@ public class Triptest {
 	public void addTripTest() throws Exception {
 		
 		trip = new Trip();
-		trip.setLng("test°æµµ");
-		trip.setLat("testÀ§µµ");
-		trip.setAddress("test ÁÖ¼ÒÁö");
+		/*trip.setLng("testï¿½æµµ");
+		trip.setLat("testï¿½ï¿½ï¿½ï¿½");
+		trip.setAddress("test ï¿½Ö¼ï¿½ï¿½ï¿½");
 		trip.setContentId("123456");
 		trip.setContentTypeId("12");
 		trip.setCreatedTime("01/01/01");
-		trip.setDescription("test¼³¸íÁö");
-		trip.setThumbnailImageFile("ÀÌ¹ÌÁö ¾øÀ½");
-		trip.setTripName("test¿©ÇàÁö");
-		
+		trip.setDescription("testï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		trip.setThumbnailImageFile("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		trip.setTripName("testï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		*/
 		
 		tripDao.addTrip(trip);
 		
@@ -70,7 +70,7 @@ public class Triptest {
 	public void listTrip() throws Exception{
 		Search search = new Search();
 		search.setSearchCondition("1");
-		search.setSearchKeyword("%ÁÖ¼ÒÁö%");
+		search.setSearchKeyword("%ï¿½Ö¼ï¿½ï¿½ï¿½%");
 		search.setCurrentPage(1);
 		search.setPageSize(3);
 		
@@ -89,15 +89,15 @@ public class Triptest {
 		
 		if(trip==null) {
 			trip = new Trip();
-			trip.setLng("test°æµµ");
-			trip.setLat("testÀ§µµ");
-			trip.setAddress("test ÁÖ¼ÒÁö");
+			trip.setLng("testï¿½æµµ");
+			trip.setLat("testï¿½ï¿½ï¿½ï¿½");
+			trip.setAddress("test ï¿½Ö¼ï¿½ï¿½ï¿½");
 			trip.setContentId("123456");
 			trip.setContentTypeId("12");
 			trip.setCreatedTime("01/01/01");
-			trip.setDescription("test¼³¸íÁö");
-			trip.setThumbnailImageFile("ÀÌ¹ÌÁö ¾øÀ½");
-			trip.setTripName("test¿©ÇàÁö");
+			trip.setDescription("testï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			trip.setThumbnailImageFile("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+			trip.setTripName("testï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			tripDao.addTrip(trip);
 			
 			
@@ -109,12 +109,12 @@ public class Triptest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void getAddress()throws Exception{
 		String lat = "37.524496";
 		String lng = "128.636357";
 		//36.703287, 128.616741
-		//¼­¿ï ¿ë»ê37.535449, 126.955552
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½37.535449, 126.955552
 		List locate = tripDaoImpl.getClientAddress(lat, lng);
 		System.out.println(locate);
 		System.out.println(locate.get(1));
@@ -129,17 +129,24 @@ public class Triptest {
 //		}
 //		System.out.println(locate);
 //		String placeName =((String)locate.get(5)).trim();
-//		System.out.println("µµ½Ã¸í::"+placeName);
-//		if(placeName.equals("¼­¿ïÆ¯º°½Ã")) {
-//			placeName = "¼­¿ï";
+//		System.out.println("ï¿½ï¿½ï¿½Ã¸ï¿½::"+placeName);
+//		if(placeName.equals("ï¿½ï¿½ï¿½ï¿½Æ¯ï¿½ï¿½ï¿½ï¿½")) {
+//			placeName = "ï¿½ï¿½ï¿½ï¿½";
 //		}
 //		
 //		String areacode = tripDaotour.getAreaCode(placeName, "");
-//		System.out.println(placeName+"ÀÇ Áö¿ªÄÚµå´Â  "+areacode);
+//		System.out.println(placeName+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½  "+areacode);
 //		placeName = ((String)locate.get(4)).trim();
 //		String localName = tripDaotour.getAreaCode(placeName, areacode);
-//		System.out.println(localName+"ÀÌ ÇÊ¿äÇÔ");
+//		System.out.println(localName+"ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½");
 //		
 	}
 
+	@Test
+	public void searchTest()throws Exception {
+		List list = tripDaotour.listTourBySearch(1,"êµ°ì‚°");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));			
+		}
+	}
 }

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="EUC-KR"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -14,7 +16,7 @@ $(function() {
 	//draggable: false,
     autoOpen: false,
     resizable: false,
-    //Å©±â Á¶Àı
+    //í¬ê¸° ì¡°ì ˆ
     width: 800,
   });
   $('#button_open_dialog').click( function(){
@@ -28,31 +30,31 @@ $(function() {
 </head>
 <body>
   
-<button id='button_open_dialog'>´ëÈ­»óÀÚ ¿­±â</button>
+<button id='button_open_dialog'>ëŒ€í™”ìƒì ì—´ê¸°</button>
  
-<div id="dialog" title="±âº» ´ëÈ­»óÀÚ">
+<div id="dialog" title="ê¸°ë³¸ ëŒ€í™”ìƒì">
   <img src="C:\Users\user\Desktop\gerjeMuseum.jpg"/>
-  <p>¿©ÇàÁö ÀÌ¸§</p>
-  <p>ÁÖ¼Ò</p>
+  <p>ì—¬í–‰ì§€ ì´ë¦„</p>
+  <p>ì£¼ì†Œ</p>
   <div id="map" style="width:100%;height:400px;"></div>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
   <script>
-	var container = document.getElementById('map'); //Áöµµ¸¦ ´ãÀ» ¿µ¿ªÀÇ DOM ·¹ÆÛ·±½º
-	var options = { //Áöµµ¸¦ »ı¼ºÇÒ ¶§ ÇÊ¿äÇÑ ±âº» ¿É¼Ç
-	center: new daum.maps.LatLng(33.450701, 126.570667), //ÁöµµÀÇ Áß½ÉÁÂÇ¥.
-	level: 3 //ÁöµµÀÇ ·¹º§(È®´ë, Ãà¼Ò Á¤µµ)
+	var container = document.getElementById('map'); //ì§€ë„ë¥¼ ë‹´ì„ ì˜ì—­ì˜ DOM ë ˆí¼ëŸ°ìŠ¤
+	var options = { //ì§€ë„ë¥¼ ìƒì„±í•  ë•Œ í•„ìš”í•œ ê¸°ë³¸ ì˜µì…˜
+	center: new daum.maps.LatLng(33.450701, 126.570667), //ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ.
+	level: 3 //ì§€ë„ì˜ ë ˆë²¨(í™•ëŒ€, ì¶•ì†Œ ì •ë„)
 	};
 
-	var map = new daum.maps.Map(container, options); //Áöµµ »ı¼º ¹× °´Ã¼ ¸®ÅÏ
+	var map = new daum.maps.Map(container, options); //ì§€ë„ ìƒì„± ë° ê°ì²´ ë¦¬í„´
   
 	var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
 
-	//¸¶Ä¿¸¦ »ı¼ºÇÕ´Ï´Ù
+	//ë§ˆì»¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 	var marker = new daum.maps.Marker({
 	   position: markerPosition
 	});
 	
-	//¸¶Ä¿°¡ Áöµµ À§¿¡ Ç¥½ÃµÇµµ·Ï ¼³Á¤ÇÕ´Ï´Ù
+	//ë§ˆì»¤ê°€ ì§€ë„ ìœ„ì— í‘œì‹œë˜ë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
 	marker.setMap(map);
   </script>
   

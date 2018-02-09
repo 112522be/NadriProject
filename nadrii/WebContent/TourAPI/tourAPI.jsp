@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="EUC-KR"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -33,7 +36,7 @@
 </script>
 
 
-<title>¹Ú¹°°üÃ£±â</title>
+<title>ë°•ë¬¼ê´€ì°¾ê¸°</title>
 </head>
 <body>
 
@@ -61,9 +64,9 @@
 								<input type="hidden" name="pageNo"
 									value="${museum.get(i).contentid}" />
 								<p>
-									<a href="#" class="btn btn-primary" role="button">°øÀ¯</a> <a
-										href="#" class="btn btn-default" role="button">ÁÁ¾Æ¿ä</a> <a
-										href="#" class="btn btn-danger" role="button">À§½Ã¸®½ºÆ®</a>
+									<a href="#" class="btn btn-primary" role="button">ê³µìœ </a> <a
+										href="#" class="btn btn-default" role="button">ì¢‹ì•„ìš”</a> <a
+										href="#" class="btn btn-danger" role="button">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>
 								</p>
 							</div>
 						</div>

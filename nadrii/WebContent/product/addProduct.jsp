@@ -1,15 +1,23 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<<<<<<< HEAD
+<%@ page contentType="text/html; charset=utf-8" %>
+=======
+<%@ page contentType="text/html; charset=UTF-8" %>
+>>>>>>> refs/remotes/origin/master
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="EUC-KR">
+<<<<<<< HEAD
+<meta charset="utf-8">
+=======
+<meta charset="UTF-8">
+>>>>>>> refs/remotes/origin/master
 
 <title>addProduct.jsp</title>
 
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -18,7 +26,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-	<!-- »óÇ°Á¦Á¶ÀÏÀÚ Calendar Event -->
+	<!-- ìƒí’ˆì œì¡°ì¼ì Calendar Event -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -35,14 +43,14 @@
 <script type="text/javascript">
 
 $(function(){
-	$( "td.ct_btn01:contains('È®ÀÎ')" ).bind("click", function(){
+	$( "td.ct_btn01:contains('í™•ì¸')" ).bind("click", function(){
 		self.location = "/product/listProduct?menu=manage"
 				$("form").attr("method" , "POST")
 	});
 });
 
 $(function(){
-	$( "td.ct_btn01:contains('Ãß°¡µî·Ï')" ).bind("click", function(){
+	$( "td.ct_btn01:contains('ì¶”ê°€ë“±ë¡')" ).bind("click", function(){
 		self.location = "../product/addProductView.jsp;"
 	});
 });
@@ -55,48 +63,48 @@ $(function(){
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info">ÆÇ¸Å»óÇ° µî·ÏÈ®ÀÎ</h3>
+	       <h3 class=" text-info">íŒë§¤ìƒí’ˆ ë“±ë¡í™•ì¸</h3>
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>»ó Ç° ¸í</strong></div>
+	  		<div class="col-xs-4 col-md-2"><strong>ìƒ í’ˆ ëª…</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°»ó¼¼Á¤º¸</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆìƒì„¸ì •ë³´</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.prodDetail }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>Á¦Á¶ÀÏÀÚ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ì œì¡°ì¼ì</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>°¡°İ</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ê°€ê²©</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.price }</div>
 		</div><hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°ÀÌ¹ÌÁö</strong></div>
+	  		<div class="col-xs-4 col-md-2 "><strong>ìƒí’ˆì´ë¯¸ì§€</strong></div>
 			<div class="col-xs-8 col-md-4">${ product.fileName }</div>
 		</div><hr/>
 		
 		<div class="row">
 		    <div class="col-md-12 text-center">
-		      <button type="button" class="btn btn-primary">È®&nbsp;ÀÎ</button>
-			  <a class="btn btn-primary btn" href="#" role="button">Ãß°¡µî·Ï</a>
+		      <button type="button" class="btn btn-primary">í™•&nbsp;ì¸</button>
+			  <a class="btn btn-primary btn" href="#" role="button">ì¶”ê°€ë“±ë¡</a>
 		    </div>
 		  </div>
 	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
- 	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+ 	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
  	
 </body>
 </html>

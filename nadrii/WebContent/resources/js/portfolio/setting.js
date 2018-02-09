@@ -33,8 +33,6 @@ if (jQuery().quicksand) {
 					title : { type: 'inside' },
 				}
 			});
-
-
 		});	
 		$(this).addClass("active"); 			
 		return false;

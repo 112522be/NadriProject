@@ -78,7 +78,9 @@ public class TripDaoImplgetAddress implements TripDao {
 	@Override
 	public List getClientAddress(String lat, String lng) throws Exception {
 		
-		System.out.println("ÁÖ¼Ò Ã£±â");
+
+		System.out.println("getClientAddress");
+
 		
 		String location = lat+","+lng;
 		System.out.println(location);
@@ -91,9 +93,9 @@ public class TripDaoImplgetAddress implements TripDao {
               
         int responseCode = con.getResponseCode();
         BufferedReader br;
-        if(responseCode==200) { // Á¤»ó È£Ãâ
+        if(responseCode==200) { // ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
             br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
-        } else {  // ¿¡·¯ ¹ß»ý
+        } else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
             br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
         }
         List list = new ArrayList();
@@ -119,6 +121,12 @@ public class TripDaoImplgetAddress implements TripDao {
 
 	@Override
 	public String getAreaCode(String placeName, String areaCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List listTourBySearch(int pageNo,String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

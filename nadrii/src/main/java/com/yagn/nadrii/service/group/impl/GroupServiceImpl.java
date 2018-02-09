@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
-import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupDao;
 import com.yagn.nadrii.service.group.GroupService;;
 
@@ -49,6 +48,11 @@ public class GroupServiceImpl implements GroupService{
 		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
+	}
+	
+	public void updateViewCount(int groupNo) throws Exception{
+		Group group = groupDao.getGroup(groupNo);
+		groupDao.updateViewCount(group);
 	}
 
 	public void updateGroup(Group group) throws Exception {

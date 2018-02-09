@@ -1,45 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>Summernote</title>
-  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">  -->
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"><!--    -->
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-  
+  <style type="text/css">
+  	.selectedhashtagButtons {
+			  height: 30px;
+			  font-size:15px;
+			  font-family: 'Nanum Gothic';
+			  color: white;
+			  text-align: center;
+			  background: #2fade2;
+			  border: solid 2px #2fade2;
+			  border-radius: 30px;
+	}
+	.hashtagButtons {
+			  height: 30px;
+			  font-size:15px;
+			  font-family: 'Nanum Gothic';
+			  color: black;
+			  text-align: center;
+			  background: #edeeef;
+			  border: solid 2px #edeeef;
+			  border-radius: 30px;
+	}
+	#selectedThumbnail{
+		border: solid 2px red;
+	}
+  </style>
   <script type="text/javascript">
-        /* summernote¿¡¼­ ÀÌ¹ÌÁö ¾÷·Îµå½Ã ½ÇÇàÇÒ ÇÔ¼ö */
+        /* summernoteì—ì„œ ì´ë¯¸ì§€ ì—…ë¡œë“œì‹œ ì‹¤í–‰í•  í•¨ìˆ˜ */
 	 	function sendFile(file, editor) {              
-            // ÆÄÀÏ Àü¼ÛÀ» À§ÇÑ Æû»ı¼º
+            // íŒŒì¼ ì „ì†¡ì„ ìœ„í•œ í¼ìƒì„±
 	 		data = new FormData();
 	 	    data.append("uploadFile", file);
-	 	    $.ajax({ // ajax¸¦ ÅëÇØ ÆÄÀÏ ¾÷·Îµå Ã³¸®
+	 	    $.ajax({ // ajaxë¥¼ í†µí•´ íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 	 	        data : data,
 	 	        type : "POST",
 	 	        url : "uploadImage",
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
-	 	        success : function(data) { // Ã³¸®°¡ ¼º°øÇÒ °æ¿ì
-                    // ¿¡µğÅÍ¿¡ ÀÌ¹ÌÁö Ãâ·Â
-	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.url+"\n\n");
-	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" alt="'+data.url+'" src="'+data.url+'" width="100px" height="120px"/>&nbsp;')
+	 	        success : function(data) { // ì²˜ë¦¬ê°€ ì„±ê³µí•  ê²½ìš°
+                    // ì—ë””í„°ì— ì´ë¯¸ì§€ ì¶œë ¥
+
+	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
+
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
-					alert("ÆÄÀÏ ¾÷·Îµå¿¡ ½ÇÆĞÇß½À´Ï´Ù.")
+					alert("íŒŒì¼ ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.")
 				}
 	 	    });
 	 	}
         function deleteFile(file) {
 			
-		}
-        function addThumbnail(filePath) {
-			$('input[name="thumbNailFileName"]').val(filePath);
 		}
         var hashtagList=",";
         function listHashTag(filePath) {
@@ -51,32 +75,41 @@
         		},
         		success : function(data) {
         			for(i=0;i<data.length;i++){
-        				if(data[i]==("À½½Ä")){
-        					data[i] = "¸ÀÁı"
+        				if(data[i]==("ìŒì‹")){
+        					data[i] = "ë§›ì§‘"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtags" value="'+data[i]+'">#'+data[i]+'</button>');
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
 	 	        	}
 				},
 				error : function() {
-					$("#cndHashtags").append("<p>ºĞ¼® °á°ú¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.</p>")
+					$("#cndHashtags").append("<p>ë¶„ì„ ê²°ê³¼ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</p>")
 				}
         	})
         }
         function addHashTag(value) {
-			$('button.hashtags:contains("'+value+'")').remove();
-			$('#selectedHashTags').append("#"+value+" ")
-			hashtagList+=value+",";
-			$('input[name="hashtag"]').val(hashtagList);
+        	$('button.hashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-ok');
+			$('button.hashtagButtons[value="'+value+'"]').attr('class', 'selectedhashtagButtons');
+		}
+        function deleteHashTag(value) {
+        	$('button.selectedhashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-plus');
+			$('button.selectedhashtagButtons[value="'+value+'"]').attr('class', 'hashtagButtons');
 		}
         $(function() {
 	 	    
- 	 	   $('div#cndHashTags').on('click', 'button.hashtags', function() {
+ 	 	   $('div#cndHashTags').on('click', 'button.hashtagButtons', function() {
  	 		   addHashTag($(this).val());
  			})
  			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
- 				console.log($(this).attr('src'))
+  				$('div#cndThumbnail>img').removeAttr("id")
+  				$('input[name="thumbNailFileName"]').val($(this).attr('src'));
+  				$(this).attr("id", "selectedThumbnail");
+  				console.log($('input[name="thumbNailFileName"]').val());
  			}) 
+ 			
+ 			$('div#cndHashTags').on('click', 'button.selectedhashtagButtons', function() {
+ 	 		   deleteHashTag($(this).val());
+ 			})
 		})
 	</script>
 </head>
@@ -84,11 +117,63 @@
 		<form name="textForm">
 		<textarea id="summernote" name="text"></textarea>
         <script>
+	        var openDialog = function (uri, name, options, closeCallback) {
+			    var win = window.open(uri, "", options);
+			    var interval = window.setInterval(function() {
+			        try {
+			            if (win == null || win.closed) {
+			                window.clearInterval(interval);
+			                closeCallback(win);
+			            }
+			        }
+			        catch (e) {
+			        }
+			    }, 1000);
+			    return win;
+	        }
+        	var addPlace = function (context) {
+        	 	var ui = $.summernote.ui;
+
+	        	var button = ui.button({
+	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
+	        		click: function() {
+	    				//openWin = window.open(popUrl,"",popOption);    
+	    				    var uri = "addPlace.jsp";
+		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
+	    				    openDialog(uri, "", options, function(win) {
+	    				    	alert($('#content_pr').val());
+	    				    	alert($('#lat').val());
+	    				    	alert($('#lng').val());
+	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left">'+
+	    									'<div class="col-xs-3" align="left">'+
+	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
+	    									'</div>'+
+	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button><p></p>';
+	    				    	$('#summernote').summernote('code', html);
+						})
+	    			}
+	        	}) 
+	        	return button.render();
+        	}
+			var openWin;
             $(document).ready(function() {
-                $('#summernote').summernote({ // summernote¸¦ »ç¿ëÇÏ±â À§ÇÑ ¼±¾ğ
+
+                $('#summernote').summernote({
                     height: 800,
-					callbacks: { // Äİ¹éÀ» »ç¿ë
-                        // ÀÌ¹ÌÁö¸¦ ¾÷·ÎµåÇÒ °æ¿ì ÀÌº¥Æ®¸¦ ¹ß»ı
+                    toolbar: [
+                    	['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']],
+                        ['insert', ['picture']],
+                    	['mybutton', ['place']]
+                    ],
+                    buttons: {
+                       place: addPlace
+                    },
+					callbacks: { // ì½œë°±ì„ ì‚¬ìš©
+                        // ì´ë¯¸ì§€ë¥¼ ì—…ë¡œë“œí•  ê²½ìš° ì´ë²¤íŠ¸ë¥¼ ë°œìƒ
 					    onImageUpload: function(files, editor, welEditable) {
 					    	for(i=0;i<files.length;i++){
 					    		sendFile(files[i], this);
@@ -99,15 +184,13 @@
 			});
 		</script>
 		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat">
-		<input type="hidden" name="lng">
+		<input type="hidden" name="lat" id="lat">
+		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
-		
-		<div>
-			<textarea class="form-control" id="selectedHashTags" rows="2"></textarea>
-		</div>
+		<input type="hidden" id="content_pr">
+		<h5 align="left">ì¸ë„¤ì¼ì„  ì„ íƒí•´ì£¼ì„¸ìš”</h5>
+		<div id="cndThumbnail"></div>
 		<br/>
-		<div id="cndHashTags"></div>
-		<br/>
+		</form>
 </body>
 </html>

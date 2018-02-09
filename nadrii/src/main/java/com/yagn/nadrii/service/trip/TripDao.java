@@ -33,5 +33,6 @@ public interface TripDao {
 	
 	public String getAreaCode(String placeName, String areaCode) throws Exception;
 	
+	public List listTourBySearch(int pageNo,String keyword) throws Exception ;
 	
 }

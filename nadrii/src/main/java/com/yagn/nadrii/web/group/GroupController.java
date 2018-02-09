@@ -54,16 +54,17 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="addGroup", method=RequestMethod.POST)
-	public String addGroup(@ModelAttribute("group") Group group, 
-											@ModelAttribute("join") Join join, 	HttpSession session) throws Exception {
+	public String addGroup(@ModelAttribute("group") Group group, HttpSession session) throws Exception {
 
 		System.out.println("/addGroup");
 		
 		int groupNo = groupService.addGroup(group);
 		
+		Join join = new Join();
+		
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		
 		group.setJoin(join);
 		
@@ -72,16 +73,18 @@ public class GroupController {
 		return "forward:/group/getGroup?groupNo="+groupNo;
 	}
 	
-	@RequestMapping(value="getGroup", method=RequestMethod.GET)
+	@RequestMapping(value="getGroup")
 	public String getGroup(@RequestParam("groupNo") int groupNo, Model model) throws Exception {
 		
 		System.out.println("/getGroup");
 		
+		groupService.updateViewCount(groupNo);
+		
 		Group group = groupService.getGroup(groupNo);
-			
+		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/getGroup?groupNo="+groupNo;
+		return "forward:/group/getGroup.jsp";
 		
 	}
 	
@@ -117,8 +120,8 @@ public class GroupController {
 		Join join = new Join();
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("user")).getUserId());
-		
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+				
 		joinService.deleteJoin(join);
 		
 		group.setJoin(join);
@@ -127,7 +130,7 @@ public class GroupController {
 		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/listGroup?groupNo="+groupNo;
+		return "forward:/group/listGroup";
 	}
 	
 	@RequestMapping(value="listGroup")
@@ -139,14 +142,12 @@ public class GroupController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+	//	search.setSearchKeyword(searchKeyword);
 		
-		// Business logic ����
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println("resultPage :: "+resultPage);
-		
-		// Model �� View ����
+				
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

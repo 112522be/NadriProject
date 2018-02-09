@@ -5,22 +5,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.purchase.PurchaseService;
+import com.yagn.nadrii.service.user.UserService;
 
 @RestController
 @RequestMapping("/purchase/*")
@@ -29,6 +29,10 @@ public class PurchaseRestController {
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	/// Constructor
 	public PurchaseRestController() {
@@ -39,7 +43,7 @@ public class PurchaseRestController {
 	public void addPurchase(
 			@RequestBody JSONObject basketData
 			) {
-		
+
 		System.out.println("\n/purchase/json/addBasket : POST");
 		
 		Purchase purchase = new Purchase();
@@ -49,7 +53,7 @@ public class PurchaseRestController {
 				System.out.println("[Basket]");
 
 				JSONObject jsonObj = (JSONObject) JSONValue.parse(basketData.toJSONString());
-//				System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
+				System.out.println("\n[JSONObject jsonObj] ==> " + jsonObj.toString());
 
 				ObjectMapper objectMapper = new ObjectMapper();
 				purchase = new Purchase();
@@ -62,16 +66,18 @@ public class PurchaseRestController {
 				cal.setTime(bDate);
 				cal.add(Calendar.DATE, -10);
 
-				String cancelDate = df.format(cal.getTime()).substring(0, 4) + "³â "
-						+ df.format(cal.getTime()).substring(4, 6) + "¿ù " + df.format(cal.getTime()).substring(6) + "ÀÏ";
+				String cancelDate = df.format(cal.getTime()).substring(0, 4) + " ë…„"
+						+ df.format(cal.getTime()).substring(4, 6) + " ì›”" + df.format(cal.getTime()).substring(6) + " ì¼";
 
 				// cancelDate set
 				purchase.setCancelDate(cancelDate);
-
+				purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
+				
+				System.out.println("\n[purchase.buyer check] ==> " + purchase.getBuyer() );
 				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
 				System.out.println("\n");
 
-//				purchaseService.addPurchase(purchase);
+				purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -81,5 +87,32 @@ public class PurchaseRestController {
 	
 	} // end of method
 
+	
+	@RequestMapping(value="json/deleteBasketList", method=RequestMethod.POST) 
+	public void deleteBasketList(
+			@RequestBody JSONObject basketData
+			) {
+		
+		System.out.println("\n /purchase/json/deleteBasketList : POST");
+		
+		Purchase purchase = new Purchase();
+		
+		try {
+			
+			JSONObject jsonObj = (JSONObject) JSONValue.parse(basketData.toJSONString());
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			purchase = new Purchase();
+			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
+			
+			purchaseService.deleteBasketList(purchase);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+	
+	
 	
 } // end of class

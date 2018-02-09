@@ -1,34 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src=""></script>
 <script type="text/javascript">
 	$(function() {
-		$('button.btn.btn-default:contains("ÂÊÁöº¸³»±â")').bind('click', function() {
-			alert("ÂÊÁöº¸³»±â!");
+		$('button.btn.btn-default:contains("ìª½ì§€ë³´ë‚´ê¸°")').bind('click', function() {
+			alert("ìª½ì§€ë³´ë‚´ê¸°!");
+
 		})
 	})
+
+		
+	$(function () {
+		$('button.btn.btn-default').bind('click', function() {
+			$(this).popover()
+		})
+	})
+
 </script>
 </head>
 <body>
-	<form>
-		<input type="hidden" value="${community.postNo}">
-	</form>
-	<div class="container">
+	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+	<div class="container" align="center">
 		<div align="center">
 			<h3>${community.title}</h3>
+			<br/>
+			<div class="col-xs-6">
+				<p align="left" class="" color="gray">${community.regDate}</p>
+			</div>
+			<div class="col-xs-6">
+				<p align="right" class="" color="gray">ì¡°íšŒìˆ˜&nbsp;${community.viewCount}</p>
+			</div>
+			<br/>
+			<hr/>
 		</div>
 		<div>
 			${community.text}
@@ -39,8 +52,13 @@
 		Profile
 		<h3 style="bold">${user.userId}</h3>
 		<p>${user.email}<p/>
-		<button type="button" class="btn btn-default">ÂÊÁöº¸³»±â</button>
+		<button type="button" class="btn btn-default">ìª½ì§€ë³´ë‚´ê¸°</button>
 	</div>
 	<jsp:include page="../common/comment.jsp"></jsp:include>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2a580a6a043772106fd68ca5e3561&libraries=services"></script>
+	<script type="text/javascript" src="/resources/js/map_2.js"></script>
 </body>
 </html>

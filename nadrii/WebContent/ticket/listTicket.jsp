@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,35 +10,25 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
-<title>³ªµéÀÌ Æ¼ÄÏ ¸ñ·Ï</title>
+<title>ë‚˜ë“¤ì´ í‹°ì¼“ ëª©ë¡</title>
 
-<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- ¹«ÇÑ½ºÅ©·Ñ -->
+	<!-- ë¬´í•œìŠ¤í¬ë¡¤ -->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-		body {
-            padding-top : 50px;
-        }
-        
-        .col-sm-3 {
-        	height: 500px;
-        }
-        
-        
-        
+	.col-sm-3 {
+		height: 500px;
+	}
 	</style>
 
 
@@ -51,33 +41,35 @@ function fncGetList(pageNo) {
 	
 }
 
-	//=================== "4 kind of sorting" Event ¿¬°á =================== 
+	//=================== "4 kind of sorting" Event ì—°ê²° =================== 
 	$(function() {
-		$("a[href='#']:contains('Á¦¸ñ¼ø')").bind("click", function(event) {
+
+		$("a[href='#']:contains('ì œëª©ìˆœ')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "A";
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
-		$("a[href='#']:contains('Á¶È¸¼ø')").bind("click", function(event) {
+		$("a[href='#']:contains('ì¡°íšŒìˆœ')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "B";
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
-		$("a[href='#']:contains('¼öÁ¤ÀÏ¼ø')").bind("click", function(event) {
+		$("a[href='#']:contains('ìˆ˜ì •ì¼ìˆœ')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "C";
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
-		$("a[href='#']:contains('»ı¼ºÀÏ¼ø')").bind("click", function(event) {
+
+		$("a[href='#']:contains('ìƒì„±ì¼ìˆœ')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "D";
 			fncGetTicketSort(searchCondition);
@@ -109,10 +101,10 @@ function fncGetList(pageNo) {
 				});		
 	}
 
-	//=================== "»ó¼¼Á¶È¸" Event ¿¬°á ===================
+	//=================== "ìƒì„¸ì¡°íšŒ" Event ì—°ê²° ===================
 	$(function() {
-		$("a[href='#' ]:contains('»ó¼¼Á¶È¸')").bind("click", function(event) {
-//			alert("»ó¼¼Á¶È¸")
+		$("a[href='#' ]:contains('ìƒì„¸ì¡°íšŒ')").bind("click", function(event) {
+//			alert("ìƒì„¸ì¡°íšŒ")
 			
 			event.preventDefault();
 
@@ -124,17 +116,17 @@ function fncGetList(pageNo) {
 			console.log('contentTypeId : ' + contentTypeId)
 			console.log('title : ' + title)
 			console.log('encodeTitle : ' + encodeTitle)
-			///*
+			
 			self.location ="/ticket/getTicket?"
 					+ "contentId=" + contentId 
 					+ "&contentTypeId=" + contentTypeId
 					+ "&title=" + encodeTitle;
-			//*/
+			
 		});
 	});
 	
 	function fncGetTicket() {
-		$("form").attr("method", "POST").attr("action", "/ticket/testTicket").submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/getTicket").submit();
 	}
 </script>
 
@@ -146,16 +138,17 @@ function fncGetList(pageNo) {
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 
 		<div class="page-header text-right">
 			<h3 class="text-info">
-				<p class="bg-success">³ªµéÀÌÆ¼ÄÏ</p>
-				<p class="bg-success">${sessionScope.users.userId }</p>
+
+				<p class="bg-success">ë‚˜ë“¤ì´í‹°ì¼“</p>
 			</h3>
+
 			<h5 class="text-muted">
-				Á¶È¸ÇÏ½Ç Æ¼ÄÏ Á¤º¸¸¦ <strong class="text-danger">¼±ÅÃ</strong>ÇØ ÁÖ¼¼¿ä.
+				ì¡°íšŒí•˜ì‹¤ í‹°ì¼“ ì •ë³´ë¥¼ <strong class="text-danger">ì„ íƒ</strong>í•´ ì£¼ì„¸ìš”.
 			</h5>
 		</div>
 
@@ -166,10 +159,10 @@ function fncGetList(pageNo) {
 		<div>
 			<!-- Nav tabs -->
 			<ul class="nav nav-pills">
-				<li role="presentation"><a href="#">Á¦¸ñ¼ø</a></li>
-				<li role="presentation"><a href="#">Á¶È¸¼ø</a></li>
-				<li role="presentation"><a href="#">¼öÁ¤ÀÏ¼ø</a></li>
-				<li role="presentation"><a href="#">»ı¼ºÀÏ¼ø</a></li>
+				<li role="presentation"><a href="#">ì œëª©ìˆœ</a></li>
+				<li role="presentation"><a href="#">ì¡°íšŒìˆœ</a></li>
+				<li role="presentation"><a href="#">ìˆ˜ì •ì¼ìˆœ</a></li>
+				<li role="presentation"><a href="#">ìƒì„±ì¼ìˆœ</a></li>
 			</ul>
 
 		</div>
@@ -178,7 +171,7 @@ function fncGetList(pageNo) {
 		<div class="col-md-12 text-right">
 			<p class="text-primary">
 				<code>
-				&lt; ÇöÀç ${ resultPage.pageNo } ÆäÀÌÁö / ÀüÃ¼ ${ resultPage.totalCount } °Ç¼ö &gt;
+				&lt; í˜„ì¬ ${ resultPage.pageNo } í˜ì´ì§€ / ì „ì²´ ${ resultPage.totalCount } ê±´ìˆ˜ &gt;
 				</code>
 			</p>
 		</div>
@@ -197,28 +190,31 @@ function fncGetList(pageNo) {
 						</div>	
 					
 						<div class="thumbnail">
+
 						
-							<p class="text-right">Á¶È¸¼ö : ${ tt.readcount }</p>
+							<p class="text-right">ì¡°íšŒìˆ˜ : ${ tt.readcount }</p>
 							
-							<img src="${ tt.firstimage }" class="img-responsive" />
-							
+							<img src="${ tt.firstimage }" />
+
 							<div class="caption">
+
 								<h5>
 								<!-- 
-									ÀÔÀå±Ç :
+									ì…ì¥ê¶Œ :
 									<c:forEach items="${ tt.usetimefestival }" varStatus="status">
 									${ tt.usetimefestival[status.index] }
 									</c:forEach>
 								 -->	
 								<hr />
 								
-								±â&nbsp;°£ : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-								Àå&nbsp;¼Ò : ${ tt.eventplace } <br>
+								ê¸°&nbsp;ê°„ : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
+								ì¥&nbsp;ì†Œ : ${ tt.eventplace } <br>
 								</h5>
 								<br>
 								<p class="text-right">
-									<a href="#" class="btn btn-success btn-lg" role="button"> »ó¼¼Á¶È¸ 
-									<!-- PageNavigationÀ» À§ÇÑ °ªÀ» º¸³»´Â ºÎºĞ  -->
+
+									<a href="#" class="btn btn-success btn-lg" role="button"> ìƒì„¸ì¡°íšŒ 
+									<!-- PageNavigationì„ ìœ„í•œ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„  -->
 										<input type="hidden" name="contentId" value="${ tt.contentid }"> 
 										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }"> 
 										<input type="hidden" name="title" value="${ tt.title }"> 
@@ -234,14 +230,14 @@ function fncGetList(pageNo) {
 			</div>
 
 			<hr />
-			<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
+			<!-- PageNavigation ì„ íƒ í˜ì´ì§€ ê°’ì„ ë³´ë‚´ëŠ” ë¶€ë¶„ -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 			
 		</form>
 		<!-- form End /////////////////////////////////////-->
 
 	</div>
-	<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div End /////////////////////////////////////-->
 	
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>

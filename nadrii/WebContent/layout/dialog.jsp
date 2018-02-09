@@ -1,24 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"></script>
 </head>
 <body>
    
 <div id="dialog" title="" >
-	<!--  Áöµµ¸¦ ´ã´Â °ø°£ -->
+	<!--  ì§€ë„ë¥¼ ë‹´ëŠ” ê³µê°„ -->
   <div id="map" style="width:400px;height:400px;"></div>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
   <script type="text/javascript"></script>
     
     
- 	<a href="#" class="btn btn-primary" role="button">°øÀ¯</a> 
-    <a href="#" class="btn btn-default" role="button">ÁÁ¾Æ¿ä</a>
-    <a href="#" id="wishList" class="btn btn-danger" role="button">À§½Ã¸®½ºÆ®</a>
+ 	<a href="#" class="btn btn-primary" role="button">ê³µìœ </a> 
+    <a href="#" class="btn btn-default" role="button">ì¢‹ì•„ìš”</a>
+    <a href="#" id="wishList" class="btn btn-danger" role="button">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a>
 
 </div>	
 </body>

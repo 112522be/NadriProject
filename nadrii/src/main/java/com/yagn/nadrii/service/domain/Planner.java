@@ -1,20 +1,20 @@
 package com.yagn.nadrii.service.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Planner {
+	
 	private int postNo;
-	private Date regDate;
-	private String userId;
+	private String plannerMakerId;
 	private String title;
-	private String planText;
-	private String hashtag;
-	private String fileName;
-	private int viewCount;
 	private String lat;
 	private String lng;
-	private int totalTime;
-	private int payment;
+	private Date regDate;
+	private int viewCount;
+	private String flag;
+	private String photo;
+	private String text;
+	
 	
 	public int getPostNo() {
 		return postNo;
@@ -22,47 +22,17 @@ public class Planner {
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public String getPlannerMakerId() {
+		return plannerMakerId;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setPlannerMakerId(String plannerMakerId) {
+		this.plannerMakerId = plannerMakerId;
 	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getPlanText() {
-		return planText;
-	}
-	public void setPlanText(String planText) {
-		this.planText = planText;
-	}
-	public String getHashtag() {
-		return hashtag;
-	}
-	public void setHashtag(String hashtag) {
-		this.hashtag = hashtag;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public int getViewCount() {
-		return viewCount;
-	}
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
 	}
 	public String getLat() {
 		return lat;
@@ -76,23 +46,46 @@ public class Planner {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	public int getTotalTime() {
-		return totalTime;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setTotalTime(int totalTime) {
-		this.totalTime = totalTime;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
-	public int getPayment() {
-		return payment;
+	public int getViewCount() {
+		return viewCount;
 	}
-	public void setPayment(int payment) {
-		this.payment = payment;
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
+
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	@Override
 	public String toString() {
-		return "Planner [postNo=" + postNo + ", regDate=" + regDate + ", userId=" + userId + ", title=" + title
-				+ ", planText=" + planText + ", hashtag=" + hashtag + ", fileName=" + fileName + ", viewCount="
-				+ viewCount + ", lat=" + lat + ", lng=" + lng + ", totalTime=" + totalTime + ", payment=" + payment
-				+ "]";
+		return "Planner [postNo=" + postNo + ", plannerMakerId=" + plannerMakerId + ", title=" + title + ", lat=" + lat
+				+ ", lng=" + lng + ", regDate=" + regDate + ", viewCount=" + viewCount + ", flag=" + flag + ", photo="
+				+ photo + ", text=" + text + "]";
 	}
+	
 }
+

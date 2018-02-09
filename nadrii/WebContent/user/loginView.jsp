@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -7,9 +7,9 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	
-	<!-- ¬¸¡∂ : http://getbootstrap.com/css/   ¬¸¡∂ -->
+	<!-- Ï∞∏Ï°∞ : http://getbootstrap.com/css/   Ï∞∏Ï°∞ -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -32,163 +32,172 @@
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-		//============= "∑Œ±◊¿Œ"  Event ø¨∞· =============
-		/* $( function() {
+		//============= "Î°úÍ∑∏Ïù∏"  Event Ïó∞Í≤∞ =============
+		$( function() {
 			
 			$("#userId").focus();
 			
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("button").on("click" , function() {
 				var id=$("input:text").val();
 				var pw=$("input:password").val();
 				
+//				alert(id +"/"+ pw)
+				
 				if(id == null || id.length <1) {
-					alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('ID Î•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
 					$("#userId").focus();
 					return;
 				}
 				
 				if(pw == null || pw.length <1) {
-					alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
+					alert('Ìå®Ïä§ÏõåÎìúÎ•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
 					$("#password").focus();
 					return;
 				}
+	
+				fncLoginCheck(id, pw);
 				
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+//				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
 		
-		*/
-		//============= »∏ø¯ø¯∞°¿‘»≠∏È¿Ãµø =============
+		//============= ÌöåÏõêÏõêÍ∞ÄÏûÖÌôîÎ©¥Ïù¥Îèô =============
 		$( function() {
-			//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3Í∞ÄÏßÄ Î∞©Î≤ï ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
 				self.location = "/user/addUser"
 			});
 		}); 
 		
-		//============= æ∆¿Ãµ √£±‚ »≠∏È¿Ãµø =============
+		//============= ÏïÑÏù¥Îîî Ï∞æÍ∏∞ ÌôîÎ©¥Ïù¥Îèô =============
 		$( function() {
-			$("a[href='#' ]:contains('æ∆¿Ãµ √£±‚')").on("click" , function() {
+			$("a[href='#' ]:contains('ÏïÑÏù¥Îîî Ï∞æÍ∏∞')").on("click" , function() {
 				self.location = "/user/findIdPg"
 			});
 		});
 		
-		//============= ∫Òπ–π¯»£ √£±‚ »≠∏È¿Ãµø =============
+		//============= ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞ ÌôîÎ©¥Ïù¥Îèô =============
 		$( function() {
-			$("a[href='#' ]:contains('∫Òπ–π¯»£ √£±‚')").on("click" , function() {
+			$("a[href='#' ]:contains('ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞')").on("click" , function() {
 				self.location = "/user/findPasswordPg"
 			});
 		});
+		//============= 'Î°úÍ∑∏Ïù∏' Î≤ÑÌäº ÌÅ¥Î¶≠ Event Ï≤òÎ¶¨ =============
+		$( function() {
+			$(".btn.btn-primary:contains('Î°ú Í∑∏ Ïù∏')").bind("click" , function() {
+				fncLoginCheck();
+				//self.location = "/user/findPasswordPg"
+			});
+		});
 		
+		//========== fncLoginProc Event Ï≤òÎ¶¨ ==========
+		function fncLoginCheck(id, pw) {
+			var userId = $("#userId").val();
+			var password = $("#password").val();
+			
+			var loginData = "userId=" + id + "&password=" + pw;
+			
+			$.ajax({
+				url : "/user/json/loginCheck",
+				type : "POST",
+				data : loginData,
+				success : function(result){
+					if(result.msg == "failed"){
+						alert("Îì±Î°ùÎêú ÏïÑÏù¥ÎîîÍ∞Ä ÏóÜÏäµÎãàÎã§.");
+						location.href="/index.jsp";
+					}
+					if(result.msg == "success"){
+						alert(result.welcomeSign + " Îãò, ÌôòÏòÅÌï©ÎãàÎã§.");
+						location.href="/index.jsp";
+					}
+				}
+			});
+		}
 		
-/**
- * ∑Œ±◊¿Œ
- */
-function loginProc(){
-	var userId = $("#userId").val();
-	var password = $("#password").val();
-	var data = "userId=" + userId;
-	data += "&password=" + password;
-	
-	if(userId == ''){
-		alert("æ∆¿Ãµ∏¶ ¿‘∑¬«ÿ ¡÷ººø‰.");
-		$("#userId").focus();
-		return;
-	}
-	if(password ==''){
-		alert("∫Òπ–π¯»£∏¶ ¿‘∑¬«ÿ ¡÷ººø‰.");
-		$("#password").focus();
-		return;
-	}
-	
-	$.ajax({
-		data :data,
-		url : "/user/loginProc",
-		type : "POST",
-		success : function(result){
-			if(result.msg == "failed"){
-				alert("æ∆¿Ãµ ∂«¥¬ ∫Òπ–π¯»£∏¶ »Æ¿Œ«ÿ¡÷ººø‰.");
-				return;
-			}
-			if(result.msg == "success"){
-				location.href="/user/main";
+		//============= FaceBook Î°úÍ∑∏Ïù∏ =============
+
+		function statusChangeCallback(response) {
+			console.log('statusChangeCallback');
+			console.log(response);
+			if (response.status === 'connected') {
+				testAPI();
+			} else {
+				document.getElementById('status').innerHTML = 'Please log '
+						+ 'into this app.';
 			}
 		}
-	});
-		
-} 
 
-//============= FaceBook ∑Œ±◊¿Œ =============
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
 
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    if (response.status === 'connected') {
-      testAPI();
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    }
-  }
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1974223106165873',
+				cookie : true,
 
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1974223106165873',
-      cookie     : true,  
-                          
-      xfbml      : true,  
-      version    : 'v2.8' 
-    });
+				xfbml : true,
+				version : 'v2.8'
+			});
 
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
 
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
+		};
 
-  };
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-  /*
-  (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    function testAPI() {
-      console.log('Welcome!  Fetching your information.... ');
-      FB.api('/me', function(response) {
-          $("#facebookId").val(response.name);
-          $("#facebookForm").submit();
-      });
-    }
-  */
-	//============= FaceBook ∑Œ±◊¿Œ =============
-	
-//============= kakao ∑Œ±◊¿Œ =============	
-	
+		function testAPI() {
+			console.log('Welcome!  Fetching your information.... ');
+			FB
+					.api(
+							'/me',
+							function(response) {
+								console.log('Successful login for: '
+										+ response.name);
+								document.getElementById('status').innerHTML = 'Thanks for logging in, '
+										+ response.name + '!';
+							});
+		}
+		/*
+		(function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+		  function testAPI() {
+		    console.log('Welcome!  Fetching your information.... ');
+		    FB.api('/me', function(response) {
+		        $("#facebookId").val(response.name);
+		        $("#facebookForm").submit();
+		    });
+		  }
+		 */
+		//============= FaceBook Î°úÍ∑∏Ïù∏ =============
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'))
+		//============= kakao Î°úÍ∑∏Ïù∏ =============
 	</script>		
 	
 </head>
@@ -196,120 +205,77 @@ function statusChangeCallback(response) {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
+	<div class="navbar navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+        	<div class="navbar-header">
+        		<a class="navbar-brand" href="/index.jsp">Nadrii Main</a>
+        	</div>	
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
-	<!--  »≠∏È±∏º∫ div Start /////////////////////////////////////-->
+	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div Start /////////////////////////////////////-->
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
-		
-			<br/>
-			
-			<div class="col-md-6">
-				<img src="/images/cropped-1920-1080-693903.jpg" class="img-rounded" width="100%" />
-			</div>
-	   	 	
-	 	 	<div class="col-md-6">
-	 	 	
-		 	 	<br/>
-				
-				<div class="jumbotron">	 	 	
-		 	 		<h1 class="text-center">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N&nbsp;</h1>
 
-			        <form class="form-horizontal">
-		  
-					  <div class="form-group">
-					    <label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
-					    <div class="col-sm-6">
-					      <input type="text" class="form-control" name="userId" id="userId"  placeholder="æ∆¿Ãµ" >
-					    </div>
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="password" class="col-sm-4 control-label">PASSWORD</label>
-					    <div class="col-sm-6">
-					      <input type="password" class="form-control" name="password" id="password" placeholder="∆–Ω∫øˆµÂ" onkeypress="if(event.keyCode==13){loginProc(); return false}">
-					    </div>
-					  </div>
-					  
-					  <div class="form-group">
-					    <div class="col-sm-offset-4 col-sm-6 text-center">
-					      <button type="button" class="btn btn-primary" onclick="loginProc();" >∑Œ &nbsp;±◊ &nbsp;¿Œ</button>
-					      <a class="btn btn-primary btn" href="#" role="button">»∏ &nbsp;ø¯ &nbsp;∞° &nbsp;¿‘</a>
-					      <a class="btn btn-warning btn" role="button" href="#"> æ∆¿Ãµ √£±‚ </a>
-					      <a class="btn btn-info" role="button" href="#"> ∫Òπ–π¯»£ √£±‚ </a>
-					      <!--  facebook login -->
-					 		<script>
-					 		(function(d, s, id) {
-							    var js, fjs = d.getElementsByTagName(s)[0];
-							    if (d.getElementById(id)) return;
-							    js = d.createElement(s); js.id = id;
-							    js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
-							    fjs.parentNode.insertBefore(js, fjs);
-							  }(document, 'script', 'facebook-jssdk'))</script>
-					 		  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+
+			<div class="col-md-12">
+				<br />
+				<div class="jumbotron">
+					<h1 class="text-center">
+						<img src="http://cdn.firespring.com/images/90349557-f83b-4af1-a134-ef1b43293823.png" />
+					</h1>
+
+					<form class="form-horizontal">
+
+						<div class="form-group">
+							<label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name="userId" id="userId" placeholder="ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•Ìï¥ Ï£ºÏÑ∏Ïöî.">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="col-sm-4 control-label">PASSWORD</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" name="password"	id="password" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏Î•º ÏûÖÎ†•Ìï¥ Ï£ºÏÑ∏Ïöî">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-4 col-sm-6 text-center">
+								<button type="button" class="btn btn-primary">Î°ú Í∑∏ Ïù∏</button>
+								<a class="btn btn-primary btn" href="#" role="button">ÌöåÏõêÍ∞ÄÏûÖ</a> 
+								<a class="btn btn-warning btn" role="button" href="#">ÏïÑÏù¥Îîî Ï∞æÍ∏∞</a> 
+								<a class="btn btn-info" role="button" href="#">ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞</a>
+							</div>
+
+							<div class="col-sm-offset-4 col-sm-6 text-center">
+
+								<br>
+								<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 								Facebook Login	
-								<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>					
-							</fb:login-button>
-							
-							<div id="status"> </div>
-							<!--  facebook login  end-->
-							
-							<!-- kakao ligin 
-							<a href="https://kauth.kakao.com/oauth/authorize?client_id=d4e94f0de61668f5bbbb2f58170b7891&redirect_uri=http://192.168.0.56:8081/oauth&response_type=code" class="kakaoLoginBtn"><img src="../images/kakao_account_login_btn_medium_narrow.png"></a>
-							-->
-							
-<!--  						<a id="custom-login-btn" href="javascript:loginWithKakao()">
-						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
-						</a>
-					    <script type='text/javascript'>
-					      //<![CDATA[
-					        // ªÁøÎ«“ æ€¿« JavaScript ≈∞∏¶ º≥¡§«ÿ ¡÷ººø‰.
-					        Kakao.init(' 55a2455a0f492f809a761acf2db7e5f9');
-					        // ƒ´ƒ´ø¿ ∑Œ±◊¿Œ πˆ∆∞¿ª ª˝º∫«’¥œ¥Ÿ.
-					        Kakao.Auth.createLoginButton({
-					          container: '#kakao-login-btn',
-					          success: function(authObj) {
-					            alert(JSON.stringify(authObj));
-					            location.href="/user/addUser";
-					          },
-					          fail: function(err) {
-					             alert(JSON.stringify(err));
-					          }
-					        });
-					        
-					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
-					        function loginWithKakao() {
-					          // ∑Œ±◊¿Œ √¢¿ª ∂ÁøÛ¥œ¥Ÿ.
-					          Kakao.Auth.login({
-					            success: function(authObj) {
-					              alert(JSON.stringify(authObj));
-					            },
-					            fail: function(err) {
-					              alert(JSON.stringify(err));
-					            }
-					          });
-					        };
-					        </script>-->
-							<!-- kakao ligin end-->
-					    </div>
-					  </div>
-			
+								<div class="fb-login-button" data-max-rows="1" data-size="large"
+										data-button-type="continue_with" data-show-faces="false"
+										data-auto-logout-link="false" data-use-continue-as="false">
+									</div>
+								</fb:login-button>
+								<div id="status"></div>
+
+							</div>
+						</div>
+
 					</form>
-			   	 </div>
-			
+				</div>
+
 			</div>
-			
-  	 	</div>
+
+		</div>
   	 	<!--  row Start /////////////////////////////////////-->
   	 	
  	</div>
- 	<!--  »≠∏È±∏º∫ div end /////////////////////////////////////-->
+ 	<!--  ÌôîÎ©¥Íµ¨ÏÑ± div end /////////////////////////////////////-->
 
 </body>
 

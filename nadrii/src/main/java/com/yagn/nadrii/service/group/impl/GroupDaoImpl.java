@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
-import com.yagn.nadrii.service.domain.Join;
 import com.yagn.nadrii.service.group.GroupDao;
 
 @Repository("groupDaoImpl")
@@ -39,6 +38,10 @@ public class GroupDaoImpl implements GroupDao{
 		return sqlSession.selectOne("GroupMapper.getGroup", groupNo);
 	}
 	
+	public void updateViewCount(Group group) throws Exception {
+		sqlSession.update("GroupMapper.updateViewCount", group);
+	}
+
 	public List<Group> getGroupList(Search search) throws Exception {
 		return sqlSession.selectList("GroupMapper.getGroupList", search);
 	}
