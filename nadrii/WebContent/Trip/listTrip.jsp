@@ -595,10 +595,12 @@ pageEncoding="UTF-8"%>
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
 		$(".btn.btn-default:contains('Go')").on("click" , function() {
-			var keyword = $(".form-control").val();
-			$("form input:nth-child(2)").val(page-1);
-			//alert($("form input:nth-child(2)").val());
-			$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
+				var keyword = $(".form-control").val();
+				$("form input:nth-child(2)").val(page-1);
+				//alert($("form input:nth-child(2)").val());
+				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
 			
 			//self.location = "/trip/listSearch?pageNo=1&keyword="+keyword
 			//alert(keyword);
