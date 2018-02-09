@@ -34,7 +34,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="addMessage", method=RequestMethod.GET)
-	public String addMessage(HttpSession session, HttpServletRequest request,@RequestParam("recevierId") String receiverId,Map map)throws Exception {
+	public String addMessage(HttpSession session, HttpServletRequest request,@RequestParam("receiverId") String receiverId,Map map)throws Exception {
 		
 		
 		System.out.println(this.getClass()+"/message/addMessageView/");
@@ -50,13 +50,11 @@ public class MessageController {
 		return "forward:/message/addMessageView.jsp";
 	}
 	
-	
-	
-	//���Ӱ� ���� �����쿡�� �ۼ��� �޽����� ������ �����ϴ� �Ϳ� �����ϴ� �޼ҵ�
+
 	@RequestMapping(value="addMessage", method=RequestMethod.POST)
-	public String addMessage(@ModelAttribute Message message,Map map)throws Exception {
+	public String addMessage(@ModelAttribute Message message,Map map,@RequestParam("receiverId") String receiverId)throws Exception {
 		System.out.println(this.getClass()+"/message/addMessage/");
-		
+		System.out.println("POST"+receiverId);
 		System.out.println(message);
 		
 		messageService.addMessage(message);

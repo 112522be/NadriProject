@@ -61,6 +61,7 @@
 		})
 	}
 	$(function() {
+
 		$('button.btn.btn-info[name="submitComment"]').bind('click', function() {
 			addComment();
 		})
@@ -72,6 +73,7 @@
 		<p/>
 		<br/>
 		<div>
+
 			<form name="formData">
 				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
@@ -82,6 +84,7 @@
 			<div class="col-xs-2">
 				<button align="right" type="button" class="btn btn-info" name="submitComment">저 장</button>
 			</div>
+
 			<div id="commentContainer"></div>
 		</div>
 	</div>

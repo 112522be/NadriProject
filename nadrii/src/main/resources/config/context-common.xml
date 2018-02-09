@@ -18,35 +18,28 @@
 	<util:properties id="naverApiProperties" 	location="classpath:common/naverApi.properties"/>
 
 	
-	<!--  주현 이메일 인증 
+	<!-- 주현 이메일 인증 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="stmp.gmail.com" />
-		<property name="port" value="25" />    587 -
+		<property name="port" value="587" />    
 		<property name="username" value="kimjh2218@gmail.com" />
-		<property name="password" value="top0347923" />-->
+		<property name="password" value="top0347923" />
+		
+		
 		<!-- email 요청시는 SMTP -->
-<!--		<property name="javaMailProperties">
+		<property name="javaMailProperties">
 			<props>
+			<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
 				<prop key="mail.transport.protocol">gsmtp</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.debug">true</prop>
+				
 			</props>
 		</property>
 	</bean>
     
-     email 인증 : gmail end-->
-
-
-	<bean id="annotationHandlerMapping"
-      class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-       <property name="interceptors">
-        <list>
-            <ref bean="sessionInterceptor" />
-        </list>
-       </property>
-    </bean>
-    <bean id="sessionInterceptor" class="com.yagn.nadrii.web.interceptor.SessionInterceptor"></bean>
+    <!-- email 인증 : gmail end-->
 
 		
 	<!-- 	ㅇ 어노테이션 기반 :: Spring Framework 사용. :: sub element 이해 할것 -->				
