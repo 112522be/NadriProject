@@ -90,11 +90,8 @@ pageEncoding="UTF-8"%>
 				var data = returnData.list;
 				
 				if(data.length != 0){
-<<<<<<< HEAD
+
 					//alert("정상작동");	
-=======
-					alert("정상작동");	
->>>>>>> refs/remotes/origin/master
 																
 					for(var a =0; a<data.length;++a){
 						
@@ -119,11 +116,8 @@ pageEncoding="UTF-8"%>
 						$(".row").append(dpValue);	
 					}
 				}else{
-<<<<<<< HEAD
+
 					//alert("예외발생");
-=======
-					alert("예외발생");
->>>>>>> refs/remotes/origin/master
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -162,11 +156,8 @@ pageEncoding="UTF-8"%>
 									$($(".row")[1]).append(dpValue);
 								}
 							}else{
-<<<<<<< HEAD
+
 								//alert("예외발생 광역단위");
-=======
-								alert("예외발생 광역단위");
->>>>>>> refs/remotes/origin/master
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -220,7 +211,7 @@ pageEncoding="UTF-8"%>
 	}
 	
 	/////////////////////////////////////////////무한스크롤
-<<<<<<< HEAD
+
 	/*
 	function listSearch(page){
 		
@@ -369,17 +360,11 @@ pageEncoding="UTF-8"%>
 	}
 	
 	//*/
-=======
->>>>>>> refs/remotes/origin/master
-	
-	
-<<<<<<< HEAD
-=======
 	
 	
 	
 	
->>>>>>> refs/remotes/origin/master
+
 	// 지도 참조 !!!!!!!
 	function makeDialog(){
 		 $('#dialog').dialog({
@@ -552,20 +537,12 @@ pageEncoding="UTF-8"%>
 	  $(document).on("click","#wish", function(e){
 		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
-			
-<<<<<<< HEAD
 		
-=======
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//alert(contentid);
 			//alert(contenttypeid);
 			//alert("리스트 위시리스트 클릭");
->>>>>>> refs/remotes/origin/master
-			
-<<<<<<< HEAD
-=======
-			
->>>>>>> refs/remotes/origin/master
+
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
 			addTripToDB(contentid, contenttypeid);
 			
@@ -575,11 +552,8 @@ pageEncoding="UTF-8"%>
 			
 			//alert($(".row ").index(this));
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
-<<<<<<< HEAD
-			//alert($("div[class='col-md-4']").index(this));
-=======
 			//alert($("div[class='col-xs-4']").index(this));
->>>>>>> refs/remotes/origin/master
+
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
@@ -776,7 +750,7 @@ pageEncoding="UTF-8"%>
    
 <div id="dialog" title="" >
 	<!--  지도를 담는 공간 -->
-<<<<<<< HEAD
+
 	<table class="table">
       
       
@@ -818,16 +792,10 @@ pageEncoding="UTF-8"%>
       </tbody>
     </table>
       
-=======
+
   <div id="map" style="width:400px;height:400px;"></div>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
   <script type="text/javascript"></script>
->>>>>>> refs/remotes/origin/master
-    
-<<<<<<< HEAD
-=======
-    
->>>>>>> refs/remotes/origin/master
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
