@@ -49,14 +49,11 @@ public class MessageController {
 		
 		return "forward:/message/addMessageView.jsp";
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value="addMessage", method=RequestMethod.POST)
-	public String addMessage(@ModelAttribute Message message,Map map)throws Exception {
+	public String addMessage(@ModelAttribute Message message,Map map,@RequestParam("receiverId") String receiverId)throws Exception {
 		System.out.println(this.getClass()+"/message/addMessage/");
-		
+		System.out.println("POST"+receiverId);
 		System.out.println(message);
 		
 		messageService.addMessage(message);
@@ -107,7 +104,7 @@ public class MessageController {
 		return "forward:/message/listMessage.jsp";
 	}
 	
-	//����Ʈ�� �̵�??
+
 	private void updateReadFlag(int messageNo) throws Exception{
 		System.out.println(this.getClass()+"  updateReadFlag");
 		

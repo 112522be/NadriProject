@@ -93,8 +93,8 @@
 		
 		//========== fncLoginProc Event 처리 ==========
 		function fncLoginCheck(id, pw) {
-//			var userId = $("#userId").val();
-//			var password = $("#password").val();
+			var userId = $("#userId").val();
+			var password = $("#password").val();
 			
 			var loginData = "userId=" + id + "&password=" + pw;
 			

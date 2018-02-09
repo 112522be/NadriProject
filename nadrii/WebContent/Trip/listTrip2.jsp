@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,6 +26,7 @@ pageEncoding="UTF-8"%>
 // 임시 해결방법 : 재차 호출의 경우 문제 없이 호출되는 것을 확인해서 맵생성, 다이얼로그 생성을 각각 2번씩 호출함(우회 코딩)
 	
 	///////////////////무한 스크롤 시작
+
 	///*
 	//page할 변수
 	var page = 1;
@@ -31,7 +34,7 @@ pageEncoding="UTF-8"%>
 	var nationalPage =0;
 	var flag =0;
 	//*/
-	
+
 	//onload 시 page 변환 출력 페이지는 1, 현재 page는 2
 	$(function(){
 		page++;
@@ -57,6 +60,7 @@ pageEncoding="UTF-8"%>
 	});
 	
 	//페이지 네이게이션을 수행하는 JS
+
 	function listTrip(){
 	
 		var areaCode = "${areaCode}";
@@ -205,11 +209,7 @@ pageEncoding="UTF-8"%>
 	
 	/////////////////////////////////////////////무한스크롤
 	
-	
-	
-	
-	
-	
+
 	// 지도 참조 !!!!!!!
 	function makeDialog(){
 		 $('#dialog').dialog({
@@ -336,6 +336,7 @@ pageEncoding="UTF-8"%>
 				"Content-Type" : "application/json"
 			},
 			success:function(){
+
 				//alert("위시리스트에 저장");
 				//alert($("a[href='#']:contains('위시리스트')").index(this) );
 				//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
@@ -343,6 +344,7 @@ pageEncoding="UTF-8"%>
 				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트 취소</a>";
 				
 				//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
+
 			}
 		});
 		
@@ -354,13 +356,12 @@ pageEncoding="UTF-8"%>
 	  $(document).on("click","#wish", function(e){
 		  	var contentid =$($("input[name = 'contentid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
 			var contenttypeid =$($("input[name = 'contenttypeid']")[$("a[href='#']:contains('위시리스트')").index(this)]).val();
-			
+
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//alert(contentid);
 			//alert(contenttypeid);
 			//alert("리스트 위시리스트 클릭");
-			
-			
+
 			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
 
 			addTripToDB(contentid, contenttypeid);
@@ -397,6 +398,7 @@ pageEncoding="UTF-8"%>
 	})
 	
 	
+
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
 		$("a[href='#' ]:contains('시구단위')").on("click" , function() {
@@ -506,6 +508,7 @@ pageEncoding="UTF-8"%>
 		          <input type="hidden" name="contentid" value="${list.contentid}"/>
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
+
 			      	<h3 id="thumbnail-label">${list.title}
 			        	<a class="anchorjs-link" href="#thumbnail-label">
 			            	<span class="anchorjs-icon"></span>
@@ -517,6 +520,7 @@ pageEncoding="UTF-8"%>
 			        	<a href="#" class="btn btn-default" role="button">좋아요</a>
 
 			            <a href="#" id="wish" class="btn btn-danger" role="button">위시리스트</a>	
+
 
 			        </p>
 		        </div>
