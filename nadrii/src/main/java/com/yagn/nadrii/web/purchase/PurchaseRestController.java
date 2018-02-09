@@ -66,8 +66,8 @@ public class PurchaseRestController {
 				cal.setTime(bDate);
 				cal.add(Calendar.DATE, -10);
 
-				String cancelDate = df.format(cal.getTime()).substring(0, 4) + "≥‚ "
-						+ df.format(cal.getTime()).substring(4, 6) + "ø˘ " + df.format(cal.getTime()).substring(6) + "¿œ";
+				String cancelDate = df.format(cal.getTime()).substring(0, 4) + " ÎÖÑ"
+						+ df.format(cal.getTime()).substring(4, 6) + " Ïõî" + df.format(cal.getTime()).substring(6) + " Ïùº";
 
 				// cancelDate set
 				purchase.setCancelDate(cancelDate);

@@ -108,9 +108,9 @@ function fncGetList(pageNo) {
 
 			for (var i = 0; i < postCount; i++) {
 				if (i != postCount - 1) {
-					var postNo = $($("input[name='postNo']")[i]).val() + ",";
+					var postNo = $($("input[name='postNo']:checked")[i]).val() + ",";
 				} else {
-					var postNo = $($("input[name='postNo']")[i]).val();
+					var postNo = $($("input[name='postNo']:checked")[i]).val();
 				}
 				sumPostNo += postNo;
 			}
