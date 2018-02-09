@@ -23,13 +23,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- 위치 정보 가져오는 JS -->
 <script type="text/javascript" src="../resources/js/tripLocation.js"></script>
 <script type="text/javascript" src="../resources/js/addMessage.js"></script>
@@ -118,13 +114,6 @@ body {
          });
       });
       
-
-
-      $(function(){
-    	  	$("a[href='#']:contains('플래너')").on("click", function(){
-    	  		self.location = "/planner/addPlannerView.jsp";
-    	  	})
-      });
 
 
       /*
