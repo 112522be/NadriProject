@@ -47,16 +47,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() { 
-	$("#userId").val('');
+	$("#email").val('');
 	idCheckFlag = false;
 	$(".signupbtn").prop("disabled", true);
-	
-	$("#userId").val($("#uid").val());
-	$("#email").val($("#uid").val());
+	$("#userId").val($("params").val());
+	$("#email").val($("params").val());
 	
 });
 
-//이메일 인증 
+//	이메일 인증 
 function checkSend(){
 	var email = $("#email").val();
 	var frm = $("#frm").serialize();
@@ -243,7 +242,6 @@ function checkSuccess(){
     		return;
     	}
     	
-<<<<<<< HEAD
     	alert($("#checkNumStatus").val());
     	if($("#confirmNum").val() == ""){
     		alert("인증번호를 입력해주세요");
@@ -269,12 +267,6 @@ function checkSuccess(){
     				}
     			}
     		}); 
-=======
-    	if(confirm("회원가입을 하시겠습니까?")){
-    		$("form").attr("method" ,"POST").attr("action" ,"/user/addUser").submit();
-    		
-    	
->>>>>>> refs/remotes/origin/master
     	}
     }
     
@@ -307,7 +299,7 @@ function checkSuccess(){
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" oninput="checkId();" autofocus>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" oninput="checkId();" autofocus>
 		      <span id = "chkMsg"></span>
 		    </div>
 			<div id="htmlId"></div>
@@ -376,13 +368,9 @@ function checkSuccess(){
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일" oninput="emailValid();">
-<<<<<<< HEAD
 		      <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
 		      <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
 		      <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" onClick="checkSuccess();">
-=======
-		      <input type="button" value="인증" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
->>>>>>> refs/remotes/origin/master
 		    </div>
 		  </div> 
 		  
@@ -398,14 +386,32 @@ function checkSuccess(){
 		
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
-<<<<<<< HEAD
 	
-	<!--<input type="hidden" id="uid" value="${uid}" />  facebook 로그인 -->
+	<input type="hidden" id="email" value="${email}" /> <!-- facebook 로그인 -->
 	
-=======
-
-
->>>>>>> refs/remotes/origin/master
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

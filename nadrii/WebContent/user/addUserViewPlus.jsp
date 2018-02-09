@@ -242,8 +242,9 @@
 		  	<label for="profiIeimageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <form id="form" runat="server">
-				    <input type='file' id="imgInput"  />
+				    <input type="file" id="imgInput"/>
 				    <img id="image_section" src="#" alt="your image" />
+				    <input type="hidden" name="profiIeimageFile"/>
 				</form>
 		     </div>
 		   </div>

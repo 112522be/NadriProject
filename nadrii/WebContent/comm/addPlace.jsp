@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 	<meta charset="UTF-8"/>
+
 	<title>Daum 지도 시작하기</title>
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -37,7 +40,7 @@
 					success : function(JSONData, status) {
 						var documents = JSONData.documents;
 						if(documents.length == 0){
-							alert("검색 결과가 없습니다."); 
+							alert("검색 결과가 없습니다.");
 							return;
 						}
 						for( i=0;i<documents.length;i++){
@@ -57,6 +60,7 @@
 								}
 
 								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4) ) ){
+
 
 									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">다음으로<span aria-hidden=\"true\">&rarr;</span></a></li>";
 								}
@@ -116,6 +120,7 @@
 				</div>
 				<div class="col-sm-2">
 					<button type="button" class="btn btn-default">검색</button>
+
 				</div> 
 			</form>
 			<hr/>
@@ -128,6 +133,7 @@
 				<div id="clickLatlng"></div>
 				<div align="right">
 					<br/>
+
 					<p><button type="button" class="btn btn-primary btn-sm">추가하기</button></p>
 				</div>
 			</div> 
@@ -142,8 +148,11 @@
 		daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 		    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 		        if (status === daum.maps.services.Status.OK) {
+
 		            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-		            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + result[0].road_address.building_name + '</h3></div>' : '';
+
+		            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+
 		            
 		            content = '<div class="bAddr">' +
 		            				buildingName+
