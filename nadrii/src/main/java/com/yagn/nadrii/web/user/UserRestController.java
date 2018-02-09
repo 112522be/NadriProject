@@ -1,7 +1,20 @@
-/*package com.yagn.nadrii.web.user;
+package com.yagn.nadrii.web.user;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
@@ -31,73 +48,25 @@ public class UserRestController extends SupportController {
 		System.out.println(this.getClass());
 	}
 	
-	*//**
-	 * 회占쏙옙占쏙옙占쏙옙
+	/**
+	 * ȸ������
 	 * @param user
 	 * @return
 	 * @throws Exception
-	 *//*
-	@RequestMapping(value="addUser", method= RequestMethod.GET  )
-	//@ResponseBody
-	public Object addUser(User user, @RequestParam String uid,
-			@RequestParam String accessToken) throws Exception{
-		//회원가입
-		
-		System.out.println("userID :   "+ uid);
-		System.out.println("토큰  :   "+ accessToken);
-		
-		System.out.println("회원가입!!");
-		userService.addUser(user);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "success");
-		return map;
-	}
-
-	@RequestMapping(value="loginProc", method=RequestMethod.POST)
-	//@ResponseBody
-	public Object loginProc( User user, HttpServletRequest request) throws Exception{
-		
-		boolean isAdmin = false;
-		
-		User loginUser = userService.loginProc(user);
-		
-		Map<String,String> map =new HashMap<String, String>();
-		
-		if(loginUser == null) {
-			map.put("msg", "failed");
-			return map;
-		}
-		
-		request.getSession().setAttribute("loginUser", loginUser );
-		map.put("msg", "success");
-		
-		if(loginUser.getRole().equals("admin")) {
-			System.out.println("관리자 로그인");
-			isAdmin = true;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}else if(loginUser.getRole().equals("user")) {
-			System.out.println("일반 로그인");
-			isAdmin = false;
-			request.getSession().setAttribute("isAdmin",  isAdmin);
-		}
-		
-		return map;
-	}
+	 */
+	
 	
 	@RequestMapping(value="json/loginCheck", method=RequestMethod.POST)
 	public Map<String, Object> loginCheck( 
 			@ModelAttribute("user") User user,
 			HttpServletRequest request
 			) {
+		
 		System.out.println("/json/loginCheck : POST");
-
-		System.out.println("회원 정보" + user.toString());	
-		User loginUser = userService.loginProc(user);	
-		Map<String,String> map =new HashMap<String, String>();
+		
 		User loginUser = new User();
 		
 		Map<String, Object> map =new HashMap<String, Object>();
-
 		
 		try {
 			loginUser = userService.loginCheck(user);
@@ -126,13 +95,13 @@ public class UserRestController extends SupportController {
 		return map;
 	}
 	
-	*//**
-	 * 占쏙옙占싱듸옙 占쌩븝옙체크
+	/**
+	 * ���̵� �ߺ�üũ
 	 * @param userId
 	 * @param model
 	 * @return
 	 * @throws Exception
-	 *//*
+	 */
 	@RequestMapping(value = "checkId", method=RequestMethod.POST)
 	//@ResponseBody
     public Map idCheck(String userId, Model model) throws Exception {
@@ -146,17 +115,17 @@ public class UserRestController extends SupportController {
 		return map;
     }
 	
-	*//**
+	/**
 	 * 
 	 * @param userId
 	 * @param responsel
 	 * @return
 	 * @throws Exception
-	 *//*
+	 */
 	@RequestMapping(value="findId", method=RequestMethod.POST)
 	//@ResponseBody
 	public Map findId(@RequestParam("userId") String userId, HttpServletResponse responsel) throws Exception{
-		System.out.println("占쏙옙占싱듸옙 찾占쏙옙" + userId);
+		System.out.println("���̵� ã��" + userId);
 		
 		Map<String, String> map = new HashMap<String, String>();
 		//System.out.println(map.toString());
@@ -169,15 +138,11 @@ public class UserRestController extends SupportController {
 		return map;
 	}
 	
-	////////////////////////////////////////kakaoLoing///	
-	@RequestMapping("/oauth/*")
-	public class KakaoLoginRestController {
 
-	}
 
 	//////////////////////////////////////////////////////////////////
-			
-	@RequestMapping(value="check", method=RequestMethod.POST)
+	///*
+	@RequestMapping(value="/json/check", method=RequestMethod.POST)
 	public Map emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
 		String email = request.getParameter("email");
@@ -193,7 +158,8 @@ public class UserRestController extends SupportController {
 		
 		return map;
 	}
-
+//*/
+	
 //	@RequestMapping(value="addUserPlus", method= RequestMethod.POST  )
 //	public Object addUserPlus(User user, ModelMap model , HttpServletRequest request) throws Exception{
 //
@@ -208,20 +174,20 @@ public class UserRestController extends SupportController {
 //		} catch(Exception e){
 //			e.printStackTrace();
 //		}	
-//		System.out.println("占쌩곤옙占쏙옙占쏙옙 占쌉뤄옙!!");
+//		System.out.println("�߰����� �Է�!!");
 //		userService.addUserPlus(user);
 //		Map<String, String> map = new HashMap<String, String>();
 //		map.put("msg", "success");
-//		System.out.println("占쌩곤옙占쏙옙占쏙옙 占쌉뤄옙占싱댐옙" +map);
+//		System.out.println("�߰����� �Է��̴�" +map);
 //		return map;
 //	}
-
+	
 	private void sendEmail(String email, String authNum) throws UnsupportedEncodingException {
-		   
+		 /*  
 		String setfrom = "kimjh2218@gmail.com";
 		String tomail = email;
-		String title = "占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙";
-		String content = "占싱몌옙占쏙옙 占쏙옙占쏙옙占쏙옙호占쏙옙 " +authNum+ "占쌉니댐옙.";
+		String title = "������ ������";
+		String content = "�̸��� ������ȣ�� " +authNum+ "�Դϴ�.";
 		
 		
 		
@@ -282,11 +248,11 @@ public class UserRestController extends SupportController {
 	   
       ////////////////////////////////////////////////////////       
         
-        
-	
+        */
+	/*
 	private void sendEmail(String email, String authNum) {
 	 Properties p = new Properties();
-	  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Google占쏙옙占쏙옙@gmail.com占쏙옙占쏙옙 占쏙옙占쏙옙
+	  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Google����@gmail.com���� ����
 	  p.put("mail.smtp.host", "smtp.gmail.com");
 	  p.put("mail.smtp.port", "465");
 	  p.put("mail.smtp.starttls.enable","true");
@@ -302,38 +268,38 @@ public class UserRestController extends SupportController {
 	  try {
 	  // Authenticator auth = new SMTPAuthenticator();
 	   Session session = Session.getInstance(p, auth);
-	   session.setDebug(true); // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙 占쏙옙황占쏙옙 占쌤솔울옙 占쏙옙占쏙옙磯占�.
+	   session.setDebug(true); // ������ ������ �� ���� ��Ȳ�� �ֿܼ� ����Ѵ�.
 	 
 	   //session = Session.getDefaultInstance(p);
 	   MimeMessage msg = new MimeMessage(session);
-	   String message = "Gmail SMTP 占쏙옙占쏙옙占쏙옙 占싱울옙占쏙옙 JavaMail 占쌓쏙옙트";
-	   msg.setSubject("Gmail SMTP 占쏙옙占쏙옙占쏙옙 占싱울옙占쏙옙 JavaMail 占쌓쏙옙트");
+	   String message = "Gmail SMTP ������ �̿��� JavaMail �׽�Ʈ";
+	   msg.setSubject("Gmail SMTP ������ �̿��� JavaMail �׽�Ʈ");
 	   msg.setContent(message, "text/plain;charset=KSC5601");
 	   System.out.println("Message: " + msg.getContent());
 	   Transport.send(msg);
-	   System.out.println("Gmail SMTP占쏙옙占쏙옙占쏙옙 占싱울옙占쏙옙 占쏙옙占싹븝옙占쏙옙占쏙옙 占쏙옙占쏙옙");
+	   System.out.println("Gmail SMTP������ �̿��� ���Ϻ����� ����");
 	  }
 	  catch (Exception mex) { // Prints all nested (chained) exceptions as well
 	   System.out.println("I am here??? ");
 	   mex.printStackTrace();
 	  }
 	
-        
+      */  
 	
 			String host = "smtp.gmail.com";
-			String subject = "占쏙옙占쏙옙占쏙옙 占싱몌옙占쏙옙 占쏙옙占쏙옙占쏙옙호";
-			String fromName="占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙";
+			String subject = "������ �̸��� ������ȣ";
+			String fromName="������ ������";
 			String from="kimjh2218@gmail.net";
 			String password = "top0347923";
 			String to01 = email;
 			
-			String content= "占쏙옙占쏙옙占쏙옙호 ["+ authNum +"]";
+			String content= "������ȣ ["+ authNum +"]";
 			
 			try {
 		//		MimeMessage message = mailSender.createMimeMessage();
 				Properties props = new Properties();
 				
-				props.put("mail.smtp.starttls.enable", "true");
+/*				props.put("mail.smtp.starttls.enable", "true");
 				props.put("mail.smtp.debug", "true");
 				props.put("mail.smtp.starttls.enable","true");
 				props.put("mail.transport.protocol", "smtp");
@@ -349,21 +315,12 @@ public class UserRestController extends SupportController {
 			    props.put("mail.smtp.socketFactory.fallback", "false");
 			    props.put("mail.smtp.socketFactory.port", "465");
 			    props.put("mail.smtp.starttls.enable", "true");
-<<<<<<< HEAD
-			    
-				props.put("mail.smtp.starttls.enable", "true");     // gmail은 무조건 true 고정
-				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp 서버 주소
-				props.put("mail.smtp.auth","true");                 // gmail은 무조건 true 고정
-				props.put("mail.smtp.port", "587");                 // gmail 포트
-				
-=======
-			    
-				props.put("mail.smtp.starttls.enable", "true");     // gmail占쏙옙 占쏙옙占쏙옙占쏙옙 true 占쏙옙占쏙옙
-				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp 占쏙옙占쏙옙 占쌍쇽옙
-				props.put("mail.sㅇmtp.auth","true");                 // gmail占쏙옙 占쏙옙占쏙옙占쏙옙 true 占쏙옙占쏙옙
-				props.put("mail.smtp.port", "587");                 // gmail 占쏙옙트
-				
-
+	*/		    
+/*				props.put("mail.smtp.starttls.enable", "true");     // gmail�� ������ true ����
+				props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ���� �ּ�
+				props.put("mail.smtp.auth","true");                 // gmail�� ������ true ����
+				props.put("mail.smtp.port", "587");                 // gmail ��Ʈ
+				*/
 				props.setProperty("mail.transport.protocol", "smtp");
 		        props.setProperty("mail.host", host);
 		        props.put("mail.transport.protocol", "smtp");
@@ -384,7 +341,7 @@ public class UserRestController extends SupportController {
 					 return new PasswordAuthentication(from, password );
 				}
 				});
-				System.out.println("占쏙옙占쏙옙"+content);
+				System.out.println("����"+content);
 				MimeMessage message = new MimeMessage(mailSession);
 				//message.setFrom(new InternetAddress("from@no-spam.com"));
 				message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName,"UTF-8","B")));
@@ -422,4 +379,3 @@ public class UserRestController extends SupportController {
 		return buffer.toString(); 
 		}
 }
-*/
