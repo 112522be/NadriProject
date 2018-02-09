@@ -1,6 +1,5 @@
-
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,7 +9,7 @@
 <html lang="ko">
 
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 
 <title>예매정보입력</title>
 
@@ -277,10 +276,11 @@
 						},
 						data:jsonData,
 						success : function() {
-							alert("들어온거 확인");
+					//		alert("들어온거 확인");
 						}
 					});		
 					alert("저장하기 완료");
+					location.reload();
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)
