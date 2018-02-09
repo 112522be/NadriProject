@@ -162,7 +162,6 @@ pageEncoding="UTF-8"%>
 
 
 								//alert("예외발생 광역단위");
-
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -551,7 +550,6 @@ pageEncoding="UTF-8"%>
 			
 			//alert($(".row ").index(this));
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
-
 			//alert($("div[class='col-xs-4']").index(this));
 
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
@@ -793,9 +791,6 @@ pageEncoding="UTF-8"%>
     </table>
       
 
-  <div id="map" style="width:400px;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript"></script>
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
