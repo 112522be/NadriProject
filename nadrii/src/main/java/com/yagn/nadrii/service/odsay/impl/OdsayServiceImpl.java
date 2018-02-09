@@ -202,7 +202,7 @@ public class OdsayServiceImpl implements OdsayService{
 					laneList.add(lane);
 				}
 				System.out.println();
-			}//for¹®
+			}//forï¿½ï¿½
 			map.put("subPathList", subPathList);	
 			map.put("laneList", laneList);	
 			
@@ -251,7 +251,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("½Ã¿Ü¹ö½º°¡ ¾ø¾î¼­ °í¼Ó¹ö½º·Î °æ·Î º¯°æ");
+					System.out.println("ï¿½Ã¿Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					trans = "exBusRequest";
 				}else {
 					trans="outBusRequest";
@@ -262,7 +262,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("°í¼Ó¹ö½º°¡ ¾ø¾î¼­ ±âÂ÷·Î °æ·Î º¯°æ");
+					System.out.println("ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					trans = "trainRequest";
 				}else {
 					trans = "exBusRequest";
@@ -307,7 +307,7 @@ public class OdsayServiceImpl implements OdsayService{
 		obj.setPayment(Integer.parseInt(payment));
 		obj.setMapOBJ(mapOBJ);
 
-		// trainRequestÀÏ¶§¸¸
+		// trainRequestï¿½Ï¶ï¿½ï¿½ï¿½
 		if (element.getAsJsonObject().get("trainType") != null) {
 			String trainType = element.getAsJsonObject().get("trainType").getAsString();
 			obj.setTrainType(trainType);

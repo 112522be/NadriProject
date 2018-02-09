@@ -42,7 +42,7 @@ public class TicketServiceTest {
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
-//		System.out.println("\n[tourTicketList °ª È®ÀÎ] ==> " + map.get("tourTicketList"));
+//		System.out.println("\n[tourTicketList ï¿½ï¿½ È®ï¿½ï¿½] ==> " + map.get("tourTicketList"));
 
 	}
 	 
@@ -57,14 +57,14 @@ public class TicketServiceTest {
 		DetailIntro detailIntro = new DetailIntro(); 
 		detailIntro = ticketService.getTicket(contentId, contentTypeId);
 		
-		// ==> console È®ÀÎ
+		// ==> console È®ï¿½ï¿½
 		System.out.println("[testGetTicket] : " + detailIntro);
 
-		// ==> API È®ÀÎ
+		// ==> API È®ï¿½ï¿½
 		Assert.assertEquals(2531711, detailIntro.getContentid());
 		Assert.assertEquals(15, detailIntro.getContenttypeid());
-//		Assert.assertEquals("°­¿øµµ È«Ãµ µµ½Ã»ê¸²°ø¿ø Åä¸®½£", detailIntro.getEventplace());
-//		Assert.assertEquals("ÀÏºÎ ÇÁ·Î±×·¥ À¯·á", detailIntro.getUsetimefestival());
+//		Assert.assertEquals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È«Ãµ ï¿½ï¿½ï¿½Ã»ê¸²ï¿½ï¿½ï¿½ï¿½ ï¿½ä¸®ï¿½ï¿½", detailIntro.getEventplace());
+//		Assert.assertEquals("ï¿½Ïºï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½", detailIntro.getUsetimefestival());
 
 	}
 	
@@ -72,17 +72,17 @@ public class TicketServiceTest {
 	public void testGetDetailImage() throws Exception {
 
 		String title = null;
-		int contentId = 1815964;		// ÄÁÅÙÃ÷ ID :	
-//		int contentId = 737479;			// ÄÁÅÙÃ÷ ID	:
-//		int contentId = 2531711;		// ÄÁÅÙÃ÷ ID	:
+		int contentId = 1815964;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID :	
+//		int contentId = 737479;			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID	:
+//		int contentId = 2531711;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID	:
 
 		DetailImage detailImage = new DetailImage();
 		detailImage = ticketService.getDetailImage(contentId, title);
 
-		// ==> console È®ÀÎ
+		// ==> console È®ï¿½ï¿½
 		System.out.println("[testGetDetailImage] : " + detailImage);
 
-		// ==> API È®ÀÎ
+		// ==> API È®ï¿½ï¿½
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
 	}
@@ -90,17 +90,17 @@ public class TicketServiceTest {
 	//@Test
 	public void testGetNaverImage() throws Exception {
 
-//		String title = "°­¸ª ´ë±â¸®¸¶À»°Ü¿ïÃàÁ¦ 2018";			
-		String title = "°¡ÆòÆæ¼ÇÃàÁ¦ 2018";			
+//		String title = "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½â¸®ï¿½ï¿½ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ 2018";			
+		String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2018";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
 		String returnImage = ticketService.getNaverImage(title);
 
-		// ==> console È®ÀÎ
+		// ==> console È®ï¿½ï¿½
 //		System.out.println("[testGetNaverImage] : " + returnImage);
 
-		// ==> API È®ÀÎ
+		// ==> API È®ï¿½ï¿½
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
 	}
@@ -109,9 +109,9 @@ public class TicketServiceTest {
 	public void testGetKakaoImage() throws Exception {
 
 		
-//		String title = "°íÁ¾¸í¼ºÈÄ °¡·Ê ÀçÇöÇà»ç (»ó¹Ý±â)";			
-//		String title = "°­¸ª ´ë±â¸®¸¶À»°Ü¿ïÃàÁ¦ 2018";			
-		String title = "°¡ÆòÆæ¼ÇÃàÁ¦ 2018";			
+//		String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Ý±ï¿½)";			
+//		String title = "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½â¸®ï¿½ï¿½ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ 2018";			
+		String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2018";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
@@ -120,10 +120,10 @@ public class TicketServiceTest {
 		
 		String returnImage = ticketService.getKakaoImage(title);
 
-		// ==> console È®ÀÎ
+		// ==> console È®ï¿½ï¿½
 //		System.out.println("[testGetNaverImage] : " + returnImage);
 
-		// ==> API È®ÀÎ
+		// ==> API È®ï¿½ï¿½
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
 	}

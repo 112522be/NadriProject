@@ -11,10 +11,12 @@ public interface PlannerDao {
 	
 	public List<Planner> getMyPlannerList(Search search, String plannerMakerId) throws Exception;
 	
-	public List<Planner> getUserPlannerList(Search search) throws Exception;
+	public List<Planner> getUserPlannerList(Search search, String plannerMakerId) throws Exception;
 	
 	public Planner getPlanner(int postNo) throws Exception;
 	
 	public int getTotalCount(Search search, String plannerMakerId) throws Exception;
+	
+	public void deletePlanner(int postNo) throws Exception;
 	
 }

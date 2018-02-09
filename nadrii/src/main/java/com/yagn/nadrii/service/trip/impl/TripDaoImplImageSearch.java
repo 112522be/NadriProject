@@ -34,14 +34,18 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	public String naverImageSearch(String target)throws Exception{
 		
+
 		System.out.println("이미지 검색");
+
 		int display = 10;
+
         String clientId = "YaTN_waxR7h6HvXakGB2";
         String clientSecret = "dHdqCyawjm";
+
         String text = URLEncoder.encode(target, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json ���
+        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json 
         
-        //naver
+
         URL url = new URL(apiURL);
         HttpURLConnection con = (HttpURLConnection)url.openConnection();
         con.setRequestMethod("GET");
@@ -71,7 +75,9 @@ public class TripDaoImplImageSearch implements TripDao {
         if(list.size()!=0) {
         	return ( (NaverImage)list.get(2) ).getLink();
         }else {
+
         	return "이미지 없음";
+
         }
 	}
 

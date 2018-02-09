@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,7 +91,7 @@
 				
 				if(data.length != 0){
 
-					alert("정상작동");	
+					//alert("정상작동");
 																
 					for(var a =0; a<data.length;++a){
 						
@@ -115,8 +115,9 @@
 											
 						$(".row").append(dpValue);	
 					}
+
 				}else{
-					alert("예외발생");
+					//alert("예외발생");
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -155,8 +156,7 @@
 									$($(".row")[1]).append(dpValue);
 								}
 							}else{
-
-								alert("예외발생 광역단위");
+								//alert("예외발생 광역단위");
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -210,6 +210,155 @@
 	}
 	
 	/////////////////////////////////////////////무한스크롤
+
+	/*
+	function listSearch(page){
+		
+		var keyword ="${keyword}";
+		var areaCode = "${areaCode}";
+		var localName ="${localName}";
+		if(areaCode ==""){
+			areaCode ="0";
+		}
+		if(localName==""){
+			localName="0";
+		}
+		
+		var restJSON = {
+			"pageNo" : pageNo,
+			"areaCode":areaCode,
+			"localName":localName,
+			"keyword":keyword		 
+		}
+		
+		
+	
+		$.ajax({
+					
+			url:"../trip/json/listSearch/",
+			method:"POST",
+			asyn :false,
+			dataType:"json",
+			data: restJSON,
+			contentType: "application/json",
+			success: function(returnData){
+				var data = returnData.list;
+				
+				if(data.length != 0){
+					//alert("정상작동");	
+																
+					for(var a =0; a<data.length;++a){
+						
+						var dpValue =
+							
+						 "<div class='col-md-4'>"+
+					        "<div class='thumbnail'>"+
+					          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+					          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+					          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+					          "<div class='caption'>"+
+					            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+					            "<p>"+data[a].addr1+"</p>"+
+					            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+					            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+					            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+					            "</p>"+
+					          "</div>"+
+					        "</div>"+
+					      "</div>";
+											
+						$(".row").append(dpValue);	
+					}
+				}else{
+					//alert("예외발생");
+					localName ="0";
+					alert(restJSON);
+					federalPage++;
+					$.ajax({
+						url:"../trip/json/listSearch/",
+						method:"POST",
+						asyn :false,
+						dataType:"json",
+						data: restJSON,
+						contentType: "application/json",
+						success: function(returnData){
+							flag =1;
+							var data = returnData.list;
+							if(data.length!=0){
+																											
+								for(var a =0; a<data.length;++a){
+									
+									var dpValue =
+										
+									 "<div class='col-md-4'>"+
+								        "<div class='thumbnail'>"+
+								          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+								          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+								          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+								          "<div class='caption'>"+
+								            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+								            "<p>"+data[a].addr1+"</p>"+
+								            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+								            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+								            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+								            "</p>"+
+								          "</div>"+
+								        "</div>"+
+								      "</div>";
+								      												
+									$($(".row")[1]).append(dpValue);
+								}
+							}else{
+								//alert("예외발생 광역단위");
+								areaCode= "0";
+								nationalPage++;
+								$.ajax({
+									url:"../trip/json/listSearch/",
+									method:"POST",
+									asyn :false,
+									dataType:"json",
+									data: restJSON,
+									contentType: "application/json",
+									success: function(returnData){
+										flag =1;
+										var data = returnData.list;
+										if(data.length!=0){
+																														
+											for(var a =0; a<data.length;++a){
+												
+												var dpValue =
+													
+												 "<div class='col-md-4'>"+
+											        "<div class='thumbnail'>"+
+											          "<img data-src='holder.js/100%x200' alt='100%x200' src='" + data[a].firstimage2+ "' data-holder-rendered='true' style='height: 200px; width: 100%; display: block;'>"+
+											          "<input type='hidden' name='contentid' value='" +data[a].contentid+"'/>"+
+											          "<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
+											          "<div class='caption'>"+
+											            "<h5 id='thumbnail-label'>"+data[a].title+"<a class='anchorjs-link' href='#thumbnail-label'><span class='anchorjs-icon'></span></a></h5>"+
+											            "<p>"+data[a].addr1+"</p>"+
+											            "<p> <a href='#' class='btn btn-primary' role='button'>공유</a>"+ 
+											            	"<a href='#' class='btn btn-default' role='button'>좋아요</a>"+
+											            	"<a href='#'id='wish' class='btn btn-danger' role='button'>위시리스트</a>"+	
+											            "</p>"+
+											          "</div>"+
+											        "</div>"+
+											      "</div>";
+											      												
+												$($(".row")[2]).append(dpValue);
+											}
+										}
+									}
+								});
+										
+							}
+						}
+					});
+				}
+			}
+		});
+	}
+	
+	//*/
 
 	// 지도 참조 !!!!!!!
 	function makeDialog(){
@@ -400,6 +549,7 @@
 			//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트</a>";
 
 			//alert($("div[class='col-xs-4']").index(this));
+
 			//alert($("a[href='#']:contains('위시리스트')").index(this));
 			//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
 			//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
@@ -595,12 +745,50 @@
 
    
 <div id="dialog" title="" >
+
 	<!--  지도를 담는 공간 -->
 
-  <div id="map" style="width:400px;height:400px;"></div>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-  <script type="text/javascript"></script>
-
+	<table class="table">
+      
+      
+      <tbody>
+        <tr>
+        	<td>
+	          <div id="map" style="width:400px;height:200px;"></div>
+	  		  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+	  	  	  <script type="text/javascript"></script>
+        	</td>
+        	
+        	<td id="imageSpace">
+        		
+        	</td>
+        </tr>
+        
+        
+        <tr >
+        
+          	<td id="titleName"> </td>
+          	<td></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td id="address"></td>
+          	<td></td>
+        </tr>
+        <tr >
+        
+          	<td colspan="2"  id="fee"></td>
+          	
+        </tr>
+        <tr >
+        
+          	<td colspan="2"   id="description"></td>
+          	
+        </tr>
+      </tbody>
+    </table>
+      
  	<a href="#" class="btn btn-primary" role="button">공유</a> 
     <a href="#" class="btn btn-default" role="button">좋아요</a>
     <a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
