@@ -76,7 +76,6 @@
 	//============= "장바구니" 화면이동 =============
     $( function() {
 
-    	
        $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
 
 //      	 alert("장바구니")
