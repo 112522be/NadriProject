@@ -10,13 +10,14 @@
 -->
 <html>
 	<head>
-		<title>Single - Future Imperfect by HTML5 UP</title>
+		<title>나들이 툴바</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+		
 		
 	</head>
 	<body class="single">
@@ -34,7 +35,7 @@
 								<li><a href="#">나만의 나들이</a></li>
 								<li><a href="#">나들이 플래너</a></li>
 								<li><a href="#">나들이 티켓</a></li>
-								<li><a href="#">나들이모임</a></li>
+								<li><a href="#">나들이 모임</a></li>
 							</ul>
 						</nav>
 						<nav class="main">
@@ -67,26 +68,37 @@
 								<ul class="links">
 									<li>
 										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
+											<h1><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></h1>
+											<h3>나들이 정보</h3>
+											<p>어디로 나들이 갈지 미리 확인해 보세요.</p>
 										</a>
 									</li>
 									<li>
 										<a href="#">
-											<h3>Dolor sit amet</h3>
-											<p>Sed vitae justo condimentum</p>
+											<h1><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></h1>
+											<h3>나만의 나들이</h3>
+											<p>내가 다녀온 나들이 정보를 함께 공유해요.</p>
 										</a>
 									</li>
 									<li>
 										<a href="#">
-											<h3>Feugiat veroeros</h3>
-											<p>Phasellus sed ultricies mi congue</p>
+											<h1><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></h1>
+											<h3>나들이 플래너</h3>
+											<p>이번 주말 나들이 계획을 미리 세워보자.</p>
 										</a>
 									</li>
 									<li>
 										<a href="#">
-											<h3>Etiam sed consequat</h3>
-											<p>Porta lectus amet ultricies</p>
+											<h1><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span></h1>
+											<h3>나들이 티켓</h3>
+											<p>나들이 가기 전 미리 티켓을 예매하세요.</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span></h1>
+											<h3>나들이 모임</h3>
+											<p>우리 함께 나들이 가서 친해져 볼까?</p>
 										</a>
 									</li>
 								</ul>

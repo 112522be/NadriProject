@@ -45,16 +45,17 @@
 }
 
 .img {width:100%; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
+
 </style>
-<title>Insert title here</title>
+<title>나들이 메인인덱스</title>
 </head>
 
 <body>
-	<jsp:include page="/layout/toolbar_new.jsp"></jsp:include>
-	</br>
-	</br>
+
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	
 	<div class="container">
-<!-- Carousel Start -->
+	<!-- Carousel Start -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
@@ -118,12 +119,14 @@
 		<!-- Carousel End -->
 		</div>
 		<div class="container">
+		
 			<div class="row">
 			    <div class="col-xs-6" style="padding-left: 15px; padding-right: 0px;">
 			       	<div class="thumbnail">
 			       	<div class="img">
    						<div class="scale">
-			        	<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        	<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
+			        		src="/resources/basic/images/uploadFiles/testImage1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        	</div>
 			        </div>
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
@@ -143,7 +146,8 @@
 			       	<div class="thumbnail">
 			       		<div class="img">
    							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage2.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
+			        				src="/resources/basic/images/uploadFiles/testImage2.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        		</div>
 			        	</div>
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
@@ -163,7 +167,8 @@
 			       	<div class="thumbnail">
 			        	<div class="img">
    							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" src="/resources/basic/images/uploadFiles/testImage3.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
+			        				src="/resources/basic/images/uploadFiles/testImage3.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 			        		</div>
 			        	</div>		
 		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
@@ -179,8 +184,10 @@
 		        		</div>
 					</div>
 				</div>
+				
 	     	</div>
 		</div>
+		
    </body>
 </html>
 
