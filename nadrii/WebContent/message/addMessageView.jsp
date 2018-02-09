@@ -14,6 +14,7 @@
 		$("a[href='#']:contains('보내기')").on("click",function(){
 			alert("보내기");
 			$("form").attr("method","POST").attr("action","/message/addMessage").submit();
+			window.close();
 		});
 	});
 
@@ -34,7 +35,7 @@
 						
 
 						<div id="sendmessage"></div>
-						<div id="errormessage"></div>
+			
 						<form>
 							<div class="alert alert-info" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
 							    <strong>보내는 사람 : </strong>

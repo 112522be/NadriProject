@@ -12,8 +12,8 @@
 	$(function(){
 		$("a[href='#']:contains('답장')").on("click",function(){
 			var receiverId = $("input[name='senderId']").val();
-			alert(receiverId)
-			self.location="/message/addMessage?recevierId="+receiverId;
+			alert(receiverId);
+			self.location="/message/addMessage?receiverId="+receiverId;
 			//window.open("/message/addMessage?recevierId="+recevierId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 			//$('form').attr("method","GET").attr("action","/message/addMessage?recevierId="+receiverId).submit();
 		});
