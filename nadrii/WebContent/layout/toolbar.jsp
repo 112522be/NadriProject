@@ -7,8 +7,12 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나들이</title>
-  	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
@@ -16,11 +20,14 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
 
-	<!-- css -->
+<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
 	<link href="/resources/css/flexslider.css" rel="stylesheet" />
@@ -98,6 +105,7 @@
 				
 				
 				<div class="navbar-collapse collapse ">
+
 					<ul class="nav navbar-nav navbar-right">
 					<c:if test="${ ! empty loginUser }">
 							<li>
@@ -136,7 +144,8 @@
 						<li><a href="#">나들이 정보</a></li>
 						<li><a href="/comm/listComm">나만의 나들이</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+								data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 
 								<b class=" icon-angle-down"></b>
 							</a>
 							<ul class="dropdown-menu">

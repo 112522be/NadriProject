@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -233,6 +234,9 @@ pageEncoding="UTF-8"%>
 		
 		
 	
+<<<<<<< HEAD
+	
+=======
 		$.ajax({
 					
 			url:"../trip/json/listSearch/",
@@ -514,6 +518,7 @@ pageEncoding="UTF-8"%>
 				"Content-Type" : "application/json"
 			},
 			success:function(){
+
 				//alert("위시리스트에 저장");
 				//alert($("a[href='#']:contains('위시리스트')").index(this) );
 				//$($("#wish")[$("a[href='#']:contains('위시리스트')").index(this)]).remove();
@@ -521,6 +526,7 @@ pageEncoding="UTF-8"%>
 				//var CancelAppend = "<a href='#' class='btn btn-default' role='button' id='deleteWish' >위시리스트 취소</a>";
 				
 				//$($("#buttonTag")[$("a[href='#']:contains('위시리스트')").index(this)]).append(CancelAppend);
+
 			}
 		});
 		
@@ -568,8 +574,7 @@ pageEncoding="UTF-8"%>
 			e.preventDefault();
 		});
 	})
-	
-	
+
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
 		$("a[href='#' ]:contains('시구단위')").on("click" , function() {
@@ -646,8 +651,7 @@ pageEncoding="UTF-8"%>
 		
 		
 	</style>
-	
-	
+
 	<title>여행지 찾기</title>
 </head>
 <body>
@@ -699,6 +703,7 @@ pageEncoding="UTF-8"%>
 		          <input type="hidden" name="contentid" value="${list.contentid}"/>
 		          <input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 		          <div class="caption">
+
 			      	<h5 id="thumbnail-label">${list.title}
 			        	<a class="anchorjs-link" href="#thumbnail-label">
 			            	<span class="anchorjs-icon"></span>

@@ -14,16 +14,15 @@
 <!-- test delete line -->
 <title>나들이 티켓 목록</title>
 
-<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	<!-- 무한스크롤 -->
+
+
+<!-- 무한스크롤 -->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- //////////////////// CSS //////////////////// -->
@@ -46,13 +45,14 @@ function fncGetList(pageNo) {
 
 	//=================== "4 kind of sorting" Event 연결 =================== 
 	$(function() {
+
 		$("a[href='#']:contains('제목순')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "A";
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
 		$("a[href='#']:contains('조회순')").bind("click", function(event) {
 			event.preventDefault();
@@ -60,7 +60,7 @@ function fncGetList(pageNo) {
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
 		$("a[href='#']:contains('수정일순')").bind("click", function(event) {
 			event.preventDefault();
@@ -68,8 +68,9 @@ function fncGetList(pageNo) {
 			fncGetTicketSort(searchCondition);
 		})
 	});
-	
+
 	$(function() {
+
 		$("a[href='#']:contains('생성일순')").bind("click", function(event) {
 			event.preventDefault();
 			var searchCondition = "D";
@@ -144,8 +145,10 @@ function fncGetList(pageNo) {
 
 		<div class="page-header text-right">
 			<h3 class="text-info">
+
 				<p class="bg-success">나들이티켓</p>
 			</h3>
+
 			<h5 class="text-muted">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
 			</h5>
@@ -189,12 +192,14 @@ function fncGetList(pageNo) {
 						</div>	
 					
 						<div class="thumbnail">
+
 						
 							<p class="text-right">조회수 : ${ tt.readcount }</p>
 							
 							<img src="${ tt.firstimage }" />
-							
+
 							<div class="caption">
+
 								<h5>
 								<!-- 
 									입장권 :
@@ -209,6 +214,7 @@ function fncGetList(pageNo) {
 								</h5>
 								<br>
 								<p class="text-right">
+
 									<a href="#" class="btn btn-success btn-lg" role="button"> 상세조회 
 									<!-- PageNavigation을 위한 값을 보내는 부분  -->
 										<input type="hidden" name="contentId" value="${ tt.contentid }"> 

@@ -141,8 +141,8 @@ public class UserRestController extends SupportController {
 
 
 	//////////////////////////////////////////////////////////////////
-	
-	@RequestMapping(value="check", method=RequestMethod.POST)
+	///*
+	@RequestMapping(value="/json/check", method=RequestMethod.POST)
 	public Map emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
 		
 		String email = request.getParameter("email");
@@ -158,7 +158,8 @@ public class UserRestController extends SupportController {
 		
 		return map;
 	}
-
+//*/
+	
 //	@RequestMapping(value="addUserPlus", method= RequestMethod.POST  )
 //	public Object addUserPlus(User user, ModelMap model , HttpServletRequest request) throws Exception{
 //

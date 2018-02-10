@@ -174,6 +174,7 @@ function fncAddBooking() {
 	  			<button type="button" class="btn btn-success">
 	  				취 소
 	  			</button>
+
 	  			<c:if test="${ detailIntro.usetimefestival eq '무료' }">
 	  			<a class="btn btn-info btn" href="#" role="button">
 	  				무료입장가능
