@@ -11,7 +11,7 @@
 
 <head>
 <meta charset="UTF-8">
-<!-- test delete line -->
+
 <title>나들이 티켓 목록</title>
 
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -19,7 +19,6 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
 
 
 <!-- 무한스크롤 -->
