@@ -19,17 +19,23 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
 
 
-<!-- 무한스크롤 -->
+	<!-- 무한스크롤 -->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
-<!-- //////////////////// CSS //////////////////// -->
+	
+	
+	<!-- //////////////////// CSS //////////////////// -->
 
 	<style>
-	.col-sm-3 {
-		height: 500px;
+	#main {
+		margin-left: 200px;
+		margin-right: 200px;
+	}
+	
+	#sidebar {
+		margin-left: 200px;
+		margin-right: 200px;
 	}
 	</style>
 
@@ -130,6 +136,32 @@ function fncGetList(pageNo) {
 	function fncGetTicket() {
 		$("form").attr("method", "POST").attr("action", "/ticket/getTicket").submit();
 	}
+	
+
+	function currentDate() {
+
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1; //January is 0!
+		var year = date.getFullYear();
+
+		if (day < 10) {
+			day = '0' + day
+		}
+
+		if (month < 10) {
+			month = '0' + month
+		}
+
+		currentDate = year + " 년" + month + " 월" + day + " 일";
+
+		$(".published").append(currentDate);
+
+	}
+	
+	
+	
+	
 </script>
 
 </head>
@@ -140,8 +172,67 @@ function fncGetList(pageNo) {
 		<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
+	<div id="main">
+
+		<section id="intro">
+			<a href="#" class="logo"> <img
+				src="/resources/basic/images/ticketLogo.jpg" alt="">
+			</a>
+			<header>
+				<h2>나들이 티켓</h2>
+				<p>
+					조회하실 티켓 정보를 <a class="text-danger">선택</a>해 주세요.
+				</p>
+			</header>
+		</section>
+	</div>
+	<!-- Main End -->
+	
+		<div class="row">
+		<c:forEach var="tt" items="${tourTicket}" varStatus="num">
+
+				<section id="sidebar">
+					<!-- Mini Posts -->
+					<section>
+						<div class="mini-posts">
+
+							<!-- Mini Post -->
+							<article class="mini-post">
+								<header>
+									<h3>
+										<a href="#"> ${ tt.title } </a>
+									</h3>
+									<time class="published" datetime="2015-10-20"> October
+										20, 2015 </time>
+									<a href="#" class="author"> <img
+										src="/resources/imperfect/images/avatar.jpg" alt="" />
+									</a>
+								</header>
+								<a href="#" class="image"> <img src="${ tt.firstimage }"
+									alt="" />
+								</a>
+							</article>
+
+						</div>
+					</section>
+				</section>
+		</c:forEach>
+		</div>
+		<!-- Row End -->
+	
+
+
+
+</body>
+
+
+
+<body>
+
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
+	
 
 		<div class="page-header text-right">
 			<h3 class="text-info">

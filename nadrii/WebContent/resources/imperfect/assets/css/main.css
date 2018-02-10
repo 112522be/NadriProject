@@ -3211,13 +3211,11 @@
 	}
 
 /* Sidebar */
-
 	#sidebar {
 		margin-right: 3em;
 		min-width: 22em;
 		width: 22em;
 	}
-
 		#sidebar > * {
 			border-top: solid 1px rgba(160, 160, 160, 0.3);
 			margin: 3em 0 0 0;
