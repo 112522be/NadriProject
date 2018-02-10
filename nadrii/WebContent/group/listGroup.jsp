@@ -81,102 +81,10 @@ function getIndex(k){
 
 
 </script>
-<style type="text/css">
 
-form.search > input:first-child {
-    padding-left: 2.5em;
-    margin-right: -20px;
-}
 
-.row {
-	margin: -20px 0 -1px -20px;
-}
 
-@media screen and (max-width: 736px) {
-	section > :last-child,
-				section > .container, section:last-child, article > :last-child,
-				article > .container, article:last-child {
-					margin-bottom: 40%;
-				}
-}
-.cog
-{
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 5px;
-	margin-top: 5px;
-	margin-right: 6px;
-	border: none;
-	color: #f5fafa;
-	font-size: 20px;
-}
 
-.admin-text:hover, .cog:hover { cursor: pointer; color: #555555; }
-
-.menu a
-{
-	display: block;
-	background: #F8F8F8;
-	width: 120px;
-	height: 40px;
-	padding: 0 0 0 10px;
-	font: bold 13px Helvetica, sans-serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #000000;
-	color: rgba( 0, 0, 0, 0.7 );
-	line-height: 40px;
-	box-shadow: 0 1px 1px rgba( 0, 0, 0, 0.2 );
-}
-
-.menu a:nth-child( 2 )
-{
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-}
-
-.menu a:last-child
-{
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-.menu a:hover { color: #555555; }
-
-.menu a:hover > .octicon { color: #555555; }
-
-.glyphicon
-{
-	float: right;
-	margin-top: 12px;
-	margin-right: 12px;
-	font-size: 15px;
-	color: #000000;
-	color: rgba( 0, 0, 0, 0.7 );
-	opacity: 0.8;
-}
-
-.arrow
-{
-	width: 0;
-	height: 0;
-	margin-left: 15px;
-	border-left: 7px solid transparent;
-	border-right: 7px solid transparent;
-	border-bottom: 9px solid #F8F8F8;
-}
-
-.button.small {
-    font-size: 13px;
-    box-shadow: 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.05);
-}
-
-.author .name {
-	margin: 5px 0 0 0;
-}
-
-</style>
 
 </head>
 <body>
