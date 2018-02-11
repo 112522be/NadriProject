@@ -48,6 +48,9 @@
 		<p>${user.email}<p/>
 		<button type="button" class="btn btn-default">쪽지보내기</button>
 	</div>
+	<div class="container">
+		<img alt="" src="/resources/images/hashtag.png" width="30px" height="25px"><span>${community.hashtag}</span>
+	</div>
 	<jsp:include page="../common/comment.jsp"></jsp:include>
 
 	<!-- Latest compiled and minified JavaScript -->
