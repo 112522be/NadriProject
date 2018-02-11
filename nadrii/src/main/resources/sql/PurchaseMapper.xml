@@ -21,6 +21,7 @@
 		<result property="buyer.email"			column="buyer_email"  		jdbcType="VARCHAR"/>
 		<result property="buyer.phone"			column="buyer_phone"  		jdbcType="VARCHAR"/>
 		<result property="buyer.userName"		column="buyer_name"  		jdbcType="VARCHAR"/>
+		<result property="qrCode"				column="qr_code"  			jdbcType="VARCHAR"/>
 		
 	</resultMap>
 	
@@ -40,7 +41,8 @@
 						buyer_id,
 						buyer_email,
 						buyer_phone,
-						buyer_name
+						buyer_name,
+						qr_code
 						)
 		VALUES (
 				seq_purchase_post_no.NEXTVAL,
@@ -56,7 +58,8 @@
 				#{buyer.userId},
 				#{buyer.email},
 				#{buyer.phone},
-				#{buyer.userName}
+				#{buyer.userName},
+				#{qrCode}
 				)
 	</insert>
 	
@@ -141,7 +144,8 @@
 			buyer_id,
 			buyer_email,
 			buyer_phone,
-			buyer_name
+			buyer_name,
+			qr_code
 	FROM PURCHASE
 	WHERE buyer_id = #{buyerId}
 	AND flag_bp = 'purchase'

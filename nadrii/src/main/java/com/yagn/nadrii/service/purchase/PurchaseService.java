@@ -22,6 +22,8 @@ public interface PurchaseService {
 	
 	public void deleteBasketList(Purchase purchase) throws Exception;
 	
+	public String getQRCode(Purchase purchase) throws Exception;
+	
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;
 	

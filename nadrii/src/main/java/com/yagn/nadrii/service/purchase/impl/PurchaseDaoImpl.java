@@ -76,6 +76,9 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public KakaoPayResponse addKakaoPayComplete(KakaoPayRequest kakaoPayRequest) {
 		return null;
 	}
-	
+	@Override
+	public String getQRCode(Purchase purchase ) {
+		return null;
+	}
 	
 } // end of class

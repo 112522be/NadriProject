@@ -155,5 +155,10 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
+	@Override
+	public String getQRCode(Purchase purchase) throws Exception {
+		return null;
+	}
+	
 	
 } // end of class

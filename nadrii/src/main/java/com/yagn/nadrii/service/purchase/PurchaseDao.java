@@ -11,6 +11,8 @@ public interface PurchaseDao {
 	
 	public void addPurchase(Purchase purchase) throws Exception ;
 
+	public String getQRCode(Purchase purchase) throws Exception ;
+
 	public List<Purchase> getBasketList(Map<String, Object> map) throws Exception ; 
 	
 	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception ;

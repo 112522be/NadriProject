@@ -190,7 +190,7 @@ public class PurchaseController {
 			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
-			System.out.println("\n[check] ==> " + purchase.toString());
+			System.out.println("\n[1. Purchase Domain Check] ==> " + purchase.toString());
 			
 			// cancelDate making algorithm
 			DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -207,15 +207,20 @@ public class PurchaseController {
 			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 			
 			if (purchase.getFlag().equals("purchase")) {
-				purchaseService.addQRcode(purchase);
+				String getQRCode = purchaseService.getQRCode(purchase);
+				System.out.println("\n[getQRCode Check]==>" + getQRCode);
+				purchase.setQrCode(getQRCode);
 			}
 			
+			System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
+
 			purchaseService.addPurchase(purchase);
-			
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		
+//		System.out.println("\n[3. Purchase Domain Check] ==> " + purchase.toString());
 		return "/index.jsp";	
 	}
 	
@@ -374,7 +379,7 @@ public class PurchaseController {
 	
 	@RequestMapping(value = "listPurchase")
 	public String listPurchase(
-			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+//			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
 			HttpSession session,
 			Map<String, Object> map
 			) {
@@ -382,6 +387,7 @@ public class PurchaseController {
 		System.out.println("\n /purchase/listPurchase");
 		
 		OpenApiPage resultPage = new OpenApiPage();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
 
 		User user = new User();
 		Map<String, Object> returnMap = new HashMap<>();

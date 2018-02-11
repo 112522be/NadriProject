@@ -36,6 +36,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 			this.purchaseKakaoDao = purchaseKakaoDao;
 		}
 		
+		@Autowired
+		@Qualifier("purchaseQRDaoImpl")
+		private PurchaseDao purchaseQRDao;
+		
+		public void setPurchaseQRCodeDao(PurchaseDao purchaseQRDao) {
+			this.purchaseQRDao = purchaseQRDao;
+		}
+		
 		
 		/// Constructor
 		public PurchaseServiceImpl() {
@@ -192,6 +200,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 			
 			return map;
 		}
+		
+		@Override
+		public String getQRCode(Purchase purchase) throws Exception {
+			return purchaseQRDao.getQRCode(purchase);
+		}
+		
 		
 		
 }
