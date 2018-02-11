@@ -32,7 +32,7 @@ $(document).ready(function() {
 		                        type: "POST",
 		                        url: "../trip/json/getClientAddress/",
 		                        contentType: "application/json",
-		                        data:jsonData,
+		                        data:location,
 		                        dataType: "json",
 		                        success: function() {
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
 		                    $.ajax({
 		                    	url: "../trip/json/getClientAddress/",
 		                        contentType: "application/json",
-		                        data:jsonData,
+		                        data:location,
 		                        dataType: "json",
 		                        success: function() {
 		                       
@@ -68,7 +68,7 @@ $(document).ready(function() {
 		            $.ajax({
                     	url: "../trip/json/getClientAddress/",
                         contentType: "application/json",
-                        data:jsonData,
+                        data:location,
                         dataType: "json",
                         success: function() {
                          
