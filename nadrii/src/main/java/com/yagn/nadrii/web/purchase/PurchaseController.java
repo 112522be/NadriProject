@@ -207,20 +207,21 @@ public class PurchaseController {
 			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 			
 			if (purchase.getFlag().equals("purchase")) {
+				
+				System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
+
 				String getQRCode = purchaseService.getQRCode(purchase);
 				System.out.println("\n[getQRCode Check]==>" + getQRCode);
 				purchase.setQrCode(getQRCode);
 			}
 			
-			System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
-
 			purchaseService.addPurchase(purchase);
+
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		
-//		System.out.println("\n[3. Purchase Domain Check] ==> " + purchase.toString());
 		return "/index.jsp";	
 	}
 	
