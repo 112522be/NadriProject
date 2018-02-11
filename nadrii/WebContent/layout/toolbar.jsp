@@ -130,6 +130,7 @@
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
+							<li><a href="/purchase/listPurchase">temp(구매한티켓목록)</a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">

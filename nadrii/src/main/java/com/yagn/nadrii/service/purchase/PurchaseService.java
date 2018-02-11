@@ -14,6 +14,8 @@ public interface PurchaseService {
 	
 	public Map<String, Object> getBasketList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
 	
+	public Map<String, Object> getPurchaseList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
+
 	public List<Purchase> addBasketTicket(Purchase purchase) throws Exception;
 	
 	public void updateBasketPurchase(Purchase purchase) throws Exception; 

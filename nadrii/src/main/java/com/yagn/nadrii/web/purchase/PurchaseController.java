@@ -199,12 +199,16 @@ public class PurchaseController {
 			cal.setTime(bDate);
 			cal.add(Calendar.DATE, -10);
 
-			String cancelDate = df.format(cal.getTime()).substring(0, 4) + "�� "
-					+ df.format(cal.getTime()).substring(4, 6) + "�� " + df.format(cal.getTime()).substring(6) + "��";
+			String cancelDate = df.format(cal.getTime()).substring(0, 4) + " 년"
+					+ df.format(cal.getTime()).substring(4, 6) + " 월 " + df.format(cal.getTime()).substring(6) + " 일";
 
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
 			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
+			
+			if (purchase.getFlag().equals("purchase")) {
+				purchaseService.addQRcode(purchase);
+			}
 			
 			purchaseService.addPurchase(purchase);
 			
@@ -368,7 +372,49 @@ public class PurchaseController {
 		return "forward:/purchase/updateBasketPurchaseView.jsp";
 	}
 	
-	
+	@RequestMapping(value = "listPurchase")
+	public String listPurchase(
+			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/listPurchase");
+		
+		OpenApiPage resultPage = new OpenApiPage();
+
+		User user = new User();
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		try {
+			
+			if (openApiSearch.getPageNo() == 0) {
+				openApiSearch.setPageNo(1);
+			}
+			openApiSearch.setNumOfRows(pageSize);
+			
+			user = (User) session.getAttribute("loginUser");
+
+			returnMap = purchaseService.getPurchaseList(openApiSearch, user.getUserId());
+			
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
+			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
+					pageUnit, pageSize);
+			System.out.println("[resultPage]" + resultPage);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("user", user);
+		map.put("list", returnMap.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("openApiSearch", openApiSearch);
+		
+		
+		return "forward:/purchase/listPurchase.jsp";
+	}
 	
 	
 } // end of class

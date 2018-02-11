@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>listPurchase.jsp</title>
+<title>구매한 티켓 목록</title>
 
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,23 +15,16 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	  body {
-            padding-top : 50px;
-        }
-    </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-//검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-function fncGetList(currentPage) {
-	$("#currentPage").val(currentPage)
-	$('form').attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
+function fncGetList(pageNo) {
+	$("#pageNo").val(pageNo);
+	$("form").attr("method", "POST").attr("action", "/ticket/listBasket").submit();
 }
 
-
+/////////////////////////////////////////////////////////
 $( function(){
 	$('td:nth-child(1)').bind("click", function(){
 		var tranNo = $( $('td:nth-child(1) input[name="tranNo"]')[$('td:nth-child(1)').index(this)] ).val(); 
@@ -67,7 +60,11 @@ $( function(){
 					}); // end of $.ajax
 				});
 	});
-	
+////////////////////////////////////////
+
+
+
+
 </script>
 </head>
 
@@ -167,7 +164,7 @@ $( function(){
  	
  	
  	<!-- PageNavigation Start... -->
-		<jsp:include page="../common/pageNavigator_new.jsp"/>
+		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
 					
 </body>
