@@ -43,9 +43,9 @@ $(function(){
 	<div class="container">
 
 		<div class="jumbotron">
-			<h1 class="text-center text-danger">결제가 <code>완료</code> 되었습니다.</h1>
+			<h1 class="text-center text-danger">결제가 <code>취소</code> 되었습니다.</h1>
 			<p>
-				구매하신 티켓의 결제가 완료 되었습니다.
+				구매하신 티켓의 결제가 취소 되었습니다.
 			</p>
 			<p>
 				확인버튼 클릭시 나드리 메인화면으로 이동합니다.

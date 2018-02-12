@@ -221,7 +221,7 @@ public class PurchaseController {
 			System.out.println(e);
 		}
 		
-		return "/index.jsp";	
+		return "redirect:/successPayment.jsp";	
 	}
 	
 	@RequestMapping(value="kakaoPayCompleteB")
@@ -251,7 +251,7 @@ public class PurchaseController {
 			System.out.println(e);
 		}
 		
-		return "/index.jsp";	
+		return "redirect:/successPayment.jsp";	
 	}
 	
 	

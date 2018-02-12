@@ -80,7 +80,14 @@
        });
     });
 	
-	
+  //============= "구매한티켓" 화면이동 =============
+    $( function() {
+       $(".glyphicon.glyphicon-qrcode").bind("click" , function() {
+
+//      	 alert("구매한티켓")
+          self.location = "/purchase/listPurchase"
+       });
+    });
 	
 	
 	</script>
@@ -121,12 +128,20 @@
 							</li>
 							<li>
 								<a href="#">
-									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="장바구니"></span>
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-qrcode" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="구매한티켓"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"
+										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
