@@ -26,7 +26,8 @@
 <script type="text/javascript">
 
 $(function(){
-	$( "btn.btn-default.btn-lg" ).bind("click", function(){
+	$( "a[href='#']:contains('확 인')" ).bind("click", function(){
+//		alert("확인")
 		self.location = "/index.jsp"
 	});
 });
@@ -48,11 +49,11 @@ $(function(){
 				구매하신 티켓의 결제가 비정상적으로 실패 되었습니다.
 			</p>
 			<p>
-				확인버튼 클릭시 나드리 메인화면으로 이동합니다.
+				확인버튼 클릭시 나들이 메인화면으로 이동합니다.
 			</p>
 			<p>
 				<a class="btn btn-default btn-lg" href="#" role="button">
-					확인
+					확 인
 				</a>
 			</p>
 		</div>

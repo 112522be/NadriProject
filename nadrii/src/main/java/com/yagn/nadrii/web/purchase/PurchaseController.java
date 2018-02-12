@@ -177,6 +177,7 @@ public class PurchaseController {
 			@RequestParam String pg_token,
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
+//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayComplete : POST");
@@ -215,13 +216,13 @@ public class PurchaseController {
 			}
 			//*/
 			purchaseService.addPurchase(purchase);
-
+			
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		
-		return "redirect:/successPayment.jsp";	
+		return "forward:/purchase/successPayment.jsp";	
 	}
 	
 	@RequestMapping(value="kakaoPayCompleteB")
@@ -229,6 +230,7 @@ public class PurchaseController {
 			@RequestParam String pg_token,
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
+//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayCompleteB : POST");
@@ -251,7 +253,8 @@ public class PurchaseController {
 			System.out.println(e);
 		}
 		
-		return "redirect:/successPayment.jsp";	
+		
+		return "forward:/purchase/successPayment.jsp";	
 	}
 	
 	

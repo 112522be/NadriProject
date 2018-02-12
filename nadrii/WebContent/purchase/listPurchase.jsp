@@ -84,11 +84,13 @@ function fncGetList(pageNo) {
 						<th scope="row">
 							<h4>${ num.count }. [NO:${ list.postNo }]</h4>
 							
+							<!-- 
 								<label class="btn btn-info">
 									<input type="checkbox" name="postNo" value="${ list.postNo }"> 
 									선택하기
 								</label>
-							
+							 -->
+							 
 							</th>
 						<td><img class="media-object" src="${ list.ticketImage }" alt="There is no image" ></td>
 						<td>
