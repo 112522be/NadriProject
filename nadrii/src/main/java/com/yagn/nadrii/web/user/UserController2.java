@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -33,9 +34,11 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,9 +47,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
 
-@Controller
+//@Controller
 @RequestMapping("/user/*")
-public class UserController {
+public class UserController2 {
 	
 //	@Autowired
 //	JavaMailSender mailSender;
@@ -55,15 +58,15 @@ public class UserController {
 //    @Autowired
 //    private JavaMailSender mailSender;
 	
-	///Field
+		///Field
 		@Autowired
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 
 //		JavaMailSender mailSender;
-		//setter Method ±¸Çö ¾ÊÀ½
+		//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
-		public UserController(){
+		public UserController2(){
 			System.out.println(this.getClass());
 		}
 		
@@ -81,18 +84,18 @@ public class UserController {
 	    final String password="god2218923";
 	
 	    /**
-	     * ¸ÞÀÎÆäÀÌÁö
+	     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	     * @return
 	     * @throws Exception
 	     */
 		@RequestMapping(value="/main")
 		public String main()throws Exception{
-			System.out.println("¸ÞÀÎÆäÀÌÁö!!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			return "redirect:/index.jsp";
 		}
 
 
-	// ÀÌ¸ÞÀÏ
+	// ï¿½Ì¸ï¿½ï¿½ï¿½
 		/*@RequestMapping(value="check", method=RequestMethod.POST)
 		@ResponseBody
 		//public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
@@ -100,12 +103,12 @@ public class UserController {
 			String email = request.getParameter("email");
 			String authNum= "";
 			
-			authNum = randomNum();							//·¥´ý ÀÎÁõ¹øÈ£
+			authNum = randomNum();							//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
 			System.out.println("authNum : "+authNum);
 			User user = new User();
 			user.setCheckSuccess(authNum);
 				System.out.println("email : "+email);
-			sendEmail(email.toString(), authNum);			//¸ÞÀÏ¹ß¼Û
+			sendEmail(email.toString(), authNum);			//ï¿½ï¿½ï¿½Ï¹ß¼ï¿½
 			request.getSession().setAttribute("confirmNum", authNum);
 			Map<String, Object> mv = new HashMap<String, Object>();
 			mv.put("email",email);
@@ -121,12 +124,12 @@ public class UserController {
 			String email = request.getParameter("email");
 			String authNum= "";
 			
-			authNum = randomNum();							//·¥´ý ÀÎÁõ¹øÈ£
+			authNum = randomNum();							//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
 			System.out.println("authNum : "+authNum);
 			User user = new User();
 			user.setCheckSuccess(authNum);
 				System.out.println("email : "+email);
-			sendEmail(email.toString(), authNum);			//¸ÞÀÏ¹ß¼Û
+			sendEmail(email.toString(), authNum);			//ï¿½ï¿½ï¿½Ï¹ß¼ï¿½
 			request.getSession().setAttribute("confirmNum", authNum);
 			Map<String, Object> mv = new HashMap<String, Object>();
 			mv.put("email",email);
@@ -142,13 +145,13 @@ public class UserController {
 			
 			Map<String, Object> mv = new HashMap<String, Object>();
 			
-			System.out.println("confirmNum : "+confirmNum);			// user°¡ ÀÔ·ÂÇÑ ÀÎÁõ ¹øÈ£
+			System.out.println("confirmNum : "+confirmNum);			// userï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 			System.out.println("userVo.getCheckSuccess() : "+user.getCheckSuccess());
-			if(confirmNum.equals(user.getCheckSuccess())) {		// equals Å¸ÀÔÀÌ object 
-				System.out.println(" ÀÎÁõ¿Ï·á");
+			if(confirmNum.equals(user.getCheckSuccess())) {		// equals Å¸ï¿½ï¿½ï¿½ï¿½ object 
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
 				mv.put("result","success");
 			}else {
-				System.out.println(" ÀÎÁõ¹øÈ£ ¾È¸ÂÀ½");
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½È¸ï¿½ï¿½ï¿½");
 				mv.put("result","fail");
 			}
 			return mv;
@@ -162,14 +165,14 @@ public class UserController {
 			
 			Map<String, Object> mv = new HashMap<String, Object>();
 			
-			System.out.println("confirmNum : "+confirmNum);			// user°¡ ÀÔ·ÂÇÑ ÀÎÁõ ¹øÈ£
+			System.out.println("confirmNum : "+confirmNum);			// userï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 //			System.out.println("user.getCheckSuccess() : "+user.getCheckSuccess());
 //			if(confirmNum.equals(user.getCheckSuccess())) {	
 			if(confirmNum.equals(request.getSession().getAttribute("confirmNum"))) {
-				System.out.println(" ÀÎÁõ¿Ï·á");
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
 				mv.put("result","success");
 			}else {
-				System.out.println(" ÀÎÁõ¹øÈ£ ¾È¸ÂÀ½");
+				System.out.println(" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½È¸ï¿½ï¿½ï¿½");
 				mv.put("result","fail");
 			}
 			return mv;
@@ -189,11 +192,11 @@ public class UserController {
 //			} catch(Exception e){
 //				e.printStackTrace();
 //			}	
-//			System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â!!");
+//			System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½!!");
 //			userService.addUserPlus(user);
 //			Map<String, String> map = new HashMap<String, String>();
 //			map.put("msg", "success");
-//			System.out.println("Ãß°¡Á¤º¸ ÀÔ·ÂÀÌ´Ù" +map);
+//			System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ì´ï¿½" +map);
 //			return map;
 //		}
 		
@@ -201,8 +204,8 @@ public class UserController {
 			 /*  
 			String setfrom = "kimjh2218@gmail.com";
 			String tomail = email;
-			String title = "³ªµéÀÌ °ü¸®ÀÚ";
-			String content = "ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£´Â " +authNum+ "ÀÔ´Ï´Ù.";
+			String title = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			String content = "ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ " +authNum+ "ï¿½Ô´Ï´ï¿½.";
 			
 			
 			
@@ -267,7 +270,7 @@ public class UserController {
 		/*
 		private void sendEmail(String email, String authNum) {
 		 Properties p = new Properties();
-		  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Google°èÁ¤@gmail.comÀ¸·Î ¼³Á¤
+		  p.put("mail.smtp.user", "gmail_id@gmail.com"); // Googleï¿½ï¿½ï¿½ï¿½@gmail.comï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		  p.put("mail.smtp.host", "smtp.gmail.com");
 		  p.put("mail.smtp.port", "465");
 		  p.put("mail.smtp.starttls.enable","true");
@@ -283,16 +286,16 @@ public class UserController {
 		  try {
 		  // Authenticator auth = new SMTPAuthenticator();
 		   Session session = Session.getInstance(p, auth);
-		   session.setDebug(true); // ¸ÞÀÏÀ» Àü¼ÛÇÒ ¶§ »ó¼¼ÇÑ »óÈ²À» ÄÜ¼Ö¿¡ Ãâ·ÂÇÑ´Ù.
+		   session.setDebug(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½Ü¼Ö¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		 
 		   //session = Session.getDefaultInstance(p);
 		   MimeMessage msg = new MimeMessage(session);
-		   String message = "Gmail SMTP ¼­¹ö¸¦ ÀÌ¿ëÇÑ JavaMail Å×½ºÆ®";
-		   msg.setSubject("Gmail SMTP ¼­¹ö¸¦ ÀÌ¿ëÇÑ JavaMail Å×½ºÆ®");
+		   String message = "Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®";
+		   msg.setSubject("Gmail SMTP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ JavaMail ï¿½×½ï¿½Æ®");
 		   msg.setContent(message, "text/plain;charset=KSC5601");
 		   System.out.println("Message: " + msg.getContent());
 		   Transport.send(msg);
-		   System.out.println("Gmail SMTP¼­¹ö¸¦ ÀÌ¿ëÇÑ ¸ÞÀÏº¸³»±â ¼º°ø");
+		   System.out.println("Gmail SMTPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		  }
 		  catch (Exception mex) { // Prints all nested (chained) exceptions as well
 		   System.out.println("I am here??? ");
@@ -302,13 +305,13 @@ public class UserController {
 	      */  
 		
 				String host = "smtp.gmail.com";
-				String subject = "³ªµéÀÌ ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£";
-				String fromName="³ªµéÀÌ °ü¸®ÀÚ";
+				String subject = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£";
+				String fromName="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 				String from="kimjh2218@gmail.com";
 				String password = "top0347923";
 //				String to01 = email;
 				
-				String content= "ÀÎÁõ¹øÈ£ ["+ authNum +"]";
+				String content= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ["+ authNum +"]";
 				
 				try {
 			//		MimeMessage message = mailSender.createMimeMessage();
@@ -331,10 +334,10 @@ public class UserController {
 				    props.put("mail.smtp.socketFactory.port", "465");
 				    props.put("mail.smtp.starttls.enable", "true");
 		*/		    
-	/*				props.put("mail.smtp.starttls.enable", "true");     // gmailÀº ¹«Á¶°Ç true °íÁ¤
-					props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ¼­¹ö ÁÖ¼Ò
-					props.put("mail.smtp.auth","true");                 // gmailÀº ¹«Á¶°Ç true °íÁ¤
-					props.put("mail.smtp.port", "587");                 // gmail Æ÷Æ®
+	/*				props.put("mail.smtp.starttls.enable", "true");     // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+					props.put("mail.smtp.host", "smtp.gmail.com");      // smtp ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+					props.put("mail.smtp.auth","true");                 // gmailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½
+					props.put("mail.smtp.port", "587");                 // gmail ï¿½ï¿½Æ®
 					*/
 					/*props.setProperty("mail.transport.protocol", "smtp");
 			        props.setProperty("mail.host", host);
@@ -362,7 +365,7 @@ public class UserController {
 						 return new PasswordAuthentication(from, password );
 					}
 					});
-					System.out.println("·£´ý"+content);
+					System.out.println("ï¿½ï¿½ï¿½ï¿½"+content);
 					MimeMessage message = new MimeMessage(mailSession);
 					//message.setFrom(new InternetAddress("from@no-spam.com"));
 					message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName,"UTF-8","B")));
@@ -406,17 +409,17 @@ public class UserController {
 	
 	
 	/**
-	 *  login ÆäÀÌÁö
+	 *  login ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() throws Exception {
-		System.out.println("·Î±×ÀÎ ÆäÀÌÁö");
+		System.out.println("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return "redirect:/user/loginView.jsp";
 	}
 		
-	//Ä«Ä«¿À
+	//Ä«Ä«ï¿½ï¿½
 /*	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -431,10 +434,10 @@ public class UserController {
 	public String getKakaoUser(@ModelAttribute("tokenResponse") TokenResponse tokenResponse,
 									@RequestParam String code, HttpSession session) throws Exception {
 		tokenResponse = KakaoLoginRestClient.loginToken(code);
-		System.out.println("Ä«Ä«¿À ÅäÅ«" +code);
+		System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½Å«" +code);
 		User user = KakaoLoginRestClient.getUserInfo(tokenResponse.getAccess_token());
 		session.setAttribute("user", user);
-		System.out.println("µÎ¹øÂ° Ä«Ä«¿À" +user);
+		System.out.println("ï¿½Î¹ï¿½Â° Ä«Ä«ï¿½ï¿½" +user);
 		session.setAttribute("token", tokenResponse.getAccess_token());
 		return "redirect:/user/loginView.jsp";
 	}
@@ -446,9 +449,9 @@ public class UserController {
 		final String AUTH_HOST = "https://kauth.kakao.com";
 	    final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
 
-	    String CLIENT_ID = "[REST API Key]"; // ÇØ´ç ¾ÛÀÇ REST API KEY Á¤º¸. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ °¡´É
-	    String REDIRECT_URI = "[Redirect uri]"; // ÇØ´ç ¾ÛÀÇ ¼³Á¤µÈ uri. °³¹ßÀÚ À¥»çÀÌÆ®ÀÇ ´ë½¬º¸µå¿¡¼­ È®ÀÎ ¹× ¼³Á¤ °¡´É
-	    String code = "[Authorized code]"; // ·Î±×ÀÎ °úÁ¤Áß ¾òÀº authorization code °ª
+	    String CLIENT_ID = "[REST API Key]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ REST API KEY ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String REDIRECT_URI = "[Redirect uri]"; // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uri. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ë½¬ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	    String code = "[Authorized code]"; // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ authorization code ï¿½ï¿½
 	    System.out.println("code" +code);
 	    
 	    HttpsURLConnection conn = null;
@@ -509,58 +512,86 @@ public class UserController {
 	         }
 	    }
 	}
-	
-	
+
 	/**
-	 * È¸¿ø°¡ÀÔ ÆäÀÌÁö
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="addUser", method= RequestMethod.GET  )
-	public String addUser(HttpServletRequest request, Model model, HttpSession session
-		) throws Exception{
+
+	 //@Cacheable(value = "users", key = "#userId")
+	@RequestMapping(value="addUser", method=RequestMethod.GET  )
+	public String addUser(HttpServletRequest request, @ModelAttribute User params ) throws Exception{
+		/*
+=======
+
+	@RequestMapping(value="/addUser", method= RequestMethod.GET  )
+	public String addUser(HttpServletRequest request, Map map) throws Exception{
 		
-		System.out.println("È¸¿ø°¡ÀÔ");
-		/*		
-	if(uid != null && accessToken != null) {
-			
-		System.out.println("uid : " +  uid);
-			System.out.println("ÅäÅ« : " + accessToken );
-			
-//			model.addAttribute("uid" , uid);
-//			model.addAttribute("accessToken", accessToken);
-			
-			session.setAttribute("uid", uid);
-			session.setAttribute("accessToken", accessToken);
-			
+<<<<<<< HEAD
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+=======
+>>>>>>> refs/remotes/origin/master
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+params);		
+>>>>>>> refs/remotes/origin/master
+		if(request.getParameter("facebookId") != null) {
+<<<<<<< HEAD
+		String fbId = request.getParameter("facebookId");		
+		System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
+		model.addAttribute("facebookId" , fbId );
+=======
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
+			map.put("facebookId" , fbId );
+>>>>>>> refs/remotes/origin/master
 		}
-	
-	if(uid == "" && accessToken == "") {
-	}*/
-		return "forward:/user/addUserView.jsp";
+		//*/
+		return "redirect:/user/addUserView.jsp";
 	}
+
 	
-	
-	@RequestMapping(value="addUserFacebook", method=  {RequestMethod.GET, RequestMethod.POST} )
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @param session
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/addUserFacebook" )
 	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
-		,	@RequestParam (value="uid", required=false) String uid, 
-		@RequestParam (value="accessToken", required=false) String accessToken 
+		,@ModelAttribute User params 
 		) throws Exception{
 		
-		System.out.println("facebookÈ¸¿ø°¡ÀÔ");
-				
-	if(uid != null && accessToken != null) {
+		System.out.println("facebookÈ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		
+		//String str = URLDecoder.decode(params, "UTF-8");
+		
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+params);		
+//	if(uid != null && accessToken != null) {
+			
+		/*if(email != null) {
 			
 		System.out.println("uid : " +  uid);
-			System.out.println("ÅäÅ« : " + accessToken );
+			System.out.println("ï¿½ï¿½Å« : " + accessToken );
+			System.out.println("email : " +email);
 			
 //			model.addAttribute("uid" , uid);
 //			model.addAttribute("accessToken", accessToken);
 			
 			session.setAttribute("uid", uid);
 			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("email", email);
 			
-		}
+		}*/
+		
+		if(request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ : "+fbId);
+			model.addAttribute("facebookId" , fbId );
+			}
 	
 	/*if(uid == "" && accessToken == "") {
 	}*/
@@ -580,12 +611,12 @@ public class UserController {
 /*	@RequestMapping(value="addUserFacebook", method = RequestMethod.GET)
 	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session) throws Exception{
 		
-		System.out.println("facebookÈ¸¿ø°¡ÀÔ");
+		System.out.println("facebookÈ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
 				if(uid != null && accessToken != null) {
 			
 			System.out.println("uid" +uid);
-			System.out.println("ÅäÅ« : " + accessToken );
+			System.out.println("ï¿½ï¿½Å« : " + accessToken );
 			
 //			model.addAttribute("uid" , uid);
 //			model.addAttribute("accessToken", accessToken);
@@ -600,13 +631,42 @@ public class UserController {
 	
 	@RequestMapping(value="/view", method = RequestMethod.GET)
 	public String view (HttpServletRequest request, HttpSession seeion) throws Exception{
-		System.out.println("Ä«Ä«¿À ÇÒ¿¹Á¤");
+		System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½Ò¿ï¿½ï¿½ï¿½");
 		
 		return "forward:/user/listUser.jsp";
 	}
+		
+	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
+	//@ResponseBody
+	public String addUser(User user) throws Exception{
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
+		System.out.println("userId==" +user.getUserId());
+		
+		userService.addUser(user);
+		Map map = new HashMap();
+		
+		
+		
+		return "redirect:/user/addUser.jsp";
+	}
 	
+	
+	/*
+	@RequestMapping(value="/addUser",method=RequestMethod.POST)
+	public String addUser(@RequestBody User user,Map map)throws Exception{
+		System.out.println("È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("Start to save User Data");
+		userService.addUser(user);
+		
+		
+		
+		return "redirect:/user/addUser.jsp";
+	}
+	*/
+
 	/**
-	 * È¸¿ø°¡ÀÔ
+	 * È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param user
 	 * @return
 	 * @throws Exception
@@ -616,7 +676,7 @@ public class UserController {
 	    request.getSession().removeAttribute("loginUser");
 		session.invalidate();
 	   
-		System.out.println("·Î±×¾Æ¿ô : " + request.getSession().getAttribute("loginUser"));
+		System.out.println("ï¿½Î±×¾Æ¿ï¿½ : " + request.getSession().getAttribute("loginUser"));
 		
 		return "redirect:/index.jsp";
 	}
@@ -624,7 +684,7 @@ public class UserController {
 	
 	
 	/**
-	 *  ¾ÆÀÌµð Ã£±â
+	 *  ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	 * @param userName
 	 * @param userId
 	 * @return
@@ -632,24 +692,24 @@ public class UserController {
 	 */
 	@RequestMapping(value="findIdPg", method=RequestMethod.GET)
 	public String faindIdPg() throws Exception{
-		System.out.println("¾ÆÀÌµð Ã£±â ÆäÀÌÁö");
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return "forward:/user/findIdUser.jsp";
 	}
 	
 	/*@RequestMapping(value="findId", method=RequestMethod.POST)
 	public String faindId(@ModelAttribute("userId") String userId) throws Exception{
-		System.out.println("¾ÆÀÌµð Ã£±â");
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½");
 		return "forward:/user/findUser.jsp";
 	}*/
 	
 	@RequestMapping(value="findPasswordPg", method=RequestMethod.GET)
 	public String findPassword(User user, Model model) throws Exception{
-		System.out.println("ºñ¹Ð¹øÈ£ Ã£±â");
+		System.out.println("ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½");
 		return "forward:/user/findPasswordUser.jsp";
 	}
 	
 	/**
-	 * 	Ãß°¡Á¤º¸ ÆäÀÌÁö ÀÌµ¿
+	 * 	ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	 * @param userId
 	 * @param model
 	 * @return
@@ -657,31 +717,32 @@ public class UserController {
 	 */
 	@RequestMapping(value="addUserPlus", method=RequestMethod.GET)
 	public String addUserPlus(String userId, Model model) throws Exception{
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â ÆäÀÌÁö");
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return "forward:/user/addUserViewPlus.jsp";
 	}
 	
 	/**
-	 *  Ãß°¡Á¤º¸ ÀÔ·Â
+	 *  ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	 * @param user
 	 * @param model
 	 * @param session
 	 * @return
 	 * @throws Exception
 	 */
+	
 	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
-	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+	public String addUserPlus( @ModelAttribute("user")User user, HttpSession session) throws Exception{
 
 		System.out.println("addUserPlus :: POST");
 		
 		System.out.println("\n[1] ==>" + user);
 		
-		System.out.println("»ý³â ¿ùÀÏ >>" + user.getbirth());
-		System.out.println("ÇÁ·ÎÇÊ >>" + user.getprofileimageFile());
-		System.out.println("ÇÚµåÆù ¹øÈ£ >>" + user.getPhone());
-		System.out.println("»ç¿ëÀÚ ÀÌ¸§ >>" + user.getUserName());
-		System.out.println("ÀÚ³à¼ö >>" + user.getchildren());
-		System.out.println("¼º º° >>" +user.getgender());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ >>" + user.getbirth());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >>" + user.getprofileimageFile());
+		System.out.println("ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½È£ >>" + user.getPhone());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ >>" + user.getUserName());
+		System.out.println("ï¿½Ú³ï¿½ï¿½ >>" + user.getchildren());
+		System.out.println("ï¿½ï¿½ ï¿½ï¿½ >>" +user.getgender());
 
 		user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
 		
@@ -698,15 +759,30 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
-	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser(String userId) throws Exception {
+
 		//	@RequestParam("userId") String userId , Model model 
+	public String getUser( @RequestParam("userId") String userId , Map map, User user) throws Exception {
 		System.out.println("/user/getUser : GET");
 /*		//Business Logic
 		User user = userService.getUser(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		*/
+		
+		map.put("user", user);
 		return "forward:/user/getUser.jsp";
 	}
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+} // end of user

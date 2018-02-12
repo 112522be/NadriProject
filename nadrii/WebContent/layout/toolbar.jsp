@@ -56,39 +56,11 @@
 	});
 
 	$( function() {
-		console.log("세션 정보 : ${session}")
-		
-		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "/ticket/listTicket"
-		});
-
-	});
-
-	$( function() {
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
       		self.location = "/message/listMessage"
         });
     });
-	
-	//============= "장바구니" 화면이동 =============
-    $( function() {
-       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-
-//      	 alert("장바구니")
-          self.location = "/purchase/listBasket"
-       });
-    });
-	
-  //============= "구매한티켓" 화면이동 =============
-    $( function() {
-       $(".glyphicon.glyphicon-qrcode").bind("click" , function() {
-
-//      	 alert("구매한티켓")
-          self.location = "/purchase/listPurchase"
-       });
-    });
-	
 	
 	</script>
 	
@@ -127,13 +99,13 @@
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/purchase/listBasket">
 									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" 
 										data-toggle="tooltip" data-placement="bottom" title="장바구니"></span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="/purchase/listPurchase">
 									<span class="glyphicon glyphicon-qrcode" aria-hidden="true" 
 										data-toggle="tooltip" data-placement="bottom" title="구매한티켓"></span>
 								</a>
@@ -169,7 +141,7 @@
 								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
 							</ul>
 						</li>
-						<li><a href="#">나들이 티켓</a></li>
+						<li><a href="/ticket/listTicket">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>
