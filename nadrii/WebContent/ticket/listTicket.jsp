@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="UTF-8">
-<!-- test delete line -->
+
 <title>나들이 티켓 목록</title>
 
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -19,21 +19,14 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
 	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
-	<link rel="stylesheet" href="../resources/imperfect/assets/css/main.css?version=1041" />
-
-
-<!-- 무한스크롤 -->
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
-<!-- //////////////////// CSS //////////////////// -->
-
-	<style>
-	.col-sm-3 {
-		height: 500px;
-	}
-	</style>
-
-
+	<link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 
@@ -121,14 +114,12 @@ function fncGetList(pageNo) {
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div id="main">
+		<section id="portfolio" class="two">
 	<div class="container">
 
 		<div class="page-header text-right">
-			<h3 class="text-info">
-
-				<p class="bg-success">나들이티켓</p>
-			</h3>
-
+			<h3>나들이 티켓</h3>
 			<h5 class="text-muted">
 				조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
 			</h5>
@@ -137,81 +128,92 @@ function fncGetList(pageNo) {
 	<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 
-	<!-- JQUERY nav-pills Start -->
-		<div>
-			<!-- Nav tabs -->
-			<ul class="nav nav-pills">
-				<li role="presentation"><a href="#">제목순</a></li>
-				<li role="presentation"><a href="#">조회순</a></li>
-				<li role="presentation"><a href="#">수정일순</a></li>
-				<li role="presentation"><a href="#">생성일순</a></li>
-			</ul>
-			
-		</div>
-	<!-- JQUERY nav-pills End -->
+			<!-- JQUERY nav-pills Start -->
+			<div>
+				<!-- Nav tabs -->
+				<header>
+				<ul class="nav nav-pills">
+					<li role="presentation" class=""><a href="#">제목순</a></li>
+					<li role="presentation" class=""><a href="#">조회순</a></li>
+					<li role="presentation" class=""><a href="#">수정일순</a></li>
+					<li role="presentation" class=""><a href="#">생성일순</a></li>
+				</ul>
+				</header>
+			</div>
+			<!-- JQUERY nav-pills End -->
 
 		<div class="col-md-12 text-right">
 			<p class="text-primary">
-				<code>
 				&lt; 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건수 &gt;
-				</code>
 			</p>
 		</div>
 
 			<hr />
 
-			<div class="row">
-			<c:forEach var="tt" items="${tourTicket}" varStatus="num">
-					<div class="col-sm-3">
-					
-						<div class="col-sm-12">
-							<p>
-								<span class="label label-success"> ${ num.count } </span>
-							</p>
-							<h5>&nbsp;${ tt.title }</h5>
-						</div>	
-					
-						<div class="thumbnail">
-
-						
-							<p class="text-right">조회수 : ${ tt.readcount }</p>
-							
-							<img src="${ tt.firstimage }" />
-
-							<div class="caption">
-
-								<h5>
-								<!-- 
-									입장권 :
-									<c:forEach items="${ tt.usetimefestival }" varStatus="status">
-									${ tt.usetimefestival[status.index] }
-									</c:forEach>
-								 -->	
-								<hr />
-								
-								기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-								장&nbsp;소 : ${ tt.eventplace } <br>
-								</h5>
-								<br>
-								<p class="text-right">
-
-									<a href="#" class="btn btn-success btn-lg" role="button"> 상세조회 
-									<!-- PageNavigation을 위한 값을 보내는 부분  -->
-										<input type="hidden" name="contentId" value="${ tt.contentid }"> 
-										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }"> 
-										<input type="hidden" name="title" value="${ tt.title }"> 
-										<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }"> 
-										<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
-									</a>
-								</p>
+					<section>
+						<h3>Image</h3>
+						<h4>Fit</h4>
+						<div class="box alt">
+							<div class="row uniform">
+								<div class="12u$">
+									<span class="image fit">
+										<img src="/resources/imperfect/images/pic02.jpg" alt="" />
+									</span>
+								</div>
 							</div>
 						</div>
+						<h4>Left &amp; Right</h4>
+					</section>
+					
+					
 
+					<div class="row">
+						<c:forEach var="tt" items="${tourTicket}" varStatus="num">
+							<div class="col-sm-3">
+
+								<div class="col-sm-12">
+									<p>
+										<span class="label label-success"> ${ num.count } </span>
+									</p>
+									<h5>&nbsp;${ tt.title }</h5>
+								</div>
+
+								<div class="thumbnail">
+
+									<p class="text-right">조회수 : ${ tt.readcount }</p>
+
+									<img src="${ tt.firstimage }" />
+
+									<div class="caption">
+
+										<h5>
+											<hr />
+
+											기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
+											장&nbsp;소 : ${ tt.eventplace } <br>
+										</h5>
+										<br>
+										<p class="text-right">
+
+											<a href="#" class="btn btn-success btn-lg" role="button">
+												상세조회 
+												
+												<!-- PageNavigation을 위한 값을 보내는 부분  --> 
+												<input type="hidden" name="contentId" value="${ tt.contentid }">
+												<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }"> 
+												<input type="hidden" name="title" value="${ tt.title }"> 
+												<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }"> 
+												<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
+											</a>
+										</p>
+									</div>
+								</div>
+
+							</div>
+						</c:forEach>
 					</div>
-			</c:forEach>
-			</div>
 
-			<hr />
+					<hr />
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
 			<input type="hidden" name="searchCondition" id="searchCondition" value="">
@@ -221,6 +223,10 @@ function fncGetList(pageNo) {
 
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
+	</section>
+	</div>
+	
+	
 	
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
@@ -228,13 +234,13 @@ function fncGetList(pageNo) {
 
 
 	<!-- Scripts -->
-	<script src="../resources/imperfect/assets/js/jquery.scrolly.min.js"></script>
-	<script src="../resources/imperfect/assets/js/jquery.scrollzer.min.js"></script>
-	<script src="../resources/imperfect/assets/js/skel.min.js"></script>
-	<script src="../resources/imperfect/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="../resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="../resources/imperfect/assets/js/main.js"></script>
-	<script src="../resources/imperfect/assets/js/1main.js"></script>
+	<script src="../resources/assets/js/jquery.scrolly.min.js"></script>
+	<script src="../resources/assets/js/jquery.scrollzer.min.js"></script>
+	<script src="../resources/assets/js/skel.min.js"></script>
+	<script src="../resources/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="../resources/assets/js/main.js"></script>
+	<script src="../resources/assets/js/1main.js"></script>
 
 </body>
 
