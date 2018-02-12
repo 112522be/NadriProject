@@ -105,18 +105,52 @@ $(function(){
 			 placement: 'bottom',
 			 }
 			);	
-	
 });
-
 
 function clickProfile(){
 	alert('${group.join.userId}');
 }
 
-function clickMessage(){
-	
+function clickMessage(){	
 	window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 }
+
+var groupNo = ${group.join.groupNo};
+
+function addLike(){
+	
+	$.ajax({
+		url: "../like/json/addLike/"+groupNo,
+		method: "POST",
+		dataType: "json",
+		success:function(returnData){
+			getCountLike();
+		}
+	});	
+	
+}
+
+var likeCount;
+
+function getCountLike(){
+	
+	$.ajax({
+		url: "../like/json/getCountLike/"+groupNo,
+		method: "POST",
+		dataType: "json",
+		success:function(returnData){
+			
+			likeCount = returnData.totalCount;
+
+		}
+	});	
+}
+
+$(function(){
+	$(".like").bind("click", function(){
+		alert(1);
+	});
+});
 
 
 </script>
@@ -134,9 +168,6 @@ function clickMessage(){
 					<div class="title" style="overflow: hidden">
 						<h2>${group.title}</h2>
 						<div>
-							<ul id="groupName" style="overflow: hidden">
-								<li>${group.groupName}</li>
-							</ul>
 							<ul id="count">
 								<li>view : ${group.viewCount}</li>
 							</ul>
@@ -159,8 +190,8 @@ function clickMessage(){
 				</div>
 				<footer>
 					<ul class="stats">
-						<li><a href="#" class="icon fa-heart">28</a></li>
-						<li><a href="#" class="icon fa-comment">128</a></li>
+						<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
+						<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
 					</ul>
 				</footer>
 				<div id="userMenu" style="float: right; margin-top: -3em; display: none;">
