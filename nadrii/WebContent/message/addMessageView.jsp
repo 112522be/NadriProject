@@ -17,18 +17,9 @@
 		});
 	});
 
-	function sleep(milliseconds) {
-		var start = new Date().getTime();
-		for (var i = 0; i < 1e7; i++) {
-		    if ((new Date().getTime() - start) > milliseconds){
-		      break;
-	    }
-	  }
-	}
 	
 	$( function() {
 		$("a[href='#']:contains('취소')").on("click",function(){
-			//alert("취소");
 			window.close();
 		});
 	});
