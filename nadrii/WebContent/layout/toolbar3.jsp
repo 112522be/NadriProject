@@ -19,116 +19,97 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
 		
 		
-		<!-- ////////// JavaScript ////////// -->
-		<script type="text/javascript">
-		
-		
-		
-		</script>
-		
 	</head>
-	
-	
-	
-	
-	
 	<body class="single">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Header -->
-		<header id="header">
-			<h1>
-				<a href="/index.jsp">N A D R I I</a>
-			</h1>
-			<nav class="links">
-				<ul>
-					<li><a href="/index.jsp">HOME</a></li>
-					<li><a href="/trip/getTheme">나들이 정보</a></li>
-					<li><a href="/comm/listComm">나만의 나들이</a></li>
-					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-						data-hover="dropdown" data-delay="0" data-close-others="false">
-							나들이 플래너 <b class=" icon-angle-down"></b>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
-							<li><a href="/planner/addPlannerView">플래너 작성</a></li>
-							<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
-						</ul></li>
-					<li><a href="/ticket/listTicket">나들이 티켓</a></li>
-					<li><a href="/group/listGroup">나들이 모임</a></li>
-				</ul>
+<!-- Header -->
+      <header id="header">
+         <h1>
+            <a href="/index.jsp">N A D R I I</a>
+         </h1>
+         <nav class="links">
+            <ul>
+               <li><a href="/index.jsp">HOME</a></li>
+               <li><a href="/trip/getTheme">나들이 정보</a></li>
+               <li><a href="/comm/listComm">나만의 나들이</a></li>
+               <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  data-hover="dropdown" data-delay="0" data-close-others="false">
+                     나들이 플래너 <b class=" icon-angle-down"></b>
+               </a>
+                  <ul class="dropdown-menu">
+                     <li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
+                     <li><a href="/planner/addPlannerView">플래너 작성</a></li>
+                     <li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
+                  </ul></li>
+               <li><a href="/ticket/listTicket">나들이 티켓</a></li>
+               <li><a href="/group/listGroup">나들이 모임</a></li>
+            </ul>
 
-				<ul>
-					<li><a href="/trip/getTheme">장바구니</a></li>
-					<li><a href="/comm/listComm">쪽지보내기</a></li>
-				</ul>
-			</nav>
-			
-			<nav class="main">
-				<ul>
-					<li class="search"><a class="fa-search" href="#search">Search</a>
-						<form id="search" method="get" action="#">
-							<input type="text" name="query" placeholder="Search" />
-						</form></li>
-					<li class="menu"><a class="fa-bars" href="#menu">Menu</a></li>
-				</ul>
-			</nav>
-		</header>
+            <ul>
+               <li><a href="/trip/getTheme">장바구니</a></li>
+               <li><a href="/comm/listComm">쪽지보내기</a></li>
+            </ul>
+         </nav>
+         
+         <nav class="main">
+            <ul>
+               <li class="search"><a class="fa-search" href="#search">Search</a>
+                  <form id="search" method="get" action="#">
+                     <input type="text" name="query" placeholder="Search" />
+                  </form></li>
+               <li class="menu"><a class="fa-bars" href="#menu">Menu</a></li>
+            </ul>
+         </nav>
+      </header>
 
-		<!-- Menu -->
-					<section id="menu">
+      <!-- Menu -->
+               <section id="menu">
 
-						<!-- Search -->
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
+                  <!-- Search -->
+                     <section>
+                        <form class="search" method="get" action="#">
+                           <input type="text" name="query" placeholder="Search" />
+                        </form>
+                     </section>
 
-						<!-- Links -->
-							<section>
-								<ul class="links">
-									<li>
-										<a href="#">
-											<h3>나들이 정보</h3>
-											<p>어디로 나들이 갈지 미리 확인해 보세요.</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>나만의 나들이</h3>
-											<p>내가 다녀온 나들이 정보를 함께 공유해요.</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>나들이 플래너</h3>
-											<p>이번 주말 나들이 계획을 미리 세워보자.</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>나들이 티켓</h3>
-											<p>나들이 가기 전 미리 티켓을 예매하세요.</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>나들이 모임</h3>
-											<p>우리 함께 나들이 가서 친해져 볼까?</p>
-										</a>
-									</li>
-								</ul>
-							</section>
-
-						<!-- Actions -->
-							<section>
-								<ul class="actions vertical">
-									<li><a href="#" class="button big fit">Log In</a></li>
-								</ul>
-							</section>
+                  <!-- Links -->
+                     <section>
+                        <ul class="links">
+                           <li>
+                              <a href="#">
+                                 <h3>나들이 정보</h3>
+                                 <p>어디로 나들이 갈지 미리 확인해 보세요.</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <h3>나만의 나들이</h3>
+                                 <p>내가 다녀온 나들이 정보를 함께 공유해요.</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <h3>나들이 플래너</h3>
+                                 <p>이번 주말 나들이 계획을 미리 세워보자.</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <h3>나들이 티켓</h3>
+                                 <p>나들이 가기 전 미리 티켓을 예매하세요.</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <h3>나들이 모임</h3>
+                                 <p>우리 함께 나들이 가서 친해져 볼까?</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </section>
 
 					</section>
 

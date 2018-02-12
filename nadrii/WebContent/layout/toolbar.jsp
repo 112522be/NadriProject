@@ -130,7 +130,6 @@
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
-							<li><a href="/purchase/listPurchase">temp(구매한티켓목록)</a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
@@ -145,8 +144,7 @@
 						<li><a href="#">나들이 정보</a></li>
 						<li><a href="/comm/listComm">나만의 나들이</a></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-								data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 
 								<b class=" icon-angle-down"></b>
 							</a>
 							<ul class="dropdown-menu">

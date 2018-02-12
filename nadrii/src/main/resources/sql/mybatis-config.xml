@@ -23,6 +23,7 @@
 		<typeAlias alias="group" type="com.yagn.nadrii.service.domain.Group"/>
 		<typeAlias alias="purchase" type="com.yagn.nadrii.service.domain.Purchase"/>
 		<typeAlias alias="join" type="com.yagn.nadrii.service.domain.Join"/>
+		<typeAlias alias="like" type="com.yagn.nadrii.service.domain.Like"/>
 		<typeAlias alias="message" type="com.yagn.nadrii.service.domain.Message"/>
 		<typeAlias alias="planner" type="com.yagn.nadrii.service.domain.Planner"/>
 		<typeAlias alias="searchContent" type="com.yagn.nadrii.service.domain.SearchContent"/>
@@ -39,6 +40,7 @@
 		<mapper resource="sql/CommentMapper.xml"/>
 		<mapper resource="sql/PurchaseMapper.xml"/> 
 		<mapper resource="sql/JoinMapper.xml"/>
+		<mapper resource="sql/LikeMapper.xml"/>
 		<mapper resource="sql/MessageMapper.xml"/>
 		<mapper resource="sql/PlannerMapper.xml"/>
 		<mapper resource="sql/SearchContentsMapper.xml"/>

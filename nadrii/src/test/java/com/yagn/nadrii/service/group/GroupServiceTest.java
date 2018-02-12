@@ -32,15 +32,14 @@ public class GroupServiceTest {
 	@Qualifier("joinServiceImpl")
 	private JoinService joinService;
 
-	//@Test
+	@Test
 	public void testAddGroup() throws Exception {
 		
 		Group group = new Group();
 		Join join = new Join();
 		
-		group.setGroupName("GROUP NAME1");
 		group.setTitle("모임 참여하기111");
-		group.setText("내용3");
+		group.setText("내용13");
 		group.setCategoryCode("a");
 		
 		int groupNo = groupService.addGroup(group);
@@ -80,7 +79,6 @@ public class GroupServiceTest {
 		
 		System.out.println(group);
 		
-		group.setGroupName("모임이름");
 		join.setGroupNo(60033);
 		group.setJoin(join);
 		
@@ -141,7 +139,7 @@ public class GroupServiceTest {
 	 	System.out.println(totalCount);
 	 }
 	 
-	@Test
+	//@Test
 	public void testGetGroupListByProdNo() throws Exception{
 		 
 		Search search = new Search();
