@@ -91,7 +91,7 @@
 	                        <span class="icon-bar"></span>
 	                        <span class="icon-bar"></span>
 	                   	</button>
-					<a class="navbar-brand" href="/index.jsp"><span>Na</span>drii</a>
+					<a class="navbar-brand" href="/index.jsp">N A D R I I</a>
 				</div>
 				<!-- navbar-header End -->
 
@@ -124,10 +124,11 @@
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
+							<li><a href="/user/addUserViewPlus.jap">추가정보 입력</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
 							<li><a href="/user/loginView.jsp">Login</a></li>
-							<li><a href="/user/addUserView.jsp">Join</a></li>
+							<li><a href="/user/addUserView.jsp">Join</a></li>							
 						</c:if>
 					</ul>
 				</div>

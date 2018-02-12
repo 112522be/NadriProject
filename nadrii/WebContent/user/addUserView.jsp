@@ -15,8 +15,8 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	
@@ -25,6 +25,7 @@
        body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
+            border:none;
         }
         
         .container-fluid {
@@ -56,7 +57,7 @@ $(document).ready(function() {
 	
 });
 
-//이메일 인증 
+//	이메일 인증 
 function checkSend(){
 	var email = $("#email").val();
 	var frm = $("#frm").serialize();
@@ -243,7 +244,6 @@ function checkSuccess(){
     		return;
     	}
     	
-<<<<<<< HEAD
     	alert($("#checkNumStatus").val());
     	if($("#confirmNum").val() == ""){
     		alert("인증번호를 입력해주세요");
@@ -269,12 +269,6 @@ function checkSuccess(){
     				}
     			}
     		}); 
-=======
-    	if(confirm("회원가입을 하시겠습니까?")){
-    		$("form").attr("method" ,"POST").attr("action" ,"/user/addUser").submit();
-    		
-    	
->>>>>>> refs/remotes/origin/master
     	}
     }
     
@@ -289,17 +283,13 @@ function checkSuccess(){
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-success text-center">회 원 가 입</h1>
+		<h1 class="bg-success text-center" style="background-color:#fff;">회 원 가 입</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="frm" class="form-horizontal">
@@ -376,13 +366,9 @@ function checkSuccess(){
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일" oninput="emailValid();">
-<<<<<<< HEAD
 		      <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
 		      <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
 		      <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" onClick="checkSuccess();">
-=======
-		      <input type="button" value="인증" class="btn btn-primary btn-sm" id="btn_submit" onClick="check()">
->>>>>>> refs/remotes/origin/master
 		    </div>
 		  </div> 
 		  
@@ -398,14 +384,9 @@ function checkSuccess(){
 		
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
-<<<<<<< HEAD
-	
+
 	<!--<input type="hidden" id="uid" value="${uid}" />  facebook 로그인 -->
-	
-=======
 
-
->>>>>>> refs/remotes/origin/master
 </body>
 
 </html>

@@ -52,9 +52,32 @@ $(document).ready(function() {
 	$(".signupbtn").prop("disabled", true);
 	$("#userId").val($("params").val());
 	$("#email").val($("params").val());
+
+
+    var p_email = emailGetParameter();
+    var p_emailId = p_email.split('@')[0];
+    
+    alert('p_emailId : ' + p_emailId);
+    alert('Email : ' + p_email);
+    $("#userId").val(p_emailId);
+    $("#email").val(p_email);
+    
 	
 });
-
+function emailGetParameter() {
+    var url = location.search;
+    var arrResult =JSON.parse(decodeURI(url.split('?')[1]));
+    return arrResult.email;
+    
+    
+    /* if (strParamName) {
+        			
+    	arrResult = location.search.match(new RegExp("[&?]" + strParamName+"=(.*?)(&|$)"));
+        alert(arrResult);
+        
+        return arrResult && arrResult[1] ? arrResult[1] : null;
+    } */
+} 
 //	이메일 인증 
 function checkSend(){
 	var email = $("#email").val();
@@ -275,7 +298,25 @@ function checkSuccess(){
             location.href = "/user/main";
         }
     }
-</script>
+    
+    /* var param = $(location).attr('search').slice($(location).attr('search').indexOf(':')+2);
+	
+    alert(param); */
+    
+    /* function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    
+
+
+    var email = getParameterByName('email');
+    */
+    
+    
+    </script>
 </head>
 
 <body>
@@ -299,7 +340,7 @@ function checkSuccess(){
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" oninput="checkId();" autofocus>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${request.getParameter('email')}" oninput="checkId();" autofocus>
 		      <span id = "chkMsg"></span>
 		    </div>
 			<div id="htmlId"></div>
