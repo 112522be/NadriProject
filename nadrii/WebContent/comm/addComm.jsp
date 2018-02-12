@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 <head>
@@ -12,10 +13,10 @@
 	<script>
 	$(function() {
 		$(document).ready(function() {
-			/* if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
+			if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
 				alert("로그인 후 이용해주세요")
 				self.location="../user/loginView.jsp"
-			} */
+			}
 		})
 		$('a#submit').bind('click', function() {
 			var hashtags=',';
@@ -23,7 +24,11 @@
 				hashtags += $(this).val();
 			})
 			$('input[name="hashtag"]').val(hashtags);
-			$('form[name="postData"]').attr("action", "addComm").attr("method", "POST").submit();
+			if("${menu}"=="update"){
+				$('form[name=postData]').attr("action", "updateComm").attr("method", "POST").submit();
+			}else{
+				$('form[name="postData"]').attr("action", "addComm").attr("method", "POST").submit();
+			}
 		})
 	})
 	</script>
@@ -39,15 +44,22 @@
 	<div class="container" align="center">
 	<br/>
 		<form name="postData">
+			<input type="hidden" name="postNo" value="${community.postNo}">
 			<input type="hidden" name="userId" value="${loginUser.userId}">
 			<div class="form-group">
-			    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요">
+			    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요" value="${community.title}">
 			 </div>
 			 <div>
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
 	 		 <br/>
-			 <div id="cndHashTags"></div>
+			 <div id="cndHashTags">
+			 	<c:set var="i" value="0" />
+			 	<c:forEach var="hashtags" items="${hashtags}">
+			 		<c:set var="i" value="${i+1}" />
+			 			<button type="button" class="selectedhashtagButtons" value="${hashtags},"><span class="glyphicon glyphicon-ok"></span>&nbsp;#${hashtags}</button>&nbsp;
+			 	</c:forEach>
+			 </div>
 			 <br/>	
 		</form> 
 		<div class="box-bottom" >
