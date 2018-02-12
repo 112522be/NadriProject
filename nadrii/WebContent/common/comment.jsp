@@ -54,7 +54,7 @@
 </script>
 </head>
 <body onload="listComment()">
-	<div align="center">
+	<div class="container" align="center">
 		<div>
 			<form name="formData">
 				<input type="hidden" name="postNo" value="${community.postNo}">
@@ -66,7 +66,7 @@
 			<div class="col-xs-1">
 				<button align="right" type="button" class="btn btn-info" name="submitComment">저 장</button>
 			</div>
-			<div id="commentContainer" align="left"></div>
+			<div id="commentContainer"></div>
 		</div>
 	</div>
 </body>
