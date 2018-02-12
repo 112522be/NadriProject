@@ -36,7 +36,7 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 	public String getQRCode(Purchase purchase) {
 		
 		System.out.println("\n[purchaseQRDaoImpl.java]::getQRCode");
-		System.out.println("\n[Purchase Domain Check]==>" + purchase.toString());
+//		System.out.println("\n[Purchase Domain Check]==>" + purchase.toString());
 		
 		String returnQRCode = "";
 		
@@ -50,17 +50,22 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 				file.mkdirs();
 			}
 			
+			/*
 			// 코드인식시 보여질 티켓의 정보입력
 			int count = 0;
 			for (int i = 0; i < purchase.getTicketCount().length; i++) {
 				count += Integer.parseInt( purchase.getTicketCount()[i] );
 			}
+			//*/
+			
 			String ticketInfo = "티켓명 : " 
 					+ purchase.getTicketTitle() 
 				+ "\n예매일자 : " + purchase.getBookingDate()
 				+ "\n구매자이름 : " + purchase.getBuyerName()
-				+ "\n입장인원 : " + count + " 명"
+//				+ "\n입장인원 : " + count + " 명"
 				;
+			
+//			String ticketInfo = "http://127.0.0.1:8080/purchase/listPurchase"; 
 			
 			System.out.println("\n[ticketInfo Check]==>" + ticketInfo);
 			
@@ -78,7 +83,7 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix, matrixToImageConfig);
 			// ImageIO를 사용한 바코드 파일쓰기
 			
-			
+			/*
 			System.out.println("현재 시간 구하기 :: by System.currentTimeMills()..!!");
 			// (1) 시스템의 시간정보를 얻는다.
 			long currentTimeInfo = System.currentTimeMillis();  // 또는 System.nanoTime();
@@ -89,12 +94,17 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			// (3) 출력 형태에 맞는 문자열을 얻는다.
 			String datetime2 = sdf2.format(new Date(currentTimeInfo));
 			System.out.println("--> " + datetime2);
+			//*/
+			
 			
 			String userId = purchase.getBuyerId();
-			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\QRCode&" + userId + "&" + datetime2 + ".jpg") );
+			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
+//					+ "&" + datetime2 
+					+ ".jpg") );
 			// QRCode&userID :: 의 형태로 QR코드 파일 생성됨
 			
-			returnQRCode = "QRCode&" + userId + "&" + datetime2 + ".jpg";
+//			returnQRCode = "QRCode&" + userId + "&" + datetime2 + ".jpg";
+			returnQRCode = userId + ".jpg";
 			
 			System.out.println("\n[returnQRCode Check]==>" + returnQRCode);
 			

@@ -99,11 +99,13 @@ function fncGetList(pageNo) {
 							<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
 							<a class="btn btn-default btn-lg btn-block" role="button" data-toggle="collapse"
 								href="#${ num.index }" aria-expanded="false" aria-controls="collapseExample">
-									<h4>티켓보기</h4>
+									<h4>티켓정보</h4>
 							</a>
 							<div class="collapse" id="${ num.index }">
 								<div class="well text-center">
-									<img class="media-object" src="/resources/qrcode/${ list[num.index].qrCode }" alt="There is no image" >								
+								<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+									<h5 class="text-danger">￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장</h5>								
+								</c:forEach>
 								</div>
 							</div>
 						</td>

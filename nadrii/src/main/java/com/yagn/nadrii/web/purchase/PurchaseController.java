@@ -205,16 +205,15 @@ public class PurchaseController {
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
 			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
-			
-			if (purchase.getFlag().equals("purchase")) {
-				
-				System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
 
+			/*
+			if (purchase.getFlag().equals("purchase")) {
+				System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
 				String getQRCode = purchaseService.getQRCode(purchase);
 				System.out.println("\n[getQRCode Check]==>" + getQRCode);
 				purchase.setQrCode(getQRCode);
 			}
-			
+			//*/
 			purchaseService.addPurchase(purchase);
 
 
@@ -244,6 +243,7 @@ public class PurchaseController {
 			purchase = (Purchase) session.getAttribute("purchase");
 			
 			System.out.println("\n[check] ==> " + purchase.toString());
+			System.out.println("\n[check] ==> " + purchase.getSumPostNo());
 			
 			purchaseService.updateBasketPurchase(purchase);
 			
@@ -422,6 +422,10 @@ public class PurchaseController {
 		
 		return "forward:/purchase/listPurchase.jsp";
 	}
+	
+	
+	
+	
 	
 	
 } // end of class
