@@ -10,19 +10,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-	$( function() {
-		$("a[href='#']:contains('보내기')").on("click",function(){
-			alert("보내기");
-			$("form").attr("method","POST").attr("action","/message/addMessage").submit();			
-
-		});
-	});
-
 	
-	$( function() {
-		$("a[href='#']:contains('취소')").on("click",function(){
-			window.close();
-		});
+	$(function(){
+		window.close();
 	});
 </script>
 
@@ -35,7 +25,7 @@
 						
 
 						<div id="sendmessage"></div>
-
+						<div id="errormessage"></div>
 						<form>
 							<div class="alert alert-info" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
 							    <strong>보내는 사람 : </strong>
@@ -55,7 +45,8 @@
 								<div class="alert alert-warning" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
 							    <strong>받는 사람 : </strong>
 							    	${message.receiverId}
-							    	<input type="hidden" name="receiverId" value="${message.receiverId}"/>
+							    	<input type="hidden" name="receiverId" value="${message.receiverId}"/ readonly="readonly">
+							    	
 							    	
 							<!-- 
 								<button class="btn btn-primary" type="button">
@@ -71,14 +62,8 @@
 								<textarea class="form-control" name="text" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="메시지를 작성하세요"></textarea>
 								<div class="validation"></div>
 							</div>
-						</form>
-						
-							<div class="text-center">
-								<a class="btn btn-default btn-md" href="#" role="button">보내기</a>
-								<a class="btn btn-default btn-md" href="#" role="button">취소</a>
 
-							</div>							
-						
+													</form>
 					</div>
 				</div>
 			</div>

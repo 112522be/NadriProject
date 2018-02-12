@@ -51,10 +51,11 @@ public class MessageController {
 	}
 
 	@RequestMapping(value="addMessage", method=RequestMethod.POST)
-	public String addMessage(@ModelAttribute Message message,Map map,@RequestParam("receiverId") String receiverId)throws Exception {
+	public String addMessage(@ModelAttribute Message message,Map map)throws Exception {
 		System.out.println(this.getClass()+"/message/addMessage/");
-		System.out.println("POST"+receiverId);
+		
 		System.out.println(message);
+		
 		
 		messageService.addMessage(message);
 		
@@ -89,6 +90,7 @@ public class MessageController {
 		
 		List<Message> list = messageService.listMessage(user.getUserId());
 		
+		/*
 		for (int i = 0; i < list.size(); i++) {
 			
 			if((list.get(i).getText()).length() >10) {
@@ -97,7 +99,7 @@ public class MessageController {
 				list.get(i).setText(text);			
 			}
 		}
-		
+		*/
 		//System.out.println(list.get(0));
 		map.put("list", list);
 		
