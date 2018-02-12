@@ -82,7 +82,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT
-									j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+									j.user_id, g.group_no, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 									FROM groups g, join j
 									WHERE g.group_no = j.group_no
 											AND j.group_role = 1
@@ -116,7 +116,7 @@
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT
-					j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+					j.user_id, g.group_no, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 					FROM groups g, join j
 					WHERE g.group_no = j.group_no
 							AND j.group_role = 1
