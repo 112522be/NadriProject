@@ -1,8 +1,3 @@
-/**
- * 
- */
-
-
 
 $(document).ready(function() {
 	
@@ -19,20 +14,22 @@ $(document).ready(function() {
 		                    var lat = position.coords.latitude;
 		                    var lon = position.coords.longitude;
 		                   
+		                    //alert(lat);
+		                    //alert(lon);
 		    
 		                    
 		                    var location ={
-		                    		"lat" : lat,
-		                    		"lng" : lon
+		                    		"lat" : lat+"",
+		                    		"lng" : lon+""
 		                    }
 		                    
 		                    var jsonData = JSON.stringify(location);
-		                    
+		                    console.log(jsonData);
 		                    $.ajax({
-		                        type: "POST",
-		                        url: "../trip/json/getClientAddress/",
-		                        contentType: "application/json",
-		                        data:location,
+		                        method: "POST",
+		                        url: "/trip/json/getClientAddress/",
+		                        contentType: "application/json;charset=UTF-8",
+		                        data:jsonData,
 		                        dataType: "json",
 		                        success: function() {
 
@@ -49,8 +46,8 @@ $(document).ready(function() {
 		                    var lon = 127.0139427;
 		                   
 		                    $.ajax({
-		                    	url: "../trip/json/getClientAddress/",
-		                        contentType: "application/json",
+		                    	url: "/trip/json/getClientAddress/",
+		                        contentType: "application/json;charset=UTF-8",
 		                        data:location,
 		                        dataType: "json",
 		                        success: function() {
@@ -66,8 +63,8 @@ $(document).ready(function() {
 		            var lon = 127.0139427;
 		           
 		            $.ajax({
-                    	url: "../trip/json/getClientAddress/",
-                        contentType: "application/json",
+                    	url: "/trip/json/getClientAddress/",
+                        contentType: "application/json;charset=UTF-8",
                         data:location,
                         dataType: "json",
                         success: function() {
@@ -76,5 +73,3 @@ $(document).ready(function() {
 		            });  
 		        }
 		    });
-
-		

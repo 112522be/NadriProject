@@ -427,15 +427,15 @@ pageEncoding="UTF-8"%>
 	//*/
 	
 	$(function() {
-		$(document).on("click","a[href='#']:contains('공유')", function(e){
-			alert("공유하기");
+		$(document).on("click",".btn.btn-default:contains('좋아요')", function(e){
+			alert("좋아요");
 		});
 	});
 	
 	
 	$(function() {
-		$(document).on("click","a[href='#']:contains('좋아요')", function(e){
-			alert("좋아요");
+		$(document).on("click",".btn.btn-default:contains('공유')", function(e){
+			alert("공유");
 		});
 	});
 	
