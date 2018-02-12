@@ -35,15 +35,10 @@
 	<!-- Theme skin -->
 	
 	<link href="/resources/skins/default.css" rel="stylesheet" />
-
-	<!-- //////////////////// CSS //////////////////// -->
-
 	<style type="text/css">
-
 		.container {
 			padding: 20px;
         }
-
 	</style>
 
 	<script type="text/javascript">

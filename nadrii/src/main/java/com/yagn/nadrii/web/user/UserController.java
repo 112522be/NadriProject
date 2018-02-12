@@ -169,10 +169,10 @@ public class UserController {
 //			System.out.println("user.getCheckSuccess() : "+user.getCheckSuccess());
 //			if(confirmNum.equals(user.getCheckSuccess())) {	
 			if(confirmNum.equals(request.getSession().getAttribute("confirmNum"))) {
-				System.out.println(" �����Ϸ�");
+				System.out.println("체크 성공");
 				mv.put("result","success");
 			}else {
-				System.out.println(" ������ȣ �ȸ���");
+				System.out.println("체크 실패");
 				mv.put("result","fail");
 			}
 			return mv;
