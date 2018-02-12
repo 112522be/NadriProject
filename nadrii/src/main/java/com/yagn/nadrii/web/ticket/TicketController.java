@@ -49,12 +49,14 @@ public class TicketController {
 	@RequestMapping(value = "listTicket")
 	public String listTicket(
 			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+			@RequestParam(value="searchCondition", required=false, defaultValue="") String searchCondition,
 			Map<String, Object>	map
 			) {
 		
 		System.out.println("\n /ticket/listTicket : GET / POST");
 		System.out.println("\n[openApiSearch domain check] ==> " + openApiSearch.toString());
-	
+		System.out.println(searchCondition);
+		
 		OpenApiPage resultPage = new OpenApiPage();
 		Map<String, Object> returnMap = new HashMap<>();
 		
@@ -67,8 +69,10 @@ public class TicketController {
 
 			if (openApiSearch.getSearchCondition() == null) {
 				openApiSearch.setSearchCondition("B");
+			} else {
+				openApiSearch.setSearchCondition(searchCondition);
 			}
-
+			
 			returnMap = ticketService.getTicketList(openApiSearch);
 			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
 					pageUnit, pageSize);

@@ -4,9 +4,7 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
@@ -20,6 +18,8 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
+	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
+	<link rel="stylesheet" href="../resources/imperfect/assets/css/main.css?version=1041" />
 
 
 <!-- 무한스크롤 -->
@@ -47,25 +47,23 @@ function fncGetList(pageNo) {
 	$(function() {
 
 		$("a[href='#']:contains('제목순')").bind("click", function(event) {
+//			alert("제목순")
 			event.preventDefault();
-			var searchCondition = "A";
-			fncGetTicketSort(searchCondition);
+			self.location="/ticket/listTicket?searchCondition=A";
 		})
 	});
 
 	$(function() {
 		$("a[href='#']:contains('조회순')").bind("click", function(event) {
 			event.preventDefault();
-			var searchCondition = "B";
-			fncGetTicketSort(searchCondition);
+			self.location="/ticket/listTicket?searchCondition=B";
 		})
 	});
 
 	$(function() {
 		$("a[href='#']:contains('수정일순')").bind("click", function(event) {
 			event.preventDefault();
-			var searchCondition = "C";
-			fncGetTicketSort(searchCondition);
+			self.location="/ticket/listTicket?searchCondition=C";
 		})
 	});
 
@@ -73,34 +71,16 @@ function fncGetList(pageNo) {
 
 		$("a[href='#']:contains('생성일순')").bind("click", function(event) {
 			event.preventDefault();
-			var searchCondition = "D";
-			fncGetTicketSort(searchCondition);
+			self.location="/ticket/listTicket?searchCondition=D";
 		})
 	});
 	
 	function fncGetTicketSort(searchCondition) {
 		
-//		alert("[value check] ==> " + searchCondition)
+		alert("[value check] ==> " + searchCondition)
 		
-		var data = {
-				"searchCondition" : searchCondition ,
-			}
-		
-		var jsonData = JSON.stringify(data);
-
-		$.ajax (
-				{
-					url : "/ticket/json/listTicket/",
-					method : "POST",
-					dataType : "json",
-					headers : {
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},
-					data : jsonData,
-					success : function() {
-					}
-				});		
+		self.location="/ticket/listTicket"
+				
 	}
 
 	//=================== "상세조회" Event 연결 ===================
@@ -166,7 +146,7 @@ function fncGetList(pageNo) {
 				<li role="presentation"><a href="#">수정일순</a></li>
 				<li role="presentation"><a href="#">생성일순</a></li>
 			</ul>
-
+			
 		</div>
 	<!-- JQUERY nav-pills End -->
 
@@ -234,6 +214,7 @@ function fncGetList(pageNo) {
 			<hr />
 			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 			<input type="hidden" id="pageNo" name="pageNo" value=""/>
+			<input type="hidden" name="searchCondition" id="searchCondition" value="">
 			
 		</form>
 		<!-- form End /////////////////////////////////////-->
@@ -244,6 +225,16 @@ function fncGetList(pageNo) {
 	<!-- PageNavigation Start... -->
 		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 	<!-- PageNavigation End... -->
+
+
+	<!-- Scripts -->
+	<script src="../resources/imperfect/assets/js/jquery.scrolly.min.js"></script>
+	<script src="../resources/imperfect/assets/js/jquery.scrollzer.min.js"></script>
+	<script src="../resources/imperfect/assets/js/skel.min.js"></script>
+	<script src="../resources/imperfect/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="../resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="../resources/imperfect/assets/js/main.js"></script>
+	<script src="../resources/imperfect/assets/js/1main.js"></script>
 
 </body>
 
