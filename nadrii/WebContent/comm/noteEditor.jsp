@@ -110,7 +110,40 @@
  			$('div#cndHashTags').on('click', 'button.selectedhashtagButtons', function() {
  	 		   deleteHashTag($(this).val());
  			})
+ 			
+ 			$('#inputGroupSuccess1').keydown(function(key) {
+ 				if(key.keyCode==13){
+ 					if($(this).val()==null||$(this).val()==""){
+ 						alert("추가하실 해시태그를 입력해주세요");
+ 					}else{
+ 						var data = $(this).val().trim();
+ 	 					$(this).empty();
+ 	 					$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data+'</button>&nbsp;');	
+ 					}
+ 				}
+			})
 		})
+		
+		$('#inputGroupSuccess1').bind('keyup input',function() {
+			var keyword = $('#inputGroupSuccess1').val();
+			$.ajax({
+				url:"/comm/getHashtags",
+				data:{
+					"keyword": keyword
+				},
+				method:"POST",
+				success: function(JSONData) {
+					console.log(JSONData)
+					var availableTags = JSONData
+					$("#inputGroupSuccess1").autocomplete({
+					      source: availableTags
+					 });
+				},
+				error: function() {
+					alert("오류")
+				}
+			})
+	 	})
 	</script>
 </head>
 <body>
@@ -191,6 +224,13 @@
 		<h5 align="left">썸네일을  선택해주세요</h5>
 		<div id="cndThumbnail"></div>
 		<br/>
+		<h5 align="left">해시태그</h5>
+			 <div class="ui-widget">
+				 <div class="input-group">
+		    	 	<span class="input-group-addon">#</span>
+		    		<input class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+		 		 </div>
+	 		 </div>
 		</form>
 </body>
 </html>
