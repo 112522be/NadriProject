@@ -85,7 +85,6 @@ function getIndex(k){
 
 
 
-
 </head>
 <body>
 	<header>
@@ -111,9 +110,9 @@ function getIndex(k){
 								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
-									<h3>
+									<h5>
 										<a href="#">${group.title}</a>
-									</h3>
+									</h5>
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									<span class="author">
 										<img src="../resources/assets/images/avatar.jpg" alt="" />
