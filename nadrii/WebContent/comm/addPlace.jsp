@@ -36,6 +36,7 @@
 						"Accept" : "application/json",
 						"Content-Type" : "application/json",
 						"Authorization": "KakaoAK 4c6e53f28fe567efc82e2e871436b51a"
+						
 					},
 					success : function(JSONData, status) {
 						var documents = JSONData.documents;

@@ -12,10 +12,10 @@
 	<script>
 	$(function() {
 		$(document).ready(function() {
-			if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
+			/* if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
 				alert("로그인 후 이용해주세요")
 				self.location="../user/loginView.jsp"
-			}
+			} */
 		})
 		$('a#submit').bind('click', function() {
 			var hashtags=',';
@@ -46,13 +46,6 @@
 			 <div>
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
-			 <h5 align="left">해시태그</h5>
-			 <div class="ui-widget">
-			 <div class="input-group">
-	    	 	<span class="input-group-addon">#</span>
-	    		<input class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
-	 		 </div>
-	 		 </div>
 	 		 <br/>
 			 <div id="cndHashTags"></div>
 			 <br/>	
@@ -63,30 +56,6 @@
 		<br/>
 	</div>	
 	</div>
-	<script>
-	$(function() {
-		$('#inputGroupSuccess1').bind('keyup input',function() {
-			var keyword = $('#inputGroupSuccess1').val();
-			$.ajax({
-				url:"/comm/getHashtags",
-				data:{
-					"keyword": keyword
-				},
-				method:"POST",
-				success: function(JSONData) {
-					console.log(JSONData)
-					var availableTags = JSONData
-					$("#inputGroupSuccess1").autocomplete({
-					      source: availableTags
-					 });
-				},
-				error: function() {
-					alert("오류")
-				}
-			})
-	 	})
-	})
-	</script>
 	<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<link rel="stylesheet" href="/resources/skins/default.css"/>

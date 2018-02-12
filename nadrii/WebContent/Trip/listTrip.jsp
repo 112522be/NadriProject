@@ -596,7 +596,7 @@ pageEncoding="UTF-8"%>
 		});
 	});
 	
-	/*
+	///*
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
 		$(".btn.btn-default:contains('Go')").on("click" , function() {

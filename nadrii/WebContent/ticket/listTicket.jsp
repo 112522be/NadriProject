@@ -18,10 +18,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
 	<!-- 무한스크롤 -->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -205,15 +202,7 @@ function fncGetList(pageNo) {
 								<!-- 
 									입장권 :
 									<c:forEach items="${ tt.usetimefestival }" varStatus="status">
->>>>>>> refs/remotes/origin/master
 									${ tt.usetimefestival[status.index] }
-<<<<<<< HEAD
-								</c:forEach>
-									<hr/>
-									기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }<br>
-									장&nbsp;소 : ${ tt.eventplace } <br>
-								</p>
-=======
 									</c:forEach>
 								 -->	
 								<hr />

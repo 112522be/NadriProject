@@ -5,7 +5,12 @@ eclipse.preferences.version=1
 encoding//SQL/Purchase\ DB\ Table.sql=UTF-8
 encoding//WebContent/Trip/123123123.jsp=UTF-8
 encoding//WebContent/history.jsp=UTF-8
+encoding//WebContent/layout/toolbar3.jsp=UTF-8
 encoding//WebContent/planner/addPlannerView.jsp=UTF-8
+<<<<<<< HEAD
+=======
+encoding//WebContent/resources/imperfect/toolbar.jsp=UTF-8
+>>>>>>> refs/remotes/origin/master
 encoding//WebContent/user/addUserView.jsp=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiPage.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/common/OpenApiSearch.java=UTF-8
@@ -18,8 +23,11 @@ encoding//src/main/java/com/yagn/nadrii/service/planner/impl/PlannerServiceImpl.
 encoding//src/main/java/com/yagn/nadrii/service/ticket/impl/TourApiDaoImpl.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketController.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/web/ticket/TicketRestController.java=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/com/yagn/nadrii/web/user/UserController.java=UTF-8
 encoding//src/main/java/com/yagn/nadrii/web/user/UserRestController.java=UTF-8
+=======
+>>>>>>> refs/remotes/origin/master
 encoding//src/test/java/com/yagn/nadrii/service/group/GroupServiceTest.java=UTF-8
 encoding//src/test/java/com/yagn/nadrii/service/join/JoinServiceTest.java=UTF-8
 encoding/<project>=UTF-8
