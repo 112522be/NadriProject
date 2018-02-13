@@ -531,17 +531,6 @@ public class UserController {
 		return "forward:/user/addUserView.jsp";
 	}
 	
-	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
-	public String addUser(User user) throws Exception{
-		//회원가입
-		System.out.println("회원가입!!");
-		System.out.println("userId==" +user.getUserId());
-		
-		userService.addUser(user);
-		Map map = new HashMap();
-			
-		return "redirect:/user/addUser.jsp";	
-	}
 	
 	@RequestMapping(value="addUserFacebook", method=  {RequestMethod.GET, RequestMethod.POST} )
 	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session

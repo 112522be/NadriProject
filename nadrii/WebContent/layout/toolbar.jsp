@@ -56,32 +56,11 @@
 	});
 
 	$( function() {
-		console.log("세션 정보 : ${session}")
-		
-		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "/ticket/listTicket"
-		});
-
-	});
-
-	$( function() {
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
       		self.location = "/message/listMessage"
         });
     });
-	
-	//============= "장바구니" 화면이동 =============
-    $( function() {
-       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-
-//      	 alert("장바구니")
-          self.location = "/purchase/listBasket"
-       });
-    });
-	
-	
-	
 	
 	</script>
 	
@@ -109,33 +88,41 @@
 					<ul class="nav navbar-nav navbar-right">
 					<c:if test="${ ! empty loginUser }">
 							<li>
-								<a href="#">
+								<a href="/user/getUser?userId=${loginUser.userId}">
+								<img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px">
 								<span>
 									<c:if test="${ loginUser.userName eq null }">
 										${ loginUser.userId }
 									</c:if>
 										${ loginUser.userName }
-										님 환영합니다.
+										님
 								</span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+								<a href="/purchase/listBasket">
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="장바구니"></span>
+								</a>
+							</li>
+							<li>
+								<a href="/purchase/listPurchase">
+									<span class="glyphicon glyphicon-qrcode" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="구매한티켓"></span>
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"
+										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
-							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
+							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
-							<li><a href="/user/addUserViewPlus.jap">추가정보 입력</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
-							<li><a href="/user/loginView.jsp">Login</a></li>
-							<li><a href="/user/addUserView.jsp">Join</a></li>							
+							<li><a href="/user/loginView.jsp" >Login</a></li>
+							<li><a href="/user/addUserView.jsp">Join</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -155,7 +142,7 @@
 								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
 							</ul>
 						</li>
-						<li><a href="#">나들이 티켓</a></li>
+						<li><a href="/ticket/listTicket">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>

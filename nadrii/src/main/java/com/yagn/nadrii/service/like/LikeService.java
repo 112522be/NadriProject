@@ -12,6 +12,6 @@ public interface LikeService {
 	public void deleteLike(Like like) throws Exception;
 	
 	public Map<String , Object> getLikeList(Search search) throws Exception;
-
-	public int getLikeCount(Like like) throws Exception;
+	
+	public Map<String , Object> getLikeUserList(Search search) throws Exception;
 }

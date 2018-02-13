@@ -68,6 +68,10 @@ section > :last-child, section > .container, section:last-child, article > :last
     margin-bottom: -35px !important;
 }
 
+.author .name{
+	margin: 0 10px 0 0 !important;
+}
+
 </style>
 <script>
 
@@ -101,7 +105,7 @@ $(function(){
 	$('[data-toggle="popover"]').popover(
 			{ html: true,
 			 container: 'body',
-			 content: '<a href="#" class="profile" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+			 content: '<a href="#none" class="profile" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 			 placement: 'bottom',
 			 }
 			);	
@@ -114,45 +118,6 @@ function clickProfile(){
 function clickMessage(){	
 	window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 }
-
-var groupNo = ${group.join.groupNo};
-
-function addLike(){
-	
-	$.ajax({
-		url: "../like/json/addLike/"+groupNo,
-		method: "POST",
-		dataType: "json",
-		success:function(returnData){
-			getCountLike();
-		}
-	});	
-	
-}
-
-var likeCount;
-
-function getCountLike(){
-	
-	$.ajax({
-		url: "../like/json/getCountLike/"+groupNo,
-		method: "POST",
-		dataType: "json",
-		success:function(returnData){
-			
-			likeCount = returnData.totalCount;
-
-		}
-	});	
-}
-
-$(function(){
-	$(".like").bind("click", function(){
-		alert(1);
-	});
-});
-
-
 </script>
 
 </head>
@@ -161,8 +126,8 @@ $(function(){
 <div id="main">
 <section class="two">
 	<div class="container">
-	<a href="#" id="write" class="button small write" style="position: relative; float:right; margin-top: -40px; margin-right: 80px">write</a>
-	<a href="#" id="list" class="button small" style="position: relative; float:right; margin-top: -40px;">list</a>
+	<a href="#none" id="write" class="button small write" style="position: relative; float:right; margin-top: -40px; margin-right: 80px">write</a>
+	<a href="#none" id="list" class="button small" style="position: relative; float:right; margin-top: -40px;">list</a>
 			<article class="post">
 				<header>
 					<div class="title" style="overflow: hidden">
@@ -176,7 +141,7 @@ $(function(){
 					
 					<div class="meta">
 						<time class="published" datetime="${group.regDate}">${group.regDate}</time>
-						<a href="#" class="author"><span class="name" data-container="body" data-toggle="popover">${group.join.userId}</span>
+						<a href="#none" class="author"><span class="name" data-container="body" data-toggle="popover">${group.join.userId}</span>
 						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
 					</div>
 				</header>
@@ -188,23 +153,19 @@ $(function(){
 				<div>
 				<p>${group.text}</p>
 				</div>
-				<footer>
-					<ul class="stats">
-						<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
-						<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
-					</ul>
-				</footer>
+				<input type="hidden" name="postNo" value="${group.join.groupNo}">
+				<jsp:include page="./like.jsp"></jsp:include>	
 				<div id="userMenu" style="float: right; margin-top: -3em; display: none;">
-					<a href="#" id="modify" class="button small modify">modify</a>
-					<a href="#" id="delete" class="button small delete">delete</a>
+					<a href="#none" id="modify" class="button small modify">modify</a>
+					<a href="#none" id="delete" class="button small delete">delete</a>
 				</div>
 	
 			</article>
 	
 	</div>
-	<jsp:include page="../common/comment.jsp"></jsp:include>
-	</section>
 	
+	</section>
+	<jsp:include page="../common/comment.jsp"></jsp:include>
 	</div>
 	
 </body>

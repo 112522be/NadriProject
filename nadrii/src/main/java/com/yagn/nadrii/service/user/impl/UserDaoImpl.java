@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserDao;
 
@@ -54,7 +55,7 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public int checkId(String user) throws Exception {
-		System.out.println("´Ù¿À °ª : " + user);
+		System.out.println("ï¿½Ù¿ï¿½ ï¿½ï¿½ : " + user);
 		return sqlSession.selectOne("UserMapper.checkId" , user);
 	}
 
@@ -64,18 +65,18 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	public String findId(String userId) throws Exception {
-		System.out.println("¾ÆÀÌµð Ã£±â" +userId);
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½" +userId);
 		return sqlSession.selectOne("UserMapper.faindId",userId);
 	}
 
 	public String findPassword(String userPw) throws Exception {
-		System.out.println("ºñ¹Ð¹øÈ£ Ã£±â" +userPw);
+		System.out.println("ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½" +userPw);
 		return sqlSession.selectOne("UserMapper.faindPassword", userPw);
 	}
 	
 	public void addUserPlus(User user) throws Exception{
 		
-		System.out.println("Ãß°¡Á¤º¸ ÀÔ·Â..." + user.toString());
+		System.out.println("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½..." + user.toString());
 		sqlSession.selectOne("UserMapper.addUserPlus", user);
 	}
 }

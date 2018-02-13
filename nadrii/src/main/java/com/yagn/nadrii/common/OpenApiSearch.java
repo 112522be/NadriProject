@@ -5,14 +5,11 @@ public class OpenApiSearch {
 	
 	///Field
 	private int pageNo;
-	// listTicket ¿¡¼­ 4°¡Áö Á¤·Ä¹æ½Ä (A=Á¦¸ñ¼ø, B=Á¶È¸¼ø, C=¼öÁ¤ÀÏ¼ø, D=»ý¼ºÀÏ¼ø)
+
 	private String searchCondition;
 	private String searchKeyword;
 	private int numOfRows;
-	//==> ¸®½ºÆ®È­¸é currentPage¿¡ ÇØ´çÇÏ´Â È¸¿øÁ¤º¸¸¦ ROWNUM »ç¿ë SELECT À§ÇØ Ãß°¡µÈ Field                   
-	//==> UserMapper.xml ÀÇ                                                              
-	//==> <select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">  
-	//==> ÂüÁ¶                                                                            
+
 	private int endRowNum;
 	private int startRowNum;
     
@@ -49,11 +46,11 @@ public class OpenApiSearch {
 		this.searchKeyword = searchKeyword;
 	}
 	
-	//==> Select Query ½Ã ROWNUM ¸¶Áö¸· °ª 
+	//==> Select Query ï¿½ï¿½ ROWNUM ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
 	public int getEndRowNum() {
 		return getPageNo()*getNumOfRows();
 	}
-	//==> Select Query ½Ã ROWNUM ½ÃÀÛ °ª   
+	//==> Select Query ï¿½ï¿½ ROWNUM ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½   
 	public int getStartRowNum() {
 		return (getPageNo()-1)*getNumOfRows()+1;
 	}

@@ -150,5 +150,15 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 	public void deleteBasketList(List<Integer> postNo) throws Exception {
 	}
 	
+	@Override
+	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception {
+		return null;
+	}
+	
+	@Override
+	public String getQRCode(Purchase purchase) throws Exception {
+		return null;
+	}
+	
 	
 } // end of class

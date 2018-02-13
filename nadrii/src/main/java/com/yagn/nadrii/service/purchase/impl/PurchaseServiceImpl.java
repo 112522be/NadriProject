@@ -36,6 +36,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 			this.purchaseKakaoDao = purchaseKakaoDao;
 		}
 		
+		@Autowired
+		@Qualifier("purchaseQRDaoImpl")
+		private PurchaseDao purchaseQRDao;
+		
+		public void setPurchaseQRCodeDao(PurchaseDao purchaseQRDao) {
+			this.purchaseQRDao = purchaseQRDao;
+		}
+		
 		
 		/// Constructor
 		public PurchaseServiceImpl() {
@@ -110,6 +118,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseKakaoDao.addKakaoPayComplete(kakaoPayRequest);
 		}
 		
+		@Override
 		public List<Purchase> addBasketTicket(Purchase purchase) throws Exception {
 			
 			String[] postNoParsing = purchase.getSumPostNo().split(",");
@@ -123,6 +132,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseDao.addBasketTicket(list);
 		}
 		
+		@Override
 		public void updateBasketPurchase(Purchase purchase) throws Exception {
 			
 			List<Integer> list = new ArrayList<Integer>();
@@ -136,6 +146,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			purchaseDao.updateBasketPurchase(list);
 		}
 		
+		@Override
 		public void deleteBasketList(Purchase purchase) throws Exception {
 			
 			List<Integer> list = new ArrayList<Integer>();
@@ -148,6 +159,53 @@ public class PurchaseServiceImpl implements PurchaseService {
 			
 			purchaseDao.deleteBasketList(list);
 		}
+		
+		@Override
+		public Map<String, Object> getPurchaseList(OpenApiSearch openApiSearch, String buyerId) throws Exception {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("openApiSearch", openApiSearch);
+			map.put("buyerId", buyerId);
+			
+			List<Purchase> list =  purchaseDao.getPurchaseList(map);
+			List<String> count = new ArrayList<>();
+			List<String> price = new ArrayList<>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
+				
+				price = new ArrayList<>();	
+				count = new ArrayList<>();
+				
+				for (int j = 0; j < firstParseArr.length; j++) {
+					String secondParseArr[] = firstParseArr[j].split("=");
+
+					for (int k = 0; k < secondParseArr.length; k++) {
+						
+						if (k == 0) {
+							price.add(secondParseArr[k].toString());
+						} else if (k == 1) {
+							count.add(secondParseArr[k].toString());
+						}
+					}
+				}
+				list.get(i).setTicketC(count);
+				list.get(i).setTicketP(price);
+			}
+			
+			int totalCount = purchaseDao.getTotalCount(buyerId);
+			
+			map.put("list", list);
+			map.put("totalCount", new Integer(totalCount));
+			
+			return map;
+		}
+		
+		@Override
+		public String getQRCode(Purchase purchase) throws Exception {
+			return purchaseQRDao.getQRCode(purchase);
+		}
+		
 		
 		
 }
