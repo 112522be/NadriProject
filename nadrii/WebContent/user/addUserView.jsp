@@ -15,10 +15,11 @@
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-   <!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
-   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.js"></script> -->
+   <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+   <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
+   <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
    
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
@@ -44,20 +45,9 @@ $(document).ready(function() {
    $("#userId").val('');
    idCheckFlag = false;
    $(".signupbtn").prop("disabled", true);
-   
-   
 
 });
 
-$(document).ready(function() { 
-   $("#userId").val('');
-   idCheckFlag = false;
-   $(".signupbtn").prop("disabled", true);
-   
-   $("#userId").val($("#uid").val());
-   $("#email").val($("#uid").val());
-   
-});
 
 //   이메일 인증 
 function checkSend(){
@@ -102,10 +92,10 @@ function checkSuccess(){
          success :function(result){
             if(result.result == "success"){
                alert("인증 확인되었습니다.");
-               $("$checkNumStatus").val("Y");
+               $("#checkNumStatus").val("Y");
             }else{
                alert("인증 번호가 다릅니다.");
-               $("$checkNumStatus").val("N");
+               $("#checkNumStatus").val("N");
             }
          },
          error:function(request,status,error){
@@ -129,15 +119,21 @@ function checkSuccess(){
      
     function checkId() {
     
+        //var data = "userId=" + $("#userId").val();
+        //var userId = $("#userId").val();
         var data = "userId=" + $("#userId").val();
+        $.ajaxSettings.traditional = true;
+  	    //var frm = $("#frm").serialize();
+  	    //alert("아이디 중복체크");
         $.ajax({
                type:"POST",
-               data : data,
+        //  data : frm,
+            data : data,
             url : "/user/json/checkId",     
-            
-            success : function(result) {
+            dataType: "json",
+            success : function(result) {			/* function(result) */
                if(result.check == 1){
-                  //alert("아이디가 중복되었습니다.");
+                  alert("아이디가 중복되었습니다.");
                   idCheckFlag = false;
                   $("#userId").css("background-color", "#FFCECE");
                   $(".signupbtn").prop("disabled", true);
@@ -151,6 +147,8 @@ function checkSuccess(){
                   $(".signupbtn").prop("disabled", false);
                   $("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
                }
+            },error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });    
         
@@ -168,7 +166,7 @@ function checkSuccess(){
 
 //      alert("가입이 완료되었습니다.")
 //   }
-    
+    function checkPwd(){
       var password = $("#password").val();
       var password2 = $("#password2").val();
       
@@ -183,8 +181,8 @@ function checkSuccess(){
          $("#password2").css("background-color", "#FFCECE");
          return;
       }
+     }
    
-   }
    
    function emailValid(){
       var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
@@ -252,10 +250,15 @@ function checkSuccess(){
           return false;
        }
        
-       if($("#checkNumStatus").val() == "N"){
-          alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
+      /*  if($("#checkNumStatus").val() == "Y"){
+          alert("이메일 인증 완료 되었습니다.");
           return;
        }
+       
+       if($("#checkNumStatus").val() != "N"){
+           alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
+           return;
+        } */
        
        
        if(confirm("회원가입을 하시겠습니까?")){
@@ -284,24 +287,20 @@ function checkSuccess(){
 <body>
 
    <!-- ToolBar Start /////////////////////////////////////-->
-   <div class="navbar  navbar-default">
-        <div class="container">
-           <a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-         </div>
-      </div>
+   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
       <!-- ToolBar End /////////////////////////////////////-->
    <!--  화면구성 div Start /////////////////////////////////////-->
    <div class="container">
    
-      <h1 class="bg-success text-center">회 원 가 입</h1>
+      <h1 class="bg-success text-center" style="background:#fff; border-bottom: 2px solid #ddd; color:#DDC; padding-bottom: 30px;">나 들 이 회 원 가 입</h1>
       
       <!-- form Start /////////////////////////////////////-->
-      <form id ="frm" class="form-horizontal">
+      <form id ="frm" class="form-horizontal" style="padding-top:50px;">
       <input id="checkNumStatus" name="checkNumStatus" type="hidden" value="N">
-        <div class="form-group">
+        <div class="form-group icon01">
           <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
           <div class="col-sm-4">
-            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" oninput="checkId();" autofocus>
+            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" oninput="checkId();" autofocus>
             <span id = "chkMsg"></span>
           </div>
          <div id="htmlId"></div>

@@ -25,6 +25,7 @@
        body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
+            border:none;
         }
         
         .container-fluid {
@@ -322,17 +323,13 @@ function checkSuccess(){
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-success text-center">회 원 가 입</h1>
+		<h1 class="bg-success text-center" style="background:#fff">회 원 가 입</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="frm" class="form-horizontal">

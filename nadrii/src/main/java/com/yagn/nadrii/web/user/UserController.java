@@ -23,13 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.log4j.Logger;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -402,9 +395,7 @@ public class UserController {
 	
 	
 	////////////////////////////////////////////////
-	
-	
-	
+
 	/**
 	 *  login 페이지
 	 * @return
@@ -413,7 +404,7 @@ public class UserController {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() throws Exception {
 		System.out.println("로그인 페이지");
-		return "redirect:/user/loginView.jsp";
+		return "redirect:/user/loginView2.jsp";
 	}
 		
 	//카카오
@@ -540,6 +531,17 @@ public class UserController {
 		return "forward:/user/addUserView.jsp";
 	}
 	
+	@RequestMapping(value="/addUser", method= RequestMethod.POST  )
+	public String addUser(User user) throws Exception{
+		//회원가입
+		System.out.println("회원가입!!");
+		System.out.println("userId==" +user.getUserId());
+		
+		userService.addUser(user);
+		Map map = new HashMap();
+			
+		return "redirect:/user/addUser.jsp";	
+	}
 	
 	@RequestMapping(value="addUserFacebook", method=  {RequestMethod.GET, RequestMethod.POST} )
 	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
@@ -699,14 +701,41 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="getUser", method=RequestMethod.GET )
-	public String getUser(String userId) throws Exception {
-		//	@RequestParam("userId") String userId , Model model 
+	public String getUser(@RequestParam("userId") String userId , Model model) throws Exception {
 		System.out.println("/user/getUser : GET");
-/*		//Business Logic
+		//Business Logic
+		User user = userService.getUser(userId);
+		System.out.println("userId ==> " + userId);
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		
+		return "forward:/user/getUser.jsp";
+	}
+	
+	@RequestMapping( value="updateUser", method=RequestMethod.GET )
+	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
+
+		System.out.println("/user/updateUser : GET");
+		//Business Logic
 		User user = userService.getUser(userId);
 		// Model 과 View 연결
 		model.addAttribute("user", user);
-		*/
-		return "forward:/user/getUser.jsp";
+		
+		return "forward:/user/updateUser.jsp";
+	}
+
+	@RequestMapping( value="updateUser", method=RequestMethod.POST )
+	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
+
+		System.out.println("/user/updateUser : POST");
+		//Business Logic
+		userService.updateUser(user);
+		
+		String sessionId=((User)session.getAttribute("user")).getUserId();
+		if(sessionId.equals(user.getUserId())){
+			session.setAttribute("user", user);
+		}
+		
+		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 }
