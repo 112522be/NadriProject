@@ -14,11 +14,13 @@
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	-->
+	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
 	<!-- DatePicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -26,12 +28,19 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
+	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->	
+	<link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+	
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
- 		body {
-            padding-top : 50px;
-        }
+ 	footer a {
+		color: #656565;
+	}
+	
     </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -88,16 +97,56 @@ function fncAddBooking() {
 	</script>
 </head>
 
-<body>
-
+<body class>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
+	<div id="wrapper">
    	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
+		<div id="main">
 
-		<div class="page-header">
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2>
+							<a href="#">${ tourTicket.title }</a>
+						</h2>
+						<p>관람등급 : ${ detailIntro.agelimit }</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2015-11-01">November 1,
+							2015</time>
+						<a href="#" class="author"><span class="name">Jane Doe</span><img
+							src="/resources/imperfect/images/avatar.jpg" alt=""></a>
+					</div>
+				</header>
+				<a href="#" class="image featured"><img
+					src="/resources/imperfect/images/pic01.jpg" alt=""></a>
+				<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus
+					nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor
+					magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies
+					mi non congue ullam corper. Praesent tincidunt sed tellus ut
+					rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies
+					congue gravida diam non fringilla.</p>
+				<footerB>
+					<ul class="actions">
+						<li><a href="#" class="button big">Continue Reading</a></li>
+					</ul>
+					<ul class="stats">
+						<li><a href="#">General</a></li>
+						<li><a href="#" class="icon fa-heart">28</a></li>
+						<li><a href="#" class="icon fa-comment">128</a></li>
+					</ul>
+				</footerB>
+			</article>
+
+
+
+
+
+			<div class="page-header">
 			<h3 class=" text-info text-center bg-warning">
 				나들이 티켓 상세조회
 			</h3>
@@ -112,23 +161,6 @@ function fncAddBooking() {
 			<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
 			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
 
-<!-- 
-			<input type="hidden" name="agelimit" value="${ detailIntro.agelimit }">
-			<input type="hidden" name="playtime" value="${ detailIntro.playtime }">
-			<input type="hidden" name="eventplace" value="${ detailIntro.eventplace }">
-			<input type="hidden" name="festivalgrade" value="${ detailIntro.festivalgrade }">
-			<input type="hidden" name="placeinfo" value="${ detailIntro.placeinfo }">
-			<input type="hidden" name="spendtimefestival" value="${ detailIntro.spendtimefestival }">
-			<input type="hidden" name="subevent" value="${ detailIntro.subevent }">
-			<input type="hidden" name="sponsor1" value="${ detailIntro.sponsor1 }">
-			<input type="hidden" name="sponsor2" value="${ detailIntro.sponsor2 }">
-			<input type="hidden" name="sponsor1tel" value="${ detailIntro.sponsor1tel }">
-			<input type="hidden" name="sponsor2tel" value="${ detailIntro.sponsor2tel }">
-			<input type="hidden" name="eventhomepage" value="${ detailIntro.eventhomepage }">
-			<input type="hidden" name="discountinfofestival" value="${ detailIntro.discountinfofestival }">
-			<input type="hidden" name="eventstartdate" value="${ detailIntro.eventstartdate }">
-			<input type="hidden" name="eventenddate" value="${ detailIntro.eventenddate }">
--->
 			<div class="form-group">
 				<h1>
 					<span class="label label-warning text-left"> ${ tourTicket.title }</span>
@@ -202,9 +234,19 @@ function fncAddBooking() {
 		
 		</form>
 		<!-- form End /////////////////////////////////////-->
-		
+	
+		</div>
+		</div>
  	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
+	
+	<!-- Scripts -->
+	<script src="/resources/imperfect/assets/js/jquery.min.js"></script>
+	<script src="/resources/imperfect/assets/js/skel.min.js"></script>
+	<script src="/resources/imperfect/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/imperfect/assets/js/main.js"></script>
+
 
 </body>
 

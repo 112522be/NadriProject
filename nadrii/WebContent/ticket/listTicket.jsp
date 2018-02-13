@@ -37,6 +37,7 @@
 .mini-post header {
 	height: 210px;
 }
+
 </style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -184,7 +185,7 @@
 
 					<hr />
 					<section>
-						<div class="row uniform">
+						<div class="row">
 							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
 								<div class="col-xs-3">
 									<!-- Mini Posts -->
@@ -205,10 +206,8 @@
 
 												</header>
 												<p class="text-right">조회수 : ${ tt.readcount }&nbsp;&nbsp;</p>
-												<a href="#" class="image"> 
-													<img src="${ tt.firstimage }" alt="" />
-												</a>
-
+												
+												<a href="#" class="image"><img src="${ tt.firstimage }" alt="" /></a>
 											</article>
 										</div>
 									</section>
