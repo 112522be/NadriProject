@@ -60,7 +60,7 @@
 													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>이전으로</a></li>"
 								}
 
-								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4) ) ){
+								if(((JSONData.meta.total_count%4!=0)&&(newerPage<JSONData.meta.total_count/4+1)) || ((JSONData.meta.total_count%4 == 0) && (newerPage<(JSONData.meta.total_count/4)) ) ){
 
 
 									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">다음으로<span aria-hidden=\"true\">&rarr;</span></a></li>";

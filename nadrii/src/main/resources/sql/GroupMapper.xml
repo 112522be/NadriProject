@@ -15,6 +15,7 @@
 		<result property="text"					column="text" 				jdbcType="CLOB" />
 		<result property="regDate" 			column="reg_date" 		jdbcType="DATE" />
 		<result property="viewCount"			column="view_count"		jdbcType="NUMERIC" />
+		<result property="placeName"		column="place_name" 		jdbcType="VARCHAR" />
 		<result property="lat"					column="lat" 				jdbcType="VARCHAR" />
 		<result property="lng"					column="lng" 				jdbcType="VARCHAR" />
 		<result property="categoryCode" 	column="category_code" 	jdbcType="VARCHAR" />
@@ -24,8 +25,8 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addGroup"		parameterType="group" >
 	 	INSERT
-		INTO groups ( group_no, title, text, view_count, lat, lng, category_code, meeting_date, reg_date ) 
-		VALUES (	seq_groups_group_no.nextval, #{title}, #{text}, 0, #{lat:VARCHAR}, #{lng:VARCHAR},
+		INTO groups ( group_no, title, text, view_count, place_name, lat, lng, category_code, meeting_date, reg_date ) 
+		VALUES (	seq_groups_group_no.nextval, #{title}, #{text}, 0, #{placeName:VARCHAR}, #{lat:VARCHAR}, #{lng:VARCHAR},
 					#{categoryCode}, #{meetingDate:VARCHAR}, SYSDATE )
 	</insert>
 	
@@ -39,7 +40,7 @@
 	 <!-- SQL : SELECT ONE -->
 	<select 	id="getGroup"	parameterType="int"	resultMap="groupSelectMap">
 		SELECT
-		j.user_id, g.group_no, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+		j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 		FROM groups g, join j
 		WHERE g.group_no = j.group_no
 				AND j.group_role = 1
@@ -60,6 +61,7 @@
 	   	<set>
 	   		title 				= #{title}, 
 	   		text 				= #{text},
+	   		place_name		= #{placeName:VARCHAR}
 	   		lat 					= #{lat:VARCHAR}, 
 	   		lng 				= #{lng:VARCHAR},
 	   		category_code 	= #{categoryCode}, 
@@ -80,7 +82,7 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT
-									j.user_id, g.group_no, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+									j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 									FROM groups g, join j
 									WHERE g.group_no = j.group_no
 											AND j.group_role = 1
@@ -108,7 +110,7 @@
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT
-					j.user_id, g.group_no, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+					j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 					FROM groups g, join j
 					WHERE g.group_no = j.group_no
 							AND j.group_role = 1

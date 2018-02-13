@@ -16,12 +16,40 @@
 <script src="../resources/assets/js/1main.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
 <style type="text/css">
+.btn.btn-default {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-webkit-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-ms-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		background-color: #FFFFFF;
+		border: 0;
+		width: auto;
+		height: auto;
+		box-shadow: inset 0 0 0 1px rgba(160, 160, 160, 0.3);
+		color: #3c3b3b;
+		cursor: pointer;
+		display: inline-block;
+		letter-spacing: 0.25em;
+		line-height: 2.8125em;
+		padding: 0;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	
+	
 footer a{
 	color: #555 !important;
 }
 
 footer{
 	background: #ffffff !important;
+	padding: 50px 270px 0 0 !important;
 }
 
 .button.fit {
@@ -88,6 +116,10 @@ function addLoadEvent(func){
 }
 
 $(function(){
+
+	if('${group.lat}' == ''){
+		$("#map").css("display","none");
+	}
 	
 	if("${loginUser.userId}" == "${group.join.userId}"){
 		$("#userMenu").css("display","block");
@@ -165,7 +197,7 @@ function clickMessage(){
 					<div class="table-wrapper" style="width: 30%; float: left;">
 						<jsp:include page="./join.jsp"></jsp:include>	
 					</div>
-					<div id="map" style="width:60%; height:350px; position: relative; float: right;"></div>
+					<div id="map" style="width:60%; height:350px; position: relative; float: right; display: block;"></div>
 				</div>
 		
 				<div>
@@ -188,7 +220,6 @@ function clickMessage(){
 	
 </body>
 <script type="text/javascript">
-
 var lat= '${group.lat}'.replace(",","");
 var lng= '${group.lng}'.replace(",","");
 
@@ -205,9 +236,10 @@ var marker = new daum.maps.Marker({
     map: map
 });
 
+var placeName = '${group.placeName}';
+var content = placeName.slice(placeName.indexOf("<h3>")+4,placeName.indexOf("</h3>"));
 var infowindow = new daum.maps.InfoWindow({
-    position : new daum.maps.LatLng(lng, lat),
-    content : '<h7>요기</h7>'
+    content : '<div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+content+'</div><br/>'
 });
 
 infowindow.open(map, marker);

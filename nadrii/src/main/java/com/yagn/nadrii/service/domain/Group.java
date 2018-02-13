@@ -5,17 +5,16 @@ import java.sql.Date;
 public class Group {
 	
 	private Join join;
-	private int postNo;
 	private String categoryCode;
 	private String title;
 	private String text;
 	private String meetingDate;
 	private int viewCount;
+	private String placeName;
 	private String lat;
 	private String lng;
 	private Date regDate;
-	
-	
+		
 	public Group(){
 	}
 		
@@ -71,6 +70,14 @@ public class Group {
 		this.viewCount = viewCount;
 	}
 
+	public String getPlaceName() {
+		return placeName;
+	}
+
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
 	public String getLat() {
 		return lat;
 	}
@@ -97,9 +104,9 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [join=" + join + ", postNo=" + postNo + ", categoryCode=" + categoryCode + ", title=" + title
-				+ ", text=" + text + ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", lat=" + lat
-				+ ", lng=" + lng + ", regDate=" + regDate + "]";
+		return "Group [join=" + join + ", categoryCode=" + categoryCode + ", title=" + title + ", text=" + text
+				+ ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", placeName=" + placeName + ", lat="
+				+ lat + ", lng=" + lng + ", regDate=" + regDate + "]";
 	}
 
 	
