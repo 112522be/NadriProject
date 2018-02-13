@@ -35,11 +35,47 @@
 			var postNo = $($('input[name="postNo"]')[$('.item').index(this)]).val()
 			self.location = "getComm?postNo="+postNo;
 		})
+		$('#searchKeyword').keydown(function(key) {
+ 			var data = $(this).val();
+ 			if(key.keyCode==13){
+ 				if(data!=""){
+					$('form.search').attr('method', 'POST').attr('action', '/comm/listComm').submit();
+ 				}else{	
+ 	 				alert("검색어를 입력해주세요");
+ 				}
+ 			}
+		})
+		
+		$(window).scroll(function() { 
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) { 
+				alert('End of Window'); 
+			} 
+		});​
 	})
 </script>
 
 <style type="text/css">
 
+#searchKeyword{
+	border-radius: 30px;
+	width: 300px;
+}
+
+.body {
+    background-color: #e6ebed;
+}
+
+.row > * {
+	padding: 20px 10px 0 10px;
+}
+
+section {
+    padding: 3em 0;
+    padding-top: 3em;
+    padding-right: 0px;
+    padding-bottom: 3em;
+    padding-left: 0px;
+}
 
 .icon{
 	padding: 5px;
@@ -130,16 +166,21 @@
 	<header>
 		<jsp:include page="/layout/toolbar.jsp"></jsp:include>
 	</header>
+	<div class="body">
 	<div class="container">
 		<nav class="container">
 		<section id="portfolio" class="two">
-			<div class="container">
-				<div align="right">
-					<img class="icon" src="">
-					
-				</div>
-				<div class="row">
-					<c:set var="i" value="0" />
+		<div class="col-xs-6" align="left">
+			<h6 style="color: #aeb1b7;font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
+		</div>
+		<div class="col-xs-6" align="right">
+			<form class="search">
+				<input type="text" name="searchKeyword" id="searchKeyword" value="" width="300px">
+			</form>
+		</div>
+		<br/>
+			<div class="row">
+				<c:set var="i" value="0" />
 					<c:forEach var="community" items="${list}">
 						<c:set var="i" value="${i+1}" />
 						<div class="3u 12u$(mobile)">
@@ -165,17 +206,14 @@
 						</div>
 					</c:forEach>
 				</div>
-				<link href="../css/floating.css" rel="stylesheet">
-				<a class="buttons" href="addComm.jsp" tooltip="게시물 작성"><span><span class="rotate"></span></span></a></nav>
-			</div>
-		</section>
+				<jsp:include page="floating.jsp"/>
+			</section>
+		</nav>
 	</div>
-
+	</div>
 
 	<!-- Scripts -->
 	<script src="../resources/assets/js/jquery.min.js"></script>
-	<script src="../resources/assets/js/jquery.scrolly.min.js"></script>
-	<script src="../resources/assets/js/jquery.scrollzer.min.js"></script>
 	<script src="../resources/assets/js/skel.min.js"></script>
 	<script src="../resources/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]-->

@@ -1,5 +1,7 @@
 package com.yagn.nadrii.web.comm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,16 @@ public class CommController {
 			return "/user/loginView.jsp";
 		}
 		Community community = commService.getComm(postNo);
+		String[] temps = community.getHashtag().split(",");
+		String temp ="";
+		for(int i=1;i<temps.length;i++) {
+			if(i == 1) {
+				temp = "#"+temps[i];
+			}else {
+				temp += " #"+temps[i];
+			}
+		}
+		community.setHashtag(temp);
 		request.setAttribute("community", community);
 		return "forward:/comm/getComm.jsp";
 	}
@@ -56,7 +68,7 @@ public class CommController {
 			search.setCurrentPage(1);
 		}
 		
-		System.out.println(search.getCurrentPage());
+		System.out.println(search);
 		System.out.println("pagesize : "+pageSize);
 		System.out.println("pageUnit :: "+pageUnit);
 		if(search.getPageSize() == 0) {
@@ -73,6 +85,20 @@ public class CommController {
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		return "forward:/comm/listComm.jsp";
+	}
+	
+	@RequestMapping("updateCommView")
+	public String updateCommView(@RequestParam int postNo, HttpServletRequest request) {
+		Community community = commService.getComm(postNo);
+		String[] temp = community.getHashtag().split(",");
+		List<String> hashtags = new ArrayList<>();
+		for(int i=1;i<temp.length;i++) {
+			hashtags.add(temp[i]);
+		}
+		request.setAttribute("community", community);
+		request.setAttribute("hashtags", hashtags);
+		request.setAttribute("menu", "update");
+		return "forward:/comm/addComm.jsp";
 	}
 	
 	@RequestMapping("updateComm")

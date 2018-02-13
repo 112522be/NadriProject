@@ -1699,7 +1699,7 @@
 	input[type="reset"],
 	input[type="button"],
 	button,
-	.button {
+ 	.button {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -1725,7 +1725,7 @@
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
-	}
+	} 
 
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,

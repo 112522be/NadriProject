@@ -86,13 +86,7 @@
 											AND j.group_role = 1
 									<if test="searchCondition != null">
 										<if test="searchCondition == 0 and searchKeyword !='' ">
-											AND g.title LIKE '%${searchKeyword}%'
-										</if>
-										<if test="searchCondition == 1 and searchKeyword !='' ">
-											AND g.text LIKE '%${searchKeyword}%'
-										</if>
-										<if test="searchCondition == 2 and searchKeyword !='' ">
-											AND j.user_id = #{searchKeyword}
+											AND (g.title LIKE '%${searchKeyword}%' OR g.text LIKE '%${searchKeyword}%')
 										</if>
 									</if>
 									ORDER BY g.reg_date DESC ) inner_table
@@ -118,16 +112,8 @@
 					FROM groups g, join j
 					WHERE g.group_no = j.group_no
 							AND j.group_role = 1
-							<if test="searchCondition != null">
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-									AND g.title LIKE '%${searchKeyword}%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-									AND g.text LIKE '%${searchKeyword}%'
-								</if>
-								<if test="searchCondition == 2 and searchKeyword !='' ">
-									AND j.user_id = #{searchKeyword}
-								</if>
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+								AND (g.title LIKE '%${searchKeyword}%' OR g.text LIKE '%${searchKeyword}%')
 							</if>
 					 ) countTable				
 							

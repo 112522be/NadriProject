@@ -120,7 +120,7 @@
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
-							<li><a href="/user/loginView.jsp">Login</a></li>
+							<li><a href="/user/loginView.jsp" >Login</a></li>
 							<li><a href="/user/addUserView.jsp">Join</a></li>
 						</c:if>
 					</ul>

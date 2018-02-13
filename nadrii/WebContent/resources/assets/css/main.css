@@ -2304,7 +2304,8 @@ hr {
 			-ms-transition: border-bottom-color 0.2s ease;
 			transition: border-bottom-color 0.2s ease;
 			display: block;
-			margin: 0 1.5em 0 0;
+			margin: 0 0 0 0;
+		
 		}
 
 		.author img {
@@ -2415,7 +2416,6 @@ hr {
 			}
 
 			.post > footer .stats {
-				color: #555 !important;
 				cursor: default;
 				list-style: none;
 				padding: 0;

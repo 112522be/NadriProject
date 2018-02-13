@@ -47,8 +47,13 @@ public class LikeDaoImpl implements LikeDao{
 	}
 	
 	@Override
-	public int getLikeCount(Like like) throws Exception {
-		return sqlSession.selectOne("LikeMapper.getLikeCount", like);
+	public List<Like> getLikeUserList(Search search) throws Exception {
+		return sqlSession.selectList("LikeMapper.getLikeUserList", search);
+	}
+	
+	@Override
+	public int getLikeCount(Search search) throws Exception {
+		return sqlSession.selectOne("LikeMapper.getLikeCount", search);
 	}
 	
 }
