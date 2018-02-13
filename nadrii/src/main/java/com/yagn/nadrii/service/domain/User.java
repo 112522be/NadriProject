@@ -17,7 +17,7 @@ public class User {
 	private Date regDate;
 	private String birth;
 	private String profileImageFile;
-	private String qrcode;
+	private String qrCode;
 	private String children;
 	private String gender;
 
@@ -96,12 +96,6 @@ public class User {
 	public void setProfiIeimageFile(String profileImageFile) {
 		this.profileImageFile = profileImageFile;
 	}
-	public String getqrcode() {
-		return qrcode;
-	}
-	public void setQrcode(String qrcode) {
-		this.qrcode = qrcode;
-	}
 	public String getchildren() {
 		return children;
 	}
@@ -125,14 +119,27 @@ public class User {
 		return phone3;
 	}
 
-	@Override
-	public String toString() {
-		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + "[profileImageFile]" +profileImageFile
-			+"[qrcode]" +qrcode + "[children]" + children + "[gender]" + gender;
-			
+	
+	
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
 	}
 	
+	
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
+				+ ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate + ", birth="
+				+ birth + ", profileImageFile=" + profileImageFile + ", qrCode=" + qrCode + ", children=" + children
+				+ ", gender=" + gender + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
+				+ ", checkSuccess=" + checkSuccess + "]";
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////
 	// JSON ==> Domain Object  Binding�� ���� �߰��� �κ�
 	// POJO �� �߿伺

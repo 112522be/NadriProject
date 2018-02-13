@@ -58,10 +58,10 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			}
 			//*/
 			
-			String ticketInfo = "티켓명 : " 
-					+ purchase.getTicketTitle() 
-				+ "\n예매일자 : " + purchase.getBookingDate()
-				+ "\n구매자이름 : " + purchase.getBuyerName()
+			String ticketInfo = 
+//					"티켓명 : " + purchase.getTicketTitle() 
+				"유저아이디 : " + purchase.getBuyerId()
+				+ "\n유저이메일 : " + purchase.getBuyerEmail()
 //				+ "\n입장인원 : " + count + " 명"
 				;
 			

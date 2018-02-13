@@ -15,11 +15,29 @@
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<!--  ///////////////////////// imperfect templete ////////////////////////// -->
+<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" />
+<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+
+
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style type="text/css">
+.image img {
+	height: 175.48px;
+	width: 350px;
+	overflow: hidden;
+}
+
+.mini-post header {
+	height: 210px;
+}
+</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -70,11 +88,9 @@
 
 	}
 
-	//=================== "상세조회" Event 연결 ===================
+	//=================== "상세조회" Event 연결 1 ===================
 	$(function() {
-		$("a[href='#' ]:contains('상세조회')").bind(
-				"click",
-				function(event) {
+		$("a[href='#' ]:contains('상세조회')").bind("click",	function(event) {
 //					alert("상세조회")
 
 					event.preventDefault();
@@ -85,6 +101,33 @@
 							$('input[name="contentTypeId"]')[$(".button.small.fit").index(this)]).val();
 					var title = $(
 							$('input[name="title"]')[$(".button.small.fit").index(this)]).val();
+					var encodeTitle = encodeURI(encodeURIComponent(title));
+					
+					console.log('contentId : ' + contentId)
+					console.log('contentTypeId : ' + contentTypeId)
+					console.log('title : ' + title)
+					console.log('encodeTitle : ' + encodeTitle)
+
+					self.location = "/ticket/getTicket?" + "contentId="
+							+ contentId + "&contentTypeId=" + contentTypeId
+							+ "&title=" + encodeTitle;
+
+				});
+	});
+	
+	//=================== "상세조회" Event 연결 2 ===================
+	$(function() {
+		$(".author").bind("click", function(event) {
+//					alert("상세조회")
+
+					event.preventDefault();
+
+					var contentId = $(
+							$('input[name="contentId"]')[$(".author").index(this)]).val();
+					var contentTypeId = $(
+							$('input[name="contentTypeId"]')[$(".author").index(this)]).val();
+					var title = $(
+							$('input[name="title"]')[$(".author").index(this)]).val();
 					var encodeTitle = encodeURI(encodeURIComponent(title));
 					
 					console.log('contentId : ' + contentId)
@@ -134,8 +177,6 @@
 					<li><a href="#" class="button fit">생성일순</a></li>
 				</ul>
 
-
-
 				<div class="col-md-12 text-right">
 						<p class="text-primary">&lt; 현재 ${ resultPage.pageNo } 페이지 /
 							전체 ${ resultPage.totalCount } 건수 &gt;</p>
@@ -145,29 +186,7 @@
 					<section>
 						<div class="row uniform">
 							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
-							
-							<div class="3u 12u$(mobile)">
-							<article class="item">
-								<a href="#" class="image fit">
-								<img src="${ tt.firstimage }" alt="" />
-								</a>
-								<header>
-									<h3>
-										<a href="#">${tt.title}</a>
-									</h3>
-									<time class="published" datetime=""> 기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } </time>
-									<span class="author">
-										<img src="../resources/assets/images/avatar.jpg" alt="" />
-									</span>
-								</header>
-							</article>
-						</div>
-							
-							
-							
-							
-							
-								<div class="col-sm-3">
+								<div class="col-xs-3">
 									<!-- Mini Posts -->
 									<section>
 										<div class="mini-posts">
@@ -177,10 +196,9 @@
 												<header>
 													<h4>${ num.count }.${ tt.title }</h4>
 
-													<time class="published" datetime=""> 기&nbsp;간 : ${ tt.eventstartdate }
-														~ ${ tt.eventenddate } </time>
+													<time class="published" datetime=""> 기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } </time>
 													<a href="#" class="author">
-														<img src="/resources/imperfect/images/pic08.jpg" alt="" /></a>
+														<img src="/resources/imperfect/images/pic08.jpg" alt="" data-toggle="tooltip" data-placement="top" title="상세조회"/></a>
 													<ul class="actions vertical small">
 														<li><a href="#" class="button small fit">상세조회</a></li>
 													</ul>
