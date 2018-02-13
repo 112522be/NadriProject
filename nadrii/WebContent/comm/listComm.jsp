@@ -27,31 +27,24 @@
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=1041" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$('.item').on('click', function() {
-			var postNo = $($('input[name="postNo"]')[$('.item').index(this)]).val()
-			self.location = "getComm?postNo="+postNo;
-		})
-		$('#searchKeyword').keydown(function(key) {
- 			var data = $(this).val();
- 			if(key.keyCode==13){
- 				if(data!=""){
-					$('form.search').attr('method', 'POST').attr('action', '/comm/listComm').submit();
- 				}else{	
- 	 				alert("검색어를 입력해주세요");
- 				}
- 			}
-		})
-		
-		$(window).scroll(function() { 
-			if ($(window).scrollTop() == $(document).height() - $(window).height()) { 
-				alert('End of Window'); 
-			} 
-		});​
+$(function() {
+	$('article.item').on('click', function() {
+		var postNo = $($('input[name="postNo"]')[$('.item').index(this)]).val()
+		self.location = "getComm?postNo="+postNo;
 	})
+	$('#searchKeyword').keydown(function(key) {
+			var data = $(this).val();
+			if(key.keyCode==13){
+				if(data!=""){
+				$('form.search').attr('method', 'POST').attr('action', '/comm/listComm').submit();
+				}else{	
+	 				alert("검색어를 입력해주세요");
+				}
+			}
+	})
+})
 </script>
 
 <style type="text/css">
@@ -63,10 +56,6 @@
 
 .body {
     background-color: #e6ebed;
-}
-
-.row > * {
-	padding: 20px 10px 0 10px;
 }
 
 section {
@@ -187,9 +176,9 @@ section {
 							<article class="item">
 								<a href="#" class="image fit"> 
 								<input type="hidden" name="postNo" value="${community.postNo}"> 
-								<img src="${community.thumbNailFileName}" alt="" />
+								<img src="${community.thumbNailFileName}" alt="" height="200px"/>
 								</a>
-								<header>
+								<header height="100px">
 									<h3>
 										<a href="#">${community.title}</a>
 									</h3>
@@ -206,7 +195,7 @@ section {
 						</div>
 					</c:forEach>
 				</div>
-				<jsp:include page="floating.jsp"/>
+				<%-- <jsp:include page="floating.jsp"/> --%>
 			</section>
 		</nav>
 	</div>
@@ -216,8 +205,8 @@ section {
 	<script src="../resources/assets/js/jquery.min.js"></script>
 	<script src="../resources/assets/js/skel.min.js"></script>
 	<script src="../resources/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="../resources/assets/js/main.js"></script>
+	<!--[if lte IE 8]><script src="../resources/assets/js/ie/respond.min.js"></script><![endif]
+	<script src="../resources/assets/js/main.js"></script>-->
 
 </body>
 </html>
