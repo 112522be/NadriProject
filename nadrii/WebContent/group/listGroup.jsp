@@ -113,9 +113,11 @@ function getIndex(k){
 								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
+
 									<h3>
 										<a href="#none">${group.title}</a>
 									</h3>
+
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									<time class="published" style="position: relative; padding-left: 100px; margin-top: -38px"> view : ${group.viewCount}</time>
 									<div>

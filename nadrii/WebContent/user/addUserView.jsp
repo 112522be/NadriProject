@@ -282,9 +282,16 @@ function checkSuccess(){
    
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
-//    		alert("걸린건가?");
+
+    		alert("걸린건가?");
     		$("form").attr("method","POST").attr("action","/user/addUser").submit();
     	});
+		
+		$("button[type='button']:contains('restTest')").on("click",function(){
+    		//alert("걸린건가?");
+    		self.location ="addUserViewRestTest.jsp"; 
+    	});
+		
 	});
     
     
@@ -346,6 +353,8 @@ function checkSuccess(){
           <div class="col-sm-offset-4  col-sm-4 text-center">
             <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" >가입</button>
            <a class="btn btn-primary btn" href="#" role="button" >취소</a>
+           <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn">restTest</button>
+
           </div>
         </div>
       </form>

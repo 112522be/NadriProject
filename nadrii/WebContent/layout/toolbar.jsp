@@ -35,15 +35,10 @@
 	<!-- Theme skin -->
 
 	<link href="/resources/skins/default.css" rel="stylesheet" />
-
-	<!-- //////////////////// CSS //////////////////// -->
-
 	<style type="text/css">
-
 		.container {
 			padding: 20px;
         }
-
 	</style>
 
 	<script type="text/javascript">
@@ -56,15 +51,37 @@
 	});
 
 	$( function() {
+
+		console.log("세션 정보 : ${session}")
+		
+		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
+			self.location = "/ticket/listTicket"
+		});
+
+	});
+
+
+	$( function() {
+
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
       		self.location = "/message/listMessage"
         });
     });
 	
+
+	//============= "장바구니" 화면이동 =============
+    $( function() {
+       $("a[href='#']:contains('Logout')").bind("click" , function() {
+			alert("나갈거임");
+	        self.location = "/user/logout";
+       });
+    });
+	
 	</script>
 	
 </head>
+
 
 
 <body>
@@ -117,8 +134,13 @@
 										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
+<<<<<<< HEAD
+							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
+							<li><a href="#">Logout</a></li>
+=======
 							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
+>>>>>>> refs/remotes/origin/master
 						</c:if>
 						<c:if test="${  empty loginUser }">
 							<li><a href="/user/loginView.jsp" >Login</a></li>
@@ -150,4 +172,5 @@
 		</nav>
 		<!-- navbar End -->
 </body>
+
 </html>

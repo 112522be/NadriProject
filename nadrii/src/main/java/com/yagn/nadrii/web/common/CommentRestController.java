@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,7 +28,6 @@ public class CommentRestController {
 	
 	@RequestMapping("addComment")
 	public Map<String, Object> addComment(@ModelAttribute Comments comments) throws Exception {
-		System.out.println(comments);
 		commentService.addComment(comments);
 		return commentService.listCommentByPost(comments.getPostNo());
 	}
@@ -43,9 +43,11 @@ public class CommentRestController {
 	}
 	
 	@RequestMapping("updateComment")
-	public Map<String, Object> updateComment(@RequestBody Comments comments)throws Exception {
+	public void updateComment(@RequestParam int commentNo,
+								@RequestParam String text)throws Exception {
+		Comments comments = commentService.getComment(commentNo);
+		comments.setText(text);
 		commentService.updateComment(comments);
-		return commentService.listCommentByPost(comments.getPostNo());
 	}
 	
 	@RequestMapping("deleteComment")
