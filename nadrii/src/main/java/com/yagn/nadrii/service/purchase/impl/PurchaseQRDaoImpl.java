@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +41,9 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 		
 		String returnQRCode = "";
 		
+		
 		try {
+			
 			
 			File file = null;
 			// 큐알이미지를 저장할 디렉토리 지정
