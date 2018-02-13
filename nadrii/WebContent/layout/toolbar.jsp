@@ -88,13 +88,14 @@
 					<ul class="nav navbar-nav navbar-right">
 					<c:if test="${ ! empty loginUser }">
 							<li>
-								<a href="#">
+								<a href="/user/getUser?userId=${loginUser.userId}">
+								<img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px">
 								<span>
 									<c:if test="${ loginUser.userName eq null }">
 										${ loginUser.userId }
 									</c:if>
 										${ loginUser.userName }
-										님 환영합니다.
+										님
 								</span>
 								</a>
 							</li>
@@ -116,7 +117,7 @@
 										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
-							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
+							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
