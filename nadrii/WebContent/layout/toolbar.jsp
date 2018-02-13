@@ -134,13 +134,8 @@
 										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
-<<<<<<< HEAD
-							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
-							<li><a href="#">Logout</a></li>
-=======
 							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
->>>>>>> refs/remotes/origin/master
 						</c:if>
 						<c:if test="${  empty loginUser }">
 							<li><a href="/user/loginView.jsp" >Login</a></li>

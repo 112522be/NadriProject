@@ -21,8 +21,3 @@ CREATE SEQUENCE SEQ_PURCHASE_POST_NO START WITH 50000 INCREMENT BY 1;
 
 COMMIT;
 
-
-
-
->>>>>>> refs/remotes/origin/master
-  
