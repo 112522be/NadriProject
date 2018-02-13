@@ -5,25 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <style type="text/css">
-	img {
-	    width: 100px;
-	    height:100px;
-	    border-radius: 50px; /* 이미지 반크기만큼 반경을 잡기*/
-	}	
-	
-	.radius-box {
-		 width: 100px;
-		 height: 100px;
-		 background-image:url("배경이미지경로");
-		 border-radius: 150px; /* 레이어 반크기만큼 반경을 잡기*/    
-		 display: table-cell;
-		 vertical-align: middle;
-		 color: #ffffff;
-		 font-weight: bold;
-		 text-align: center;
+<style type="text/css">
+	#commentContainer{
+		padding-bottom: 10px;
 	}
-</style> -->
+</style>
 <script type="text/javascript"> 
 	function listComment() {
 		var postNo = $('input[name="postNo"]').val()
@@ -35,7 +21,7 @@
 				},
 				success: function(JSONData) {
 					for(i=0;i<JSONData.totalCount;i++){
-						$('#commentContainer').append('<hr/><div class="container"><h4>'+JSONData.listComment[i].userId+'</h4><div class="col-xs-9"><p/>'+JSONData.listComment[i].text+'</div><div class="col-xs-3" align="right">'+JSONData.listComment[i].regDate+'</div></div>');
+						$('#commentContainer').append('<div class="col-xs-1" align="left"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="50px" height="50px"></div><div class="col-xs-11"><h4 align="left">'+JSONData.listComment[i].userId+'</h4><div class="col-xs-9"><p/>'+JSONData.listComment[i].text+'</div><div class="col-xs-3" align="right">'+JSONData.listComment[i].regDate+'</div></div><hr/>');
 					}
 				}
 		})
@@ -61,7 +47,6 @@
 		})
 	}
 	$(function() {
-
 		$('button.btn.btn-info[name="submitComment"]').bind('click', function() {
 			addComment();
 		})
@@ -74,11 +59,11 @@
 			<form name="formData">
 				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
-				<div class="col-xs-10">
+				<div class="col-xs-11">
 						<input type="text" name="text" class="form-control" rows="3" placeholder="댓글을 입력하세요...">
 				</div>
 			</form>
-			<div class="col-xs-2">
+			<div class="col-xs-1">
 				<button align="right" type="button" class="btn btn-info" name="submitComment">저 장</button>
 			</div>
 			<div id="commentContainer"></div>

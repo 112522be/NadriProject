@@ -14,11 +14,15 @@ public interface PurchaseService {
 	
 	public Map<String, Object> getBasketList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
 	
+	public Map<String, Object> getPurchaseList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
+
 	public List<Purchase> addBasketTicket(Purchase purchase) throws Exception;
 	
 	public void updateBasketPurchase(Purchase purchase) throws Exception; 
 	
 	public void deleteBasketList(Purchase purchase) throws Exception;
+	
+	public String getQRCode(Purchase purchase) throws Exception;
 	
 	/// KakaoPay API
 	public KakaoPayResponse addKakaoPayment(KakaoPayRequest kakaoPayRequest) throws Exception;
