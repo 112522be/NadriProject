@@ -183,11 +183,12 @@
 	    				    	if(content == null || content=='' || lat=="," || lng == ","){
 									return;
 	    				    	}else{ 
-	    				    		var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left">'+
+	    				    		var html =$('#summernote').summernote('code')+'<div class="accordion"><button type="button" class="btn btn-default">'+
 									'<div class="col-xs-3" align="left">'+
 									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 									'</div>'+
-									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button><br/><p></p>';
+									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>'+
+									'<div><div id="map" style="width:500px;height:400px;"></div></div></div><br/><p></p>';
 				    				$('#summernote').summernote('code', html);
 	    				    	}
 						})
