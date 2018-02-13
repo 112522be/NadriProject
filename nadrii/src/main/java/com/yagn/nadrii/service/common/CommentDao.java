@@ -12,4 +12,6 @@ public interface CommentDao {
 	public void deleteComment(int commentNo)throws Exception;
 	public int getTotalCount(int postNo)throws Exception;
 	public int getCommentNo(Comments comment)throws Exception;
+	public Comments getComment(int commentNo)throws Exception;
+	public void deleteCommentByPost(int postNo)throws Exception;
 }

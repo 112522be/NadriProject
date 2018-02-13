@@ -53,4 +53,15 @@ public class CommentServiceImpl implements CommentService {
 	public int getCommentNo(Comments comment) throws Exception {
 		return commentDao.getCommentNo(comment);
 	}
+	
+	@Override
+	public Comments getComment(int commentNo) throws Exception {
+		return commentDao.getComment(commentNo);
+	}
+	
+	
+	@Override
+	public void deleteCommentByPost(int postNo) throws Exception {
+		commentDao.deleteCommentByPost(postNo);
+	}
 }

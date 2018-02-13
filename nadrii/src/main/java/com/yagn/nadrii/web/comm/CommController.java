@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yagn.nadrii.common.Page;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.comm.CommService;
+import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Community;
 
 @Controller
@@ -27,6 +28,9 @@ public class CommController {
 	@Autowired
 	@Qualifier("commServiceImpl")
 	private CommService commService;
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
@@ -108,7 +112,8 @@ public class CommController {
 	}
 	
 	@RequestMapping("deleteComm")
-	public String deleteComm(@RequestParam int postNo) {
+	public String deleteComm(@RequestParam int postNo) throws Exception {
+		commentService.deleteCommentByPost(postNo);
 		commService.deleteComm(postNo);
 		return "forward:/comm/listComm";
 	}
