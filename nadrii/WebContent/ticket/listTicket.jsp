@@ -26,18 +26,7 @@
 
 
 
-<!--  ///////////////////////// CSS ////////////////////////// -->
-<style type="text/css">
-.image img {
-	height: 175.48px;
-	width: 350px;
-	overflow: hidden;
-}
 
-.mini-post header {
-	height: 210px;
-}
-</style>
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -148,6 +137,23 @@
 	}
 </script>
 
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style type="text/css">
+.image img {
+	height: 175.48px;
+	width: 350px;
+	overflow: hidden;
+}
+
+.mini-post header {
+	height: 210px;
+}
+
+.buttonBox{
+	margin-top:10px;
+}
+</style>
+
 </head>
 
 <body>
@@ -194,12 +200,14 @@
 											<!-- Mini Post -->
 											<article class="mini-post">
 												<header>
+												  <div class="countTitle" style="height:100px; display:block;">
 													<h4>${ num.count }.${ tt.title }</h4>
 
 													<time class="published" datetime=""> 기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate } </time>
 													<a href="#" class="author">
 														<img src="/resources/imperfect/images/pic08.jpg" alt="" data-toggle="tooltip" data-placement="top" title="상세조회"/></a>
-													<ul class="actions vertical small">
+													</div>
+													<ul class="actions vertical small buttonBox">
 														<li><a href="#" class="button small fit">상세조회</a></li>
 													</ul>
 
