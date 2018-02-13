@@ -1,16 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
 <style type="text/css">
 li > span{
 	position: relative !important;
 	color: #555555 !important;
 }
-.icon.fa-heart.block::before{
+.block::before{
 	color: #f43d3d !important;
-}
-.icon.fa-heart.none::before{
-	color: rgba(160, 160, 160, 0.3) !important;
 }
 </style>
 <script type="text/javascript">
@@ -52,26 +46,27 @@ function getLike(){
 			$(".like").empty();
 			$(".like").append(returnData.totalCount);
 			
-			if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1){
-				$(".icon.fa-heart").addClass('none');
-				$(".icon.fa-heart").removeClass('block');
-				
+			if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") != -1){
+				$(".icon.fa-heart").toggleClass("block", true);
 			}else{
-				$(".icon.fa-heart").addClass('block');
-				$(".icon.fa-heart").removeClass('none');
+				$(".icon.fa-heart").toggleClass("block", false);
 			}
-
-			$(".icon.fa-heart.none").bind("click", function(){
-				addLike();
-			});
-			$(".icon.fa-heart.block").bind("click", function(){
-				deleteLike();
-			});
-			
 		}
 	});	
 	
 }
+
+$(function(){
+
+	$(".icon.fa-heart").bind("click", function(){
+		if( $(".icon.fa-heart").hasClass("block") ){
+			deleteLike();
+		}else{
+			addLike();
+		}
+	});
+	
+});
 
 </script>
 

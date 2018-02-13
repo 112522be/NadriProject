@@ -107,13 +107,11 @@ function getMemberList(){
 			});	
 		}
 	});	
-	
-	getLike();
 }
 
 </script>
 </head>
-<body onload="getMemberList()">
+<body>
 	<table>
 
 		<thead>

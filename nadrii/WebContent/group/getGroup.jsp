@@ -75,6 +75,18 @@ section > :last-child, section > .container, section:last-child, article > :last
 </style>
 <script>
 
+function addLoadEvent(func){
+    var oldonload = window.onload;
+    if(typeof window.onload != 'function'){
+        window.onload = func;
+    }else{
+        window.onload = function(){
+            oldonload();
+            func();
+        };
+    }
+}
+
 $(function(){
 	
 	if("${loginUser.userId}" == "${group.join.userId}"){
@@ -109,6 +121,9 @@ $(function(){
 			 placement: 'bottom',
 			 }
 			);	
+
+	addLoadEvent(getMemberList);
+	addLoadEvent(getLike);
 });
 
 function clickProfile(){
@@ -154,7 +169,7 @@ function clickMessage(){
 				<p>${group.text}</p>
 				</div>
 				<input type="hidden" name="postNo" value="${group.join.groupNo}">
-				<jsp:include page="./like.jsp"></jsp:include>	
+				<jsp:include page="../common/like.jsp"></jsp:include>	
 				<div id="userMenu" style="float: right; margin-top: -3em; display: none;">
 					<a href="#none" id="modify" class="button small modify">modify</a>
 					<a href="#none" id="delete" class="button small delete">delete</a>
