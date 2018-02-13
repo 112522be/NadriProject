@@ -26,6 +26,10 @@
 		SELECT comment_no FROM comments WHERE user_id=#{userId} AND reg_date=#{regDage}
 	</select>
 	
+	<select id="getComment" parameterType="int" resultMap="communitySelectMap">
+		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE comment_no=#{commentNo}
+ 	</select>
+	
 	<select id="listCommentByPost" parameterType="int" resultMap="communitySelectMap">
 		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE post_no=#{postNo}
 		ORDER BY reg_date DESC
@@ -55,6 +59,10 @@
 	<!-- comm의 delete -->
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM comments WHERE comment_no=#{value}
+	</delete>
+	
+	<delete id="deleteCommentByPost" parameterType="int">
+		DELETE FROM comments WHERE post_no=#{value}
 	</delete>
 	
 </mapper>
