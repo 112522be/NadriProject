@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.yagn.nadrii.common.Search;
+import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserDao;
 
@@ -55,14 +56,15 @@ public class UserDaoImpl implements UserDao{
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("UserMapper.getTotalCount", search);
 	}
+
 	
 	public User getUserByEmail(String email) throws Exception{
 		return sqlSession.selectOne("UserMapper.getUserByEmail",email);
 	}
 	
+
 	public User getUser(User user) throws Exception{
 		return sqlSession.selectOne("UserMapper.getPassword",user);		
 	}
 	
-
 }

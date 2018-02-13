@@ -39,6 +39,8 @@ public class Purchase {
 	private String buyerPhone;
 	private String buyerEmail;
 	
+	private String qrCode;
+	
 	private User buyer;
 	
 	public Purchase() {
@@ -247,6 +249,14 @@ public class Purchase {
 		this.sumPostNo = sumPostNo;
 	}
 
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase [contentId=" + contentId + ", contentTypeId=" + contentTypeId + ", contentid=" + contentid
@@ -257,9 +267,10 @@ public class Purchase {
 				+ Arrays.toString(ticketPrice) + ", ticketC=" + ticketC + ", ticketP=" + ticketP + ", totalTicketPrice="
 				+ totalTicketPrice + ", taxFree=" + taxFree + ", ticketPayment=" + ticketPayment + ", buyerId="
 				+ buyerId + ", buyerName=" + buyerName + ", buyerPhone=" + buyerPhone + ", buyerEmail=" + buyerEmail
-				+ ", buyer=" + buyer + "]";
+				+ ", qrCode=" + qrCode + ", buyer=" + buyer + "]";
 	}
 
+	
 	
 	
 	

@@ -16,7 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.TourTicket;
+import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.purchase.PurchaseService;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 import com.yagn.nadrii.service.ticket.impl.NaverApiDaoImpl;
@@ -33,6 +36,12 @@ public class TicketServiceTest {
 	@Qualifier("ticketServiceImpl")
 	private TicketService ticketService;
 
+	@Autowired
+	@Qualifier("purchaseServiceImpl")
+	private PurchaseService purchaseService;
+
+	
+	
 	@Test
 	public void testGetTicketListAll() throws Exception {
 
@@ -42,8 +51,6 @@ public class TicketServiceTest {
 		
 		Map<String, Object> map = ticketService.getTicketList(openApiSearch);
 		
-//		System.out.println("\n[tourTicketList �� Ȯ��] ==> " + map.get("tourTicketList"));
-
 	}
 	 
 	//@Test
@@ -57,14 +64,10 @@ public class TicketServiceTest {
 		DetailIntro detailIntro = new DetailIntro(); 
 		detailIntro = ticketService.getTicket(contentId, contentTypeId);
 		
-		// ==> console Ȯ��
 		System.out.println("[testGetTicket] : " + detailIntro);
 
-		// ==> API Ȯ��
 		Assert.assertEquals(2531711, detailIntro.getContentid());
 		Assert.assertEquals(15, detailIntro.getContenttypeid());
-//		Assert.assertEquals("������ ȫõ ���û긲���� �丮��", detailIntro.getEventplace());
-//		Assert.assertEquals("�Ϻ� ���α׷� ����", detailIntro.getUsetimefestival());
 
 	}
 	
@@ -72,17 +75,15 @@ public class TicketServiceTest {
 	public void testGetDetailImage() throws Exception {
 
 		String title = null;
-		int contentId = 1815964;		// ������ ID :	
-//		int contentId = 737479;			// ������ ID	:
-//		int contentId = 2531711;		// ������ ID	:
+		int contentId = 1815964;		
+//		int contentId = 737479;			
+//		int contentId = 2531711;		
 
 		DetailImage detailImage = new DetailImage();
 		detailImage = ticketService.getDetailImage(contentId, title);
 
-		// ==> console Ȯ��
 		System.out.println("[testGetDetailImage] : " + detailImage);
 
-		// ==> API Ȯ��
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
 	}
@@ -90,28 +91,22 @@ public class TicketServiceTest {
 	//@Test
 	public void testGetNaverImage() throws Exception {
 
-//		String title = "���� ��⸮�����ܿ����� 2018";			
-		String title = "����������� 2018";			
+		String title = "룸넘버 13";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
 		String returnImage = ticketService.getNaverImage(title);
 
-		// ==> console Ȯ��
 //		System.out.println("[testGetNaverImage] : " + returnImage);
 
-		// ==> API Ȯ��
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
 	}
 	
 	//@Test
 	public void testGetKakaoImage() throws Exception {
-
 		
-//		String title = "�������� ���� ������� (��ݱ�)";			
-//		String title = "���� ��⸮�����ܿ����� 2018";			
-		String title = "����������� 2018";			
+		String title = "룸넘버 13";			
 //		String clientID = "hC9Dwk1KGJiiTZ79onoy";
 //		String clientSecret = "cLODYnjh2Y";
 
@@ -126,6 +121,27 @@ public class TicketServiceTest {
 		// ==> API Ȯ��
 //		Assert.assertEquals(null, detailImage.getContentid());
 	
+	}
+	
+	@Test
+	public void testGetQRCode() throws Exception {
+
+		System.out.println("\n[GetQRCode TEST]");
+		
+		User user = new User();
+		Purchase purchase = new Purchase();
+		purchase.setBuyerId("yumaKim88");
+		purchase.setTicketTitle("태안 세계튤립축제");
+		purchase.setBookingDate("2018년 3월 15일"); ;
+		purchase.setBuyerName("김연아 테스트 이름 길게 붙여서 뒤에 값 어떻게 보여지는지 확인중");
+		
+		String getQRCode = purchaseService.getQRCode(purchase);
+		
+		System.out.println("\n[testGetQRCode] : " + getQRCode);
+
+		// ==> API Ȯ��
+//		Assert.assertEquals(null, detailImage.getContentid());
+
 	}
 	 
 } // end of class

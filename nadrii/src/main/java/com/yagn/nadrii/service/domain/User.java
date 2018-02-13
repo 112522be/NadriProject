@@ -17,7 +17,7 @@ public class User {
 	private Date regDate;
 	private String birth;
 	private String profileImageFile;
-	private String qrcode;
+	private String qrCode;
 	private String children;
 	private String gender;
 
@@ -88,12 +88,7 @@ public class User {
 	public void setProfileImageFile(String profileImageFile) {
 		this.profileImageFile = profileImageFile;
 	}
-	public String getQrcode() {
-		return qrcode;
-	}
-	public void setQrcode(String qrcode) {
-		this.qrcode = qrcode;
-	}
+
 	public String getChildren() {
 		return children;
 	}
@@ -115,31 +110,40 @@ public class User {
 	public String getPhone2() {
 		return phone2;
 	}
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
 	public String getPhone3() {
 		return phone3;
 	}
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
+
+	
+	
+	public String getQrCode() {
+		return qrCode;
 	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+		
 	public String getCheckSuccess() {
 		return checkSuccess;
 	}
 	public void setCheckSuccess(String checkSuccess) {
 		this.checkSuccess = checkSuccess;
 	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
 	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
 				+ ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate + ", birth="
-				+ birth + ", profileImageFile=" + profileImageFile + ", qrcode=" + qrcode + ", children=" + children
+				+ birth + ", profileImageFile=" + profileImageFile + ", qrCode=" + qrCode + ", children=" + children
 				+ ", gender=" + gender + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
 				+ ", checkSuccess=" + checkSuccess + "]";
 	}
-	
-	
 	
 }

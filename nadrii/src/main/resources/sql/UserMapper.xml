@@ -17,7 +17,7 @@
 		<result property="profileImageFile" 	column="PROFILE_IMAGE_FILE" jdbcType="VARCHAR" />
 		<result property="email" 				column="email" 				jdbcType="VARCHAR"  />
 		<result property="children" 			column="children" 			jdbcType="NUMERIC" />
-		<result property="qrcode" 				column="qr_code" 			jdbcType="VARCHAR" />
+		<result property="qrCode" 				column="qr_code" 			jdbcType="VARCHAR" />
 		<result property="regDate" 				column="reg_date" 			jdbcType="DATE" />
 	</resultMap>
 	
@@ -27,12 +27,14 @@
 					password,
 					email,
 					reg_date,
+					qr_code,
 					role
 	) VALUES (
 					#{userId},
 					#{password},
 					#{email},
 					SYSDATE,
+					#{qrCode},
 					'user'
 	)
 	</insert>

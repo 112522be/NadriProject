@@ -18,6 +18,12 @@
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
   crossorigin="anonymous"></script>
 <style type="text/css">
+
+img{
+	max-width: 800px;
+	height: auto;
+}
+
 footer a{
 	color: #555 !important;
 }
@@ -102,13 +108,11 @@ $(function(){
 		}		
 	});
 	
-	$('[data-toggle="popover"]').popover(
-			{ html: true,
-			 container: 'body',
-			 content: '<a href="#" class="profile" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
-			 placement: 'bottom',
-			 }
-			);	
+	$( function() {
+	    $( "#accordion" ).accordion({
+	      collapsible: true
+	    });
+	} );
 });
 
 function clickProfile(){
@@ -191,18 +195,35 @@ $(function(){
 						<a href="#" class="button small modify">modify</a>
 						<a href="#" class="button small delete">delete</a>
 					</div>
-				</c:if>		
+				</c:if>	
 				<footer>
-					<ul class="stats">
-						<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
-						<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
-					</ul>
+					<div class="col-xs-6">
+						<ul class="stats">
+							<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
+							<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-6" align="right">
+						<img src="/resources/images/hashtag.png" width="30px" height="30px"><span style="color: gray; font-size: 10pt;">&nbsp;&nbsp;${community.hashtag}</span>
+					</div>
 				</footer>
 			</article>
 		<jsp:include page="../common/comment.jsp"></jsp:include>
 	</div>
 	</section>
 	</div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2a580a6a043772106fd68ca5e3561"></script>
+	<script>
+		function map(lat, lng) {	
+			var container = document.getElementById('map');
+			var options = {
+				center: new daum.maps.LatLng(lat, lng),
+				level: 3
+			};
+	
+			var map = new daum.maps.Map(container, options);
+		}
+	</script>
 </body>
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
 </html>
