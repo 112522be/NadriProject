@@ -60,26 +60,27 @@ public class LikeRestController {
 		return like;
 	}
 	
-	@RequestMapping(value="json/getLikeCount/{postNo}", method=RequestMethod.POST)
-	public Like getLikeCount(@PathVariable int postNo) throws Exception {
+	@RequestMapping(value="json/getLikeList")
+	public Map getLikeList(@RequestBody Search search, HttpSession session) throws Exception{
+		
+		System.out.println("json/getLikeList");
 
-		System.out.println("/like/json/getLikeCount");
+		search.setSearchKeyword(((User)session.getAttribute("loginUser")).getUserId());
 		
-		Like like = new Like();
+		Map<String , Object> map=likeService.getLikeList(search);
 		
-		like.setPostNo(postNo);
-			
-		likeService.getLikeCount(like);
-		
-		return like;
+		return map;
 	}
 	
-	@RequestMapping(value="json/listLike")
-	public Map listLike(@RequestBody Search search) throws Exception{
+	@RequestMapping(value="json/getLikeUserList/{postNo}")
+	public Map getLikeUserList(@PathVariable int postNo) throws Exception{
 		
-		System.out.println("/listLike");
-
-		Map<String , Object> map=likeService.getLikeList(search);
+		System.out.println("json/getLikeUserList");
+		
+		Search search = new Search();
+		search.setSearchKeyword(Integer.toString(postNo));
+		
+		Map<String , Object> map=likeService.getLikeUserList(search);
 		
 		return map;
 	}

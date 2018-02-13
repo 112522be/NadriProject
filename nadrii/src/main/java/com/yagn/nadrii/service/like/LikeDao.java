@@ -15,5 +15,7 @@ public interface LikeDao {
 
 	public int getTotalLikeCount(Search search) throws Exception;
 	
-	public int getLikeCount(Like like) throws Exception;
+	public List<Like> getLikeUserList(Search search) throws Exception ;
+	
+	public int getLikeCount(Search search) throws Exception;
 }
