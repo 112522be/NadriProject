@@ -77,7 +77,7 @@
 	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
-	    				    var uri = "addPlace.jsp";
+	    				    var uri = "../comm/addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
 	    				    	alert($('#content_pr').val());

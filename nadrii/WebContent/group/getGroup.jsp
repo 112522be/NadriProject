@@ -14,6 +14,7 @@
 <script src="../resources/assets/js/1skel.min.js"></script>
 <script src="../resources/assets/js/1util.js"></script>
 <script src="../resources/assets/js/1main.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
 <style type="text/css">
 footer a{
 	color: #555 !important;
@@ -74,7 +75,6 @@ section > :last-child, section > .container, section:last-child, article > :last
 
 </style>
 <script>
-
 function addLoadEvent(func){
     var oldonload = window.onload;
     if(typeof window.onload != 'function'){
@@ -161,10 +161,13 @@ function clickMessage(){
 					</div>
 				</header>
 
-				<div class="table-wrapper" style="width: 30%">
-					<jsp:include page="./join.jsp"></jsp:include>	
+				<div style="padding-bottom: 330px">
+					<div class="table-wrapper" style="width: 30%; float: left;">
+						<jsp:include page="./join.jsp"></jsp:include>	
+					</div>
+					<div id="map" style="width:60%; height:350px; position: relative; float: right;"></div>
 				</div>
-				<br/>
+		
 				<div>
 				<p>${group.text}</p>
 				</div>
@@ -184,5 +187,31 @@ function clickMessage(){
 	</div>
 	
 </body>
+<script type="text/javascript">
+
+var lat= '${group.lat}'.replace(",","");
+var lng= '${group.lng}'.replace(",","");
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+    center: new daum.maps.LatLng(lng, lat), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};
+
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+var marker = new daum.maps.Marker({
+    position: new daum.maps.LatLng(lng, lat),
+    map: map
+});
+
+var infowindow = new daum.maps.InfoWindow({
+    position : new daum.maps.LatLng(lng, lat),
+    content : '<h7>요기</h7>'
+});
+
+infowindow.open(map, marker);
+
+</script>
 <link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
 </html>

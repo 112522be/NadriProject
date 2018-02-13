@@ -26,15 +26,23 @@
 .row > * {
     padding: 20px 0 0 10px;
 }
+.navbar {
+    margin-bottom: 0px !important;
+	}
+@media screen and (min-width: 1681px) and (max-width: 1880px) {
+		body, input, textarea, select {
+				font-size: 15pt !important;
+			}
+	}	
+	
 	</style>
 
 </head>
 	<body>
 	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 	<div id="main">
-	
+	<section class="two">
 	<div class="container" align="center">
-	<br/>
 		<form name="postData">
 			<div class="row">
 				<div class="3u 6u$(xsmall)">
@@ -60,6 +68,7 @@
 			<a id="submit">저장하기</a>
 		</div>
 	</div>	
+	</section>
 	</div>
 	</body>
 	<link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
