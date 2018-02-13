@@ -69,10 +69,9 @@
 	
 	//============= "장바구니" 화면이동 =============
     $( function() {
-       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-
-//      	 alert("장바구니")
-          self.location = "/purchase/listBasket"
+       $("a[href='#']:contains('Logout')").bind("click" , function() {
+			alert("나갈거임");
+	        self.location = "/user/logout";
        });
     });
 	
@@ -127,7 +126,7 @@
 								</a>
 							</li>
 							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
-							<li><a href="/user/logoutProc">Logout</a></li>
+							<li><a href="#">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
 							<li><a href="/user/loginView.jsp" >Login</a></li>

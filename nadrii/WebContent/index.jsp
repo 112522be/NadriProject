@@ -60,8 +60,8 @@
 
 <body>
 
-	<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	
+	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	 
 	<div class="container">
 	<!-- Carousel Start -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
