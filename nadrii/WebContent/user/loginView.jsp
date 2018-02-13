@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -31,7 +31,7 @@
     
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-
+		/*
 		//============= "로그인"  Event 연결 =============
 		$( function() {
 			
@@ -56,12 +56,12 @@
 					return;
 				}
 	
-				fncLoginCheck(id, pw);
+				//fncLoginCheck(id, pw);
 				
 //				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
-		
+		//*/
 		//============= 회원원가입화면이동 =============
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -86,118 +86,32 @@
 		//============= '로그인' 버튼 클릭 Event 처리 =============
 		$( function() {
 			$(".btn.btn-primary:contains('로 그 인')").bind("click" , function() {
-				fncLoginCheck();
-				//self.location = "/user/findPasswordPg"
+				alert("로그인");
+				validateCheck();
 			});
 		});
+		//================================================================
 		
-		//========== fncLoginProc Event 처리 ==========
-		function fncLoginCheck(id, pw) {
-			var userId = $("#userId").val();
+		function validateCheck(){
+			var id = $("#userId").val();
 			var password = $("#password").val();
+			//alert(id+ ":::"+password);
 			
-			var loginData = "userId=" + id + "&password=" + pw;
-			
-			$.ajax({
-				url : "/user/json/loginCheck",
-				type : "POST",
-				data : loginData,
-				success : function(result){
-					if(result.msg == "failed"){
-						alert("등록된 아이디가 없습니다.");
-						location.href="/index.jsp";
-					}
-					if(result.msg == "success"){
-						alert(result.welcomeSign + " 님, 환영합니다.");
-						location.href="/index.jsp";
-					}
-				}
-			});
-		}
-		
-		//============= FaceBook 로그인 =============
-
-		function statusChangeCallback(response) {
-			console.log('statusChangeCallback');
-			console.log(response);
-			if (response.status === 'connected') {
-				testAPI();
-			} else {
-				document.getElementById('status').innerHTML = 'Please log '
-						+ 'into this app.';
+			if(id == null || id ==""){
+				alert("아이디 입력해라");
+				return;
 			}
-		}
-
-		function checkLoginState() {
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
-		}
-
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '1974223106165873',
-				cookie : true,
-
-				xfbml : true,
-				version : 'v2.8'
-			});
-
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
-
-		};
-
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
+			
+			if(password == null || password=="" ){
+				alert("비번은 쳐야지 그래야 안쳐맞지")
 				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-
-		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
-			FB
-					.api(
-							'/me',
-							function(response) {
-								console.log('Successful login for: '
-										+ response.name);
-								document.getElementById('status').innerHTML = 'Thanks for logging in, '
-										+ response.name + '!';
-							});
+			}
+			
+			$("form").attr("method","POST").attr("action","/user/login").submit();
 		}
-		/*
-		(function(d, s, id) {
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) return;
-		    js = d.createElement(s); js.id = id;
-		    js.src = "https://connect.facebook.net/en_US/sdk.js";
-		    fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
-		  function testAPI() {
-		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me', function(response) {
-		        $("#facebookId").val(response.name);
-		        $("#facebookForm").submit();
-		    });
-		  }
-		 */
-		//============= FaceBook 로그인 =============
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=1974223106165873';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'))
-		//============= kakao 로그인 =============
+			
+				
+
 	</script>		
 	
 </head>
@@ -233,6 +147,9 @@
 							<label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해 주세요.">
+								<c:if test="${systemMessage == 'IdError'}">
+									아이디가 잘못되었소이다
+								</c:if>
 							</div>
 						</div>
 
@@ -240,6 +157,9 @@
 							<label for="password" class="col-sm-4 control-label">PASSWORD</label>
 							<div class="col-sm-6">
 								<input type="password" class="form-control" name="password"	id="password" placeholder="비밀번호를 입력해 주세요">
+								<c:if test="${systemMessage == 'pwError'}">
+									비밀번호가 잘못되었소이다
+								</c:if>
 							</div>
 						</div>
 

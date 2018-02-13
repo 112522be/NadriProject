@@ -88,8 +88,8 @@ public class TripController {
 		
 		
 		
-		return "forward:/Trip/listTrip.jsp";
-		//return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
+		//return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")
@@ -133,7 +133,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	
@@ -164,7 +164,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	@RequestMapping(value="/listExperience")
@@ -193,7 +193,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 
 	@RequestMapping(value="/listTradition")
@@ -222,7 +222,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 	
 	@RequestMapping(value="/getTheme")
@@ -243,7 +243,7 @@ public class TripController {
 		map.put("pageNo", pageNo);
 		
 		
-		return "forward:/Trip/listTrip.jsp";
+		return "forward:/Trip/listTrip2.jsp";
 	}
 	
 }

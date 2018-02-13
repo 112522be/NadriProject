@@ -62,10 +62,10 @@
 	
 	<select id="listWish" parameterType="string" resultMap="WishSelectMap">
 		SELECT
-			wish_no, 
+			wish_no,
 			user_id, 
 			trip_no, 
-			post_no,
+			post_no
 		FROM wish
 		WHERE user_id = #{userId}	
 	
