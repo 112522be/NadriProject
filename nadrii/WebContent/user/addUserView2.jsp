@@ -221,7 +221,7 @@ function check(){
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${facebookId}" oninput="checkId();" autofocus>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" oninput="checkId();" autofocus>
 		      <span id = "chkMsg"></span>
 		    </div>
 			<div id="htmlId"></div>

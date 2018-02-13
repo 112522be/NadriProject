@@ -49,7 +49,8 @@
 				}
 	
 				fncLoginCheck(id, pw);
-				
+				//alert(id);
+				//alert(pw);
 //				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
@@ -82,7 +83,7 @@
 		$( function() {
 			$(".btn.btn-primary:contains('로 그 인')").bind("click" , function() {
 				fncLoginCheck();
-				self.close();
+				//self.close();
 				//self.location = "/user/findPasswordPg"
 			});
 		});
@@ -97,17 +98,19 @@
 		
 		//========== fncLoginProc Event 처리 ==========
 		function fncLoginCheck(id, pw) {
-//			var userId = $("#userId").val();
-//			var password = $("#password").val();
-			
-			var loginData = "userId=" + id + "&password=" + pw;
-			
+			//var userId = $("#userId").val();
+			//var password = $("#password").val();
+			var frmData = $("#frm").serialize();
+			//var loginData = "userId=" + id + "&password=" + pw;
+			//alert(loginData);
 			$.ajax({
 				url : "/user/json/loginCheck",
 				type : "POST",
-				data : loginData,
+				data : frmData,
+				async: false,
+				dataType : "json",
 				success : function(result){
-					if(result.msg == "failed"){
+					if(result.msg == "ositifailed"){
 						alert("등록된 아이디가 없습니다.");
 						location.href="/index.jsp";
 					}
@@ -170,8 +173,7 @@
 			        $("#birthday").text(response.birthday);
 			        $("#id").text(response.id);
 			        alert(encodeURI(JSON.stringify(response)));
-			        window.opener.location.href="/user/addUserFacebook?" + encodeURI(JSON.stringify(response));
-			        self.close();
+			        location.href="/user/addUserFacebook?" + encodeURI(JSON.stringify(response));
 					 }
 					 )
 					
@@ -250,7 +252,7 @@
 						<img src="http://cdn.firespring.com/images/90349557-f83b-4af1-a134-ef1b43293823.png" />
 					</h1> -->
 
-					<form class="form-horizontal">
+					<form id="frm" name="frm" class="form-horizontal">
 
 					<div>
 						<div class="form-group">
@@ -317,8 +319,8 @@
 									    ></div> -->
 									</div>
 
-								<div class="fb-login-button" data-width="300px" data-height="49px" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-								
+								<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" ></div>
+								</fb:login-button>
 								<div id="status"></div>
 								<!--  facebook login end -->
 								
@@ -330,13 +332,11 @@
 							<!-- kakao ligin 
 							<a href="https://kauth.kakao.com/oauth/authorize?client_id=d4e94f0de61668f5bbbb2f58170b7891&redirect_uri=http://192.168.0.56:8081/oauth&response_type=code" class="kakaoLoginBtn"><img src="../images/kakao_account_login_btn_medium_narrow.png"></a>
 							-->
-						<div style="margin-top:11px;">	
-	  						<a id="custom-login-btn"  href="javascript:loginWithKakao()">
-							<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300" height="40px"/>
-							<input type="hidden"  id="kakao-login-btn" name="kakaotocken" value="0">
-							<!-- id="kakaotocken" -->
-							</a>
-						</div>	
+							
+  						<a id="custom-login-btn"  href="javascript:loginWithKakao()">
+						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
+						<input type="hidden" id="kakaotocken" name="kakaotocken" value="0">
+						</a>
 					    <script type='text/javascript'>
 					      //<![CDATA[
 					        // ?ъ?⑺?? ?깆?? JavaScript ?ㅻ?? ?ㅼ???? 二쇱?몄??.
@@ -352,27 +352,15 @@
 //					             alert(JSON.stringify(err));
 //					          }
 //					        });
-					        
-					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9'); 
-					        //여기서 아까 발급받은 키 중 javascript키를 사용해준다. 
-					        // 카카오 로그인 버튼을 생성합니다. 
-					        Kakao.Auth.createLoginButton({ 
-					        	container: '#kakao-login-btn', 
-					        	success: function(authObj) { alert(JSON.stringify(authObj)); 
-					        	}, 
-					        	fail: function(err) { 
-					        		alert(JSON.stringify(err)); 
-					        	} 
-					        	});
-
-							/* function setCookie( name , value , expired ){
+					        /* 濡?洹몄?? 愿??? 荑??? ????  
+							function setCookie( name , value , expired ){
 							 
 							 var date = new Date();
 							 date.setHours(date.getHours() + expired);
 							 var expried_set = "expries="+date.toGMTString();
 							 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
 							 
-							}
+							}*/
 							
 							function setCookie( name , value , expired ){
 								 
@@ -380,7 +368,7 @@
 								 date.setHours(date.getHours() + expired);
 								 var cookieValue = escape(value) + ((exdys==null) ? "" : "; expires=" + exdate.toGMTString());
 								 document.cookie = name + "=" + cookieValue;
-								} */				        
+								}					        
 					        
 							/*	荑??? 遺??ъ?ㅺ린
 					        function getCookie(name){
@@ -400,9 +388,9 @@
 							        }
 							        
 							        return "";
-							}
+							}*/
 							
-							/*  function getCookie(name){
+							function getCookie(name){
 								 
 							    nameofCookie = name + "=";
 							    var cookieDate = document.cookie
@@ -417,6 +405,7 @@
 							    return unescape(cookieValue);
 							}
 							
+					        //	濡?洹몄?? 援ы?? ???? 遺?遺?
 					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
 					        function loginWithKakao() {
 					          // 濡?洹몄?? 李쎌?? ????????.
@@ -431,11 +420,11 @@
 					                  success: function(authObj) {
 					                      setCookie("kakao_login","done",1); // 荑??ㅼ???? (濡?洹몄??)
 					                      //alert(cookiedata);
+					                      $('#kakaoName').val(res.properties.nickname);
 										  $('#kakaoId').val(res.id);
 										  $('#kakaoEmail').val(res.email);
 					                      createLogoutKakao();
-					                      window.opener.location.href="/user/addUserKakao?" + encodeURI(JSON.stringify(response));
-					  			        self.close();
+					                      window.location.href="/user/addUserView";
 					                  },
 					                      fail: function(err) {
 					                       alert(JSON.stringify(err));
@@ -455,10 +444,49 @@
 					        	 var expried_set = "expries="+date.toGMTString();
 					        	 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
 					        	 
-					        	}  */
+					        	}
 					        
 					        ////////////////////////////////////////////////////////////
 					        
+				        /* Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
+					        function loginWithKakao() {
+					          // 濡?洹몄?? 李쎌?? ????????.
+					          Kakao.Auth.createLoginButton({
+   								container: '#kakao-login-btn',
+   					//           Kakao.Auth.login({
+					            success: function(authObj) {
+					           	 Kakao.API.request({
+					            	       url: '/user/loginView',
+					            	 success: function(res) {
+
+					                     alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+
+					                     alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+
+					                     console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+
+					                     console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
+
+					                     console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+
+					                 // res.properties.nickname으로도 접근 가능 )
+
+					                     console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
+
+					                   }
+
+					                 })
+
+					               },
+
+					               fail: function(error) {
+
+					                 alert(JSON.stringify(error));
+
+					               }
+
+					             });
+					          }	 */
 					        </script>
 							<!-- kakao ligin end-->
 

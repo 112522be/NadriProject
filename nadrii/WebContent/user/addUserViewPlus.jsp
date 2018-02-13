@@ -30,6 +30,7 @@
        body > div.container{
         	border: 3px solid #D6CDB7;
             margin-top: 10px;
+            border:none;
         }
         
         .container-fluid {
@@ -45,7 +46,7 @@
 	
 		// 생일
 		 $( function() {
-			    $( "#datepicker" ).datepicker();
+			    $( ".datepicker" ).datepicker();
 			  } );
 		 
 		 
@@ -150,8 +151,8 @@
 		
 		// ===== '추가' 버튼 처리 =====
 		$(function() {
-	            $("button:contains('추 가')").bind('click', function(){
-	            	addUserPlus();
+	            $("button.btn.btn-info.cancelbtn").on('click', function(){
+	            	fncAddUserPlus();
 	            })
 	        });
 		 
@@ -162,25 +163,21 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">추 가 정 보 입 력</h1>
+		<h1 class="bg-primary text-center" style="background:#fff; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">추 가 정 보 입 력</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" action="addUserPlus">
+		<form class="form-horizontal" action="addUserPlus" style="padding-top:50px;">
 		
 		  <div class="form-group">
-		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생 년 월 일</label>
+		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label" >생 년 월 일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="datepicker" name="birth" placeholder="생 년 월 일">
+		      <input type="text" class="form-control datepicker" id="birth" name="birth" placeholder="생 년 월 일" style="border-radius: 25px;">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
@@ -198,7 +195,7 @@
 		  <div class="form-group">
 		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀수</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수">
+		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
@@ -206,22 +203,22 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label><input type="radio" name="gender" value="남">남</label>
-			  <label><input type="radio" name="gender" value="여">여</label>
+		      <label style="padding-right: 60px"><input type="radio" name="gender" value="남"style="margin-right: 5px;">남</label>
+			  <label><input type="radio" name="gender" value="여" style="margin-right: 5px;">여</label>
 		    </div>
 		   </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
 		     <div class="col-sm-2">
-		      <select class="form-control" name="phone1" id="phone1">
+		      <select class="form-control" name="phone1" id="phone1" style="border-radius: 25px;">
 				  	<option value="010" >010</option>
 					<option value="011" >011</option>
 					<option value="016" >016</option>
@@ -230,10 +227,10 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <input type="hidden" name="phone"/>
 		  </div>
@@ -243,7 +240,7 @@
 			  <div class="col-sm-2">
 				  <form id="form" runat="server">
 				    <input type="file" id="imgInput"/>
-				    <img id="image_section" src="#" alt="your image" />
+				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" name="profiIeimageFile"/>
 				</form>
 		     </div>

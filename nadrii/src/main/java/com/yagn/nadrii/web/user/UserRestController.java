@@ -1,20 +1,7 @@
 package com.yagn.nadrii.web.user;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,19 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.user.UserService;
@@ -58,16 +39,18 @@ public class UserRestController extends SupportController {
 	 * @return
 	 * @throws Exception
 	 */
-	
-	
 	@RequestMapping(value="json/loginCheck", method=RequestMethod.POST)
-	public Map<String, Object> loginCheck( 
-			@ModelAttribute("user") User user,
-			HttpServletRequest request
-			) {
+	@ResponseBody
+	public Map<String, Object> loginCheck( 	@ModelAttribute("user") User user,
+			HttpServletRequest request, HttpServletResponse response	){
 		
-		System.out.println("/json/loginCheck : POST");
 		
+		System.out.println("json/loginCheck : POST");
+		String userId= request.getParameter("userId");
+		String password= request.getParameter("password");
+		System.out.println("userId : "+userId);
+		System.out.println("password : "+password);
+		user.setUserId(userId);
 		User loginUser = new User();
 		
 		Map<String, Object> map =new HashMap<String, Object>();
@@ -76,9 +59,6 @@ public class UserRestController extends SupportController {
 			loginUser = userService.loginCheck(user);
 			
 			System.out.println("\n[1]::" + loginUser.toString());
-
-
-         map = new HashMap<String, Object>();
 
 
 			if (loginUser.getUserId() == null) {
@@ -102,24 +82,23 @@ public class UserRestController extends SupportController {
 	}
 	
 	/**
-	 * ���̵� �ߺ�üũ
+	 * 아이디 중복체크
 	 * @param userId
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "checkId", method=RequestMethod.POST)
+	@RequestMapping(value = "json/checkId", method=RequestMethod.POST)
 	//@ResponseBody
-    public Map idCheck(String userId, Model model) throws Exception {
+    public Object idCheck(String userId, Model model) throws Exception {
 
-      System.out.println("[check]");
-      System.out.println("[UserId check]==>]" + userId);
-      
-      Map<String, String> map = new HashMap<String, String>();
-      int check = userService.checkId(userId);
+		System.out.println("[check]");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		int check = userService.checkId(userId);
 
-      map.put("check", String.valueOf(check));
-      return map;
+		map.put("check", String.valueOf(check));
+		return map;
     }
 
 	
