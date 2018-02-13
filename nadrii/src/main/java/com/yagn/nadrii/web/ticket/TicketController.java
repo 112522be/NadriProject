@@ -94,6 +94,7 @@ public class TicketController {
 		@RequestParam("contentId") int contentId,	
 		@RequestParam("contentTypeId") int contentTypeId,
 		@RequestParam("title") String encodeTitle,
+		HttpSession session,
 		Map<String, Object> map
 			) {
 		
@@ -102,6 +103,7 @@ public class TicketController {
 		DetailIntro detailIntro = new DetailIntro();
 		DetailImage detailImage = new DetailImage();
 		TourTicket tourTicket = new TourTicket();
+		User user = new User();
 		
 		try {
 
@@ -112,11 +114,12 @@ public class TicketController {
 
 			System.out.println("\n\n[entrance Fee check] ==> " + detailIntro.getUsetimefestival());
 			
-			
 			tourTicket = new TourTicket();
 			tourTicket.setTitle(decodeTitle);
 			tourTicket.setContentid(contentId);
 			tourTicket.setContenttypeid(contentTypeId);
+			
+			user = (User) session.getAttribute("loginUser");
 			
 			System.out.println("\n\n[1]==> " + detailIntro.toString());
 			System.out.println("\n\n[2]==> " + detailImage.toString());
@@ -126,6 +129,7 @@ public class TicketController {
 			System.out.println(e);
 		}
 		
+		map.put("user", user);
 		map.put("detailIntro", detailIntro);
 		map.put("detailImage", detailImage);
 		map.put("tourTicket", tourTicket);

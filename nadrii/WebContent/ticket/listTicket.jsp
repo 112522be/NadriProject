@@ -26,8 +26,6 @@
 
 
 
-
-
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 	function fncGetList(pageNo) {
@@ -152,6 +150,10 @@
 .buttonBox{
 	margin-top:10px;
 }
+
+.mini-post header {
+	height: 210px;
+}
 </style>
 
 </head>
@@ -190,9 +192,9 @@
 
 					<hr />
 					<section>
-						<div class="row uniform">
+						<div class="row">
 							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
-								<div class="col-xs-3">
+								<div class="col-xs-3$ col-md-3$ col-sm-3">
 									<!-- Mini Posts -->
 									<section>
 										<div class="mini-posts">
@@ -213,10 +215,8 @@
 
 												</header>
 												<p class="text-right">조회수 : ${ tt.readcount }&nbsp;&nbsp;</p>
-												<a href="#" class="image"> 
-													<img src="${ tt.firstimage }" alt="" />
-												</a>
-
+												
+												<a href="#" class="image"><img src="${ tt.firstimage }" alt="" /></a>
 											</article>
 										</div>
 									</section>
