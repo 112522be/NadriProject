@@ -187,7 +187,7 @@
 					<section>
 						<div class="row">
 							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
-								<div class="col-xs-3">
+								<div class="col-xs-3$ col-md-3$ col-sm-3">
 									<!-- Mini Posts -->
 									<section>
 										<div class="mini-posts">

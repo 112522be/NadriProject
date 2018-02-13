@@ -14,34 +14,36 @@
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// 
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	-->
-	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
-	<!-- DatePicker -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css">  -->
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	
 	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
-	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->	
+	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" />
 	<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
 	
 	
+	<!--  ///////////////////////// DatePicker ////////////////////////// --> 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 	footer a {
-		color: #656565;
+	<style type="text/css">
+	.image.featured img {
+    	width: 846px;
+    	width: 343.42px;
 	}
 	
-    </style>
+	</style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -99,7 +101,6 @@ function fncAddBooking() {
 
 <body class>
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	<div id="wrapper">
    	
@@ -116,23 +117,47 @@ function fncAddBooking() {
 						<p>관람등급 : ${ detailIntro.agelimit }</p>
 					</div>
 					<div class="meta">
-						<time class="published" datetime="2015-11-01">November 1,
-							2015</time>
-						<a href="#" class="author"><span class="name">Jane Doe</span><img
-							src="/resources/imperfect/images/avatar.jpg" alt=""></a>
+						<time class="published" datetime="2015-11-01">
+							November 1,	2015
+						</time>
+						<a href="#" class="author">
+							<span class="name">
+							<c:if test="${ user.userName eq null }">
+								${ user.userId }
+								<c:if test="${ user.userId eq null }">
+									Guest
+								</c:if>	
+							</c:if>	
+							</span>
+							<img src="/resources/imperfect/images/avatar.jpg" alt="" />
+						</a>
 					</div>
 				</header>
-				<a href="#" class="image featured"><img
-					src="/resources/imperfect/images/pic01.jpg" alt=""></a>
-				<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus
-					nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor
-					magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies
-					mi non congue ullam corper. Praesent tincidunt sed tellus ut
-					rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies
-					congue gravida diam non fringilla.</p>
-				<footerB>
+				<!-- 
+				<span class="image fit"><img src="${ detailImage.originimgurl }" alt=""></span>
+				 -->	
+				<a href="#" class="image featured"><img src="${ detailImage.originimgurl }" alt=""></a>
+					<ul>
+						<li>행사기간 : ${ detailIntro.playtime }</li>
+						<li>행사장소 : ${ detailIntro.eventplace }</li>
+						<li>축제등급 : ${ detailIntro.festivalgrade }</li>
+						<li>행사장 위치 안내 : ${ detailIntro.placeinfo }</li>
+						<li>관람 소요시간 : ${ detailIntro.spendtimefestival }</li>
+						<li>부대행사 : ${ detailIntro.subevent }</li>
+						<hr>
+						<li>주최 : ${ detailIntro.sponsor1 } / ${ detailIntro.sponsor2 }</li>
+						<li>주관사 연락처 ① : ${ detailIntro.sponsor1tel }</li>
+						<li>주관사 연락처 ② : ${ detailIntro.sponsor2tel }</li>
+						<hr>
+						<li>행사 홈페이지 : ${ detailIntro.eventhomepage }</li>
+						<li>할인정보 : ${ detailIntro.discountinfofestival }</li>
+						<hr>
+						<li>이용요금 : ${ detailIntro.usetimefestival }</li>
+					</ul>
+
+					<footerB>
 					<ul class="actions">
-						<li><a href="#" class="button big">Continue Reading</a></li>
+						<li><a href="#" class="button big">예매하기 / 장바구니 담기</a></li>
 					</ul>
 					<ul class="stats">
 						<li><a href="#">General</a></li>
