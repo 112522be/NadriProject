@@ -69,6 +69,7 @@
    	
    	
    	<mvc:resources mapping="/resources/**" location="/resources/" />
+   	<mvc:resources mapping="/imperfect/**" location="/imperfect/" />
    	
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 

@@ -13,11 +13,19 @@
 <title>나들이 티켓 목록</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
 <!--  ///////////////////////// imperfect templete ////////////////////////// -->
 <!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="/resources/imperfect/assets/css/main2.css" />
 <!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
 <!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+
+
+
+	
+
 
 
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -108,9 +116,13 @@
 
 <body>
 
+
+
+
 		<!-- Wrapper -->
 			<div id="wrapper">
 
+		<!-- ///////////////////////////// Toolbar Start /////////////////////////////// -->
 				<!-- Header -->
 					<header id="header">
 						<h1><a href="#">N A D R I I</a></h1>
@@ -187,7 +199,8 @@
 							</section>
 
 					</section>
-
+	<!-- /////////////////////////// Toolbar ///////////////////////////////////////////////// -->	
+	
 				<!-- Main -->
 					<div id="main">
 						<!-- Post -->
@@ -220,6 +233,12 @@
 										<li><a href="#" class="icon fa-comment">128</a></li>
 									</ul>
 								</footer>
+								<!-- PageNavigation을 위한 값을 보내는 부분  -->
+								<input type="hidden" name="contentId" value="${ tt.contentid }">
+								<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
+								<input type="hidden" name="title" value="${ tt.title }">
+								<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+								<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
 							</article>
 							</c:forEach>
 							
@@ -265,6 +284,12 @@
 											<a href="#" class="image">
 												<img src="${ tt.firstimage }" alt="" />
 											</a>
+											<!-- PageNavigation을 위한 값을 보내는 부분  -->
+								<input type="hidden" name="contentId" value="${ tt.contentid }">
+								<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
+								<input type="hidden" name="title" value="${ tt.title }">
+								<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+								<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
 										</article>
 										</c:forEach>
 
@@ -283,6 +308,12 @@
 												<time class="published" datetime="">조회수 : ${ tt.readcount }</time>
 											</header>
 											<a href="#" class="image"><img src="${ tt.firstimage }" alt="" /></a>
+											<!-- PageNavigation을 위한 값을 보내는 부분  -->
+								<input type="hidden" name="contentId" value="${ tt.contentid }">
+								<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
+								<input type="hidden" name="title" value="${ tt.title }">
+								<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+								<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
 										</article>
 									</li>
 										</c:forEach>
@@ -311,6 +342,10 @@
 							</section>
 
 					</section>
+					
+					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+					<input type="hidden" id="pageNo" name="pageNo" value="" /> 
+					<input type="hidden" name="searchCondition" id="searchCondition" value="">
 
 			</div>
 
@@ -322,100 +357,6 @@
 			<script src="/resources/imperfect/assets/js/main.js"></script>
 
 	</body>
-
-<body>
-
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-		<div id="main">
-
-				<div class="page-header text-right">
-					<h3>나들이 티켓</h3>
-					<h5 class="text-muted">
-						조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.
-					</h5>
-				</div>
-
-				<!-- form Start /////////////////////////////////////-->
-				<form class="form-horizontal">
-
-				<ul class="actions fit">
-					<li><a href="#" class="button fit">제목순</a></li>
-					<li><a href="#" class="button fit">조회순</a></li>
-					<li><a href="#" class="button fit">수정일순</a></li>
-					<li><a href="#" class="button fit">생성일순</a></li>
-				</ul>
-
-
-
-				<div class="col-md-12 text-right">
-						<p class="text-primary">&lt; 현재 ${ resultPage.pageNo } 페이지 /
-							전체 ${ resultPage.totalCount } 건수 &gt;</p>
-					</div>
-
-					<hr />
-					<section>
-						<div class="row uniform">
-							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
-								<div class="col-sm-3">
-									<!-- Mini Posts -->
-									<section>
-										<div class="mini-posts">
-
-											<!-- Mini Post -->
-											<article class="mini-post">
-												<header>
-													<h4>${ num.count }.</h4>
-
-													<time class="published" datetime=""> 기&nbsp;간 : ${ tt.eventstartdate }
-														~ ${ tt.eventenddate } </time>
-													<a href="#" class="author">
-														<img src="/resources/imperfect/images/pic08.jpg" alt="" /></a>
-													<ul class="actions vertical small">
-														<li><a href="#" class="button small fit">상세조회</a></li>
-													</ul>
-
-												</header>
-												<p class="text-right">조회수 : ${ tt.readcount }&nbsp;&nbsp;</p>
-												<a href="#" class="image"> 
-													<img src="${ tt.firstimage }" alt="" />
-												</a>
-
-											</article>
-										</div>
-									</section>
-								</div>
-
-								<!-- PageNavigation을 위한 값을 보내는 부분  -->
-								<input type="hidden" name="contentId" value="${ tt.contentid }">
-								<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
-								<input type="hidden" name="title" value="${ tt.title }">
-								<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
-								<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
-
-							</c:forEach>
-						</div>
-					</section>
-
-					<hr />
-					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-					<input type="hidden" id="pageNo" name="pageNo" value="" /> 
-					<input type="hidden" name="searchCondition" id="searchCondition" value="">
-
-				</form>
-				<!-- form End /////////////////////////////////////-->
-
-			</div>
-			<!--  화면구성 div End /////////////////////////////////////-->
-	</div>
-
-
-
-	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_openApi.jsp" />
-	<!-- PageNavigation End... -->
-
-	
-</body>
+ 
 
 </html>
