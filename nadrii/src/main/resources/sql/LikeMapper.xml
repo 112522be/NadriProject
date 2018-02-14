@@ -16,7 +16,7 @@
 	<insert id="addLike"		parameterType="like" >
 	 	INSERT
 		INTO likes ( like_no, post_no, user_id, reg_date ) 
-		VALUES (	seq_likes_like_no.nextval, #{postNo}, #{userId}, #{regDate} )
+		VALUES (	seq_likes_like_no.nextval, #{postNo}, #{userId}, SYSDATE )
 	</insert>
 		
 	<delete id="deleteLike"		parameterType="like">
@@ -45,11 +45,17 @@
 					 ) countTable		
 	 </select>
 	 
-	 <select  id="getLikeCount"  parameterType="like"	 resultType="int">
+	 <select id="getLikeUserList"		parameterType="Search"	resultMap="likeSelectMap">
+		SELECT like_no, post_no, user_id, reg_date
+		FROM likes
+		WHERE post_no = #{searchKeyword}
+	</select>
+	 
+	 <select  id="getLikeCount"  parameterType="Search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT like_no, post_no, user_id, reg_date
 					FROM likes
-					WHERE post_no = #{postNo}
+					WHERE post_no = #{searchKeyword}
 					 ) countTable		
 	 </select>
 	

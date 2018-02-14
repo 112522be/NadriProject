@@ -26,24 +26,19 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
-
 <!-- css -->
+
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
 	<link href="/resources/css/flexslider.css" rel="stylesheet" />
 	<link href="/resources/css/style.css" rel="stylesheet" />
 	<!-- Theme skin -->
-	
+
 	<link href="/resources/skins/default.css" rel="stylesheet" />
-
-	<!-- //////////////////// CSS //////////////////// -->
-
 	<style type="text/css">
-
 		.container {
 			padding: 20px;
         }
-
 	</style>
 
 	<script type="text/javascript">
@@ -56,6 +51,7 @@
 	});
 
 	$( function() {
+
 		console.log("세션 정보 : ${session}")
 		
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
@@ -64,28 +60,28 @@
 
 	});
 
+
 	$( function() {
+
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
       		self.location = "/message/listMessage"
         });
     });
 	
+
 	//============= "장바구니" 화면이동 =============
     $( function() {
-       $(".glyphicon.glyphicon-shopping-cart").bind("click" , function() {
-
-//      	 alert("장바구니")
-          self.location = "/purchase/listBasket"
+       $("a[href='#']:contains('Logout')").bind("click" , function() {
+			alert("나갈거임");
+	        self.location = "/user/logout";
        });
     });
-	
-	
-	
 	
 	</script>
 	
 </head>
+
 
 
 <body>
@@ -109,31 +105,40 @@
 					<ul class="nav navbar-nav navbar-right">
 					<c:if test="${ ! empty loginUser }">
 							<li>
-								<a href="#">
+								<a href="/user/getUser?userId=${loginUser.userId}">
+								<img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px">
 								<span>
 									<c:if test="${ loginUser.userName eq null }">
 										${ loginUser.userId }
 									</c:if>
 										${ loginUser.userName }
-										님 환영합니다.
+										님
 								</span>
 								</a>
 							</li>
 							<li>
-								<a href="#">
-									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+								<a href="/purchase/listBasket">
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="장바구니"></span>
+								</a>
+							</li>
+							<li>
+								<a href="/purchase/listPurchase">
+									<span class="glyphicon glyphicon-qrcode" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="구매한티켓"></span>
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"
+										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
 								</a>
 							</li>
-							<li><a href="/user/getUser?userId=${loginUser.userId}">MyPage</a></li>
+							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
 							<li><a href="/user/logoutProc">Logout</a></li>
 						</c:if>
 						<c:if test="${  empty loginUser }">
-							<li><a href="/user/loginView.jsp">Login</a></li>
+							<li><a href="/user/loginView.jsp" >Login</a></li>
 							<li><a href="/user/addUserView.jsp">Join</a></li>
 						</c:if>
 					</ul>
@@ -154,7 +159,7 @@
 								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
 							</ul>
 						</li>
-						<li><a href="#">나들이 티켓</a></li>
+						<li><a href="/ticket/listTicket">나들이 티켓</a></li>
 						<li><a href="/group/listGroup">나들이모임</a></li>
 					</ul>
 				</div>
@@ -162,4 +167,5 @@
 		</nav>
 		<!-- navbar End -->
 </body>
+
 </html>

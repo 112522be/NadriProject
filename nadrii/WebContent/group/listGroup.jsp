@@ -18,7 +18,7 @@
 	
 function fncGetList(currentPage){
 	$("#currentPage").val(currentPage);
-	$("form .search").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
+	$("form").attr("method" , "POST").attr("action" , "../group/listGroup").submit();
 }
 
 function a(){
@@ -26,6 +26,12 @@ function a(){
 }
 
 $(function(){
+	
+	$("#searchKeyword").keypress(function(e){
+		if(e.which==13){
+			fncGetList();
+		}
+	})
 	
 	$("#write").bind("click", function(){
 		self.location="../group/addGroup";
@@ -58,7 +64,7 @@ $(function(){
 	$('[data-toggle="popover"]').popover(
 			{ html: true,
 			 container: 'body',
-			 content: '<a href="#" class="profile" onclick="javascript:clickProfile()">프로필 조회<span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage()"> 쪽지 보내기</a>',
+			 content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 			 placement: 'bottom',
 			 }
 			);	
@@ -82,10 +88,6 @@ function getIndex(k){
 
 </script>
 
-
-
-
-
 </head>
 <body>
 	<header>
@@ -93,35 +95,40 @@ function getIndex(k){
 	</header>
 	<div id="main">
 		<section id="portfolio" class="two">
-			<div class="container">
+			<div class="container" style="padding: 10px 10px 10px 10px !important;">
 			<section style="position: relative;">
-				<form class="search">
-					<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" placeholder="Search" />
+				<form class="search" method="post" action="../group/listGroup">
+					<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ''}" placeholder="Search"/>
 				</form>
 			</section>
-			<a href="#" id="write" class="button small write" style="position: relative; float:left; margin-top: -7px; margin-left: 6px;">write</a>
+			<a href="#none" id="write" class="button small write" style="font-size: 13px; position: relative; float:ri; margin-top: -7px; margin-left: 6px;">write</a>
 				<div class="row">
 					<c:set var="i" value="0" />
 					<c:forEach var="group" items="${list}">
 						<c:set var="i" value="${ i+1 }" />
 						<div class="3u 12u$(mobile)">
 							<article class="item">
-								<a href="#" class="image fit">
+								<a href="#none" class="image fit">
 								<input type="hidden" id="groupNo" value="${group.join.groupNo}">
 								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
+
 									<h3>
-										<a href="#">${group.title}</a>
+										<a href="#none">${group.title}</a>
 									</h3>
+
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
-									<span class="author">
-										<img src="../resources/assets/images/avatar.jpg" alt="" />
-									</span>
-									<a href="#" class="author">
-										<input type="hidden" id="userId" value="${group.join.userId}">
-										<h5 class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">${group.join.userId}</h5>
-									</a>
+									<time class="published" style="position: relative; padding-left: 100px; margin-top: -38px"> view : ${group.viewCount}</time>
+									<div>
+										<span class="author">
+											<img src="../resources/assets/images/avatar.jpg" alt="" />
+										</span>
+										<a href="#none" class="author">
+											<input type="hidden" id="userId" value="${group.join.userId}" style="position: relative;">
+											<h5 class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">${group.join.userId}</h5>
+										</a>
+									</div>
 								</header>
 							</article>
 						</div>

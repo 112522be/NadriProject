@@ -17,7 +17,7 @@ public class User {
 	private Date regDate;
 	private String birth;
 	private String profileImageFile;
-	private String qrcode;
+	private String qrCode;
 	private String children;
 	private String gender;
 
@@ -28,8 +28,6 @@ public class User {
 	///Constructor
 	public User(){
 	}
-	
-	///Method 
 	public String getUserId() {
 		return userId;
 	}
@@ -59,12 +57,6 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-		/////////////// EL ���� ���� �߰� ///////////
-		if(phone != null && phone.length() !=0 ){
-			phone1 = phone.split("-")[0];
-			phone2 = phone.split("-")[1];
-			phone3 = phone.split("-")[2];
-		}
 	}
 	public String getAddr() {
 		return addr;
@@ -84,39 +76,36 @@ public class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public String getbirth() {
+	public String getBirth() {
 		return birth;
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getprofileimageFile() {
+	public String getProfileImageFile() {
 		return profileImageFile;
 	}
-	public void setProfiIeimageFile(String profileImageFile) {
+	public void setProfileImageFile(String profileImageFile) {
 		this.profileImageFile = profileImageFile;
 	}
-	public String getqrcode() {
-		return qrcode;
-	}
-	public void setQrcode(String qrcode) {
-		this.qrcode = qrcode;
-	}
-	public String getchildren() {
+
+	public String getChildren() {
 		return children;
 	}
 	public void setChildren(String children) {
 		this.children = children;
 	}
-	public String getgender() {
+	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	/////////////// EL ���� ���� �߰��� getter Method ///////////
 	public String getPhone1() {
 		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
 	}
 	public String getPhone2() {
 		return phone2;
@@ -125,35 +114,36 @@ public class User {
 		return phone3;
 	}
 
-	@Override
-	public String toString() {
-		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate + "[profileImageFile]" +profileImageFile
-			+"[qrcode]" +qrcode + "[children]" + children + "[gender]" + gender;
-			
-	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////
-	// JSON ==> Domain Object  Binding�� ���� �߰��� �κ�
-	// POJO �� �߿伺
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
 	
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
+	public String getQrCode() {
+		return qrCode;
 	}
-	
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
-	}
-	/////////////////////////////////////////////////////////////////////////////////////////
 
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+		
 	public String getCheckSuccess() {
 		return checkSuccess;
 	}
-
 	public void setCheckSuccess(String checkSuccess) {
 		this.checkSuccess = checkSuccess;
 	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
+				+ ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate + ", birth="
+				+ birth + ", profileImageFile=" + profileImageFile + ", qrCode=" + qrCode + ", children=" + children
+				+ ", gender=" + gender + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
+				+ ", checkSuccess=" + checkSuccess + "]";
+	}
+	
 }

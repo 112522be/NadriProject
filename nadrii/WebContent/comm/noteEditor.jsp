@@ -112,43 +112,45 @@
  			})
  			
  			$('#inputGroupSuccess1').keydown(function(key) {
+ 				var data = $(this).val().replace(/ /g, '');
  				if(key.keyCode==13){
- 					if($(this).val()==null||$(this).val()==""){
- 						alert("추가하실 해시태그를 입력해주세요");
- 					}else{
- 						var data = $(this).val().trim();
- 	 					$(this).empty();
- 	 					$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data+'</button>&nbsp;');	
+ 					if(data!=""){
+ 		 				$(this).val("");
+ 						$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data+'</button>&nbsp;');
+ 					}else{	
+ 	 					alert("추가하실 해시태그를 입력해주세요");
  					}
  				}
 			})
-		})
-		
-		$('#inputGroupSuccess1').bind('keyup input',function() {
-			var keyword = $('#inputGroupSuccess1').val();
-			$.ajax({
-				url:"/comm/getHashtags",
-				data:{
-					"keyword": keyword
-				},
-				method:"POST",
-				success: function(JSONData) {
-					console.log(JSONData)
-					var availableTags = JSONData
-					$("#inputGroupSuccess1").autocomplete({
-					      source: availableTags
-					 });
-				},
-				error: function() {
-					alert("오류")
+			$('#inputGroupSuccess1').bind('keyup input',function(key) {
+				var keyword = $('#inputGroupSuccess1').val();
+				if(key.keyCode==13){
+					keyword="";
 				}
-			})
+				$.ajax({
+					url:"/comm/getHashtags",
+					data:{
+						"keyword": keyword
+					},
+					method:"POST",
+					success: function(JSONData) {
+						console.log(JSONData)
+						var availableTags = JSONData
+						$("#inputGroupSuccess1").autocomplete({
+						      source: availableTags
+						 });
+					},
+					error: function() {
+						alert("오류")
+					}
+				})
+		 	})
 	 	})
 	</script>
 </head>
 <body>
 		<form name="textForm">
-		<textarea id="summernote" name="text"></textarea>
+		<textarea id="summernote" name="text">${community.text}</textarea>
         <script>
 	        var openDialog = function (uri, name, options, closeCallback) {
 			    var win = window.open(uri, "", options);
@@ -174,15 +176,21 @@
 	    				    var uri = "addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
-	    				    	alert($('#content_pr').val());
-	    				    	alert($('#lat').val());
-	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default" placement="left">'+
-	    									'<div class="col-xs-3" align="left">'+
-	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-	    									'</div>'+
-	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button><p></p>';
-	    				    	$('#summernote').summernote('code', html);
+	    				    	
+	    				    	var content = $('#content_pr').val();
+	    				    	var lat = $('#lat').val();
+	    				    	var lng = $('#lng').val();
+	    				    	if(content == null || content=='' || lat=="," || lng == ","){
+									return;
+	    				    	}else{ 
+	    				    		var html =$('#summernote').summernote('code')+'<br/><div class="accordion"><button type="button" class="btn btn-default">'+
+									'<div class="col-xs-3" align="left">'+
+									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
+									'</div>'+
+									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>'+
+									'<div><div id="map" style="width:500px;height:400px;"></div></div></div><br/><p></p>';
+				    				$('#summernote').summernote('code', html);
+	    				    	}
 						})
 	    			}
 	        	}) 
@@ -216,13 +224,13 @@
 				});
 			});
 		</script>
-		<input type="hidden" name="hashtag">
-		<input type="hidden" name="lat" id="lat">
-		<input type="hidden" name="lng" id="lng">
-		<input type="hidden" name="thumbNailFileName">
+		<input type="hidden" name="hashtag" value="${community.hashtag}">
+		<input type="hidden" name="lat" id="lat" value="${community.lat}">
+		<input type="hidden" name="lng" id="lng" value="${community.lng}">
+		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail"></div>
+		<div id="cndThumbnail"><img id="selectedThumbnail" src="${community.thumbNailFileName}"></div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">

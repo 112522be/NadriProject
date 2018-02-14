@@ -52,7 +52,18 @@ public class LikeServiceImpl implements LikeService{
 		return map;
 	}
 	
-	public int getLikeCount(Like like) throws Exception {
-		return likeDao.getLikeCount(like);
+	public Map<String , Object > getLikeUserList(Search search) throws Exception {
+		
+		List<Like> list= likeDao.getLikeUserList(search);
+		int totalCount = likeDao.getLikeCount(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list );
+		map.put("totalCount", new Integer(totalCount));
+		
+		System.out.println(map);
+		
+		return map;
 	}
 }

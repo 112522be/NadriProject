@@ -142,8 +142,7 @@ public class GroupController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-	//	search.setSearchKeyword(searchKeyword);
-		
+		search.setSearchCondition("0");
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
