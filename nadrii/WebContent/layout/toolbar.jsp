@@ -190,7 +190,34 @@
         });
     });
 	
-
+	//============="login" ==============
+		
+		function validateCheck(){
+			var id = $("#userId").val();
+			var password = $("#password").val();
+			//alert(id+ ":::"+password);
+			
+			if(id == null || id ==""){
+				alert("아이디 입력해라");
+				return;
+			}
+			
+			if(password == null || password=="" ){
+				alert("비번은 쳐야지 그래야 안쳐맞지")
+				return;
+			}
+			
+			$("form").attr("method","POST").attr("action","/user/login").submit();
+		}
+	
+		//============= '로그인' 버튼 클릭 Event 처리 =============
+		$( function() {
+			$(".btn.btn-primary.joinBtn:contains('로 그 인')").bind("click" , function() {
+				alert("로그인");
+				validateCheck();
+			});
+		});
+	
 
 	//============= "장바구니" 화면이동 =============
     $( function() {
