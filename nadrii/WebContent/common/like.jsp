@@ -4,12 +4,12 @@ li > span{
 	color: #555555 !important;
 }
 .block::before{
-	color: #f43d3d !important;
+	color: #F05643 !important;
 }
 </style>
 <script type="text/javascript">
 
-var postNo = $("input[name=postNo]").val();
+var postNo = $("input[name='postNo']").val();
 
 function addLike(){
 	
@@ -70,9 +70,11 @@ $(function(){
 
 </script>
 
-	<footer>
-	<ul class="stats">
-		<li><a href="#none" class="icon fa-heart"><span class="like"></span></a></li>
-		<li><a href="#none" class="icon fa-comment">128</a></li>
-	</ul>
-	</footer>
+<div style="padding: 30px">
+<span style="padding-right: 15px">
+<a href="#none" class="icon fa-heart">&nbsp;<span class="like"></span></a>
+</span>
+<span>
+<a href="#none" class="icon fa-comment">&nbsp;128</a>
+</span>
+</div>

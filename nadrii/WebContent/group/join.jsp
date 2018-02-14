@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.button {
+	    width: 100% !important;
+}
+</style>
 <script>
 
 var groupNo = ${group.join.groupNo};
@@ -117,7 +122,7 @@ function getMemberList(){
 </script>
 </head>
 <body>
-	<table>
+	<table class="default">
 
 		<thead>
 			<tr>
@@ -129,7 +134,7 @@ function getMemberList(){
 		
 		<tfoot>
 			<tr>
-				<td class="joinButtonContainer"></td>
+				<td class="joinButtonContainer" style="padding: 1em 2em 1em 2em;"></td>
 			</tr>
 		</tfoot>
 
