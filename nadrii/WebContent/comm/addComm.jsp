@@ -16,7 +16,7 @@
 			if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
 				alert("로그인 후 이용해주세요")
 				self.location="../user/loginView.jsp"
-			}
+			}펜타토닉스
 		})
 		$('a#submit').bind('click', function() {
 			var hashtags=',';
