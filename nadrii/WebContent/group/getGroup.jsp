@@ -211,15 +211,18 @@ function clickMessage(){
 				</div>
 	
 			</article>
+			<div style="margin-top: -100px; margin-left: -25px; margin-bottom: 100px;">
+			<input type="hidden" name="postNo" value="${group.join.groupNo}">
+			<jsp:include page="../common/comment.jsp"></jsp:include>
+			</div>
+		</div>
+</section>	
+</div>
 	
-	</div>
-	
-	</section>
-	<jsp:include page="../common/comment.jsp"></jsp:include>
-	</div>
 	
 </body>
 <script type="text/javascript">
+
 var lat= '${group.lat}'.replace(",","");
 var lng= '${group.lng}'.replace(",","");
 

@@ -57,7 +57,6 @@
 	<div class="container" align="center">
 		<div>
 			<form name="formData">
-				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
 				<div class="col-xs-11">
 						<input type="text" name="text" class="form-control" rows="3" placeholder="댓글을 입력하세요...">

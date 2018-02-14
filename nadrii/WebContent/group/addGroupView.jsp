@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="3u 6u$(xsmall)">
 					<div class="select-wrapper">
-						<select name="categoryCode">
+						<select name="categoryCode" style="font-size: 13pt;">
 							<option value="">- Category -</option>
 							<option value="1">카테1</option>
 							<option value="2">카테2</option>
@@ -57,10 +57,10 @@
 					</div>
 				</div>
 				<div class="9u 12u$(xsmall)">
-					<input type="text" class="form" name="title" id="title" value="" placeholder="제목" />
+					<input type="text" class="form" style="font-size: 13pt;" name="title" id="title" value="" placeholder="제목" />
 				</div>
 			 </div>
-			 <div>
+			 <div style="padding-top: 10px">
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
 		</form> 
