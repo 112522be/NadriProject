@@ -164,6 +164,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+<input type="hidden" name="postNo" value="${community.postNo}">
 <div id="main">
 <section class="two">
 	<div class="container" style="height: auto;">
@@ -197,13 +198,13 @@ $(function(){
 					</div>
 				</c:if>	
 				<footer>
-					<div class="col-xs-6">
+					<div class="col-xs-4">
 						<ul class="stats">
 							<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
 							<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
 						</ul>
 					</div>
-					<div class="col-xs-6" align="right">
+					<div class="col-xs-8" align="right">
 						<img src="/resources/images/hashtag.png" width="30px" height="30px"><span style="color: gray; font-size: 10pt;">&nbsp;&nbsp;${community.hashtag}</span>
 					</div>
 				</footer>
