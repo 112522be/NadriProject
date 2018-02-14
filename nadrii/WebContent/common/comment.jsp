@@ -12,9 +12,8 @@
 	}
 </style>
 <script type="text/javascript"> 
-	var postNo;
+	var postNo = $('input[name="postNo"]').val();
 	function listComment() {
-		var postNo = $('input[name="postNo"]').val()
 		$.ajax({
 				url:"/common/listCommentByPost",
 				method:"GET",
@@ -40,7 +39,8 @@
 		})
 	}
 	function addComment() {
-		var params = $("form[name=formData]").serialize();
+		var userId = $('input[name="userId"]').val();
+		var text=$('input[name="text"]').val();
 		$.ajax({
 					url:"/common/addComment",
 					dataType:"json",
@@ -48,7 +48,11 @@
 					headers : {
 						"Accept" : "application/json",
 					},
-					data:params,
+					data:{
+						"postNo": postNo,
+						"text": text,
+						"userId": userId
+					},
 					success: function(JSONData) {
 						$('input[name="text"]').val("")
 						$('#commentContainer').empty()      
@@ -134,7 +138,6 @@
 <body onload="listComment()">
 		<div>
 			<form name="formData">
-				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
 				<div class="col-xs-11">
 						<input type="text" name="text" class="form-control" rows="3" placeholder="댓글을 입력하세요...">
