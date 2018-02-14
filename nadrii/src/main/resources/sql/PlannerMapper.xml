@@ -104,11 +104,31 @@
 		WHERE post_no in #{postNo}
 	</select>
 	
+	<update id="updatePlanner" parameterType="planner">
+		UPDATE post
+		<set>
+			title = '${title}',
+			lat = '${lat}',
+			lng = '${lng}',
+			text = '${text}',
+			THUMBNAIL_IMAGE_FILE = '${photo}'
+		</set>
+		WHERE post_no in '${postNo}'
+	</update>
+	
 	<delete id="deletePlanner" parameterType="int">
 		DELETE
 		FROM post
 		WHERE post_no in #{postNo}
 	</delete>
+	
+	<update id="updateViewCount" parameterType="int">
+		UPDATE post
+		<set>
+			view_count = view_count+1
+		</set>
+		WHERE post_no = #{postNo}
+	</update>
 	
  	 
 </mapper>

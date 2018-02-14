@@ -43,7 +43,10 @@
 
 </head>
 <body>
-	<div style="width: 70%; height: 700px; float: left;">
+<div class="container-fulid">
+
+				<div class="row">
+	<div class="col-md-9">
 
 		<div class="map_wrap">
 
@@ -75,8 +78,8 @@
 		</div>
 	</div>
 	<form name="addPlanner">
-		<div style="width: 30%; height: 700px; float: left; overflow: auto">
-			<div class="container-fulid">
+		<div class="col-md-3" >
+			<div class="container-fulid" style="overflow-y:auto">
 
 				<div class="row">
 					<div class="col-md-12">
@@ -113,7 +116,7 @@
 			</div>
 		</div>
 	</form>
-
+</div></div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
