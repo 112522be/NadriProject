@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <!--
 	Helios by HTML5 UP
@@ -10,9 +14,9 @@
 		<meta charset="utf-8" />
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 		
 	</head>
 	<body class="homepage">
@@ -21,7 +25,7 @@
 			<!-- Header -->
 				<div id="header">
 
-					<!-- Inner -->
+					<!-- Inner 
 						<div class="inner">
 							<header>
 								<h1><a href="index.html" id="logo">Helios</a></h1>
@@ -32,8 +36,11 @@
 								<a href="#banner" class="button circled scrolly">Start</a>
 							</footer>
 						</div>
+					-->
+						<jsp:include page="/layout/inner.jsp" />
+				 		 	
 
-					<!-- Nav -->
+					<!-- Nav 
 						<nav id="nav">
 							<ul>
 								<li><a href="index.html">Home</a></li>
@@ -60,6 +67,8 @@
 								<li><a href="no-sidebar.html">No Sidebar</a></li>
 							</ul>
 						</nav>
+					-->
+						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
 
@@ -79,7 +88,7 @@
 					<div class="reel">
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic01.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Pulvinar sagittis congue</a></h3>
 							</header>
@@ -87,7 +96,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic02.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Fermentum sagittis proin</a></h3>
 							</header>
@@ -95,7 +104,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic03.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
 							</header>
@@ -103,7 +112,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic04.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
 							</header>
@@ -111,7 +120,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic05.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Varius magnis sollicitudin</a></h3>
 							</header>
@@ -119,7 +128,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic01.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Pulvinar sagittis congue</a></h3>
 							</header>
@@ -127,7 +136,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic02.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Fermentum sagittis proin</a></h3>
 							</header>
@@ -135,7 +144,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic03.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
 							</header>
@@ -143,7 +152,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic04.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
 							</header>
@@ -151,7 +160,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/helios/images/pic05.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">Varius magnis sollicitudin</a></h3>
 							</header>
@@ -165,7 +174,7 @@
 				<div class="wrapper style2">
 
 					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+						<a href="#" class="image featured"><img src="/resources/helios/images/pic06.jpg" alt="" /></a>
 						<header>
 							<h2><a href="#">Sed massa imperdiet magnis</a></h2>
 							<p>
@@ -200,7 +209,7 @@
 						</header>
 						<div class="row">
 							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="/resources/helios/images/pic07.jpg" alt="" /></a>
 								<header>
 									<h3><a href="#">Gravida aliquam penatibus</a></h3>
 								</header>
@@ -210,7 +219,7 @@
 								</p>
 							</article>
 							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="/resources/helios/images/pic08.jpg" alt="" /></a>
 								<header>
 									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
 								</header>
@@ -220,7 +229,7 @@
 								</p>
 							</article>
 							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="/resources/helios/images/pic09.jpg" alt="" /></a>
 								<header>
 									<h3><a href="#">Magna laoreet et aliquam</a></h3>
 								</header>
@@ -320,22 +329,22 @@
 									</header>
 									<div class="row 25%">
 										<div class="6u">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic10.jpg" alt="" /></a>
 										</div>
 										<div class="6u$">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic11.jpg" alt="" /></a>
 										</div>
 										<div class="6u">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic12.jpg" alt="" /></a>
 										</div>
 										<div class="6u$">
-											<a href="#" class="image fit"><img src="images/pic13.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic13.jpg" alt="" /></a>
 										</div>
 										<div class="6u">
-											<a href="#" class="image fit"><img src="images/pic14.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic14.jpg" alt="" /></a>
 										</div>
 										<div class="6u$">
-											<a href="#" class="image fit"><img src="images/pic15.jpg" alt="" /></a>
+											<a href="#" class="image fit"><img src="/resources/helios/images/pic15.jpg" alt="" /></a>
 										</div>
 									</div>
 								</section>
@@ -377,14 +386,14 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.onvisible.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/resources/helios/assets/js/main.js"></script>
 
 	</body>
 </html>
