@@ -48,8 +48,11 @@
 						</select>
 					</div>
 				</div>
-				<div class="9u 12u$(xsmall)">
+				<div class="6u 12u$(xsmall)">
 					<input type="text" class="form" name="title" id="title" value="" placeholder="제목" />
+				</div>
+				<div class="3u 6u$(xsmall)">
+					<input type="text" class="form" name="groupName" id="groupName" value="" placeholder="모임명" />
 				</div>
 			 </div>
 			 <div>
