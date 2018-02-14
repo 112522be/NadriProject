@@ -7,50 +7,32 @@
 <html lang="ko">
 
 <head>
+<title>나들이 티켓 상세조회</title>
+
 <meta charset="UTF-8">
 
-<title>나들이 티켓 상세조회</title>
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
-	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
-	 <link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" /> 
-	<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
 	
-	<!-- Scripts -->
-	<script src="/resources/imperfect/assets/js/jquery.min.js"></script>
-	<script src="/resources/imperfect/assets/js/skel.min.js"></script>
-	<script src="/resources/imperfect/assets/js/util.js"></script> 
-	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/imperfect/assets/js/main.js"></script> 
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
-	<!--  ///////////////////////// DatePicker ////////////////////////// --> 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<link rel="stylesheet" href="/resources/demos/style.css">
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+ 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script>
+    var jqOld = jQuery.noConflict();
+    jqOld(function() {
+        jqOld("#datepicker" ).datepicker();
+    })
+	</script>
 	
 	
-	
-	
-	
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style type="text/css">
-	
-	</style>
-
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
 // ========== '예매하기 / 장바구니 담기' Event 연결 ==========
@@ -68,6 +50,7 @@ $(function(){
 });
 
 // ========== "DatePicker" Event 연결  ==========
+	
 $(function() {
 	$("#datepicker").datepicker({
 		
@@ -103,119 +86,175 @@ function fncAddBooking() {
 	</script>
 </head>
 
-<body class>
-	<!-- ToolBar Start /////////////////////////////////////-->
-		<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-	<div id="wrapper">
-   	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-		<div id="main">
+<body class="no-sidebar">
+	<div id="page-wrapper">
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-inline">
+		<!-- Header -->
+		<div id="header">
 
-			<input type="hidden" name="title" value="${ tourTicket.title }">
-			<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
-			<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
-			<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
-
-			<article class="post">
+			<div class="inner">
 				<header>
-					<div class="title">
+					<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+				</header>
+			</div>
+					
+				<jsp:include page="/layout/toolbar.jsp" />
+
+		</div>
+
+			
+		<!-- Main -->
+		<div class="wrapper style1">
+		
+		<input type="hidden" name="title" value="${ tourTicket.title }">
+		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
+		<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
+		<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
+		
+			<div class="container">
+				<article id="main" class="special">
+					<header>
 						<h2>
 							<a href="#">${ tourTicket.title }</a>
 						</h2>
-						<p>관람등급 : ${ detailIntro.agelimit }</p>
-					</div>
-					<div class="meta">
-						<time class="published" datetime="2015-11-01">
-							November 1,	2015
-						</time>
-						<a href="#" class="author">
-							<span class="name">
-								${ user.userName } 
-							<c:if test="${ user.userName eq null }">
-								${ user.userId }
-								<c:if test="${ user.userId eq null }">
-									Guest 
-								</c:if>	
-							</c:if>	
-							&nbsp;님
-							</span>
-							<img src="/resources/imperfect/images/avatar.jpg" alt="" />
-						</a>
-					</div>
-				</header>
-				<span class="image right"><img src="${ detailImage.originimgurl }" alt=""></span>
-				<!-- 
-				<a href="#" class="image"><img src="${ detailImage.originimgurl }" alt=""></a>
-				 -->	
-					<ul>
-						<li>행사기간 : ${ detailIntro.playtime }</li>
-						<li>행사장소 : ${ detailIntro.eventplace }</li>
-						<li>축제등급 : ${ detailIntro.festivalgrade }</li>
-						<li>행사장 위치 안내 : ${ detailIntro.placeinfo }</li>
-						<li>관람 소요시간 : ${ detailIntro.spendtimefestival }</li>
-						<li>부대행사 : ${ detailIntro.subevent }</li>
-						<hr>
-						<li>주 최 ① : ${ detailIntro.sponsor1 } : ${ detailIntro.sponsor1tel }</li>
-						<li>주 최 ② : ${ detailIntro.sponsor2 } : ${ detailIntro.sponsor2tel }</li>
-						<hr>
-						<li>행사 홈페이지 : ${ detailIntro.eventhomepage }</li>
-						<li>할인정보 : ${ detailIntro.discountinfofestival }</li>
-						<hr>
-						<li>이용요금 : ${ detailIntro.usetimefestival }</li>
-						<c:if test="${ detailIntro.usetimefestival ne '무료' }">
-							<li>예매일자 선택</li>
+						<p>
+							관람등급 : ${ detailIntro.agelimit }
+						</p>
+					</header>
+					<a href="#" class="image featured">
+						<img src="${ detailImage.originimgurl }" alt="" style="height: 642.83px;"/>
+					</a>
+					
+					<section>
+						<header><h3>행사정보</h3></header>
+						<p>행사기간 : ${ detailIntro.playtime }</p>
+						<p>행사장소 : ${ detailIntro.eventplace }</p>
+						<p>축제등급 : ${ detailIntro.festivalgrade }</p>
+						<p>행사장 위치 : ${ detailIntro.placeinfo }</p>
+						<p>관람 소요시간 : ${ detailIntro.spendtimefestival }</p>
+						<br>
+						<header><h3>부대행사</h3></header>
+						<p>${ detailIntro.subevent }</p>
+						<p>행사 홈페이지 : ${ detailIntro.eventhomepage }</p>
+						<br>
+						<header><h3>주 최</h3></header>
+						<p>1. ${ detailIntro.sponsor1 } : ${ detailIntro.sponsor1tel }</p>
+						<p>2. ${ detailIntro.sponsor2 } : ${ detailIntro.sponsor2tel }</p>
+						<br>
+						<header><h3>요금정보</h3></header>
+						<p>할인정보 : ${ detailIntro.discountinfofestival }</p>
+						<p>이용요금 : ${ detailIntro.usetimefestival }</p>
+						
+					</section>
+				</article>
+				<hr />
+				
+				<div class="row">
+					<article class="4u 12u(mobile) special">
+						<header>
+							<h3>
+							<c:if test="${ detailIntro.usetimefestival ne '무료' }">
 								<div id="datepicker">
 									<input type="hidden" name="bookingDate" />
 								</div>
-						</c:if>
-					</ul>
+							</c:if>	
+							</h3>
+						</header>
+					</article>
+					<article class="4u 12u(mobile) special">
+						<header>
+							<h3>
+								<a href="#" class="button">
+									<c:if test="${ detailIntro.usetimefestival ne '무료' }">
+										예매하기 / 장바구니 담기
+									</c:if>
+									<c:if test="${ detailIntro.usetimefestival eq '무료' }">
+	  									무료입장가능
+									</c:if>
+								</a>
+							</h3>
+						</header>	
+					</article>
+					<article class="4u 12u(mobile) special">
+						<header>
+							<h3>
+								<a href="#" class="button">
+	  								취 소
+								</a>
+							</h3>
+						</header>
+					</article>
+				</div>
+			</div>
 
-				<footerB>
-					<ul class="actions">
-						<li><a href="#" class="button big">
-						<c:if test="${ detailIntro.usetimefestival ne '무료' }">
-							예매하기 / 장바구니 담기
-						</c:if>
-						<c:if test="${ detailIntro.usetimefestival eq '무료' }">
-	  							무료입장가능
-						</c:if>
-						</a></li>
-					</ul>
-					<ul class="stats">
-						<li>
-							<a href="#">
-								취 소
-							</a>
-						</li>
-						<!-- <li><a href="#" class="icon fa-heart">28</a></li>
-						<li><a href="#" class="icon fa-comment">128</a></li> -->
-					</ul>
-				</footerB>
-			</article>
+		</div>
 
-
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
 				
-	  		
-		<hr/>
-		
-		<br/>
-		
-		</form>
-		<!-- form End /////////////////////////////////////-->
-	
-		</div>
-		</div>
- 	</div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
-	
-	
+				<div class="row">
+					
+				</div>
+				
+				<hr />
+				
+				<div class="row">
+					<div class="12u">
 
+						<!-- Contact -->
+						<section class="contact">
+							<header>
+								<h3>Nisl turpis nascetur interdum?</h3>
+							</header>
+							<p>Urna nisl non quis interdum mus ornare ridiculus egestas
+								ridiculus lobortis vivamus tempor aliquet.</p>
+							<ul class="icons">
+								<li><a href="#" class="icon fa-twitter"><span
+										class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon fa-facebook"><span
+										class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon fa-instagram"><span
+										class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon fa-pinterest"><span
+										class="label">Pinterest</span></a></li>
+								<li><a href="#" class="icon fa-dribbble"><span
+										class="label">Dribbble</span></a></li>
+								<li><a href="#" class="icon fa-linkedin"><span
+										class="label">Linkedin</span></a></li>
+							</ul>
+						</section>
+
+						<!-- Copyright -->
+						<div class="copyright">
+							<ul class="menu">
+								<li>&copy; Untitled. All rights reserved.</li>
+								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+				
+				
+				
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+		<script src="/resources/helios/assets/js/jquery.min.js"></script>
+		<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="/resources/helios/assets/js/skel.min.js"></script>
+		<script src="/resources/helios/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/resources/helios/assets/js/main.js"></script>
 
 </body>
+
 
 </html>
