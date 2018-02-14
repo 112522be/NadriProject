@@ -193,7 +193,7 @@
 						<!-- Post -->
 						<p>현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건</p>
 						
-							<c:forEach var="tt" items="${tourTicket}" begin="0" end="2" varStatus="num">
+							<c:forEach var="tt" items="${tourTicket}" begin="0" end="3" varStatus="num">
 							<article class="post">
 								<header>
 									<div class="title">
@@ -250,7 +250,7 @@
 
 									<!-- Mini Post -->
 									
-										<c:forEach var="tt" items="${tourTicket}" begin="3" end="6" varStatus="num">
+										<c:forEach var="tt" items="${tourTicket}" begin="4" end="11" varStatus="num">
 										<article class="mini-post">
 											<header>
 												<h3><a href="#">
@@ -259,7 +259,7 @@
 												<time class="published" datetime="">조회수 : ${ tt.readcount }</time>
 												<a href="#" class="author">
 													<span class="name">NO. ${ num.count + 3 }</span>
-													<img src="/resources/imperfect/images/avatar.jpg" alt="" />
+													<img src="/resources/imperfect/images/avatar.jpg" alt=""/>
 												</a>
 											</header>
 											<a href="#" class="image">
@@ -271,8 +271,8 @@
 
 								</div>
 							</section>
-
-						<!-- Posts List -->
+<!-- 
+						
 							<section>
 								<ul class="posts">
 										<c:forEach var="tt" items="${tourTicket}" begin="7" end="12" varStatus="num">
@@ -289,7 +289,7 @@
 								</ul>
 							</section>
 
-						<!-- About -->
+					
 							<section class="blurb">
 								<h2>About</h2>
 								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
@@ -298,7 +298,7 @@
 								</ul>
 							</section>
 
-						<!-- Footer -->
+					
 							<section id="footer">
 								<ul class="icons">
 									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
@@ -311,7 +311,7 @@
 							</section>
 
 					</section>
-
+ -->
 			</div>
 
 		<!-- Scripts -->
