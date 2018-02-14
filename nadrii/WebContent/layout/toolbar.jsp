@@ -46,7 +46,7 @@
 	<ul>
 		<li><a href="#">Login</a></li>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
-		<li><a href="./comm/listComm">나만의 나들이</a></li>
+		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
@@ -71,5 +71,6 @@
 				<li><a href="no-sidebar.html">No Sidebar</a></li>
 		 		-->
 	</ul>
+	
 </nav>
 
