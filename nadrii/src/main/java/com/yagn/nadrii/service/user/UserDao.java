@@ -6,7 +6,7 @@ import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.User;
 
 
-//==> ȸ���������� CRUD �߻�ȭ/ĸ��ȭ�� DAO Interface Definition
+
 public interface UserDao {
 	
 	// INSERT
@@ -16,22 +16,15 @@ public interface UserDao {
 	public User getUser(String userId) throws Exception ;
 
 	// SELECT LIST
-	public List<User> getUserList(Search search) throws Exception ;
+	public List<User> listUser(Search search) throws Exception ;
 
 	// UPDATE
 	public void updateUser(User user) throws Exception ;
 	
-	// �Խ��� Page ó���� ���� ��üRow(totalCount)  return
+	//totalCount of User
 	public int getTotalCount(Search search) throws Exception ;
 	
-	public int checkId(String user) throws Exception;
+	public User getUser(User user) throws Exception;
 	
-	public User loginCheck(User user) throws Exception;
-	
-	public String findId(String user) throws Exception;
-	
-	public String findPassword(String user) throws Exception;
-	
-	public void addUserPlus(User user) throws Exception;
-
+	public User getUserByEmail(String email) throws Exception;
 }

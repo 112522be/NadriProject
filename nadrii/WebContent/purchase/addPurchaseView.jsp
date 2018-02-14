@@ -180,7 +180,8 @@ function goBack() {
 	  			<h4 class="text-right">결제대행비 : ￦ ${ purchase.taxFree }</h4>
 	  			<hr>
 	  			<h4 class="text-right text-danger">￦ ${ purchase.ticketPayment }</h4>
-	  			
+				
+					  			
 	
 	  		</div>
 		</div>

@@ -16,11 +16,24 @@
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
+	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
+	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
+	 <link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" /> 
+	<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+	
+	<!-- Scripts -->
+	<script src="/resources/imperfect/assets/js/jquery.min.js"></script>
+	<script src="/resources/imperfect/assets/js/skel.min.js"></script>
+	<script src="/resources/imperfect/assets/js/util.js"></script> 
+	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/imperfect/assets/js/main.js"></script> 
+	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 	
 	<!-- ///////////////////////// jQuery Spinner ////////////////////////// -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -300,10 +313,139 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
-
+<div id="wrapper">
+   	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
+		<div id="main">
 
+				<article class="post">
+					<header>
+						<div class="title">
+							<h1>
+								<a href="#">예매정보입력</a>
+							</h1>
+							<p>구매하실 티켓에 대한 개인정보를 <strong class="text-danger">형식에 맞게 </strong>입력해 주세요.</p>
+						</div>
+						<div class="meta">
+							<time class="published" datetime="2015-10-18">October 18,
+								2015</time>
+							<a href="#" class="author"><span class="name">Jane Doe</span><img
+								src="/resources/imperfect/images/avatar.jpg" alt=""></a>
+						</div>
+					</header>
+				
+				<!-- form Start /////////////////////////////////////-->
+				<form class="form-horizontal">
+				
+				<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
+				<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
+
+				<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
+				<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
+				<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
+				<input type="hidden" name="bookingDate" value="${ bookingDate }">
+				<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
+				<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
+
+						<section>
+							<div class="row">
+								<div class="6u 12u$(medium)">
+									<ul class="alt">
+										<h4>예매일자</h4>
+											<li>선택하신 <strong class="text-danger">예매일자</strong>를 확인하시기 바랍니다.</li>
+											<p>${ bookingDate }</p>
+											<br>
+										<h4>이용요금</h4>
+											<li>아래 <strong class="text-danger">이용요금</strong>을 확인하시기 바랍니다.</li>
+											<p>${ detailIntro.usetimefestival }</p>
+									</ul>
+								</div>
+								<div class="6u$ 12u$(medium)">
+									<span class="image fit"><img src="${ detailImage.originimgurl }" alt=""></span>
+								</div>
+							</div>
+						</section>	
+	
+						<section>
+							<div class="row">
+								<div class="6u 12u$(medium)">
+									<ul class="alt">
+										<h4>입장권 구매 안내</h4>
+											<li><strong class="text-danger">구매 수량</strong>을 선택하시기 바랍니다.</li>
+										</ul>
+											<p>
+											<c:forEach items="${ priceList }" varStatus="status">
+
+												<input type="hidden" class="ticketCount" name="ticketCount" value=0>
+												<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
+
+													<ul class="actions">
+														<a href="#" value="${ priceList[status.index] }"> 
+															&nbsp; ${ priceList[status.index] } ￦ <span class="badge">0</span>
+														</a>&nbsp;&nbsp;
+													
+													<!-- 수량증감 버튼 -->
+														<li>
+															<a href="#" class="button fit icon fa-download" name="minus" value="minus">Minus</a>
+														</li>
+														<li>
+															<a href="#" class="button fit icon fa-upload" name="plus" value="plus">Plus</a>
+														</li>
+													</ul>
+												</ul>
+
+												<br>
+											</c:forEach>
+											</p>
+									</div>
+										
+									<div class="6u 12u$(medium)">	
+										
+										<c:if test="${ user.userId eq null }">
+										<ul class="alt">
+											<h4>개인정보 입력</h4>
+											<br>
+											<a href="#" class="button small fit">로그인</a>
+										</ul>
+									</c:if>	
+									<c:if test="${ user.userId ne null }">
+										<ul class="alt">
+											<h4>개인정보 입력</h4>
+											<li><strong class="text-danger">개인 정보</strong>를 확인하시기 바랍니다.</li>
+											<div class="6u 12u$(xsmall)">
+												<input type="text" name="buyerId" id="demo-name" value="${ user.userId }" placeholder="ID" readonly>
+												<br>
+												<c:if test="${ user.userName eq null }">
+													<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder="Name">
+												</c:if>
+												<c:if test="${ user.userName ne null }">	
+													<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder="Name" readonly>
+												</c:if>		
+												<br>
+												<c:if test="${ user.phone eq null }">
+													<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder="Phone">
+												</c:if>	
+												<c:if test="${ user.phone ne null }">
+													<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder="Phone" readonly>
+												</c:if>	
+												<br>
+												<input type="text" name="buyerEmail" id="demo-name" value="${ user.email }" placeholder="Email" readonly>
+											</div>
+										</ul>
+											<br>
+											<a href="#" class="button">장바구니 담기</a>
+											<a href="#" class="button">취 소</a>
+											<a href="#" class="button">결제하기</a>
+								</c:if>
+									</div>	
+								</div>	
+						</section>
+	
+							
+
+
+						<!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="page-header">
 		<h3 class="text-info text-center">예매정보입력</h3>
 		<h5 class="text-muted text-center">
@@ -311,18 +453,8 @@
 		</h5>
 	</div>
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
 
-		<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
-		<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
-
-		<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
-		<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
-		<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
-		<input type="hidden" name="bookingDate" value="${ bookingDate }">
-		<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
-		<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
+		
 
 			<div class="col-md-6">
 				<div class="form-group text-center">
@@ -491,6 +623,8 @@
 
 	</div>
 		<!--  화면구성 div end /////////////////////////////////////-->
+	</div>
+	</div>
 
 	
 

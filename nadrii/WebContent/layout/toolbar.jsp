@@ -20,29 +20,27 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified JavaScript -->	
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
-
-<!-- css -->
-
+	<!-- css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
 	<link href="/resources/css/flexslider.css" rel="stylesheet" />
 	<link href="/resources/css/style.css" rel="stylesheet" />
 	<!-- Theme skin -->
-
 	<link href="/resources/skins/default.css" rel="stylesheet" />
-
-	<!-- //////////////////// CSS //////////////////// -->
-
+	
+	
+	
+	
 	<style type="text/css">
-
 		.container {
 			padding: 20px;
+
         }
         
         .dropdown-content {
@@ -129,6 +127,9 @@
 			margin:-6px 0 0 255px;
 	        content: "";
 		}
+
+        }
+
 	</style>
 
 	<script type="text/javascript">
@@ -141,12 +142,25 @@
 	});
 
 	$( function() {
+
+		console.log("세션 정보 : ${session}")
+		
+		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
+			self.location = "/ticket/listTicket"
+		});
+
+	});
+
+
+	$( function() {
+
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
       		self.location = "/message/listMessage"
         });
     });
 	
+
 	
 	$(document).ready(function(){
         // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
@@ -176,9 +190,20 @@
         });
     });
 	
+
+
+	//============= "장바구니" 화면이동 =============
+    $( function() {
+       $("a[href='#']:contains('Logout')").bind("click" , function() {
+			alert("나갈거임");
+	        self.location = "/user/logout";
+       });
+    });
+	
 	</script>
 	
 </head>
+
 
 
 <body>
@@ -314,4 +339,5 @@
 		</nav>
 		<!-- navbar End -->
 </body>
+
 </html>

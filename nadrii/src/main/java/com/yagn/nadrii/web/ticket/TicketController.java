@@ -74,6 +74,7 @@ public class TicketController {
 			}
 			
 			returnMap = ticketService.getTicketList(openApiSearch);
+			
 			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
 					pageUnit, pageSize);
 

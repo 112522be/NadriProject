@@ -183,7 +183,7 @@
 	    				    	if(content == null || content=='' || lat=="," || lng == ","){
 									return;
 	    				    	}else{ 
-	    				    		var html =$('#summernote').summernote('code')+'<div class="accordion"><button type="button" class="btn btn-default">'+
+	    				    		var html =$('#summernote').summernote('code')+'<br/><div class="accordion"><button type="button" class="btn btn-default">'+
 									'<div class="col-xs-3" align="left">'+
 									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
 									'</div>'+

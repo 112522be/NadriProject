@@ -13,14 +13,15 @@
 	$( function() {
 		$("a[href='#']:contains('보내기')").on("click",function(){
 			alert("보내기");
-			$("form").attr("method","POST").attr("action","/message/addMessage").submit();
+			$("form").attr("method","POST").attr("action","/message/addMessage").submit();			
+
 		});
 	});
 
+	
 	$( function() {
 		$("a[href='#']:contains('취소')").on("click",function(){
-			alert("취소");
-			//close();
+			window.close();
 		});
 	});
 </script>
@@ -34,7 +35,7 @@
 						
 
 						<div id="sendmessage"></div>
-						<div id="errormessage"></div>
+
 						<form>
 							<div class="alert alert-info" role="alert" style="padding-top: 5px;padding-bottom: 5px;">
 							    <strong>보내는 사람 : </strong>
@@ -70,13 +71,14 @@
 								<textarea class="form-control" name="text" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="메시지를 작성하세요"></textarea>
 								<div class="validation"></div>
 							</div>
-
+						</form>
+						
 							<div class="text-center">
-								<button type="submit" class="btn btn-theme">보내기</button>
-								<button type="cancel" class="btn btn-theme">취소</button>
+								<a class="btn btn-default btn-md" href="#" role="button">보내기</a>
+								<a class="btn btn-default btn-md" href="#" role="button">취소</a>
 
 							</div>							
-						</form>
+						
 					</div>
 				</div>
 			</div>

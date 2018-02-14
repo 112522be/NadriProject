@@ -52,7 +52,13 @@ public class CommentDaoImpl implements CommentDao {
 		return sqlSession.selectOne("CommentMapper.getCommentNo", comment);
 	}
 	
+	@Override
+	public Comments getComment(int commentNo) throws Exception {
+		return sqlSession.selectOne("CommentMapper.getComment", commentNo);
+	}
 	
-	
-
+	@Override
+	public void deleteCommentByPost(int postNo) throws Exception {
+		sqlSession.delete("CommentMapper.deleteCommentByPost", postNo);
+	}
 }
