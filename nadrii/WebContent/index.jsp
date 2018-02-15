@@ -24,7 +24,7 @@
 
 			<!-- Header -->
 				<div id="header">
-
+<!-- <<<<<<< HEAD -->
 					<!-- Inner 
 						<div class="inner">
 							<header>
@@ -37,9 +37,13 @@
 							</footer>
 						</div>
 					-->
-						<jsp:include page="/layout/inner.jsp" />
+						<%-- <jsp:include page="/layout/inner.jsp" /> --%>
 				 		 	
+<!-- ======= -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- >>>>>>> refs/remotes/origin/master -->
 
+<!-- <<<<<<< HEAD -->
 					<!-- Nav 
 						<nav id="nav">
 							<ul>
@@ -68,8 +72,76 @@
 							</ul>
 						</nav>
 					-->
-						<jsp:include page="/layout/toolbar.jsp" />
+					<%-- 	<jsp:include page="/layout/toolbar.jsp" /> --%>
 
+<!-- ======= -->
+<script src="/resources/js/tripLocation.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+
+<style>
+.scale {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+}
+.scale:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
+.img {width:100%; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
+
+</style>
+<title>나들이 메인인덱스</title>
+</head>
+
+<body>
+
+	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+	 
+	<div class="container">
+	<!-- Carousel Start -->
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+
+				<div class="item active">
+				<div class="img">
+   					<div class="scale">	
+   						<img src="/resources/basic/images/chicago01.jpg" alt="chicago01" style="width: 100%;">
+   					</div>
+<!-- >>>>>>> refs/remotes/origin/master -->
 				</div>
 
 			<!-- Banner -->

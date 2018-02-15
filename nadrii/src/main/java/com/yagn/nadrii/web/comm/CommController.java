@@ -82,6 +82,12 @@ public class CommController {
 		}
 		
 		Map<String , Object> map=commService.listComm(search);
+		List<Community> list = (List<Community>)map.get("listComm");
+		for(int i=0;i<list.size();i++) {
+			String temp = list.get(i).getHashtag();
+			
+			
+		}
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
