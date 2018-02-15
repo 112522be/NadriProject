@@ -1884,7 +1884,8 @@
 	form select,
 	form textarea {
 		-webkit-appearance: none;
-		display: block;
+/*		display: block;
+*/
 		border: 0;
 		background: #fafafa;
 		width: 100%;

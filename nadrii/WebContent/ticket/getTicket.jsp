@@ -20,40 +20,46 @@
 	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
+	<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+	
+	
+	<!-- DatePicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
-  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-	<script>
-    var jqOld = jQuery.noConflict();
-    jqOld(function() {
-        jqOld("#datepicker" ).datepicker();
-    })
-	</script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	
 	<script type="text/javascript">
+	
 
 // ========== '예매하기 / 장바구니 담기' Event 연결 ==========
 $(function(){
-	$("a[href='#']:contains('예매하기')").bind("click", function(){
+	$("a[href='#']:contains('예매하기')").bind("click", function(event){
+		event.preventDefault();
 		fncAddBooking();
-	});
+	})
 });
 
-//========== '예매하기 / 장바구니 담기' Event 연결 ==========
+//========== ''취 소' Event 연결 ==========
 $(function(){
-	$("button:contains('취 소')").bind("click", function(){
+	$("a[href='#']:contains('취 소')").bind("click", function(){
 		self.location = "/ticket/listTicket"
-	});
+	})
 });
+
 
 // ========== "DatePicker" Event 연결  ==========
 	
 $(function() {
 	$("#datepicker").datepicker({
-		
 		dateFormat: "yymmdd",
 		changeMonth: true,
 		changeYear: true,
@@ -70,6 +76,8 @@ $(function() {
 		}
 	})
 });
+
+
 function fncAddBooking() {
 	var bookingDate = $('input[name="bookingDate"]').val();
 	
@@ -77,6 +85,7 @@ function fncAddBooking() {
 		alert("예매일자를 선택해 주세요");
 		return;
 	}
+	
 	
 	$("form")
 	.attr("method", "POST")
@@ -88,7 +97,7 @@ function fncAddBooking() {
 
 <body class="no-sidebar">
 	<div id="page-wrapper">
-
+	
 		<!-- Header -->
 		<div id="header">
 
@@ -102,7 +111,7 @@ function fncAddBooking() {
 
 		</div>
 
-			
+<form action="navigation">			
 		<!-- Main -->
 		<div class="wrapper style1">
 		
@@ -113,6 +122,7 @@ function fncAddBooking() {
 		
 			<div class="container">
 				<article id="main" class="special">
+					
 					<header>
 						<h2>
 							<a href="#">${ tourTicket.title }</a>
@@ -121,42 +131,124 @@ function fncAddBooking() {
 							관람등급 : ${ detailIntro.agelimit }
 						</p>
 					</header>
+					
 					<a href="#" class="image featured">
 						<img src="${ detailImage.originimgurl }" alt="" style="height: 642.83px;"/>
 					</a>
 					
-					<section>
-						<header><h3>행사정보</h3></header>
-						<p>행사기간 : ${ detailIntro.playtime }</p>
-						<p>행사장소 : ${ detailIntro.eventplace }</p>
-						<p>축제등급 : ${ detailIntro.festivalgrade }</p>
-						<p>행사장 위치 : ${ detailIntro.placeinfo }</p>
-						<p>관람 소요시간 : ${ detailIntro.spendtimefestival }</p>
-						<br>
-						<header><h3>부대행사</h3></header>
-						<p>${ detailIntro.subevent }</p>
-						<p>행사 홈페이지 : ${ detailIntro.eventhomepage }</p>
-						<br>
-						<header><h3>주 최</h3></header>
-						<p>1. ${ detailIntro.sponsor1 } : ${ detailIntro.sponsor1tel }</p>
-						<p>2. ${ detailIntro.sponsor2 } : ${ detailIntro.sponsor2tel }</p>
-						<br>
-						<header><h3>요금정보</h3></header>
-						<p>할인정보 : ${ detailIntro.discountinfofestival }</p>
-						<p>이용요금 : ${ detailIntro.usetimefestival }</p>
-						
-					</section>
 				</article>
-				<hr />
+			</div>		
+					
+					
+					
+			<!-- Footer -->
+			<div class="container">	
+				<div class="row">
+
+					<section class="4u 12u(mobile)">
+							<header>
+								<h2 class="icon fa-info circled"><span class="label">info</span></h2>&nbsp;&nbsp;&nbsp;&nbsp;행사정보
+							</header>
+							<ul class="divided">
+								<li>
+									<article class="tweet">
+										기 간 : ${ detailIntro.playtime }
+										<span class="timestamp"></span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										장 소 : ${ detailIntro.eventplace }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										축제등급 : ${ detailIntro.festivalgrade }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										행사장 위치 : ${ detailIntro.placeinfo }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										관람 소요시간 : ${ detailIntro.spendtimefestival }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+							</ul>
+					</section>
+								
+					<section class="4u 12u(mobile)">
+							<header>
+								<h2 class="icon fa-diamond circled"><span class="label">info</span></h2>&nbsp;&nbsp;&nbsp;&nbsp;주관사정보
+							</header>
+							<ul class="divided">
+								<li>
+									<article class="tweet">
+										부대행사 : ${ detailIntro.subevent }
+										<span class="timestamp"></span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										홈페이지 : ${ detailIntro.eventhomepage }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										1. 주관사 : ${ detailIntro.sponsor1 } : ${ detailIntro.sponsor1tel }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										2. 주관사 :  ${ detailIntro.sponsor2 } : ${ detailIntro.sponsor2tel }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+							</ul>
+					</section>		
+					
+					<section class="4u 12u(mobile)">
+							<header>
+								<h2 class="icon fa-ticket circled"><span class="label">info</span></h2>&nbsp;&nbsp;&nbsp;&nbsp;요금정보
+							</header>
+							<ul class="divided">
+								<li>
+									<article class="tweet">
+										할인정보 : ${ detailIntro.discountinfofestival }
+										<span class="timestamp"></span>
+									</article>
+								</li>
+								<li>
+									<article class="tweet">
+										이용요금 : ${ detailIntro.usetimefestival }
+										<span class="timestamp"</span>
+									</article>
+								</li>
+							</ul>
+					</section>			
+
+				</div><!-- row end -->
+			</div><!-- container end -->
 				
+			<hr />
+		
+			<div class="container">	
 				<div class="row">
 					<article class="4u 12u(mobile) special">
 						<header>
 							<h3>
 							<c:if test="${ detailIntro.usetimefestival ne '무료' }">
 								<div id="datepicker">
-									<input type="hidden" name="bookingDate" />
 								</div>
+									<input type="hidden" name="bookingDate" />
 							</c:if>	
 							</h3>
 						</header>
@@ -188,7 +280,7 @@ function fncAddBooking() {
 			</div>
 
 		</div>
-
+</form>
 		<!-- Footer -->
 		<div id="footer">
 			<div class="container">
@@ -205,10 +297,12 @@ function fncAddBooking() {
 						<!-- Contact -->
 						<section class="contact">
 							<header>
-								<h3>Nisl turpis nascetur interdum?</h3>
+								<h3>We provide the wonderful holiday for you.</h3>
 							</header>
-							<p>Urna nisl non quis interdum mus ornare ridiculus egestas
-								ridiculus lobortis vivamus tempor aliquet.</p>
+							<p>
+								Don't waste of your time when you make a holiday plan.
+								Here is the Nadrii.
+							</p>
 							<ul class="icons">
 								<li><a href="#" class="icon fa-twitter"><span
 										class="label">Twitter</span></a></li>
@@ -228,31 +322,20 @@ function fncAddBooking() {
 						<!-- Copyright -->
 						<div class="copyright">
 							<ul class="menu">
-								<li>&copy; Untitled. All rights reserved.</li>
-								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; Nadrii. All rights reserved.</li>
+								<li>Made by <a href="http://html5up.net">Daniel</a></li>
 							</ul>
 						</div>
 
 					</div>
 
-				</div>
-				
-				
-				
-			</div>
-		</div>
+				</div><!-- row end -->
+			</div><!-- container end -->
+		</div><!-- footer end -->
 
 	</div>
 
-	<!-- Scripts -->
-		<script src="/resources/helios/assets/js/jquery.min.js"></script>
-		<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-		<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-		<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-		<script src="/resources/helios/assets/js/skel.min.js"></script>
-		<script src="/resources/helios/assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-		<script src="/resources/helios/assets/js/main.js"></script>
+	
 
 </body>
 

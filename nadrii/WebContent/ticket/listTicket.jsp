@@ -14,15 +14,37 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 
+
 <!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 <!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+
+
 				
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 	function fncGetList(pageNo) {
+//		alert("pageNo")
 		$("#pageNo").val(pageNo);
 		$("form").attr("method", "POST").attr("action", "/ticket/listTicket")
 				.submit();
@@ -120,7 +142,7 @@
 					<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
-
+<form action="navicagion">
 			<!-- Features -->
 				<div class="wrapper style1">
 
@@ -173,8 +195,10 @@
 					<input type="hidden" id="pageNo" name="pageNo" value="" /> 
 					<input type="hidden" name="searchCondition" id="searchCondition" value="">
 							
+				<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 				</div>
-
+				
+</form>
 			<!-- Footer -->
 		<div id="footer">
 			<div class="container">
@@ -214,8 +238,8 @@
 						<!-- Copyright -->
 						<div class="copyright">
 							<ul class="menu">
-								<li>&copy; Untitled. All rights reserved.</li>
-								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; Nadrii. All rights reserved.</li>
+								<li>Made by <a href="http://html5up.net">Daniel</a></li>
 							</ul>
 						</div>
 
@@ -233,15 +257,7 @@
 
 	</div>
 
-		<!-- Scripts -->
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-			<script src="/resources/helios/assets/js/skel.min.js"></script>
-			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="/resources/helios/assets/js/main.js"></script>
+		
 
 	</body>
 </html>
