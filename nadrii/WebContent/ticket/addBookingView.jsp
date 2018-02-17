@@ -15,6 +15,20 @@
 
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous"> 
+	
+	<!-- Optional theme -->	
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
+	
+	
 	
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
@@ -30,6 +44,15 @@
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
 
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+
+
+
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -41,7 +64,7 @@
 
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
-		$("button:contains('장바구니 담기')").bind('click', function() {
+		$("a[href='#']:contains('장바구니 담기')").bind('click', function() {
 			fncBasketList();
 		})
 	});
@@ -72,7 +95,7 @@
 </script>
 <script>
 	
-	//=================== "장바구니 내에서 저장하기" Event 연결 =================== 
+	//=================== "장바구니 내 저장하기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('저장하기')").bind("click", function() {
 			var flag = 'basket';
@@ -90,22 +113,14 @@
 	}
 	
 	
-	//=================== "결제" Event 연결 =================== 
+	//=================== "결제하기" Event 연결 =================== 
 	$(function() {
-		$("button.btn.btn-danger").bind("click", function() {
-//			alert("결제")
+		$("a[href='#']:contains('결제하기')").bind("click", function() {
+			alert("결제하기")
 			var flag = 'purchase';
 			fncAddPurchase(flag);
 		});
 	});
-	
-	//=================== "로그인" Event 연결 =================== 
-	$(function() {
-		$("button:contains('로그인')").bind("click", function() {
-			self.location = "/user/login"
-		});
-	});
-	
 	
 	//==================== "수량증감" Event 연결 =================== 
 	
@@ -114,7 +129,7 @@
 //		console.log("[fncTicketCount START]")
 
 		var inputVal = $(".ticketCount").eq(indexVal).val();
-		var textVal = $(".badge").eq(indexVal).text();
+		var textVal = $("h3[name='priceCount']").eq(indexVal).text();
 /*
 		console.log("[1] inputVal : " + inputVal)
 		console.log("[2] textVal : " + textVal)
@@ -122,13 +137,13 @@
 		if (countVal == 'plus') {
 //			console.log("[Plus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
-			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
+			textVal = $("h3[name='priceCount']").eq(indexVal).text(currentVal * 1 + 1);
 		}
 
 		if (countVal == 'minus' && currentVal >= 1) {
 //			console.log("[Minus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
-			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
+			textVal = $("h3[name='priceCount']").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
 			console.log("[티켓 수량이 0 보다 작음]")
 		}
@@ -139,11 +154,11 @@
 
 	$(function() {
 
-		$("button[name='minus']").bind("click", function(event) {
+		$(".icon.fa-minus").bind("click", function(event) {
 
 			event.preventDefault();
 
-			var indexVal = $("button[name='minus']").index(this);
+			var indexVal = $(".icon.fa-minus").index(this);
 			var countVal = 'minus';
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
@@ -161,11 +176,11 @@
 
 		});
 
-		$("a[name='plus']").bind("click", function(event) {
+		$(".icon.fa-plus").bind("click", function(event) {
 
 			event.preventDefault();
 
-			var indexVal = $("a[name='plus']").index(this);
+			var indexVal = $(".icon.fa-plus").index(this);
 			var countVal = 'plus';
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
@@ -289,6 +304,12 @@
 		}
 	}
 
+	
+	
+	
+	
+	
+	
 </script>
 	
 </head>
@@ -310,7 +331,7 @@
 				</div>
 
 
-
+<form>
 			<!-- Main -->
 				<div class="wrapper style1">
 				
@@ -341,6 +362,23 @@
 								<hr />
 								
 								<section>
+									
+									<c:if test="${ user.userId eq null }">
+									<header>
+										<h3 class="icon fa-lock"><a href="#"> 로그인 후 이용가능</a></h3>
+									</header>
+									<div class="row 50%">
+										
+										<div class="12u">
+											<a href="/user/login" name="login" class="button">로 그 인</a>&nbsp;
+										</div>	
+										<div class="12u">
+											<a href="/index.jsp" name="login" class="button">메인으로</a>
+										</div>	
+									</div>
+									</c:if>
+									
+									<c:if test="${ user.userId ne null }">
 									<header>
 										<h3><a href="#">개인정보 입력</a></h3>
 									</header>
@@ -393,6 +431,7 @@
 									</div>
 									
 								</section>
+								</c:if>
 									<hr>
 								
 								<section>
@@ -410,7 +449,7 @@
 										<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
 									
 										<div class="4u">
-											<h2 class="icon fa-ticket circled"><span class="label">Ticket</span></h2>
+											<h2 class="icon fa-money circled"><span class="label">Ticket</span></h2>
 										</div>
 										
 										<div class="4u">
@@ -421,7 +460,7 @@
 										</div>
 										
 										<div class="4u">
-											<h3 class="icon">0</h3>
+											<h3 class="icon" name="priceCount">0</h3>
 										</div>
 										<div class="4u">
 											<h3 class="icon fa-minus"></h3>
@@ -460,17 +499,65 @@
 									</section>
 								</article>
 							</div>
-							<footer>
-								<a href="#" name="cancel" class="button">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>
-								<a href="#" name="basket" class="button">장바구니</a>
-								<a href="#" name="purchase" class="button">결제하기</a>
-							</footer>
+							<c:if test="${ user.userId ne null }">
 							
+							<section id="features" class="container special">
+								<div class="row">
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="cancel" class="button" onclick="goBack()">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>
+										</header>
+									</article>
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="basket" class="button" data-toggle="modal" data-target="#myModal">장바구니 담기</a>
+										</header>
+									</article>
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="purchase" class="button">결제하기</a>
+										</header>
+									</article>
+								</div>
+							</section>		
+							
+							</c:if>
 						</div><!-- row 200% end -->
 						
 					</div><!-- container -->
 
 				</div>
+				
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-copy" aria-hidden="true"> </span>
+						장바구니에 저장 하시겠습니까?
+					</h4>
+				</div>
+			
+				<div class="modal-body">
+					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
+					<h3>- 선택한 예매일자 : <span class="label label-info">${ bookingDate }</span></h3>
+					<h3>- 총 결제요금 : <span class="label label-success"></span>&nbsp;원</h3>
+				
+				</div>
+			
+				<div class="modal-footer">
+					<button type="button" class="button" data-dismiss="modal">저장하기</button>
+					<button type="button" class="button" name="modalCancel" data-dismiss="modal">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
 
 			<!-- Footer -->
 				<div id="footer">
