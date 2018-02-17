@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 <script type="text/javascript">
 
 
@@ -169,90 +168,91 @@ figure.snip1384.hover i {
   opacity: 1;
 }
 
-#header{
-	background-color: #ffffcd;
-	background-image: url("/resources/images/tripIcon/tripInfo.jpg");
-}
-
-#nav{
-	background-image: url("../resources/helios/images/header.jpg");
-}
-
 </style>
  
  
 </head>
-<body class="no-sidebar">
+<body>
+<jsp:include page="../layout/toolbar.jsp"/>
 
-		<div id="page-wrapper">
 
-			<div id="header">
-				<div class="inner">
-					<header>
-						<h1><a href="index.html" id="logo">나들이 정보</a></h1>
-					</header>
-				</div>
-						
-				<jsp:include page="/layout/toolbar.jsp" />
-			</div>
+
+	<div class="container">
+		<div class="col-md-12"></br></br></br></br></div>
+		 
+		<div class="col-md-3"></div>
+		
+		
+		<div class="col-md-2">
+			<div class="sample_image">
+				<figure class="snip1384" name="museum">
+					<img src ="/resources/images/tripIcon/museum.JPG" width="160" height="120" name="museum" align="center"/>
+					<figcaption>
+	    				<p>박 물 관</p>
+	  				</figcaption>
+	  				
+				</figure>
+			</div>	
+		</div>	
 			
-			<section class="carousel">
-				<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">
-					
-					<article class="">
-						<a href="#" class="image featured"><img src="../resources/images/tripIcon/museum.JPG" alt=""></a>
-						<header>
-							<h3><a href="#">박물관</a></h3>
-						</header>
-						<p>휴식과 배움을 동시에</p>
-					</article>
-
-					<article class="">
-						<a href="#" class="image featured"><img src="../resources/images/tripIcon/exhibition.JPG" alt=""></a>
-						<header>
-							<h3><a href="#">전시관</a></h3>
-						</header>
-						<p>새로운 것을 보고 싶다면</p>
-					</article>
-
-					<article class="">
-						<a href="#" class="image featured"><img src="../resources/images/tripIcon/gallery.JPG" alt=""></a>
-						<header>
-							<h3><a href="#">미술관</a></h3>
-						</header>
-						<p>섬세하고 감각적이라면</p>
-					</article>
-
-					<article class="">
-						<a href="#" class="image featured"><img src="../resources/images/tripIcon/experience.JPG" alt=""></a>
-						<header>
-							<h3><a href="#">체험관</a></h3>
-						</header>
-						<p>보는 게 다 가 아니다</p>
-					</article>
-
-					<article class="">
-						<a href="#" class="image featured"><img src="../resources/images/tripIcon/tradition.JPG" alt=""></a>
-						<header>
-							<h3><a href="#">민속마을</a></h3>
-						</header>
-						<p>그 속에서 살아가리</p>
-					</article>
-
-				</div>
-				<span class="forward" style="display: block;"></span>
-				<span class="backward" style="display: block;"></span>
-			</section>
+		<div class="col-md-2">	
+			<div class="sample_image">
+				<figure class="snip1384" name="exhibition">
+					<img src ="/resources/images/tripIcon/exhibition.JPG" width="160" height="120" name="exhibition"align="center"/>
+					<figcaption>
+	    				<p>전 시 관</p>
+	  				</figcaption>
+	  			</figure>
+			</div>
+		</div>
+			
+		<div class="col-md-2">
+			<div class="sample_image">
+				<figure class="snip1384" name="gallery">
+					<img src ="/resources/images/tripIcon/gallery.JPG" width="160" height="120"name="gallery"align="middle"/>
+					<figcaption>
+	    				<p>미 술 관</p>
+	  				</figcaption>
+	  			</figure>
+			</div>
 		</div>
 		
-		<script src="../resources/helios/assets/js/jquery.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
-		<script src="../resources/helios/assets/js/skel.min.js"></script>
-		<script src="../resources/helios/assets/js/util.js"></script>
-		<script src="../resources/helios/assets/js/main.js"></script>
+		<div class="col-md-3"></div>
 		
+	</div>
+	
+
+
+	<div class="container">
+			<div class="col-md-12"> </br></br></br>    </div>
+	
+		<div class="col-md-4"></div>
+		<div class="col-md-2">
+			<div class="sample_image">
+				<figure class="snip1384" name="experience">
+					<img src ="/resources/images/tripIcon/experience.JPG" width="160" height="120"name="experience"/>
+					<figcaption>
+	    				<p>체 험 관</p>
+	  				</figcaption>
+	  			</figure>
+			</div>
+		</div>
+		
+		<div class="col-md-2">	
+			<div class="sample_image">
+				<figure class="snip1384" name="tradition">
+					<img src ="/resources/images/tripIcon/tradition.JPG" width="160" height="120"name="tradition"/>
+					<figcaption>
+	    				<p>민속마을</p>
+	  				</figcaption>
+	  			</figure>
+			</div>
+		</div>
+	
+		<div class="col-md-4"></div>
+	</div>
+
+	
 </body>
 
 </html>
