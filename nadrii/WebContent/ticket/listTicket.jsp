@@ -14,22 +14,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
-
-<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 
 
-<!-- Scripts -->
+	<!-- Scripts -->
 	<script src="/resources/helios/assets/js/jquery.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
@@ -39,6 +41,11 @@
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
 
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
 				
 <!-- //////////////////// JavaScript //////////////////// -->
@@ -142,7 +149,7 @@
 					<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
-<form action="navicagion">
+<form action="navigation">
 			<!-- Features -->
 				<div class="wrapper style1">
 
@@ -194,64 +201,13 @@
 					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 					<input type="hidden" id="pageNo" name="pageNo" value="" /> 
 					<input type="hidden" name="searchCondition" id="searchCondition" value="">
-							
+				<hr/>			
 				<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 				</div>
 				
 </form>
-			<!-- Footer -->
-		<div id="footer">
-			<div class="container">
-				
-				<div class="row">
-					
-				</div>
-				
-				<hr />
-				
-				<div class="row">
-					<div class="12u">
-
-						<!-- Contact -->
-						<section class="contact">
-							<header>
-								<h3>Nisl turpis nascetur interdum?</h3>
-							</header>
-							<p>Urna nisl non quis interdum mus ornare ridiculus egestas
-								ridiculus lobortis vivamus tempor aliquet.</p>
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter"><span
-										class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook"><span
-										class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram"><span
-										class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span
-										class="label">Pinterest</span></a></li>
-								<li><a href="#" class="icon fa-dribbble"><span
-										class="label">Dribbble</span></a></li>
-								<li><a href="#" class="icon fa-linkedin"><span
-										class="label">Linkedin</span></a></li>
-							</ul>
-						</section>
-
-						<!-- Copyright -->
-						<div class="copyright">
-							<ul class="menu">
-								<li>&copy; Nadrii. All rights reserved.</li>
-								<li>Made by <a href="http://html5up.net">Daniel</a></li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-				
-				
-				
-			</div>
-		</div>
-
+		
+		<jsp:include page="/layout/footer.jsp" />
 
 
 

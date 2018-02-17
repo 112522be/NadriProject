@@ -116,7 +116,7 @@
 	//=================== "결제하기" Event 연결 =================== 
 	$(function() {
 		$("a[href='#']:contains('결제하기')").bind("click", function() {
-			alert("결제하기")
+//			alert("결제하기")
 			var flag = 'purchase';
 			fncAddPurchase(flag);
 		});
@@ -255,8 +255,12 @@
 				ticketPrice = $(".ticketPrice").eq(i).val();
 				ticketCount = $(".ticketCount").eq(i).val();
 				
+	//			alert(ticketPrice)
+	//			alert(ticketCount)
+				
 				if (ticketCount != 0) {
 					ticketPriceAll += ticketPrice + "=" + ticketCount + "&";
+	//				alert(ticketPriceAll)
 				}
 			}
 			
@@ -559,42 +563,7 @@
 
 </form>
 
-			<!-- Footer -->
-				<div id="footer">
-					<div class="container">
-						
-						<hr />
-						<div class="row">
-							<div class="12u">
-
-								<!-- Contact -->
-									<section class="contact">
-										<header>
-											<h3>Nisl turpis nascetur interdum?</h3>
-										</header>
-										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
-										<ul class="icons">
-											<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-											<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-											<li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-										</ul>
-									</section>
-
-								<!-- Copyright -->
-									<div class="copyright">
-										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-										</ul>
-									</div>
-
-							</div>
-
-						</div>
-					</div>
-				</div>
+			<jsp:include page="/layout/footer.jsp" />
 
 		</div>
 
