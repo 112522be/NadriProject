@@ -66,25 +66,22 @@
 				
 				if('${group.lat}' == ''){
 					$("#map").css("display","none");
+					
 				}
 				
 				if("${loginUser.userId}" == "${group.join.userId}"){
-					$("#userMenu").css("display","block");
+					$(".userMenu").css("display","block");
 				}
-				
-				$("#write").bind("click", function(){
-					self.location="../group/addGroup";
-				});
-				
-				$("#list").bind("click", function(){
+	
+				$(".button.list").bind("click", function(){
 					self.location="../group/listGroup";
 				});
 				
-				$("#modify").bind("click", function(){
+				$(".button.modify").bind("click", function(){
 					self.location="../group/updateGroup?groupNo=${group.join.groupNo}";
 				});
 				
-				$("#delete").bind("click", function(){
+				$(".button.delete").bind("click", function(){
 					if(confirm("삭제하시겠습니까?")==true){
 						self.location="../group/deleteGroup?groupNo=${group.join.groupNo}";
 						alert("삭제되었습니다.");
@@ -113,34 +110,46 @@
 		</script>
 	</head>
 	<body class="right-sidebar">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				
-			<!-- Main -->
+		<div id="page-wrapper">	
+		<!-- Header -->
+				<div id="header">
+			<!-- Inner -->
+					<div class="inner">
+						<header>
+							<h1><a href="index.html" id="logo">Helios</a></h1>
+						</header>
+					</div>
+				<jsp:include page="../layout/toolbar.jsp" />		
+			</div>		
+		<!-- Main -->
 				<div class="wrapper style1">
-
 					<div class="container">
 						<div class="row 200%">
 							<div class="8u 12u(mobile)" id="content">
 								<article id="main">
+									<span class="button list" style="float: right; padding: 0; font-size: 12pt; width: 60px; background: #828282;">list</span>
 									<header style="margin-bottom: 5em;">
 										<h2>${group.title}</h2>
 										<div style="float: left;"> 
-										<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
-										<a href="#none" style="position: relative;">
-											<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${group.join.userId}</span>
-										</a>
+											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<a href="#none" style="position: relative;">
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${group.join.userId}</span>
+											</a>
 										</div>
 										<div style="float: right;">
 											<span style="padding-right: 30px;">view : &nbsp;${group.viewCount}</span>
 											<span style="border-left: 1px solid; padding-left: 30px;">${group.regDate}</span>
 										</div>
+										<br/>
+										<div class="userMenu" style="float: right; margin-top: 10px">
+											<span class="button modify" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
+											<span class="button delete" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>
+										</div>
 									</header>
-									<div id="map"></div>
-									<section>
-										<p>${group.text}</p>
-									</section>
+									<span id="map"></span>
+									<span>
+										${group.text}
+									</span>
 								</article>
 							</div>
 							<div class="4u 12u(mobile)" id="sidebar">
@@ -181,7 +190,7 @@
 		var placeName = '${group.placeName}';
 		var content = placeName.slice(placeName.indexOf("<h3>")+4,placeName.indexOf("</h3>"));
 		var infowindow = new daum.maps.InfoWindow({
-		    content : '<div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+content+'</div><br/>'
+		    content : '<div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+content+'</div>'
 		});
 		
 		infowindow.open(map, marker);

@@ -44,7 +44,7 @@
 <!-- Nav -->
 <nav id="nav">
 	<ul>
-		<li><a href="#">Login</a></li>
+		<li><a href="../user/login">Login</a></li>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="./comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>

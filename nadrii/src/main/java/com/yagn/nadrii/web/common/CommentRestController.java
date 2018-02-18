@@ -3,20 +3,15 @@ package com.yagn.nadrii.web.common;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Comments;
-import com.yagn.nadrii.service.domain.User;
 
 @RestController
 @RequestMapping("/common/*")

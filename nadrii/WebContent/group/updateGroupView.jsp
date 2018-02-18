@@ -33,6 +33,7 @@
 	<div id="main">
 	
 	<div class="container" align="center">
+	<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
 	<br/>
 		<form name="postData">
 			<div class="row">

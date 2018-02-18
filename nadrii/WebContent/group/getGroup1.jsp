@@ -176,6 +176,7 @@ function clickMessage(){
 	<a href="#none" id="write" class="button small write" style="position: relative; float:right; margin-top: -40px; margin-right: 80px">write</a>
 	<a href="#none" id="list" class="button small" style="position: relative; float:right; margin-top: -40px;">list</a>
 			<article class="post">
+			<a href="#none" id="list" class="button small delete">delete</a>
 				<header>
 					<div class="title" style="overflow: hidden">
 						<h2>${group.title}</h2>
