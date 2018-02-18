@@ -104,7 +104,7 @@ function goBack() {
 		
 		<!-- KakaoPay API Request -->
 		<input type="hidden" name="cid" 				value="TC0ONETIME">
-		<input type="hidden" name="partner_order_id" 	value="나드리티켓시스템">
+		<input type="hidden" name="partner_order_id" 	value="㈜나들이">
 		<input type="hidden" name="partner_user_id" 	value="${ user.userId }">
 		<input type="hidden" name="item_name" 			value="${ purchase.ticketTitle }">
 		<input type="hidden" name="quantity" 			value="1">

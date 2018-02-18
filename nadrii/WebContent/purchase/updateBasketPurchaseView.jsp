@@ -86,21 +86,6 @@ function goBack() {
 
 		<input type="hidden" name="sumPostNo" value="${ purchase.sumPostNo }">
 		
-		<!-- Purchase Info 
-		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
-		<input type="hidden" name="contentTypeId" 		value="${ purchase.contentTypeId }">
-		<input type="hidden" name="ticketTitle"			value="${ purchase.ticketTitle }">
-		<input type="hidden" name="ticketImage" 		value="${ purchase.ticketImage }">
-		<input type="hidden" name="bookingDate" 		value="${ purchase.bookingDate }">
-		<input type="hidden" name="flag" 				value="${ purchase.flag }">
-		<input type="hidden" name="totalTicketPrice" 	value="${ purchase.totalTicketPrice }">
-		<input type="hidden" name="taxFree"				value="${ purchase.taxFree }">
-		<input type="hidden" name="ticketPayment" 		value="${ purchase.ticketPayment }">
-		<c:forEach items="${ purchase.ticketPrice }" varStatus="status">
-			<input type="hidden" name="ticketCount" value="${ purchase.ticketCount[status.index] }">
-			<input type="hidden" name="ticketPrice" value="${ purchase.ticketPrice[status.index] }">
-		</c:forEach>
-		-->
 		
 		<!-- KakaoPay API Request -->
 		<input type="hidden" name="cid" 				value="TC0ONETIME">
@@ -110,9 +95,9 @@ function goBack() {
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="approval_url" 		value="http://192.168.0.7:8080/purchase/kakaoPayCompleteB">
-		<input type="hidden" name="cancel_url" 			value="http://192.168.0.7:8080/purchase/cancelPayment.jsp">
-		<input type="hidden" name="fail_url" 			value="http://192.168.0.7:8080/purchase/failPayment.jsp">
+		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayCompleteB">
+		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/purchase/cancelPayment.jsp">
+		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/purchase/failPayment.jsp">
 
 	
 	
