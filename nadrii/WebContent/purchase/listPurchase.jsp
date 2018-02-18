@@ -8,19 +8,45 @@
 <html lang="ko">
 
 <head>
+<title>구매한 티켓 목록</title>
 <meta charset="UTF-8">
 
-<title>구매한 티켓 목록</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->	 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
-	<!-- //////////////////// CSS //////////////////// -->
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
 
+
+
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+
+
+	<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
@@ -33,7 +59,7 @@ function fncGetList(pageNo) {
 
 	//=================== "메인으로" 버튼 Event 연결 =================== 
 	$(function() {
-		$("button:contains('메인으로')").bind("click", function() {
+		$("a[href='#']:contains('메인으로')").bind("click", function() {
 			self.location = "/index.jsp"
 		})
 	});
@@ -43,103 +69,116 @@ function fncGetList(pageNo) {
 </script>
 
 </head>
-<body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-   	
-   	<div class="container">
 
-		<div class="page-header text-right">
-			<h3 class="text-info">
-				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 구매한티켓목록</p>
-			</h3>
-			<h5 class="text-muted">
-				<strong class="text-success">
-				<c:if test="${ user.userName eq null }">
-					${ user.userId }
-				</c:if>
-					${ user.userName }
-				</strong> 회원님의  <strong class="text-danger">구매한 티켓</strong> 목록 입니다.
-			</h5>
-		</div>
+<body class="no-sidebar">
+		<div id="page-wrapper">
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+			<!-- Header -->
+				<div id="header">
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>티켓이미지</th>
-						<th>티켓명</th>
-						<th>상세정보</th>
-					</tr>
-				</thead>
-				
-				<c:forEach var="list" items="${list}" varStatus="num">
-				<tbody>
-					<tr>
-						<th scope="row">
-							<h4>${ num.count }. [NO:${ list.postNo }]</h4>
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+					<jsp:include page="/layout/toolbar.jsp" /> 
+
+				</div>
+
+<form action="navigation">
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#">구매한 티켓 목록</a></h2>
+								<p>
+									<strong class="text-success">
+									<c:if test="${ user.userName eq null }">
+										${ user.userId }
+									</c:if>
+										${ user.userName }
+									</strong> 회원님의  <strong class="text-danger">구매하신 티켓</strong> 목록 입니다.
+								</p>
+							</header>
 							
-							<!-- 
-								<label class="btn btn-info">
-									<input type="checkbox" name="postNo" value="${ list.postNo }"> 
-									선택하기
-								</label>
-							 -->
-							 
-							</th>
-						<td><img class="media-object" src="${ list.ticketImage }" alt="There is no image" ></td>
-						<td>
-							<h3>${ list.ticketTitle }</h3>
-						</td>
-						<td>
-							<h5>● 예매일자 : ${ list.bookingDate }</h5>
-							<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
-							<a class="btn btn-default btn-lg btn-block" role="button" data-toggle="collapse"
-								href="#${ num.index }" aria-expanded="false" aria-controls="collapseExample">
-									<h4>티켓정보</h4>
-							</a>
-							<div class="collapse" id="${ num.index }">
-								<div class="well text-center">
-								<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
-									<h5 class="text-danger">￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장</h5>								
-								</c:forEach>
-								</div>
-							</div>
-						</td>
-				</tbody>
-				</c:forEach>
-			</table>
-			
-			<input type="hidden" name="sumPostNo">
-			
-			<hr>
-			<div class="row">
-				<div class="col-xs-6 text-left">
-				<!-- <button type="button" class="btn btn-danger">전체선택취소</button> --> 
-				</div>
-				<div class="col-xs-6 text-right">
-					<button type="button" class="btn btn-success" >메인으로</button>
-				</div>
-			</div>
-			
-			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<input type="hidden" id="pageNo" name="pageNo" value=""/>
+						</article>
+					
+					</div>
 
 
-		</form>
-		<!-- form End /////////////////////////////////////-->
+					<div class="container">
+					
+						<c:forEach var="list" items="${list}" varStatus="num">
+						<span class="timestamp">No.${ num.count } ${ list.postNo }</span>
+						<div class="row">
 
+							<!-- Photos -->
+								<section class="4u 12u(mobile)">
+									<div class="row 25% no-collapse">
+										<div class="12u">
+											<a href="#" class="image fit"><img src="${ list.ticketImage }" alt="" /></a>
+										</div>
+									</div>
+								</section>	
+							
+							<!-- content -->
+								<section class="4u 12u(mobile)">
+									<ul class="divided">
+										<li>
+											<article class="tweet">
+												<h3><a href="#">${ list.ticketTitle }</a></h3>
+												<span class="timestamp">&nbsp;</span>
+												<h4>예매일자</h4>
+												<p>&nbsp;&nbsp;${ list.bookingDate }</p>
+												<h4>취소 가능일자</h4>
+												<p>&nbsp;&nbsp;${ list.cancelDate } 까지</p>
+												<p>
+													<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+														￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장
+													</c:forEach>
+												</p>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+						</div><!-- row end -->
+						<br>
+						</c:forEach>
+					
+							<input type="hidden" name="sumPostNo">
+							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+							<input type="hidden" id="pageNo" name="pageNo" value=""/>
+						
+
+							<article id="main" class="container special">
+								<footer>
+									<a href="#" class="button">메인으로</a>
+								</footer>
+							</article>
+		
+					</div><!-- container end -->
+					
+					
+					
+					<hr/>	
+					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
+					
+				</div><!-- wrapper style1 End -->
+
+	</form>
+
+			<jsp:include page="/layout/footer.jsp" />
+			
+		
 	</div>
-	<!--  화면구성 div End /////////////////////////////////////-->
-	
-	<!-- PageNavigation Start... -->
-		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
-	<!-- PageNavigation End... -->
+
 
 </body>
+
 </html>

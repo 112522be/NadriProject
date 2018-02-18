@@ -1,201 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE HTML>
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
-
-
-
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/resources/js/tripLocation.js"></script>
-
-
-
-
-
-<style>
-.scale {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
-}
-.scale:hover {
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
-}
-
-.img {width:100%; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
-
-</style>
-<title>나들이 메인인덱스</title>
-</head>
-
-<body>
-
-	 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
-	 
-	<div class="container">
-	<!-- Carousel Start -->
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
-
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner">
-
-				<div class="item active">
-				<div class="img">
-   					<div class="scale">	
-   						<img src="/resources/basic/images/chicago01.jpg" alt="chicago01" style="width: 100%;">
-   					</div>
-				</div>
-   						
-					<div class="carousel-caption">
-						<h1>Beautiful Chicago Sunset</h1>
-						<h4>This sunset would be the best one among what you see ever.</h4>
-					</div>
-				</div>
-
-
-				<div class="item">
-					<div class="img">
-   						<div class="scale">
-							<img src="/resources/basic/images/chicago02.jpg" alt="chicago02" style="width: 100%;">
-						</div>
-					</div>
-					<div class="carousel-caption">
-						<h1>Amazing Architectures</h1>
-						<h4>You can enjoy the wonderful architecture forest.</h4>
-					</div>
-				</div>
-
-				<div class="item">
-					<div class="img">
-   						<div class="scale">
-							<img src="/resources/basic/images/chicago03.jpg" alt="chicago03" style="width: 100%;">
-						</div>
-					</div>
-					<div class="carousel-caption">
-						<h1>Fantastic Cloud Bean</h1>
-						<h4>This statue of bean is so shine in middle of the park.</h4>
-					</div>
-				</div>
-			</div>
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right"></span> <span
-				class="sr-only">Next</span>
-			</a>
-		</div>
-		<!-- Carousel End -->
-		</div>
-		<div class="container">
+	<head>
+		<title>Helios by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="/resources/js/tripLocation.js"></script>
 		
-			<div class="row">
-			    <div class="col-xs-6" style="padding-left: 15px; padding-right: 0px;">
-			       	<div class="thumbnail">
-			       	<div class="img">
-   						<div class="scale">
-			        	<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
-			        		src="/resources/basic/images/uploadFiles/testImage1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-			        	</div>
-			        </div>
-		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
-		        		<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
-		          	  	<div class="caption">
-			      			<h4 id="thumbnail-label">여행지 이름은?
-			        			<a class="anchorjs-link" href="#thumbnail-label">
-			            			<span class="anchorjs-icon"></span>
-			            		</a>
-			      			</h4>
-			        		<p>주소지</p>
-			        		
-		        		</div>
-					</div>
-				</div>
-				<div class="col-xs-3" style="padding-left: 0px;	padding-right: 0px;">
-			       	<div class="thumbnail">
-			       		<div class="img">
-   							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
-			        				src="/resources/basic/images/uploadFiles/testImage2.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-			        		</div>
-			        	</div>
-		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
-		        		<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
-		          	  	<div class="caption">
-			      			<h4 id="thumbnail-label">여행지 이름은?
-			        			<a class="anchorjs-link" href="#thumbnail-label">
-			            			<span class="anchorjs-icon"></span>
-			            		</a>
-			      			</h4>
-			        		<p>주소지</p>
-			        		
-		        		</div>
-					</div>
-				</div>
-				<div class="col-xs-3" style="padding-left: 0px; padding-right: 15px;">
-			       	<div class="thumbnail">
-			        	<div class="img">
-   							<div class="scale">
-			        			<img id="thumbnailImage" data-src="holder.js/100%x200" alt="100%x200" 
-			        				src="/resources/basic/images/uploadFiles/testImage3.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-			        		</div>
-			        	</div>		
-		    		    <input type="hidden" name="contentid" value="${list.contentid}"/>
-		        		<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
-		          	  	<div class="caption">
-			      			<h4 id="thumbnail-label">여행지 이름은?
-			        			<a class="anchorjs-link" href="#thumbnail-label">
-			            			<span class="anchorjs-icon"></span>
-			            		</a>
-			      			</h4>
-			        		<p>주소지</p>
-			        		
-		        		</div>
-					</div>
-				</div>
-				
-	     	</div>
-		</div>
+		<style>
+			#header{
+			background-image: url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
+			background-color: #3a2748;
+			}
+			
+			#nav{
+			background-color: #3b2b48;
+			opacity: 0.7;
+			}
+ 
+		</style>
 		
-   </body>
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					
+						<jsp:include page="/layout/inner.jsp" />
+				 		 	
+
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
+
+			<!-- Banner -->
+				<section id="banner">
+					<header>
+						<h2>Hi. You're looking at <strong>Helios</strong>.</h2>
+						<p>
+							A (free) responsive site template by <a href="http://html5up.net">HTML5 UP</a>.
+							Built on <strong>skel</strong> and released under the <a href="http://html5up.net/license">CCA</a> license.
+						</p>
+					</header>
+				</section>
+
+			<!-- Carousel -->
+				<section class="carousel">
+					<div class="reel">
+
+						<article>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/racing-442393_1920.jpg" alt="" /></a>
+							<header>
+								<h3><a href="#">나들이 정보</a></h3>
+							</header>
+							<p>어디로 갈까?</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/calendar-3073971_1920.jpg" alt="" /></a>
+							<header>
+								<h3><a href="#">나들이 플래너</a></h3>
+							</header>
+							<p>계획을 짜볼까?</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/notebook-1803664_1920.jpg" alt="" /></a>
+							<header>
+								<h3><a href="#">나만의 나들이</a></h3>
+							</header>
+							<p>자랑해볼까?</p>
+						</article>
+
+						<article>
+							<a href="/ticket/listTicket" class="image featured"><img src="/resources/images/tripIcon/admission-2974645_1920.jpg" alt="" /></a>
+							<header>
+								<h3><a href="#">나들이 티켓</a></h3>
+							</header>
+							<p>입장권을 사볼까?</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/pinky-swear-329329_1920.jpg" alt="" /></a>
+							<header>
+								<h3><a href="#">나들이 모임</a></h3>
+							</header>
+							<p>누구와 갈까?</p>
+						</article>
+
+					</div>
+				</section>
+
+			<!-- Main -->
+				<div class="wrapper style2">
+
+					<article id="main" class="container special">
+						<a href="#" class="image featured"><img src="/resources/helios/images/pic06.jpg" alt="" /></a>
+						<header>
+							<h2><a href="#">Sed massa imperdiet magnis</a></h2>
+							<p>
+								Sociis aenean eu aenean mollis mollis facilisis primis ornare penatibus aenean. Cursus ac enim
+								pulvinar curabitur morbi convallis. Lectus malesuada sed fermentum dolore amet.
+							</p>
+						</header>
+						<p>
+							Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
+							posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
+							sit arcu sociis. Nunc fermentum adipiscing tempor cursus nascetur adipiscing adipiscing. Primis aliquam
+							mus lacinia lobortis phasellus suscipit. Fermentum lobortis non tristique ante proin sociis accumsan
+							lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
+							consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
+							interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
+							natoque aenean scelerisque.
+						</p>
+						<footer>
+							<a href="#" class="button">Continue Reading</a>
+						</footer>
+					</article>
+
+				</div>
+
+			
+		</div>
+
+		<!-- Scripts -->
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/resources/helios/assets/js/main.js"></script>
+
+	</body>
 </html>
-

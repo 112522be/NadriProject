@@ -26,20 +26,28 @@
 .row > * {
     padding: 20px 0 0 10px;
 }
+.navbar {
+    margin-bottom: 0px !important;
+	}
+@media screen and (min-width: 1681px) and (max-width: 1880px) {
+		body, input, textarea, select {
+				font-size: 15pt !important;
+			}
+	}	
+	
 	</style>
 
 </head>
 	<body>
 	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 	<div id="main">
-	
+	<section class="two">
 	<div class="container" align="center">
-	<br/>
 		<form name="postData">
 			<div class="row">
 				<div class="3u 6u$(xsmall)">
 					<div class="select-wrapper">
-						<select name="categoryCode">
+						<select name="categoryCode" style="font-size: 13pt;">
 							<option value="">- Category -</option>
 							<option value="1">카테1</option>
 							<option value="2">카테2</option>
@@ -49,10 +57,13 @@
 					</div>
 				</div>
 				<div class="9u 12u$(xsmall)">
-					<input type="text" class="form" name="title" id="title" value="" placeholder="제목" />
+					<input type="text" class="form" style="font-size: 13pt;" name="title" id="title" value="" placeholder="제목" />
+				</div>
+				<div class="3u 6u$(xsmall)">
+					<input type="text" class="form" name="groupName" id="groupName" value="" placeholder="모임명" />
 				</div>
 			 </div>
-			 <div>
+			 <div style="padding-top: 10px">
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
 			 </div>
 		</form> 
@@ -60,6 +71,7 @@
 			<a id="submit">저장하기</a>
 		</div>
 	</div>	
+	</section>
 	</div>
 	</body>
 	<link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
