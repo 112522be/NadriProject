@@ -71,6 +71,10 @@ public class PurchaseRestController {
 				purchase.setCancelDate(cancelDate);
 				purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 				purchase.setQrCode("StepOfBasket");
+
+				purchase.getBuyer().getUserName();
+				purchase.getBuyer().getPhone();
+				
 				
 				System.out.println("\n[purchase.buyer check] ==> " + purchase.getBuyer() );
 				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
