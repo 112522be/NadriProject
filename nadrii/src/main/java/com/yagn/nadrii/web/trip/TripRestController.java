@@ -158,7 +158,7 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
-			System.out.println("���� �� 13 ��������");
+			
 			
 		}
 		System.out.println(areaCode +" : "+localName);
