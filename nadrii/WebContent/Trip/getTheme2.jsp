@@ -209,7 +209,7 @@ figure.snip1384.hover i {
 		<div class="col-md-2">
 			<div class="sample_image">
 				<figure class="snip1384" name="gallery">
-					<img src ="/resources/images/tripIcon/gallery.JPG" width="160" height="120"name="gallery"align="middle"/>
+					<img src ="/resources/images/tripIcon/pohang-1613923_1920_eidt.jpg" width="160" height="120"name="gallery"align="middle"/>
 					<figcaption>
 	    				<p>미 술 관</p>
 	  				</figcaption>

@@ -181,13 +181,25 @@ pageEncoding="UTF-8"%>
 	}
 	
 	function makeDialog(){
-		 $('#dialog').dialog({
+		/* 
+		$('#dialog').dialog({
 			 	modal: true,
 			    autoOpen: false,
 			    resizable: false,
 			    width: 800
 		});
+		*/
 	}
+	
+	$(function(){
+		$('#dialog').dialog({
+		 	modal: true,
+		    autoOpen: false,
+		    resizable: false,
+		    width: 800
+	});
+		
+	});
 	
 	
 	var contenttypeid;
@@ -446,6 +458,7 @@ pageEncoding="UTF-8"%>
 		
 		#dialog{
 			background-color: #8f8287;
+		
 		}
 		
 		.wrapper.style1{
@@ -454,10 +467,13 @@ pageEncoding="UTF-8"%>
 		.4u header{
 			background-color:#fff 
 		}
-		
-
-		
-		
+		#wish{
+			background: #000000;
+			padding-bottom: 4px;
+			padding-top: 4px;
+			padding-left: 4px;
+			padding-right: 4px;
+		}
 	</style>
 
 	<title>여행지 찾기</title>
@@ -526,10 +542,14 @@ pageEncoding="UTF-8"%>
                   	<td colspan="2"   id="description"></td>
           		</tr>
       		</tbody>
+      		
     	</table>
-     	<a href="#" class="btn btn-primary" role="button">공유</a> 
-    	<a href="#" class="btn btn-default" role="button">좋아요</a>
-    	<a href="#" id="wishList" class="btn btn-danger" role="button">위시리스트</a>
+    	
+     	<footer>
+		<a href="#banner" class="button circled scrolly">좋아요</a>
+		<a href="#banner" class="button circled scrolly">공유</a>
+		<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
+		</footer>
 	</div>	
 						
 </body>
