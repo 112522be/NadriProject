@@ -138,6 +138,19 @@ public class UserRestController extends SupportController {
 		map.put("systemMessage", user);
 		return map;
 	}
+	
+	@RequestMapping(value = "checkId", method=RequestMethod.POST)
+    public Object idCheck(String user, Model model) throws Exception {
+
+		System.out.println("[check]");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("[check]!!!"+map);
+		int check = userService.checkId(user);
+		System.out.println("[check]01"+user);
+		map.put("check", String.valueOf(check));
+		return map;
+    }
 		
 }
 

@@ -25,7 +25,9 @@
 	  <link rel="stylesheet" href="/resources/demos/style.css">
 	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  <script src="/resources/helios/assets/js/main.js"></script>
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 		
@@ -48,6 +50,13 @@
 		margin:0 0 30px 0;
 	}
 	
+	#nav{
+   background-color: #086A87;
+   opacity: 0.4;
+   color:#ddd;
+   
+}
+	
 	</style>
 	
 </head>
@@ -59,7 +68,7 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="margin-top:200px; width: 1170px;">
 	
 		<div class="page-header" style="    border-bottom: 3px solid #31708f;">
 	       <h3 class=" text-info" style="margin:0 0 25px 15px">회원정보조회</h3>
@@ -160,7 +169,17 @@
 	  		</div>
 		</div>
 		
+		<!-- 메인 script-->
 		
+		<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 
 </body>
 

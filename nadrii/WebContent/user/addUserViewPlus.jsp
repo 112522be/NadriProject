@@ -25,6 +25,18 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		   <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+		    <script src="/resources/helios/assets/js/main.js"></script>
+		    
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
@@ -38,6 +50,13 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+
+#nav{
+   background-color: #44324a;
+   opacity: 0.5;
+   color:#ddd;
+   
 }
     </style>
     
@@ -167,9 +186,9 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="margin-top:150px;">
 	
-		<h1 class="bg-primary text-center" style="background:#fff; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">추 가 정 보 입 력</h1>
+		<h1 class="bg-primary text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">추 가 정 보 입 력</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" action="addUserPlus" style="padding-top:50px;">
@@ -203,8 +222,8 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label style="padding-right: 60px"><input type="radio" name="gender" value="남"style="margin-right: 5px;">남</label>
-			  <label><input type="radio" name="gender" value="여" style="margin-right: 5px;">여</label>
+		      <label style="padding-right: 60px; float:left;"><input type="radio" name="gender" value="남"style="margin-right: 5px; ">남</label>
+			  <label><input type="radio" name="gender" value="여" style="margin-right: 5px; ">여</label>
 		    </div>
 		   </div>
 		  
@@ -259,6 +278,17 @@
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 
+	<!-- 메인 script-->
+		
+		<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 </body>
 
 </html>
