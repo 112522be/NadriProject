@@ -38,10 +38,14 @@ function jsGoURL(strURL){
 	self.close();
 }
 
-
+function winOpen()
+{
+window.open("loginView2.jsp","new","width=600,height=500,top=250,left=600"); 
+} 
 </script>
 </head>
 <body>
+<a href="javascript:;" onclick="winOpen()">·Î±×ÀÎ</a>
 
 </body>
 </html>

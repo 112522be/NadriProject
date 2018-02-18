@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.button {
+.fit {
 	    width: 100% !important;
 }
 </style>
@@ -126,7 +126,7 @@ function getMemberList(){
 
 		<thead>
 			<tr>
-				<th>참여자 목록<div class="totalCount" style="position: relative; float: right;"></div></th>
+				<th><span class="glyphicon glyphicon-ok-sign"></span> 참여자 목록 <div class="totalCount" style="position: relative; float: right;"></div></th>
 			</tr>
 		</thead>
 		

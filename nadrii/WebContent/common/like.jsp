@@ -53,7 +53,6 @@ function getLike(){
 			}
 		}
 	});	
-	
 }
 
 $(function(){
@@ -75,6 +74,6 @@ $(function(){
 <a href="#none" class="icon fa-heart">&nbsp;<span class="like"></span></a>
 </span>
 <span>
-<a href="#none" class="icon fa-comment">&nbsp;128</a>
+<a href="#none" class="icon fa-comment">&nbsp;<span class="comment"></span></a>
 </span>
 </div>

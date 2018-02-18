@@ -453,7 +453,10 @@ pageEncoding="UTF-8"%>
 	<style>
 	
 		img {
+		
 			cursor: pointer;
+			width:282px;
+			height:187px;
 		}
 		
 		#dialog{
@@ -461,12 +464,22 @@ pageEncoding="UTF-8"%>
 		
 		}
 		
-		.wrapper.style1{
-			background-color: #e6f9ff;
-		}
+		
 		.4u header{
-			background-color:#fff 
+			background-color:#fff; 
 		}
+		
+		#header{
+		background-image: url("/resources/images/tripIcon/tripInfo.jpg");
+		}
+		
+		
+		#nav{
+		background-image: url("../resources/helios/images/header.jpg");	
+		background-color: #44324a;
+		opacity: 0.7;
+		}
+		
 		#wish{
 			background: #000000;
 			padding-bottom: 4px;
@@ -474,6 +487,15 @@ pageEncoding="UTF-8"%>
 			padding-left: 4px;
 			padding-right: 4px;
 		}
+		
+		article{
+		background-color: #ffffff;
+		}
+		
+		.wrapper.style1{
+			background-color: #000000;
+		}
+		
 	</style>
 
 	<title>여행지 찾기</title>
@@ -498,7 +520,7 @@ pageEncoding="UTF-8"%>
 						<div class="row">
 							<c:forEach var ="list" items="${list}">
 								<article class="4u 12u(mobile) special">
-									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" width="282px" height="187px"/></a>
+									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" /></a>
 									<input type="hidden" name="contentid" value="${list.contentid}"/>
 		          					<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 									<header>

@@ -233,27 +233,22 @@ public class TripController {
 	}
 	
 	@RequestMapping(value="/getTheme")
-	public String getTheme(HttpSession session,Map map) throws Exception{
+	public String getTheme(Map map) throws Exception{
 		
-//		String areaCode = (String)session.getAttribute("areaCode");
-//		String localName = (String)session.getAttribute("localName");
-//		
-//		Map tripMap = tripService.listTrip(1,"14","A02","A0206","",areaCode,localName);
-//		
-//		List list = (List)tripMap.get("list");
-//		
-//		TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
-//		TourApiDomain feeDomain = tripService.getTripDetail(tourApiDomain.getContentid()+"",tourApiDomain.getContenttypeid()+"");
-//				
-//		
-//		System.out.println(tourApiDomain);
-//		System.out.println(feeDomain);
-//		
-//		
-//		
-//		
-//		map.put("trip", tourApiDomain);
-//		map.put("fee", feeDomain);
+		
+		Map tripMap = tripService.listTrip(1,"14","A02","A0206","","","");
+		
+		List list = (List)tripMap.get("list");
+		
+		TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
+		TourApiDomain feeDomain = tripService.getTripDetail(tourApiDomain.getContentid()+"",tourApiDomain.getContenttypeid()+"");
+				
+		
+		System.out.println(tourApiDomain);
+		System.out.println(feeDomain);
+		
+		map.put("trip", tourApiDomain);
+		map.put("fee", feeDomain);
 		return"forward:/Trip/getTheme.jsp";
 	}
 	

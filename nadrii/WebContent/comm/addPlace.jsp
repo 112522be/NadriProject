@@ -87,7 +87,7 @@
 							searchDetailAddrFromCoords(marker.getPosition(), function(result, status) {
 						        if (status === daum.maps.services.Status.OK) {
 						            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-						            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>' : '';
+						            var buildingName ='<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>';
 						            
 						            var content = '<div class="bAddr">' +
 						            				buildingName+
