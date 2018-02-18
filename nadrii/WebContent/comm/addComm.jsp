@@ -12,12 +12,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script>
 	$(function() {
-		$(document).ready(function() {
+		/* $(document).ready(function() {
 			if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
 				alert("로그인 후 이용해주세요")
 				self.location="../user/loginView.jsp"
-			}펜타토닉스
-		})
+			}
+		}) */
 		$('a#submit').bind('click', function() {
 			var hashtags=',';
 			$('button.selectedhashtagButtons').each(function() {
@@ -44,8 +44,11 @@
 	<div class="container" align="center">
 	<br/>
 		<form name="postData">
+		<c:if test="${community.postNo != null}">			
 			<input type="hidden" name="postNo" value="${community.postNo}">
-			<input type="hidden" name="userId" value="${loginUser.userId}">
+		</c:if>
+			<input type="hidden" name="userId" value="test01">
+			<%-- ${loginUser.userId} --%>
 			<div class="form-group">
 			    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요" value="${community.title}">
 			 </div>
