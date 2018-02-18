@@ -87,7 +87,6 @@ function getIndex(k){
 
 
 </script>
-
 </head>
 <body>
 	<header>
@@ -113,11 +112,17 @@ function getIndex(k){
 								<img src="../resources/assets/images/pic02.jpg" alt="" />
 								</a>
 								<header>
+<<<<<<< master
 
 									<h3>
 										<a href="#none">${group.title}</a>
 									</h3>
 
+=======
+									<h3>
+										<a href="#">${group.title}</a>
+									</h3>
+>>>>>>> 3e1f4a7 team/jm commit
 									<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									<time class="published" style="position: relative; padding-left: 100px; margin-top: -38px"> view : ${group.viewCount}</time>
 									<div>

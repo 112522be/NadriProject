@@ -59,6 +59,9 @@
 				<div class="9u 12u$(xsmall)">
 					<input type="text" class="form" style="font-size: 13pt;" name="title" id="title" value="" placeholder="제목" />
 				</div>
+				<div class="3u 6u$(xsmall)">
+					<input type="text" class="form" name="groupName" id="groupName" value="" placeholder="모임명" />
+				</div>
 			 </div>
 			 <div style="padding-top: 10px">
 			  	<jsp:include page="noteEditor.jsp"></jsp:include>
