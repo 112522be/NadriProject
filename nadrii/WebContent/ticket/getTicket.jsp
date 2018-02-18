@@ -160,25 +160,25 @@ function fncAddBooking() {
 								<li>
 									<article class="tweet">
 										장 소 : ${ detailIntro.eventplace }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 								<li>
 									<article class="tweet">
 										축제등급 : ${ detailIntro.festivalgrade }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 								<li>
 									<article class="tweet">
 										행사장 위치 : ${ detailIntro.placeinfo }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 								<li>
 									<article class="tweet">
 										관람 소요시간 : ${ detailIntro.spendtimefestival }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 							</ul>
@@ -198,19 +198,19 @@ function fncAddBooking() {
 								<li>
 									<article class="tweet">
 										홈페이지 : ${ detailIntro.eventhomepage }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 								<li>
 									<article class="tweet">
 										1. 주관사 : ${ detailIntro.sponsor1 } : ${ detailIntro.sponsor1tel }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 								<li>
 									<article class="tweet">
 										2. 주관사 :  ${ detailIntro.sponsor2 } : ${ detailIntro.sponsor2tel }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 							</ul>
@@ -230,7 +230,7 @@ function fncAddBooking() {
 								<li>
 									<article class="tweet">
 										이용요금 : ${ detailIntro.usetimefestival }
-										<span class="timestamp"</span>
+										<span class="timestamp"></span>
 									</article>
 								</li>
 							</ul>
