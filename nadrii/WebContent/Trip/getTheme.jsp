@@ -9,26 +9,29 @@
 <link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 <script type="text/javascript">
 
-
 	$( function() {
+
 		$("img[name='museum']").on("click" , function() {
 			self.location = "../trip/listMuseum?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
+
 		$("img[name='exhibition']").on("click" , function() {
 			self.location = "../trip/listExhibit?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
+
 		$("img[name='gallery']").on("click" , function() {
 			self.location = "../trip/listGallery?pageNo=1&area=local"
 		});
 	});
 	
 	$( function() {
+
 		$("img[name='experience']").on("click" , function() {
 			self.location = "../trip/listExperience?pageNo=1&area=local"
 		});
@@ -36,17 +39,13 @@
 	
 	$( function() {
 		$("img[name='tradition']").on("click" , function() {
-					
 			self.location = "../trip/listTradition?pageNo=1&area=local"
 		});
 	});
 	
 
-	
-	
-
-
 </script>
+
  
 <style type="text/css">
 
@@ -73,6 +72,7 @@
  
  
 </head>
+
 <body class="no-sidebar">
 
 		<div id="page-wrapper">
@@ -172,6 +172,7 @@
 		<script src="../resources/helios/assets/js/util.js"></script>
 		<script src="../resources/helios/assets/js/main.js"></script>
 		
+
 </body>
 
 </html>

@@ -88,6 +88,7 @@ public class TripController {
 		
 		
 		
+
 		return "forward:/Trip/listTrip3.jsp";
 		//return "forward:/Trip/listTrip3.jsp";
 	}
@@ -133,7 +134,9 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
+
 		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 	
@@ -164,6 +167,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
+
 		return "forward:/Trip/listTrip3.jsp";
 	}
 	
@@ -193,7 +197,9 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
+
 		return "forward:/Trip/listTrip3.jsp";
+
 	}
 
 	@RequestMapping(value="/listTradition")
@@ -222,6 +228,7 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
+
 		return "forward:/Trip/listTrip3.jsp";
 	}
 	
@@ -263,7 +270,9 @@ public class TripController {
 		map.put("pageNo", pageNo);
 		
 		
+
 		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 }
