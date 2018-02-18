@@ -1,3 +1,8 @@
+/**
+ * 
+ */
+
+
 
 $(document).ready(function() {
 	
@@ -14,22 +19,21 @@ $(document).ready(function() {
 		                    var lat = position.coords.latitude;
 		                    var lon = position.coords.longitude;
 		                   
-		                    //alert(lat);
-		                    //alert(lon);
 		    
 		                    
 		                    var location ={
-		                    		"lat" : lat+"",
-		                    		"lng" : lon+""
+		                    		"lat" : lat,
+		                    		"lng" : lon
 		                    }
 		                    
 		                    var jsonData = JSON.stringify(location);
-		                    console.log(jsonData);
+		                    
 		                    $.ajax({
+		                    	//혹여 type:"POST",로 되어 있음// method:"POST"로 바꾸고
 		                        method: "POST",
-		                        url: "/trip/json/getClientAddress/",
-		                        contentType: "application/json;charset=UTF-8",
-		                        data:jsonData,
+		                        url: "../trip/json/getClientAddress/",
+		                        contentType: "application/json",
+		                        data:location,
 		                        dataType: "json",
 		                        success: function() {
 
@@ -46,8 +50,8 @@ $(document).ready(function() {
 		                    var lon = 127.0139427;
 		                   
 		                    $.ajax({
-		                    	url: "/trip/json/getClientAddress/",
-		                        contentType: "application/json;charset=UTF-8",
+		                    	url: "../trip/json/getClientAddress/",
+		                        contentType: "application/json",
 		                        data:location,
 		                        dataType: "json",
 		                        success: function() {
@@ -63,8 +67,8 @@ $(document).ready(function() {
 		            var lon = 127.0139427;
 		           
 		            $.ajax({
-                    	url: "/trip/json/getClientAddress/",
-                        contentType: "application/json;charset=UTF-8",
+                    	url: "../trip/json/getClientAddress/",
+                        contentType: "application/json",
                         data:location,
                         dataType: "json",
                         success: function() {
@@ -73,3 +77,5 @@ $(document).ready(function() {
 		            });  
 		        }
 		    });
+
+		

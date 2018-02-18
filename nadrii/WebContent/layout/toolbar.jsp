@@ -129,6 +129,7 @@
 <!-- Nav -->
 <nav id="nav">
 	<ul>
+<<<<<<< HEAD
 		<c:if test="${  empty loginUser }">	
 		<!--  <li><a href="#">Login</a></li> -->
 		</c:if>
@@ -152,8 +153,11 @@
 								<!--  </a>-->
 							</li>
 		</c:if>
+=======
+		<li><a href="../user/login">Login</a></li>
+>>>>>>> refs/heads/master
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
-		<li><a href="./comm/listComm">나만의 나들이</a></li>
+		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
@@ -170,7 +174,17 @@
 		<!-- 					<li><a href="#">Veroeros feugiat</a></li> -->
 	</ul>
 	</li>
-	<li><a href="/ticket/listTicket">나들이 티켓</a></li>
+	<li><a href="/ticket/listTicket">나들이 티켓</a>
+		<ul>
+			<li><a href="/purchase/listBasket">장바구니</a></li>
+			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
+		</ul>
+	</li>
+	
+	
+	
+	
+	
 	<li><a href="/group/listGroup">나들이 모임</a></li>
 	<!-- 	
 				<li><a href="left-sidebar.html">Left Sidebar</a></li>
@@ -178,4 +192,5 @@
 				<li><a href="no-sidebar.html">No Sidebar</a></li>
 		 		-->
 	</ul>
+	
 </nav>

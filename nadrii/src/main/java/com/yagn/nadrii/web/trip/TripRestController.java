@@ -11,14 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yagn.nadrii.service.domain.Location;
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.Wish;
@@ -161,6 +158,7 @@ public class TripRestController {
 		
 		if(localName.equals("0")) {
 			localName ="";
+			System.out.println("���� �� 13 ��������");
 			
 		}
 		System.out.println(areaCode +" : "+localName);
@@ -283,16 +281,9 @@ public class TripRestController {
 	}
 	
 	@RequestMapping(value="json/getClientAddress")
-	public void getClientAddress(@RequestBody Location location, HttpServletRequest request)throws Exception {
-		
-		////*
-		String lat = location.getLat();
-		String lng = location.getLng();
-		//*/
-		/*
+	public void getClientAddress(@RequestBody JSONObject location, HttpServletRequest request)throws Exception {
 		String lat = (String)location.get("lat");
 		String lng = (String)location.get("lng");
-		//*/
 		System.out.println("Location :   " +location);
 		System.out.println("Latitude : " + lat +" , Longitude : "+ lng);
 		
@@ -317,7 +308,6 @@ public class TripRestController {
 	
 		
 	}
-	
 	@RequestMapping(value="json/listSearch/")
 	public Map listSearch(@RequestBody JSONObject parameter)throws Exception{
 		System.out.println(parameter);

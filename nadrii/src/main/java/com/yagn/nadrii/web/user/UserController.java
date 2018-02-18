@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.api.client.util.Value;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.purchase.PurchaseService;
@@ -84,6 +82,7 @@ public class UserController {
 			Map map = new HashMap();
 			
 			return "redirect:/index.jsp";
+
 		}
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)

@@ -5,160 +5,148 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Moderna - Bootstrap 3 flat corporate template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<!-- css -->
+	<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../resources/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+	<link href="../resources/css/jcarousel.css" rel="stylesheet">
+	<link href="../resources/css/flexslider.css" rel="stylesheet">
+	<link href="../resources/css/style.css" rel="stylesheet">
+
+	<!-- Theme skin -->
+	<link href="../resources/skins/default.css" rel="stylesheet">
 	<script type="text/javascript">
-	$(".hover").mouseleave(
-		function () {
-		    $(this).removeClass("hover");
-		}
-	);
+
+	jQuery(function() {
+	    
+	    var sort = '';
+	    var gu = '';
+	    if (! isEmpty(sort)) {
+	        $("input[id='areaCode']").val(sort);
+	        $(".siDoList").find("a[targetId='areaCode'][idValue='"+sort+"']").parent().parent().prev().html($("a[targetId='areaCode'][idValue='"+sort+"']").text() + '<span class="ico_arrow1"></span>');
+	        ajaxGetGu(sort, gu);
+	    }
+	    
+	    $(".siDoList > li > a").click(function() {
+	        ajaxGetGu($(this).attr("idValue"));
+	    });
+	    
+	    $(".store_map ul li").mouseover(function(){
+	        $(this).find("img").attr("src", $(this).find("img").attr("src").replace(".png", "_on.png"));
+	        $(this).addClass("overmap");
+	    }).mouseout(function(){
+	        $(this).find("img").attr("src", $(this).find("img").attr("src").replace("_on.png", ".png"));
+	        $(".store_map ul li").removeClass("overmap");
+	    });
+	    
+	    $(".store_map").find("a").click(function() {
+	        $("input").val("");
+	        $("input[name='sort']").val($(this).attr("idValue"));
+	        $("form[name='areaSearchForm']").submit();
+	    });
+	    
+	    $(".new_storebox li:odd() , .store_service li:odd()").addClass("lbox");
+	    
+	    
+	    $(".store_gbn > a").click(function() {
+	        if ($(this).attr("targetId") == "gbnSort") {
+	            $("input[name='gbnSort']").val("");
+	        } else {
+	            if (isEmpty($("input[id="+$(this).attr("targetId")+"]").val())) {
+	                $("input[id="+$(this).attr("targetId")+"]").val($(this).attr("idValue"));
+	            } else {
+	                $("input[id="+$(this).attr("targetId")+"]").val("");
+	            }
+	            var gbnSort = "";
+	            for (var i = 1; i < 7; i++) {
+	                if (! isEmpty($("input[name='gbnSort" + i + "']").val())) {
+	                    if (! isEmpty(gbnSort)) {
+	                        gbnSort += ",";
+	                    }
+	                    gbnSort += $("input[name='gbnSort" + i + "']").val();
+	                }
+	            }
+
+	            $("input[name='gbnSort']").val(gbnSort);
+	            if (gbnSort.length == 11) {
+	                $("input[name='gbnSort']").val("");
+	            }
+	        }
+	        $("form[name='areaSearchForm']").submit();
+	    });
+	    
+	    $(".store_serv > a").click(function() {
+	        if ($("input[id='"+$(this).attr("targetId")+"']").val() == 'true') {
+	            $("input[id='"+$(this).attr("targetId")+"']").val("");
+	        } else {
+	            $("input[id='"+$(this).attr("targetId")+"']").val("true");
+	        }
+	        $("form[name='areaSearchForm']").submit();
+	    });
+	});
+
+	function ajaxGetGu(areaCode, gu) {
+	    $.ajax({
+	        type: 'post'
+	        , data: {
+	            prntCode : areaCode
+	        }
+	        , url: 'http://www.abcmart.co.kr/abc/customer/ajaxGetGu',
+	        dataType: 'html'
+	        , success: function(data) {
+	            $("input[name='gu']").val("");
+	            $(".guGunList").prev().html('전체<span class="ico_arrow1"></span>')
+	            $('.guGunList').html("");
+	            $('.guGunList').html("<li><a href='javascript://' targetId='gu' idValue=''>전체</a></li>" + data);
+	            $(".guGunList > li > a").click(function(e) {
+	                $(this).parent().parent().prev().html($(this).text() + '<span class="ico_arrow1"></span>');
+	                $(this).parent().parent().prev().toggleClass("on");
+	                $(this).parent().parent().toggleClass("on");
+	                $("input[id='"+$(this).attr("targetId")+"']").val($(this).attr("idValue"));
+	            });
+	            
+	            if (! isEmpty(gu)) {
+	                $("input[id='gu']").val(gu);
+	                $(".guGunList").find("a[targetId='gu'][idValue='"+gu+"']").parent().parent().prev().html($("a[targetId='gu'][idValue='"+gu+"']").text() + '<span class="ico_arrow1"></span>');
+	            }
+	        }
+	    });
+	}
+
+	function searchValueCheck() {
+	    $("input[name='searchValue']").val($.trim($("input[name='searchValue']").val()));
+	}
+
+	function formSubmit(page) {
+	    $("input[name='page']").val(page);
+	    $("form[name='areaSearchForm']").submit();
+	}
+
 	
 	</script>
-	<style type="text/css">
-	
-		@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
-		@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-		figure.snip1384 {
-		  font-family: 'Raleway', Arial, sans-serif;
-		  position: relative;
-		  float: left;
-		  overflow: hidden;
-		  margin: 10px 1%;
-		  min-width: 230px;
-		  max-width: 315px;
-		  width: 100%;
-		  color: #ffffff;
-		  text-align: left;
-		  font-size: 16px;
-		  background-color: #000000;
-		}
-		figure.snip1384 * {
-		  -webkit-box-sizing: border-box;
-		  box-sizing: border-box;
-		  -webkit-transition: all 0.35s ease;
-		  transition: all 0.35s ease;
-		}
-		figure.snip1384 img {
-		  max-width: 100%;
-		  backface-visibility: hidden;
-		  vertical-align: top;
-		}
-		figure.snip1384:after,
-		figure.snip1384 figcaption {
-		  position: absolute;
-		  top: 0;
-		  bottom: 0;
-		  left: 0;
-		  right: 0;
-		}
-		figure.snip1384:after {
-		  content: '';
-		  background-color: rgba(0, 0, 0, 0.65);
-		  -webkit-transition: all 0.35s ease;
-		  transition: all 0.35s ease;
-		  opacity: 0;
-		}
-		figure.snip1384 figcaption {
-		  z-index: 1;
-		  padding: 40px;
-		}
-		figure.snip1384 h3,
-		figure.snip1384 .links {
-		  width: 100%;
-		  margin: 5px 0;
-		  padding: 0;
-		}
-		figure.snip1384 h3 {
-		  line-height: 1.1em;
-		  font-weight: 700;
-		  font-size: 1.4em;
-		  text-transform: uppercase;
-		  opacity: 0;
-		}
-		figure.snip1384 p {
-		  font-size: 0.8em;
-		  font-weight: 300;
-		  letter-spacing: 1px;
-		  opacity: 0;
-		  top: 50%;
-		  -webkit-transform: translateY(40px);
-		  transform: translateY(40px);
-		}
-		figure.snip1384 i {
-		  position: absolute;
-		  bottom: 10px;
-		  right: 10px;
-		  padding: 20px 25px;
-		  font-size: 34px;
-		  opacity: 0;
-		  -webkit-transform: translateX(-10px);
-		  transform: translateX(-10px);
-		}
-		figure.snip1384 a {
-		  position: absolute;
-		  top: 0;
-		  bottom: 0;
-		  left: 0;
-		  right: 0;
-		  z-index: 1;
-		}
-		figure.snip1384:hover img,
-		figure.snip1384.hover img {
-		  zoom: 1;
-		  filter: alpha(opacity=50);
-		  -webkit-opacity: 0.5;
-		  opacity: 0.5;
-		}
-		figure.snip1384:hover:after,
-		figure.snip1384.hover:after {
-		  opacity: 1;
-		  position: absolute;
-		  top: 10px;
-		  bottom: 10px;
-		  left: 10px;
-		  right: 10px;
-		}
-		figure.snip1384:hover h3,
-		figure.snip1384.hover h3,
-		figure.snip1384:hover p,
-		figure.snip1384.hover p,
-		figure.snip1384:hover i,
-		figure.snip1384.hover i {
-		  -webkit-transform: translate(0px, 0px);
-		  transform: translate(0px, 0px);
-		  opacity: 1;
-		}
-		/* Demo purposes only */
-		body {
-		  background-color: #212121;
-		}
-		
-		
-	
-	</style>
+    
 </head>
-
 <body>
-<figure class="snip1384">
-  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample83.jpg" alt="sample83" />
-  <figcaption>
-    <h3>Fleece Marigold</h3>
-    <p>Which is worse, that everyone has his price, or that the price is always so low.</p><i class="ion-ios-arrow-right"></i>
-  </figcaption>
-  <a href="#"></a>
-</figure>
-<figure class="snip1384 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample66.jpg" alt="sample66" />
-  <figcaption>
-    <h3>Guy Mann</h3>
-    <p>I'm killing time while I wait for life to shower me with meaning and happiness.</p><i class="ion-ios-arrow-right"></i>
-  </figcaption>
-  <a href="#"></a>
-</figure>
-<figure class="snip1384"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample92.jpg" alt="sample92" />
-  <figcaption>
-    <h3>Nigel Nigel</h3>
-    <p>The only skills I have the patience to learn are those that have no real application in life. </p><i class="ion-ios-arrow-right"></i>
-  </figcaption>
-  <a href="#"></a>
-</figure>
+	<div class="store_map">
+                <ul>
+                    <li class="map01 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="01"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_01.png" alt="서울"></a><span>서울 <em>62개</em></span></div></li>
+                    <li class="map02"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="06"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_02.png" alt="경기도"></a><span>경기도 <em>50개</em></span></div></li>
+                    <li class="map03 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="07"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_03.png" alt="인천광역시"></a><span>인천광역시 <em>10개</em></span></div></li>
+                    <li class="map04"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="02"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_04.png" alt="강원도"></a><span>강원도 <em>4개</em></span></div></li>
+                    <li class="map05 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="03"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_05.png" alt="대전광역시"></a><span>대전광역시 <em>8개</em></span></div></li>
+                    <li class="map06"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="04"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_06.png" alt="충청남도"></a><span>충청남도 <em>9개</em></span></div></li>
+                    <li class="map07"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="05"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_07.png" alt="충청북도"></a><span>충청북도 <em>7개</em></span></div></li>
+                    <li class="map08 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="08"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_08.png" alt="광주광역시"></a><span>광주광역시 <em>6개</em></span></div></li>
+                    <li class="map09"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="10"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_09.png" alt="전라북도"></a><span>전라북도 <em>6개</em></span></div></li>
+                    <li class="map10"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="09"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_10.png" alt="전라남도"></a><span>전라남도 <em>5개</em></span></div></li>
+                    <li class="map11 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="14"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_11.png" alt="대구광역시"></a><span>대구광역시 <em>11개</em></span></div></li>
+                    <li class="map12"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="13"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_12.png" alt="경상북도"></a><span>경상북도 <em>8개</em></span></div></li>
+                    <li class="map13"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="12"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_13.png" alt="경상남도"></a><span>경상남도 <em>10개</em></span></div></li>
+                    <li class="map14 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="15"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_14.png" alt="울산광역시"></a><span>울산광역시 <em>4개</em></span></div></li>
+                    <li class="map15 top_map"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="11"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_15.png" alt="서울"></a><span>부산광역시 <em>14개</em></span></div></li>
+                    <li class="map16"><div class="positR"><a href="javascript://" targetid="areaCode" idvalue="16"><img src="http://image.abcmart.co.kr/nexti/images/abcmart_new/map_16.png" alt="제주도"></a><span>제주도 <em>5개</em></span></div></li>
+                </ul>
+            </div>
 </body>
 </html>
