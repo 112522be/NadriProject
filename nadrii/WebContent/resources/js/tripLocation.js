@@ -29,7 +29,8 @@ $(document).ready(function() {
 		                    var jsonData = JSON.stringify(location);
 		                    
 		                    $.ajax({
-		                        type: "POST",
+		                    	//혹여 type:"POST",로 되어 있음// method:"POST"로 바꾸고
+		                        method: "POST",
 		                        url: "../trip/json/getClientAddress/",
 		                        contentType: "application/json",
 		                        data:location,
