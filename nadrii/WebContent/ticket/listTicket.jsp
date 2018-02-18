@@ -175,7 +175,7 @@
 									<a href="#" class="image featured">
 										<img src="${ tt.firstimage }" alt="" style="height: 302.36px;"/>
 									</a>
-									<header>
+									<header style="height: 70px;">
 										<h3><a href="#">${ num.count }. ${ tt.title }</a></h3>
 									</header>
 									<p>

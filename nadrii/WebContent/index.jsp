@@ -84,7 +84,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="/resources/images/tripIcon/admission-2974645_1920.jpg" alt="" /></a>
+							<a href="/ticket/listTicket" class="image featured"><img src="/resources/images/tripIcon/admission-2974645_1920.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">나들이 티켓</a></h3>
 							</header>
