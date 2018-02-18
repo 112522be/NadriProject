@@ -144,7 +144,7 @@
 								</article>
 							</div>
 							<div class="4u 12u(mobile)" id="sidebar">
-								<hr class="first" />
+								<hr class="first"/>
 								<section>
 									<jsp:include page="./join.jsp"></jsp:include>
 								</section>
