@@ -88,8 +88,9 @@ public class TripController {
 		
 		
 		
-		return "forward:/Trip/listTrip.jsp";
-		//return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
+		//return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")
@@ -133,7 +134,9 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 	
@@ -164,7 +167,8 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="/listExperience")
@@ -193,7 +197,9 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 
 	@RequestMapping(value="/listTradition")
@@ -222,11 +228,32 @@ public class TripController {
 		map.put("localName", localName);
 		
 				
-		return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="/getTheme")
-	public String getTheme() {
+	public String getTheme(HttpSession session,Map map) throws Exception{
+		
+		String areaCode = (String)session.getAttribute("areaCode");
+		String localName = (String)session.getAttribute("localName");
+		
+		Map tripMap = tripService.listTrip(1,"14","A02","A0206","",areaCode,localName);
+		
+		List list = (List)tripMap.get("list");
+		
+		TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
+		TourApiDomain feeDomain = tripService.getTripDetail(tourApiDomain.getContentid()+"",tourApiDomain.getContenttypeid()+"");
+				
+		
+		System.out.println(tourApiDomain);
+		System.out.println(feeDomain);
+		
+		
+		
+		
+		map.put("trip", tourApiDomain);
+		map.put("fee", feeDomain);
 		return"forward:/Trip/getTheme.jsp";
 	}
 	
@@ -243,7 +270,9 @@ public class TripController {
 		map.put("pageNo", pageNo);
 		
 		
-		return "forward:/Trip/listTrip.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 }

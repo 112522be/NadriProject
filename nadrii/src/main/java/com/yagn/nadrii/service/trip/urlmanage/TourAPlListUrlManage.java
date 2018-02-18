@@ -21,8 +21,8 @@ public class TourAPlListUrlManage {
 	private String contentIdName ="&contentId=";
 	private String kewordName ="&keyword=";
 	
-	//private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
-	private String serviceKey = "elArz5Uco6Vjf5eFlDFY225L72%2FKxulUVoQ6ucNpvUkwvvoOZw4Pri%2B3tFJHQXU4CxNyVGp%2BNRzup9HNp4XsMg%3D%3D";
+	private String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+	//private String serviceKey = "elArz5Uco6Vjf5eFlDFY225L72%2FKxulUVoQ6ucNpvUkwvvoOZw4Pri%2B3tFJHQXU4CxNyVGp%2BNRzup9HNp4XsMg%3D%3D";
 	private String contentTypeId = "12"; //""
 	private String contentId ="";
 	private String areaCode = "";

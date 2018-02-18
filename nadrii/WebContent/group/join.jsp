@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.button {
+	    width: 100% !important;
+}
+</style>
 <script>
 
 var groupNo = ${group.join.groupNo};
@@ -93,8 +98,13 @@ function getMemberList(){
 				addJoin();
 			});	
 			
+			if('${loginUser.userId}' == '${group.join.userId}'){
+				$('.joinButtonContainer').empty();
+				$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
+			}
+
 			$("a[name='cancel']").on("click", function(){
-				if(returnData.totalCount == 1){
+				if('${loginUser.userId}' == '${group.join.userId}'){
 					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
@@ -107,14 +117,12 @@ function getMemberList(){
 			});	
 		}
 	});	
-	
-	getLike();
 }
 
 </script>
 </head>
-<body onload="getMemberList()">
-	<table>
+<body>
+	<table class="default">
 
 		<thead>
 			<tr>
@@ -126,7 +134,7 @@ function getMemberList(){
 		
 		<tfoot>
 			<tr>
-				<td class="joinButtonContainer"></td>
+				<td class="joinButtonContainer" style="padding: 1em 2em 1em 2em;"></td>
 			</tr>
 		</tfoot>
 
