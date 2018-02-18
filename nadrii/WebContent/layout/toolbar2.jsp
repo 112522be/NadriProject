@@ -20,6 +20,7 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
+<<<<<<< HEAD
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -162,4 +163,156 @@
 		</nav>
 		<!-- navbar End -->
 </body>
+=======
+<!-- Latest compiled and minified JavaScript -->	
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+	<!-- css -->
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/resources/css/jcarousel.css" rel="stylesheet" />
+	<link href="/resources/css/flexslider.css" rel="stylesheet" />
+	<link href="/resources/css/style.css" rel="stylesheet" />
+	<!-- Theme skin -->
+	<link href="/resources/skins/default.css" rel="stylesheet" />
+	
+	
+	
+	
+	<style type="text/css">
+		.container {
+			padding: 20px;
+        }
+	</style>
+
+	<script type="text/javascript">
+	
+	//========== '나들이 정보' 버튼 처리 Event ==========
+	$( function() {
+		$("a[href='#' ]:contains('나들이 정보')").on("click" , function() {
+			self.location = "../trip/getTheme"
+		});
+	});
+
+	$( function() {
+
+		console.log("세션 정보 : ${session}")
+		
+		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
+			self.location = "/ticket/listTicket"
+		});
+
+	});
+
+
+	$( function() {
+
+        $(".glyphicon.glyphicon-envelope").bind("click" , function() {
+        	//alert("쪽지함")
+      		self.location = "/message/listMessage"
+        });
+    });
+	
+
+	//============= "장바구니" 화면이동 =============
+    $( function() {
+       $("a[href='#']:contains('Logout')").bind("click" , function() {
+			alert("나갈거임");
+	        self.location = "/user/logout";
+       });
+    });
+	
+	</script>
+	
+</head>
+
+
+
+<body>
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+							data-target="#bs-example-navbar-collapse-1" >
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                   	</button>
+					<a class="navbar-brand" href="/index.jsp"><span>Na</span>drii</a>
+				</div>
+				<!-- navbar-header End -->
+
+				
+				
+				<div class="navbar-collapse collapse ">
+
+					<ul class="nav navbar-nav navbar-right">
+					<c:if test="${ ! empty loginUser }">
+							<li>
+								<a href="/user/getUser?userId=${loginUser.userId}">
+								<img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px">
+								<span>
+									<c:if test="${ loginUser.userName eq null }">
+										${ loginUser.userId }
+									</c:if>
+										${ loginUser.userName }
+										님
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="/purchase/listBasket">
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="장바구니"></span>
+								</a>
+							</li>
+							<li>
+								<a href="/purchase/listPurchase">
+									<span class="glyphicon glyphicon-qrcode" aria-hidden="true" 
+										data-toggle="tooltip" data-placement="bottom" title="구매한티켓"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="glyphicon glyphicon-envelope" aria-hidden="true"
+										data-toggle="tooltip" data-placement="bottom" title="쪽지"></span>
+								</a>
+							</li>
+							<li><a href=""><span class="glyphicon glyphicon-bell"></span></a></li>
+							<li><a href="/user/logoutProc">Logout</a></li>
+						</c:if>
+						<c:if test="${  empty loginUser }">
+							<li><a href="/user/loginView.jsp" >Login</a></li>
+							<li><a href="/user/addUserView.jsp">Join</a></li>
+						</c:if>
+					</ul>
+				</div>
+			
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="../index.jsp">Home</a></li>
+						<li><a href="#">나들이 정보</a></li>
+						<li><a href="/comm/listComm">나만의 나들이</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">나들이 플래너 
+								<b class=" icon-angle-down"></b>
+							</a>
+							<ul class="dropdown-menu">
+
+								<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
+								<li><a href="/planner/addPlannerView">플래너 작성</a></li>
+								<li><a href="/planner/getMyPlannerList">나의 플래너</a></li>
+							</ul>
+						</li>
+						<li><a href="/ticket/listTicket">나들이 티켓</a></li>
+						<li><a href="/group/listGroup">나들이모임</a></li>
+					</ul>
+				</div>
+			<!-- Container End -->
+		</nav>
+		<!-- navbar End -->
+</body>
+
+>>>>>>> refs/remotes/origin/master
 </html>

@@ -3,19 +3,15 @@ package com.yagn.nadrii.web.common;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Comments;
-import com.yagn.nadrii.service.domain.User;
 
 @RestController
 @RequestMapping("/common/*")
@@ -27,7 +23,6 @@ public class CommentRestController {
 	
 	@RequestMapping("addComment")
 	public Map<String, Object> addComment(@ModelAttribute Comments comments) throws Exception {
-		System.out.println(comments);
 		commentService.addComment(comments);
 		return commentService.listCommentByPost(comments.getPostNo());
 	}
@@ -43,9 +38,11 @@ public class CommentRestController {
 	}
 	
 	@RequestMapping("updateComment")
-	public Map<String, Object> updateComment(@RequestBody Comments comments)throws Exception {
+	public void updateComment(@RequestParam int commentNo,
+								@RequestParam String text)throws Exception {
+		Comments comments = commentService.getComment(commentNo);
+		comments.setText(text);
 		commentService.updateComment(comments);
-		return commentService.listCommentByPost(comments.getPostNo());
 	}
 	
 	@RequestMapping("deleteComment")

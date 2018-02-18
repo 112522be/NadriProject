@@ -1,32 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<!-- <style type="text/css">
-	img {
-	    width: 100px;
-	    height:100px;
-	    border-radius: 50px; /* 이미지 반크기만큼 반경을 잡기*/
-	}	
-	
-	.radius-box {
-		 width: 100px;
-		 height: 100px;
-		 background-image:url("배경이미지경로");
-		 border-radius: 150px; /* 레이어 반크기만큼 반경을 잡기*/    
-		 display: table-cell;
-		 vertical-align: middle;
-		 color: #ffffff;
-		 font-weight: bold;
-		 text-align: center;
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+	#commentContainer{
+		padding-bottom: 10px;
 	}
-</style> -->
+	div[name='submitComment']{
+		background: #4b3753;
+	}
+</style>
 <script type="text/javascript"> 
+	var postNo = $('input[name="postNo"]').val();
 	function listComment() {
-		var postNo = $('input[name="postNo"]').val()
 		$.ajax({
 				url:"/common/listCommentByPost",
 				method:"GET",
@@ -34,14 +19,29 @@
 					"postNo": postNo
 				},
 				success: function(JSONData) {
+					$('#commentContainer').empty();
 					for(i=0;i<JSONData.totalCount;i++){
-						$('#commentContainer').append('<hr/><div class="container"><h4>'+JSONData.listComment[i].userId+'</h4><div class="col-xs-9"><p/>'+JSONData.listComment[i].text+'</div><div class="col-xs-3" align="right">'+JSONData.listComment[i].regDate+'</div></div>');
+						var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
+						+JSONData.listComment[i].commentNo
+						+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+						+JSONData.listComment[i].userId
+						+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
+						+JSONData.listComment[i].regDate
+						+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
+						if("${loginUser.userId}"==JSONData.listComment[i].userId){
+							html += '<span class="glyphicon glyphicon-pencil" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" style="font-size:10pt;"/>';
+						}
+						html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
+						$('#commentContainer').append(html);
 					}
+					$(".comment").empty();
+					$(".comment").append(JSONData.totalCount);
 				}
 		})
 	}
 	function addComment() {
-		var params = $("form[name=formData]").serialize();
+		var userId = $('input[name="userId"]').val();
+		var text=$('input[name="text"]').val();
 		$.ajax({
 					url:"/common/addComment",
 					dataType:"json",
@@ -49,10 +49,14 @@
 					headers : {
 						"Accept" : "application/json",
 					},
-					data:params,
+					data:{
+						"postNo": postNo,
+						"text": text,
+						"userId": userId
+					},
 					success: function(JSONData) {
-						$('input[name="text"]').val("")
-						$('#commentContainer').empty()
+						$('input[name="text"]').val("");
+						$('#commentContainer').empty();  
 						listComment();
 					},
 					error: function() {
@@ -60,33 +64,98 @@
 					}
 		})
 	}
+	function updateComment(commentNo, text) {
+		$.ajax({
+			url: '/common/updateComment',
+			method:'POST',
+			headers:{
+				"Accept" : "application/json",
+			},
+			data:{
+				"commentNo": commentNo,
+				"text": text
+			},
+			success: function() {
+				$('input[name="text"]').val("");
+				$('#commentContainer').empty();
+				alert('수정을 완료했습니다.');
+				listComment();
+			},
+			error: function() {
+				$('input[name="text"]').val("");
+				$('#commentContainer').empty();
+				alert("수정을 실패했습니다.");
+				listComment();
+			}
+			
+		})
+	}
+		
 	$(function() {
-
-		$('button.btn.btn-info[name="submitComment"]').bind('click', function() {
+		
+		$('div[name="submitComment"]').bind('click', function() {
 			addComment();
+		});
+		
+		$('#commentContainer').on('click','span.glyphicon.glyphicon-pencil',function() {
+			var text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
+			var commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
+			var editForm = '<div style="float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></div><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%;" name="update">수정</div><hr/>';
+			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html(editForm);
+			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("display","none");
+			$($('div.comments')[$(".glyphicon.glyphicon-pencil").index(this)]).attr("style", "margin-bottom: -10em;");
+			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).removeAttr("style");
+			
+			$('#commentContainer').on('click', 'div[name="update"]', function() {
+				alert(commentNo);
+				text = $('input[name="editText"]').val();
+				updateComment(commentNo, text);
+			});
+		});
+		
+		$('#commentContainer').on('click', 'span.glyphicon.glyphicon-trash',function() {
+			if(confirm("삭제하시겠습니까?")==true){
+				var commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-trash").index(this)]).val();
+				$.ajax({
+					url: '/common/deleteComment',
+					method:'POST',
+					data:{
+						"commentNo": commentNo,
+						"postNo": postNo
+					}, 
+					success: function(JSONData) {
+						$('input[name="text"]').val("");
+						$('#commentContainer').empty();
+						alert('삭제를 완료했습니다.');
+						listComment();
+					},
+					error: function() {
+						$('input[name="text"]').val("");
+						$('#commentContainer').empty();
+						alert("삭제에 실패했습니다.");
+						listComment();
+					}
+					
+				});
+			}else{
+				return;
+			}
 		})
 	})
 </script>
-</head>
-<body onload="listComment()">
-	<div class="container" align="center">
-		<p/>
-		<br/>
-		<div>
 
+<body onload="listComment()">
+	<div>
+		<div>
 			<form name="formData">
-				<input type="hidden" name="postNo" value="${community.postNo}">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
-				<div class="col-xs-10">
-						<input type="text" name="text" class="form-control" rows="3" placeholder="댓글을 입력하세요...">
+				<div style="float: left; width: 83%;">
+					<input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요...">
 				</div>
 			</form>
-			<div class="col-xs-2">
-				<button align="right" type="button" class="btn btn-info" name="submitComment">저 장</button>
-			</div>
-
-			<div id="commentContainer"></div>
 		</div>
+		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
+		<br/><br/>
+		<div id="commentContainer"></div>
 	</div>
 </body>
-</html>

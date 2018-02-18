@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.fit {
+	    width: 100% !important;
+}
+</style>
 <script>
 
 var groupNo = ${group.join.groupNo};
@@ -65,14 +70,14 @@ function getMemberList(){
 									
 			for(var i=0; i<returnData.totalCount; i++){
 				
-				$(".userIdContainer").append('<tr onclick="javascript:trClick(this);"><td><input type="hidden" class="member" value="'+returnData.list[i].userId+'"><a href="#" class="joinMemberId" data-container="body" data-toggle="popover">'+returnData.list[i].userId+'</a></td></tr>');
+				$(".userIdContainer").append('<tr onclick="javascript:trClick(this);"><td><input type="hidden" class="member" value="'+returnData.list[i].userId+'"><a href="#none" class="joinMemberId" data-container="body" data-toggle="popover">'+returnData.list[i].userId+'</a></td></tr>');
 				
 				if( returnData.list[i].userId == '${loginUser.userId}' ){
 					$('.joinButtonContainer').empty();
-					$(".joinButtonContainer").append('<a href="#" class="button fit delete" name="concel" style="float: right">concel</a>');
+					$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
 				}else{
 					$('.joinButtonContainer').empty();
-					$(".joinButtonContainer").append('<a href="#" class="button fit modify" name="join" style="float: right">join</a>');
+					$(".joinButtonContainer").append('<a href="#none" class="button fit modify" name="join" style="float: right">join</a>');
 				}
 				
 				if( '${group.join.userId}' == returnData.list[i].userId ){
@@ -84,7 +89,7 @@ function getMemberList(){
 			$('[data-toggle="popover"]').popover(
 					{ html: true,
 					 container: 'body',
-					 content: '<a href="#" class="profile" onclick="javascript:clickProfile1()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#" class="message" onclick="javascript:clickMessage1()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+					 content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 					 placement: 'bottom',
 					 }
 					);	
@@ -93,8 +98,13 @@ function getMemberList(){
 				addJoin();
 			});	
 			
-			$("a[name='concel']").on("click", function(){
-				if(returnData.totalCount == 1){
+			if('${loginUser.userId}' == '${group.join.userId}'){
+				$('.joinButtonContainer').empty();
+				$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
+			}
+
+			$("a[name='cancel']").on("click", function(){
+				if('${loginUser.userId}' == '${group.join.userId}'){
 					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
@@ -111,12 +121,12 @@ function getMemberList(){
 
 </script>
 </head>
-<body onload="getMemberList()">
-	<table>
+<body>
+	<table class="default">
 
 		<thead>
 			<tr>
-				<th>참여자 목록<div class="totalCount" style="position: relative; float: right;"></div></th>
+				<th><span class="glyphicon glyphicon-ok-sign"></span> 참여자 목록 <div class="totalCount" style="position: relative; float: right;"></div></th>
 			</tr>
 		</thead>
 		
@@ -124,7 +134,7 @@ function getMemberList(){
 		
 		<tfoot>
 			<tr>
-				<td class="joinButtonContainer"></td>
+				<td class="joinButtonContainer" style="padding: 1em 2em 1em 2em;"></td>
 			</tr>
 		</tfoot>
 

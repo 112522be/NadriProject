@@ -12,4 +12,6 @@ public interface CommentService {
 	public void updateComment(Comments comment)throws Exception;
 	public void deleteComment(int commentNo)throws Exception;
 	public int getCommentNo(Comments comment)throws Exception;
+	public Comments getComment(int commentNo)throws Exception;
+	public void deleteCommentByPost(int postNo)throws Exception;
 }

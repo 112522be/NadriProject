@@ -70,7 +70,7 @@ public class GroupController {
 		
 		joinService.addJoin(join);
 		
-		return "forward:/group/getGroup?groupNo="+groupNo;
+		return "redirect:/group/getGroup?groupNo="+groupNo;
 	}
 	
 	@RequestMapping(value="getGroup")
@@ -107,7 +107,7 @@ public class GroupController {
 		
 		groupService.updateGroup(group);
 		
-		return "forward:/group/getGroup.jsp";
+		return "redirect:/group/getGroup.jsp";
 	}
 	
 	@RequestMapping(value="deleteGroup")
@@ -130,7 +130,7 @@ public class GroupController {
 		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/listGroup";
+		return "redirect:/group/listGroup";
 	}
 	
 	@RequestMapping(value="listGroup")
@@ -142,8 +142,7 @@ public class GroupController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-	//	search.setSearchKeyword(searchKeyword);
-		
+		search.setSearchCondition("0");
 		Map<String , Object> map=groupService.getGroupList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);

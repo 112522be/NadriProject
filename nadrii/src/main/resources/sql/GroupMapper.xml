@@ -11,11 +11,11 @@
 		<result property="join.groupNo"		column="group_no"		jdbcType="NUMERIC"/>
 		<result property="join.userId"		column="user_id"			jdbcType="VARCHAR"/>
 		<result property="join.groupRole"	column="group_role"		jdbcType="NUMERIC"/>
-		<result property="groupName"		column="group_name" 	jdbcType="VARCHAR" />
 		<result property="title"					column="title" 				jdbcType="VARCHAR" />
 		<result property="text"					column="text" 				jdbcType="CLOB" />
 		<result property="regDate" 			column="reg_date" 		jdbcType="DATE" />
 		<result property="viewCount"			column="view_count"		jdbcType="NUMERIC" />
+		<result property="placeName"		column="place_name" 		jdbcType="VARCHAR" />
 		<result property="lat"					column="lat" 				jdbcType="VARCHAR" />
 		<result property="lng"					column="lng" 				jdbcType="VARCHAR" />
 		<result property="categoryCode" 	column="category_code" 	jdbcType="VARCHAR" />
@@ -25,8 +25,8 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addGroup"		parameterType="group" >
 	 	INSERT
-		INTO groups ( group_no, group_name, title, text, view_count, lat, lng, category_code, meeting_date, reg_date ) 
-		VALUES (	seq_groups_group_no.nextval, #{groupName}, #{title}, #{text}, 0, #{lat:VARCHAR}, #{lng:VARCHAR},
+		INTO groups ( group_no, title, text, view_count, place_name, lat, lng, category_code, meeting_date, reg_date ) 
+		VALUES (	seq_groups_group_no.nextval, #{title}, #{text}, 0, #{placeName:VARCHAR}, #{lat:VARCHAR}, #{lng:VARCHAR},
 					#{categoryCode}, #{meetingDate:VARCHAR}, SYSDATE )
 	</insert>
 	
@@ -34,13 +34,13 @@
 		SELECT
 		group_no
 		FROM groups
-		WHERE title=#{title} AND group_name=#{groupName}
+		WHERE title=#{title} AND dbms_lob.compare(text, #{text})=0
 	</select>	 
 	 
 	 <!-- SQL : SELECT ONE -->
 	<select 	id="getGroup"	parameterType="int"	resultMap="groupSelectMap">
 		SELECT
-		j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+		j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 		FROM groups g, join j
 		WHERE g.group_no = j.group_no
 				AND j.group_role = 1
@@ -59,9 +59,9 @@
 	<update	id="updateGroup"		parameterType="group" >
 		UPDATE groups
 	   	<set>
-	   		group_name 	= #{groupName},
 	   		title 				= #{title}, 
 	   		text 				= #{text},
+	   		place_name		= #{placeName:VARCHAR}
 	   		lat 					= #{lat:VARCHAR}, 
 	   		lng 				= #{lng:VARCHAR},
 	   		category_code 	= #{categoryCode}, 
@@ -82,19 +82,13 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT
-									j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+									j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 									FROM groups g, join j
 									WHERE g.group_no = j.group_no
 											AND j.group_role = 1
 									<if test="searchCondition != null">
 										<if test="searchCondition == 0 and searchKeyword !='' ">
-											AND g.title LIKE '%${searchKeyword}%'
-										</if>
-										<if test="searchCondition == 1 and searchKeyword !='' ">
-											AND g.text LIKE '%${searchKeyword}%'
-										</if>
-										<if test="searchCondition == 2 and searchKeyword !='' ">
-											AND j.user_id = #{searchKeyword}
+											AND (g.title LIKE '%${searchKeyword}%' OR g.text LIKE '%${searchKeyword}%')
 										</if>
 									</if>
 									ORDER BY g.reg_date DESC ) inner_table
@@ -116,20 +110,12 @@
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT
-					j.user_id, g.group_no, g.group_name, g.title, g.text, g.view_count, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
+					j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.lat, g.lng, g.category_code, g.meeting_date, g.reg_date
 					FROM groups g, join j
 					WHERE g.group_no = j.group_no
 							AND j.group_role = 1
-							<if test="searchCondition != null">
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-									AND g.title LIKE '%${searchKeyword}%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-									AND g.text LIKE '%${searchKeyword}%'
-								</if>
-								<if test="searchCondition == 2 and searchKeyword !='' ">
-									AND j.user_id = #{searchKeyword}
-								</if>
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+								AND (g.title LIKE '%${searchKeyword}%' OR g.text LIKE '%${searchKeyword}%')
 							</if>
 					 ) countTable				
 							

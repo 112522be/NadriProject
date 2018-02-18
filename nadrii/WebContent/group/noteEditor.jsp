@@ -77,17 +77,11 @@
 	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
-	    				    var uri = "addPlace.jsp";
+	    				    var uri = "../comm/addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
-	    				    	alert($('#content_pr').val());
-	    				    	alert($('#lat').val());
-	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default">'+
-	    									'<div class="col-xs-3" align="left">'+
-	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-	    									'</div>'+
-	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>';
+	    				    	var html =$('#summernote').summernote('code')+
+	    									'<div style="font-size: 12pt; text-align: center; width: 450px; border: 1px solid;">'+$('#content_pr').val()+'</div></br></br></br>';
 	    				    	$('#summernote').summernote('code', html);
 						})
 	    			}
@@ -124,7 +118,7 @@
 		<input type="hidden" name="lat" id="lat">
 		<input type="hidden" name="lng" id="lng">
 		<input type="hidden" name="thumbNailFileName">
-		<input type="hidden" id="content_pr">
+		<input type="hidden" id="content_pr" name="placeName">
 		<div id="cndThumbnail"></div>
 		</form>
 </body>

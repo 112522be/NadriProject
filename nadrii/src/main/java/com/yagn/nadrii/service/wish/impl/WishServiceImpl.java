@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.wish.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.Wish;
+import com.yagn.nadrii.service.trip.TripDao;
 import com.yagn.nadrii.service.wish.WishDao;
 import com.yagn.nadrii.service.wish.WishService;
 
@@ -21,6 +24,9 @@ public class WishServiceImpl implements WishService{
 	@Qualifier("wishDaoImpl")
 	private WishDao wishDao;
 	
+	@Autowired
+	@Qualifier("tripDaoImpla")
+	private TripDao tripDao;
 	
 	
 	public WishServiceImpl() {
@@ -50,6 +56,7 @@ public class WishServiceImpl implements WishService{
 		return wishDao.getWish(wishNo)	;
 	}
 
+	
 	@Override
 	public Map listWish(String userId) throws Exception {
 		System.out.println("WishService listwish");
@@ -74,9 +81,36 @@ public class WishServiceImpl implements WishService{
 		Map map = new HashMap();
 		map.put("userId", userId);
 		map.put("tripNo", tripNo);
-		System.out.println("���ߴ�?" + wishDao.getWishByTripNo(map));
+		System.out.println("Confirm :  " + wishDao.getWishByTripNo(map));
 		return wishDao.getWishByTripNo(map);
 		
+	}
+
+	//플래너에서 사용할 위시리스트 내용 
+	@Override
+	public List listTripFromWish(String userId) throws Exception {
+		System.out.println("WishService listTripFromWish");
+		
+		List wishList = new ArrayList();
+		
+		List list = wishDao.listWish(userId);
+		
+		for (int i = 0; i < list.size(); i++) {
+			Wish wish = (Wish)list.get(i);
+			Trip trip = tripDao.getTrip(wish.getTripNo().getPostNo());
+			
+			wish.setTripNo(trip);
+			
+			wishList.add(wish);
+			
+		}
+		
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(wishList.get(i));
+		}
+		
+		return wishList;
 	}
 
 	

@@ -38,6 +38,7 @@
     
               
 <script>
+/*
 $(document).ready(function() { 
    $("#userId").val('');
    idCheckFlag = false;
@@ -157,14 +158,14 @@ function checkSuccess(){
    
    
     
-//    function joinform(){
- //      location.href="getUser.jsp"
- //         var str3 = document.getElementById('join');
+    function joinform(){
+       location.href="getUser.jsp"
+          var str3 = document.getElementById('join');
 
-//      str3.submit();
+      str3.submit();
 
-//      alert("가입이 완료되었습니다.")
-//   }
+      alert("가입이 완료되었습니다.")
+   }
     
       var password = $("#password").val();
       var password2 = $("#password2").val();
@@ -197,7 +198,9 @@ function checkSuccess(){
          $("#email").css("background-color", "#B0F6AC");
       }
    }
-    
+  //*/  
+     
+   /*
     function addUser(){
        var data = "userId=" + $("#userId").val();
        data += "&password=" + $("#password").val(); 
@@ -275,6 +278,23 @@ function checkSuccess(){
             location.href = "/user/main";
         }
     }
+   //*/ 
+   
+	$( function() {
+		$("button[type='button']:contains('가입')").on("click",function(){
+
+    		alert("걸린건가?");
+    		$("form").attr("method","POST").attr("action","/user/addUser").submit();
+    	});
+		
+		$("button[type='button']:contains('restTest')").on("click",function(){
+    		//alert("걸린건가?");
+    		self.location ="addUserViewRestTest.jsp"; 
+    	});
+		
+	});
+    
+    
 </script>
 </head>
 
@@ -299,7 +319,7 @@ function checkSuccess(){
         <div class="form-group">
           <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
           <div class="col-sm-4">
-            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" oninput="checkId();" autofocus>
+            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" autofocus>
             <span id = "chkMsg"></span>
           </div>
          <div id="htmlId"></div>
@@ -308,7 +328,7 @@ function checkSuccess(){
         <div class="form-group">
           <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
           <div class="col-sm-4">
-            <input type="password" class="form-control password" id="password" name="password" placeholder="비밀번호">
+            <input type="password" class="form-control password" id="password" name="password" placeholder="비밀번호"/>
           </div>
           <div id="htmlId"></div>
         </div>
@@ -316,68 +336,25 @@ function checkSuccess(){
         <div class="form-group">
           <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
           <div class="col-sm-4">
-            <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인" oninput="checkPwd();">
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인" />
           </div>
         </div>
-<!--      
-        <div class="form-group">
-          <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주민번호</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="ssn" name="ssn" placeholder="주민번호">
-            <span id="helpBlock" class="help-block">
-                <strong class="text-danger">" -  " 제외 13자리입력하세요</strong>
-            </span>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
-           <div class="col-sm-2">
-            <select class="form-control" name="phone1" id="phone1">
-                 <option value="010" >010</option>
-               <option value="011" >011</option>
-               <option value="016" >016</option>
-               <option value="018" >018</option>
-               <option value="019" >019</option>
-            </select>
-          </div>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호">
-          </div>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
-          </div>
-          <input type="hidden" name="phone"  />
-        </div>
-        -->
          <div class="form-group">
           <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" oninput="emailValid();">
-            <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" />
+            <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" />
             <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
-            <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" onClick="checkSuccess();">
+            <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" />
           </div>
         </div> 
         
         <div class="form-group">
           <div class="col-sm-offset-4  col-sm-4 text-center">
-            <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >가 &nbsp;입</button>
-           <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >취&nbsp;소</a>
+            <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" >가입</button>
+           <a class="btn btn-primary btn" href="#" role="button" >취소</a>
+           <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn">restTest</button>
+
           </div>
         </div>
       </form>

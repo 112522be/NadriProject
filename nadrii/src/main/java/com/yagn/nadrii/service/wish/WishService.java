@@ -1,6 +1,7 @@
 package com.yagn.nadrii.service.wish;
 
 
+import java.util.List;
 import java.util.Map;
 
 import com.yagn.nadrii.service.domain.Wish;
@@ -18,4 +19,6 @@ public interface WishService {
 	public void deleteWish(int wishNo) throws Exception;
 
 	public Wish getWishByTripNo(String UserId, int tripNo) throws Exception;
+	
+	public List listTripFromWish(String userId) throws Exception;
 }

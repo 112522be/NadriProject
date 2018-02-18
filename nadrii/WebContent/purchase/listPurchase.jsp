@@ -1,175 +1,184 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
 
-<html>
 <head>
+<title>구매한 티켓 목록</title>
 <meta charset="UTF-8">
-<title>listPurchase.jsp</title>
 
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	  body {
-            padding-top : 50px;
-        }
-    </style>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
 
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
+
+
+
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+
+
+	<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-//검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
-function fncGetList(currentPage) {
-	$("#currentPage").val(currentPage)
-	$('form').attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
+function fncGetList(pageNo) {
+	$("#pageNo").val(pageNo);
+	$("form").attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
 }
 
 
-$( function(){
-	$('td:nth-child(1)').bind("click", function(){
-		var tranNo = $( $('td:nth-child(1) input[name="tranNo"]')[$('td:nth-child(1)').index(this)] ).val(); 
-		self.location = "/purchase/getPurchase?tranNo=" + tranNo
+
+	//=================== "메인으로" 버튼 Event 연결 =================== 
+	$(function() {
+		$("a[href='#']:contains('메인으로')").bind("click", function() {
+			self.location = "/index.jsp"
+		})
 	});
-});
 
-
-$( function(){
-	$('td:nth-child(2)').bind("click", function(){
-		var buyerUserId = $( $('td:nth-child(2) input[name="buyerUserId"]')[$('td:nth-child(2)').index(this)] ).val(); 
-		self.location = "/user/getUser?userId=" + buyerUserId
-	});
-});
-
-
-$( function(){
-	$('td:nth-child(6)').bind("click", function(){
-		var tranNo = $( $('input[name="tranNo"]')[$('td:nth-child(6)').index(this)] ).val(); 
 	
-		$.ajax({
-						url : "/purchase/json/updateTranCode/" + tranNo + "/2",
-						method : "GET",
-						dataType : "json",
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(JSONData, status) {
-							location.reload();
-						}
-
-					}); // end of $.ajax
-				});
-	});
 	
 </script>
+
 </head>
 
-<body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<div class="page-header text-info">
-	       <h3>구매목록조회</h3>
-	    </div>
 
-	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	    <div class="row">
-	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
-		    	</p>
-		    </div>
+<body class="no-sidebar">
+		<div id="page-wrapper">
 
-			<div class="col-md-6 text-right">
-			    <form class="form-inline" name="detailForm">
-			    
-				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  
-				</form>
-	    	</div>
-    	</div>
-    	
-    	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		
-		
-      <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
-      
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left">구매회원ID</th>
-            <th align="left">받으실분 이름</th>
-            <th align="left">받으실분 전화번호</th>
-            <th align="left">배송현황</th>
-            <th align="left">정보수정</th>
-          </tr>
-        </thead>
-       
-		<tbody>
-		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="purchase" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">
-			  	<input type="hidden" name="tranNo" value="${ purchase.tranNo }">${ i }
-		  	  </td>
-			  
-			  <td align="left">
-				<input type="hidden" name="buyerUserId" value="${ purchase.buyer.userId }">${ purchase.buyer.userId }
-	          </td>
-			  
-			  <td align="left">${ purchase.receiverName }</td>
-			  
-			  <td align="left">${ purchase.receiverPhone }</td>
-			  
-			  <td align="left">현재
-				<c:if test="${ purchase.tranCode == '0' }">
-					구매완료
-				</c:if>
-				<c:if test="${ purchase.tranCode == '1' }">
-					배송중
-				</c:if>
-				<c:if test="${ purchase.tranCode == '2' }">
-					배송완료
-				</c:if> 상태 입니다.
-			  </td>
-			  
-			  <td align="left">
-			  	<c:if test="${ purchase.tranCode == '1' }">
-					<input type="hidden" name="tranNo" value="${ purchase.tranNo }">물건도착
-				</c:if>
-			  </td>
-			</tr>
-          </c:forEach>
-        
-        </tbody>
-      
-      </table>
-	  <!--  table End /////////////////////////////////////-->
-	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	
- 	<!-- PageNavigation Start... -->
-		<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
+			<!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
 					
+					<jsp:include page="/layout/toolbar.jsp" /> 
+
+				</div>
+
+<form action="navigation">
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#">구매한 티켓 목록</a></h2>
+								<p>
+									<strong class="text-success">
+									<c:if test="${ user.userName eq null }">
+										${ user.userId }
+									</c:if>
+										${ user.userName }
+									</strong> 회원님의  <strong class="text-danger">구매하신 티켓</strong> 목록 입니다.
+								</p>
+							</header>
+							
+						</article>
+					
+					</div>
+
+
+					<div class="container">
+					
+						<c:forEach var="list" items="${list}" varStatus="num">
+						<span class="timestamp">No.${ num.count } ${ list.postNo }</span>
+						<div class="row">
+
+							<!-- Photos -->
+								<section class="4u 12u(mobile)">
+									<div class="row 25% no-collapse">
+										<div class="12u">
+											<a href="#" class="image fit"><img src="${ list.ticketImage }" alt="" /></a>
+										</div>
+									</div>
+								</section>	
+							
+							<!-- content -->
+								<section class="4u 12u(mobile)">
+									<ul class="divided">
+										<li>
+											<article class="tweet">
+												<h3><a href="#">${ list.ticketTitle }</a></h3>
+												<span class="timestamp">&nbsp;</span>
+												<h4>예매일자</h4>
+												<p>&nbsp;&nbsp;${ list.bookingDate }</p>
+												<h4>취소 가능일자</h4>
+												<p>&nbsp;&nbsp;${ list.cancelDate } 까지</p>
+												<p>
+													<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+														￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장
+													</c:forEach>
+												</p>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+						</div><!-- row end -->
+						<br>
+						</c:forEach>
+					
+							<input type="hidden" name="sumPostNo">
+							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+							<input type="hidden" id="pageNo" name="pageNo" value=""/>
+						
+
+							<article id="main" class="container special">
+								<footer>
+									<a href="#" class="button">메인으로</a>
+								</footer>
+							</article>
+		
+					</div><!-- container end -->
+					
+					
+					
+					<hr/>	
+					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
+					
+				</div><!-- wrapper style1 End -->
+
+	</form>
+
+			<jsp:include page="/layout/footer.jsp" />
+			
+		
+	</div>
+
+
 </body>
- 
+
 </html>

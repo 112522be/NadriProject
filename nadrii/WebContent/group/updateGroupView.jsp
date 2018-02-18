@@ -20,8 +20,6 @@
 			$('form[name="postData"]').attr("action", "updateGroup").attr("method", "POST").submit();
 		})
 	})
-	
-	alert(${group.join.groupNo});
 	</script>
 	<style type="text/css">
 .row > * {
@@ -35,6 +33,7 @@
 	<div id="main">
 	
 	<div class="container" align="center">
+	<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
 	<br/>
 		<form name="postData">
 			<div class="row">
@@ -51,9 +50,6 @@
 				</div>
 				<div class="6u 12u$(xsmall)">
 					<input type="text" class="form" name="title" id="title" value="${group.title}" placeholder="제목" />
-				</div>
-				<div class="3u 6u$(xsmall)">
-					<input type="text" class="form" name="groupName" id="groupName" value="${group.groupName}" placeholder="모임명" />
 				</div>
 			 </div>
 			 <div>

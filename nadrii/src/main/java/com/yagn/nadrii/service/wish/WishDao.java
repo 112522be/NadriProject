@@ -18,4 +18,6 @@ public interface WishDao {
 	public void deleteWish(int wishNo) throws Exception;
 		
 	public Wish getWishByTripNo(Map map) throws Exception;
+	
+	
 }
