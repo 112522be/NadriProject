@@ -189,6 +189,8 @@ public class PurchaseController {
 			kakaoPayRequest.setPg_token(pg_token);
 			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
 			
+			System.out.println("\n[kakaoPayResponse]==>"+kakaoPayResponse.toString());
+			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
 			System.out.println("\n[1. Purchase Domain Check] ==> " + purchase.toString());
