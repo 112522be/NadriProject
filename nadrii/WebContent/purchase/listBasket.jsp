@@ -27,7 +27,6 @@
 	crossorigin="anonymous"> -->
 
 
-
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
@@ -342,16 +341,24 @@ function fncGetList(pageNo) {
 							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 							<input type="hidden" id="pageNo" name="pageNo" value=""/>
 						
-
-							<article id="main" class="container special">
-								<footer>
-									<a href="#" class="button">전체선택취소</a>&nbsp;
-									<a href="#" class="button" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</a>&nbsp;
-									<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</a>&nbsp;
-									<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</a>
-								</footer>
-							</article>
-		
+							<c:if test="${ empty list }">
+								<article id="main" class="special">
+									<header>
+										<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">장바구니에 등록된 티켓이 없습니다.</a></h2>
+									</header>
+								</article>	
+							</c:if>
+							<c:if test="${ !empty list }">	
+								<article id="main" class="container special">
+									<footer>
+										<a href="#" class="button">전체선택취소</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</a>
+									</footer>
+								</article>
+							</c:if>
+							
 							
 					</div><!-- container end -->
 					

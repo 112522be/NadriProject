@@ -448,7 +448,7 @@ function checkSuccess(){
 							<div class="col-sm-6 loginId">
 								<input type="text" class="form-control" name="userId" id="userId" style="padding:0.5em" placeholder="아이디를 입력해 주세요.">
 								<c:if test="${systemMessage == 'IdError'}">
-									아이디가 잘못되었소이다
+									아이디가 잘못되었습니다.
 								</c:if>
 							</div>
 						</div>
@@ -458,7 +458,7 @@ function checkSuccess(){
 							<div class="col-sm-6 loginPw">
 								<input type="password" class="form-control" name="password"	id="password" style="padding:0.5em" placeholder="비밀번호를 입력해 주세요">
 								<c:if test="${systemMessage == 'pwError'}">
-									비밀번호가 잘못되었소이다
+									비밀번호가 잘못되었습니다.
 								</c:if>
 							</div>
 						</div>

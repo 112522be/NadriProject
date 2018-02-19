@@ -70,26 +70,36 @@
 	});
 
 	function fncBasketList() {
-		 
+		
+		totalTicketPrice = 0;
+		
 		$(".modal-body .text-center.title").append('${ tourTicket.title }');
-
+		
 		for (var i = 0; i < $(".ticketPrice").length; i++) {
 			ticketPrice = $(".ticketPrice").eq(i).val();
 			ticketCount = $(".ticketCount").eq(i).val();
-
+			
 			totalTicketCount += ticketCount * 1;
 
 			if (ticketCount != 0) {
 				var sumPriceTicket = (ticketPrice * 1) * ticketCount;
 				totalTicketPrice = (totalTicketPrice * 1)
 						+ (sumPriceTicket * 1);
-				$(".modal-body").append("<h3>&nbsp;&nbsp;￦ "
-										+ ticketPrice
-										+ " : <strong class='text-danger'>"
-										+ ticketCount + "</strong>&nbsp;장</h3>");
+				$(".modal-body h3:contains('- 선택한 티켓매수')").append( 
+						"<h4>&nbsp;&nbsp;&nbsp;&nbsp;￦ "
+						+ ticketPrice 
+						+ " = "
+						+ "<strong class='text-danger'>"
+						+ ticketCount
+						+ " 매</strong></h4>"
+				);
 			}
 		}
-		$(".modal-body h3:contains('- 총 결제요금 : ￦ ') .text-danger").append(totalTicketPrice);
+		$(".modal-body h3:contains('- 총 결제요금 : ￦ ')").append(
+				"<strong class='text-danger' name='totalTicketCount'>"
+				+ totalTicketPrice
+				+ "</strong>"
+		);
 	}
 	
 </script>
@@ -308,7 +318,17 @@
 		}
 	}
 
-	
+	//=================== "선택티켓결제 취소" 버튼 Event 연결 ===================
+	$(function() {
+		$("#myModal button[name='modalCancel']").bind("click", function() {
+//					alert("선택티켓결제 취소")
+					$(".text-center.title").empty();
+					$(".modal-body h4").empty();
+//					$(".modal-body h3:contains('- 총 결제요금') strong").empty();
+					$("strong.text-danger[name='totalTicketCount']").empty();
+					$("strong.text-danger[name='totalTicketCount']").val('0');
+				})
+	});	
 	
 	
 	
@@ -547,14 +567,17 @@
 				</div>
 			
 				<div class="modal-body">
-					<h2 class="text-center title"></h2><br>
+					<h3 class="text-center title"></h3><br>
 					<h3>- 선택한 예매일자 : <strong class='text-danger'>${ bookingDate }</strong></h3>
-					<h3>- 총 결제요금 : ￦ <strong class="text-danger"></strong></h3>
+					<h3>- 선택한 티켓매수</h3>
+					
+					
+					<h3>- 총 결제요금 : ￦ </h3>
 				
 				</div>
 			
 				<div class="modal-footer">
-					<button type="button" class="button" data-dismiss="modal">저장하기</button>
+					<button type="button" class="button" data-dismiss="modal">저장하기</button>&nbsp;
 					<button type="button" class="button" name="modalCancel" data-dismiss="modal">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>
 				</div>
 			</div>
