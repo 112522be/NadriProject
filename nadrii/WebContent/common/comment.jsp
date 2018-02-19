@@ -97,20 +97,23 @@
 			addComment();
 		});
 		
+		var text;
+		var commentNo;
+		
 		$('#commentContainer').on('click','span.glyphicon.glyphicon-pencil',function() {
-			var text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
-			var commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
+			text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
+			commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
 			var editForm = '<div style="float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></div><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%;" name="update">수정</div><hr/>';
 			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html(editForm);
 			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("display","none");
 			$($('div.comments')[$(".glyphicon.glyphicon-pencil").index(this)]).attr("style", "margin-bottom: -10em;");
 			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).removeAttr("style");
-			
-			$('#commentContainer').on('click', 'div[name="update"]', function() {
-				alert(commentNo);
-				text = $('input[name="editText"]').val();
-				updateComment(commentNo, text);
-			});
+		});
+		
+		$('#commentContainer').on('click', 'div[name="update"]', function() {
+			alert(commentNo);
+			text = $('input[name="editText"]').val();
+			updateComment(commentNo, text);
 		});
 		
 		$('#commentContainer').on('click', 'span.glyphicon.glyphicon-trash',function() {

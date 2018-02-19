@@ -1,20 +1,7 @@
 package com.yagn.nadrii.web.user;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,14 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
@@ -50,8 +37,6 @@ public class UserRestController extends SupportController {
 	public UserRestController(){
 		System.out.println(this.getClass());
 	}
-	
-		
 		
 	@RequestMapping(value="json/addUser", method= RequestMethod.POST )
 	public Map addUser(@RequestBody JSONObject jsonObject) throws Exception{
@@ -91,10 +76,7 @@ public class UserRestController extends SupportController {
 			}
 		return buffer.toString(); 
 	}
-	
-	
-	
-		
+
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
 	public Map login(@RequestBody JSONObject jsonObject,HttpSession session,HttpServletRequest request) throws Exception {
 		
@@ -156,6 +138,20 @@ public class UserRestController extends SupportController {
 		map.put("systemMessage", user);
 		return map;
 	}
-		
 	
+	@RequestMapping(value = "checkId", method=RequestMethod.POST)
+    public Object idCheck(String user, Model model) throws Exception {
+
+		System.out.println("[check]");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("[check]!!!"+map);
+		int check = userService.checkId(user);
+		System.out.println("[check]01"+user);
+		map.put("check", String.valueOf(check));
+		return map;
+    }
+		
 }
+
+

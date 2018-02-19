@@ -53,6 +53,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 		@Override
 		public void addPurchase(Purchase purchase) throws Exception {
 			
+			System.out.println("\n[purchaseServiceImpl.java / addPurchase");
+			
 			if (purchase.getTicketPriceAll() == null) {
 				String sumTicketPrice = "";
 				for (int i = 0; i < purchase.getTicketPrice().length; i++) {

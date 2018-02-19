@@ -18,21 +18,9 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -139,7 +127,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건수,    현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    </div>
 		    
@@ -174,13 +162,14 @@
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
       
-        <thead>
+        <thead style="    background: #DDC;">
           <tr>
-            <th align="center">No</th>
+            <th align="center">No.</th>
             <th align="left">회원 ID</th>
-            <th align="left">회원명</th>
+            <!-- <th align="left">회원명</th> -->
             <th align="left">이메일</th>
-            <th align="left">간략정보</th>
+            <!-- <th align="left">간략정보</th> -->
+            <th align="left">가입 날짜</th>
           </tr>
         </thead>
        

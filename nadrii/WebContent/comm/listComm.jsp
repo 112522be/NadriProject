@@ -16,7 +16,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<link rel="stylesheet" href="/resources/assets/css/main.css?version=1041"/>
 <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 <script type="text/javascript">
 $(function() {
@@ -83,12 +82,13 @@ $(function() {
 							<p>세상에 하나뿐인 당신의 추억을 공유하세요</p>
 						</header>
 						<div class="continer">
-						<div class="col-sm-6" align="left">
+						<div class="col-sm-9" align="left">
 							<h6 style="color: #aeb1b7;font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
 						</div>
-						<div class="col-sm-6" align="right">
+						<div class="col-sm-3" align="right">
 							<form class="search">
-								<input type="text" name="searchKeyword" id="searchKeyword" value="" width="300px">
+								<span class="glyphicon glyphicon-search" style="position: relative; margin-right: -40px;"></span>
+								<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 80%"/>
 							</form>
 						</div>
 						</div>	
