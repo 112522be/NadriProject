@@ -98,7 +98,7 @@ public class Wishtest {
 		System.out.println(wish);
 	}
 	
-	//@Test
+	@Test
 	public void listWish()throws Exception{
 		List list = wishDao.listWish("questsolve");
 		for (int i = 0; i < list.size(); i++) {
@@ -120,7 +120,7 @@ public class Wishtest {
 		System.out.println(wishDao.getWish(10001));
 	}
 	
-	@Test
+	//@Test
 	public void listWishPlusTrip() throws Exception{
 		List list = wishService.listTripFromWish("test01");
 		for (int i = 0; i < list.size(); i++) {

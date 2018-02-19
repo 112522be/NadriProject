@@ -23,7 +23,7 @@ import com.yagn.nadrii.service.wish.WishService;
 
 @RestController
 @RequestMapping("/wish/*")
-public class WishRestController {
+public class WishController {
 	
 	@Autowired
 	@Qualifier("wishServiceImpl")
@@ -38,11 +38,11 @@ public class WishRestController {
 	private TripService tripService;
 	
 		
-	public WishRestController() {
+	public WishController() {
 		System.out.println(this.getClass());
 	}
 
-	@RequestMapping("json/addWishFromTrip/{contentId}")
+	@RequestMapping("/addWishFromTrip/{contentId}")
 	public void addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
 		
 		
@@ -73,7 +73,7 @@ public class WishRestController {
 		
 	}
 	
-	@RequestMapping("json/addWishFromPost/{postNo}")
+	@RequestMapping("/addWishFromPost/{postNo}")
 	public void addWishFromPost(@PathVariable("postNo")int postNo, HttpServletRequest request) throws Exception{
 		
 		System.out.println("RestController addWishFromPost");
@@ -110,8 +110,8 @@ public class WishRestController {
 	
 	
 	
-	@RequestMapping("/json/listWish/{userId}")
-	public Map listWish(HttpSession session, HttpServletRequest request) throws Exception {
+	@RequestMapping("/listWish/{userId}")
+	public String listWish(Map map, HttpSession session, HttpServletRequest request) throws Exception {
 		System.out.println("listWish");
 		session = request.getSession(true);
 				
@@ -119,14 +119,14 @@ public class WishRestController {
 		
 		Map wishMap = wishService.listWish(userId);
 		
-		Map map = new HashMap();
+		
 		map.put("wishMap", wishMap.get("list"));
 		
-		return map;
+		return "forward://planner/wishList/ListWishList.jsp";
 	}
 	
 	
-	@RequestMapping("/json/deleteWish/{wishNo}")
+	@RequestMapping("/deleteWish/{wishNo}")
 	public void deleteWish(int wishNo) throws Exception{
 		System.out.println("deleteWish");
 		wishService.deleteWish(wishNo);

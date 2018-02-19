@@ -114,6 +114,41 @@
 		
 	});
 	
+	////////////////////////추가 js////////////////
+	
+	///*
+	$(function(){
+		$("#placesWishList").css("display","block");	
+	});
+	
+	/*
+	$(function(){
+		$("#wishButton").on("click",function(){
+			$( "#placesWishList" ).toggle( "blind", 300 );
+		})
+		
+	})
+	//*/
+	
+	$( function() {
+		
+		// run the currently selected effect
+	    function runWishEffect() {
+	    
+	      // Run the effect
+	      $( "#placesWishList" ).toggle( "blind", 300 );
+	    };
+	 
+	    // Set effect from select menu value
+	    $( "#wishButton" ).on( "click", function() {
+	      runWishEffect();
+	    });
+	    
+	  });
+	
+	
+	
+	
 	//////////////////////////////////////////////////////
 	
 	var sort =[];	//sortable 배열선언
@@ -123,6 +158,7 @@
 		
 		$("#searchListSubmit").on("click", function(){
 			$("#placesList").css("display","block");
+			
 		});
 		
 	    // run the currently selected effect
@@ -136,7 +172,7 @@
 	    $( "#button" ).on( "click", function() {
 	      runEffect();
 	    });
-	  } );
+	  });
 	
 	
 	$( function() {

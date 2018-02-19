@@ -128,7 +128,11 @@ h4 {
 							<button type="submit" id="searchListSubmit" style="padding: 0;font-size: 9pt;width: 60px;background-color: navajowhite;">검색하기</button>
 						</form>
 						<ul id="placesList" style="display: none;"></ul>
+						
 						<text id="button">▼</text>
+						<ul id="placesWishList" style="display: none;"></ul>
+						<text id="wishButton">▲</text>
+						
 					</div>
 				</div>
 				<div id="pagination"></div>
@@ -277,7 +281,7 @@ h4 {
 			</div>
 		</form>
 	</div>
-
+	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 
