@@ -26,8 +26,8 @@ import com.yagn.nadrii.service.domain.naverLogin.NaverLoginRequest;
 import com.yagn.nadrii.service.domain.naverLogin.NaverLoginResponse;
 import com.yagn.nadrii.service.domain.naverLogin.UserResponse;
 
-public class KakaoLoginRestClient {
-	public KakaoLoginRestClient() {}
+public class LoginRestClient {
+	public LoginRestClient() {}
 	
 	public static TokenResponse loginToken(String code) throws Exception {
 		
@@ -52,13 +52,13 @@ public class KakaoLoginRestClient {
 		return objectMapper.readValue(object.toString(), TokenResponse.class);
 	}
 	
-	public static String getProfile(String token) throws Exception {
+	public static JSONObject getProfile(String token) throws Exception {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		String url = "https://kapi.kakao.com/v1/user/me";
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
-		httpGet.setHeader("Authorization", token);
+		httpGet.setHeader("Authorization", "Bearer "+token);
 		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 		HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -68,7 +68,7 @@ public class KakaoLoginRestClient {
 		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
 		
-		return object.toString();
+		return object;
 	}
 	
 	public static void signUp(String token) throws Exception{
@@ -76,7 +76,7 @@ public class KakaoLoginRestClient {
 		String url = "https://kapi.kakao.com/v1/user/signup";
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Authorization", "Bearer "+token);
+		httpPost.setHeader("Authorization", token);
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 		
 //		JSONObject properties = new JSONObject();
@@ -163,14 +163,13 @@ public class KakaoLoginRestClient {
 		NaverLoginRequest loginRequest = new NaverLoginRequest();
 		loginRequest.setCode(code);
 		loginRequest.setGrant_type("authorization_code");
-		loginRequest.setClient_id("u1N5M6Sn4cT3DMseJTdyatBT1zfAyAoS"); //hkuEu0FBgOT1dsQixJU3
+		loginRequest.setClient_id("hkuEu0FBgOT1dsQixJU3"); //hkuEu0FBgOT1dsQixJU3
 		loginRequest.setClient_secret("dm1JX0XXqi");
 		loginRequest.setState(state);
 		
 		HttpEntity httpEntity = new ByteArrayEntity(loginRequest.toString().getBytes("UTF-8"));
 		httpPost.setEntity(httpEntity);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
-		System.out.println("�ι� �������� Ȯ��");
 		httpEntity = httpResponse.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
@@ -189,7 +188,6 @@ public class KakaoLoginRestClient {
 		httpPost.setHeader("Authorization", tokenInfo.getToken_type()+" "+tokenInfo.getAccess_token());
 		
 		HttpResponse httpResponse = httpClient.execute(httpPost);
-		System.out.println("�ι� �������� Ȯ��");
 		HttpEntity httpEntity = httpResponse.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
 		JSONObject object = (JSONObject)JSONValue.parse(br);
