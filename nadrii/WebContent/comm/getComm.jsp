@@ -164,6 +164,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+<input type="hidden" name="postNo" value="${community.postNo}">
 <div id="main">
 <section class="two">
 	<div class="container" style="height: auto;">

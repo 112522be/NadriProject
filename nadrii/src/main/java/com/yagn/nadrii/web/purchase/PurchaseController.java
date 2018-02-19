@@ -153,7 +153,7 @@ public class PurchaseController {
 		
 		System.out.println("\n /purchase/kakaoPay : POST");
 //		System.out.println("\n[kakaoPayRequest]==>" + kakaoPayRequest.toString());
-		System.out.println("\n[purchase]==>" + purchase.toString());
+		System.out.println("\n[kakaoPay/purchase]==>" + purchase.toString());
 
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 		
@@ -162,6 +162,8 @@ public class PurchaseController {
 			kakaoPayResponse = purchaseService.addKakaoPayment(kakaoPayRequest);
 			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
 			this.kakaoPayRequest = kakaoPayRequest;
+			
+			System.out.println("\n[kakaoPay / kakaoPayRequest Check]==>" + kakaoPayRequest.toString());
 			
 		} catch(Exception e) {
 			System.out.println(e);
@@ -175,23 +177,25 @@ public class PurchaseController {
 	@RequestMapping(value="kakaoPayComplete")
 	public String kakaoPayComplete(
 			@RequestParam String pg_token,
-			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
+//			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
-//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayComplete : POST");
 		
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		System.out.println("\n[1. kakaoPayComplete / kakaoPayResponse Check]==>" + kakaoPayResponse.toString());
 		Purchase purchase = new Purchase();
 		
 		try {
 			kakaoPayRequest.setPg_token(pg_token);
 			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
 			
+			System.out.println("\n[2. kakaoPayComplete / kakaoPayResponse Check]==>" + kakaoPayResponse.toString());
+			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
-			System.out.println("\n[1. Purchase Domain Check] ==> " + purchase.toString());
+			System.out.println("\n[kakaoPayComplete / purchase Check]==>" + purchase.toString());
 			
 			// cancelDate making algorithm
 			DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -206,16 +210,10 @@ public class PurchaseController {
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
 			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
-
-			/*
-			if (purchase.getFlag().equals("purchase")) {
-				System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
-				String getQRCode = purchaseService.getQRCode(purchase);
-				System.out.println("\n[getQRCode Check]==>" + getQRCode);
-				purchase.setQrCode(getQRCode);
+			
+			if (kakaoPayResponse.getMsg().equals("payment is already done!")) {
+				purchaseService.addPurchase(purchase);
 			}
-			//*/
-			purchaseService.addPurchase(purchase);
 			
 
 		} catch (Exception e) {
@@ -230,7 +228,6 @@ public class PurchaseController {
 			@RequestParam String pg_token,
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
-//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayCompleteB : POST");
@@ -281,12 +278,6 @@ public class PurchaseController {
 			System.out.println("\n[purchase]==>"+purchase);
 
 			list = purchaseService.addBasketTicket(purchase);
-			/*
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println("//[1]=====" + i);
-				System.out.println(list.get(i));
-			}
-			//*/
 			
 			// ticketPrice split
 			for (int i = 0; i < list.size(); i++) {

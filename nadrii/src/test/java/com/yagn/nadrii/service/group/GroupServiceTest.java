@@ -32,7 +32,7 @@ public class GroupServiceTest {
 	@Qualifier("joinServiceImpl")
 	private JoinService joinService;
 
-	@Test
+	//@Test
 	public void testAddGroup() throws Exception {
 		
 		Group group = new Group();
@@ -87,13 +87,13 @@ public class GroupServiceTest {
 		System.out.println(group);
 	 }
 	
-	//@Test
+	@Test
 	public void testDeleteGroup() throws Exception {
 			
 		Group group = new Group();
 		Join join = new Join();
 		
-		join.setGroupNo(60044);
+		join.setGroupNo(60048);
 		join.setUserId("test02");
 		
 		joinService.deleteJoin(join);

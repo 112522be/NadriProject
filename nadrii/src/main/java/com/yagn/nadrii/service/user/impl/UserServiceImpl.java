@@ -74,5 +74,11 @@ public class UserServiceImpl implements UserService{
 			
 		return result;
 	}
+
+	@Override
+	public int checkId(String user) throws Exception {
+		System.out.println("service "+user);
+		return userDao.checkId(user);
+	}
 			  
 }

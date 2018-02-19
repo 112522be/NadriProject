@@ -15,7 +15,7 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
@@ -109,9 +109,6 @@
 			
 			$("form").attr("method","POST").attr("action","/user/login").submit();
 		}
-			
-				
-
 	</script>		
 	
 </head>
@@ -182,6 +179,173 @@
 									</div>
 								</fb:login-button>
 								<div id="status"></div>
+								<!--  facebook login end -->
+								
+								<!-- kakao ligin 
+							<a href="https://kauth.kakao.com/oauth/authorize?client_id=d4e94f0de61668f5bbbb2f58170b7891&redirect_uri=http://192.168.0.56:8081/oauth&response_type=code" class="kakaoLoginBtn" 
+							id="kakao" onclick="kakaoLogin()">
+							<img src="../images/kakao_account_login_btn_medium_narrow.png"></a>-->
+							
+							<!-- kakao ligin 
+							<a href="https://kauth.kakao.com/oauth/authorize?client_id=d4e94f0de61668f5bbbb2f58170b7891&redirect_uri=http://192.168.0.56:8081/oauth&response_type=code" class="kakaoLoginBtn"><img src="../images/kakao_account_login_btn_medium_narrow.png"></a>
+							-->
+							<a href="#">추가정보 입력</a>
+  						<a id="custom-login-btn"  href="javascript:loginWithKakao()">
+						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
+						<input type="hidden" id="kakaotocken" name="kakaotocken" value="0">
+						</a>
+					    <script type='text/javascript'>
+					      //<![CDATA[
+					        // ?ъ?⑺?? ?깆?? JavaScript ?ㅻ?? ?ㅼ???? 二쇱?몄??.
+//					        Kakao.init(' 55a2455a0f492f809a761acf2db7e5f9');
+					        // 移댁뭅?? 濡?洹몄?? 踰??쇱?? ???깊?⑸????.
+//					        Kakao.Auth.createLoginButton({
+//					          container: '#kakao-login-btn',
+//					          success: function(authObj) {
+//					            alert(JSON.stringify(authObj));
+//					            location.href="/user/addUser";
+//					          },
+//					          fail: function(err) {
+//					             alert(JSON.stringify(err));
+//					          }
+//					        });
+					        /* 濡?洹몄?? 愿??? 荑??? ????  
+							function setCookie( name , value , expired ){
+							 
+							 var date = new Date();
+							 date.setHours(date.getHours() + expired);
+							 var expried_set = "expries="+date.toGMTString();
+							 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
+							 
+							}*/
+							
+							function setCookie( name , value , expired ){
+								 
+								 var date = new Date();
+								 date.setHours(date.getHours() + expired);
+								 var cookieValue = escape(value) + ((exdys==null) ? "" : "; expires=" + exdate.toGMTString());
+								 document.cookie = name + "=" + cookieValue;
+								}					        
+					        
+							/*	荑??? 遺??ъ?ㅺ린
+					        function getCookie(name){
+ 
+							    var nameofCookie = name + "=";
+							    var x = 0;
+							    while(x <= document.cookie.length){
+							        var y = ( x + nameofCookie.length);
+							        if(document.cookie.substring(x,y) == nameofCookie){
+							            if((endofCookie = document.cookie.indexOf(";",y)) == -1)
+							                endofCookie = document.cookie.length;
+							            return unescape(document.cookie.substring(y,endofCookie));
+							        }
+							        x = document.cookie.indexOf(" ",x) + 1;
+							        if( x == 0 )
+							            break;
+							        }
+							        
+							        return "";
+							}*/
+							
+							function getCookie(name){
+								 
+							    nameofCookie = name + "=";
+							    var cookieDate = document.cookie
+							    var start = cookieDate.indexOf(cookiename);
+							    var cookieValue = '';
+							    if(start != -1){
+							    	start += cookieName.length;
+							    	var end = cookieDate.indexOf(';',start);
+							    	if(end  == -1)end = cookieDate.length;
+							    	cookieValue = cookieData.subString(start, end);
+							    }
+							    return unescape(cookieValue);
+							}
+							
+					        //	濡?洹몄?? 援ы?? ???? 遺?遺?
+					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
+					        function loginWithKakao() {
+					          // 濡?洹몄?? 李쎌?? ????????.
+					          Kakao.Auth.login({
+					            success: function(authObj) {
+					              console.log(JSON.stringify(authObj));
+					              //location.href="/user/main";
+					              Kakao.Auth.cleanup();
+					              Kakao.Auth.login({
+					                  persistAccessToken: true,
+					                  persistRefreshToken: true,
+					                  success: function(authObj) {
+					                      setCookie("kakao_login","done",1); // 荑??ㅼ???? (濡?洹몄??)
+					                      //alert(cookiedata);
+					                      $('#kakaoName').val(res.properties.nickname);
+										  $('#kakaoId').val(res.id);
+										  $('#kakaoEmail').val(res.email);
+					                      createLogoutKakao();
+					                      window.location.href="/user/addUserView";
+					                  },
+					                      fail: function(err) {
+					                       alert(JSON.stringify(err));
+					                  }
+					                           
+					              })
+					            },
+					            fail: function(err) {
+					              alert(JSON.stringify(err));
+					            }
+					          });
+					        };
+					        function setCookie( name , value , expired ){
+					        	 
+					        	 var date = new Date();
+					        	 date.setHours(date.getHours() + expired);
+					        	 var expried_set = "expries="+date.toGMTString();
+					        	 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
+					        	 
+					        	}
+					        
+					        ////////////////////////////////////////////////////////////
+					        
+				        /* Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
+					        function loginWithKakao() {
+					          // 濡?洹몄?? 李쎌?? ????????.
+					          Kakao.Auth.createLoginButton({
+   								container: '#kakao-login-btn',
+   					//           Kakao.Auth.login({
+					            success: function(authObj) {
+					           	 Kakao.API.request({
+					            	       url: '/user/loginView',
+					            	 success: function(res) {
+
+					                     alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+
+					                     alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+
+					                     console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+
+					                     console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
+
+					                     console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+
+					                 // res.properties.nickname으로도 접근 가능 )
+
+					                     console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
+
+					                   }
+
+					                 })
+
+					               },
+
+					               fail: function(error) {
+
+					                 alert(JSON.stringify(error));
+
+					               }
+
+					             });
+					          }	 */
+					        </script>
+							<!-- kakao ligin end-->
 
 							</div>
 						</div>

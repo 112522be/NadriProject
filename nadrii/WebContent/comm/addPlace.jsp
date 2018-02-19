@@ -60,7 +60,7 @@
 													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>이전으로</a></li>"
 								}
 
-								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4) ) ){
+								if(((JSONData.meta.total_count%4!=0)&&(newerPage<JSONData.meta.total_count/4+1)) || ((JSONData.meta.total_count%4 == 0) && (newerPage<(JSONData.meta.total_count/4)) ) ){
 
 
 									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">다음으로<span aria-hidden=\"true\">&rarr;</span></a></li>";
@@ -87,7 +87,7 @@
 							searchDetailAddrFromCoords(marker.getPosition(), function(result, status) {
 						        if (status === daum.maps.services.Status.OK) {
 						            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-						            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>' : '';
+						            var buildingName ='<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>';
 						            
 						            var content = '<div class="bAddr">' +
 						            				buildingName+

@@ -15,37 +15,44 @@
 
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous"> 
 	
-	<!--  ///////////////////////// imperfect templete ////////////////////////// -->
-	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
-	 <link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" /> 
-	<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+	<!-- Optional theme -->	
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
+	
+	
+	
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
 	<!-- Scripts -->
-	<script src="/resources/imperfect/assets/js/jquery.min.js"></script>
-	<script src="/resources/imperfect/assets/js/skel.min.js"></script>
-	<script src="/resources/imperfect/assets/js/util.js"></script> 
-	<!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/imperfect/assets/js/main.js"></script> 
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
-	
-	<!-- ///////////////////////// jQuery Spinner ////////////////////////// -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	 
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
 
-<!-- //////////////////// CSS //////////////////// -->
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
-	<style>
-	</style>
+
+
+
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -57,14 +64,14 @@
 
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
-		$("button:contains('장바구니 담기')").bind('click', function() {
-				fncBasketList();
+		$("a[href='#']:contains('장바구니 담기')").bind('click', function() {
+			fncBasketList();
 		})
 	});
 
 	function fncBasketList() {
 		 
-		$(".label.label-warning[name='titleB']").append('${ tourTicket.title }');
+		$(".modal-body .text-center.title").append('${ tourTicket.title }');
 
 		for (var i = 0; i < $(".ticketPrice").length; i++) {
 			ticketPrice = $(".ticketPrice").eq(i).val();
@@ -76,19 +83,19 @@
 				var sumPriceTicket = (ticketPrice * 1) * ticketCount;
 				totalTicketPrice = (totalTicketPrice * 1)
 						+ (sumPriceTicket * 1);
-				$(".modal-body").append("<h2>&nbsp;&nbsp;<code>￦ "
+				$(".modal-body").append("<h3>&nbsp;&nbsp;￦ "
 										+ ticketPrice
-										+ "</code> : <span class='label label-info'>"
-										+ ticketCount + "</span>&nbsp;장</h2>");
+										+ " : <strong class='text-danger'>"
+										+ ticketCount + "</strong>&nbsp;장</h3>");
 			}
 		}
-		$(".label.label-success").append("￦ " + totalTicketPrice);
+		$(".modal-body h3:contains('- 총 결제요금 : ￦ ') .text-danger").append(totalTicketPrice);
 	}
 	
 </script>
 <script>
 	
-	//=================== "장바구니 내에서 저장하기" Event 연결 =================== 
+	//=================== "장바구니 내 저장하기" Event 연결 =================== 
 	$(function() {
 		$("button:contains('저장하기')").bind("click", function() {
 			var flag = 'basket';
@@ -106,22 +113,14 @@
 	}
 	
 	
-	//=================== "결제" Event 연결 =================== 
+	//=================== "결제하기" Event 연결 =================== 
 	$(function() {
-		$("button.btn.btn-danger").bind("click", function() {
-//			alert("결제")
+		$("a[href='#']:contains('결제하기')").bind("click", function() {
+//			alert("결제하기")
 			var flag = 'purchase';
 			fncAddPurchase(flag);
 		});
 	});
-	
-	//=================== "로그인" Event 연결 =================== 
-	$(function() {
-		$("button:contains('로그인')").bind("click", function() {
-			self.location = "/user/login"
-		});
-	});
-	
 	
 	//==================== "수량증감" Event 연결 =================== 
 	
@@ -130,7 +129,7 @@
 //		console.log("[fncTicketCount START]")
 
 		var inputVal = $(".ticketCount").eq(indexVal).val();
-		var textVal = $(".badge").eq(indexVal).text();
+		var textVal = $("h3[name='priceCount']").eq(indexVal).text();
 /*
 		console.log("[1] inputVal : " + inputVal)
 		console.log("[2] textVal : " + textVal)
@@ -138,13 +137,13 @@
 		if (countVal == 'plus') {
 //			console.log("[Plus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 + 1);
-			textVal = $(".badge").eq(indexVal).text(currentVal * 1 + 1);
+			textVal = $("h3[name='priceCount']").eq(indexVal).text(currentVal * 1 + 1);
 		}
 
 		if (countVal == 'minus' && currentVal >= 1) {
 //			console.log("[Minus]")
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
-			textVal = $(".badge").eq(indexVal).text(currentVal * 1 - 1);
+			textVal = $("h3[name='priceCount']").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
 			console.log("[티켓 수량이 0 보다 작음]")
 		}
@@ -155,11 +154,11 @@
 
 	$(function() {
 
-		$("button[name='minus']").bind("click", function(event) {
+		$(".icon.fa-minus").bind("click", function(event) {
 
 			event.preventDefault();
 
-			var indexVal = $("button[name='minus']").index(this);
+			var indexVal = $(".icon.fa-minus").index(this);
 			var countVal = 'minus';
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
@@ -177,11 +176,11 @@
 
 		});
 
-		$("a[name='plus']").bind("click", function(event) {
+		$(".icon.fa-plus").bind("click", function(event) {
 
 			event.preventDefault();
 
-			var indexVal = $("a[name='plus']").index(this);
+			var indexVal = $(".icon.fa-plus").index(this);
 			var countVal = 'plus';
 			var currentVal = $(".ticketCount").eq(indexVal).val();
 
@@ -256,8 +255,12 @@
 				ticketPrice = $(".ticketPrice").eq(i).val();
 				ticketCount = $(".ticketCount").eq(i).val();
 				
+	//			alert(ticketPrice)
+	//			alert(ticketCount)
+				
 				if (ticketCount != 0) {
 					ticketPriceAll += ticketPrice + "=" + ticketCount + "&";
+	//				alert(ticketPriceAll)
 				}
 			}
 			
@@ -305,38 +308,36 @@
 		}
 	}
 
+	
+	
+	
+	
+	
+	
 </script>
 	
 </head>
 
-<body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<!-- ToolBar End /////////////////////////////////////-->
-<div id="wrapper">
-   	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-		<div id="main">
+<body class="left-sidebar">
+		<div id="page-wrapper">
 
-				<article class="post">
-					<header>
-						<div class="title">
-							<h1>
-								<a href="#">예매정보입력</a>
-							</h1>
-							<p>구매하실 티켓에 대한 개인정보를 <strong class="text-danger">형식에 맞게 </strong>입력해 주세요.</p>
-						</div>
-						<div class="meta">
-							<time class="published" datetime="2015-10-18">October 18,
-								2015</time>
-							<a href="#" class="author"><span class="name">Jane Doe</span><img
-								src="/resources/imperfect/images/avatar.jpg" alt=""></a>
-						</div>
-					</header>
-				
-				<!-- form Start /////////////////////////////////////-->
-				<form class="form-horizontal">
+			<!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
+
+
+<form>
+			<!-- Main -->
+				<div class="wrapper style1">
 				
 				<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
 				<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
@@ -348,246 +349,190 @@
 				<input type="hidden" name="eventplace" value="${ tourTicket.eventplace }">
 				<input type="hidden" name="ticketImage" value="${ detailImage.originimgurl }">
 
-						<section>
-							<div class="row">
-								<div class="6u 12u$(medium)">
-									<ul class="alt">
-										<h4>예매일자</h4>
-											<li>선택하신 <strong class="text-danger">예매일자</strong>를 확인하시기 바랍니다.</li>
-											<p>${ bookingDate }</p>
-											<br>
-										<h4>이용요금</h4>
-											<li>아래 <strong class="text-danger">이용요금</strong>을 확인하시기 바랍니다.</li>
-											<p>${ detailIntro.usetimefestival }</p>
-									</ul>
-								</div>
-								<div class="6u$ 12u$(medium)">
-									<span class="image fit"><img src="${ detailImage.originimgurl }" alt=""></span>
-								</div>
-							</div>
-						</section>	
-	
-						<section>
-							<div class="row">
-								<div class="6u 12u$(medium)">
-									<ul class="alt">
-										<h4>입장권 구매 안내</h4>
-											<li><strong class="text-danger">구매 수량</strong>을 선택하시기 바랍니다.</li>
-										</ul>
-											<p>
-											<c:forEach items="${ priceList }" varStatus="status">
-
-												<input type="hidden" class="ticketCount" name="ticketCount" value=0>
-												<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
-
-													<ul class="actions">
-														<a href="#" value="${ priceList[status.index] }"> 
-															&nbsp; ${ priceList[status.index] } ￦ <span class="badge">0</span>
-														</a>&nbsp;&nbsp;
-													
-													<!-- 수량증감 버튼 -->
-														<li>
-															<a href="#" class="button fit icon fa-download" name="minus" value="minus">Minus</a>
-														</li>
-														<li>
-															<a href="#" class="button fit icon fa-upload" name="plus" value="plus">Plus</a>
-														</li>
-													</ul>
-												</ul>
-
-												<br>
-											</c:forEach>
-											</p>
+					<div class="container">
+						<div class="row 200%">
+							<div class="4u 12u(mobile)" id="sidebar">
+								<hr class="first" />
+								<section>
+									<header>
+										<h3 class="icon fa-user">
+											<a href="#">예매정보입력</a>
+										</h3>
+									</header>
+									<p>
+										구매하실 티켓에 대한 개인정보를 <strong class="text-danger">형식에 맞게 </strong>입력해 주세요.
+									</p>
+								</section>
+								<hr />
+								
+								<section>
+									
+									<c:if test="${ user.userId eq null }">
+									<header>
+										<h3 class="icon fa-lock"><a href="#"> 로그인 후 이용가능</a></h3>
+									</header>
+									<div class="row 50%">
+										
+										<div class="12u">
+											<a href="/user/login" name="login" class="button">로 그 인</a>&nbsp;
+										</div>	
+										<div class="12u">
+											<a href="/index.jsp" name="login" class="button">메인으로</a>
+										</div>	
 									</div>
-										
-									<div class="6u 12u$(medium)">	
-										
-										<c:if test="${ user.userId eq null }">
-										<ul class="alt">
-											<h4>개인정보 입력</h4>
-											<br>
-											<a href="#" class="button small fit">로그인</a>
-										</ul>
-									</c:if>	
+									</c:if>
+									
 									<c:if test="${ user.userId ne null }">
-										<ul class="alt">
-											<h4>개인정보 입력</h4>
-											<li><strong class="text-danger">개인 정보</strong>를 확인하시기 바랍니다.</li>
-											<div class="6u 12u$(xsmall)">
-												<input type="text" name="buyerId" id="demo-name" value="${ user.userId }" placeholder="ID" readonly>
-												<br>
-												<c:if test="${ user.userName eq null }">
-													<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder="Name">
-												</c:if>
-												<c:if test="${ user.userName ne null }">	
-													<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder="Name" readonly>
-												</c:if>		
-												<br>
-												<c:if test="${ user.phone eq null }">
-													<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder="Phone">
-												</c:if>	
-												<c:if test="${ user.phone ne null }">
-													<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder="Phone" readonly>
-												</c:if>	
-												<br>
-												<input type="text" name="buyerEmail" id="demo-name" value="${ user.email }" placeholder="Email" readonly>
-											</div>
-										</ul>
-											<br>
-											<a href="#" class="button">장바구니 담기</a>
-											<a href="#" class="button">취 소</a>
-											<a href="#" class="button">결제하기</a>
+									<header>
+										<h3><a href="#">개인정보 입력</a></h3>
+									</header>
+									<p>
+										<strong class="text-danger">개인 정보</strong>를 확인하시기 바랍니다.
+									</p>
+									
+									<div class="row 50%">
+										
+										<div class="4u">
+											<h2 class="icon fa-user circled"><span class="label">user</span></h2>
+										</div>
+										
+										<div class="8u">
+											<input type="text" name="buyerId" id="demo-name" value="${ user.userId }" placeholder=" ID" readonly>
+										</div>
+										
+										<div class="8u">
+											<c:if test="${ user.userName eq null }">
+												<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder=" Name">
+											</c:if>
+											<c:if test="${ user.userName ne null }">	
+												<input type="text" name="buyerName" id="demo-name" value="${ user.userName }" placeholder=" Name" readonly>
+											</c:if>
+										</div>
+
+									</div>
+								</section>
+								
+								
+								<section>		
+									<div class="row 50%">
+									
+										<div class="4u">
+											<h2 class="icon fa-phone circled"><span class="label">user</span></h2>
+										</div>
+										
+										<div class="8u">
+											<c:if test="${ user.phone eq null }">
+												<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder=" Phone">
+											</c:if>	
+											<c:if test="${ user.phone ne null }">
+												<input type="text" name="buyerPhone" id="demo-name" value="${ user.phone }" placeholder=" Phone" readonly>
+											</c:if>
+										</div>
+										<div class="8u">
+											<input type="text" name="buyerEmail" id="demo-name" value="${ user.email }" placeholder=" Email" readonly>
+										</div>
+
+									</div>
+									
+								</section>
 								</c:if>
-									</div>	
-								</div>	
-						</section>
-	
+									<hr>
+								
+								<section>
+									<header>
+										<h3><a href="#">입장권 구매</a></h3>
+									</header>
+									<p>
+										<strong class="text-danger">구매 수량</strong>을 선택하시기 바랍니다.
+									</p>
+									
+									<c:forEach items="${ priceList }" varStatus="status">
+									<div class="row 50%">
+										
+										<input type="hidden" class="ticketCount" name="ticketCount" value=0>
+										<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
+									
+										<div class="4u">
+											<h2 class="icon fa-money circled"><span class="label">Ticket</span></h2>
+										</div>
+										
+										<div class="4u">
+											<h4>￦ ${ priceList[status.index] }</h4>
+										</div>
+										<div class="4u">
+											<h3 class="icon fa-plus"></h3>
+										</div>
+										
+										<div class="4u">
+											<h3 class="icon" name="priceCount">0</h3>
+										</div>
+										<div class="4u">
+											<h3 class="icon fa-minus"></h3>
+										</div>
+
+									</div>
+									</c:forEach>
+								</section>
+								
+							</div>
 							
-
-
-						<!-- ///////////////////////////////////////////////////////////////////////////////////////////// -->
-	<div class="page-header">
-		<h3 class="text-info text-center">예매정보입력</h3>
-		<h5 class="text-muted text-center">
-			구매하실 티켓에 대한 개인정보를 <strong class="text-danger">형식에 맞게 </strong>입력해 주세요.
-		</h5>
-	</div>
-
-
-		
-
-			<div class="col-md-6">
-				<div class="form-group text-center">
-					<h1>
-						<span class="label label-warning text-center"> ${ tourTicket.title }</span>
-					</h1>
-				</div>
-				<hr />
-				
-				<!-- #1 -->
-				<div class="alert alert-success" role="alert">
-					● <strong>예매일자</strong><br> 
-					&nbsp;- 선택하신 예매일자를 확인하시기 바랍니다.
-				</div>
-					<p>${ bookingDate }</p><br>
-					
-				<!-- #2 -->
-				<div class="alert alert-warning" role="alert">
-					● <strong>이용요금</strong><br> 
-					&nbsp;- 아래 이용요금을 확인하시기 바랍니다.
-				</div>
-					<p>${ detailIntro.usetimefestival }</p><br>
-					
-				<!-- #3 -->
-				<div class="alert alert-danger" role="alert">
-					● <strong>입장권 구매 안내</strong><br> 
-					&nbsp;- 구매 수량을 선택하시기 바랍니다.
-				</div>
-				
-				<c:forEach items="${ priceList }" varStatus="status">
-				
-					<input type="hidden" class="ticketCount" name="ticketCount" value=0>
-					<input type="hidden" class="ticketPrice" name="ticketPrice" value="${ priceList[status.index] }">
-				
-					<ul class="nav nav-pills" role="tablist">
-						<li role="presentation" class="active">
-							<a href="#"	value="${ priceList[status.index] }"> 
-								<span class="glyphicon glyphicon-barcode" aria-hidden="true"> </span>&nbsp;
-										${ priceList[status.index] } ￦ <span class="badge">0</span> 
-							</a>
-						</li>
-						&nbsp;&nbsp;
-						<!-- 수량증감 버튼 -->
-						<div class="btn-group" role="group" aria-label="...">
-							<button type="button" class="btn btn-default" name="minus" value="minus">
-								<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-							</button>
-
-							<a class="btn btn-default" href="#" role="button" name="plus" value="plus">
-								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				  			</a>
-						</div>
-					</ul>
-					
-					<br>
-				</c:forEach>
-
-			</div>
-
-
-			<div class="col-md-6">
-			<br>
-			<br>
-				<img src="${ detailImage.originimgurl }" alt="There is no image"
-					class="img-responsive img-rounded"> <br>
-
-				<div class="alert alert-info" role="alert">
-					● <strong>개인정보 입력</strong>
-				</div>
-			<c:if test="${ user.userId eq null }">
-				<div class="col-sm-12 text-center">
-					<button type="button" class="btn btn-info btn-lg btn-block">로그인</button>
-				</div>
-			</c:if>	
-			<c:if test="${ user.userId ne null }">
-			
-				<div class="input-group">
-					<span class="input-group-addon">아이디</span> 
-					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="buyerId" value="${ user.userId }" readonly>
-				</div>
-				<br>
-				
-				<div class="input-group">
-					<span class="input-group-addon">이 름</span> 
-					<c:if test="${ user.userName eq null }">
-					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="buyerName" value="${ user.userName }">
-					</c:if>
-					<c:if test="${ user.userName ne null }">
-					<input type="text" class="form-control" placeholder="필수입력"
-						aria-describedby="basic-addon1" name="buyerName" value="${ user.userName }" readonly>
-					</c:if>	
-				</div>
-				<br>
-				
-				<div class="input-group">
-					<span class="input-group-addon">연락처</span>
-					<c:if test="${ user.phone eq null }">
-					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="buyerPhone" value="${ user.phone }">
-					</c:if> 
-					<c:if test="${ user.phone ne null }">
-					<input type="text" class="form-control" placeholder="' - ' 없이 번호만 입력"
-						aria-describedby="basic-addon1" name="buyerPhone" value="${ user.phone }" readonly>
-					</c:if> 
-				</div>
-				<br>
-
-				<div class="input-group">
-					<span class="input-group-addon">@</span> 
-					<input type="text" class="form-control" placeholder="E-mail"
-						aria-describedby="basic-addon1" name="buyerEmail" value="${ user.email }" readonly>
-				</div>
-
-				<!-- Button -->
-				<div class="form-group">
-					<div class="col-sm-12 text-center">
-						<br>
+							<div class="8u 12u(mobile) important(mobile)" id="content">
+								<article id="main">
+									<header>
+										<h2><a href="#">${ tourTicket.title }</a></h2>
+									</header>
+									<a href="#" class="image featured">
+										<img src="${ detailImage.originimgurl }" alt="" style="height: 413.86px;"/>
+									</a>
+									
+									<section>
+										<header>
+											<h3>선택한 예매일자</h3>
+										</header>
+										<p>
+											${ bookingDate }
+										</p>
+									</section>
+									<section>
+										<header>
+											<h3>이용요금</h3>
+										</header>
+										<p>
+											${ detailIntro.usetimefestival }
+										</p>
+									</section>
+								</article>
+							</div>
+							<c:if test="${ user.userId ne null }">
+							
+							<section id="features" class="container special">
+								<div class="row">
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="cancel" class="button" onclick="goBack()">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>
+										</header>
+									</article>
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="basket" class="button" data-toggle="modal" data-target="#myModal">장바구니 담기</a>
+										</header>
+									</article>
+									<article class="4u 12u(mobile) special">
+										<header>
+											<a href="#" name="purchase" class="button">결제하기</a>
+										</header>
+									</article>
+								</div>
+							</section>		
+							
+							</c:if>
+						</div><!-- row 200% end -->
 						
- 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">  
-  							장바구니 담기
-						</button>
-						 
-						<input class="btn btn-default" type="button" value="취&nbsp;소" onclick="goBack()">
-						
-						<button type="button" class="btn btn-danger">결제하기</button>
-					</div>
-				</div>
-			</c:if>		
-			</div>
+					</div><!-- container -->
 
-<!-- Modal -->
+				</div>
+				
+	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -602,32 +547,26 @@
 				</div>
 			
 				<div class="modal-body">
-					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
-					<h2>● 선택한 예매일자 : <span class="label label-info">${ bookingDate }</span></h2>
-					<h2>● 총 결제요금 : <span class="label label-success"></span>&nbsp;원</h2>
+					<h2 class="text-center title"></h2><br>
+					<h3>- 선택한 예매일자 : <strong class='text-danger'>${ bookingDate }</strong></h3>
+					<h3>- 총 결제요금 : ￦ <strong class="text-danger"></strong></h3>
 				
 				</div>
 			
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">저장하기</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">취 소</button>
+					<button type="button" class="button" data-dismiss="modal">저장하기</button>
+					<button type="button" class="button" name="modalCancel" data-dismiss="modal">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
+</form>
 
+			<jsp:include page="/layout/footer.jsp" />
 
-		</form>
-		<!-- form Start /////////////////////////////////////-->
+		</div>
 
-	</div>
-		<!--  화면구성 div end /////////////////////////////////////-->
-	</div>
-	</div>
-
-	
-
-</body>
+	</body>
 
 </html>
