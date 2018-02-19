@@ -16,7 +16,7 @@
 		console.log("세션 정보 : ${session}")
 		
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "/ticket/listTicket"
+			self.location = "../ticket/listTicket"
 		});
 
 	});
@@ -26,7 +26,7 @@
 
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
-      		self.location = "/message/listMessage"
+      		self.location = "../message/listMessage"
         });
     });
 	
@@ -162,7 +162,7 @@
 							</li>
 		</c:if>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
-		<li><a href="./comm/listComm">나만의 나들이</a></li>
+		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
