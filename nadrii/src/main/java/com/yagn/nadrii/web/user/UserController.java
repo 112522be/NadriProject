@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -167,6 +167,35 @@ public class UserController {
 		return "forward:/user/addUserViewPlus.jsp";
 	}
 	
+/*	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
+	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+
+		System.out.println("addUserPlus :: POST");
+		
+		System.out.println("\n[1] ==>" + user);
+		
+		System.out.println("생년 월일 >>" + user.getBirth());
+		System.out.println("프로필 >>" + user.getProfileImageFile());
+		System.out.println("핸드폰 번호 >>" + user.getPhone());
+		System.out.println("사용자 이름 >>" + user.getUserName());
+		System.out.println("자녀수 >>" + user.getChildren());
+		System.out.println("성 별 >>" +user.getGender());
+
+		user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
+		
+		System.out.println(user);
+		
+		if(user.getGender() == null) {
+			user.setGender("");
+		}
+		
+		userService.addUserPlus(user);
+		
+//		return null;
+		//return "forward:/user/getUser?userId="+user.getUserId();
+		return "redirect:/user/getUser?userId="+user.getUserId();
+	}*/
+	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
 	public String getUser()throws Exception{
 		System.out.println("getUser");
@@ -283,6 +312,36 @@ public class UserController {
 					}
 					return buffer.toString(); 
 					}
-			
+			//////////////////////////////////////////////////////////////////////////////////////////
+				
+				@RequestMapping(value="updateUser", method=RequestMethod.POST)
+				public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+
+					System.out.println("addUserPlus :: POST");
+					
+					System.out.println("\n[1] ==>" + user);
+					
+					System.out.println("비밀번호 >>" + user.getPassword());
+					System.out.println("생년 월일 >>" + user.getBirth());
+					System.out.println("프로필 >>" + user.getProfileImageFile());
+					System.out.println("핸드폰 번호 >>" + user.getPhone());
+					System.out.println("사용자 이름 >>" + user.getUserName());
+					System.out.println("자녀수 >>" + user.getChildren());
+					System.out.println("성 별 >>" +user.getGender());
+
+					user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
+					
+					System.out.println(user);
+					
+					if(user.getGender() == null) {
+						user.setGender("");
+					}
+					
+					userService.updateUser(user);
+					
+//					return null;
+					//return "forward:/user/getUser?userId="+user.getUserId();
+					return "redirect:/user/getUser?userId="+user.getUserId();
+				}
 } 
 

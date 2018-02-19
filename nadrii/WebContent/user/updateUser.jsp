@@ -18,29 +18,28 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/css/style.css">
-	<script src='//code.jquery.com/jquery.min.js'></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-            border:none;
-        }
-        
-        .container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-    </style>
-    
+	
+	<!-- tabs -->
+	 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  
+	<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
+   
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
@@ -173,19 +172,73 @@
 	        });
 		 
 	</script>		
+    	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+            border:none;
+        }
+        
+        .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  
+  
+}
+
+	.updatebtn01{
+		font-size:24px;
+		margin-top:-6px;
+	}
+	
+	.cancel{
+		margin-left:40px;
+	}
+	
+	.cancel01{
+		font-size:24px;
+		margin-top:-6px;
+	}
     
+    .groupbtn{
+    	padding:50px 0 70px 0;
+    }
+    
+    @media screen and (max-width:736px){
+    	.groupbtn .updatebtn{width:70px; height:70px;}
+    	.updatebtn01{font-size:20px}
+    	.groupbtn .cancel{width:70px; height:70px;}
+    	.cancel01{font-size:20px;}
+    	.container{padding:35px;}
+    }
+    </style>
+ 
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+	<div id="header">
+					
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+					<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center" style="background:#fff; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#000;">정 보 수 정</h1>
+		<h1 class="bg-primary text-center" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" action="addUserPlus" style="padding-top:50px;">
@@ -279,10 +332,10 @@
 		   </div>
 		  
 		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-info cancelbtn" data-toggle="popover"
-		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" >수 정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		    <div class="col-sm-offset-4  col-sm-4 text-center groupbtn">
+		      <button type="button" class="btn btn-info cancelbtn icon circled updatebtn" data-toggle="popover"
+		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" ><div class="updatebtn01">수 정</div></button>
+			  <a class="btn btn-primary btn icon circled cancel" href="#" role="button"><div class="cancel01">취&nbsp;소</div></a>
 		    </div>
 		  </div>
 		</form>
@@ -291,6 +344,9 @@
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 
+	<!-- 메인 script-->
+		
+		
 </body>
 
 </html>

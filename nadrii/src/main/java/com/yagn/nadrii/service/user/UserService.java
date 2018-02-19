@@ -25,4 +25,5 @@ public interface UserService {
 	
 	public int checkId(String user) throws Exception;
 	
+	
 }

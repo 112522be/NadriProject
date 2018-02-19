@@ -22,12 +22,10 @@
 	
 	<!-- tabs -->
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	  <link rel="stylesheet" href="/resources/demos/style.css">
 	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  
 	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-	  <script src="/resources/helios/assets/js/main.js"></script>
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 		
@@ -56,7 +54,28 @@
    color:#ddd;
    
 }
+	.updatebtn{
+		margin:40px 0 50px 0;
+	}
 	
+	.updatebtn01{
+		font-size:16px;
+		line-height: 20px;
+		margin: 4px 0 0 -5px;
+	}
+	
+	.tabs{
+		border: 1px solid #31708f;
+   		width: 740px;
+    	margin: auto;
+    	padding: 0;
+	}
+	@media screen and (max-width:736px){
+		.groupbtn .updatebtn{width:75px; height:75px; margin:0px}
+		.updatebtn01{margin-top:10px;}
+		.container .tabs{width:500px}
+		.container{padding:35px; margin-top:30px !important;}
+	}
 	</style>
 	
 </head>
@@ -64,7 +83,18 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -143,7 +173,7 @@
 		</div>
 		
 		<hr/>
-			<div class="tabs .col-md-8" style="border:1px solid #31708f; width:740px; margin:auto; padding:0;">
+			<div class="tabs col-md-8">
 				<ul style="background:#f8f8f8; border:1px solid #31708f;">
 					<li style="border:1px solid #31708f;"><a href="#tabs-1">쪽지</a></li>
 		    		<li style="border:1px solid #31708f;"><a href="#tabs-2">좋아요</a></li>
@@ -164,8 +194,8 @@
 		
 		
 		<div class="row">
-	  		<div class="text-center " style="padding-top:60px;">
-	  			<button type="button" class="btn btn-primary">회원정보수정</button>
+	  		<div class="text-center groupbtn" style="padding-top:60px;">
+	  			<button type="button" class="btn btn-primary icon circled updatebtn"><div class="updatebtn01">회원정보<br> 수정</div></button>
 	  		</div>
 		</div>
 		

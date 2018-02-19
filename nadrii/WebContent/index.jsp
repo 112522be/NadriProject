@@ -359,6 +359,10 @@ function checkSuccess(){
 			.login .loginbtn{ width: 70px; height: 70px; padding: 0; float:left; display:block;}
 			#rastbtn{}
 			
+			.groupbtn .facebookbtn{padding:0 ; background:#385998 !important;margin-left:10px;}
+			
+			.facebookbtn01{font-size:0px;}
+			
 			.addUerlayout{padding-top:8px}
 			
 			@media screen and (max-width: 1280px){
@@ -367,15 +371,32 @@ function checkSuccess(){
 			
 			@media screen and (max-width:736px){
 				.loginBtn02{margin-top:-30px;}
-				#banner{padding: 2em 2em 2em 2em; height:250px;}
-				.groupId{width:380px; padding:12px 0 0 10px; margin:0; display:block; height:98px; float:none;}
-				.groupPw{width:380px; padding-top:12px; margin:auto; display:block; height:67px;}
+				#banner{padding: 1em 2em 1em 2em; height:285px;}
+				.groupId{width:380px; padding:12px 0 0 10px; margin:0; display:block; height:98px; float:none; position:absolute;}
+				.groupPw{width:380px; margin-top:100px; padding-top:12px; margin-top:130px; display:block; height:67px; position:absolute;}
 				.loginPw{float:none; padding-left:10px;}
 				.groupbtn{position:relative;}
-				.loginbtn{margin-left:-319px;}
-				.homepage .login .joinbtn{position:absolute; margin-left:480px; display:block;}
+				.homepage .login .joinbtn{position:absolute; margin:110px 0 0 460px; display:block;}
 				.joinbtn02{margin-left:8px; padding-top: 5px; position:absolute;}
 				.mobileSize{position: relative; display: block;}
+				.loginPw, .loginId{width:320px; float:none;}
+				.login .loginbtn{margin:110px 0 0 360px !important;}
+				.joinbtn{maring-left:100px}
+			}
+			
+			@media screen and (max-width:400px){
+				.loginBtn02{margin-top:-30px;}
+				#banner{padding: 1em 2em 1em 2em; height:335px;}
+				.groupId{width:380px; padding:12px 0 0 10px; margin:0; display:block; height:98px; float:none; position:absolute;}
+				.groupPw{width:380px; margin-top:100px; padding-top:12px; margin-top:130px; display:block; height:67px; position:absolute;}
+				.loginPw{float:none; padding-left:10px;}
+				.groupbtn{position:relative;}
+				.homepage .login .joinbtn{position:absolute; margin:240px 0 0 200px; display:block;}
+				.joinbtn02{margin-left:8px; padding-top: 5px; position:absolute;}
+				.mobileSize{position: relative; display: block;}
+				.loginPw, .loginId{width:320px; float:none;}
+				.login .loginbtn{margin:240px 0 0 80px !important;}
+				.joinbtn{maring-left:100px}
 			}
 			
 			@media screen and (max-width:1680px){
@@ -504,9 +525,10 @@ function checkSuccess(){
 						
 						<div class="form-group groupbtn">
 							<div class="col-sm-offset-4 col-sm-6 text-center mobileSize">
-								<button class="btn btn-primary icon fa- circled loginbtn"><div class="loginBtn02">로 그 인</div></button>
+								<button class="btn btn-primary icon circled loginbtn"><div class="loginBtn02">로 그 인</div></button>
 								<a id="addUserDialog" href="#addUserView" class="btn btn-warning icon circled joinbtn" data-rel="dialog" style="width:70px; height:70px;">
 								<div class="joinbtn02">회원가입</div></a>
+								<button class="btn btn-primary icon circled facebookbtn"><div class="facebookbtn01">f</div></button>
 							</div>
 						</div>
 						</div>
@@ -556,7 +578,7 @@ function checkSuccess(){
 	        <div class="form-group" style="margin-top:25px;">
 	          <div class="col-sm-offset-4  col-sm-4 text-center">
 	            <button type="button" id="signUp" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="width:70px; height:70px; background:#610B21; padding:0; margin-left: 100px; position: absolute;"><div style="margin-top:-5px; font-size:24px;">가입</div></button>
-	           <a class="btn btn-primary btn icon fa- circled" href="#" style="width:70px; height:70px; padding:0; margin-left:205px; position: absolute; background:#0B615E;" onclick="delchk();">
+	           <a class="btn btn-primary btn icon circled" href="#" style="width:70px; height:70px; padding:0; margin-left:205px; position: absolute; background:#0B615E;" onclick="delchk();">
 	           <div style="font-size:24px; margin-top:-3px">취소</div></a>
 	           <!-- <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="margin-left:290px; padding:0;"><div class="">restTest</div></button>	 -->
 	          </div>
