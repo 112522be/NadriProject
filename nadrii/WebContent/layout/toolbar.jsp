@@ -129,7 +129,18 @@
 <!-- Nav -->
 <nav id="nav">
 	<ul>
-		<li><a href="../user/login">Login</a></li>
+		<c:if test="${ ! empty loginUser }">
+				<li>
+					<a href="/user/getUser?userId=${loginUser.userId}">
+					<span>
+						<c:if test="${ loginUser.userName eq null }">
+							${ loginUser.userId }
+						</c:if>
+							${ loginUser.userName } 님
+					</span>
+					</a>
+				</li>
+		</c:if>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>
