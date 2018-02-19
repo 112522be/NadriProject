@@ -56,7 +56,7 @@
 
 #nav{
 	background-image: url("../resources/helios/images/header.jpg");	
-	background: #1f2223;
+	background-color: #44324a;
 	opacity: 0.7;
 	
 }
@@ -86,9 +86,9 @@
 						
 				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
-			<br/>
+		
 			<form class="search">
-				<input type="text" name="keyword" value="" placeholder="지역명을 입력하세요" />
+				<input type="text" name="keyword" value="" placeholder="지역 검색" />
 				<input type="hidden" name="pageNo" value="" />
 				<input type="hidden" name="areaCode" value="${areaCode}"/>
       			<input type="hidden" name="localName" value="${localName}"/>

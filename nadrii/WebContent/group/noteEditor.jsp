@@ -40,16 +40,16 @@
 		}
         function addThumbnail(filePath) {
 			$('input[name="thumbNailFileName"]').val(filePath);
-			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected")
+			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected");
 			console.log($('input[name="thumbNailFileName"]').val());
 		}
         
         $(function() {
 	 	    			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
-  				addThumbnail($(this).attr('src'))
- 			}) 
-		})
+  				addThumbnail($(this).attr('src'));
+ 			});
+		});
 	</script>
 </head>
 <body>
