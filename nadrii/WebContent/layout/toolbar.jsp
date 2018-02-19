@@ -40,7 +40,16 @@
     });
 	
 	</script>
-
+	
+	<style type="text/css">
+		#nav {
+			background-color: #3b2b48;
+			opacity: 0.7;
+		}
+		#nav > ul > li{
+			color: lightgray;
+		}	
+	</style>
 <!-- Nav -->
 <nav id="nav">
 	<ul>
