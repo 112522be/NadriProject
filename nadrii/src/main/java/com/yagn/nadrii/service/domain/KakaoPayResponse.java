@@ -30,6 +30,8 @@ public class KakaoPayResponse {
 	private String msg;
 	private boolean tms_result;
 	
+	private Object extras;
+	
 	/// Constructor
 	public KakaoPayResponse() {
 		
@@ -174,6 +176,14 @@ public class KakaoPayResponse {
 		this.tms_result = tms_result;
 	}
 
+	public Object getExtras() {
+		return extras;
+	}
+
+	public void setExtras(Object extras) {
+		this.extras = extras;
+	}
+
 	@Override
 	public String toString() {
 		return "KakaoPayResponse [code=" + code + ", aid=" + aid + ", cid=" + cid + ", tid=" + tid + ", sid=" + sid
@@ -183,8 +193,11 @@ public class KakaoPayResponse {
 				+ approved_at + ", pay_load=" + pay_load + ", next_redirect_app_url=" + next_redirect_app_url
 				+ ", next_redirect_mobile_url=" + next_redirect_mobile_url + ", next_redirect_pc_url="
 				+ next_redirect_pc_url + ", android_app_scheme=" + android_app_scheme + ", ios_app_scheme="
-				+ ios_app_scheme + ", created_at=" + created_at + ", msg=" + msg + ", tms_result=" + tms_result + "]";
+				+ ios_app_scheme + ", created_at=" + created_at + ", msg=" + msg + ", tms_result=" + tms_result
+				+ ", extras=" + extras + "]";
 	}
+
+	
 	
 	
 	
