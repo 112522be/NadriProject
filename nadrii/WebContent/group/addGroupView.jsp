@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
-<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+
 <!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
 		
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -77,13 +77,13 @@ button[data-original-title='More Color']{
 					<div style="padding-top: 10px">
 						<jsp:include page="noteEditor.jsp"></jsp:include>
 					</div>
-									
-					<div class="box-bottom" >
-						<a id="submit">저장하기</a>
+					<div style="width: 20% !important;">	
+						<a href="#" class="button" name="submit">save</a>
 					</div>
 				</article>
 			</div>
 		</div>
 	</div>
 </body>
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 </html>
