@@ -122,7 +122,7 @@ function checkSuccess(){
         $.ajax({
             	type:"POST",
             	data : data,
-				url : "/user/checkId",     
+				url : "/user/json/checkId",     
             
             success : function(result) {
             	if(result.check == 1){
