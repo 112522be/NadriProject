@@ -185,7 +185,6 @@ public class TicketController {
 			}
 			System.out.println("[sendPriceList.toString()]" + sendPriceList.toString());
 			
-			
 			tourTicket.setUsetimefestival(sendPriceList);
 			System.out.println("\n[tourTicket 도메인 확인]==>" + tourTicket.getUsetimefestival());
 			

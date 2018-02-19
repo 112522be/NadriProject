@@ -79,17 +79,18 @@ public class KakaoApiDaoImpl implements TicketDao {
 
 		System.out.println("\n[KakaoApiDaoImpl.java]::getKakaoImage");
 		System.out.println("[getKakaoImage title check]==>" + title);
-
+		System.out.println("[getKakaoImage title.replaceAll check]==>" + title.replaceAll(" 2018", ""));
+		
 		int minImage = 200;
 		String kakaoReturnImage = "";
 
 		try {
 			
-			String encodeTitle = URLEncoder.encode(title, "UTF-8");
+			String encodeTitle = URLEncoder.encode(title.replaceAll(" 2018", ""), "UTF-8");
 			
 			StringBuilder kakaoImageSB = KakaoApiDaoImpl.sendGetKakaoURL
 					(new StringBuilder(searchImageURL 
-							+ "&sort=recency"
+//							+ "&sort=recency"
 							+ encodeTitle),	kakaoKey);
 
 			JSONObject kiJsonObj = (JSONObject) JSONValue.parse(kakaoImageSB.toString());

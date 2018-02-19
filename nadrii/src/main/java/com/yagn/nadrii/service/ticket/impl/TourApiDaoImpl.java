@@ -241,7 +241,12 @@ public class TourApiDaoImpl implements TicketDao {
 			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
 				detailIntro.setSubevent("정보 제공 없음");
 			}
+			
+			System.out.println("\n[detailIntro.getUsetimefestival()]==> " + detailIntro.getUsetimefestival());
+			
 			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
+				detailIntro.setUsetimefestival("무료");
+			} else if ( detailIntro.getUsetimefestival().contains("000") == false || detailIntro.getUsetimefestival().contains("00") == false ) {
 				detailIntro.setUsetimefestival("무료");
 			}
 		} catch (Exception e) {
