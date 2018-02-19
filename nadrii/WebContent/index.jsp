@@ -346,6 +346,19 @@ function checkSuccess(){
 			
 			.addUerlayout{width:130px; float:left}
     		</style>
+    		
+    		<style>
+			#header{
+			background-image: url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
+			background-color: #3a2748;
+			}
+			
+			#nav{
+			background-color: #3b2b48;
+			opacity: 0.7;
+			}
+ 
+		</style>
 	
 	</head>
 	<body class="homepage">
@@ -512,85 +525,44 @@ function checkSuccess(){
 			<!-- Carousel -->
 				<section class="carousel">
 					<div class="reel">
-
 						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic01.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/racing-442393_1920.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Pulvinar sagittis congue</a></h3>
+								<h3><a href="#">나들이 정보</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>어디로 갈까?</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic02.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/calendar-3073971_1920.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Fermentum sagittis proin</a></h3>
+								<h3><a href="#">나들이 플래너</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>계획을 짜볼까?</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic03.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/notebook-1803664_1920.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+								<h3><a href="#">나만의 나들이</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>자랑해볼까?</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic04.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/admission-2974645_1920.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
+								<h3><a href="#">나들이 티켓</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>입장권을 사볼까?</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic05.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="/resources/images/tripIcon/pinky-swear-329329_1920.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Varius magnis sollicitudin</a></h3>
+								<h3><a href="#">나들이 모임</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic01.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">Pulvinar sagittis congue</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic02.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">Fermentum sagittis proin</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic03.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic04.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="/resources/helios/images/pic05.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">Varius magnis sollicitudin</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>누구와 갈까?</p>
 						</article>
 
 					</div>
