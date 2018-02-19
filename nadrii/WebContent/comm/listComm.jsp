@@ -36,10 +36,6 @@ $(function() {
 })
 </script>
 <style type="text/css">
-	form.search > input:first-child {
-		content: none;
-		padding-left: 1em;
-	}
 	#nav {
 	    background-color: #3b2b48;
 	    opacity: 0.7;
@@ -51,6 +47,7 @@ $(function() {
 		border-radius: 30px;
 		width: 400px;
 		height: 50px;
+		padding: 1em 1em 1em 2.5em;
 	}
 	.image.featured{
 		margin: 0 0 1em 0;
