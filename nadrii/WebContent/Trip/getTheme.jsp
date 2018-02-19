@@ -68,6 +68,9 @@
 	opacity: 0.0;
 }
 
+article a img{
+}
+
 </style>
  
  
