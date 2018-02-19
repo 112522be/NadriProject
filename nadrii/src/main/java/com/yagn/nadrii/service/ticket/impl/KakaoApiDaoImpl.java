@@ -88,7 +88,9 @@ public class KakaoApiDaoImpl implements TicketDao {
 			String encodeTitle = URLEncoder.encode(title, "UTF-8");
 			
 			StringBuilder kakaoImageSB = KakaoApiDaoImpl.sendGetKakaoURL
-					(new StringBuilder(searchImageURL + encodeTitle),	kakaoKey);
+					(new StringBuilder(searchImageURL 
+							+ "&sort=recency"
+							+ encodeTitle),	kakaoKey);
 
 			JSONObject kiJsonObj = (JSONObject) JSONValue.parse(kakaoImageSB.toString());
 			JSONArray kiItems = (JSONArray) kiJsonObj.get("documents");
@@ -110,12 +112,12 @@ public class KakaoApiDaoImpl implements TicketDao {
 //					System.out.println("\n[kakaoImage height]==>" +kakaoImage.getHeight());
 				}		
 			}
+			System.out.println("\n[getKakaoImage :: selected image url]==>" + kakaoReturnImage);
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 
-		System.out.println("\n[getKakaoImage :: selected image url]==>" + kakaoReturnImage);
 		
 		return kakaoReturnImage;
 	}

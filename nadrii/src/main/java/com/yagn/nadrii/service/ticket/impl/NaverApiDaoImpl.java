@@ -97,8 +97,9 @@ public class NaverApiDaoImpl implements TicketDao {
 			StringBuilder naverImageSB = NaverApiDaoImpl
 					.sendGetNaverURL(new StringBuilder(searchImageURL + "query=" + encodeTitle 
 							+ "&display=100" 
-//							+ "&filter=large" 
-//							+ "&sort=sim" 
+							+ "&filter=large" 
+							+ "&sort=sim" 
+//							+ "&sort=date" 
 			), clientID, clientSecret);
 
 			JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
@@ -128,11 +129,16 @@ public class NaverApiDaoImpl implements TicketDao {
 					naverImage = objectMapper.readValue(itemsValue.toJSONString(), NaverImage.class);
 
 					if (Integer.parseInt(naverImage.getSizeheight()) > minImage) {
-
+						
+//						System.out.println(naverImage.toString());
+						
 						minImage = Integer.parseInt(naverImage.getSizeheight());
-						naverReturnImage = naverImage.getThumbnail();
+//						naverReturnImage = naverImage.getThumbnail();
+						naverReturnImage = naverImage.getLink();
 					}
 				}
+				System.out.println("\n[getNaverImage :: selected image url]==>" + naverReturnImage);
+				
 			}
 		} catch (Exception e) {
 			System.out.println(e);
