@@ -129,9 +129,31 @@
 <!-- Nav -->
 <nav id="nav">
 	<ul>
-		<li><a href="../user/login">Login</a></li>
+		<c:if test="${  empty loginUser }">	
+		<!--  <li><a href="#">Login</a></li> -->
+		</c:if>
+		<c:if test="${ ! empty loginUser }">
+			<li>
+								<!--<a href="/user/getUser?userId=${loginUser.userId}"> -->
+								<!-- <img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px"> -->
+									<span>
+										<c:if test="${ loginUser.userName eq null }">
+											${ loginUser.userId }
+										</c:if>
+											${ loginUser.userName }
+											님
+									</span>
+									<ul>								
+										<li><a href="#">추가정보 입력</a></li>
+										<li><a href="#">내정보 보기</a></li>
+										<li><a href="#">쪽지</a></li>
+										<li><a href="#">로 그 아 웃</a></li>
+									</ul>
+								<!--  </a>-->
+							</li>
+		</c:if>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
-		<li><a href="../comm/listComm">나만의 나들이</a></li>
+		<li><a href="./comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너</a>
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
@@ -148,17 +170,7 @@
 		<!-- 					<li><a href="#">Veroeros feugiat</a></li> -->
 	</ul>
 	</li>
-	<li><a href="/ticket/listTicket">나들이 티켓</a>
-		<ul>
-			<li><a href="/purchase/listBasket">장바구니</a></li>
-			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
-		</ul>
-	</li>
-	
-	
-	
-	
-	
+	<li><a href="/ticket/listTicket">나들이 티켓</a></li>
 	<li><a href="/group/listGroup">나들이 모임</a></li>
 	<!-- 	
 				<li><a href="left-sidebar.html">Left Sidebar</a></li>
@@ -166,5 +178,4 @@
 				<li><a href="no-sidebar.html">No Sidebar</a></li>
 		 		-->
 	</ul>
-	
 </nav>
