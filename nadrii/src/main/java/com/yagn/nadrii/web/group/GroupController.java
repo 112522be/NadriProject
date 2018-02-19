@@ -84,6 +84,8 @@ public class GroupController {
 		
 		model.addAttribute("group", group);
 		
+		System.out.println(group);
+		
 		return "forward:/group/getGroup.jsp";
 		
 	}

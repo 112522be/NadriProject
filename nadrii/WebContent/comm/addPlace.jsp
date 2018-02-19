@@ -93,7 +93,7 @@
 						            				buildingName+
 						                            detailAddr + 
 						                        '</div>';
-						            $('#content').val(content)
+						            $('#content').val(content);
 
 						            var resultDiv = document.getElementById('clickLatlng'); 
 								    resultDiv.innerHTML = content;

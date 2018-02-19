@@ -87,11 +87,11 @@
 						$("article.special:nth-child("+(i+1)+") .like").empty();
 						$("article.special:nth-child("+(i+1)+") .like").append(returnData.totalCount);
 						
-						if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") != -1){
-							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
-						}else{
-							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
-						}
+						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+		                	$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
+		                }else{
+		                    $("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
+		                }
 					}
 				});	
 				
@@ -109,7 +109,16 @@
 						
 					}
 				});
-			}
+				
+				var placeName = $($('input[name="placeName"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeName").empty();
+				$("article.special:nth-child("+(i+1)+") .placeName").append(placeName);
+				
+				var placeDetail = $($('input[name="placeDetail"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").empty();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").append(placeDetail);
+				
+			}//for문
 		}
 				
 		</script>
@@ -156,15 +165,7 @@
 		</style>
 	</head>
 	<body onload="getSomething()">
-		<div id="header">
-			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
-			<!-- Inner -->
-			<div class="inner">
-				<header>
-					<h1><a href="../index.jsp" id="logo">NADRII</a></h1>
-				</header>
-			</div>
-		</div>
+		<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
 				<div class="continer">
@@ -183,21 +184,24 @@
 					<c:forEach var="group" items="${list}">
 						<c:set var="i" value="${i+1}"/>
 							<article class="4u 12u(mobile) special">
-								<div style="background-color: white; height:450px; padding: 10px 10px 0 10px; position: relative;">
-									<input type="hidden" name="groupNo" value="${group.join.groupNo}">
+								<div style="background-color: white; height: 450px; padding: 10px 10px 0 10px; position: relative;">
+									<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
 									<a href="#" class="image featured"><img src="../resources/assets/images/pic02.jpg" alt="" height="245px"></a>
 									<header align="center">
 										<h3><a href="#none" name="title">${group.title}</a></h3>
 										<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									</header>
-									<p>
-										
-									</p>
+									<div>
+										<input type="hidden" name="placeName" value="${group.placeName}"/>
+										<input type="hidden" name="placeDetail" value="${group.placeDetail}"/>
+										<span class="placeName" style="weight: 500;"></span>
+										<span class="placeDetail"></span>
+									</div>								
 									<div>
 										<div class="author" style="float: left;"> 
 											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="userId" value="${group.join.userId}">
+												<input type="hidden" name="userId" value="${group.join.userId}"/>
 												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${group.join.userId}</span>
 											</a>
 										</div>
