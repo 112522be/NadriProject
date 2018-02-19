@@ -6,7 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
@@ -34,11 +36,14 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	public String naverImageSearch(String target)throws Exception{
 		
-
+		
 		System.out.println("이미지 검색");
 
 		int display = 10;
-
+		
+		
+		
+		
         String clientId = "YaTN_waxR7h6HvXakGB2";
         String clientSecret = "dHdqCyawjm";
 
