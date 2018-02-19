@@ -1306,9 +1306,9 @@
 			success:function(returnData){
 				alert("시외 success 터미널 마커 생성");
 				
-				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right;">'
-					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right;">'
-					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right;">');
+				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right;width:30%; padding:5px;">&nbsp;'
+					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; width:30%; padding:5px;">'
+					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right;width:30%; padding:5px;">');
 				
 				
 				var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
@@ -1603,6 +1603,35 @@
 			lng.push(tempMarkerArray[i].getLng());
 			lat.push(tempMarkerArray[i].getLat());
 		}
+	}
+	
+	/*********************** 캡쳐기능 펑션생성 **************************/
+	
+	function capture() {
+        html2canvas($("#captureArea").get(0)).then(function(canvas) {
+              console.log(canvas) 
+                $("#imgSrc").val(canvas.toDataURL("image/png"));
+
+                $.ajax({
+                    type: "POST",
+                    data : $("form").serialize(),
+                    url: "../planner/capture",
+                    error: function(a, b, c){        
+                        alert("fail!!");
+                    },
+                    success: function (data) {
+                        try{
+                            alert(data+"::::::::ok");
+                            alert(123123123);
+                        }catch(e){                
+                            alert('server Error!!');
+                        }
+                    },
+                    error : function(){
+                    		alert("전송실패했다리");
+                    }
+                });
+		});
 	}
 
 	

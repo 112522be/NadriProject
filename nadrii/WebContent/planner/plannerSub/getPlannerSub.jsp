@@ -198,49 +198,49 @@
 					//출발지를 출력하면서 애니메이션 효과의 길이 설정을 위해 geoPosition의 개수별로 조건문을 처리함
 					if(i==0 && geoPosition.length == 2){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport1" src="../resources/images/planner/transport.gif">'
 								+'<img class="road1" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 3){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport2" src="../resources/images/planner/transport.gif">'
 								+'<img class="road2" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 4){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport3" src="../resources/images/planner/transport.gif">'
 								+'<img class="road3" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 5){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport4" src="../resources/images/planner/transport.gif">'
 								+'<img class="road4" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 6){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport5" src="../resources/images/planner/transport.gif">'
 								+'<img class="road5" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					if(i==0 && geoPosition.length == 7){
 						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+startSrc+'" style="width:50px; height:45px">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
 								+'<img class="transport6" src="../resources/images/planner/transport.gif">'
 								+'<img class="road6" src="../resources/images/planner/roadImg.gif"></div>');
 					}
@@ -248,69 +248,69 @@
 					//경유지와 도착지를 설정
 					if(i == 1 && i != geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="passImg1"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="경유지1" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[1]+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+passSrc[1]+'" style="width:50px; height:45px"></button></div>');
 					}else if( i==1 && i == geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 					
 					if(i == 2 && i != geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="passImg2"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="경유지2" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[2]+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+passSrc[2]+'" style="width:50px; height:45px"></button></div>');
 					}else if( i==2 && i == geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 					
 					if(i == 3 && i != geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="passImg3"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="경유지3" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[3]+'" style="width:50px; height:45px"></div>');	
+								+'<img src="'+passSrc[3]+'" style="width:50px; height:45px"></button></div>');	
 					}else if( i==3 && i == geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 					
 					if(i == 4 && i != geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="passImg4"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="경유지4" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[4]+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+passSrc[4]+'" style="width:50px; height:45px"></button></div>');
 					}else if( i==4 && i == geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 					
 					if(i == 5 && i != geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="passImg5"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="경유지5" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+passSrc[5]+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+passSrc[5]+'" style="width:50px; height:45px"></button></div>');
 					}else if( i==5 && i == geoPosition.length-1){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 					
 					if(i == 6){
 						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
-								+' box-shadow:none;" data-toggle="popover" data-placement="top"'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
 								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
-								+'<img src="'+endSrc+'" style="width:50px; height:45px"></div>');
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
 					}
 				}
 			})
