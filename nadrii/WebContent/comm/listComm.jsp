@@ -36,10 +36,6 @@ $(function() {
 })
 </script>
 <style type="text/css">
-	form.search > input:first-child {
-		content: none;
-		padding-left: 1em;
-	}
 	#nav {
 	    background-color: #3b2b48;
 	    opacity: 0.7;
@@ -51,6 +47,7 @@ $(function() {
 		border-radius: 30px;
 		width: 400px;
 		height: 50px;
+		padding: 1em 1em 1em 2.5em;
 	}
 	.image.featured{
 		margin: 0 0 1em 0;
@@ -59,9 +56,9 @@ $(function() {
 		height: 500px;
 	}
 	.icons {
-		float: right;
 		position: absolute;
-		bottom: 0px;
+		bottom: 10px;
+		right: 10px;
 	}
 </style>
 </head>
@@ -97,10 +94,10 @@ $(function() {
 								<c:forEach var="community" items="${list}">
 								<c:set var="i" value="${i+1}" />
 								<article class="4u 12u(mobile) special">
-									<div style="background-color: white; height:450px; padding: 10px 10px 0 10px;">
+									<div style="background-color: white; height:450px; padding: 10px 10px 0 10px; position: relative;">
 									<input type="hidden" name="postNo" value="${community.postNo}">
 									<a href="#" class="image featured"><img src="${community.thumbNailFileName}" alt="" height="245px"></a>
-									<header>
+									<header align="center">
 										<h3><a href="#">${community.title}</a></h3>
 									</header>
 									<p>
