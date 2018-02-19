@@ -39,7 +39,7 @@ public class PlannerController {
 	}
 	
 	@RequestMapping("addPlannerView")
-	public String addPlannerView(User user, HttpSession session) throws Exception{
+	public String addPlannerView(User user, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("PlannerController/addPlannerView 접속");
 		//session 에 저장된 userId 값을 가져옴
@@ -51,6 +51,9 @@ public class PlannerController {
 			System.out.println("로그인한 회원만 사용가능합니다.");
 			return "forward:/user/loginView.jsp";
 		}
+
+		//일반적으로 접속시 상태를 세팅 --> 업데이트 접속과 구분
+		request.setAttribute("status", "normal");
 		
 		System.out.println("addPlannerView로 이동");
 		
@@ -167,11 +170,21 @@ public class PlannerController {
 	}
 	
 	@RequestMapping(value="getPlanner", method=RequestMethod.GET)
-	public String getPlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
+	public String getPlanner(@RequestParam("postNo")int postNo, User user ,HttpServletRequest request, HttpSession session) throws Exception{
+		
+		//login유저만 접근 가능하게
+		if(session.getAttribute("loginUser") == null) {
+			System.out.println("로그인한 회원만 사용가능합니다.");
+			return "forward:/user/loginView.jsp";
+		}
 		
 		System.out.println("PlannerController/getPlanner 접속");
 		System.out.println("postNo :: "+postNo);
 		Planner planner = plannerService.getPlanner(postNo);
+		
+		//뷰카운트 증가
+		plannerService.updateViewCount(postNo);
+		System.out.println(planner);
 		
 		//db에서 가져온 x,y좌표를 파싱하여 저장
 		String[] lat = planner.getLat().split(",");
@@ -179,11 +192,14 @@ public class PlannerController {
 		
 		int latLength = lat.length;
 		
-		System.out.println(latLength);
 		
 		System.out.println("lat :: "+lat);
 		System.out.println("lng :: "+lng);
 		
+		user = (User)session.getAttribute("loginUser");
+		String userId = user.getUserId();
+		
+		request.setAttribute("userId", userId);
 		request.setAttribute("planner", planner);
 		request.setAttribute("lat", lat);
 		request.setAttribute("lng", lng);
@@ -192,6 +208,56 @@ public class PlannerController {
 		System.out.println("PlannerController/getPlanner 접속완료");
 		
 		return "forward:/planner/getPlanner.jsp";
+	}
+	
+	@RequestMapping(value="updatePlanner", method=RequestMethod.GET)
+	public String updatePlanner(@RequestParam("postNo")int postNo, HttpServletRequest request) throws Exception{
+		
+		System.out.println("PlannerController/updatePlanner planner정보 받아오기 접속");
+		
+		Planner planner = plannerService.getPlanner(postNo);
+		System.out.println(planner);
+		
+		//db에서 가져온 x,y좌표를 파싱하여 저장
+		String[] lat = planner.getLat().split(",");
+		String[] lng = planner.getLng().split(",");
+				
+		int latLength = lat.length;
+		
+		request.setAttribute("planner", planner);
+		//업데이트 접속시 상태값 세팅 --> 일반접속과 구분
+		request.setAttribute("status", "update");
+		//DB정보를 파싱하여 lat, lng값을 배열로 전달
+		request.setAttribute("dbLat", lat);
+		request.setAttribute("dbLng", lng);
+		request.setAttribute("dbLatLength", latLength);
+		
+		System.out.println("PlannerController/updatePlanner planner정보 받아오기 완료");
+		
+		return "forward:../planner/addPlannerView.jsp";
+	}
+	
+	@RequestMapping(value="updatePlanner", method=RequestMethod.POST)
+	public String updatePlanner(@ModelAttribute("planner")Planner planner,@RequestParam("postNo")int postNo , User user, HttpSession session) throws Exception{
+		
+		System.out.println("PlannerController/updatePlanner planner정보 수정 접속");
+		
+		user = (User)session.getAttribute("loginUser");
+		String plannerMakerId = user.getUserId();
+		System.out.println("로그인한 유저 ID : "+plannerMakerId);
+		
+		planner.setPostNo(postNo);
+		planner.setFlag("pl");
+		planner.setPlannerMakerId(plannerMakerId);
+		planner.setPhoto("kk");
+		
+		System.out.println(planner);
+		
+		plannerService.updatePlanner(planner);
+		
+		System.out.println("PlannerController/updatePlanner planner정보 수정 완료");
+		
+		return "redirect:/planner/getMyPlannerList";
 	}
 	
 	@RequestMapping(value="deletePlanner", method=RequestMethod.GET)

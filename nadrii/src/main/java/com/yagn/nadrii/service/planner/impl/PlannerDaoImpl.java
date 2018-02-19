@@ -68,6 +68,18 @@ public class PlannerDaoImpl implements PlannerDao{
 		System.out.println("PlannerDao/getPlanner 접속");
 		return sqlSession.selectOne("PlannerMapper.getPlanner", postNo);
 	}
+	
+	
+
+	@Override
+	public void updatePlanner(Planner planner) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("plannerDao/updatePlanner 접속");
+		
+		sqlSession.update("PlannerMapper.updatePlanner", planner);
+		
+		System.out.println("plannerDao/updatePlanner 완료");
+	}
 
 	@Override
 	public int getTotalCount(Search search, String plannerMakerId) throws Exception {
@@ -89,4 +101,12 @@ public class PlannerDaoImpl implements PlannerDao{
 		sqlSession.delete("PlannerMapper.deletePlanner", postNo);
 	}
 
+	@Override
+	public void updateViewCount(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("plannnerDao/updateViewCount 접속");
+		
+		sqlSession.update("PlannerMapper.updateViewCount", postNo);
+	}
+	
 }

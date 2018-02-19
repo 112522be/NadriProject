@@ -251,7 +251,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("�ÿܹ����� ��� ��ӹ����� ��� ����");
+					System.out.println("시외버스가 없어서 고속버스로 탐색");
 					trans = "exBusRequest";
 				}else {
 					trans="outBusRequest";
@@ -262,7 +262,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("��ӹ����� ��� ������ ��� ����");
+					System.out.println("고속버스가없어서 기차로 탐색");
 					trans = "trainRequest";
 				}else {
 					trans = "exBusRequest";
@@ -307,7 +307,7 @@ public class OdsayServiceImpl implements OdsayService{
 		obj.setPayment(Integer.parseInt(payment));
 		obj.setMapOBJ(mapOBJ);
 
-		// trainRequest�϶���
+		// trainRequest
 		if (element.getAsJsonObject().get("trainType") != null) {
 			String trainType = element.getAsJsonObject().get("trainType").getAsString();
 			obj.setTrainType(trainType);
