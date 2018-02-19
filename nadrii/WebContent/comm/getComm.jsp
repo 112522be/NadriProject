@@ -43,8 +43,8 @@
 			<!-- Main -->
 				<div class="wrapper style1">
 
-					<div class="container">
-						<article id="main" class="special">
+					<div class="container" align="center">
+						<article id="main" class="special" >
 							<header>
 								<h2><a href="#">${community.title}</a></h2>
 								<p>

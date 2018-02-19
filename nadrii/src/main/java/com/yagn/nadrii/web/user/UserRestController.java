@@ -24,6 +24,7 @@ import org.apache.log4j.Priority;
 import org.json.simple.JSONObject;
 
 import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.user.UserService;
 
 @RestController
@@ -141,8 +142,7 @@ public class UserRestController extends SupportController {
 		System.out.println("[check]01"+userId);
 		map.put("check", String.valueOf(check));
 		return map;
-    }
-		
+    }	
 }
 
 

@@ -329,7 +329,7 @@ function checkSuccess(){
          <div class="form-group">
           <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" />
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${outerUser.email}" />
             <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" />
             <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
             <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" />
