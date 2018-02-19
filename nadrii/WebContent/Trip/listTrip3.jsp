@@ -99,7 +99,7 @@ pageEncoding="UTF-8"%>
 						
 						var dpValue =						
 							"<article class='4u 12u(mobile) special'>"+
-								"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"+
+								"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt=''style='width='282px'; height='187px';' /></a>"+
 								"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"+
       							"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 								"<header>"+
@@ -132,7 +132,7 @@ pageEncoding="UTF-8"%>
 									var dpValue =
 										
 										"<article class='4u 12u(mobile) special'>"
-										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"
+										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 										+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 		      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 										+"<header>"
@@ -164,7 +164,7 @@ pageEncoding="UTF-8"%>
 												var dpValue =
 													
 													"<article class='4u 12u(mobile) special'>"
-													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"
+													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 													+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 					      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 													+"<header>"
@@ -412,10 +412,11 @@ pageEncoding="UTF-8"%>
 	
 	///*
 	$( function() {
-		$("a[href='#']:contains('Go')").on("click" , function() {
-			var keyword = $(".form-control").val();
-			$("form input:nth-child(2)").val(page-1);
-			$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+		$("#search").on("click" , function() {
+				var keyword = $(".form-control").val();
+				$("form input:nth-child(2)").val(page-1);
+				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
 		});
 	});
 	//*/
@@ -496,7 +497,43 @@ pageEncoding="UTF-8"%>
 			padding: 4px;
 		}
 		
-		
+		article{
+ 			height: 400px; 
+		}
+		.carousel{
+	background-color: #5d4f7166;
+}
+
+
+.jbTable {
+        display: table;
+        width: 100%;
+      }
+.jbTableRow {
+        display: table-row;
+        
+      }
+.jbTableCell {
+        display: table-cell;
+      }
+.jbText {
+        width: 100%;
+      }
+.jbSubmit {
+        width: 1%;
+      }
+.jbText input {
+        width: 100%;
+}
+
+#keyword, #search{
+	padding-bottom:10px;
+	padding-top:10px;
+	
+}
+#search{
+	background: #605b7b;
+}
 	</style>
 
 	<title>여행지 찾기</title>
@@ -515,13 +552,29 @@ pageEncoding="UTF-8"%>
 						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
+				
+				<div class="jbTable">
+      			<div class="jbTableRow">
+        			<div class="jbTableCell jbText">
+          				<form class="search">
+							<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
+							<input type="hidden" name="pageNo" value="" />
+							<input type="hidden" name="areaCode" value="${areaCode}"/>
+		      				<input type="hidden" name="localName" value="${localName}"/>
+				      	</form>
+        			</div>
+        			<div class="jbTableCell jbSubmit">
+          				<input type="button"name="search" id="search" value="검색">
+        			</div>
+        		</div>
+        	</div>
 				<div class="wrapper style1">
 
 					<section id="features" class="container special">
 						<div class="row">
 							<c:forEach var ="list" items="${list}">
 								<article class="4u 12u(mobile) special">
-									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" /></a>
+									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" style="width="282px"; height="187px";"/></a>
 									<input type="hidden" name="contentid" value="${list.contentid}"/>
 		          					<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 									<header>

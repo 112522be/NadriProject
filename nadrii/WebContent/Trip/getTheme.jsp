@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
@@ -43,6 +44,15 @@
 		});
 	});
 	
+	$( function() {
+		$("#search").on("click" , function() {
+				var keyword = $(".form-control").val();
+				$("form input:nth-child(2)").val(1);
+				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
+		});
+	});
+	
 
 </script>
 
@@ -68,7 +78,41 @@
 	opacity: 0.0;
 }
 
-article a img{
+
+
+.carousel{
+	background-color: #5d4f7166;
+}
+
+
+.jbTable {
+        display: table;
+        width: 100%;
+      }
+.jbTableRow {
+        display: table-row;
+        
+      }
+.jbTableCell {
+        display: table-cell;
+      }
+.jbText {
+        width: 100%;
+      }
+.jbSubmit {
+        width: 1%;
+      }
+.jbText input {
+        width: 100%;
+}
+
+#keyword, #search{
+	padding-bottom:10px;
+	padding-top:10px;
+	
+}
+#search{
+	background: #605b7b;
 }
 
 </style>
@@ -83,26 +127,37 @@ article a img{
 			<div id="header">
 				<div class="inner">
 					<header>
-						<h1><a href="index.html" id="logo">나들이 정보</a></h1>
+						<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
 					</header>
 				</div>
 						
 				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
 		
-			<form class="search">
-				<input type="text" name="keyword" value="" placeholder="지역 검색" />
-				<input type="hidden" name="pageNo" value="" />
-				<input type="hidden" name="areaCode" value="${areaCode}"/>
-      			<input type="hidden" name="localName" value="${localName}"/>
-			</form>
+			<div class="jbTable">
+      			<div class="jbTableRow">
+        			<div class="jbTableCell jbText">
+          				<form class="search">
+							<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
+							<input type="hidden" name="pageNo" value="" />
+							<input type="hidden" name="areaCode" value="${areaCode}"/>
+		      				<input type="hidden" name="localName" value="${localName}"/>
+				      	</form>
+        			</div>
+        			<div class="jbTableCell jbSubmit">
+          				<input type="button"name="search" id="search" value="검색">
+        			</div>
+        		</div>
+        	</div>
+			
+			
 			
 			
 			<section class="carousel">
 				<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">
 					
 					<article class="">
-						<a href="#" class="image featured"><img name = "museum" src="../resources/images/tripIcon/gyeongbok-palace-3077864_1920.jpg" alt=""></a>
+						<a href="#" class="image featured"><img name = "museum" src="../resources/images/tripIcon/gyeongbok-palace-3077864_1920.jpg" alt="" style="height: 250.42px;"></a>
 						<header>
 							<h3><a href="#">박물관</a></h3>
 						</header>
@@ -110,7 +165,7 @@ article a img{
 					</article>
 
 					<article class="">
-						<a href="#" class="image featured"><img name = "exhibition" src="../resources/images/tripIcon/snow-708859_1920.jpg	" alt=""></a>
+						<a href="#" class="image featured"><img name = "exhibition" src="../resources/images/tripIcon/snow-708859_1920.jpg	" alt="" style="height: 250.42px;"></a>
 						<header>
 							<h3><a href="#">전시관</a></h3>
 						</header>
@@ -118,7 +173,7 @@ article a img{
 					</article>
 
 					<article class="">
-						<a href="#" class="image featured"><img name = "gallery" src="../resources/images/tripIcon/pohang-1613923_1920_eidt.jpg" alt=""></a>
+						<a href="#" class="image featured"><img name = "gallery" src="../resources/images/tripIcon/pohang-1613923_1920_eidt.jpg" alt="" style="height: 250.42px;"></a>
 						<header>
 							<h3><a href="#">미술관</a></h3>
 						</header>
@@ -126,7 +181,7 @@ article a img{
 					</article>
 
 					<article class="">
-						<a href="#" class="image featured"><img name = "experience" src="../resources/images/tripIcon/art-1837073_1920.jpg" alt=""></a>
+						<a href="#" class="image featured"><img name = "experience" src="../resources/images/tripIcon/art-1837073_1920.jpg" alt="" style="height: 250.42px;"></a>
 						<header>
 							<h3><a href="#">체험관</a></h3>
 						</header>
@@ -134,7 +189,7 @@ article a img{
 					</article>
 
 					<article class="">
-						<a href="#" class="image featured"><img name = "tradition" src="../resources/images/tripIcon/republic-of-korea-2675868_1920.jpg" alt=""></a>
+						<a href="#" class="image featured"><img name = "tradition" src="../resources/images/tripIcon/republic-of-korea-2675868_1920.jpg" alt="" style="height: 250.42px;"></a>
 						<header>
 							<h3><a href="#">민속마을</a></h3>
 						</header>

@@ -43,7 +43,8 @@ public class TripDaoImplImageSearch implements TripDao {
         String clientSecret = "dHdqCyawjm";
 
         String text = URLEncoder.encode(target, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json 
+        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display
+        		+"&filter=large&sort=sim"; // json 
         
 
         URL url = new URL(apiURL);

@@ -34,6 +34,8 @@ public class TripDaoImplTour implements TripDao {
 
 	private TripDaoImplImageSearch tripDaoImplImageSearch;
 	
+	private TripDaoImplImageSearchKakao tripDaoImplImageSearchKakao;
+	
 	public TripDaoImplTour() {
 		System.out.println(this.getClass());		
 	}
@@ -91,7 +93,9 @@ public class TripDaoImplTour implements TripDao {
 			if(items.get("item") instanceof JSONArray) {
 				JSONArray jsonArray = (JSONArray)items.get("item");
 				
-				tripDaoImplImageSearch = new TripDaoImplImageSearch();
+				tripDaoImplImageSearchKakao = new TripDaoImplImageSearchKakao();
+				
+				
 						
 				for(int i=0;i<jsonArray.size();++i) {
 					JSONObject obj = (JSONObject)jsonArray.get(i);
@@ -105,7 +109,14 @@ public class TripDaoImplTour implements TripDao {
 
 						System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
 
-						String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+						String image = tripDaoImplImageSearchKakao.naverImageSearch(tourDomain.getTitle());
+						if(image ==null) {
+							tripDaoImplImageSearch = new TripDaoImplImageSearch();
+							
+							image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+									
+						}
+						
 						System.out.println(image);
 						tourDomain.setFirstimage2(image);
 					}
