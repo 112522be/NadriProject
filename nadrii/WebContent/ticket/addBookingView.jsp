@@ -71,7 +71,7 @@
 
 	function fncBasketList() {
 		 
-		$(".label.label-warning[name='titleB']").append('${ tourTicket.title }');
+		$(".modal-body .text-center.title").append('${ tourTicket.title }');
 
 		for (var i = 0; i < $(".ticketPrice").length; i++) {
 			ticketPrice = $(".ticketPrice").eq(i).val();
@@ -83,13 +83,13 @@
 				var sumPriceTicket = (ticketPrice * 1) * ticketCount;
 				totalTicketPrice = (totalTicketPrice * 1)
 						+ (sumPriceTicket * 1);
-				$(".modal-body").append("<h2>&nbsp;&nbsp;<code>￦ "
+				$(".modal-body").append("<h3>&nbsp;&nbsp;￦ "
 										+ ticketPrice
-										+ "</code> : <span class='label label-info'>"
-										+ ticketCount + "</span>&nbsp;장</h2>");
+										+ " : <strong class='text-danger'>"
+										+ ticketCount + "</strong>&nbsp;장</h3>");
 			}
 		}
-		$(".label.label-success").append("￦ " + totalTicketPrice);
+		$(".modal-body h3:contains('- 총 결제요금 : ￦ ') .text-danger").append(totalTicketPrice);
 	}
 	
 </script>
@@ -547,9 +547,9 @@
 				</div>
 			
 				<div class="modal-body">
-					<h1 class="text-center"><span class="label label-warning" name='titleB'></span></h1><br>
-					<h3>- 선택한 예매일자 : <span class="label label-info">${ bookingDate }</span></h3>
-					<h3>- 총 결제요금 : <span class="label label-success"></span>&nbsp;원</h3>
+					<h2 class="text-center title"></h2><br>
+					<h3>- 선택한 예매일자 : <strong class='text-danger'>${ bookingDate }</strong></h3>
+					<h3>- 총 결제요금 : ￦ <strong class="text-danger"></strong></h3>
 				
 				</div>
 			
