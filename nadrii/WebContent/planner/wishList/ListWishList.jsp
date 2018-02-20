@@ -3,16 +3,128 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
-</head>
-<body>
+<script type="text/javascript">
 
-<div id="header">
+	$( function() {
+
+		$("img[name='museum']").on("click" , function() {
+			self.location = "../trip/listMuseum?pageNo=1&area=local"
+		});
+	});
+	
+	$( function() {
+
+		$("img[name='exhibition']").on("click" , function() {
+			self.location = "../trip/listExhibit?pageNo=1&area=local"
+		});
+	});
+	
+	$( function() {
+
+		$("img[name='gallery']").on("click" , function() {
+			self.location = "../trip/listGallery?pageNo=1&area=local"
+		});
+	});
+	
+	$( function() {
+
+		$("img[name='experience']").on("click" , function() {
+			self.location = "../trip/listExperience?pageNo=1&area=local"
+		});
+	});
+	
+	$( function() {
+		$("img[name='tradition']").on("click" , function() {
+			self.location = "../trip/listTradition?pageNo=1&area=local"
+		});
+	});
+	
+	$( function() {
+		$("#search").on("click" , function() {
+				var keyword = $(".form-control").val();
+				$("form input:nth-child(2)").val(1);
+				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
+		});
+	});
+	
+
+</script>
+
+ 
+<style type="text/css">
+
+#header{
+	background-color: #ffffcd;
+	background-image: url("/resources/images/tripIcon/tripInfo.jpg");
+}
+
+#nav{
+	background-image: url("../resources/helios/images/header.jpg");	
+	background-color: #44324a;
+	opacity: 0.7;
+	
+}
+.forward{
+	opacity: 0.0;
+}
+
+.backward{
+	opacity: 0.0;
+}
+
+
+
+.carousel{
+	background-color: #5d4f7166;
+}
+
+
+.jbTable {
+        display: table;
+        width: 100%;
+      }
+.jbTableRow {
+        display: table-row;
+        
+      }
+.jbTableCell {
+        display: table-cell;
+      }
+.jbText {
+        width: 100%;
+      }
+.jbSubmit {
+        width: 1%;
+      }
+.jbText input {
+        width: 100%;
+}
+
+#keyword, #search{
+	padding-bottom:10px;
+	padding-top:10px;
+	
+}
+#search{
+	background: #605b7b;
+}
+
+</style>
+ 
+ 
+</head>
+
+<body class="no-sidebar">
+
+		<div id="page-wrapper">
+
+			<div id="header">
 				<div class="inner">
 					<header>
 						<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
@@ -21,8 +133,11 @@
 						
 				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
-
-<section class="carousel">
+		
+			
+			
+			
+			<section class="carousel">
 				<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">
 					
 					<article class="">
@@ -70,6 +185,27 @@
 				<span class="backward" style="display: block;"></span>
 			</section>
 			
+				<div class="wrapper style2">
+
+					<article id="main" class="container special">
+					<h3><a href="#">이런 곳은 어때요?</a></h3>
+						<a href="#" class="image featured"><img src="${trip.firstimage2}" alt="" /></a>
+						<header>
+							<h2><a href="#">${trip.title}</a></h2>
+							
+						</header>
+						<p>
+							${fee.overview}
+						</p>
+						<footer>
+						</footer>
+					</article>
+
+				</div>
+			
+			
+		</div>
+		
 		<script src="../resources/helios/assets/js/jquery.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
@@ -77,5 +213,8 @@
 		<script src="../resources/helios/assets/js/skel.min.js"></script>
 		<script src="../resources/helios/assets/js/util.js"></script>
 		<script src="../resources/helios/assets/js/main.js"></script>
+		
+
 </body>
+
 </html>
