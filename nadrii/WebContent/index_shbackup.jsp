@@ -12,84 +12,32 @@
 	<head>
 		<title>나들이 메인화면</title>
 		<meta charset="utf-8" />
-
-
-<!-- ///////////////////////////////////////////////// 기존 
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
-		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]
+		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 		
 		<!-- 합쳐지고 최소화된 최신 CSS 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 			 			 
-		<!-- 부가적인 테마 
+		<!-- 부가적인 테마 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
     		
     	<!-- 합쳐지고 최소화된 최신 자바스크립트 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --> 		
     	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
+    	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">-->
+    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  -->
     	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     	<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.js"></script> 
-<!-- ///////////////////////////////////////////////// 기존 -->
-
-
-		<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous"> 
-	
-	<!-- Optional theme -->	
-	<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous"> -->
-	
-	
-	
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-	
-	<!-- Scripts -->
-	<script src="/resources/helios/assets/js/jquery.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
-	<script src="/resources/helios/assets/js/skel.min.js"></script>
-	<script src="/resources/helios/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/helios/assets/js/main.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
-		
-
-
-
-
-
-
-
-
-
 			
 		<script type="text/javascript">
     		
@@ -386,11 +334,9 @@ function checkSuccess(){
 		
 	});
 		   
-	
-	
     
     		</script>
-    	<!--	
+    		
     		<style>
     		
     		.groupId{width:450px; padding-top:12px; margin:auto; display:block; height:67px; float:left;}
@@ -462,34 +408,22 @@ function checkSuccess(){
 				}
 			}
 			
-				
     		</style>
     		
-	-->
+    		<style>
+			#header{
+			background-image: url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
+			background-color: #3a2748;
+			}
+			
+			#nav{
+			background-color: #3b2b48;
+			opacity: 0.7;
+			}
+ 
+		</style>
 	
-<style>
-/* Yagn team custom CSS */
-#header {
-	background-image:
-		url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
-	background-color: #3a2748;
-}
-
-.buttonyagn {
-	background-color: #df7366;
-	display: inline-block;
-	border-radius: 100%;
-	width: 4.5em;
-	height: 4.5em;
-	line-height: 4.5em;
-	text-align: center;
-	font-size: 1.25em;
-	color: #fff;
-	padding: 0;
-}
-</style>
-
-</head>
+	</head>
 	
 	
 	
@@ -499,70 +433,15 @@ function checkSuccess(){
 
 			<!-- Header -->
 				<div id="header">
-					
+
 						<jsp:include page="/layout/inner.jsp" />
 				 		 	
 
 						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
-		</div>
 
-<!-- /////////////////////////////////////////////////////////// -->
-<c:if test="${  empty loginUser }">
-<div class="wrapper-style1">
-	<section id="banner">
-	<div class="container">
-		<div class="row">
-		
-			<article class="4u 12u(mobile) special">
-				<header>
-					<h3>
-						<a href="#"><strong>아 이 디</strong></a>
-					</h3>
-				</header>
-				<form>
-					<input type="text" class="12u" name="" placeholder="  ID">
-				</form>
-			</article>
-			<article class="4u 12u(mobile) special">
-				<header>
-					<h3>
-						<a href="#"><strong>비밀번호</strong></a>
-					</h3>
-				</header>
-				<form>
-					<input type="password" class="12u" name="" placeholder="  Password">
-				</form>
-			</article>
-			<article class="2u 12u(mobile) special">
-				<header>
-					<h3>
-						<a href="#"><strong>&nbsp;</strong></a>
-					</h3>
-					<input type="button" class="button circled 12u" value="로그인">
-					<!-- <a href="#" class="buttonyagn">로그인</a> -->
-				</header>
-			</article>
-			<article class="2u 12u(mobile) special">
-				<header>
-					<h3>
-						<a href="#"><strong>&nbsp;</strong></a>
-					</h3>
-					<input type="button" class="12u" value="회원가입">
-					
-				</header>
-			</article>
-			
-			
-		</div>
-	</div>
-	</section>
-</div>
-</c:if>
-<!-- /////////////////////////////////////////////////////////// -->
-
-		<!-- Banner  ////////// index 화면 로그인,회원가입 화면 ////////// --> 
+			<!-- Banner  ////////// index 화면 로그인,회원가입 화면 ////////// --> 
 			<c:if test="${  empty loginUser }">
 				<section id="banner">
 					<header>
@@ -619,18 +498,8 @@ function checkSuccess(){
 						</form>
 					</c:if>
 				</header>
-			</section><!-- banner end -->
+			</section>
 		</c:if>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			<!-- 회원가입 다이얼로그 창 -->
 	<div id="addUserView" style="display:none; ">
@@ -942,14 +811,14 @@ function checkSuccess(){
 		</div>
 
 		<!-- Scripts 
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
 			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
 			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
 			<script src="/resources/helios/assets/js/skel.min.js"></script>
 			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]
-		    <script src="/resources/helios/assets/js/main.js"></script>-->
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 			
 			
 			

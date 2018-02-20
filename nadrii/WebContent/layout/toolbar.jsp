@@ -181,7 +181,7 @@
 	<c:if test="${ empty loginUser }">
 	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
 		<ul>
-			<li><a href="/user/login">로그인 후 나들이 티켓의 추가기능을 사용하실 수 있습니다.</a></li>
+			<li><a href="/user/login" data-toggle="tooltip" data-placement="bottom" title="클릭시 로그인 화면으로 이동">로그인 후 나들이 티켓의 추가기능을 사용하실 수 있습니다.</a></li>
 		</ul>	
 	</li>	
 	</c:if>
@@ -191,7 +191,6 @@
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
 			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
-			<li><a href="/purchase/tempTicket">[임시] 입장권 보여주기</a></li>
 		</ul>
 	</c:if>
 	</li>
