@@ -2,10 +2,10 @@ package com.yagn.nadrii.web.user;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -27,13 +27,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yagn.nadrii.service.common.CommentService;
+import com.yagn.nadrii.service.domain.Comments;
+import com.yagn.nadrii.service.domain.Message;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.domain.naverLogin.NaverLoginResponse;
+import com.yagn.nadrii.service.like.LikeService;
+import com.yagn.nadrii.service.message.MessageService;
 import com.yagn.nadrii.service.purchase.PurchaseService;
 import com.yagn.nadrii.service.user.UserService;
-import com.yagn.nadrii.web.user.LoginRestClient;
 
 
 @Controller
@@ -51,7 +55,15 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
+	@Autowired
+	@Qualifier("likeServiceImpl")
+	private LikeService likeService;
+	@Autowired
+	@Qualifier("messageServiceImpl")
+	private MessageService messageService;
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
@@ -172,9 +184,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "getUser", method = RequestMethod.GET)
-	public String getUser() throws Exception {
-		System.out.println("getUser");
-
+	public String getUser(HttpSession session, HttpServletRequest request) throws Exception {
+		System.out.println((User)session.getAttribute("loginUser"));
+		String userId = ((User)session.getAttribute("loginUser")).getUserId();
+		List<Comments> comments = commentService.listCommentById(userId);
+		List<Message> messages = messageService.listMessage(userId);
+		request.setAttribute("comments", comments);
+		request.setAttribute("messages", messages);
 		return "forward:/user/getUser.jsp";
 	}
 
@@ -266,7 +282,7 @@ public class UserController {
 			System.out.println("message!!" + message);
 			InternetAddress[] address = { new InternetAddress(email, authNum) };
 			System.out.println("address1" + address);
-			message.setRecipients(Message.RecipientType.TO, address);
+			message.setRecipients(javax.mail.Message.RecipientType.TO, address);
 			message.setSentDate(new java.util.Date());
 			message.setSubject(subject);
 			message.setContent(content, "text/html; charset=UTF-8");

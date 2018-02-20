@@ -14,10 +14,83 @@
 		
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		
+		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$("a.button.small.write:contains('write')").bind("click", function(){
+				self.location="addComm.jsp";
+			});
+			
+			$("a.button.small:contains('link')").bind("click", function(){
+				self.location="/comm/listComm";
+			});
+			
+			$("a.button.small.modify:contains('modify')").bind("click", function(){
+				self.location="/comm/updateCommView?postNo=${community.postNo}";
+			});
+			
+			$("a.button.small.delete:contains('delete')").bind("click", function(){
+				if(confirm("삭제하시겠습니까?")==true){
+					self.location="/comm/deleteComm?postNo=${community.postNo}";
+					alert("삭제되었습니다.");
+				}else{
+					return;	
+				}		
+			});
+			
+			$( function() {
+			    $( "#accordion" ).accordion({
+			      collapsible: true
+			    });
+			} );
+		});
+
+		function clickProfile(){
+			alert('${group.join.userId}');
+		}
+
+		function clickMessage(){	
+			window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+		}
+
+		function addLike(){
+			
+			$.ajax({
+				url: "../like/json/addLike/"+groupNo,
+				method: "POST",
+				dataType: "json",
+				success:function(returnData){
+					getCountLike();
+				}
+			});	
+			
+		}
+
+		var likeCount;
+
+		function getCountLike(){
+			
+			$.ajax({
+				url: "../like/json/getCountLike/"+groupNo,
+				method: "POST",
+				dataType: "json",
+				success:function(returnData){
+					
+					likeCount = returnData.totalCount;
+
+				}
+			});	
+		}
+
+		$(function(){
+			$(".like").bind("click", function(){
+				alert(1);
+			});
+		});
+		</script>
 		<style type="text/css">
 			.btn.btn-default{
 				background-color: lightgray;
@@ -25,11 +98,23 @@
 				height: auto;
 				padding: 10px;
 			}
+			img{
+				max-width: 700;
+				height: auto;
+			}
+			hr{
+				top: 2em;
+				margin-bottom: 4em;
+			}
+			input.form-control{
+				margin: 1px;
+			}
 		</style>
 	</head>
 	<body class="no-sidebar">
 		<div id="page-wrapper">
 			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+			<input type="hidden" name="postNo" value="${community.postNo}">
 			<!-- Header -->
 				<div id="header">
 					<!-- Inner -->
@@ -43,20 +128,41 @@
 			<!-- Main -->
 				<div class="wrapper style1">
 
-					<div class="container" align="center">
-						<article id="main" class="special" >
+					<div class="container">
+						<article id="main" class="special" align="center" style="position: relative; height:auto;">
 							<header>
 								<h2><a href="#">${community.title}</a></h2>
-								<p>
-									${community.hashtag}
-								</p>
+								<br/>
+								<div style="float: left;"> 
+									<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+									<a href="#none" style="position: relative;">
+										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.userId}</span>
+									</a>
+								</div>
+								<div style="float: right;">
+									<span style="padding-right: 30px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;&nbsp;${community.viewCount}</span>
+									<span style="border-left: 1px solid; padding-left: 30px;">${community.regDate}</span>
+								</div>
 							</header>
+							<br/>
 							<div align="center">
 								${community.text}						
 							</div>
+							<br/><br/>
+							<div>
+								<div align= "left" class="col-xs-9" style="padding: 30px;">
+									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 11pt;">${community.hashtag}</span>
+								</div>
+								<div align="right" class="col-xs-3">
+									<input type="hidden" name="postNo" value="${community.postNo}">
+									<jsp:include page="../common/like.jsp"></jsp:include>
+								</div>
+							</div>
 						</article>
-						<hr />
+						<br/><br/><br/>
+						<div>
 						<jsp:include page="../common/comment.jsp"></jsp:include>
+						</div>
 						<hr />
 						<div class="row">
 							<article class="4u 12u(mobile) special">
@@ -93,7 +199,6 @@
 					</div>
 				</div>
 		</div>
-			<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 		<!-- Scripts -->
 			<script src="/resources/helios/assets/js/jquery.min.js"></script>
 			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>

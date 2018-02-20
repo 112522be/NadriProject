@@ -57,6 +57,10 @@
 				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 				placement: 'bottom',
 			});	
+			
+			$('button[name="addComm"]').bind('click', function() {
+				self.location="addComm.jsp"
+			})
 		});
 		
 		function clickProfile(){
@@ -75,7 +79,7 @@
 		
 		function getSomething(){
 			
-			for(var i=0; i< ${resultPage.totalCount} ; i++){
+			for(var i=0; i< '${resultPage.totalCount}' ; i++){
 				var postNo = $($('input[name="postNo"]')[i]).val();
 				
 				$.ajax({
@@ -87,10 +91,10 @@
 						$("article.special:nth-child("+(i+1)+") .like").empty();
 						$("article.special:nth-child("+(i+1)+") .like").append(returnData.totalCount);
 						
-						if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") != -1){
-							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
-						}else{
+						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
 							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
+						}else{
+							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
 						}
 					}
 				});	
@@ -182,6 +186,9 @@
 						</form>
 					</div>
 				</div>	
+				<div>
+					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="glyphicon glyphicon-pencil"></span></button>
+				</div>
 				<div class="row">
 					<c:set var="i" value="0" />
 					<c:forEach var="community" items="${list}">
@@ -212,6 +219,11 @@
 								</div>
 						</article>
 					</c:forEach>
+				</div>
+				<c:if test="">
+				</c:if>
+				<div align="center" style="font-size: medium;">
+					<button type="button" name="more">더보기<span class="glyphicon glyphicon-chevron-down"></span></button>
 				</div>
 			</section>
 		</div>

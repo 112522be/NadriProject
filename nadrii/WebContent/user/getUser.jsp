@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -34,14 +34,56 @@
 		//============= 회원정보수정 Event  처리 =============	
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "button" ).on("click" , function() {
-					self.location = "/user/updateUser?userId=${user.userId}"
+			 $( "button.btn.btn-primary" ).on("click" , function() {
+					self.location = "/loginUser/updateUser?userId=${loginUser.userId}"
 				});
 		});
 		
-		 $( function() {
-			    $( ".tabs" ).tabs();
-			  } );
+		$( function() {
+			$( ".tabs" ).tabs();
+			$('button.moreInfo').on('click', function() {
+				var text='<div class="row">'
+			  		+'<div class="col-xs-4 col-md-2 "><strong>생 년 월 일</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.email}</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2 "><strong>이 름</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.userName}</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2 "><strong>자녀 수</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.children}</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2 "><strong>성 별</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.gender}</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2 "><strong>휴대전화번호</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${ !empty loginUser.phone ? loginUser.phone : ""}	</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2"><strong>QrCode</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.qrCode}</div>'
+					+'</div>'
+					+'<div class="row">'
+					+'<div class="col-xs-4 col-md-2 "><strong>가입일자</strong></div>'
+					+'<div class="col-xs-8 col-md-4">${loginUser.regDate}</div>'
+					+'<div class="row" align="right ">'
+					+'<div class="text-center " style="padding-top:60px;">'
+					+'<button type="button" class="btn btn-primary">회원정보수정</button>'
+					+'</div>'
+					+'</div>'
+					+'</div>'
+				if($(this).html().indexOf("더보기") != -1){
+					$('#extraInfo').html(text)
+					$(this).html('접기<span class="glyphicon glyphicon-chevron-up"></span>')
+				}else{
+					$('#extraInfo').html('')
+					$(this).html('더보기<span class="glyphicon glyphicon-chevron-down"></span>')
+				}
+			})
+		} );
 		
 	</script>
 	
@@ -51,11 +93,9 @@
 	}
 	
 	#nav{
-   background-color: #086A87;
-   opacity: 0.4;
-   color:#ddd;
-   
-}
+	   opacity: 0.4;
+	   color:#ddd;   
+	}
 	
 	</style>
 	
@@ -73,76 +113,32 @@
 		<div class="page-header" style="    border-bottom: 3px solid #31708f;">
 	       <h3 class=" text-info" style="margin:0 0 25px 15px">회원정보조회</h3>
 	    </div>
-	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>아 이 디</strong></div>
-			<div class="col-xs-8 col-md-4">${user.userId}</div>
+	    <div>
+			<div class="col-xs-8" align="center">
+				<div class="row">
+			  		<div class="col-xs-4 col-md-2"><strong>아 이 디</strong></div>
+					<div class="col-xs-8 col-md-4">${loginUser.userId}</div>
+				</div>
+				<div class="row">
+			  		<div class="col-xs-4 col-md-2 "><strong>Email</strong></div>
+					<div class="col-xs-8 col-md-4">${loginUser.email}</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<c:if test="${empty loginUser.profileImageFile}">
+					<img src="/resources/images/00742106_105752.jpg" width="150px">
+				</c:if>
+				<c:if test="${!empty loginUser.profileImageFile}">
+					<img src="${loginUser.profileImageFile}">
+				</c:if>
+			</div>
 		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>Email</strong></div>
-			<div class="col-xs-8 col-md-4">${user.email}</div>
+		<br/>
+		<div align="center">
+			<button type="button" class="moreInfo" name="moreInfo">더보기<span class="glyphicon glyphicon-chevron-down"></span></button>
 		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>생 년 월 일</strong></div>
-			<div class="col-xs-8 col-md-4">${user.email}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>이 름</strong></div>
-			<div class="col-xs-8 col-md-4">${user.userName}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>자녀 수</strong></div>
-			<div class="col-xs-8 col-md-4">${user.children}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>성 별</strong></div>
-			<div class="col-xs-8 col-md-4">${user.gender}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>휴대전화번호</strong></div>
-			<div class="col-xs-8 col-md-4">${ !empty user.phone ? user.phone : ''}	</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>이 메 일</strong></div>
-			<div class="col-xs-8 col-md-4">${user.email}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>QrCode</strong></div>
-			<div class="col-xs-8 col-md-4">${user.qrCode}</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>가입일자</strong></div>
-			<div class="col-xs-8 col-md-4">${user.regDate}</div>
-		</div>
-		
-		<hr/>
+		<div id="extraInfo" align="center"></div>
+		<br/>
 			<div class="tabs .col-md-8" style="border:1px solid #31708f; width:740px; margin:auto; padding:0;">
 				<ul style="background:#f8f8f8; border:1px solid #31708f;">
 					<li style="border:1px solid #31708f;"><a href="#tabs-1">쪽지</a></li>
@@ -150,24 +146,31 @@
 		    		<li style="border:1px solid #31708f;"><a href="#tabs-3">내가 쓴 댓글</a></li>
 		    	</ul>
 		    	<div id="tabs-1">
-    				쪽지
+    				<div class="row">
+    					<c:set var="i" value="0" />
+							<c:forEach var="messages" items="${messages}">
+								<c:set var="i" value="${i+1}" />
+								<div>${messages.text}</div>
+								<hr/>
+							</c:forEach>
+    				</div>
 				</div>
 				<div id="tabs-2">
 					좋아요
 				</div>
 			   <div id="tabs-3">
-			   		내가 쓴 댓글 
+			   		<div class="row">
+    					<c:set var="i" value="0" />
+							<c:forEach var="comments" items="${comments}">
+								<c:set var="i" value="${i+1}" />
+								<div>${comments.text}</div>
+								<hr/>
+							</c:forEach>
+    				</div>
 			   </div>
 			</div>
-		
-		<!-- <hr/> -->
-		
-		
-		<div class="row">
-	  		<div class="text-center " style="padding-top:60px;">
-	  			<button type="button" class="btn btn-primary">회원정보수정</button>
-	  		</div>
 		</div>
+		
 		
 		<!-- 메인 script-->
 		

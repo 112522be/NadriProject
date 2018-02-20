@@ -36,8 +36,12 @@
  	</select>
  	
  	<select id="listCommentById" parameterType="int" resultMap="communitySelectMap">
-		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE user_id=#{userId}
- 		ORDER BY reg_date DESC
+		SELECT * FROM (SELECT ROWNUM row_num, inner_tabel.*
+		FROM (SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE user_id=#{userId}
+ 		ORDER BY reg_date DESC) inner_table
+ 		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+ 		
  	</select>
 	
 	<!-- comm의 Update(update) -->
