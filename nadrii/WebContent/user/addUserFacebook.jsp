@@ -323,7 +323,8 @@ function checkSuccess(){
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+	<jsp:include page="/layout/toolbar.jsp" />
+	<jsp:include page="/layout/inner.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -427,6 +428,16 @@ function checkSuccess(){
 	
 	<input type="hidden" id="email" value="${email}" /> <!-- facebook 로그인 -->
 	
+	
+	<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 </body>
 
 </html>

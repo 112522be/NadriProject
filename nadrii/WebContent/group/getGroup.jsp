@@ -8,10 +8,23 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">	
-		<link rel="stylesheet" href="../resources/helios/assets/css/main.css?version=211" />
+		<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
+		<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
+				
+		<!-- Scripts -->
+		<script src="../resources/helios/assets/js/jquery.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="../resources/helios/assets/js/skel.min.js"></script>
+		<script src="../resources/helios/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="../resources/helios/assets/js/main.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
+	
+		<!-- Latest compiled and minified JavaScript -->
 		
 		<style>
 		.wrapper{
@@ -29,24 +42,8 @@
 			height:350px;
 			position: relative; 
 			display: block;			
-		}
-				
+		}						
 		</style>
-		
-		<!-- Scripts -->
-
-		<script src="../resources/helios/assets/js/jquery.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
-		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
-		<script src="../resources/helios/assets/js/skel.min.js"></script>
-		<script src="../resources/helios/assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-		<script src="../resources/helios/assets/js/main.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
-	
-		<!-- Latest compiled and minified JavaScript -->
 		
 		<script>
 		
@@ -116,7 +113,7 @@
 			<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1><a href="index.html" id="logo">Helios</a></h1>
+							<h1>나들이 모임</h1>
 						</header>
 					</div>
 				<jsp:include page="../layout/toolbar.jsp" />		
@@ -137,7 +134,7 @@
 											</a>
 										</div>
 										<div style="float: right;">
-											<span style="padding-right: 30px;">view : &nbsp;${group.viewCount}</span>
+											<span style="padding-right: 30px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;&nbsp;${group.viewCount}</span>
 											<span style="border-left: 1px solid; padding-left: 30px;">${group.regDate}</span>
 										</div>
 										<br/>
@@ -187,10 +184,8 @@
 		    map: map
 		});
 		
-		var placeName = '${group.placeName}';
-		var content = placeName.slice(placeName.indexOf("<h3>")+4,placeName.indexOf("</h3>"));
 		var infowindow = new daum.maps.InfoWindow({
-		    content : '<div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+content+'</div>'
+		    content : '<center><div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+'${group.placeName}'+'</div></center>'
 		});
 		
 		infowindow.open(map, marker);

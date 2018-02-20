@@ -2,10 +2,10 @@ package com.yagn.nadrii.service.domain.kakaoLogin;
 
 public class TokenRequest {
 	private final static String grant_type = "authorization_code";
-	private final static String client_id="4c6e53f28fe567efc82e2e871436b51a";
-	private final static String redirect_uri = "http://192.168.0.12:8080/oauth/rest";
+	private final static String client_id="ffbb3cfd77a7b485daca0958078eb74a";
+	private final static String redirect_uri = "http://127.0.0.1:8080/user/kakaoLogin";
 	private String code;
-	private final static String client_secret="zVA5UmbS2hV82LqzvbYVM0HXE74ztyEB";
+	private final static String client_secret="yMMDvwpl9M355IhZSl82ZmPQ1GLW5GtE";
 	
 	public String getClient_id() {
 		return client_id;

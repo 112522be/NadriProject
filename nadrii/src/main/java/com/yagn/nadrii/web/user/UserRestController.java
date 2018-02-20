@@ -24,6 +24,7 @@ import org.apache.log4j.Priority;
 import org.json.simple.JSONObject;
 
 import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.user.UserService;
 
 @RestController
@@ -66,15 +67,6 @@ public class UserRestController extends SupportController {
 		
 		return map;
 		
-	}
-			
-	private String randomNum() {
-		StringBuffer buffer = new StringBuffer();
-		for(int i = 0; i <= 6; i++) {
-			int n = (int) (Math.random() *10);
-				buffer.append(n);
-			}
-		return buffer.toString(); 
 	}
 
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
@@ -139,19 +131,18 @@ public class UserRestController extends SupportController {
 		return map;
 	}
 	
-	@RequestMapping(value = "checkId", method=RequestMethod.POST)
-    public Object idCheck(String user, Model model) throws Exception {
+	@RequestMapping(value = "json/checkId", method=RequestMethod.POST)
+    public Map idCheck(String userId, Model model) throws Exception {
 
 		System.out.println("[check]");
 		
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println("[check]!!!"+map);
-		int check = userService.checkId(user);
-		System.out.println("[check]01"+user);
+		System.out.println("[check]==>"+userId);
+		int check = userService.checkId(userId);
+		System.out.println("[check]01"+userId);
 		map.put("check", String.valueOf(check));
 		return map;
-    }
-		
+    }	
 }
 
 

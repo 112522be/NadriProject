@@ -16,7 +16,7 @@
 		console.log("세션 정보 : ${session}")
 		
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "/ticket/listTicket"
+			self.location = "../ticket/listTicket"
 		});
 
 	});
@@ -26,7 +26,7 @@
 
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
-      		self.location = "/message/listMessage"
+      		self.location = "../message/listMessage"
         });
     });
 	
@@ -125,7 +125,16 @@
 
 	
 	</script>
-
+	
+	<style type="text/css">
+		#nav {
+			background-color: #3b2b48;
+			opacity: 0.7;
+		}
+		#nav > ul > li{
+			color: lightgray;
+		}	
+	</style>
 <!-- Nav -->
 <nav id="nav">
 	<ul>

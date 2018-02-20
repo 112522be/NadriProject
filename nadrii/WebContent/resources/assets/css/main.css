@@ -2670,7 +2670,6 @@ hr {
 
 			form.search:before {
 				color: #aaaaaa;
-				content: '\f002';
 				display: block;
 				height: 2.75em;
 				left: 0;
