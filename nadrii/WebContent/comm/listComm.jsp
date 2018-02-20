@@ -24,7 +24,11 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		
 		<script type="text/javascript">
+		var currentSize = 0;
+		var resultSize=${resultSize}
 		$(function() {
+			var currentPage = 1;
+			var maxPage = ${resultPage.maxPage}
 			$('#searchKeyword').keydown(function(key) {
 				var data = $(this).val();
 				if(key.keyCode==13){
@@ -42,21 +46,99 @@
 			});
 			
 			$('a[name="title"]').on('click', function() {
+				var postNo = $($('input[name="postNo"]')[$('.image.featured').index(this)]).val();
+				self.location = "getComm?postNo="+postNo;
+			});
+			
+			$('#listContainer').on('click', '.image.featured', function() {
+				var postNo = $($('input[name="postNo"]')[$('.image.featured').index(this)]).val();
+				self.location = "getComm?postNo="+postNo;
+			});
+			$('#listContainer').on('click', 'a[name="title"]', function() {
 				var postNo = $($('input[name="postNo"]')[$('a[name="title"]').index(this)]).val();
 				self.location = "getComm?postNo="+postNo;
-			});	
+			})
 			
-			$(".author span").on("click", function(){
+			$(".author > span").on("click", function(){
 				var userId = $($("input[id='userId']")[$(".author span").index(this)]).val();
 				//self.location="../user/getUserProfile?userId="+userId;	
 			});
-			
+			$('#listContainer').on('click', 'span.name', function() {
+				var userId = $($("input[id='userId']")[$(".author span").index(this)]).val();
+			})			
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
 				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 				placement: 'bottom',
 			});	
+			
+			$('button[name="addComm"]').bind('click', function() {
+				self.location="addComm.jsp"
+			})
+
+			$(window).scroll(function() {
+    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				      if(currentPage < maxPage){
+					      currentPage++;
+					      var searchKeyword = $('input[name="searchKeyword"]').val();
+					      $.ajax({
+					    	  url: '/comm/listComm/json',
+					    	  method: 'POST',
+					    	  data: {
+					    		"currentPage": currentPage,
+					    		"searchKeyword": searchKeyword
+					    	  },
+					    	  header: {
+					    			"Accept": "application/json"
+					    	  },
+					    	  success: function(JSONData) {
+					    		  resultSize=JSONData.resultSize
+					    		  console.log(JSONData)
+					    		  var html=''
+					    		  var community = JSONData.listComm;
+					    		  for(var i=0;i<community.length;i++){
+					    		  	html +='<article class="4u 12u(mobile) special">'
+											+'<div style="background-color: white; height:450px; padding: 10px 10px 0 10px; position: relative;">'
+											+'<input type="hidden" name="postNo" value="'+community[i].postNo+'">'
+											+'<a href="#" class="image featured" style="margin: 0 0 1em 0;"><img src="'+community[i].thumbNailFileName+'" alt="" height="245px"></a>'
+											+'<header align="center">'
+											+'<h3><a href="#none" name="title">'+community[i].title+'</a></h3>'
+											+'</header>'
+											+'<p>'
+											+community[i].hashtag
+											+'</p>'
+											+'<div>'
+											+'<div class="author" style="float: left; position: absolute; bottom: 0px; left: 10px;">'
+											+'<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>'
+											+'<a href="#none" style="position: relative;">'
+											+'<input type="hidden" name="userId" value="'+community[i].userId+'">'
+											+'<span style="vertical-align: top; position: absolute; bottom: 0px;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;'+community[i].userId+'</span>'
+											+'</a>'
+											+'</div>'
+											+'<div class="icons" style="float: right;">'
+											+'<span>view :  '+community[i].viewCount+'</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+											+'<span class="heart"></span>&nbsp;<span class="like"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="far fa-comment"></i>&nbsp;<span class="comment"></span>'
+											+'</div>'
+											+'</div>'
+											+'</div>'
+											+'</article>'
+					    		  }
+					    		  $('#listContainer').append(html);
+					    		  getSomething();
+					    		  $('[data-toggle="popover"]').popover({ 
+					  				html: true,
+					  				container: 'body',
+					  				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+					  				placement: 'bottom',
+					  			});	
+					    	 }
+						})
+					}else{
+					    return;
+					}
+    			}
+			});
 		});
 		
 		function clickProfile(){
@@ -74,10 +156,10 @@
 		}
 		
 		function getSomething(){
-			
-			for(var i=0; i< ${resultPage.totalCount} ; i++){
+			var i;
+			for(var i=currentSize; i< currentSize+resultSize ; i++){
+				console.log(i)
 				var postNo = $($('input[name="postNo"]')[i]).val();
-				
 				$.ajax({
 					url: "../like/json/getLikeUserList/"+postNo,
 					dataType: "json",
@@ -87,10 +169,10 @@
 						$("article.special:nth-child("+(i+1)+") .like").empty();
 						$("article.special:nth-child("+(i+1)+") .like").append(returnData.totalCount);
 						
-						if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") != -1){
-							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
-						}else{
+						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
 							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
+						}else{
+							$("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
 						}
 					}
 				});	
@@ -110,8 +192,8 @@
 					}
 				});
 			}
+			currentSize=i;
 		}
-		
 		</script>
 		<style type="text/css">
 			#nav {
@@ -119,7 +201,7 @@
 			    opacity: 0.7;
 			}
 			div.wrapper.style1{
-				background-image: url("/resources/images/background_3.jpg");
+				background-image: url("/resources/images/background.png");
 			}
 			#searchKeyword{
 				border-radius: 30px;
@@ -173,16 +255,20 @@
 				</header>
 				<div class="continer">
 					<div class="col-sm-9" align="left">
-						<h6 style="color: #8a8c91;font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
+						<h6 style="color: lightgray;font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
 					</div>
 					<div class="col-sm-3" align="right">
-						<form class="search">
+						<form class="search" name="search">
 							<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
 							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 80%"/>
-						</form>
+							<input type="hidden" name="currentPage"	value="${search.currentPage}">
+ 						</form>
 					</div>
 				</div>	
-				<div class="row">
+				<div>
+					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="glyphicon glyphicon-pencil"></span></button>
+				</div>
+				<div class="row" id="listContainer">
 					<c:set var="i" value="0" />
 					<c:forEach var="community" items="${list}">
 						<c:set var="i" value="${i+1}" />
