@@ -88,22 +88,22 @@ public class LoginRestClient {
 //		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		//==> Response Ȯ��
+
 		System.out.println(httpResponse);
 		System.out.println();
 
-		//==> Response �� entity(DATA) Ȯ��
+
 		HttpEntity httpEntity = httpResponse.getEntity();
 		
-		//==> InputStream ����
+
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 		
-		System.out.println("[ Server ���� ���� Data Ȯ�� ] ");
+		System.out.println("[ Server Data ] ");
 		String serverData = br.readLine();
 		System.out.println(serverData);
 		
-		//==> �����б�(JSON Value Ȯ��)
+
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(serverData);
 		System.out.println(jsonobj);
 	}
@@ -127,22 +127,22 @@ public class LoginRestClient {
 		httpPost.setEntity(httpEntity01);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
 		
-		//==> Response Ȯ��
+
 		System.out.println(httpResponse);
 		System.out.println();
 
-		//==> Response �� entity(DATA) Ȯ��
+
 		HttpEntity httpEntity = httpResponse.getEntity();
 		
-		//==> InputStream ����
+
 		InputStream is = httpEntity.getContent();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 		
-		System.out.println("[ Server ���� ���� Data Ȯ�� ] ");
+		System.out.println("[ Server Data  ] ");
 		String serverData = br.readLine();
 		System.out.println(serverData);
 		
-		//==> �����б�(JSON Value Ȯ��)
+
 		JSONObject jsonobj = (JSONObject)JSONValue.parse(serverData);
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -163,7 +163,7 @@ public class LoginRestClient {
 		NaverLoginRequest loginRequest = new NaverLoginRequest();
 		loginRequest.setCode(code);
 		loginRequest.setGrant_type("authorization_code");
-		loginRequest.setClient_id("hkuEu0FBgOT1dsQixJU3"); //hkuEu0FBgOT1dsQixJU3
+		loginRequest.setClient_id("hkuEu0FBgOT1dsQixJU3");
 		loginRequest.setClient_secret("dm1JX0XXqi");
 		loginRequest.setState(state);
 		

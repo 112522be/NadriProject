@@ -7,16 +7,23 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -90,18 +97,21 @@
 	
 </head>
 
-<body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar navbar-default">
-        <div class="container">
-        	<div class="navbar-header">
-        		<a class="navbar-brand" href="/index.jsp">Nadrii Main</a>
-        	</div>	
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->	
 	
+<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+						<jsp:include page="/layout/inner.jsp" />
+				 		 	
+
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
+		</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 		<!--  row Start /////////////////////////////////////-->
@@ -160,9 +170,11 @@
 								
 						
 							<a href="#">추가정보 입력</a><br/>
+							
 							<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300" id="kakaoLogin"/>
 							<br/><br/>
 							<img src="/resources/images/userImage/naver_login.png" width="300" id="naverLogin"/>
+							
 					    <script type='text/javascript'>
 					      
 							
