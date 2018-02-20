@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.domain.Group;
 import com.yagn.nadrii.service.group.GroupDao;
-import com.yagn.nadrii.service.group.GroupService;;
+import com.yagn.nadrii.service.group.GroupService;
+import com.yagn.nadrii.service.like.LikeDao;;
 
 @Service("groupServiceImpl")
 public class GroupServiceImpl implements GroupService{
@@ -22,6 +23,13 @@ public class GroupServiceImpl implements GroupService{
 	private GroupDao groupDao;
 	public void setGroupDao(GroupDao groupDao) {
 		this.groupDao = groupDao;
+	}
+	
+	@Autowired
+	@Qualifier("likeDaoImpl")
+	private LikeDao likeDao;
+	public void setLikeDao(LikeDao likeDao) {
+		this.likeDao = likeDao;
 	}
 	
 	///Constructor

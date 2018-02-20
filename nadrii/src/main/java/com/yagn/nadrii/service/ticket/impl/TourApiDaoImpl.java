@@ -144,12 +144,14 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 				
 				System.out.println("\n[1. Title Check] ==> " + searchFestival.getTitle());
+				System.out.println("\n[2. searchFestival.getFirstimage() Check] ==> " + searchFestival.getFirstimage());
 				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-					String image = ticketService.getNaverImage(searchFestival.getTitle());
+					String image = ticketService.getNaverImage(searchFestival.getTitle() + " 2018");
 					tourTicket.setFirstimage(image);
 				} else {
 					tourTicket.setFirstimage(searchFestival.getFirstimage());
 				}
+				
 				tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 				tourTicket.setEventenddate(searchFestival.getEventenddate());
 				tourTicket.setReadcount(searchFestival.getReadcount());
@@ -239,7 +241,12 @@ public class TourApiDaoImpl implements TicketDao {
 			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
 				detailIntro.setSubevent("정보 제공 없음");
 			}
+			
+			System.out.println("\n[detailIntro.getUsetimefestival()]==> " + detailIntro.getUsetimefestival());
+			
 			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
+				detailIntro.setUsetimefestival("무료");
+			} else if ( detailIntro.getUsetimefestival().contains("000") == false || detailIntro.getUsetimefestival().contains("00") == false ) {
 				detailIntro.setUsetimefestival("무료");
 			}
 		} catch (Exception e) {
@@ -268,7 +275,6 @@ public class TourApiDaoImpl implements TicketDao {
 			String image = ticketService.getNaverImage(title);
 			detailImage.setOriginimgurl(image);	
 			
-			return detailImage;
 			
 		} else {
 			

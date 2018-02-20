@@ -16,7 +16,7 @@
 		console.log("세션 정보 : ${session}")
 		
 		$("a[href='#' ]:contains('나들이 티켓')").bind("click" , function() {
-			self.location = "/ticket/listTicket"
+			self.location = "../ticket/listTicket"
 		});
 
 	});
@@ -26,7 +26,7 @@
 
         $(".glyphicon.glyphicon-envelope").bind("click" , function() {
         	//alert("쪽지함")
-      		self.location = "/message/listMessage"
+      		self.location = "../message/listMessage"
         });
     });
 	
@@ -124,6 +124,7 @@
   });
 
 
+
 //==================='쪽지함으로 이동' =============================
 	
 	 $(function() {
@@ -132,8 +133,18 @@
 		})
 	})
 	
-	</script>
 
+	</script>
+	
+	<style type="text/css">
+		#nav {
+			background-color: #3b2b48;
+			opacity: 0.7;
+		}
+		#nav > ul > li{
+			color: lightgray;
+		}	
+	</style>
 <!-- Nav -->
 <nav id="nav">
 	<ul>
@@ -162,7 +173,8 @@
 		</c:if>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
-		<li><a href="#">나들이 플래너</a>
+		<li><a href="#">나들이 플래너 ▼</a>
+
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
 				<li><a href="/planner/addPlannerView">플래너 작성</a></li>
@@ -178,7 +190,23 @@
 		<!-- 					<li><a href="#">Veroeros feugiat</a></li> -->
 	</ul>
 	</li>
-	<li><a href="/ticket/listTicket">나들이 티켓</a></li>
+	<c:if test="${ empty loginUser }">
+	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
+		<ul>
+			<li><a href="/user/login">로그인 후 나들이 티켓의 추가기능을 사용하실 수 있습니다.</a></li>
+		</ul>	
+	</li>	
+	</c:if>
+	<c:if test="${ ! empty loginUser }">
+	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
+		<ul>
+			<li><a href="/purchase/listBasket">장바구니</a></li>
+			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
+			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
+			<li><a href="/purchase/tempTicket">[임시] 입장권 보여주기</a></li>
+		</ul>
+	</c:if>
+	</li>
 	<li><a href="/group/listGroup">나들이 모임</a></li>
 	<!-- 	
 				<li><a href="left-sidebar.html">Left Sidebar</a></li>

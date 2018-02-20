@@ -40,7 +40,7 @@
     
               
 <script>
-/*
+
 $(document).ready(function() { 
 
    $("#userId").val('');
@@ -171,6 +171,7 @@ function checkSuccess(){
       var password = $("#password").val();
       var password2 = $("#password2").val();
       
+      function checkPwd(){
       if(password == password2 ){
          $("#password2").css("background-color", "#B0F6AC");
          return;
@@ -202,7 +203,7 @@ function checkSuccess(){
 
   //*/  
      
-   /*
+   
     function addUser(){
        var data = "userId=" + $("#userId").val();
        data += "&password=" + $("#password").val(); 
@@ -254,7 +255,7 @@ function checkSuccess(){
           return false;
        }
        
-      /*  if($("#checkNumStatus").val() == "Y"){
+        if($("#checkNumStatus").val() == "Y"){
           alert("이메일 인증 완료 되었습니다.");
           return;
        }
@@ -262,30 +263,14 @@ function checkSuccess(){
        if($("#checkNumStatus").val() != "N"){
            alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
            return;
-        } */
-       
-       
-       if(confirm("회원가입을 하시겠습니까?")){
-           $.ajax({
-             data : data,
-             url : "/user/addUser",
-             type : "POST",
-             success : function(result){
-                if(result.msg == "success"){
-                   alert("가입이 완료되었습니다.");
-                   location.href="/user/main";
-                }
-             }
-          }); 
-       }
-    }
+        } 
+  }
     
     function delchk(){
         if(confirm("취소하시겠습니까?")){
             location.href = "/user/main";
         }
     }
-   //*/ 
    
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
@@ -321,7 +306,7 @@ function checkSuccess(){
         <div class="form-group icon01">
           <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
           <div class="col-sm-4">
-            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" autofocus>
+            <input type="text" placeholder="Enter ID" class="form-control" oninput="checkId();" id="userId" required class="userid" name="userId" value="${kakaoId}" autofocus>
             <span id = "chkMsg"></span>
           </div>
          <div id="htmlId"></div>
@@ -344,7 +329,7 @@ function checkSuccess(){
          <div class="form-group">
           <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" />
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${outerUser.email}" />
             <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" />
             <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
             <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" />

@@ -115,11 +115,11 @@ function fncAddBooking() {
 		<!-- Main -->
 		<div class="wrapper style1">
 		
+		<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
 		<input type="hidden" name="title" value="${ tourTicket.title }">
 		<input type="hidden" name="originimgurl" value="${ detailImage.originimgurl }">
 		<input type="hidden" name="contentid" value="${ detailIntro.contentid }">
 		<input type="hidden" name="contenttypeid" value="${ detailIntro.contenttypeid }">
-		<input type="hidden" name="usetimefestival" value="${ detailIntro.usetimefestival }">
 		
 			<div class="container">
 				<article id="main" class="special">
@@ -134,7 +134,8 @@ function fncAddBooking() {
 					</header>
 					
 					<a href="#" class="image featured">
-						<img src="${ detailImage.originimgurl }" alt="" style="height: 642.83px;"/>
+<%-- 						<img src="${ detailImage.originimgurl }" alt="" style="height: 642.83px;"/> --%>
+						<img src="${ detailImage.originimgurl }" alt="" />
 					</a>
 					
 				</article>

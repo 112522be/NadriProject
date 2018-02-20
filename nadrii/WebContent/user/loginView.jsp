@@ -109,6 +109,14 @@
 			
 			$("form").attr("method","POST").attr("action","/user/login").submit();
 		}
+		$(function() {
+			$('img#kakaoLogin').bind('click', function() {
+				self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code";
+			})
+			$('img#naverLogin').bind('click', function() {
+				self.location="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=hkuEu0FBgOT1dsQixJU3&state=success to nadrii&redirect_uri=http://127.0.0.1:8080/user/naverLogin";
+			})
+		})
 	</script>		
 	
 </head>
@@ -189,11 +197,10 @@
 							<!-- kakao ligin 
 							<a href="https://kauth.kakao.com/oauth/authorize?client_id=d4e94f0de61668f5bbbb2f58170b7891&redirect_uri=http://192.168.0.56:8081/oauth&response_type=code" class="kakaoLoginBtn"><img src="../images/kakao_account_login_btn_medium_narrow.png"></a>
 							-->
-							<a href="#">추가정보 입력</a>
-  						<a id="custom-login-btn"  href="javascript:loginWithKakao()">
-						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
-						<input type="hidden" id="kakaotocken" name="kakaotocken" value="0">
-						</a>
+							<a href="#">추가정보 입력</a><br/>
+							<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300" id="kakaoLogin"/>
+							<br/><br/>
+							<img src="/resources/images/userImage/naver_login.png" width="300" id="naverLogin"/>
 					    <script type='text/javascript'>
 					      //<![CDATA[
 					        // ?ъ?⑺?? ?깆?? JavaScript ?ㅻ?? ?ㅼ???? 二쇱?몄??.

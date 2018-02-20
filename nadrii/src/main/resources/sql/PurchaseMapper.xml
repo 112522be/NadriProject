@@ -73,6 +73,17 @@
   	</foreach>
 	</update>
 	
+	
+	<update id="updatePurchaseQR" parameterType="int">
+		UPDATE purchase 
+		<set>
+			flag_bp = 'adminCheck'
+		</set>	 
+		WHERE post_no = #{postNo}
+	</update>
+	
+	
+	
 	<select id="getBasketList" parameterType="map" resultMap="purchaseSelectMap">
 	SELECT
 			post_no,
@@ -148,6 +159,26 @@
 	AND flag_bp = 'purchase'
 	</select>
 	
+	<select id="getPurchasedList" parameterType="map" resultMap="purchaseSelectMap">
+	SELECT
+			post_no,
+			ticket_title,
+			ticket_image,
+			booking_date,
+			cancel_date,
+			ticket_priceall,
+			content_id,
+			content_typeid,
+			flag_bp,
+			reg_date,
+			buyer_id,
+			buyer_email,
+			buyer_phone,
+			buyer_name
+	FROM PURCHASE
+	WHERE buyer_id = #{buyerId}
+	AND flag_bp = 'adminCheck'
+	</select>
 	
 
 <!-- SQL : SELECT ROW Count -->

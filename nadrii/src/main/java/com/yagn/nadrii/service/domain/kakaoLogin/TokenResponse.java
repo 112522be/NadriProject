@@ -7,6 +7,8 @@ public class TokenResponse {
 	private long expires_in;
 	private String scope;
 	private long refresh_token_expires_in;
+	private String error_description;
+	private String error;
 	
 	public String getAccess_token() {
 		return access_token;
@@ -47,8 +49,25 @@ public class TokenResponse {
 	}
 	@Override
 	public String toString() {
-		return "TokenResponse [access_token=" + access_token + ", token_type=" + token_type + ", refresh_token="
-				+ refresh_token + ", expires_in=" + expires_in + ", scope=" + scope + "]";
+		if(error_description != null) {
+			return "TokenResponse [access_token=" + access_token + ", token_type=" + token_type + ", refresh_token="
+					+ refresh_token + ", expires_in=" + expires_in + ", scope=" + scope + "]";
+		}else {
+			return "TokenResponseError[error_description="+error_description+", error="+error+"]";
+		}
+	}
+	
+	public String getError_description() {
+		return error_description;
+	}
+	public void setError_description(String error_description) {
+		this.error_description = error_description;
+	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
 	}
 	
 }
