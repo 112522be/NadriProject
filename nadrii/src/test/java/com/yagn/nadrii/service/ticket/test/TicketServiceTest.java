@@ -128,7 +128,7 @@ public class TicketServiceTest {
 	
 	}
 	
-	//@Test
+	@Test
 	public void testGetQRCode() throws Exception {
 
 		System.out.println("\n[GetQRCode TEST]");

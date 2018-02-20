@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 		<!-- Footer -->
 		<div id="footer">
 			<div class="container">
@@ -10,10 +11,9 @@
 						<!-- Contact -->
 						<section class="contact">
 							<header>
-								<h3>Nisl turpis nascetur interdum?</h3>
+								<h3>더 다양한 나들이 정보를 원하시나요?</h3>
 							</header>
-							<p>Urna nisl non quis interdum mus ornare ridiculus egestas
-								ridiculus lobortis vivamus tempor aliquet.</p>
+							<p>아래 링크를 통해 다양한 나들이 정보를 확인하실 수 있습니다.</p>
 							<ul class="icons">
 								<li><a href="#" class="icon fa-twitter"><span
 										class="label">Twitter</span></a></li>
@@ -34,7 +34,7 @@
 						<div class="copyright">
 							<ul class="menu">
 								<li>&copy; Nadrii. All rights reserved.</li>
-								<li>Made by <a href="http://html5up.net">Daniel</a></li>
+								<li>Made by <a href="http://html5up.net">YAGN</a></li>
 							</ul>
 						</div>
 

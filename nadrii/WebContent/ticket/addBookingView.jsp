@@ -413,7 +413,8 @@
 									<div class="row 50%">
 										
 										<div class="4u">
-											<h2 class="icon fa-user circled"><span class="label">user</span></h2>
+											<h2 class="icon fa-user circl
+											ed"><span class="label">user</span></h2>
 										</div>
 										
 										<div class="8u">

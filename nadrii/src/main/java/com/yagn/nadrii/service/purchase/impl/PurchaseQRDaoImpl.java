@@ -48,7 +48,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			// 비트캠프 경로
 //			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
 			// DanielLaptop 경로
-			file = new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
+//			file = new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
+			file = new File(".\\WebContent\\resources\\qrcode");
 			
 			if (!file.exists()) {
 				file.mkdirs();
@@ -104,7 +105,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			
 			String userId = purchase.getBuyerId();
 //			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode" + userId 
-			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
+//			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
+			ImageIO.write(bufferedImage, "png", new File(".\\WebContent\\resources\\qrcode\\" + userId 
 //					+ "&" + datetime2 
 					+ ".jpg") );
 			// QRCode&userID :: 의 형태로 QR코드 파일 생성됨
