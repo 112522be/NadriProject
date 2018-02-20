@@ -80,413 +80,310 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-		
 
 
+<script type="text/javascript">
+	//============= 회원원가입화면이동 =============
+	/* $( function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$("a[href='#' ]").on("click" , function() {
+			self.location = "/user/addUser"
+		});
+	});  */
 
-
-
-
-
-
-
-			
-		<script type="text/javascript">
-    		
-	    		//============= 회원원가입화면이동 =============
-	    		/* $( function() {
-	    			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	    			$("a[href='#' ]").on("click" , function() {
-	    				self.location = "/user/addUser"
-	    			});
-	    		});  */
-	    		
-	    		//============= '로그인' 버튼 클릭 Event 처리 =============
-	    		$( function() {
-	    			$(".btn.btn-primary:contains('로 그 인')").bind("click" , function(event) {
-	    				event.preventDefault();
-	    				validateCheck();
-	    			})
-	    		});
-	    			    		
-	    		
-	    		//================================================================
-	    		
-	    		function validateCheck(){
-	    			var id = $("#userId").val();
-	    			var password = $("#password").val();
-	    			//alert(id+ ":::"+password);
-	    			
-	    			alert(id)
-	    			alert(password)
-	    			
-	    			if(id == null || id ==""){
-	    				alert("아이디를 입력해주세요.");
-	    				return false;
-	    			}
-	    			
-	    			if(password == null || password=="" ){
-	    				alert("비밀번호를 입력해 주세요.")
-	    				return false;
-	    			}
-	    			
-	    			$("form").attr("method","POST").attr("action","/user/login").submit();
-	    		}
-	    			 
-			     $(function(){
-			    	 $("#addUserDialog").click(function(){
-			    //		alert("되냐?");
-			    		$("#addUserView").dialog({
-			    			width:450,
-			    			height:650,
-			    			model:true,
-			    			autoOpen:false,
-			    			resizable: false,
-			    			position: [700,500],
-			    		})
-			    		
-			    	//	alert("여기도되냐?");
-			    			 $('#addUserView').dialog('open');
-			    	})
-			    });
-
-
-			    
-			    
-			    // ===============	회원가입	 ==============
-		
-
-//   이메일 인증 
-function checkSend(){
-   var email = $("#email").val();
-   var frm = $("#frm").serialize();
-   if(email !=""){
-      $.ajax({
-         type:"POST",
-         dataType : "json",
-         url:"/user/check",
-         async: false,
-         data:frm,     //    onclick();
-         success :function(result){
-            
-            $("#btn_submit").hide();
-            $("#btn_chkSuccess").css("display","block");
-            $("#confirmNum").css("display","block");
-         },
-         error:function(request,status,error){
-              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-          }
-      });
-   }else{
-      alert("이메일을 입력해주세요");
-      $("#email").focus();
-      return false;
-   }
-   
-}
-
-//이메일 인증 번호 확인
-function checkSuccess(){
-   var confirmNum = $("#confirmNum").val();
-   var frm = $("#frm").serialize();
-   if(confirmNum !=""){
-      $.ajax({
-         type:"POST",
-         dataType : "json",
-         url:"/user/checkSuccess",
-         async: false,
-         data:frm,     //    onclick();
-         success :function(result){
-            if(result.result == "success"){
-               alert("인증 확인되었습니다.");
-               $("#checkNumStatus").val("Y");
-            }else{
-               alert("인증 번호가 다릅니다.");
-               $("#checkNumStatus").val("N");
-            }
-         },
-         error:function(request,status,error){
-              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-          }
-      });
-   }else{
-      alert("인증번호를 입력해주세요");
-      $("#confirmNum").focus();
-      return false;
-   }
-   
-}
-
-
- 
-///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
-    var idCheckFlag = false;
-    var pwdCheck = false;
-    //아이디 체크하여 가입버튼 비활성화, 중복확인.
-     
-    function checkId() {
-    
-    	var data = "userId=" + $("#userId01").val();
-        $.ajaxSettings.traditional = true;
-  	    //alert("아이디 중복체크");
-        $.ajax({
-               type:"POST",
-            data : data,
-            url : "/user/json/checkId",     
-            dataType: "json",
-            success : function(result) {			/* function(result) */
-               if(result.check == 1){
-                  //alert("아이디가 중복되었습니다.");
-                  idCheckFlag = false;
-                  $("#userId01").css("background-color", "#FFCECE");
-                  $(".signupbtn").prop("disabled", true);
-                   $(".signupbtn").css("background-color", "#aaaaaa");
-                   $("#htmlId").html("아이디 중복입니다.").css('color','red');
-                  return;
-               }else{
-                  //alert("사용 가능합니다.");
-                  idCheckFlag = true;
-                  $("#userId01").css("background-color", "#B0F6AC");
-                  $(".signupbtn").prop("disabled", false);
-                  $(".signupbtn").css("background-color", "#610B21");
-                  $("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
-               }
-            },error:function(request,status,error){
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-        });    
-        
-    }
-      
-    function joinform(){
-       location.href="getUser.jsp"
-          var str3 = document.getElementById('join');
-
-      str3.submit();
-
-      alert("가입이 완료되었습니다.")
-   }
-    
-      var password = $("#password01").val();
-      var password2 = $("#password02").val();
-      
-      function checkPwd(){
-      if(password == password2 ){
-         $("#password02").css("background-color", "#B0F6AC");
-         return;
-      }
-      
-      if(password != password2 ){
-         $(".signupbtn").prop("disabled", true);
-         $(".signupbtn").css("background-color", "#aaaaaa");
-         $("#password02").css("background-color", "#FFCECE");
-         return;
-      }
-     }
-   
-   
-   function emailValid(){
-      var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
-      var email = $("#email").val();
-      if(!regExp.test(email)){
-         $(".signupbtn").prop("disabled", true);
-         $("#email").css("background-color", "#FFCECE");
-         return;
-      }
-      
-      if(regExp.test(email)){
-         $(".signupbtn").prop("disabled", false);
-         $("#email").css("background-color", "#B0F6AC");
-      }
-   }
-
-  //*/  
-     
-   
-    function addUser(){
-       var data = "userId=" + $("#userId01").val();
-       data += "&password=" + $("#password01").val(); 
-         data += "&email=" + $("#email").val();
-       if($("#userId01").val() == ''){
-          alert("아이디를 입력해주세요.");
-          $("#userId01").focus();
-          return;
-       }
-         
-         if(idCheckFlag == false){
-          alert("아이디가 사용중입니다.");
-          $("#userId01").val('');
-          $("#userId01").focus();
-          $("#userId01").css("background-color", "#B0F6AC");
-          return;
-       }
-         
-         if($("#password01").val() == ''){
-            alert("비밀번호를 입력해주세요.");
-            $("#password01").focus();
-            return;
-         }
-         
-         if($("#password02").val() == ''){
-            alert("비밀번호 확인을 입력해주세요.");
-            $("#password02").focus();
-            return;
-         }
-       
-       if($("#password01").val() != $("#password2").val()){
-          alert("비밀번호가 일치하지 않습니다.");
-          $("#password01").val('');
-          $("#password02").val('');
-          $("#password01").focus();
-          return;
-       }
-       
-       if($("#email").val() == ''){
-          alert("이메일을 입력해주세요.");
-          $("#email").focus();
-          return;
-       }
-       
-       alert($("#checkNumStatus").val());
-       if($("#confirmNum").val() == ""){
-          alert("인증번호를 입력해주세요");
-          $("#confirmNum").focus();
-          return false;
-       }
-       
-        if($("#checkNumStatus").val() == "Y"){
-          alert("이메일 인증 완료 되었습니다.");
-          return;
-       }
-       
-       if($("#checkNumStatus").val() != "N"){
-           alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
-           return;
-        } 
-  }
-    
-    function delchk(){
-        if(confirm("취소하시겠습니까?")){
-        	  $(".addUserView01")[0].reset();
-            location.href = "/user/main";
-        }
-    }
-   
-	$( function() {
-		$("button[type='button']:contains('가입')").on("click",function(){
-
-  //  		alert("걸린건가?");
-    		$("form").attr("method","POST").attr("action","/user/addUser").submit();
-    	});
-		
-		$("button[type='button']:contains('restTest')").on("click",function(){
-    		//alert("걸린건가?");
-    		self.location ="addUserViewRestTest.jsp"; 
-    	});
-		
+	//============= '로그인' 버튼 클릭 Event 처리 =============
+	$(function() {
+		$(".btn.btn-primary:contains('로 그 인')").bind("click", function(event) {
+			event.preventDefault();
+			validateCheck();
+		})
 	});
-		   
-	
-	
-    
-    		</script>
-    	<!--	
-    		<style>
-    		
-    		.groupId{width:450px; padding-top:12px; margin:auto; display:block; height:67px; float:left;}
-    		.labelId{width:50px; float:left; padding-top: 4px;}
-    		.loginId{width:350px; float:left;}
-    		
-    		.groupPw{width:500px; padding-top:12px; margin:auto; display:block; height:67px; float:left;}
-    		.labelPw{width:125px; float:left; padding-top: 4px;}
-    		.loginPw{width:350px; float:left;}
-    		
-			form textarea{padding:5px;}
-			
-			.addUerlayout{width:130px; float:left}
-			
-			.login{width:1200px; margin:auto; height:73px;}
-			
-			
-			.loginBtn02{position:absolute; margin:-40px 0 0 10px; font-size:14px;}
-			
-			.joinbtn02{font-size:14px; margin-top:-30px; }
-			.joinbtn03{}
-			.joinbtn{padding-top: 27px;}
-			.login .loginbtn{ width: 70px; height: 70px; padding: 0; float:left; display:block;}
-			#rastbtn{}
-			
-			.groupbtn .facebookbtn{padding:0 ; background:#385998 !important;margin-left:10px;}
-			
-			.facebookbtn01{font-size:0px;}
-			
-			.addUerlayout{padding-top:8px}
-			
-			@media screen and (max-width: 1280px){
-				#banner{padding:2em 0;}
-			}
-			
-			@media screen and (max-width:736px){
-				.loginBtn02{margin-top:-30px;}
-				#banner{padding: 1em 2em 1em 2em; height:285px;}
-				.groupId{width:380px; padding:12px 0 0 10px; margin:0; display:block; height:98px; float:none; position:absolute;}
-				.groupPw{width:380px; margin-top:100px; padding-top:12px; margin-top:130px; display:block; height:67px; position:absolute;}
-				.loginPw{float:none; padding-left:10px;}
-				.groupbtn{position:relative;}
-				.homepage .login .joinbtn{position:absolute; margin:110px 0 0 460px; display:block;}
-				.joinbtn02{margin-left:8px; padding-top: 5px; position:absolute;}
-				.mobileSize{position: relative; display: block;}
-				.loginPw, .loginId{width:320px; float:none;}
-				.login .loginbtn{margin:110px 0 0 360px !important;}
-				.joinbtn{maring-left:100px}
-			}
-			
-			@media screen and (max-width:400px){
-				.loginBtn02{margin-top:-30px;}
-				#banner{padding: 1em 2em 1em 2em; height:335px;}
-				.groupId{width:380px; padding:12px 0 0 10px; margin:0; display:block; height:98px; float:none; position:absolute;}
-				.groupPw{width:380px; margin-top:100px; padding-top:12px; margin-top:130px; display:block; height:67px; position:absolute;}
-				.loginPw{float:none; padding-left:10px;}
-				.groupbtn{position:relative;}
-				.homepage .login .joinbtn{position:absolute; margin:240px 0 0 200px; display:block;}
-				.joinbtn02{margin-left:8px; padding-top: 5px; position:absolute;}
-				.mobileSize{position: relative; display: block;}
-				.loginPw, .loginId{width:320px; float:none;}
-				.login .loginbtn{margin:240px 0 0 80px !important;}
-				.joinbtn{maring-left:100px}
-			}
-			
-			@media screen and (max-width:1680px){
-				.carousel{
-					overflow:inherit;
+
+	//================================================================
+
+	function validateCheck() {
+		var id = $("#userId").val();
+		var password = $("#password").val();
+		//alert(id+ ":::"+password);
+
+		alert(id)
+		alert(password)
+
+		if (id == null || id == "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+
+		if (password == null || password == "") {
+			alert("비밀번호를 입력해 주세요.")
+			return false;
+		}
+
+		$("form").attr("method", "POST").attr("action", "/user/login").submit();
+	}
+
+	$(function() {
+		$("#addUserDialog").click(function() {
+			//		alert("되냐?");
+			$("#addUserView").dialog({
+				width : 450,
+				height : 650,
+				model : true,
+				autoOpen : false,
+				resizable : false,
+				position : [ 700, 500 ],
+			})
+
+			//	alert("여기도되냐?");
+			$('#addUserView').dialog('open');
+		})
+	});
+
+	// ===============	회원가입	 ==============
+
+	//   이메일 인증 
+	function checkSend() {
+		var email = $("#email").val();
+		var frm = $("#frm").serialize();
+		if (email != "") {
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/user/check",
+				async : false,
+				data : frm, //    onclick();
+				success : function(result) {
+
+					$("#btn_submit").hide();
+					$("#btn_chkSuccess").css("display", "block");
+					$("#confirmNum").css("display", "block");
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:" + error);
 				}
+			});
+		} else {
+			alert("이메일을 입력해주세요");
+			$("#email").focus();
+			return false;
+		}
+
+	}
+
+	//이메일 인증 번호 확인
+	function checkSuccess() {
+		var confirmNum = $("#confirmNum").val();
+		var frm = $("#frm").serialize();
+		if (confirmNum != "") {
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/user/checkSuccess",
+				async : false,
+				data : frm, //    onclick();
+				success : function(result) {
+					if (result.result == "success") {
+						alert("인증 확인되었습니다.");
+						$("#checkNumStatus").val("Y");
+					} else {
+						alert("인증 번호가 다릅니다.");
+						$("#checkNumStatus").val("N");
+					}
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:" + error);
+				}
+			});
+		} else {
+			alert("인증번호를 입력해주세요");
+			$("#confirmNum").focus();
+			return false;
+		}
+
+	}
+
+	///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
+	var idCheckFlag = false;
+	var pwdCheck = false;
+	//아이디 체크하여 가입버튼 비활성화, 중복확인.
+
+	function checkId() {
+
+		var data = "userId=" + $("#userId01").val();
+		$.ajaxSettings.traditional = true;
+		//alert("아이디 중복체크");
+		$.ajax({
+			type : "POST",
+			data : data,
+			url : "/user/json/checkId",
+			dataType : "json",
+			success : function(result) { /* function(result) */
+				if (result.check == 1) {
+					//alert("아이디가 중복되었습니다.");
+					idCheckFlag = false;
+					$("#userId01").css("background-color", "#FFCECE");
+					$(".signupbtn").prop("disabled", true);
+					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#htmlId").html("아이디 중복입니다.").css('color', 'red');
+					return;
+				} else {
+					//alert("사용 가능합니다.");
+					idCheckFlag = true;
+					$("#userId01").css("background-color", "#B0F6AC");
+					$(".signupbtn").prop("disabled", false);
+					$(".signupbtn").css("background-color", "#610B21");
+					$("#htmlId").html("사용가능한 아이디 입니다.").css('color', 'blue');
+				}
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:" + error);
 			}
-			
-				
-    		</style>
-    		
-	-->
+		});
+
+	}
+
+	function joinform() {
+		location.href = "getUser.jsp"
+		var str3 = document.getElementById('join');
+
+		str3.submit();
+
+		alert("가입이 완료되었습니다.")
+	}
+
+	var password = $("#password01").val();
+	var password2 = $("#password02").val();
+
+	function checkPwd() {
+		if (password == password2) {
+			$("#password02").css("background-color", "#B0F6AC");
+			return;
+		}
+
+		if (password != password2) {
+			$(".signupbtn").prop("disabled", true);
+			$(".signupbtn").css("background-color", "#aaaaaa");
+			$("#password02").css("background-color", "#FFCECE");
+			return;
+		}
+	}
+
+	function emailValid() {
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		var email = $("#email").val();
+		if (!regExp.test(email)) {
+			$(".signupbtn").prop("disabled", true);
+			$("#email").css("background-color", "#FFCECE");
+			return;
+		}
+
+		if (regExp.test(email)) {
+			$(".signupbtn").prop("disabled", false);
+			$("#email").css("background-color", "#B0F6AC");
+		}
+	}
+
+	//*/  
+
+	function addUser() {
+		var data = "userId=" + $("#userId01").val();
+		data += "&password=" + $("#password01").val();
+		data += "&email=" + $("#email").val();
+		if ($("#userId01").val() == '') {
+			alert("아이디를 입력해주세요.");
+			$("#userId01").focus();
+			return;
+		}
+
+		if (idCheckFlag == false) {
+			alert("아이디가 사용중입니다.");
+			$("#userId01").val('');
+			$("#userId01").focus();
+			$("#userId01").css("background-color", "#B0F6AC");
+			return;
+		}
+
+		if ($("#password01").val() == '') {
+			alert("비밀번호를 입력해주세요.");
+			$("#password01").focus();
+			return;
+		}
+
+		if ($("#password02").val() == '') {
+			alert("비밀번호 확인을 입력해주세요.");
+			$("#password02").focus();
+			return;
+		}
+
+		if ($("#password01").val() != $("#password2").val()) {
+			alert("비밀번호가 일치하지 않습니다.");
+			$("#password01").val('');
+			$("#password02").val('');
+			$("#password01").focus();
+			return;
+		}
+
+		if ($("#email").val() == '') {
+			alert("이메일을 입력해주세요.");
+			$("#email").focus();
+			return;
+		}
+
+		alert($("#checkNumStatus").val());
+		if ($("#confirmNum").val() == "") {
+			alert("인증번호를 입력해주세요");
+			$("#confirmNum").focus();
+			return false;
+		}
+
+		if ($("#checkNumStatus").val() == "Y") {
+			alert("이메일 인증 완료 되었습니다.");
+			return;
+		}
+
+		if ($("#checkNumStatus").val() != "N") {
+			alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
+			return;
+		}
+	}
+
+	function delchk() {
+		if (confirm("취소하시겠습니까?")) {
+			$(".addUserView01")[0].reset();
+			location.href = "/user/main";
+		}
+	}
+
+	$(function() {
+		$("button[type='button']:contains('가입')").on(
+				"click",
+				function() {
+
+					//  		alert("걸린건가?");
+					$("form").attr("method", "POST").attr("action",
+							"/user/addUser").submit();
+				});
+
+		$("button[type='button']:contains('restTest')").on("click", function() {
+			//alert("걸린건가?");
+			self.location = "addUserViewRestTest.jsp";
+		});
+
+	});
+</script>
 	
 <style>
 /* Yagn team custom CSS */
+
 #header {
 	background-image:
 		url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
 	background-color: #3a2748;
 }
 
-.buttonyagn {
-	background-color: #df7366;
-	display: inline-block;
-	border-radius: 100%;
-	width: 4.5em;
-	height: 4.5em;
-	line-height: 4.5em;
-	text-align: center;
-	font-size: 1.25em;
-	color: #fff;
-	padding: 0;
-}
 </style>
 
 </head>
