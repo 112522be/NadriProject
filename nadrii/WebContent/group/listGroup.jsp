@@ -41,6 +41,10 @@
 				}
 			});
 			
+			$("a.write").on("click", function(){
+				self.location="../group/addGroup";
+			});
+			
 			$('.image.featured').on('click', function() {
 				var groupNo = $($('input[name="groupNo"]')[$('.image.featured').index(this)]).val();
 				self.location = "../group/getGroup?groupNo="+groupNo;
