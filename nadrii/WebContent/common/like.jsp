@@ -6,6 +6,9 @@ li > span{
 .block::before{
 	color: #F05643 !important;
 }
+.full{
+	color: #F05643 !important;
+}
 </style>
 <script type="text/javascript">
 
@@ -40,29 +43,32 @@ var likeCount;
 function getLike(){
 	
 	$.ajax({
-		url: "../like/json/getLikeUserList/"+postNo,
+		url: "../like/json/listLikeByPost/"+postNo,
 		dataType: "json",
 		success:function(returnData){
 			$(".like").empty();
 			$(".like").append(returnData.totalCount);
 			
-			if( (JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") != -1){
-				$(".icon.fa-heart").toggleClass("block", true);
-			}else{
-				$(".icon.fa-heart").toggleClass("block", false);
-			}
+			$("span.heart").empty();
+			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+            	$("span.heart").append('<i class="far fa-heart"></i>');
+            }else{
+                $("span.heart").append('<i class="fas fa-heart full"></i>');
+            }
 		}
 	});	
 }
 
 $(function(){
 
-	$(".icon.fa-heart").bind("click", function(){
-		if( $(".icon.fa-heart").hasClass("block") ){
+	$("a.heart").bind("click", function(){
+		
+		if( $("span.heart svg").attr("data-prefix") == 'fas' ){
 			deleteLike();
 		}else{
 			addLike();
 		}
+		
 	});
 	
 });
@@ -71,7 +77,7 @@ $(function(){
 
 <div style="padding: 30px">
 <span style="padding-right: 15px">
-<a href="#none" class="icon fa-heart">&nbsp;<span class="like"></span></a>
+<a href="#none" class="heart"><span class="heart"></span>&nbsp;<span class="like"></span></a>
 </span>
 <span>
 <a href="#none" class="icon fa-comment">&nbsp;<span class="comment"></span></a>

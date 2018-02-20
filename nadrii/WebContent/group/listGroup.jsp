@@ -24,6 +24,11 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 				
 		<script type="text/javascript">
+		
+		window.onload = function(){
+			 getSomething();
+		}
+		
 		$(function() {
 			$('#searchKeyword').keydown(function(key) {
 				var data = $(this).val();
@@ -75,11 +80,21 @@
 		
 		function getSomething(){
 			
-			for(var i=0; i< ${resultPage.totalCount} ; i++){
+			var totalCount = ${resultPage.totalCount};
+			
+			for(var i=0; i< totalCount ; i++){
 				var groupNo = $($('input[name="groupNo"]')[i]).val();
+
+				var placeName = $($('input[name="placeName"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeName").empty();
+				$("article.special:nth-child("+(i+1)+") .placeName").append(placeName);
+				
+				var placeDetail = $($('input[name="placeDetail"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").empty();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").append(placeDetail);
 				
 				$.ajax({
-					url: "../like/json/getLikeUserList/"+groupNo,
+					url: "../like/json/listLikeByPost/"+groupNo,
 					dataType: "json",
 					async: false,
 					success:function(returnData){
@@ -110,19 +125,48 @@
 					}
 				});
 				
-				var placeName = $($('input[name="placeName"]')[i]).val();
-				$("article.special:nth-child("+(i+1)+") .placeName").empty();
-				$("article.special:nth-child("+(i+1)+") .placeName").append(placeName);
-				
-				var placeDetail = $($('input[name="placeDetail"]')[i]).val();
-				$("article.special:nth-child("+(i+1)+") .placeDetail").empty();
-				$("article.special:nth-child("+(i+1)+") .placeDetail").append(placeDetail);
-				
+				if(placeName != ""){
+					$.ajax({
+						url: "../group/json/getThumbNail",
+						method:"POST",
+						data:{
+							"placeName": placeName
+						},
+						async: false,
+						success:function(returnData){
+							var tag =	'<img src="'+returnData+'" alt="" class="filter" height="245px">';
+							$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
+							$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
+						}
+					});	
+				}else{
+					var tag =	'<img src="../resources/images/background_2.jpg" alt="" height="245px">';
+					$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
+					$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
+				}			
+						
 			}//for문
 		}
 				
 		</script>
 		<style type="text/css">
+			.filter {
+			  position: relative;
+			  -webkit-filter: contrast(140%) sepia(50%);
+			  filter: contrast(140%) sepia(50%);
+			}
+			.filter::before {
+			  content: "";
+			  display: block;
+			  height: 100%;
+			  width: 100%;
+			  top: 0;
+			  left: 0;
+			  position: absolute;
+			  pointer-events: none;
+			  mix-blend-mode: lighten;
+			  background: rgba(161, 44, 199, 0.31);
+			}
 			#nav {
 			    background-color: #3b2b48;
 			    opacity: 0.7;
@@ -161,21 +205,34 @@
 			svg[name="full"]{
 				color: #F05643 !important;
 			}
-			
+			.row > * {
+			    padding: 0 0 48px 48px;
+			}
 		</style>
 	</head>
-	<body onload="getSomething()">
+	<body>
 		<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
 				<div class="continer">
-					<div class="col-sm-9" align="left">
-						<h6 style="color: #8a8c91; font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
+					<div class="col-sm-12" style="padding-bottom: 40px;">
+						<h6 style="color: #8a8c91; float: left; font-style:normal;">
+						<c:if test="${search.searchKeyword != null}">
+							'${search.searchKeyword}' 검색 결과 &nbsp;&nbsp;>> &nbsp;
+						</c:if>
+						<c:if test="${search.searchKeyword == null}">
+							전체
+						</c:if>
+							 ${resultPage.totalCount}개 게시물
+						</h6>
 					</div>
-					<div class="col-sm-3" align="right">
-						<form class="search">
+					<div class="col-sm-9" style="padding-bottom: 25px;">
+						<a class="button" style="float: left; padding: 2px 15px;">write</a>
+					</div>
+					<div class="col-sm-3">
+						<form class="search" style="float: right;">
 							<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
-							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 80%"/>
+							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 100%"/>
 						</form>
 					</div>
 				</div>	
@@ -186,16 +243,16 @@
 							<article class="4u 12u(mobile) special">
 								<div style="background-color: white; height: 450px; padding: 10px 10px 0 10px; position: relative;">
 									<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
-									<a href="#" class="image featured"><img src="../resources/assets/images/pic02.jpg" alt="" height="245px"></a>
-									<header align="center">
+									<a href="#" class="image featured"><span class="thumbNail"></span></a>
+									<header style="text-align: center;">
 										<h3><a href="#none" name="title">${group.title}</a></h3>
 										<time class="published" datetime="${group.regDate}">${group.regDate}</time>
 									</header>
-									<div>
+									<div style="text-align: right;">
 										<input type="hidden" name="placeName" value="${group.placeName}"/>
 										<input type="hidden" name="placeDetail" value="${group.placeDetail}"/>
-										<span class="placeName" style="weight: 500;"></span>
-										<span class="placeDetail"></span>
+										<span class="placeName" style="font-size: 11pt; font-weight: bold;"></span>
+										:&nbsp;&nbsp;<span class="placeDetail" style="font-size: 11pt"></span>
 									</div>								
 									<div>
 										<div class="author" style="float: left;"> 

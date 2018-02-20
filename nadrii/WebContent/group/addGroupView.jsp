@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
-
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 <!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
 		
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,20 +25,27 @@
 				
 <script type="text/javascript">
 	$(function() {
-		$('a#submit').bind(
-				'click',
-				function() {
-					$('form[name="postData"]').attr("action", "addGroup").attr(
-							"method", "POST").submit();
-				})
-	})
+		$('a[name="submit"]').bind('click', function() {
+			$('form[name="postData"]').attr("action", "addGroup").attr("method", "POST").submit();
+		});
+	});
 </script>
 <style type="text/css">
+input:focus{
+	outline:none;
+}
+select:focus{
+	outline:none;
+}
 button[data-original-title='More Color']{
 	width: 20px !important;
 }
 .panel-heading{
 	text-align: center !important;
+}
+.wrapper{
+	margin: 0;
+	padding: 6em 0 10em 0;
 }
 </style>
 
@@ -60,30 +67,22 @@ button[data-original-title='More Color']{
 
 			<div class="container">
 				<article id="main" class="special">
-					<div>
-					<span>
-						<select name="categoryCode" style="font-size: 13pt; width: 15%; padding: 6px;">
-							<option value="">- Category -</option>
-							<option value="1">카테1</option>
-							<option value="2">카테2</option>
-							<option value="3">카테3</option>
-							<option value="4">카테4</option>
-						</select>
-					</span>
-					<span>
-						<input type="text" class="form" style="font-size: 13pt; width: 83.9%; padding-left: 8px; margin-left: 11px;" name="title" value="" placeholder="제목" />
-					</span>
-					</div>					
-					<div style="padding-top: 10px">
-						<jsp:include page="noteEditor.jsp"></jsp:include>
-					</div>
-					<div style="width: 20% !important;">	
-						<a href="#" class="button" name="submit">save</a>
+					<form name="postData">
+						<div>
+							<span>
+								<input type="text" class="form" style="font-size: 13pt; width: 100%; padding: 10px; " name="title" value="" placeholder="제목" />
+							</span>
+						</div>					
+						<div style="padding-top: 10px">
+							<jsp:include page="noteEditor.jsp"></jsp:include>
+						</div>
+					</form>
+					<div style="text-align: center;">	
+						<a href="#" class="button" name="submit" style="width: 20% !important; font-size: 0.8em;">save</a>
 					</div>
 				</article>
 			</div>
 		</div>
 	</div>
 </body>
-<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 </html>

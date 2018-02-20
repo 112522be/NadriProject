@@ -54,9 +54,10 @@
 </head>
 <body>
 		<form name="textForm">
-		<textarea id="summernote" name="text"></textarea>
+		<textarea id="summernote" name="text">${group.text}</textarea>
         <script>
-	        var openDialog = function (uri, name, options, closeCallback) {
+        	
+        	var openDialog = function (uri, name, options, closeCallback) {
 			    var win = window.open(uri, "", options);
 			    var interval = window.setInterval(function() {
 			        try {
@@ -77,7 +78,7 @@
 	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
-	    				    var uri = "../comm/addPlace.jsp";
+	    				    var uri = "./addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
 	    				    	var html =$('#summernote').summernote('code')+
@@ -86,8 +87,12 @@
 						})
 	    			}
 	        	}) 
+	        	
+	        
+		    	
 	        	return button.render();
         	}
+        	
 			var openWin;
             $(document).ready(function() {
                 $('#summernote').summernote({
@@ -117,17 +122,18 @@
 		</script>
 		<input type="hidden" name="lat" id="lat">
 		<input type="hidden" name="lng" id="lng">
-		<input type="hidden" name="thumbNailFileName">
-		<input type="hidden" id="content_pr" name="placeName">
+		<input type="hidden" id="content_pr" name="content_pr">
+		<input type="hidden" name="placeName" id="placeName_pr">
+		<input type="hidden" name="placeDetail" id="placeDetail_pr">
 		<div id="cndThumbnail"></div>
 		</form>
 </body>
 	<style type="text/css">
 		input[type="submit"],
-	input[type="reset"],
-	input[type="button"],
-	button,
-	.button {
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
