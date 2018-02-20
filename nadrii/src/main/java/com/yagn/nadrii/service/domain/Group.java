@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Group {
 	
 	private Join join;
-	private String categoryCode;
 	private String title;
 	private String text;
 	private String meetingDate;
@@ -15,7 +14,6 @@ public class Group {
 	private String lat;
 	private String lng;
 	private Date regDate;
-	private int like;
 		
 	public Group(){
 	}
@@ -30,14 +28,6 @@ public class Group {
 
 	public void setJoin(Join join) {
 		this.join = join;
-	}
-
-	public String getCategoryCode() {
-		return categoryCode;
-	}
-
-	public void setCategoryCode(String categoryCode) {
-		this.categoryCode = categoryCode;
 	}
 
 	public String getTitle() {
@@ -77,12 +67,15 @@ public class Group {
 	}
 
 	public void setPlaceName(String placeName) {
-		this.placeName = placeName.substring(placeName.indexOf("<h3>")+4, placeName.indexOf("</h3>"));
-		this.placeDetail = placeName.substring(placeName.indexOf(":")+2, placeName.indexOf("</div></div>"));
+		this.placeName = placeName;
 	}
 
 	public String getPlaceDetail() {
-		return placeDetail;
+		return placeDetail;	
+	}
+	
+	public void setPlaceDetail(String placeDetail) {
+		this.placeDetail = placeDetail;
 	}
 
 	public String getLat() {
@@ -108,21 +101,12 @@ public class Group {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
-	public int getLike() {
-		return like;
-	}
-
-	public void setLike(int like) {
-		this.like = like;
-	}
 
 	@Override
 	public String toString() {
-		return "Group [join=" + join + ", categoryCode=" + categoryCode + ", title=" + title + ", text=" + text
-				+ ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", placeName=" + placeName
-				+ ", placeDetail=" + placeDetail + ", lat=" + lat + ", lng=" + lng + ", regDate=" + regDate + ", like="
-				+ like + "]";
+		return "Group [join=" + join + ", title=" + title + ", text=" + text + ", meetingDate=" + meetingDate
+				+ ", viewCount=" + viewCount + ", placeName=" + placeName + ", placeDetail=" + placeDetail + ", lat="
+				+ lat + ", lng=" + lng + ", regDate=" + regDate + "]";
 	}
 
 	

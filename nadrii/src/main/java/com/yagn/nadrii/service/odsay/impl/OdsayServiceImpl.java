@@ -56,7 +56,6 @@ public class OdsayServiceImpl implements OdsayService{
 		System.out.println("mapObj :: "+trimMapObj);
 		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&mapObject=0:0@"+trimMapObj;
 		
-
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");

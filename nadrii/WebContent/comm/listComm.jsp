@@ -161,7 +161,7 @@
 				console.log(i)
 				var postNo = $($('input[name="postNo"]')[i]).val();
 				$.ajax({
-					url: "../like/json/getLikeUserList/"+postNo,
+					url: "../like/json/listLikeByPost/"+postNo,
 					dataType: "json",
 					async: false,
 					success:function(returnData){

@@ -1,66 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title></title>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="/resources/skins/default.css"/>
-	<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript">
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
+		
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+<script src="../resources/helios/assets/js/skel.min.js"></script>
+<script src="../resources/helios/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="../resources/helios/assets/js/main.js"></script>
+
+<script type="text/javascript">
 	$(function() {
-		$('a#submit').bind('click', function() {
-			$('form[name="postData"]').attr("action", "updateGroup").attr("method", "POST").submit();
-		})
-	})
-	</script>
-	<style type="text/css">
-.row > * {
-    padding: 20px 0 0 10px;
+		$('a[name="submit"]').bind('click', function() {
+			$('form[name="postData"]').attr("action", "../group/updateGroup?groupNo=${group.join.groupNo}").attr("method", "POST").submit();
+		});
+	});
+</script>
+<style type="text/css">
+input:focus{
+	outline:none;
 }
-	</style>
+select:focus{
+	outline:none;
+}
+button[data-original-title='More Color']{
+	width: 20px !important;
+}
+.panel-heading{
+	text-align: center !important;
+}
+.wrapper{
+	margin: 0;
+	padding: 6em 0 10em 0;
+}
+</style>
 
 </head>
-	<body>
-	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
-	<div id="main">
-	
-	<div class="container" align="center">
-	<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
-	<br/>
-		<form name="postData">
-			<div class="row">
-				<div class="3u 6u$(xsmall)">
-					<div class="select-wrapper">
-						<select name="categoryCode">
-							<option value="">- Category -</option>
-							<option value="1">카테1</option>
-							<option value="2">카테2</option>
-							<option value="3">카테3</option>
-							<option value="4">카테4</option>
-						</select>
-					</div>
-				</div>
-				<div class="6u 12u$(xsmall)">
-					<input type="text" class="form" name="title" id="title" value="${group.title}" placeholder="제목" />
-				</div>
-			 </div>
-			 <div>
-			  	<jsp:include page="noteEditor.jsp"></jsp:include>
-			 </div>
-		</form> 
-		<div class="box-bottom" >
-			<a id="submit">저장하기</a>
+<body class="no-sidebar">
+	<div id="page-wrapper">
+		<!-- Header -->
+		<div id="header">
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+				<h1>나들이 모임</h1>
+				</header>
+			</div>
+			<jsp:include page="../layout/toolbar.jsp" />
 		</div>
-	</div>	
+
+		<div class="wrapper style1">
+
+			<div class="container">
+				<article id="main" class="special">
+					<form name="postData">
+					<input type="hidden" name="groupNo" value="${group.join.groupNo}"/>
+						<div>
+							<span>
+								<input type="text" class="form" style="font-size: 13pt; width: 100%; padding: 10px; " name="title" value="${group.title}" placeholder="제목" />
+							</span>
+						</div>					
+						<div style="padding-top: 10px">
+							<jsp:include page="noteEditor.jsp"></jsp:include>
+						</div>
+					</form>
+					<div style="text-align: center;">	
+						<a href="#" class="button" name="submit" style="width: 20% !important; font-size: 0.8em;">save</a>
+					</div>
+				</article>
+			</div>
+		</div>
 	</div>
-	</body>
-	<link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
+</body>
 </html>

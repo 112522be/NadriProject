@@ -24,13 +24,13 @@ public class LikeServiceTest {
 	@Qualifier("likeServiceImpl")
 	private LikeService likeService;
 	
-	//@Test
+	@Test
 	public void testAddLike() throws Exception {
 
 		Like like = new Like();
 		
-		like.setPostNo(60040);
-		like.setUserId("test02");
+		like.setPostNo(60058);
+		like.setUserId("test01");
 				
 		likeService.addLike(like);
 		
@@ -38,7 +38,7 @@ public class LikeServiceTest {
 		
 	}
 
-	@Test
+	//@Test
 	public void testDeleteLike() throws Exception {
 		
 		Like like = new Like();
@@ -50,7 +50,7 @@ public class LikeServiceTest {
 		
 	}
 			 
-	@Test
+	//@Test
 	public void testGetLikeListAll() throws Exception{
 		 
 		Search search = new Search();
@@ -61,8 +61,8 @@ public class LikeServiceTest {
 		
 		like.setUserId("test01");
 		search.setSearchKeyword(like.getUserId());
-		
-		Map<String , Object> map=likeService.getLikeList(search);
+
+		Map<String , Object> map=likeService.listLikeById(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), 5, 1);
 		System.out.println("resultPage :: "+resultPage);
