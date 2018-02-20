@@ -75,12 +75,18 @@
 	    				return;
 	    			}
 	    			
+	    			if(id != null || password != null){
+						alert("아이디 또는 비밀번호가 틀립니다.");
+						return;
+					}
+	    			
 	    			$("form").attr("method","POST").attr("action","/user/login").submit();
 	    		}
 	    			 
 			     $(function(){
 			    	 $("#addUserDialog").click(function(){
 			    		alert("되냐?");
+			    		$(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
 			    		$("#addUserView").dialog({
 			    			width:450,
 			    			height:650,
@@ -88,6 +94,9 @@
 			    			autoOpen:false,
 			    			resizable: false,
 			    			position: [700,500],
+			    			open:function() {
+			    		        $(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
+			    		    },
 			    		})
 			    		
 			    		alert("여기도되냐?");
@@ -99,7 +108,21 @@
 			    
 			    
 			    // ===============	회원가입	 ==============
-		
+$(document).ready(function() { 
+	$("#userId01").val('');
+	idCheckFlag = false;
+	$(".signupbtn").prop("disabled", true);
+	
+	
+});
+			    
+	$(document).ready(function() { 
+	$("#userId01").val('');
+	idCheckFlag = false;
+	$(".signupbtn").prop("disabled", true);
+	
+	
+});
 
 //   이메일 인증 
 function checkSend(){
@@ -202,24 +225,23 @@ function checkSuccess(){
         });    
         
     }
-      
-    function joinform(){
-       location.href="getUser.jsp"
-          var str3 = document.getElementById('join');
 
-      str3.submit();
-
-      alert("가입이 완료되었습니다.")
-   }
-    
-      var password = $("#password01").val();
-      var password2 = $("#password02").val();
-      
       function checkPwd(){
+    	  var password = $("#password01").val();
+          var password2 = $("#password02").val();
       if(password == password2 ){
+    	 $(".signupbtn").prop("disabled", false);
+    	 $(".signupbtn").css("background-color", "#610B21");
          $("#password02").css("background-color", "#B0F6AC");
          return;
       }
+      
+      if(password == "" || password2 == "" ){
+     	 $(".signupbtn").prop("disabled", true);
+     	$(".signupbtn").css("background-color", "#aaaaaa");
+          $("#password02").css("background-color", "#B0F6AC");
+          return;
+       }
       
       if(password != password2 ){
          $(".signupbtn").prop("disabled", true);
@@ -278,7 +300,7 @@ function checkSuccess(){
             return;
          }
        
-       if($("#password01").val() != $("#password2").val()){
+       if($("#password01").val() != $("#password02").val()){
           alert("비밀번호가 일치하지 않습니다.");
           $("#password01").val('');
           $("#password02").val('');
@@ -292,7 +314,6 @@ function checkSuccess(){
           return;
        }
        
-       alert($("#checkNumStatus").val());
        if($("#confirmNum").val() == ""){
           alert("인증번호를 입력해주세요");
           $("#confirmNum").focus();
@@ -319,7 +340,32 @@ function checkSuccess(){
    
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
-
+			
+			if($("#password01").val() == ''){
+	            alert("비밀번호를 입력해주세요.");
+	            $("#password01").focus();
+	            
+	            return;
+	         }
+	         
+	         if($("#password02").val() == ''){
+	            alert("비밀번호 확인을 입력해주세요.");
+	            $("#password02").focus();
+	            return;
+	         }	   
+	       
+	       if($("#email").val() == ''){
+	          alert("이메일을 입력해주세요.");
+	          $("#email").focus();
+	          return;
+	       }
+	       
+	       if($("#confirmNum").val() == ""){
+	          alert("인증번호를 입력해주세요");
+	          $("#confirmNum").focus();
+	          return false;
+	       }   
+	       
     		alert("걸린건가?");
     		$("form").attr("method","POST").attr("action","/user/addUser").submit();
     	});
@@ -330,8 +376,27 @@ function checkSuccess(){
     	});
 		
 	});
+	
+	
+		
+		////////// TOPbutton////////////////////
+		$(function() {
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 500) {
+	                $('#topBtn').fadeIn();
+	            } else {
+	                $('#topBtn').fadeOut();
+	            }
+	        });
+	        
+	        $("#topBtn").click(function() {
+	            $('html, body').animate({
+	                scrollTop : 0
+	            }, 400);
+	            return false;
+	        });
+	    });
 		   
-    
     		</script>
     		
     		<style>
@@ -405,6 +470,8 @@ function checkSuccess(){
 				}
 			}
 			
+			 #addUserView{background:url(resources/images/userImage/background_3.jpg);}
+			
     		</style>
     		
     		<style>
@@ -417,6 +484,15 @@ function checkSuccess(){
 			background-color: #3b2b48;
 			opacity: 0.7;
 			}
+			
+			#topBtn{
+				position:fixed;
+				right:2%;
+				bottom:50px;
+				z-index:999;
+				background:#6cc;
+				font-weight: bolder
+				}
  
 		</style>
 	
@@ -527,8 +603,7 @@ function checkSuccess(){
 							<div class="col-sm-offset-4 col-sm-6 text-center mobileSize">
 								<button class="btn btn-primary icon circled loginbtn"><div class="loginBtn02">로 그 인</div></button>
 								<a id="addUserDialog" href="#addUserView" class="btn btn-warning icon circled joinbtn" data-rel="dialog" style="width:70px; height:70px;">
-								<div class="joinbtn02">회원가입</div></a>
-								<button class="btn btn-primary icon circled facebookbtn"><div class="facebookbtn01">f</div></button>
+								<div class="joinbtn02">회원가입</div></a>								
 							</div>
 						</div>
 						</div>
@@ -545,16 +620,16 @@ function checkSuccess(){
 	        <div class="form-group icon01" style="">
 	          <label for="userId" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">아 이 디</label>
 	          <div class="col-sm-4 col-xs-6">
-	            <input type="text" style="padding:10px; width:250px" placeholder="아이디" class="form-control" id="userId01" required class="userid" name="userId" oninput="checkId();"autofocus>
+	            <input type="text" style="padding:10px; width:250px; ime-mode:disabled;" placeholder="아이디" class="form-control" id="userId01" required class="userid" name="userId" oninput="checkId();"autofocus>
 	            <!-- <span id = "chkMsg"></span> -->
 	          </div>
 	         <div id="htmlId"></div>
 	        </div>
 	        
 	        <div class="form-group" style="display:inline-block; width:404px; padding-top:30px;">
-	          <label for="password01" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호</label>
+	          <label for="password" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호</label>
 	          <div class="col-sm-4 col-xs-6">
-	            <input type="password" style="padding:10px; width:250px" class="form-control password addUerlayoutInput" id="password01" name="password" placeholder="비밀번호"/>
+	            <input type="password" style="padding:10px; width:250px; ime-mode:disabled;" class="form-control password addUerlayoutInput" id="password01" required class="password01" name="password" placeholder="비밀번호"/>
 	          </div>
 	          <div id="htmlId"></div>
 	        </div>
@@ -844,7 +919,8 @@ function checkSuccess(){
 						</div>
 					</div>
 				</div>
-
+			<!-- top button -->
+			<a id="topBtn" href="#" class="icon circled">TOP</a>
 		</div>
 
 		<!-- Scripts 

@@ -119,9 +119,20 @@
 	
 	$(function(){
      $("a[href='#' ]:contains('내정보 보기')").on("click" , function() {
-        self.location = "/user/getUser.jsp";
+        self.location = "/user/getUser?userId="+$(this).text().trim();
      });
   });
+  
+//================= '회원 리스트' 버튼 클릭 Event 처리========================
+	
+	$(function(){
+     $("a[href='#' ]:contains('회원 리스트')").on("click" , function() {
+        self.location = "/user/listUser.jsp";
+     });
+  });
+  
+	  
+	  
 
 	
 	</script>
@@ -152,7 +163,10 @@
 											${ loginUser.userName }
 											님
 									</span>
-									<ul>								
+									<ul>
+										<c:if test="${! isAdmin eq 'user' }">
+										<li><a href="#">회원 리스트</a></li>
+										</c:if>								
 										<li><a href="#">추가정보 입력</a></li>
 										<li><a href="#">내정보 보기</a></li>
 										<li><a href="#">쪽지</a></li>

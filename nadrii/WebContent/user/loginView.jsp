@@ -117,6 +117,62 @@
 				self.location="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=hkuEu0FBgOT1dsQixJU3&state=success to nadrii&redirect_uri=http://127.0.0.1:8080/user/naverLogin";
 			})
 		})
+		
+		/////////////////////// facebook login/////////////////////////////////
+	
+	
+		function statusChangeCallback(response) {
+			console.log('statusChangeCallback');
+			console.log(response);
+			if (response.status === 'connected') {
+				testAPI();
+			}
+		}
+
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1974223106165873',
+				cookie : true,
+
+				xfbml : true,
+				version : 'v2.8'
+			});
+
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/ko_KR/all.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function testAPI() {
+			 alert("페이스북 로그인 이동");
+			 FB.api('/me', {fields: 'name,email,gender,birthday'}, function(response) {
+			        console.log(JSON.stringify(response));
+			        $("#name").text("이름 : "+response.name);
+			        $("#email").text("이메일 : "+response.email);
+			        $("#gender").text("성별 : "+response.gender);
+			        $("#birthday").text("생년월일 : "+response.birthday);
+			        $("#id").text("아이디 : "+response.id);
+
+			        
+			        location.href="/user/addUserFacebook?" + encodeURI(JSON.stringify(response));
+			    });
+		     }
 	</script>		
 	
 </head>
@@ -180,11 +236,8 @@
 
 								<br>
 								<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-								Facebook Login	
-								<div class="fb-login-button" data-max-rows="1" data-size="large"
-										data-button-type="continue_with" data-show-faces="false"
-										data-auto-logout-link="false" data-use-continue-as="false">
-									</div>
+								페이스북 로그인	
+								<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 								</fb:login-button>
 								<div id="status"></div>
 								<!--  facebook login end -->

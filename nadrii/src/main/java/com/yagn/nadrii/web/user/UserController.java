@@ -98,8 +98,34 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(@ModelAttribute User user,HttpSession session,HttpServletRequest request, Map map) throws Exception {
+		System.out.println(this.getClass()+"/login.POST");
+		String userId = user.getUserId();
+		String password = user.getPassword();
+		
+		user = userService.getUser(userId);
+		System.out.println(user);
+		if(user != null) {
+			if(user.getPassword().equals(password)) {
+				session = request.getSession(true);
+				session.setAttribute("loginUser", user);
+				return "redirect:/index.jsp";				
+				
+			}else {
+				map.put("systemMessage", "pwError");
+				return "forward:/user/loginView.jsp";
+			}
+			
+		}else {
+			map.put("systemMessage", "IdError");
+			return "forward:/user/loginView.jsp";
+		}
+		
+	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute User user, HttpSession session, HttpServletRequest request, Map map)
 			throws Exception {
 		System.out.println(this.getClass() + "/login.POST");
@@ -107,6 +133,28 @@ public class UserController {
 		String password = user.getPassword();
 
 		user = userService.getUser(userId);
+		
+		if(userId != null) {
+			boolean isAdmin = false;
+		
+			System.out.println(user.toString());
+			map =new HashMap();
+				
+			request.getSession().setAttribute("user", user );
+			
+			if(user.getRole().equals("admin")) {
+				System.out.println("관리자 로그인");
+				isAdmin = true;
+				request.getSession().setAttribute("isAdmin",  isAdmin);
+			}else if(user.getRole().equals("user")) {
+				System.out.println("일반 로그인");
+				isAdmin = false;
+				request.getSession().setAttribute("isAdmin",  isAdmin);
+			}		
+			map.put("msg", "success");	
+			
+			return "redirect:/index.jsp";
+		}		
 		System.out.println(user);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
@@ -124,7 +172,7 @@ public class UserController {
 			return "forward:/user/loginView.jsp";
 		}
 
-	}
+	}*/
 
 	@RequestMapping(value = "/logout")
 	public String logout(Map map, HttpSession session, HttpServletRequest request) throws Exception {
@@ -203,10 +251,18 @@ public class UserController {
 	}*/
 	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
-	public String getUser()throws Exception{
+	public String getUser(@RequestParam("userId") String userId , Model model )throws Exception{
 
-		System.out.println("getUser");
-
+		System.out.println("/user/getUser : GET");		
+		//Business Logic
+		System.out.println("userId ==" + userId);
+		User user = userService.getUser(userId);
+		
+		System.out.println("User == " + user);
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		System.out.println("model  == " + model);
+		
 		return "forward:/user/getUser.jsp";
 	}
 
@@ -377,6 +433,22 @@ public class UserController {
 		System.out.println(user);
 		request.setAttribute("outerUser", user);
 		return "forward:addUserView.jsp";
+	}
+	
+	@RequestMapping(value="/addUserFacebook" )
+	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
+		,@ModelAttribute User params 	) throws Exception{
+		
+		System.out.println("facebook회원가입");
+		
+		System.out.println("데이터"+params);		
+		
+		if(request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("페이스북 아이디 : "+fbId);
+			model.addAttribute("facebookId" , fbId );
+			}
+		return "forward:/user/addUserFacebook.jsp";
 	}
 
 }

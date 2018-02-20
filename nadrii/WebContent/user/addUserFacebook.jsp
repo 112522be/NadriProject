@@ -20,6 +20,23 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	
+	<!-- tabs -->
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	
+	<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
+	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
@@ -42,7 +59,7 @@
 $(document).ready(function() { 
 	$("#userId").val('');
 	idCheckFlag = false;
-	$(".signupbtn").prop("disabled", true);
+	$(".signupbtn").prop("disabled", false);
 	
 	
 });
@@ -50,7 +67,7 @@ $(document).ready(function() {
 $(document).ready(function() { 
 	$("#email").val('');
 	idCheckFlag = false;
-	$(".signupbtn").prop("disabled", true);
+	$(".signupbtn").prop("disabled", false);
 	$("#userId").val($("params").val());
 	$("#email").val($("params").val());
 
@@ -169,8 +186,11 @@ function checkSuccess(){
             		idCheckFlag = true;
             		$("#userId").css("background-color", "#B0F6AC");
             		$(".signupbtn").prop("disabled", false);
+            		$(".signupbtn").css("background-color", "#610B21");
             		$("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
             	}
+            },error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });    
         
@@ -194,9 +214,17 @@ function checkSuccess(){
 		var password2 = $("#password2").val();
 		
 		if(password == password2 ){
+			$(".signupbtn").prop("disabled", false);
 			$("#password2").css("background-color", "#B0F6AC");
 			return;
 		}
+		
+		if(password == "" || password2 == "" ){
+	     	 $(".signupbtn").prop("disabled", true);
+	     	$(".signupbtn").css("background-color", "#aaaaaa");
+	          $("#password02").css("background-color", "#B0F6AC");
+	          return;
+	       }
 		
 		if(password != password2 ){
 			$(".signupbtn").prop("disabled", true);
@@ -211,18 +239,18 @@ function checkSuccess(){
 		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
 		var email = $("#email").val();
 		if(!regExp.test(email)){
-			$(".signupbtn").prop("disabled", true);
+			//$(".signupbtn").prop("disabled", true);
 			$("#email").css("background-color", "#FFCECE");
 			return;
 		}
 		
 		if(regExp.test(email)){
-			$(".signupbtn").prop("disabled", false);
+			//$(".signupbtn").prop("disabled", false);
 			$("#email").css("background-color", "#B0F6AC");
 		}
 	}
     
-    function addUser(){
+	    function addUser(){
     	var data = "userId=" + $("#userId").val();
     	data += "&password=" + $("#password").val(); 
    		data += "&email=" + $("#email").val();
@@ -232,13 +260,13 @@ function checkSuccess(){
     		return;
     	}
    		
-   		if(idCheckFlag == false){
+   		  if(idCheckFlag == false){
     		alert("아이디가 사용중입니다.");
     		$("#userId").val('');
     		$("#userId").focus();
     		$("#userId").css("background-color", "#B0F6AC");
     		return;
-    	}
+    	}  
    		
    		if($("#password").val() == ''){
    			alert("비밀번호를 입력해주세요.");
@@ -260,7 +288,7 @@ function checkSuccess(){
     		return;
     	}
     	
-    	if($("#email").val() == ''){
+    	 if($("#email").val() == ''){
     		alert("이메일을 입력해주세요.");
     		$("#email").focus();
     		return;
@@ -276,7 +304,7 @@ function checkSuccess(){
     	if($("#checkNumStatus").val() == "N"){
     		alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
     		return;
-    	}
+    	} 
     	
     	
     	if(confirm("회원가입을 하시겠습니까?")){
@@ -316,6 +344,33 @@ function checkSuccess(){
     var email = getParameterByName('email');
     */
     
+    $( function() {
+		$("button[type='button']:contains('가입')").on("click",function(){
+			
+			if($("#password01").val() == ''){
+	            alert("비밀번호를 입력해주세요.");
+	            $("#password01").focus();
+	            
+	            return;
+	         }
+	         
+	         if($("#password02").val() == ''){
+	            alert("비밀번호 확인을 입력해주세요.");
+	            $("#password02").focus();
+	            return;
+	         }	   
+    		alert("걸린건가?");
+    		$("form").attr("method","POST").attr("action","/user/addUser").submit();
+    	});
+		
+		$("button[type='button']:contains('restTest')").on("click",function(){
+    		//alert("걸린건가?");
+    		self.location ="addUserViewRestTest.jsp"; 
+    	});
+		
+	});
+	
+    
     
     </script>
 </head>
@@ -323,14 +378,24 @@ function checkSuccess(){
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/layout/inner.jsp" />
+	<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<h1 class="bg-success text-center" style="background:#fff">회 원 가 입</h1>
+	<div class="container" style="margin-top:70px;">
+		<div class="page-header text-info">
+			<h1 class="bg-success text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">회 원 가 입</h1>
+		</div>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form id ="frm" class="form-horizontal">
@@ -338,7 +403,7 @@ function checkSuccess(){
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${request.getParameter('email')}" oninput="checkId();" autofocus>
+		      <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${request.getParameter('email')}" autofocus>
 		      <span id = "chkMsg"></span>
 		    </div>
 			<div id="htmlId"></div>
@@ -407,15 +472,15 @@ function checkSuccess(){
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="email" name="email" placeholder="이메일" oninput="emailValid();">
-		      <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
+		      <!-- <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();"> 
 		      <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
-		      <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" onClick="checkSuccess();">
+		      <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" onClick="checkSuccess();">-->
 		    </div>
 		  </div> 
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" onclick="addUser();" >가 &nbsp;입</button>
+		      <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" onclick="addUser();" >가 &nbsp;입</button>
 			  <a class="btn btn-primary btn" href="#" role="button" onclick="delchk();" >취&nbsp;소</a>
 		    </div>
 		  </div>
@@ -426,18 +491,6 @@ function checkSuccess(){
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 	
-	<input type="hidden" id="email" value="${email}" /> <!-- facebook 로그인 -->
-	
-	
-	<!-- Scripts 
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
-			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-			<script src="/resources/helios/assets/js/skel.min.js"></script>
-			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-		    <script src="/resources/helios/assets/js/main.js"></script>
 </body>
 
 </html>
