@@ -81,6 +81,17 @@ public class PlannerServiceImpl implements PlannerService{
 		
 		return plannerDao.getPlanner(postNo);
 	}
+	
+
+	@Override
+	public void updatePlanner(Planner planner) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("plannerService/updatePlanner 접속");
+		
+		plannerDao.updatePlanner(planner);
+		
+		System.out.println("plannerService/updatePlanner 완료");
+	}
 
 	@Override
 	public void deletePlanner(int postNo) throws Exception {
@@ -92,4 +103,15 @@ public class PlannerServiceImpl implements PlannerService{
 		System.out.println("PlannerService/deletePlanner 완료");
 	}
 
+	@Override
+	public void updateViewCount(int postNo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("plannnerService/updateViewCount 접속");
+		
+		plannerDao.updateViewCount(postNo);
+		
+		System.out.println("plannerService/updateViewCount 완료");
+		
+	}
+	
 }

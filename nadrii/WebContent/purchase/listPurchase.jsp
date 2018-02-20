@@ -155,13 +155,20 @@ function fncGetList(pageNo) {
 							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 							<input type="hidden" id="pageNo" name="pageNo" value=""/>
 						
-
+						<c:if test="${ empty list }">
+							<article id="main" class="container special">
+								<footer>
+									<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">구매한 티켓 목록에 등록된 티켓이 없습니다.</a></h2>
+								</footer>
+							</article>
+						</c:if>
+						<c:if test="${ !empty list }">	
 							<article id="main" class="container special">
 								<footer>
 									<a href="#" class="button">메인으로</a>
 								</footer>
 							</article>
-		
+						</c:if>
 					</div><!-- container end -->
 					
 					

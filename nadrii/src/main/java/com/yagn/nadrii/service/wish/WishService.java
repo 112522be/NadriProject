@@ -21,4 +21,6 @@ public interface WishService {
 	public Wish getWishByTripNo(String UserId, int tripNo) throws Exception;
 	
 	public List listTripFromWish(String userId) throws Exception;
+	
+	public Wish checkDuplication(int postNo) throws Exception;
 }

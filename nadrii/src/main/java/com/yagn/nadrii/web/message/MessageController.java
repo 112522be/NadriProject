@@ -84,12 +84,13 @@ public class MessageController {
 		System.out.println(this.getClass()+"  listMessage");
 		
 		session= request.getSession(true);
+		
 		User user = (User)session.getAttribute("loginUser");
 		
 		System.out.println(user);
 		
 		List<Message> list = messageService.listMessage(user.getUserId());
-		
+		System.out.println(list.size());
 		/*
 		for (int i = 0; i < list.size(); i++) {
 			
@@ -142,6 +143,7 @@ public class MessageController {
 		//System.out.println(listType);
 		
 		List list = messageService.listSendMessage(user.getUserId());
+		
 		
 		//map.put("listType", listType);
 		map.put("list",list);

@@ -11,10 +11,20 @@ pageEncoding="UTF-8"%>
 	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
 	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 	
+ 	
 	<script type="text/javascript">
 	
 // 무한 스크롤 구현, getTheme.jsp 대신 다이얼로그 창으로 화면 구성함
@@ -89,7 +99,7 @@ pageEncoding="UTF-8"%>
 						
 						var dpValue =						
 							"<article class='4u 12u(mobile) special'>"+
-								"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"+
+								"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt=''style='width='282px'; height='187px';' /></a>"+
 								"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"+
       							"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
 								"<header>"+
@@ -122,7 +132,7 @@ pageEncoding="UTF-8"%>
 									var dpValue =
 										
 										"<article class='4u 12u(mobile) special'>"
-										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"
+										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 										+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 		      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 										+"<header>"
@@ -154,7 +164,7 @@ pageEncoding="UTF-8"%>
 												var dpValue =
 													
 													"<article class='4u 12u(mobile) special'>"
-													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' /></a>"
+													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 													+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 					      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 													+"<header>"
@@ -202,23 +212,7 @@ pageEncoding="UTF-8"%>
 	});
 	
 	
-	var contenttypeid;
-	var contentid;
 	
-	$(function() {
-	  $(document).on("click","img", function(e){
-	    
-		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
-		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
-		e.preventDefault();	 
-		alert(contentid);
-		alert(contenttypeid);
-		
-		getTheme(contentid, contenttypeid);
-		
-		
-	  });
-	});	
 	
 	///*
 	
@@ -266,7 +260,7 @@ pageEncoding="UTF-8"%>
 				}				
 				
 				if(common.title != null){
-					tourName= "<h5 id='tourName'> "+ common.title+"</h5>";
+					tourName= "<h5 id='tourName'><strong> "+ common.title+"</strong></h5>";
 				}else{
 					tourName= "<h5 id='tourName'> 제공정보 없음 </h5>";
 				}
@@ -326,6 +320,24 @@ pageEncoding="UTF-8"%>
 		})
 	}
 	
+	var contenttypeid;
+	var contentid;
+	
+	$(function() {
+	  $(document).on("click","img", function(e){
+	    
+		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
+		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
+		e.preventDefault();	 
+		alert(contentid);
+		alert(contenttypeid);
+		
+		getTheme(contentid, contenttypeid);
+		
+		
+	  });
+	});	
+	
 	//위시리스트에 저장할 때 사용
 	function addWish(contentid){
 		$.ajax({
@@ -336,7 +348,13 @@ pageEncoding="UTF-8"%>
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
-			success:function(){
+			success:function(returnData){
+				var message = returnData.message;
+				if(message == "ok"){
+					alert("위시리스트 저장");
+				}else{
+					alert("이미 저장된 장소");
+				}
 			}
 		});
 		
@@ -346,9 +364,7 @@ pageEncoding="UTF-8"%>
 	//리스트에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function() {
 	  $(document).on("click","#wish", function(e){
-		  	var contentid =$($("input[name = 'contentid']")[$("#wish").index(this)]).val();
-			var contenttypeid =$($("input[name = 'contenttypeid']")[$("#wish").index(this)]).val();
-
+		  	
 			///*
 			alert(contentid);
 			alert(contenttypeid);
@@ -402,10 +418,11 @@ pageEncoding="UTF-8"%>
 	
 	///*
 	$( function() {
-		$("a[href='#']:contains('Go')").on("click" , function() {
-			var keyword = $(".form-control").val();
-			$("form input:nth-child(2)").val(page-1);
-			$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+		$("#search").on("click" , function() {
+				var keyword = $(".form-control").val();
+				$("form input:nth-child(2)").val(page-1);
+				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
+			
 		});
 	});
 	//*/
@@ -427,7 +444,7 @@ pageEncoding="UTF-8"%>
 		
 	</script>
 	<!-- 지도 생성하는 CDN 및 맵에 담을 내용 확인 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
+	
 	  <script type="text/javascript">
 	  function makeMap(){
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -454,11 +471,21 @@ pageEncoding="UTF-8"%>
 	
 		img {
 			cursor: pointer;
+			width:"282px";
+			height:"187px";
+			
 		}
 		
 		#dialog{
-			background-color: #8f8287;
-		
+			background-color: #ffffff;
+			z-index: 100;
+		}
+		.ui-dialog-titlebar{
+			background-color: #ffffff;
+			
+		}
+		.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close{
+			
 		}
 		
 		.wrapper.style1{
@@ -467,13 +494,52 @@ pageEncoding="UTF-8"%>
 		.4u header{
 			background-color:#fff 
 		}
+		
 		#wish{
 			background: #000000;
-			padding-bottom: 4px;
-			padding-top: 4px;
-			padding-left: 4px;
-			padding-right: 4px;
+			padding: 4px;
 		}
+		td{
+			padding: 4px;
+		}
+		
+		article{
+ 			height: 400px; 
+		}
+		.carousel{
+	background-color: #5d4f7166;
+}
+
+
+.jbTable {
+        display: table;
+        width: 100%;
+      }
+.jbTableRow {
+        display: table-row;
+        
+      }
+.jbTableCell {
+        display: table-cell;
+      }
+.jbText {
+        width: 100%;
+      }
+.jbSubmit {
+        width: 1%;
+      }
+.jbText input {
+        width: 100%;
+}
+
+#keyword, #search{
+	padding-bottom:10px;
+	padding-top:10px;
+	
+}
+#search{
+	background: #605b7b;
+}
 	</style>
 
 	<title>여행지 찾기</title>
@@ -485,20 +551,36 @@ pageEncoding="UTF-8"%>
 
 						<div class="inner">
 							<header>
-								<h1><a href="index.html" id="logo">나들이 정보</a></h1>
+								<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
 							</header>
 						</div>
 						
 						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
+				
+				<div class="jbTable">
+      			<div class="jbTableRow">
+        			<div class="jbTableCell jbText">
+          				<form class="search">
+							<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
+							<input type="hidden" name="pageNo" value="" />
+							<input type="hidden" name="areaCode" value="${areaCode}"/>
+		      				<input type="hidden" name="localName" value="${localName}"/>
+				      	</form>
+        			</div>
+        			<div class="jbTableCell jbSubmit">
+          				<input type="button"name="search" id="search" value="검색">
+        			</div>
+        		</div>
+        	</div>
 				<div class="wrapper style1">
 
 					<section id="features" class="container special">
 						<div class="row">
 							<c:forEach var ="list" items="${list}">
 								<article class="4u 12u(mobile) special">
-									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" width="282px" height="187px"/></a>
+									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" style="width="282px"; height="187px";"/></a>
 									<input type="hidden" name="contentid" value="${list.contentid}"/>
 		          					<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 									<header>
@@ -520,8 +602,8 @@ pageEncoding="UTF-8"%>
         		<tr>
         			<td>
 			        	<div id="map" style="width:400px;height:200px;"></div>
-			  			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>
-			  	  		<script type="text/javascript"></script>
+			  			
+			  	  		
 		        	</td>
         	   		<td id="imageSpace">
         	   		</td>
@@ -546,11 +628,11 @@ pageEncoding="UTF-8"%>
     	</table>
     	
      	<footer>
-		<a href="#banner" class="button circled scrolly">좋아요</a>
-		<a href="#banner" class="button circled scrolly">공유</a>
-		<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
+			<a href="#banner" class="button circled scrolly">좋아요</a>
+			<a href="#banner" class="button circled scrolly">공유</a>
+			<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
 		</footer>
 	</div>	
-						
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>					
 </body>
 </html>

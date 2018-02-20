@@ -90,7 +90,6 @@ public class TripController {
 		
 
 		return "forward:/Trip/listTrip3.jsp";
-		//return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")
@@ -235,10 +234,9 @@ public class TripController {
 	@RequestMapping(value="/getTheme")
 	public String getTheme(HttpSession session,Map map) throws Exception{
 		
-		String areaCode = (String)session.getAttribute("areaCode");
-		String localName = (String)session.getAttribute("localName");
 		
-		Map tripMap = tripService.listTrip(1,"14","A02","A0206","",areaCode,localName);
+		
+		Map tripMap = tripService.listTrip(1,"14","A02","A0206","","","");
 		
 		List list = (List)tripMap.get("list");
 		

@@ -76,7 +76,6 @@ public class UserController {
 		/// GetQRCode ///////////////////////////////////////////
 		Purchase purchase = new Purchase();
 		purchase.setBuyerId(user.getUserId());
-		purchase.setBuyerEmail(user.getEmail());
 		String getQRCode = purchaseService.getQRCode(purchase);
 		System.out.println("\n[getQRCode Check]==>" + getQRCode);
 		user.setQrCode(getQRCode);
@@ -250,6 +249,7 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}*/
 	
+	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
 	public String getUser(@RequestParam("userId") String userId , Model model )throws Exception{
 
@@ -262,7 +262,7 @@ public class UserController {
 		// Model 과 View 연결
 		model.addAttribute("user", user);
 		System.out.println("model  == " + model);
-		
+
 		return "forward:/user/getUser.jsp";
 	}
 

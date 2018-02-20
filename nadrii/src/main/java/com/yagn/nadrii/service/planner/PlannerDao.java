@@ -15,8 +15,12 @@ public interface PlannerDao {
 	
 	public Planner getPlanner(int postNo) throws Exception;
 	
+	public void updatePlanner(Planner planner) throws Exception;
+	
 	public int getTotalCount(Search search, String plannerMakerId) throws Exception;
 	
 	public void deletePlanner(int postNo) throws Exception;
+	
+	public void updateViewCount(int postNo) throws Exception;
 	
 }

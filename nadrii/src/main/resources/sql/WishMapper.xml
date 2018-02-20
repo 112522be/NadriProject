@@ -72,6 +72,18 @@
 	
 	</select>
 	
+	<select id="checkDuplication" parameterType="integer" resultMap="WishSelectMap">
+		SELECT
+			wish_no,
+			user_id, 
+			trip_no, 
+			post_no
+		FROM wish
+		WHERE trip_no = #{postNo}	
+	
+	
+	</select>
+	
 	<delete id="deleteWish" parameterType="integer">
 		DELETE 
 		FROM wish

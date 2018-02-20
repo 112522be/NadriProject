@@ -208,6 +208,50 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return purchaseQRDao.getQRCode(purchase);
 		}
 		
+		@Override
+		public void updatePurchaseQR(int postNo) throws Exception {
+			purchaseDao.updatePurchaseQR(postNo);
+		}
 		
+		@Override
+		public Map<String, Object> getPurchasedList(OpenApiSearch openApiSearch, String buyerId) throws Exception {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("openApiSearch", openApiSearch);
+			map.put("buyerId", buyerId);
+			
+			List<Purchase> list =  purchaseDao.getPurchasedList(map);
+			List<String> count = new ArrayList<>();
+			List<String> price = new ArrayList<>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				String firstParseArr[] = list.get(i).getTicketPriceAll().split("&");
+				
+				price = new ArrayList<>();	
+				count = new ArrayList<>();
+				
+				for (int j = 0; j < firstParseArr.length; j++) {
+					String secondParseArr[] = firstParseArr[j].split("=");
+
+					for (int k = 0; k < secondParseArr.length; k++) {
+						
+						if (k == 0) {
+							price.add(secondParseArr[k].toString());
+						} else if (k == 1) {
+							count.add(secondParseArr[k].toString());
+						}
+					}
+				}
+				list.get(i).setTicketC(count);
+				list.get(i).setTicketP(price);
+			}
+			
+			int totalCount = purchaseDao.getTotalCount(buyerId);
+			
+			map.put("list", list);
+			map.put("totalCount", new Integer(totalCount));
+			
+			return map;
+		}
 		
 }
