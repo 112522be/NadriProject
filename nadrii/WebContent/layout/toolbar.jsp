@@ -181,7 +181,7 @@
 	<c:if test="${ empty loginUser }">
 	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
 		<ul>
-			<li><a href="#">로그인 후 장바구니 및 티켓목록 확인이 가능합니다.</a></li>
+			<li><a href="/user/login">로그인 후 나들이 티켓의 추가기능을 사용하실 수 있습니다.</a></li>
 		</ul>	
 	</li>	
 	</c:if>
