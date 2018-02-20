@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.wish;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.comm.CommService;
@@ -43,12 +45,12 @@ public class WishRestController {
 	}
 
 	@RequestMapping("json/addWishFromTrip/{contentId}")
-	public void addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
+	public Map addWishFromTrip(HttpServletRequest request, @PathVariable("contentId") String contentId) throws Exception{
 		
 		
 		System.out.println("RestController addWishFromTrip");
-		
-		//
+		Map map = new HashMap();
+
 		HttpSession session = request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
 		System.out.println(user);
@@ -60,17 +62,21 @@ public class WishRestController {
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println(trip);
 		
-		//
-		//if()
+		Wish wish = wishService.checkDuplication(trip.getPostNo());
 		
-		Wish wish = new Wish();
-		wish.setUserId(user.getUserId());
-		wish.setTripNo(trip);
-		System.out.println(wish);
+		if(wish==null) {
+			wish = new Wish();
+			wish.setUserId(user.getUserId());
+			wish.setTripNo(trip);
+			System.out.println(wish);
+			
+			wishService.addWishListFromTrip(wish);
+			map.put("message", "ok");
+		}else {
+			map.put("message", "fail");
+		}
 		
-		wishService.addWishListFromTrip(wish);
-		
-		
+		return map;
 	}
 	
 	@RequestMapping("json/addWishFromPost/{postNo}")
@@ -134,5 +140,31 @@ public class WishRestController {
 		
 	}
 	
+	@RequestMapping("json/listTripFromWish/{userId}")
+	public Map listTripFromWish(@PathVariable("userId") String userId) throws Exception{
+		System.out.println(this.getClass()+".json/listTripFromWish()");
+		System.out.println(userId);
+		Map map = new HashMap();
+		Map wishMap = wishService.listWish(userId);
+		
+		List tempList = (List) wishMap.get("list");
+		List list = new ArrayList();
+		
+		for (int i = 0; i < tempList.size(); i++) {
+			//System.out.println(list.get(i));
+			Wish wish = (Wish)tempList.get(i);
+			
+			Trip trip = tripService.getTrip(wish.getTripNo().getPostNo());
+			
+			wish.setTripNo(trip);
+			System.out.println(wish);
+			list.add(wish);
+		}
+		
+		
+		map.put("list", list);
+		
+		return map;
+	}
 
 }

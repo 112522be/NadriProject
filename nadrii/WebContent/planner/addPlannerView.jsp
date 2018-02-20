@@ -84,8 +84,8 @@
 			$("input[name='lng']").val(lng);
 			
 			$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
-		})
-	})
+		});
+	});
 	
 	$(function() {
 		$("#update").on("click",function() {
@@ -96,9 +96,43 @@
 			$("input[name='lng']").val(lng);
 
 			$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
-		})
-	})
+		});
+	});
 	
+	
+	///////////////////////////위 위시 위시리스트///////////////////////////////////
+	$(function(){
+		$("#wish").on("click",function(){
+			alert("뭐야 이게");
+			//window.open("/wish/listTripFromWish?userId=" +'${loginUser.userId}',"wishList","width=300, height=350,status=no, scrollbars=no, location=no");
+			listWishFromTrip();
+		});
+	});
+	
+	function listWishFromTrip(){
+		$.ajax({
+			url:"/wish/json/listTripFromWish/"+'${loginUser.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success: function(returnData){
+				var imgList = returnData.list;
+				var tagValue= "";
+				for (var i = 0; i < imgList.length; i++) {
+					tagValue = "<img src='"+ imgList[i].tripNo.thumbnailImageFile+"'/>"
+								+"<input type='hidden' name='latFromWish' value='"+imgList[i].tripNo.lat+"'/>"
+								+"<input type='hidden' name='lngFromWish' value='"+imgList[i].tripNo.lng+"'/>";
+					$(".reel").append(tagValue);			
+				}
+				
+			}
+		});
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
 </script>
 
 <style type="text/css">
@@ -111,6 +145,11 @@ h4 {
 	border-width: 3px;
 	border-color: #adbdf9;;
 }
+img{
+width: 300px;
+height: 200px;
+
+}
 </style>
 
 </head>
@@ -120,7 +159,21 @@ h4 {
 		<div class="map_wrap">
 			<div id="map"
 				style="width: 100%; height: 800px; position: relative; overflow: hidden; padding:10px;"></div>
-
+				
+				<!--  --><!--  --><!--  --><!--  --><!--위시리스트 이미지 넣기  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+				<section class="carousel">
+					<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">
+								
+						
+						
+							
+					</div>
+					<span class="forward" style="display: block;"></span>
+					<span class="backward" style="display: block;"></span>
+				</section>
+				<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+				
+				
 			<div id="menu_wrap" class="bg_white">
 				<div class="option">
 						<form onsubmit="searchPlaces(); return false;">
@@ -131,11 +184,16 @@ h4 {
 						
 						<text id="button">▼</text>
 						<ul id="placesWishList" style="display: none;"></ul>
-						<text id="wishButton">▲</text>
+						<!--  --><!--  --><!--  --><!--  --><!--  -->
 						
-					</div>
+						<text id="wishButton">▲</text>
+						<!--  --><!--  --><!--  --><!--  --><!--  -->
+						
 				</div>
-				<div id="pagination"></div>
+			</div>
+			<div id="pagination"></div>
+			
+				
 			</div>
 
 			<div id="clickLatlng"></div>
@@ -170,6 +228,9 @@ h4 {
 	
 					<div class="col-md-12" style="padding:10px; ">
 						<input type="button" value="경로탐색" style="float:right;" onclick="javascript:search1(1)">
+						<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+						<input type="button" id="wish" value="위시리스트" style="float:right;" >
+						<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
 					</div>
 
 					<div id="roadContent" class="col-md-12" style="padding:10px;">

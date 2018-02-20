@@ -212,23 +212,7 @@ pageEncoding="UTF-8"%>
 	});
 	
 	
-	var contenttypeid;
-	var contentid;
 	
-	$(function() {
-	  $(document).on("click","img", function(e){
-	    
-		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
-		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
-		e.preventDefault();	 
-		alert(contentid);
-		alert(contenttypeid);
-		
-		getTheme(contentid, contenttypeid);
-		
-		
-	  });
-	});	
 	
 	///*
 	
@@ -336,6 +320,24 @@ pageEncoding="UTF-8"%>
 		})
 	}
 	
+	var contenttypeid;
+	var contentid;
+	
+	$(function() {
+	  $(document).on("click","img", function(e){
+	    
+		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
+		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
+		e.preventDefault();	 
+		alert(contentid);
+		alert(contenttypeid);
+		
+		getTheme(contentid, contenttypeid);
+		
+		
+	  });
+	});	
+	
 	//위시리스트에 저장할 때 사용
 	function addWish(contentid){
 		$.ajax({
@@ -346,7 +348,13 @@ pageEncoding="UTF-8"%>
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
-			success:function(){
+			success:function(returnData){
+				var message = returnData.message;
+				if(message == "ok"){
+					alert("위시리스트 저장");
+				}else{
+					alert("이미 저장된 장소");
+				}
 			}
 		});
 		
@@ -356,9 +364,7 @@ pageEncoding="UTF-8"%>
 	//리스트에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function() {
 	  $(document).on("click","#wish", function(e){
-		  	var contentid =$($("input[name = 'contentid']")[$("#wish").index(this)]).val();
-			var contenttypeid =$($("input[name = 'contenttypeid']")[$("#wish").index(this)]).val();
-
+		  	
 			///*
 			alert(contentid);
 			alert(contenttypeid);

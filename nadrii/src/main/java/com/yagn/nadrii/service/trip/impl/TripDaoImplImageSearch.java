@@ -79,7 +79,7 @@ public class TripDaoImplImageSearch implements TripDao {
 		}
                    
         if(list.size()!=0) {
-        	return ( (NaverImage)list.get(2) ).getLink();
+        	return ( (NaverImage)list.get(0) ).getLink();
         }else {
 
         	return "이미지 없음";
