@@ -342,39 +342,7 @@ function checkSuccess(){
           $("#userId01").css("background-color", "#B0F6AC");
           return;
        }
-         
-         if($("#password01").val() == ''){
-            alert("비밀번호를 입력해주세요.");
-            $("#password01").focus();
-            return;
-         }
-         
-         if($("#password02").val() == ''){
-            alert("비밀번호 확인을 입력해주세요.");
-            $("#password02").focus();
-            return;
-         }
-       
-       if($("#password01").val() != $("#password02").val()){
-          alert("비밀번호가 일치하지 않습니다.");
-          $("#password01").val('');
-          $("#password02").val('');
-          $("#password01").focus();
-          return;
-       }
-       
-       if($("#email").val() == ''){
-          alert("이메일을 입력해주세요.");
-          $("#email").focus();
-          return;
-       }
-       
-       if($("#confirmNum").val() == ""){
-          alert("인증번호를 입력해주세요");
-          $("#confirmNum").focus();
-          return false;
-       }
-       
+
         if($("#checkNumStatus").val() == "Y"){
           alert("이메일 인증 완료 되었습니다.");
           return;
@@ -395,7 +363,6 @@ function checkSuccess(){
    
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
-<<<<<<< HEAD
 			
 			if($("#password01").val() == ''){
 	            alert("비밀번호를 입력해주세요.");
@@ -423,10 +390,8 @@ function checkSuccess(){
 	       }   
 	       
     		alert("걸린건가?");
-=======
 
   //  		alert("걸린건가?");
->>>>>>> refs/remotes/origin/master
     		$("form").attr("method","POST").attr("action","/user/addUser").submit();
     	});
 		
@@ -457,12 +422,6 @@ function checkSuccess(){
 	        });
 	    });
 		   
-<<<<<<< HEAD
-=======
-	
-	
-    
->>>>>>> refs/remotes/origin/master
     		</script>
     	<!--	
     		<style>
@@ -536,39 +495,10 @@ function checkSuccess(){
 				}
 			}
 			
-<<<<<<< HEAD
-			 #addUserView{background:url(resources/images/userImage/background_3.jpg);}
-			
-=======
-				
->>>>>>> refs/remotes/origin/master
+
     		</style>
     		
-<<<<<<< HEAD
-    		<style>
-			#header{
-			background-image: url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
-			background-color: #3a2748;
-			}
-			
-			#nav{
-			background-color: #3b2b48;
-			opacity: 0.7;
-			}
-			
-			#topBtn{
-				position:fixed;
-				right:2%;
-				bottom:50px;
-				z-index:999;
-				background:#6cc;
-				font-weight: bolder
-				}
- 
-		</style>
-=======
 	-->
->>>>>>> refs/remotes/origin/master
 	
 <style>
 /* Yagn team custom CSS */
@@ -577,6 +507,11 @@ function checkSuccess(){
 		url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
 	background-color: #3a2748;
 }
+
+#nav{
+			background-color: #3b2b48;
+			opacity: 0.7;
+			}
 
 .buttonyagn {
 	background-color: #df7366;
@@ -589,6 +524,15 @@ function checkSuccess(){
 	font-size: 1.25em;
 	color: #fff;
 	padding: 0;
+}
+
+#topBtn{
+				position:fixed;
+				right:2%;
+				bottom:50px;
+				z-index:999;
+				background:#6cc;
+				font-weight: bolder
 }
 </style>
 
