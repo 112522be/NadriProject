@@ -12,11 +12,10 @@
 	<head>
 		<title>나들이 메인화면</title>
 		<meta charset="utf-8" />
-
-
-<!-- ///////////////////////////////////////////////// 기존 
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
+		
+		<!-- ///////////////////////////////////// 기존 CDN ////////////////////////////////////// 
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]
 		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]
@@ -32,44 +31,42 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     		
     	<!-- 합쳐지고 최소화된 최신 자바스크립트 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
     	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
+    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
     	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     	<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.js"></script> 
-<!-- ///////////////////////////////////////////////// 기존 -->
-
-
-		<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+		<!-- ///////////////////////////////////// 기존 ////////////////////////////////////// -->
+		
+		
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous"> 
-	
-	<!-- Optional theme -->	
+	crossorigin="anonymous">
+
+	<!-- Optional theme -->
 	<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous"> -->
-	
-	
-	
+
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-	
+
+
 	<!-- Scripts -->
 	<script src="/resources/helios/assets/js/jquery.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
 	<script src="/resources/helios/assets/js/skel.min.js"></script>
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
@@ -80,7 +77,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-
 
 <script type="text/javascript">
 	//============= 회원원가입화면이동 =============
@@ -374,16 +370,13 @@
 
 	});
 </script>
-	
-<style>
-/* Yagn team custom CSS */
 
+<style>
 #header {
 	background-image:
 		url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
 	background-color: #3a2748;
 }
-
 </style>
 
 </head>
@@ -396,15 +389,14 @@
 
 			<!-- Header -->
 				<div id="header">
-					
+
 						<jsp:include page="/layout/inner.jsp" />
 				 		 	
 
 						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
-		</div>
-
+				
 <!-- /////////////////////////////////////////////////////////// -->
 <c:if test="${  empty loginUser }">
 <div class="wrapper-style1">
@@ -457,81 +449,35 @@
 	</section>
 </div>
 </c:if>
-<!-- /////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////////////////////////////////// -->				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
-		<!-- Banner  ////////// index 화면 로그인,회원가입 화면 ////////// --> 
-			<c:if test="${  empty loginUser }">
-				<section id="banner">
-					<header>
-					
-					<!-- login -->
-					<c:if test="${ ! empty loginUser }">
-							<li>
-								<a href="/user/getUser?userId=${loginUser.userId}">
-								<img src="/resources/images/00742106_105752.jpg" alt="..." class="img-circle" width="30px" height="30px">
-								<span>
-									<c:if test="${ loginUser.userName eq null }">
-										${ loginUser.userId }
-									</c:if>
-										${ loginUser.userName }
-										님
-								</span>
-								</a>
-							</li>
-					</c:if>
-					
-					
-					<c:if test="${  empty loginUser }">	
-						<form class="form-horizontal">
-						<div class="login">
-						<div class="form-group groupId">
-							<label for="userId" class="col-sm-4 control-label labelId">I&nbsp;D</label>
-							<div class="col-sm-6 loginId">
-								<input type="text" class="form-control" name="userId" id="userId" style="padding:0.5em" placeholder="아이디를 입력해 주세요.">
-								<c:if test="${systemMessage == 'IdError'}">
-									아이디가 잘못되었습니다.
-								</c:if>
-							</div>
-						</div>
-
-						<div class="form-group groupPw">
-							<label for="password" class="col-sm-4 control-label labelPw">PASSWORD</label>
-							<div class="col-sm-6 loginPw">
-								<input type="password" class="form-control" name="password"	id="password" style="padding:0.5em" placeholder="비밀번호를 입력해 주세요">
-								<c:if test="${systemMessage == 'pwError'}">
-									비밀번호가 잘못되었습니다.
-								</c:if>
-							</div>
-						</div>
-						
-						<div class="form-group groupbtn">
-							<div class="col-sm-offset-4 col-sm-6 text-center mobileSize">
-								<button class="btn btn-primary icon circled loginbtn"><div class="loginBtn02">로 그 인</div></button>
-								<a id="addUserDialog" href="#addUserView" class="btn btn-warning icon circled joinbtn" data-rel="dialog" style="width:70px; height:70px;">
-								<div class="joinbtn02">회원가입</div></a>
-								<button class="btn btn-primary icon circled facebookbtn"><div class="facebookbtn01">f</div></button>
-							</div>
-						</div>
-						</div>
-						</form>
-					</c:if>
-				</header>
-			</section><!-- banner end -->
-		</c:if>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			<!-- 회원가입 다이얼로그 창 -->
 	<div id="addUserView" style="display:none; ">
-		<form id ="frm" class="form-horizontal addUserView01" title="회원가입" style=" padding-top:25px;" name="joinform">
+		<form id ="frm" class="form-horizontal addUserView01" title="회원가입" style="padding-top:25px;" name="joinform">
 	      <input id="checkNumStatus" name="checkNumStatus" type="hidden" value="N">
 	        <div class="form-group icon01" style="">
 	          <label for="userId" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">아 이 디</label>
@@ -838,16 +784,6 @@
 
 		</div>
 
-		<!-- Scripts 
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-			<script src="/resources/helios/assets/js/skel.min.js"></script>
-			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]
-		    <script src="/resources/helios/assets/js/main.js"></script>-->
-			
 			
 			
 			
