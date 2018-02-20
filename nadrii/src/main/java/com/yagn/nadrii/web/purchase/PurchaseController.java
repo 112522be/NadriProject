@@ -152,10 +152,10 @@ public class PurchaseController {
 			) {
 		
 		System.out.println("\n /purchase/kakaoPay : POST");
-//		System.out.println("\n[kakaoPayRequest]==>" + kakaoPayRequest.toString());
-		System.out.println("\n[kakaoPay/purchase]==>" + purchase.toString());
 
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+
+		User user = new User();
 		
 		try {
 			
@@ -163,14 +163,23 @@ public class PurchaseController {
 			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
 			this.kakaoPayRequest = kakaoPayRequest;
 			
-			System.out.println("\n[kakaoPay / kakaoPayRequest Check]==>" + kakaoPayRequest.toString());
+			System.out.println("\n[2. kakaoPay / kakaoPayRequest Check]==>" + kakaoPayRequest.toString());
 			
+			if (purchase.getBuyer() == null) {
+				user.setUserId(purchase.getBuyerId());
+				user.setUserName(purchase.getBuyerName());
+				user.setEmail(purchase.getBuyerEmail());
+				user.setPhone(purchase.getBuyerPhone());
+			}
+			
+			purchase.setBuyer(user);
+			
+			System.out.println("\n[3. kakaoPay/purchase]==>" + purchase.toString());
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		
 		session.setAttribute("purchase", purchase);
-		
 		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
 	}
 	
@@ -195,7 +204,7 @@ public class PurchaseController {
 			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
-			System.out.println("\n[kakaoPayComplete / purchase Check]==>" + purchase.toString());
+			System.out.println("\n[3. kakaoPayComplete / purchase Check]==>" + purchase.toString());
 			
 			// cancelDate making algorithm
 			DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -209,9 +218,10 @@ public class PurchaseController {
 
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
-			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
-			
+//			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
+
 			if (kakaoPayResponse.getMsg().equals("payment is already done!")) {
+				
 				purchaseService.addPurchase(purchase);
 			}
 			
@@ -243,6 +253,7 @@ public class PurchaseController {
 			
 			System.out.println("\n[check] ==> " + purchase.toString());
 			System.out.println("\n[check] ==> " + purchase.getSumPostNo());
+			
 			
 			purchaseService.updateBasketPurchase(purchase);
 			

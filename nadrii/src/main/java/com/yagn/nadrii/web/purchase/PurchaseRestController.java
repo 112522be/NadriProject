@@ -72,14 +72,18 @@ public class PurchaseRestController {
 				purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 				purchase.setQrCode("StepOfBasket");
 
-				purchase.getBuyer().getUserName();
-				purchase.getBuyer().getPhone();
-				
-				
 				System.out.println("\n[purchase.buyer check] ==> " + purchase.getBuyer() );
 				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
+				System.out.println("\n[Purchase Domain buyer check] ==> " + purchase.getBuyer());
 				System.out.println("\n");
 
+				if (purchase.getBuyer().getUserName() == null) {
+					purchase.getBuyer().setUserName(purchase.getBuyerName());
+				}
+				if (purchase.getBuyer().getPhone() == null) {
+					purchase.getBuyer().setPhone(purchase.getBuyerPhone());
+				}
+				
 				purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {

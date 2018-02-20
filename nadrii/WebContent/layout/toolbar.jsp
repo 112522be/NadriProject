@@ -123,7 +123,6 @@
      });
   });
 
-	
 	</script>
 	
 	<style type="text/css">
@@ -180,7 +179,11 @@
 	</ul>
 	</li>
 	<c:if test="${ empty loginUser }">
-	<li><a href="/ticket/listTicket" data-toggle="tooltip" data-placement="bottom" title="장바구니 및 구매한 티켓 목록을 보시려면 로그인 하시기 바랍니다.">나들이 티켓 ▼</a></li>
+	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
+		<ul>
+			<li><a href="#">로그인 후 장바구니 및 티켓목록 확인이 가능합니다.</a></li>
+		</ul>	
+	</li>	
 	</c:if>
 	<c:if test="${ ! empty loginUser }">
 	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
@@ -188,6 +191,7 @@
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
 			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
+			<li><a href="/purchase/tempTicket">[임시] 입장권 보여주기</a></li>
 		</ul>
 	</c:if>
 	</li>

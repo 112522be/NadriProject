@@ -98,8 +98,8 @@ public class NaverApiDaoImpl implements TicketDao {
 					.sendGetNaverURL(new StringBuilder(searchImageURL + "query=" + encodeTitle 
 							+ "&display=100" 
 //							+ "&filter=large" 
-//							+ "&sort=sim" 
-							+ "&sort=date" 
+							+ "&sort=sim" 
+//							+ "&sort=date" 
 			), clientID, clientSecret);
 
 			JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());

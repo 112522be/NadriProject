@@ -60,16 +60,16 @@ function fncGetList(pageNo) {
 
 	//=================== "메인으로" 버튼 Event 연결 =================== 
 	$(function() {
-		$("a[href='#']:contains('담당자 확인')").bind("click", function(event) {
+		$("a[href='#']:contains('담당자 확인 후 클릭')").bind("click", function(event) {
 			event.preventDefault();
-			alert( $( $("input[name='postNo']")[ $("a[href='#']:contains('담당자 확인')").index(this) ] ).val() )
+//			alert( $( $("input[name='postNo']")[ $("a[href='#']:contains('담당자 확인')").index(this) ] ).val() )
 			fncUpdatePurchaseList($( $("input[name='postNo']")[ $("a[href='#']:contains('담당자 확인')").index(this) ] ).val());
 		})
 	});
 
 	function fncUpdatePurchaseList(postNo) {
 		
-		alert("fncUpdatePurchaseList")
+//		alert("fncUpdatePurchaseList")
 		
 		$.ajax (
 				{
@@ -85,7 +85,7 @@ function fncGetList(pageNo) {
 			//			alert("들어온거 확인");
 					}
 				})
-		alert("티켓확인이 완료 되었습니다.")
+		alert("입장권 티켓확인이 완료 되었습니다.")
 		location.reload();
 	}
 	
@@ -121,9 +121,9 @@ function fncGetList(pageNo) {
 						
 						<article id="main" class="special">
 							<header>
-								<h2><a href="#">나들이 QR코드 티켓 확인 시스템</a></h2>
+								<h2><a href="#">나들이 QR코드 <br>티켓 확인 시스템</a></h2>
 								<p>
-									${ userId } 님의  <strong class="text-danger">구매하신 티켓</strong>을 확인 바랍니다.
+									구매자 아이디 : <strong class="text-danger">${ userId }</strong>
 								</p>
 							</header>
 							
@@ -159,7 +159,7 @@ function fncGetList(pageNo) {
 							
 							</ul>
 							
-						<a href="#" class="button">담당자 확인</a>
+						<a href="#" class="button">담당자 확인 후 클릭</a>
 						<input type="hidden" name="postNo" value="${ list.postNo }">
 						</section>
 						</div>

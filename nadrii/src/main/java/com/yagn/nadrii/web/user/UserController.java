@@ -76,7 +76,6 @@ public class UserController {
 		/// GetQRCode ///////////////////////////////////////////
 		Purchase purchase = new Purchase();
 		purchase.setBuyerId(user.getUserId());
-		purchase.setBuyerEmail(user.getEmail());
 		String getQRCode = purchaseService.getQRCode(purchase);
 		System.out.println("\n[getQRCode Check]==>" + getQRCode);
 		user.setQrCode(getQRCode);
@@ -202,11 +201,13 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}*/
 	
+	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
-	public String getUser()throws Exception{
+	public String getUser(
+			)throws Exception{
 
 		System.out.println("getUser");
-
+		
 		return "forward:/user/getUser.jsp";
 	}
 
