@@ -1,11 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-=======
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
->>>>>>> refs/heads/master
 
 <!DOCTYPE html>
 

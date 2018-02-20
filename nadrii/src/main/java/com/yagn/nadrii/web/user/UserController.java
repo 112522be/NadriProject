@@ -375,27 +375,36 @@ public class UserController {
 
 
 	@RequestMapping("kakaoLogin")
-	public String kakaoLogin(@RequestParam String code, HttpServletRequest request) throws Exception {
+	public String kakaoLogin(@RequestParam String code, HttpServletRequest request, HttpSession session) throws Exception {
 		TokenResponse token = LoginRestClient.loginToken(code);
 		JSONObject object = LoginRestClient.getProfile(token.getAccess_token());
 		User user = new User();
-		user.setEmail(object.get("kaccount_email").toString());
-		user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
-		user.setUserId(object.get("id").toString());
-		request.setAttribute("outerUser", user);
-		return "forward:addUserView.jsp";
+		if(userService.getUserByEmail(object.get("kaccount_email").toString()) == null) {
+			user.setEmail(object.get("kaccount_email").toString());
+			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
+			user.setUserId(object.get("id").toString());
+			request.setAttribute("outerUser", user);
+			return "forward:addUserView.jsp";
+		}else {
+			session.setAttribute("loginUser", userService.getUserByEmail(object.get("kaccount_email").toString()));
+			return "forward:/index.jsp";
+		}
 	}
 	
 	@RequestMapping("naverLogin")
 	public String naverLogin(@RequestParam String code, 
 								@RequestParam String state,
-								HttpServletRequest request) throws Exception {
+								HttpServletRequest request, HttpSession session) throws Exception {
 		NaverLoginResponse response = LoginRestClient.getNaverToken(code, state);
-		System.out.println(response);
 		User user = LoginRestClient.getNaverUserInfo(response);
-		System.out.println(user);
-		request.setAttribute("outerUser", user);
-		return "forward:addUserView.jsp";
+		if(userService.getUserByEmail(user.getEmail()) == null) {
+			request.setAttribute("outerUser", user);
+			return "forward:addUserView.jsp";
+		}else {
+			session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
+			return "forward:../index.jsp";
+		}
+		
 	}
 
 }

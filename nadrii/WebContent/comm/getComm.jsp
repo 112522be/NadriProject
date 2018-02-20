@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -20,19 +21,11 @@
 		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 		<script type="text/javascript">
 		$(function(){
-			$("a.button.small.write:contains('write')").bind("click", function(){
-				self.location="addComm.jsp";
-			});
-			
-			$("a.button.small:contains('link')").bind("click", function(){
-				self.location="/comm/listComm";
-			});
-			
-			$("a.button.small.modify:contains('modify')").bind("click", function(){
+			$("a#modify").bind("click", function(){
 				self.location="/comm/updateCommView?postNo=${community.postNo}";
 			});
 			
-			$("a.button.small.delete:contains('delete')").bind("click", function(){
+			$("a#delete").bind("click", function(){
 				if(confirm("삭제하시겠습니까?")==true){
 					self.location="/comm/deleteComm?postNo=${community.postNo}";
 					alert("삭제되었습니다.");
@@ -145,7 +138,14 @@
 								</div>
 							</header>
 							<br/>
-							<div align="center">
+							<div>
+							<c:if test="${community.userId == loginUser.userId}">
+								<div align="right">
+									<a id="modify"><span class="glyphicon glyphicon-wrench"></span></a>
+									&nbsp;
+									<a id="delete"><span class="glyphicon glyphicon-erase"></span></a>
+								</div>
+							</c:if>
 								${community.text}						
 							</div>
 							<br/><br/>

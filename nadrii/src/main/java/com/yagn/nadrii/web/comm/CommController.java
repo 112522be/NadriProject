@@ -98,8 +98,9 @@ public class CommController {
 		}
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		
-		request.setAttribute("list", map.get("listComm"));
+		List arrayList = (List) map.get("listComm");
+		request.setAttribute("list", arrayList);
+		request.setAttribute("resultSize", arrayList.size());
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		return "forward:/comm/listComm.jsp";
