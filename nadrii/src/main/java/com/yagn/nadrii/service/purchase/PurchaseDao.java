@@ -16,12 +16,16 @@ public interface PurchaseDao {
 	public List<Purchase> getBasketList(Map<String, Object> map) throws Exception ; 
 	
 	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception ;
+
+	public List<Purchase> getPurchasedList(Map<String, Object> map) throws Exception ;
 	
 	public int getTotalCount(String buyerId) throws Exception ;
 	
 	public List<Purchase> addBasketTicket(List<Integer> sendPostNo) throws Exception ;
 	
 	public void updateBasketPurchase(List<Integer> postNo) throws Exception ;
+
+	public void updatePurchaseQR(int postNo) throws Exception ;
 	
 	public void deleteBasketList(List<Integer> postNo) throws Exception ;
 	

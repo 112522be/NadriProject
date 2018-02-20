@@ -47,6 +47,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
+	
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
@@ -59,11 +60,35 @@ function fncGetList(pageNo) {
 
 	//=================== "메인으로" 버튼 Event 연결 =================== 
 	$(function() {
-		$("a[href='#']:contains('메인으로')").bind("click", function() {
-			self.location = "/index.jsp"
+		$("a[href='#']:contains('담당자 확인 후 클릭')").bind("click", function(event) {
+			event.preventDefault();
+//			alert( $( $("input[name='postNo']")[ $("a[href='#']:contains('담당자 확인')").index(this) ] ).val() )
+			fncUpdatePurchaseList($( $("input[name='postNo']")[ $("a[href='#']:contains('담당자 확인')").index(this) ] ).val());
 		})
 	});
 
+	function fncUpdatePurchaseList(postNo) {
+		
+//		alert("fncUpdatePurchaseList")
+		
+		$.ajax (
+				{
+					url : "/purchase/json/updatePurchaseList",
+					method : "POST",
+					dataType : "String",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					data:postNo,
+					success : function() {
+			//			alert("들어온거 확인");
+					}
+				})
+		alert("입장권 티켓확인이 완료 되었습니다.")
+		location.reload();
+	}
+	
 	
 	
 </script>
@@ -88,6 +113,7 @@ function fncGetList(pageNo) {
 				</div>
 
 <form action="navigation">
+
 			<!-- Main -->
 				<div class="wrapper style1">
 
@@ -95,62 +121,53 @@ function fncGetList(pageNo) {
 						
 						<article id="main" class="special">
 							<header>
-								<h2><a href="#">구매한 티켓 목록</a></h2>
+								<h2><a href="#">나들이 QR코드 <br>티켓 확인 시스템</a></h2>
 								<p>
-									<strong class="text-success">
-									<c:if test="${ user.userName eq null }">
-										${ user.userId }
-									</c:if>
-										${ user.userName }
-									</strong> 회원님의  <strong class="text-danger">구매하신 티켓</strong> 목록 입니다.
+									구매자 아이디 : <strong class="text-danger">${ userId }</strong>
 								</p>
 							</header>
 							
 						</article>
 					
-					</div>
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
-
-					<div class="container">
-					
-						<c:forEach var="list" items="${list}" varStatus="num">
-						<span class="timestamp">No.${ num.count } ${ list.postNo }</span>
+						<c:forEach var="list" items="${list}" varStatus="num">					
 						<div class="row">
 
-							<!-- Photos -->
-								<section class="4u 12u(mobile)">
-									<div class="row 25% no-collapse">
-										<div class="12u">
-											<a href="#" class="image fit"><img src="${ list.ticketImage }" alt="" /></a>
-										</div>
-									</div>
-								</section>	
+						<!-- Posts -->
+						<section class="4u 12u(mobile)">
+							<header>
+								<h3>No.${ num.count } : ${ list.ticketTitle }</h3>
+							</header>
 							
-							<!-- content -->
-								<section class="4u 12u(mobile)">
-									<ul class="divided">
-										<li>
-											<article class="tweet">
-												<h3><a href="#">${ list.ticketTitle }</a></h3>
-												<span class="timestamp">&nbsp;</span>
-												<h4>예매일자</h4>
-												<p>&nbsp;&nbsp;${ list.bookingDate }</p>
-												<h4>취소 가능일자</h4>
-												<p>&nbsp;&nbsp;${ list.cancelDate } 까지</p>
-												<p>
-													<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
-														￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장
-													</c:forEach>
-												</p>
-											</article>
-										</li>
-									</ul>
-								</section>
-
-						</div><!-- row end -->
-						<br>
+							<ul class="divided">
+							
+								<li>
+									<article class="post stub">
+										<header>
+											[예매일자]
+											<h3><a href="#">${ list.bookingDate }</a></h3>
+											[티켓확인]<br>
+											<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+												<c:if test="${ list.ticketC[num.index] ne 0 }">
+													￦ ${ ticketInfo } = ${ list.ticketC[num.index] }ea<br>
+												</c:if>
+											</c:forEach>	
+										</header>
+									</article>
+								</li>
+							
+							</ul>
+							
+						<a href="#" class="button">담당자 확인 후 클릭</a>
+						<input type="hidden" name="postNo" value="${ list.postNo }">
+						</section>
+						</div>
+						
 						</c:forEach>
-					
+						
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->		
+
 							<input type="hidden" name="sumPostNo">
 							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 							<input type="hidden" id="pageNo" name="pageNo" value=""/>
@@ -158,20 +175,12 @@ function fncGetList(pageNo) {
 						<c:if test="${ empty list }">
 							<article id="main" class="container special">
 								<footer>
-									<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">구매한 티켓 목록에 등록된 티켓이 없습니다.</a></h2>
+									<h2><a href="#" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">등록된 티켓이 없습니다.</a></h2>
 								</footer>
 							</article>
 						</c:if>
-						<c:if test="${ !empty list }">	
-							<article id="main" class="container special">
-								<footer>
-									<a href="#" class="button">메인으로</a>
-								</footer>
-							</article>
-						</c:if>
+						
 					</div><!-- container end -->
-					
-					
 					
 					<hr/>	
 					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
@@ -180,7 +189,7 @@ function fncGetList(pageNo) {
 
 	</form>
 
-			<jsp:include page="/layout/footer.jsp" />
+			<jsp:include page="../layout/footer.jsp" />
 			
 		
 	</div>

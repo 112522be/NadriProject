@@ -11,6 +11,7 @@ public class Group {
 	private String meetingDate;
 	private int viewCount;
 	private String placeName;
+	private String placeDetail;
 	private String lat;
 	private String lng;
 	private Date regDate;
@@ -76,7 +77,12 @@ public class Group {
 	}
 
 	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
+		this.placeName = placeName.substring(placeName.indexOf("<h3>")+4, placeName.indexOf("</h3>"));
+		this.placeDetail = placeName.substring(placeName.indexOf(":")+2, placeName.indexOf("</div></div>"));
+	}
+
+	public String getPlaceDetail() {
+		return placeDetail;
 	}
 
 	public String getLat() {
@@ -114,8 +120,9 @@ public class Group {
 	@Override
 	public String toString() {
 		return "Group [join=" + join + ", categoryCode=" + categoryCode + ", title=" + title + ", text=" + text
-				+ ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", placeName=" + placeName + ", lat="
-				+ lat + ", lng=" + lng + ", regDate=" + regDate + ", like=" + like + "]";
+				+ ", meetingDate=" + meetingDate + ", viewCount=" + viewCount + ", placeName=" + placeName
+				+ ", placeDetail=" + placeDetail + ", lat=" + lat + ", lng=" + lng + ", regDate=" + regDate + ", like="
+				+ like + "]";
 	}
 
 	

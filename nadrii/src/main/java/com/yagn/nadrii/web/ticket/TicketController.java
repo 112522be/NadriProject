@@ -1,9 +1,12 @@
 package com.yagn.nadrii.web.ticket;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -111,7 +114,7 @@ public class TicketController {
 			String decodeTitle = URLDecoder.decode(encodeTitle, "UTF-8");
 
 			detailIntro = ticketService.getTicket(contentId, contentTypeId);
-			detailImage = ticketService.getDetailImage(tourTicket.getContentid(), decodeTitle);
+			detailImage = ticketService.getDetailImage(tourTicket.getContentid(), decodeTitle + " 2018");
 
 			System.out.println("\n\n[entrance Fee check] ==> " + detailIntro.getUsetimefestival());
 			
@@ -158,15 +161,31 @@ public class TicketController {
 		String priceInfo = detailIntro.getUsetimefestival();
 		
 		User user = new User();
+		
+		Set<String> set = new HashSet<>();
+		
+		
+		
 		try {
 			
 			List<String> priceList = ticketService.getTicketPrice(priceInfo);
+			List<String> sendPriceList = new ArrayList<>();
 			
 			for (int i = 0; i < priceList.size(); i++) {
 				System.out.println("[리턴 값 확인]==>"+priceList.get(i));
+				set.add(priceList.get(i));		
 			}
 			
-			tourTicket.setUsetimefestival(priceList);
+			System.out.println("[set size()]" + set.size());
+			System.out.println("[set toString()]" + set.toString());
+			
+			Object[] obj = set.toArray();
+			for (int i = 0; i < obj.length; i++) {
+				sendPriceList.add((String) obj[i]);
+			}
+			System.out.println("[sendPriceList.toString()]" + sendPriceList.toString());
+			
+			tourTicket.setUsetimefestival(sendPriceList);
 			System.out.println("\n[tourTicket 도메인 확인]==>" + tourTicket.getUsetimefestival());
 			
 			user = (User) session.getAttribute("loginUser");

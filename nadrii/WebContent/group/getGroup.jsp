@@ -184,10 +184,8 @@
 		    map: map
 		});
 		
-		var placeName = '${group.placeName}';
-		var content = placeName.slice(placeName.indexOf("<h3>")+4,placeName.indexOf("</h3>"));
 		var infowindow = new daum.maps.InfoWindow({
-		    content : '<center><div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+content+'</div></center>'
+		    content : '<center><div style="font-size: 10pt; font-weight: bold;">&nbsp;&nbsp;'+'${group.placeName}'+'</div></center>'
 		});
 		
 		infowindow.open(map, marker);

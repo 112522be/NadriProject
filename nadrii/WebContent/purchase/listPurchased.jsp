@@ -95,14 +95,14 @@ function fncGetList(pageNo) {
 						
 						<article id="main" class="special">
 							<header>
-								<h2><a href="#">구매한 티켓 목록</a></h2>
+								<h2><a href="#">지난 티켓 내역</a></h2>
 								<p>
 									<strong class="text-success">
 									<c:if test="${ user.userName eq null }">
 										${ user.userId }
 									</c:if>
 										${ user.userName }
-									</strong> 회원님의  <strong class="text-danger">구매하신 티켓</strong> 목록 입니다.
+									</strong> 회원님의  <strong class="text-danger">지난 티켓 사용 내역</strong> 입니다.
 								</p>
 							</header>
 							
@@ -133,10 +133,8 @@ function fncGetList(pageNo) {
 											<article class="tweet">
 												<h3><a href="#">${ list.ticketTitle }</a></h3>
 												<span class="timestamp">&nbsp;</span>
-												<h4>예매일자</h4>
+												<h4>티켓 사용 일자</h4>
 												<p>&nbsp;&nbsp;${ list.bookingDate }</p>
-												<h4>취소 가능일자</h4>
-												<p>&nbsp;&nbsp;${ list.cancelDate } 까지</p>
 												<p>
 													<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
 														￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장
@@ -158,7 +156,7 @@ function fncGetList(pageNo) {
 						<c:if test="${ empty list }">
 							<article id="main" class="container special">
 								<footer>
-									<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">구매한 티켓 목록에 등록된 티켓이 없습니다.</a></h2>
+									<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">지난 티켓 내역이 없습니다.</a></h2>
 								</footer>
 							</article>
 						</c:if>
