@@ -6,7 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
@@ -34,16 +36,20 @@ public class TripDaoImplImageSearch implements TripDao {
 	
 	public String naverImageSearch(String target)throws Exception{
 		
-
+		
 		System.out.println("이미지 검색");
 
 		int display = 10;
-
+		
+		
+		
+		
         String clientId = "YaTN_waxR7h6HvXakGB2";
         String clientSecret = "dHdqCyawjm";
 
         String text = URLEncoder.encode(target, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display; // json 
+        String apiURL = "https://openapi.naver.com/v1/search/image?query="+ text+"&display="+display
+        		+"&filter=large&sort=sim"; // json 
         
 
         URL url = new URL(apiURL);
@@ -73,7 +79,7 @@ public class TripDaoImplImageSearch implements TripDao {
 		}
                    
         if(list.size()!=0) {
-        	return ( (NaverImage)list.get(2) ).getLink();
+        	return ( (NaverImage)list.get(0) ).getLink();
         }else {
 
         	return "이미지 없음";

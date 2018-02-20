@@ -1,39 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>나들이 모임~</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- Latest compiled and minified CSS -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-	<!-- Optional theme -->
+	crossorigin="anonymous"> 
+	
+	<!-- Optional theme -->	
 	<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous"> -->
-
+	
+	
+	
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-
-
+	
 	<!-- Scripts -->
 	<script src="/resources/helios/assets/js/jquery.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
 	<script src="/resources/helios/assets/js/skel.min.js"></script>
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
@@ -45,8 +46,55 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
+<div id="header">
+
+		<div class="inner">
+			<header>
+			<h1>
+				<a href="/index.jsp" id="logo">N A D R I I</a>
+			</h1>
+			</header>
+		</div>
+
+		<jsp:include page="/layout/toolbar.jsp" />
+
+	</div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 
+<script src="../resources/assets/js/jquery.min.js"></script>
+<script src="../resources/assets/js/skel.min.js"></script>
+<script src="../resources/assets/js/util.js"></script>
+<script src="../resources/assets/js/main.js"></script>
+ -->
+<!-- ----------------------  Map관련부분 -----------------------------  -->
+
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="../resources/css/keywordSearch.css?version=1" rel="stylesheet">
+<!-- ----------------------  Map관련부분 -----------------------------  -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+ 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+ 
+ 
+ <!--[if lte IE 8]><script src="/resources/imperfect/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="/resources/imperfect/assets/css/main.css" />
+<!--[if lte IE 9]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie9.css" /><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="/resources/imperfect/assets/css/ie8.css" /><![endif]-->
+ 
+ 
+ 
+ <link rel="stylesheet"
+	href="../resources/assets/css/main.css?version=0206455" />
+ 
 <style type="text/css">
 
 	footer a {
@@ -94,8 +142,7 @@
 		line-height: 23px;
 		vertical-align: middle;
 		text-align: center;
-		margin: 14px;
-		position: relative;	
+		margin: 14px;	
 	}
 	
 	#path {
@@ -125,10 +172,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove1 3s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	
@@ -137,11 +183,11 @@
 	}
 	
 	@keyframes mymove1 {
-		from {left: 20px;
+		from {left: -45px;
 		}
 		
 		to {
-			left: 130px;
+			left: 60px;
 		}
 	}
 	
@@ -153,10 +199,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove2 6s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport2 {
@@ -164,11 +209,11 @@
 	}
 	
 	@keyframes mymove2 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 260px;
+			left: 200px;
 		}
 	}
 	
@@ -180,10 +225,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove3 9s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport3 {
@@ -191,11 +235,11 @@
 	}
 	
 	@keyframes mymove3 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 390px;
+			left: 327px;
 		}
 	}
 	
@@ -207,10 +251,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove4 12s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport4 {
@@ -218,11 +261,11 @@
 	}
 	
 	@keyframes mymove4 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 520px;
+			left: 466px;
 		}
 	}
 	
@@ -234,10 +277,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove5 15s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport5 {
@@ -245,11 +287,11 @@
 	}
 	
 	@keyframes mymove5 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 650px;
+			left: 594px;
 		}
 	}
 	
@@ -261,10 +303,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove6 18s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport6 {
@@ -272,11 +313,11 @@
 	}
 	
 	@keyframes mymove6 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 780px;
+			left: 720px;
 		}
 	}
 	
@@ -288,10 +329,9 @@
 		line-height: 20px;
 		vertical-align: middle;
 		text-align: center;
-		position: absolute;
+		position: relative;
 		animation: mymove7 21s infinite;
 		margin-bottom: -20px;
-		z-index:9999;
 	}
 	
 	.transport7 {
@@ -299,71 +339,69 @@
 	}
 	
 	@keyframes mymove7 {
-		from {left: 20px;
+		from {left: -40px;
 		}
 		
 		to {
-			left: 910px;
+			left: 840px;
 		}
 	}
 
 	/* 길 이미지 크기조절 */
 	.road1 {
-		width: 133%;
-		height: 10px;
-		position: absolute;
+		width: 268%;
+		position: relative;
 		text-align: center;
-		margin-top: 51px;
-		margin-left: -36px;
+		margin-bottom: -60px;
+		margin-left: -113px;
 	}
 	
 	.road2 {
-	    width: 260%;
+	    width: 526%;
 	    height: 10px;
-	    position: absolute;
+	    position: relative;
 	    text-align: center;
-	    margin-top: 51px;
-		margin-left: -36px;
+	    margin-bottom: -60px;
+	    margin-left: -113px;
 	}
 	
 	.road3 {
-		width: 390%;
+		width: 780%;
 		height: 10px;
-		position: absolute;
+		position: relative;
 		text-align: center;
-		margin-top: 51px;
-		margin-left: -36px;
+		margin-bottom: -60px;
+		margin-left: -113px;
 	}
 	
 	.road4 {
-		width: 520%;
+		width: 1033%;
 		height: 10px;
-		position: absolute;
+		position: relative;
 		text-align: center;
-		margin-top: 51px;
-		margin-left: -36px;
+		margin-bottom: -60px;
+		margin-left: -113px;
 	}
 	
 	.road5 {
-		width: 650%;
+		width: 1293%;
 	    height: 10px;
-	    position: absolute;
+	    position: relative;
 	    text-align: center;
-	    margin-top: 51px;
-		margin-left: -36px;
+	    margin-bottom: -60px;
+	    margin-left: -113px;
 	}
 	
 	.road6 {
-	    width: 780%;
+	    width: 1550%;
 	    height: 10px;
-	    position: absolute;
+	    position: relative;
 	    text-align: center;
-	    margin-top: 51px;
-		margin-left: -36px;
+	    margin-bottom: -60px;
+	    margin-left: -113px;
 	}
 	
 </style>
-
 <script>
 $(function(){
 	
@@ -463,74 +501,59 @@ $(function () {
 	$('[data-toggle="popover"]').popover({html: true})
 })
 
+
 </script>
-
 </head>
-<body class="no-sidebar">
-	<div id="page-wrapper">
-		<!-- Header -->
-		<div id="header">
-			<!-- Inner -->
-			<div class="inner">
-				<header>
-					<h1>
-						<a href="index.html" id="logo">플래너</a>
-					</h1>
-				</header>
-			</div>
-			<jsp:include page="../layout/toolbar.jsp" />
-		</div>
-
-		<!-- Main -->
-		<div class="wrapper style1">
-
-			<div class="container">
-				<article id="main" class="special">
-					<header style="margin-bottom: 5em;">
-						<h2>${planner.title}</h2>
-						<div style="float: left;">
-							<img src="../resources/assets/images/avatar.jpg" alt=""
-								style="border-radius: 5em; height: 100%" /> <a href="#none"
-								style="position: relative;"> <span
-								style="vertical-align: top;" class="name" data-container="body"
-								data-toggle="popover">&nbsp;&nbsp;${planner.plannerMakerId}</span>
-							</a>
-						</div>
-						<div style="float: right;">
-							<span style="padding-right: 30px;">view :
-								&nbsp;${planner.viewCount}</span> <span
-								style="border-left: 1px solid; padding-left: 30px;">${planner.regDate}</span>
-						</div>
-						<br />
-						<div class="userMenu" style="float: right; margin-top: 10px">
-							<c:if test="${planner.plannerMakerId eq userId}">
-								<span class="button modify" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
-								<span class="button delete" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>	
-							</c:if>
-						</div>
-					</header>
-					<a href="#" class="image featured"><img src="images/pic06.jpg"
-						alt="" /></a>
-						
-					<div id="map" style="width: 100%; height: 450px;"></div>
-					<section id="pathImg">
-					</section>
-					
-					<br>
-					
-					<section>
-						${planner.text}
-					</section>
-					<input type="hidden" name="postNo" value="${planner.postNo}">
-					<jsp:include page="../common/like.jsp"></jsp:include>
+<body>
+	<div id="main">
+		<section class="two">
+		<div class="container">
+			<a href="#" id="list" class="button small"
+				style="position: relative; float: right; margin-top: -40px;">list</a>
+			<article class="post"> <header>
+				<div class="title" style="overflow: hidden">
+					<h2>${planner.title}</h2>
 					<div>
-						<jsp:include page="../common/comment.jsp"></jsp:include>
+						<ul id="groupName" style="overflow: hidden">
+							<li>${planner.plannerMakerId}</li>
+						</ul>
+						<ul id="count">
+							<li>view : ${planner.viewCount}</li>
+						</ul>
 					</div>
-				</article>
-			</div>
+				</div>
+	
+				<div class="meta">
+					<time class="published" datetime="${planner.regDate}">${planner.regDate}</time>
+					<a href="#" class="author"><span class="name">${planner.plannerMakerId}</span>
+						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
+				</div>
+				</header>
+				<div id="map" style="width: 100%; height: 350px;"></div>
+				
+				<div id=pathImg></div><br>
+				<div id="path"></div><br><br>
+				
+				<div>${planner.text}</div>
 
+				<footer>
+				<ul class="stats">
+					<li><a href="#" class="icon fa-heart">28</a></li>
+					<li><a href="#" class="icon fa-comment">128</a></li>
+				</ul>
+				</footer>
+				<div style="float: right; margin-top: -3em;">
+					<c:if test="${planner.plannerMakerId eq userId}">
+						<a href="#" id="modify" class="button small modify">modify</a> 
+						<a href="#" id="delete" class="button small delete">delete</a>	
+					</c:if>
+				</div>
+			</article>
 		</div>
-	<jsp:include page="../planner/plannerSub/getPlannerSub.jsp"></jsp:include>
+		</section>
 	</div>
+	<jsp:include page="../planner/plannerSub/getPlannerSub.jsp"></jsp:include>
+
 </body>
+
 </html>

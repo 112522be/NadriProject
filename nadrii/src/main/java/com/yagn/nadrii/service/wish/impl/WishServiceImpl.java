@@ -113,5 +113,12 @@ public class WishServiceImpl implements WishService{
 		return wishList;
 	}
 
+
+	@Override
+	public Wish checkDuplication(int postNo) throws Exception {
+		return wishDao.checkDuplication(postNo);
+		
+	}
+
 	
 }

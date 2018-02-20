@@ -123,6 +123,17 @@
      });
   });
 
+
+
+//==================='쪽지함으로 이동' =============================
+	
+	 $(function() {
+		$("a[href='#']:contains('쪽지')").on("click",function(){
+			self.location ="/message/listMessage";			
+		})
+	})
+	
+
 	</script>
 	
 	<style type="text/css">
@@ -163,6 +174,7 @@
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너 ▼</a>
+
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>
 				<li><a href="/planner/addPlannerView">플래너 작성</a></li>

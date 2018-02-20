@@ -282,8 +282,8 @@ public class TripRestController {
 	
 	@RequestMapping(value="json/getClientAddress")
 	public void getClientAddress(@RequestBody JSONObject location, HttpServletRequest request)throws Exception {
-		String lat = (String)location.get("lat");
-		String lng = (String)location.get("lng");
+		String lat = (Double)location.get("lat")+"";
+		String lng = (Double)location.get("lng")+"";
 		System.out.println("Location :   " +location);
 		System.out.println("Latitude : " + lat +" , Longitude : "+ lng);
 		

@@ -18,6 +18,8 @@ public interface TripService {
 	
 	public void addTriptoDB(Trip trip) throws Exception;
 	
+	public Trip getTrip(int postNo) throws Exception;
+	
 	public Trip getTripFromDB(String contentId)throws Exception;
 	
 	public void updateViewCount(String contentId) throws Exception;

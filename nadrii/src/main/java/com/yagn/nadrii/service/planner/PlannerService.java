@@ -15,6 +15,10 @@ public interface PlannerService {
 	
 	public Planner getPlanner(int postNo) throws Exception;
 	
+	public void updatePlanner(Planner planner) throws Exception;
+	
 	public void deletePlanner(int postNo) throws Exception;
+	
+	public void updateViewCount(int postNo) throws Exception;
 	
 }

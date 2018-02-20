@@ -1,19 +1,15 @@
-<<<<<<< HEAD
-<%@ page contentType="text/html; charset=utf-8" %>
-=======
+
 <%@ page contentType="text/html; charset=UTF-8" %>
->>>>>>> refs/remotes/origin/master
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-<<<<<<< HEAD
-<meta charset="utf-8">
-=======
+
 <meta charset="UTF-8">
->>>>>>> refs/remotes/origin/master
+
 
 <title>addProduct.jsp</title>
 
