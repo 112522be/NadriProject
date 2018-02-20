@@ -130,10 +130,10 @@ public class TicketServiceTest {
 		
 		User user = new User();
 		Purchase purchase = new Purchase();
-		purchase.setBuyerId("yumaKim88");
-		purchase.setTicketTitle("태안 세계튤립축제");
-		purchase.setBookingDate("2018년 3월 15일"); ;
-		purchase.setBuyerName("김연아 테스트 이름 길게 붙여서 뒤에 값 어떻게 보여지는지 확인중");
+		purchase.setBuyerId("user6364");
+//		purchase.setTicketTitle("태안 세계튤립축제");
+//		purchase.setBookingDate("2018년 3월 15일"); ;
+//		purchase.setBuyerName("김연아 테스트 이름 길게 붙여서 뒤에 값 어떻게 보여지는지 확인중");
 		
 		String getQRCode = purchaseService.getQRCode(purchase);
 		

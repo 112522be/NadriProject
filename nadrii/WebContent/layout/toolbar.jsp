@@ -178,7 +178,7 @@
 		<ul>
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
-			<li><a href="#">입장권 보여주기</a></li>
+			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
 		</ul>
 	</c:if>
 	</li>

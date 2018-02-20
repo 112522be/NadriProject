@@ -16,9 +16,13 @@ public interface PurchaseService {
 	
 	public Map<String, Object> getPurchaseList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
 
+	public Map<String, Object> getPurchasedList(OpenApiSearch openApiSearch, String buyerId) throws Exception;
+
 	public List<Purchase> addBasketTicket(Purchase purchase) throws Exception;
 	
 	public void updateBasketPurchase(Purchase purchase) throws Exception; 
+
+	public void updatePurchaseQR(int postNo) throws Exception; 
 	
 	public void deleteBasketList(Purchase purchase) throws Exception;
 	

@@ -116,6 +116,28 @@ public class PurchaseRestController {
 		
 	}
 	
+	@RequestMapping(value="json/updatePurchaseList", method=RequestMethod.POST) 
+	public void updatePurchaseList(
+			@RequestBody String postNo
+			) {
+		
+		System.out.println("\n /purchase/json/updatePurchaseList : POST");
+		
+		System.out.println("\n[check]==>" + postNo);
+		
+		Purchase purchase = new Purchase();
+		
+		try {
+			
+			purchaseService.updatePurchaseQR( Integer.parseInt(postNo) );
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+	
 	
 	
 } // end of class

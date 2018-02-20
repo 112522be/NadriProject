@@ -385,7 +385,7 @@ public class PurchaseController {
 		OpenApiSearch openApiSearch = new OpenApiSearch();
 
 		User user = new User();
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<>();    
 		
 		try {
 			
@@ -417,9 +417,92 @@ public class PurchaseController {
 		return "forward:/purchase/listPurchase.jsp";
 	}
 	
+	@RequestMapping(value = "listPurchaseQR")
+	public String listPurchaseQR(
+			@RequestParam("userId") String userId,
+//			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/listPurchaseQR");
+		
+		OpenApiPage resultPage = new OpenApiPage();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+
+		User user = new User();
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		try {
+			
+			if (openApiSearch.getPageNo() == 0) {
+				openApiSearch.setPageNo(1);
+			}
+			openApiSearch.setNumOfRows(pageSize);
+			
+			returnMap = purchaseService.getPurchaseList(openApiSearch, userId);
+			
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
+			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
+					pageUnit, pageSize);
+			System.out.println("[resultPage]" + resultPage);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("userId", userId);
+		map.put("list", returnMap.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("openApiSearch", openApiSearch);
+		
+		
+		return "forward:/purchase/listPurchaseQR.jsp";
+	}
 	
-	
-	
-	
+	@RequestMapping(value = "listPurchased")
+	public String listPurchased(
+//			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/listPurchased");
+		
+		OpenApiPage resultPage = new OpenApiPage();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+
+		User user = new User();
+		Map<String, Object> returnMap = new HashMap<>();    
+		
+		try {
+			
+			if (openApiSearch.getPageNo() == 0) {
+				openApiSearch.setPageNo(1);
+			}
+			openApiSearch.setNumOfRows(pageSize);
+			
+			user = (User) session.getAttribute("loginUser");
+
+			returnMap = purchaseService.getPurchasedList(openApiSearch, user.getUserId());
+			
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
+			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
+					pageUnit, pageSize);
+			System.out.println("[resultPage]" + resultPage);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("user", user);
+		map.put("list", returnMap.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("openApiSearch", openApiSearch);
+		
+		
+		return "forward:/purchase/listPurchased.jsp";
+	}
 	
 } // end of class

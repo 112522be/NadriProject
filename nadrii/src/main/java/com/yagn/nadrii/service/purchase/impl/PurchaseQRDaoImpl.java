@@ -47,7 +47,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			
 			File file = null;
 			// 큐알이미지를 저장할 디렉토리 지정
-			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
+//			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
+			file = new File("C:\\testQR\\qrcode");
 			
 			if (!file.exists()) {
 				file.mkdirs();
@@ -61,14 +62,15 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			}
 			//*/
 			
-			String ticketInfo = 
+//			String ticketInfo = 
 //					"티켓명 : " + purchase.getTicketTitle() 
-				"유저아이디 : " + purchase.getBuyerId()
-				+ "\n유저이메일 : " + purchase.getBuyerEmail()
+//				"유저아이디 : " + purchase.getBuyerId()
+//				+ "\n유저이메일 : " + purchase.getBuyerEmail()
 //				+ "\n입장인원 : " + count + " 명"
-				;
+//				;
 			
-//			String ticketInfo = "http://127.0.0.1:8080/purchase/listPurchase"; 
+			String ticketInfo = "http://192.168.0.8:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
+//			String ticketInfo = "http://192.168.0.8:8080"; 
 			
 			System.out.println("\n[ticketInfo Check]==>" + ticketInfo);
 			
@@ -101,7 +103,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			
 			
 			String userId = purchase.getBuyerId();
-			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
+			ImageIO.write(bufferedImage, "png", new File("C:\\testQR\\qrcode\\" + userId 
+//			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
 //					+ "&" + datetime2 
 					+ ".jpg") );
 			// QRCode&userID :: 의 형태로 QR코드 파일 생성됨
@@ -164,6 +167,13 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
+	@Override
+	public void updatePurchaseQR(int postNo) throws Exception {
+	}
 	
+	@Override
+	public List<Purchase> getPurchasedList(Map<String, Object> map) throws Exception {
+		return null;
+	}
 	
 } // end of class
