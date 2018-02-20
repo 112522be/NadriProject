@@ -123,6 +123,14 @@
      });
   });
 
+
+//==================='쪽지함으로 이동' =============================
+	
+	 $(function() {
+		$("a[href='#']:contains('쪽지')").on("click",function(){
+			self.location ="/message/listMessage";			
+		})
+	})
 	
 	</script>
 

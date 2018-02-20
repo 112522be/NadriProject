@@ -18,7 +18,13 @@
 			//window.open("/message/addMessage?recevierId="+recevierId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 			//$('form').attr("method","GET").attr("action","/message/addMessage?recevierId="+receiverId).submit();
 		});
+		
+		$("a[href='#']:contains('취소')").on("click",function(){
+			window.close();
+		});
+		
 	});
+	
 
 
 </script>
