@@ -12,85 +12,41 @@
 	<head>
 		<title>나들이 메인화면</title>
 		<meta charset="utf-8" />
-
-
-<!-- ///////////////////////////////////////////////// 기존 
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
-		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]
-		
+		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 		<!-- 합쳐지고 최소화된 최신 CSS 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+			 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+			  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 			 			 
-		<!-- 부가적인 테마 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+			<!-- 부가적인 테마 -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+			<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 
+    		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
     		
-    	<!-- 합쳐지고 최소화된 최신 자바스크립트 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 		
-    	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
-    	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-    	<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.js"></script> 
-<!-- ///////////////////////////////////////////////// 기존 -->
+    		<!-- 합쳐지고 최소화된 최신 자바스크립트 
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --> 		
+    		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    		<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">-->
+    		<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  -->
+    		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    	    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.js"></script> 
 
-
-		<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous"> 
-	
-	<!-- Optional theme -->	
-	<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous"> -->
-	
-	
-	
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-	
-	<!-- Scripts -->
-	<script src="/resources/helios/assets/js/jquery.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
-	<script src="/resources/helios/assets/js/skel.min.js"></script>
-	<script src="/resources/helios/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/helios/assets/js/main.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+			<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 		
-
-
-
-
-
-
-
-
-
-			
 		<script type="text/javascript">
     		
 	    		//============= 회원원가입화면이동 =============
@@ -101,18 +57,12 @@
 	    			});
 	    		});  */
 	    		
-	    		//============= '로그인' 버튼 클릭 Event 처리 =============
-	    		$( function() {
-	    			$(".btn.btn-primary:contains('로 그 인')").bind("click" , function(event) {
-	    				event.preventDefault();
-	    				validateCheck();
-	    			})
-	    		});
+	    		
 	    			    		
 	    		
 	    		//================================================================
 	    		
-	    		function validateCheck(){
+	    		/* function validateCheck(){
 	    			var id = $("#userId").val();
 	    			var password = $("#password").val();
 	    			//alert(id+ ":::"+password);
@@ -122,12 +72,12 @@
 	    			
 	    			if(id == null || id ==""){
 	    				alert("아이디를 입력해주세요.");
-	    				return false;
+	    				return ;
 	    			}
 	    			
 	    			if(password == null || password=="" ){
 	    				alert("비밀번호를 입력해 주세요.")
-	    				return false;
+	    				return ;
 	    			}
 	    			
 	    			if(id != null || password != null){
@@ -136,12 +86,12 @@
 					}
 	    			
 	    			$("form").attr("method","POST").attr("action","/user/login").submit();
-	    		}
+	    		} */
 	    			 
 			     $(function(){
 			    	 $("#addUserDialog").click(function(){
 			    		alert("되냐?");
-			    		$(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
+			    		//$(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
 			    		$("#addUserView").dialog({
 			    			width:450,
 			    			height:650,
@@ -149,12 +99,9 @@
 			    			autoOpen:false,
 			    			resizable: false,
 			    			position: [700,500],
-			    			open:function() {
-			    		        $(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
-			    		    },
 			    		})
-			    		
-			    	//	alert("여기도되냐?");
+			    		$(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar").remove();
+			    		alert("여기도되냐?");
 			    			 $('#addUserView').dialog('open');
 			    	})
 			    });
@@ -163,21 +110,14 @@
 			    
 			    
 			    // ===============	회원가입	 ==============
-$(document).ready(function() { 
+ $(document).ready(function() { 
 	$("#userId01").val('');
 	idCheckFlag = false;
 	$(".signupbtn").prop("disabled", true);
-	
+	$(".signupbtn").css("background-color", "#aaaaaa");
 	
 });
 			    
-	$(document).ready(function() { 
-	$("#userId01").val('');
-	idCheckFlag = false;
-	$(".signupbtn").prop("disabled", true);
-	
-	
-});
 
 //   이메일 인증 
 function checkSend(){
@@ -243,8 +183,8 @@ function checkSuccess(){
 
  
 ///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
-    var idCheckFlag = false;
-    var pwdCheck = false;
+    var idCheckFlag = true;
+    var pwdCheck = true;
     //아이디 체크하여 가입버튼 비활성화, 중복확인.
      
     function checkId() {
@@ -273,6 +213,7 @@ function checkSuccess(){
                   $(".signupbtn").prop("disabled", false);
                   $(".signupbtn").css("background-color", "#610B21");
                   $("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
+                  idCheck = 1;
                }
             },error:function(request,status,error){
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -287,23 +228,28 @@ function checkSuccess(){
       if(password == password2 ){
     	 $(".signupbtn").prop("disabled", false);
     	 $(".signupbtn").css("background-color", "#610B21");
-         $("#password02").css("background-color", "#B0F6AC");
-         return;
-      }
-      
-      if(password == "" || password2 == "" ){
+         $("#password02").css("background-color", "#B0F6AC");       
+         pwdCheck = 1
+         
+         if(idCheck == 1 && pwdCheck == 1) {
+         	 alert("안되니?")
+              $(".signupbtn").prop("disabled", true);
+              $(".signupbtn").css("background-color", "#aaaaaa");
+              $("#userId01").css("background-color", "#FFCECE");
+              $("#password02").css("background-color", "#FFCECE");
+          }
+
+      }else if(password == "" || password2 == "" ){
      	 $(".signupbtn").prop("disabled", true);
      	$(".signupbtn").css("background-color", "#aaaaaa");
           $("#password02").css("background-color", "#B0F6AC");
-          return;
-       }
-      
-      if(password != password2 ){
+
+       }else if(password != password2 ){
          $(".signupbtn").prop("disabled", true);
          $(".signupbtn").css("background-color", "#aaaaaa");
          $("#password02").css("background-color", "#FFCECE");
-         return;
       }
+      
      }
    
    
@@ -561,54 +507,74 @@ function checkSuccess(){
 	<section id="banner">
 	<div class="container">
 		<div class="row">
-		
-			<article class="4u 12u(mobile) special">
+		  <form class="form-horizontal">
+			<div class="4u 12u(mobile) special">
 				<header>
 					<h3>
-						<a href="#"><strong>아 이 디</strong></a>
+						<label for="userId"><strong>아 이 디</strong></label>
 					</h3>
 				</header>
-				<form>
-					<input type="text" class="12u" name="" placeholder="  ID">
-				</form>
-			</article>
-			<article class="4u 12u(mobile) special">
+					<input type="text" class="12u" name="" id="userId" placeholder="  ID">
+			</div>
+			<div class="4u 12u(mobile) special">
 				<header>
 					<h3>
-						<a href="#"><strong>비밀번호</strong></a>
+						<label for="password"><strong>비밀번호</strong></label>
 					</h3>
 				</header>
-				<form>
-					<input type="password" class="12u" name="" placeholder="  Password">
-				</form>
-			</article>
-			<article class="2u 12u(mobile) special">
-				<header>
+					<input type="password" class="12u" name="" id="password" placeholder="  Password">
+			</div>
+			<div class="2u 12u(mobile) special">
 					<h3>
-						<a href="#"><strong>&nbsp;</strong></a>
+						<strong>&nbsp;</strong>
 					</h3>
-					<input type="button" class="button circled 12u" value="로그인">
+					<button class="button circled 12u" onclick="login()">로그인</button>
 					<!-- <a href="#" class="buttonyagn">로그인</a> -->
-				</header>
-			</article>
-			<article class="2u 12u(mobile) special">
+			</div>
+			<div class="2u 12u(mobile) special">
 				<header>
 					<h3>
-						<a href="#"><strong>&nbsp;</strong></a>
+						<strong>&nbsp;</strong>
 					</h3>
 					<input type="button" class="12u" value="회원가입">
 					
 				</header>
-			</article>
-			
-			
+			</div>			
+		 </form>	
 		</div>
 	</div>
 	</section>
 </div>
 </c:if>
-<!-- /////////////////////////////////////////////////////////// -->
+<script>
+//============= '로그인' 버튼 클릭 Event 처리 =============
+	    		function login() {
+	    				alert("로그인!");
+	    				var id = $("#userId").val();
+		    			var password = $("#password").val();
+		    			//alert(id+ ":::"+password);
+		    			
+		    			alert(id)
+		    			alert(password)
+		    			
+		    			if(id ==""){
+		    				alert("아이디를 입력해주세요.");
+		    				return;
+		    			}else if(password=="" ){
+		    				alert("비밀번호를 입력해 주세요.")
+		    				return;
+		    			}else if( id != null || password != null)
+		    			
+		    			/* if(id != null || password != null){
+							alert("아이디 또는 비밀번호가 틀립니다.");
+							return;
+						} */
+		    			
+		    			$("form").attr("method","POST").attr("action","/user/login").submit();
+	    			}
 
+<!-- /////////////////////////////////////////////////////////// -->
+</script>
 		<!-- Banner  ////////// index 화면 로그인,회원가입 화면 ////////// --> 
 			<c:if test="${  empty loginUser }">
 				<section id="banner">
@@ -631,7 +597,7 @@ function checkSuccess(){
 					</c:if>
 					
 					
-					<c:if test="${  empty loginUser }">	
+					<%-- <c:if test="${  empty loginUser }">	
 						<form class="form-horizontal">
 						<div class="login">
 						<div class="form-group groupId">
@@ -663,21 +629,11 @@ function checkSuccess(){
 						</div>
 						</div>
 						</form>
-					</c:if>
+					</c:if> --%>
 				</header>
 			</section><!-- banner end -->
 		</c:if>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+							
 			<!-- 회원가입 다이얼로그 창 -->
 	<div id="addUserView" style="display:none; ">
 		<form id ="frm" class="form-horizontal addUserView01" title="회원가입" style=" padding-top:25px;" name="joinform">
@@ -988,15 +944,7 @@ function checkSuccess(){
 			<a id="topBtn" href="#" class="icon circled">TOP</a>
 		</div>
 
-		<!-- Scripts 
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-			<script src="/resources/helios/assets/js/skel.min.js"></script>
-			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]
-		    <script src="/resources/helios/assets/js/main.js"></script>-->
+		
 			
 			
 			

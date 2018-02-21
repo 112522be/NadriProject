@@ -123,6 +123,14 @@
      });
   });
   
+//================= '내정보 보기' 버튼 클릭 Event 처리========================
+	
+	$(function(){
+     $("a[href='#' ]:contains('내정보 수정')").on("click" , function() {
+        self.location = "/user/updateUser.jsp";
+     });
+  });
+  
 //================= '회원 리스트' 버튼 클릭 Event 처리========================
 	
 	$(function(){
@@ -171,14 +179,14 @@
 											${ loginUser.userId }
 										</c:if>
 											${ loginUser.userName }
-											님
+											님 ▼
 									</span>
 									<ul>
 										<c:if test="${! isAdmin eq 'user' }">
 										<li><a href="#">회원 리스트</a></li>
 										</c:if>								
-										<li><a href="#">추가정보 입력</a></li>
 										<li><a href="#">내정보 보기</a></li>
+										<li><a href="#">내정보 수정</a></li>
 										<li><a href="#">쪽지</a></li>
 										<li><a href="#">로 그 아 웃</a></li>
 									</ul>

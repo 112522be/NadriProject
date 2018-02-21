@@ -86,7 +86,7 @@
 //				 }
 //			 }
 		 
-		 function addUserPlus(){
+		 function fncUpdateUser(){
 //			 var data = "userName=" +$("#userName").val();
 //			 if($("userName").val() == ''){
 //		   			alert("당신 이름이 맞습니까?");
@@ -102,7 +102,7 @@
 			console.log("사용자 이름 : " + name)
 			var phone = $("hidden[name='phone']").val();
 			console.log("핸드폰번호 : " + phone)
-			var img = $("hidden[name='profiIeimageFile']").val();
+			var img = $("hidden[name='profileImageFile']").val();
 			console.log("프로필 사진 : " + img)
 			
 			var value = "";	
@@ -117,23 +117,33 @@
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 			
 			 }
+		 //	============== 비밀번호 유효성 검사 =====================
 		 function checkPwd(){
 		      var password = $("#password").val();
 		      var password2 = $("#password2").val();
 		      
 		      if(password == password2 ){
+		    	  $(".signupbtn").prop("disabled", false);
+		    	  $(".signupbtn").css("background-color", "#ef8376");
 		         $("#password2").css("background-color", "#B0F6AC");
 		         return;
 		      }
 		      
+		      if(password == "" || password2 == ""){
+		    	 	 $(".signupbtn").prop("disabled", true);
+		    	 	$(".signupbtn").css("background-color", "#aaaaaa");
+			         return;
+			      }
+		      
 		      if(password != password2 ){
-		         $(".signupbtn").prop("disabled", true);
+		    	  $(".signupbtn").prop("disabled", true);
 		         $(".signupbtn").css("background-color", "#aaaaaa");
 		         $("#password2").css("background-color", "#FFCECE");
 		         return;
 		      }
 		     }
 		 
+		 //============= '프로필 사진' ==============
 		 $(function() {
 	            $("#imgInput").on('change', function(){
 	                readURL(this);
@@ -164,12 +174,38 @@
 		 });
 		
 		
+		
 		// ===== '추가' 버튼 처리 =====
-		$(function() {
-	            $("button.btn.btn-info.cancelbtn").on('click', function(){
+		/* $(function() {
+	            $("button.btn.btn-success.col-xs-3").on('click', function(){
 	            	fncUpdateUser();
 	            })
-	        });
+	        }); */
+		
+	        function update(){
+	        	if($("#password").val() == ''){
+		            alert("비밀번호를 입력해주세요.");
+		            $("#password01").focus();
+		            
+		            return;
+		         }
+		         
+		         if($("#password2").val() == ''){
+		            alert("비밀번호 확인을 입력해주세요.");
+		            $("#password02").focus();
+		            return;
+		         }
+	            if(confirm("수정하시겠습니까?")){
+	            	fncUpdateUser();
+	            }
+	        }
+	        
+		// ===== '취소' 버튼 처리 =====
+		function delchk(){
+        if(confirm("취소하시겠습니까?")){
+            location.href = "/user/main";
+        }
+    }
 		 
 	</script>		
     	
@@ -208,13 +244,6 @@
     	padding:50px 0 70px 0;
     }
     
-    @media screen and (max-width:736px){
-    	.groupbtn .updatebtn{width:70px; height:70px;}
-    	.updatebtn01{font-size:20px}
-    	.groupbtn .cancel{width:70px; height:70px;}
-    	.cancel01{font-size:20px;}
-    	.container{padding:35px;}
-    }
     </style>
  
 </head>
@@ -238,10 +267,10 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">정 보 수 정</h1>
+		<h1 class="bg-primary text-center" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" action="addUserPlus" style="padding-top:50px;">
+		<form class="form-horizontal" action="updateUser" style="padding-top:50px;">
 		
 		  <div class="form-group">
           <label for="password" class="col-sm-offset-1 col-sm-3 control-label" style="color:#68A4C4">비밀번호</label>
@@ -262,7 +291,7 @@
 		  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생 년 월 일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control datepicker" id="birth" name="birth" placeholder="생 년 월 일" style="border-radius: 25px;">
+		      <input type="text" class="form-control datepicker" id="birth" name="birth" value="" placeholder="생 년 월 일" style="border-radius: 25px;">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
@@ -321,22 +350,23 @@
 		  </div>
 		  
 		  <div class="form-group">
-		  	<label for="profiIeimageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
+		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <form id="form" runat="server">
 				    <input type="file" id="imgInput"/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
-				    <input type="hidden" name="profiIeimageFile"/>
+				    <input type="hidden" name="profileImageFile"/>
 				</form>
 		     </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center groupbtn">
-		      <button type="button" class="btn btn-info cancelbtn icon circled updatebtn" data-toggle="popover"
-		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" ><div class="updatebtn01">수 정</div></button>
-			  <a class="btn btn-primary btn icon circled cancel" href="#" role="button"><div class="cancel01">취&nbsp;소</div></a>
-		    </div>
+		  <div class="form-group row">
+		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
+		      <button type="button" class="button btn btn-success col-xs-3 signupbtn" data-toggle="popover"
+		      data-trigger="hover"data-placement="bottom" 
+		      style="margin:0 5% 12% 0; " data-content="이름, 핸드폰번호 다시 확인!" onclick="update()">수 정</button>
+			  <a class="button btn btn-primary col-xs-3 cancel" href="#" role="button" onclick="delchk()">취&nbsp;소</a>
+		    </article>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->

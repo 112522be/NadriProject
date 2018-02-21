@@ -349,7 +349,6 @@ public class UserController {
 			});
 			System.out.println("랜덤" + content);
 			MimeMessage message = new MimeMessage(mailSession);
-			// message.setFrom(new InternetAddress("from@no-spam.com"));
 			message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
 			System.out.println("message!!" + message);
 			InternetAddress[] address = { new InternetAddress(email, authNum) };
@@ -379,7 +378,8 @@ public class UserController {
 
 	
 			//////////////////////////////////////////////////////////////////////////////////////////
-				
+
+	
 				@RequestMapping(value="updateUser", method=RequestMethod.POST)
 				public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
 
@@ -395,6 +395,7 @@ public class UserController {
 					System.out.println("자녀수 >>" + user.getChildren());
 					System.out.println("성 별 >>" +user.getGender());
 
+					//user.setUserId( ((User) session.getAttribute("user")).getUserId());
 					user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
 					
 					System.out.println(user);

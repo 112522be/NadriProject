@@ -36,30 +36,7 @@
 			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 		   <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 		    <script src="/resources/helios/assets/js/main.js"></script>
-		    
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-            border:none;
-        }
-        
-        .container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-#nav{
-   background-color: #44324a;
-   opacity: 0.5;
-   color:#ddd;
-   
-}
-    </style>
-    
+		       
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
@@ -170,12 +147,43 @@
 		
 		// ===== '추가' 버튼 처리 =====
 		$(function() {
-	            $("button.btn.btn-info.cancelbtn").on('click', function(){
+	            $("button.btn.btn-success.col-xs-3").on('click', function(){
 	            	fncAddUserPlus();
 	            })
 	        });
+		
+		$(function() {
+            $("button.btn.btn-primary.col-xs-3").on('click', function(){
+            	fncAddUserPlus();
+            })
+        });
 		 
-	</script>		
+	</script>	
+	
+		<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+            border:none;
+        }
+        
+        .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#nav{
+   background-color: #44324a;
+   opacity: 0.5;
+   color:#ddd;
+   
+}
+
+@margin-bottom:10%
+    </style>	
     
 </head>
 
@@ -279,12 +287,12 @@
 		     </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-info cancelbtn" data-toggle="popover"
-		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" >추 가</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		    </div>
+		  <div class="form-group row">
+		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
+		      <button type="button" class="button btn btn-success col-xs-3" data-toggle="popover"
+		      data-trigger="hover"data-placement="bottom" style="margin:0 5% 12% 0; " data-content="이름, 핸드폰번호 다시 확인!" >추 가</button>
+			  <a class="button btn btn-primary col-xs-3" href="#" role="button">취&nbsp;소</a>
+		    </article>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
