@@ -204,7 +204,7 @@ public class OdsayServiceImpl implements OdsayService{
 						laneList.add(lane);
 					}
 					System.out.println();
-				}//for��
+				}//for 종료
 				map.put("subPathList", subPathList);	
 				map.put("laneList", laneList);	
 				

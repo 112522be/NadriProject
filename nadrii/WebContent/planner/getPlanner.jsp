@@ -474,7 +474,7 @@ $(function () {
 			<div class="inner">
 				<header>
 					<h1>
-						<a href="index.html" id="logo">플래너</a>
+						<a href="../index.jsp" id="logo">나들이 플래너</a>
 					</h1>
 				</header>
 			</div>

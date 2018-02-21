@@ -187,7 +187,18 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+		<!-- Header -->
+		<div id="header">
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+					<h1>
+						<a href="../index.jsp" id="logo">나들이 플래너</a>
+					</h1>
+				</header>
+			</div>
+			<jsp:include page="../layout/toolbar.jsp" />
+		</div>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
 				<div class="continer">
