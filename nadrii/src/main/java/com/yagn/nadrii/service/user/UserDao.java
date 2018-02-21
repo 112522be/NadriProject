@@ -28,5 +28,5 @@ public interface UserDao {
 	
 	public User getUserByEmail(String email) throws Exception;
 	
-	public int checkId(String user) throws Exception;
+	public int checkId(String userId) throws Exception;
 }
