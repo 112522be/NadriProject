@@ -317,7 +317,7 @@ public class UserController {
 	@RequestMapping(value = "checkSuccess", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> checkSuccess(HttpServletResponse response, HttpServletRequest request) throws Exception {
-		String confirmNum = request.getParameter("confirmNum");
+		String confirmNum = request.getParameter("code");
 
 		Map<String, Object> mv = new HashMap<String, Object>();
 
@@ -428,7 +428,10 @@ public class UserController {
 		JSONObject object = LoginRestClient.getProfile(token.getAccess_token());
 		User user = new User();
 		user.setEmail(object.get("kaccount_email").toString());
-		//user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
+		
+		if(((JSONObject) object.get("properties")).get("profile_image") !=null) {
+			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
+		}
 		user.setUserId(object.get("id").toString());
 		request.setAttribute("outerUser", user);
 		return "forward:addUserView.jsp";

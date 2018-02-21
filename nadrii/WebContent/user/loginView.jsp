@@ -1,307 +1,651 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!DOCTYPE html>
-
-<html lang="ko">
-	
-<head>
+<html  lang="ko">
+	<head>
 	<meta charset="UTF-8">
+	<title>http://www.blueb.co.kr</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.tabs .tab').click(function(){
+	    if ($(this).hasClass('signin')) {
+	        $('.tabs .tab').removeClass('active');
+	        $(this).addClass('active');
+	        $('.cont').hide();
+	        $('.signin-cont').show();
+	    } 
+	    if ($(this).hasClass('signup')) {
+	        $('.tabs .tab').removeClass('active');
+	        $(this).addClass('active');
+	        $('.cont').hide();
+	        $('.signup-cont').show();
+	    }
+	});
+	$('.container .bg').mousemove(function(e){
+	    var amountMovedX = (e.pageX * -1 / 30);
+	    var amountMovedY = (e.pageY * -1 / 9);
+	    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+	});
+})
+
+function makeToast(title) {
+	$('#toastMessage').text(title).fadeIn(400).delay(2000).fadeOut(400);
+}
+
+/////////////////////////////////컨트롤러 연결////////////////////
+
+/////////////////로그인/////////////////
+$(function(){
+	$("input[value='Login']").on("click",function(){
+ 		var userId = $("form[name='Login'] input[name='userId']").val();
+ 		var password =$("form[name='Login'] input[name='password']").val();
+		
+  		if(userId==null || userId==""){
+  			makeToast("아이디를 입력하지 않았습니다");
+  			$("form[name='Login'] input[name='userId']").focus();
+  			return;
+  		}
+  		if(password=null||password==""){
+  			makeToast("비밀번호를 입력하지 않았습니다");
+  			$("form[name='Login'] input[name='password']").focus();
+  			return;
+  		}
+  		//alert("로그인");
+  		$("form[name='Login']").attr("method","POST").attr("action","/user/login").submit();
+	})
+})
+
+///////////////////회원가입/////////////////////////
+$(function(){
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	$("input[value='가입']").on("click",function(){
+		
+		var userId = $("form[name='join'] input[name='userId']").val();
+		var password = $("form[name='join'] input[name='password']").val();
+		var password2 = $("input[name='password2']").val();
+		var email = $("input[name='email']").val();
+		var code = $("input[name='code']").val();
+		
+		if(userId==null || userId==""){
+  			makeToast("아이디를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(password=null||password==""){
+  			makeToast("비밀번호를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(password2=null||password2==""){
+  			makeToast("확인영 비밀번호를 입력하세요");
+  			return;
+  		}
+  		
+  		if(password2 != password){
+  			makeToast("비밀번호가 서로 다릅니다");
+  			return;
+  		}
+  		
+  		if(email=null||email==""){
+  			makeToast("이메일 주소를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(code=null||code==""){
+  			makeToast("인증번호를 입력해주세요");
+  			return;
+  		}
+  		
+  		
+  		$("form[name='join']").attr("method","POST").attr("action","/user/addUser").submit();
+		
+	})
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-    	 body > div.container{ 
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-            border-radius: 8px;
-        }
-        
-    </style>
+	$("input[name='sendEmail']").on("click",function(){
+		check();
+	})
+	
+	$("input[name='checkCode']").on("click",function(){
+		checkCode();
+	})
+	
+	
+})
+
+////////////////////////////빨강 파랑
+
+
+	function checkId() {
     
-    <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
-			//============= 회원원가입화면이동 =============
-		$( function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				self.location = "/user/addUser"
-			});
-		}); 
-		
-		//============= 아이디 찾기 화면이동 =============
-		$( function() {
-			$("a[href='#' ]:contains('아이디 찾기')").on("click" , function() {
-				self.location = "/user/findIdPg"
-			});
-		});
-		
-		//============= 비밀번호 찾기 화면이동 =============
-		$( function() {
-			$("a[href='#' ]:contains('비밀번호 찾기')").on("click" , function() {
-				self.location = "/user/findPasswordPg"
-			});
-		});
-		//============= '로그인' 버튼 클릭 Event 처리 =============
-		$( function() {
-			$(".btn.btn-primary:contains('로 그 인')").bind("click" , function() {
-				alert("로그인");
-				validateCheck();
-			});
-		});
-		//================================================================
-		
-		function validateCheck(){
-			var id = $("#userId").val();
-			var password = $("#password").val();
-			//alert(id+ ":::"+password);
-			
-			if(id == null || id ==""){
-				alert("아이디 입력해라");
-				return;
-			}
-			
-			if(password == null || password=="" ){
-				alert("비번은 쳐야지 그래야 안쳐맞지")
-				return;
-			}
-			
-			$("form").attr("method","POST").attr("action","/user/login").submit();
+        var data = "userId=" + $("form[name='join'] input[name='userId']").val();
+        $.ajax({
+            	type:"POST",
+            	data : data,
+				url : "/user/json/checkId",     
+            
+            success : function(result) {
+            	if(result.check == 1){
+            		
+            		idCheckFlag = false;
+            		$("form[name='join'] input[name='userId']").css("background-color", "#FFCECE");
+            		$("input[value='가입']").prop("disabled", true);
+	                            		
+            	}else{
+            		
+            		idCheckFlag = true;
+            		$("form[name='join'] input[name='userId']").css("background-color", "#B0F6AC");
+            		$("input[value='가입']").prop("disabled", false);
+            		
+            	}
+            }
+        });    
+        
+    }
+//////////////////////인증번호 확인//////
+
+function checkCode(){
+	var code = $("input[name='code']").val();
+
+	$.ajax({
+		type:"POST",
+		url:"/user/checkSuccess",
+		data:"code=" +code,     //    onclick();
+		success :function(result){
+			makeToast(result.result);
 		}
-		$(function() {
-			$('img#kakaoLogin').bind('click', function() {
-				self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://192.168.0.39:8080/user/kakaoLogin&response_type=code";
-			})
-			$('img#naverLogin').bind('click', function() {
-				self.location="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=hkuEu0FBgOT1dsQixJU3&state=success to nadrii&redirect_uri=http://127.0.0.1:8080/user/naverLogin";
-			})
-		})
+	})
+	
+}
+    
+
+//////////////////외부 로그인
+
+$(function(){
+	$("img[name='kakaoLogin']").on("click",function(){
+		self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://192.168.0.78:8080/user/kakaoLogin&response_type=code";
+	})
+	$("img[name='naverLogin']").on("click",function(){
+		self.location="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=hkuEu0FBgOT1dsQixJU3&state=success to nadrii&redirect_uri=http://127.0.0.1:8080/user/naverLogin";
+
+	})
+})
+
+//////////////이메일
+
+function check(){
+	var email = $("input[name='email']").val();
+	$.ajax({
+		type:"POST",
+		url:"/user/check",
+		data:"email=" +email,     //    onclick();
+		success :function(result){
+			makeToast("이메일이 발송되었습니다.");
+		}
+	});
+}
+
+function emailValid(){
+	var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
+	var email = $("input[name='email']").val();
+	if(!regExp.test(email)){
+		$("input[value='가입']").prop("disabled", true);
+		$("input[name='email']").css("background-color", "#FFCECE");
 		
-		/////////////////////// facebook login/////////////////////////////////
+	}
 	
+	if(regExp.test(email)){
+		$("input[value='가입']").prop("disabled", false);
+		$("input[name='email']").css("background-color", "#B0F6AC");
+	}
+}
+
+
+</script>
+
+<style rel="stylesheet">
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #f8f8f8;
+}
+body .container {
+  position: relative;
+  overflow: hidden;
+  max-width: 700px;
+  width: auto;
+  height:700px;  
+  margin: 80px auto 0;
+  background-color: #ffffff;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+}
+body .container .half {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 58px 40px 0;
+}
+body .container .half.bg {
+  background-image: url("http://www.blueb.co.kr/SRC2/_image/v01.jpg");
+  background-size: 400px;
+  background-repeat: no-repeat;
+}
+body .container h1 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 23px;
+  text-align: center;
+  text-indent: 6px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: #263238;
+}
+body .container .tabs {
+  width: 100%;
+  margin-bottom: 29px;
+  border-bottom: 1px solid #d9d9d9;
+}
+body .container .tabs .tab {
+  display: inline-block;
+  margin-bottom: -1px;
+  padding: 20px 15px 10px;
+  cursor: pointer;
+  letter-spacing: 0;
+  border-bottom: 1px solid #d9d9d9;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: all 0.1s ease-in-out;
+}
+body .container .tabs .tab a {
+  font-size: 11px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #d9d9d9;
+  transition: all 0.1s ease-in-out;
+}
+body .container .tabs .tab.active a, body .container .tabs .tab:hover a {
+  color: #263238;
+  
+}
+body .container .tabs .tab.active {
+  border-bottom: 1px solid #263238;
+  
+}
+body .container .content form {
+  position: relative;
+  height: 400px;
+}
+body .container .content label:first-of-type, body .container .content input:first-of-type, body .container .content .more:first-of-type {
+  -moz-animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.4s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+body .container .content label:nth-of-type(2), body .container .content input:nth-of-type(2), body .container .content .more:nth-of-type(2) {
+  -moz-animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.5s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+
+body .container .content label:nth-of-type(3), body .container .content input:nth-of-type(3), body .container .content .more:nth-of-type(3) {
+  -moz-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+
+body .container .content label:nth-of-type(4), body .container .content input:nth-of-type(4), body .container .content .more:nth-of-type(4) {
+  -moz-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+
+body .container .content label:nth-of-type(5), body .container .content input:nth-of-type(5), body .container .content .more:nth-of-type(5) {
+  -moz-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+
+img {
+  -moz-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  -webkit-animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+  animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
+}
+
+body .container .content label {
+  font-size: 12px;
+  color: #263238;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+body .container .content label:not([for='remember']) {
+  display: none;
+}
+body .container .content input.inpt {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  height: 42px;
+  margin-bottom: 12px;
+  
+  color: #999999;
+  border: 1px solid #d9d9d9;
+  background: transparent;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+body .container .content input.inpt.email {
+  font-size: 14px;
+  display: block;
+  width: 80%;
+  height: 42px;
+  margin-bottom: 12px;
+  padding: 16px 13px;
+  color: #999999;
+  border: 1px solid #d9d9d9;
+  background: transparent;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  float: left;
+  
+  
+}
+body .container .content input.inpt.access {
+  font-size: 14px;
+  
+  display: block;
+  width: 20%;
+  height: 42px;
+  margin-bottom: 12px;
+  
+  color: #ffffff;
+  border: 1px solid #d9d9d9;
+  background: transparent;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background: #111111;
+}
+
+
+body .container .content input.inpt::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Lato', sans-serif;
+}
+body .container .content input.inpt:-moz-placeholder {
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Lato', sans-serif;
+}
+body .container .content input.inpt::-moz-placeholder {
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Lato', sans-serif;
+}
+body .container .content input.inpt:-ms-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+  font-family: 'Lato', sans-serif;
+}
+body .container .content input.inpt:focus {
+  border-color: #999999;
+}
+body .container .content input.submit {
+  font-size: 15px;
 	
-		function statusChangeCallback(response) {
-			console.log('statusChangeCallback');
-			console.log(response);
-			if (response.status === 'connected') {
-				testAPI();
-			}
-		}
+  display: block;
+  width: 100%;
+  height: 42px;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #263238;
+  border: 1px solid #263238;
+  background: transparent;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
 
-		function checkLoginState() {
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
-		}
+body .container .content.signin-cont.cont input.submit {
+  font-size: 12px;
+  line-height: 42px;
+  display: block;
+  width: 100%;
+  height: 42px;
+  cursor: pointer;
+  vertical-align: middle;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #263238;
+  border: 1px solid #263238;
+  background: transparent;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+body .container .content input.submit:hover {
+  background-color: #263238;
+  color: #ffffff;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+body .container .content input:focus {
+  outline: none;
+}
 
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '1974223106165873',
-				cookie : true,
+body .container .content .submit-wrap {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+body .container .content .submit-wrap a {
+  font-size: 12px;
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #999999;
+}
+body .container .content .submit-wrap a:hover {
+  text-decoration: underline;
+}
+body .container .content .signup-cont {
+  display: none;
+}
 
-				xfbml : true,
-				version : 'v2.8'
-			});
+@keyframes slideIn {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    margin-left: -320px;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+@-webkit-keyframes slideIn {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    margin-left: -320px;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+.credits {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #999999;
+  font-size: 14px;
+  margin: 0 10px 10px 0;
+}
+.credits a {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
 
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
-		};
+article{
+	padding-left: 10%;
+	padding-right: 10%; 
+	padding-top: 10%;
+	padding-bottom: 10%;
+}
 
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://connect.facebook.net/ko_KR/all.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-
-		function testAPI() {
-			 alert("페이스북 로그인 이동");
-			 FB.api('/me', {fields: 'name,email,gender,birthday'}, function(response) {
-			        console.log(JSON.stringify(response));
-			        $("#name").text("이름 : "+response.name);
-			        $("#email").text("이메일 : "+response.email);
-			        $("#gender").text("성별 : "+response.gender);
-			        $("#birthday").text("생년월일 : "+response.birthday);
-			        $("#id").text("아이디 : "+response.id);
-
-			        
-			        location.href="/user/addUserFacebook?" + encodeURI(JSON.stringify(response));
-			    });
-		     }
-	</script>		
+img{
+	max-width: 100%;
+ 	width: auto; 
+	height: auto;
+	float: left;
 	
-</head>
+}
 
-<body>
+.btn.btn-info{
+	font-size: 20px;
+	max-width: 100%;
+ 	width: auto; 
+	height: auto;
+	float:right;
+	margin-left: 5%;
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar navbar-default">
-        <div class="container">
-        	<div class="navbar-header">
-        		<a class="navbar-brand" href="/index.jsp">Nadrii Main</a>
-        	</div>	
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->	
+}
+
+
+.toastMessage {
+    width:400px;
+    height:auto;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
+
+
+
+</style>
+<!-- </head> -->
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-		<!--  row Start /////////////////////////////////////-->
-		<div class="row">
+<body class="no-sidebar">
+	
+	<div id="page-wrapper">
 
+		<div id="header">
 
-			<div class="col-md-12">
-				<br />
-				<div class="jumbotron">
-					<h1 class="text-center">
-						<img src="http://cdn.firespring.com/images/90349557-f83b-4af1-a134-ef1b43293823.png" />
-					</h1>
-
-					<form class="form-horizontal">
-
-						<div class="form-group">
-							<label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해 주세요.">
-								<c:if test="${systemMessage == 'IdError'}">
-									아이디가 잘못되었소이다
-								</c:if>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="password" class="col-sm-4 control-label">PASSWORD</label>
-							<div class="col-sm-6">
-								<input type="password" class="form-control" name="password"	id="password" placeholder="비밀번호를 입력해 주세요">
-								<c:if test="${systemMessage == 'pwError'}">
-									비밀번호가 잘못되었소이다
-								</c:if>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-sm-offset-4 col-sm-6 text-center">
-								<button type="button" class="btn btn-primary">로 그 인</button>
-								<a class="btn btn-primary btn" href="#" role="button">회원가입</a> 
-								<a class="btn btn-warning btn" role="button" href="#">아이디 찾기</a> 
-								<a class="btn btn-info" role="button" href="#">비밀번호 찾기</a>
-							</div>
-
-							<div class="col-sm-offset-4 col-sm-6 text-center">
-
-								<br>
-								<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-								페이스북 로그인	
-								<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-								</fb:login-button>
-								<div id="status"></div>
-								<!--  facebook login end -->
-								
-						
-							<a href="#">추가정보 입력</a><br/>
-							<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300" id="kakaoLogin"/>
-							<br/><br/>
-							<img src="/resources/images/userImage/naver_login.png" width="300" id="naverLogin"/>
-					    <script type='text/javascript'>
-					      
-							
-							function setCookie( name , value , expired ){
-								 
-								 var date = new Date();
-								 date.setHours(date.getHours() + expired);
-								 var cookieValue = escape(value) + ((exdys==null) ? "" : "; expires=" + exdate.toGMTString());
-								 document.cookie = name + "=" + cookieValue;
-								}					        
-					        
-														
-							function getCookie(name){
-								 
-							    nameofCookie = name + "=";
-							    var cookieDate = document.cookie
-							    var start = cookieDate.indexOf(cookiename);
-							    var cookieValue = '';
-							    if(start != -1){
-							    	start += cookieName.length;
-							    	var end = cookieDate.indexOf(';',start);
-							    	if(end  == -1)end = cookieDate.length;
-							    	cookieValue = cookieData.subString(start, end);
-							    }
-							    return unescape(cookieValue);
-							}
-							
-					        
-					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
-					        function loginWithKakao() {
-					        
-					          Kakao.Auth.login({
-					            success: function(authObj) {
-					              console.log(JSON.stringify(authObj));
-					              //location.href="/user/main";
-					              Kakao.Auth.cleanup();
-					              Kakao.Auth.login({
-					                  persistAccessToken: true,
-					                  persistRefreshToken: true,
-					                  success: function(authObj) {
-					                      setCookie("kakao_login","done",1); // 荑??ㅼ???? (濡?洹몄??)
-					                      //alert(cookiedata);
-					                      $('#kakaoName').val(res.properties.nickname);
-										  $('#kakaoId').val(res.id);
-										  $('#kakaoEmail').val(res.email);
-					                      createLogoutKakao();
-					                      window.location.href="/user/addUserView";
-					                  },
-					                      fail: function(err) {
-					                       alert(JSON.stringify(err));
-					                  }
-					                           
-					              })
-					            },
-					            fail: function(err) {
-					              alert(JSON.stringify(err));
-					            }
-					          });
-					        };
-					        function setCookie( name , value , expired ){
-					        	 
-					        	 var date = new Date();
-					        	 date.setHours(date.getHours() + expired);
-					        	 var expried_set = "expries="+date.toGMTString();
-					        	 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
-					        	 
-					        	}
-					        
-					        ////////////////////////////////////////////////////////////
-					        
-				        					        </script>
-							<!-- kakao ligin end-->
-
-							</div>
-						</div>
-
-					</form>
-				</div>
-
+			<div class="inner">
+				<header>
+					<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
+				</header>
 			</div>
-
+			<jsp:include page="/layout/toolbar.jsp" />
 		</div>
-  	 	<!--  row Start /////////////////////////////////////-->
-  	 	
- 	</div>
- 	<!--  화면구성 div end /////////////////////////////////////-->
+
+		<section class="container">
+		    <article class="">
+		       
+		        <div class="tabs">
+		            <span class="tab signin active"><a href="#signin">로그인</a></span>
+		            <span class="tab signup"><a href="#signup">가입하기</a></span>
+		        </div>
+		        <div class="content">
+		            <div class="signin-cont cont">
+		                <form name ="Login">
+			                <input type="text" name="userId" class="inpt" required="required" placeholder="아이디">
+			                
+			                <input type="password" name="password" class="inpt" required="required" placeholder="비밀번호">
+									        			    			                
+				            <div class="submit-wrap">
+				            <a class="btn btn-info" role="button" href="#">비밀번호 찾기</a>
+				            <a class="btn btn-info" role="button" href="#" >아이디 찾기</a>
+							
+			 	               <input type="button" value="Login" class="submit">
+				 	        </div>
+        		    	</form>
+    				</div>
+    				<div class="signup-cont cont">
+	                	<form name ="join">
+							<input type="text" name="userId" class="inpt" required="required" placeholder="아이디" oninput="checkId();">
+							<input type="password" name="password" class="inpt" required="required" placeholder="비밀번호">
+							<input type="password" name="password2" class="inpt" required="required" placeholder="비밀번호 확인">
+							
+							<ul>
+								<li><input type="text" name="email" class="inpt email" required="required" placeholder="이메일" oninput="emailValid();"></li>
+	                			<li><input type="button" class="inpt access" name="sendEmail" value="인증"></li>
+	                		</ul>
+	                		
+	                		<ul>
+								<li><input type="text" name="code" class="inpt email" required="required" placeholder="인증번호" ></li>
+	                			<li><input type="button" class="inpt access" name="checkCode" value="확인"></li>
+	                		</ul>
+	                		
+							
+	                		
+							<div class="submit-wrap">
+								<img src="../resources/images/userImage/kakao_account_login_btn_medium_narrow.png" class="6u 12u(mobile) special" name="kakaoLogin">
+	                			<img src="../resources/images/userImage/naverLongBar-iloveimg-resized.png" class="6u 12u(mobile) special" name ="naverLogin">
+								<input type="button" value="가입" class="submit">
+							</div>
+							
+	        			</form>
+	            	</div>
+				</div>
+			</article>
+		</section>
+
+	</div>
+
+ 	<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>
+ 	
 
 </body>
-
 </html>
