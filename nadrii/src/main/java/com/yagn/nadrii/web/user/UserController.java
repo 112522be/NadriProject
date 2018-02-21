@@ -2,10 +2,10 @@ package com.yagn.nadrii.web.user;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -29,13 +29,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yagn.nadrii.service.common.CommentService;
+import com.yagn.nadrii.service.domain.Comments;
+import com.yagn.nadrii.service.domain.Message;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.domain.naverLogin.NaverLoginResponse;
+import com.yagn.nadrii.service.like.LikeService;
+import com.yagn.nadrii.service.message.MessageService;
 import com.yagn.nadrii.service.purchase.PurchaseService;
 import com.yagn.nadrii.service.user.UserService;
-import com.yagn.nadrii.web.user.LoginRestClient;
 
 
 @Controller
@@ -53,7 +57,15 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-
+	@Autowired
+	@Qualifier("commentServiceImpl")
+	private CommentService commentService;
+	@Autowired
+	@Qualifier("likeServiceImpl")
+	private LikeService likeService;
+	@Autowired
+	@Qualifier("messageServiceImpl")
+	private MessageService messageService;
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
@@ -97,8 +109,34 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(@ModelAttribute User user,HttpSession session,HttpServletRequest request, Map map) throws Exception {
+		System.out.println(this.getClass()+"/login.POST");
+		String userId = user.getUserId();
+		String password = user.getPassword();
+		
+		user = userService.getUser(userId);
+		System.out.println(user);
+		if(user != null) {
+			if(user.getPassword().equals(password)) {
+				session = request.getSession(true);
+				session.setAttribute("loginUser", user);
+				return "redirect:/index.jsp";				
+				
+			}else {
+				map.put("systemMessage", "pwError");
+				return "forward:/user/loginView.jsp";
+			}
+			
+		}else {
+			map.put("systemMessage", "IdError");
+			return "forward:/user/loginView.jsp";
+		}
+		
+	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute User user, HttpSession session, HttpServletRequest request, Map map)
 			throws Exception {
 		System.out.println(this.getClass() + "/login.POST");
@@ -106,6 +144,28 @@ public class UserController {
 		String password = user.getPassword();
 
 		user = userService.getUser(userId);
+		
+		if(userId != null) {
+			boolean isAdmin = false;
+		
+			System.out.println(user.toString());
+			map =new HashMap();
+				
+			request.getSession().setAttribute("user", user );
+			
+			if(user.getRole().equals("admin")) {
+				System.out.println("관리자 로그인");
+				isAdmin = true;
+				request.getSession().setAttribute("isAdmin",  isAdmin);
+			}else if(user.getRole().equals("user")) {
+				System.out.println("일반 로그인");
+				isAdmin = false;
+				request.getSession().setAttribute("isAdmin",  isAdmin);
+			}		
+			map.put("msg", "success");	
+			
+			return "redirect:/index.jsp";
+		}		
 		System.out.println(user);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
@@ -123,7 +183,7 @@ public class UserController {
 			return "forward:/user/loginView.jsp";
 		}
 
-	}
+	}*/
 
 	@RequestMapping(value = "/logout")
 	public String logout(Map map, HttpSession session, HttpServletRequest request) throws Exception {
@@ -175,6 +235,16 @@ public class UserController {
 /*	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
 	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
 
+<<<<<<< HEAD
+	@RequestMapping(value = "getUser", method = RequestMethod.GET)
+	public String getUser(HttpSession session, HttpServletRequest request) throws Exception {
+		System.out.println((User)session.getAttribute("loginUser"));
+		String userId = ((User)session.getAttribute("loginUser")).getUserId();
+		List<Comments> comments = commentService.listCommentById(userId);
+		List<Message> messages = messageService.listMessage(userId);
+		request.setAttribute("comments", comments);
+		request.setAttribute("messages", messages);
+=======
 		System.out.println("addUserPlus :: POST");
 		
 		System.out.println("\n[1] ==>" + user);
@@ -203,11 +273,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value="getUser", method=RequestMethod.GET)
-	public String getUser(
-			)throws Exception{
-
-		System.out.println("getUser");
-		
+	public String getUser(){
 		return "forward:/user/getUser.jsp";
 	}
 
@@ -299,7 +365,7 @@ public class UserController {
 			System.out.println("message!!" + message);
 			InternetAddress[] address = { new InternetAddress(email, authNum) };
 			System.out.println("address1" + address);
-			message.setRecipients(Message.RecipientType.TO, address);
+			message.setRecipients(javax.mail.Message.RecipientType.TO, address);
 			message.setSentDate(new java.util.Date());
 			message.setSubject(subject);
 			message.setContent(content, "text/html; charset=UTF-8");
@@ -357,7 +423,7 @@ public class UserController {
 
 
 	@RequestMapping("kakaoLogin")
-	public String kakaoLogin(@RequestParam String code, HttpServletRequest request) throws Exception {
+	public String kakaoLogin(@RequestParam String code, HttpServletRequest request, HttpSession session) throws Exception {
 		TokenResponse token = LoginRestClient.loginToken(code);
 		JSONObject object = LoginRestClient.getProfile(token.getAccess_token());
 		User user = new User();
@@ -371,13 +437,33 @@ public class UserController {
 	@RequestMapping("naverLogin")
 	public String naverLogin(@RequestParam String code, 
 								@RequestParam String state,
-								HttpServletRequest request) throws Exception {
+								HttpServletRequest request, HttpSession session) throws Exception {
 		NaverLoginResponse response = LoginRestClient.getNaverToken(code, state);
-		System.out.println(response);
 		User user = LoginRestClient.getNaverUserInfo(response);
-		System.out.println(user);
-		request.setAttribute("outerUser", user);
-		return "forward:addUserView.jsp";
+		if(userService.getUserByEmail(user.getEmail()) == null) {
+			request.setAttribute("outerUser", user);
+			return "forward:addUserView.jsp";
+		}else {
+			session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
+			return "forward:../index.jsp";
+		}
+		
+	}
+	
+	@RequestMapping(value="/addUserFacebook" )
+	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
+		,@ModelAttribute User params 	) throws Exception{
+		
+		System.out.println("facebook회원가입");
+		
+		System.out.println("데이터"+params);		
+		
+		if(request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");		
+			System.out.println("페이스북 아이디 : "+fbId);
+			model.addAttribute("facebookId" , fbId );
+			}
+		return "forward:/user/addUserFacebook.jsp";
 	}
 
 }

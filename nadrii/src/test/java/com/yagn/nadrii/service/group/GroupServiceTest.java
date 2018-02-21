@@ -40,7 +40,6 @@ public class GroupServiceTest {
 		
 		group.setTitle("모임 참여하기111");
 		group.setText("내용13");
-		group.setCategoryCode("a");
 		
 		int groupNo = groupService.addGroup(group);
 
@@ -93,8 +92,8 @@ public class GroupServiceTest {
 		Group group = new Group();
 		Join join = new Join();
 		
-		join.setGroupNo(60048);
-		join.setUserId("test02");
+		join.setGroupNo(60124);
+		join.setUserId("test01");
 		
 		joinService.deleteJoin(join);
 		
@@ -110,7 +109,7 @@ public class GroupServiceTest {
 		Search search = new Search();
 		search.setCurrentPage(1);
 	 	search.setPageSize(3);
-	 	Map<String,Object> map = groupService.getGroupList(search);
+	 	Map<String,Object> map = groupService.listGroup(search);
 	 	
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
@@ -127,7 +126,7 @@ public class GroupServiceTest {
 	 	search.setPageSize(3);
 	 	search.setSearchCondition("0");
 	 	search.setSearchKeyword("");
-	 	map = groupService.getGroupList(search);
+	 	map = groupService.listGroup(search);
 	 	
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
@@ -138,110 +137,11 @@ public class GroupServiceTest {
 	 	totalCount = (Integer)map.get("totalCount");
 	 	System.out.println(totalCount);
 	 }
-	 
+
 	//@Test
-	public void testGetGroupListByProdNo() throws Exception{
+	public void testGetThumbnail() throws Exception{
 		 
-		Search search = new Search();
-		search.setCurrentPage(1);
-		search.setPageSize(3);
-		search.setSearchCondition("2");
-	 	search.setSearchKeyword("test01");
-	 	Map<String,Object> map = groupService.getGroupList(search);
-	 	
-	 	List<Object> list = (List<Object>)map.get("list");
-	 	//Assert.assertEquals(1, list.size());
-	 	
-		//==> console 확占쏙옙
-	 	System.out.println(list);
-	 	
-	 	Integer totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 	
-	 	System.out.println("=======================================");
-	 	
-	 	search.setSearchCondition("0");
-	 	search.setSearchKeyword(""+System.currentTimeMillis());
-	 	map = groupService.getGroupList(search);
-	 	
-	 	list = (List<Object>)map.get("list");
-	 	
-		//==> console 확占쏙옙
-	 	System.out.println(list);
-	 	
-	 	totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
+		System.out.println(groupService.getThumbNail("경복궁"));
+				
 	 }
-	 
-	 //@Test
-	 public void testGetGroupListByGroupName() throws Exception{
-		 
-	 	Search search = new Search();
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	search.setSearchCondition("1");
-	 	search.setSearchKeyword("占쏙옙占쏙옙");
-	 	Map<String,Object> map = groupService.getGroupList(search);
-	 	
-	 	List<Object> list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(3, list.size());
-	 	
-		//==> console 확占쏙옙
-	 	System.out.println(list);
-	 	
-	 	Integer totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 	
-	 	System.out.println("=======================================");
-	 	
-	 	search.setSearchCondition("1");
-	 	search.setSearchKeyword(""+System.currentTimeMillis());
-	 	map = groupService.getGroupList(search);
-	 	
-	 	list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(0, list.size());
-	 	
-		//==> console 확占쏙옙
-	 	System.out.println(list);
-	 	
-	 	totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 }	 
-	 
-	//@Test
-	 public void testGetGroupListByTranCode() throws Exception{
-		 
-	 	Search search = new Search();
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	Map<String,Object> map = groupService.getGroupList(search);
-		 	
-	 	List<Object> list = (List<Object>)map.get("list");
-	 //	Assert.assertEquals(3, list.size());
-	 	
-		//==> console 확占쏙옙
-	 	System.out.println(list);
-	 	
-	 	Integer totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 	
-	 	System.out.println("=======================================");
-	 	
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	search.setSearchCondition("0");
-	 	search.setSearchKeyword("");
-	 	map = groupService.getGroupList(search);
-	 	
-	 	list = (List<Object>)map.get("list");
-	// 	Assert.assertEquals(3, list.size());
-	 	
-	 	//==> console 확占쏙옙
-	 	System.out.println(list);
-		 	
-	 	totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 }
-	
-	
 }

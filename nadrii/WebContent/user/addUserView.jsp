@@ -21,6 +21,23 @@
    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
    
+   <!-- tabs -->
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  
+	  <!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
+   
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
        body > div.container{
@@ -293,12 +310,24 @@ function checkSuccess(){
 <body>
 
    <!-- ToolBar Start /////////////////////////////////////-->
-   <jsp:include page="/layout/toolbar.jsp"></jsp:include>
+   <!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
       <!-- ToolBar End /////////////////////////////////////-->
    <!--  화면구성 div Start /////////////////////////////////////-->
    <div class="container">
-   
-      <h1 class="bg-success text-center" style="background:#fff; border-bottom: 2px solid #ddd; color:#DDC; padding-bottom: 30px;">나 들 이 회 원 가 입</h1>
+  	 <div class="page-header text-info" style="border:none;">
+     	 <h1 class="bg-success text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">나 들 이 회 원 가 입</h1>
+      </div>
       
       <!-- form Start /////////////////////////////////////-->
       <form id ="frm" class="form-horizontal" style="padding-top:50px;">
