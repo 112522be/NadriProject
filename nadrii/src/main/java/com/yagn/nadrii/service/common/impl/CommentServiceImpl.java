@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.common.CommentDao;
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Comments;
@@ -35,8 +36,11 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comments> listCommentById(String userId) throws Exception {
-		return commentDao.listCommentById(userId);
+	public Map<String, Object> listCommentById(Search search) throws Exception {
+		Map<String , Object> map = new HashMap<>();
+		map.put("comments", commentDao.listCommentById(search));
+		map.put("totalCount", commentDao.getTotalCount(search.getSearchKeyword()));
+		return map;
 	}
 
 	@Override
@@ -64,4 +68,10 @@ public class CommentServiceImpl implements CommentService {
 	public void deleteCommentByPost(int postNo) throws Exception {
 		commentDao.deleteCommentByPost(postNo);
 	}
+
+	@Override
+	public String listTitle(int postNo) throws Exception {
+		return commentDao.listTitle(postNo);
+	}
+	
 }
