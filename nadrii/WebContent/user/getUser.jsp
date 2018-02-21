@@ -265,13 +265,9 @@
 		
 		<div class="row">
 	  		<div class="text-center groupbtn" style="padding-top:60px;">
-<<<<<<< HEAD
 	  			<button type="button" class="btn btn-primary updatebtn">회원정보<br>수정</button>
 	  		</div>
-=======
-	  			<button type="button" class="btn btn-primary icon circled updatebtn"><div class="updatebtn01">회원정보<br> 수정</div></button>
-	  		</div>
->>>>>>> refs/heads/team/yr
+
 		</div>
 		
 		
