@@ -427,16 +427,11 @@ public class UserController {
 		TokenResponse token = LoginRestClient.loginToken(code);
 		JSONObject object = LoginRestClient.getProfile(token.getAccess_token());
 		User user = new User();
-		if(userService.getUserByEmail(object.get("kaccount_email").toString()) == null) {
-			user.setEmail(object.get("kaccount_email").toString());
-			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
-			user.setUserId(object.get("id").toString());
-			request.setAttribute("outerUser", user);
-			return "forward:addUserView.jsp";
-		}else {
-			session.setAttribute("loginUser", userService.getUserByEmail(object.get("kaccount_email").toString()));
-			return "forward:/index.jsp";
-		}
+		user.setEmail(object.get("kaccount_email").toString());
+		//user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
+		user.setUserId(object.get("id").toString());
+		request.setAttribute("outerUser", user);
+		return "forward:addUserView.jsp";
 	}
 	
 	@RequestMapping("naverLogin")
