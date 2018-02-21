@@ -77,9 +77,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int checkId(String user) throws Exception {
-		System.out.println("service "+user);
-		return userDao.checkId(user);
+	public int checkId(String userId) throws Exception {
+		return userDao.checkId(userId);
 	}
 			  
 }
