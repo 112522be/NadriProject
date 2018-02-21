@@ -131,18 +131,50 @@ public class UserRestController extends SupportController {
 		return map;
 	}
 	
+	@RequestMapping(value = "json/checkId2", method=RequestMethod.POST)
+    public String checkId(
+    		@RequestBody String userId
+    		) throws Exception {
+
+		System.out.println("\n/user/json/checkId : POST");
+		System.out.println("\n[input userId]==>" + userId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int userIdCheck = userService.checkId(userId);
+		System.out.println("[DB userIdCheck]==>" + userIdCheck);
+		
+		///*
+		String resultIdCheck = "";
+		if (userIdCheck == 1) {
+			resultIdCheck = "incorrect";
+		} else {
+			resultIdCheck = "correct";
+		}
+		//*/
+		
+		System.out.println("[resultIdCheck]==>" + resultIdCheck);
+		
+		return resultIdCheck;
+    }	
+	
 	@RequestMapping(value = "json/checkId", method=RequestMethod.POST)
-    public Map idCheck(String userId, Model model) throws Exception {
+    public Map idCheck(
+    		String userId 
+    		) throws Exception {
 
 		System.out.println("[check]");
 		
 		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("[check]==>"+userId);
 		int check = userService.checkId(userId);
-		System.out.println("[check]01"+userId);
 		map.put("check", String.valueOf(check));
 		return map;
     }	
+
+	
+	
+	
 }
 
 

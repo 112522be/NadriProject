@@ -163,7 +163,7 @@ function checkCode(){
 	$.ajax({
 		type:"POST",
 		url:"/user/checkSuccess",
-		data:"code=" +code,     //    onclick();
+		data:"modalUserEmailAuth=" +code,     //    onclick();
 		success :function(result){
 			makeToast(result.result);
 		}

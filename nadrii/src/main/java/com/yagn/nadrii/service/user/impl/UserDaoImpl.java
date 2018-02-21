@@ -68,9 +68,8 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	@Override
-	public int checkId (String user) throws Exception{
-		System.out.println("checkId??"+ user);
-		return sqlSession.selectOne("UserMapper.checkId", user);
+	public int checkId (String userId) throws Exception{
+		return sqlSession.selectOne("UserMapper.checkId", userId);
 	}
 	
 }

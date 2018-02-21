@@ -23,7 +23,7 @@ public interface UserService {
 	
 	public User getPassword(User user) throws Exception;
 	
-	public int checkId(String user) throws Exception;
+	public int checkId(String userId) throws Exception;
 	
 	
 }

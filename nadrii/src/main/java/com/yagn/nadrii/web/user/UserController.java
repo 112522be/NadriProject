@@ -81,10 +81,19 @@ public class UserController {
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute User user) throws Exception {
-		System.out.println(this.getClass() + "/user/addUser.POST");
+		System.out.println("/user/addUser : POST");
 
-		System.out.println("\nuserId==" + user.getUserId());
+		System.out.println("\n[1. user Domain check]==>" + user.toString());
 
+
+		if (user.getUserId() == "" || user.getUserId() == null) {
+			user.setUserId(user.getModalUserId());
+			user.setPassword(user.getModalUserPw());
+			user.setEmail(user.getModalUserEmail());
+		}
+		
+		System.out.println("\n[2. user Domain check]==>" + user.toString());
+		
 		/// GetQRCode ///////////////////////////////////////////
 		Purchase purchase = new Purchase();
 		purchase.setBuyerId(user.getUserId());
@@ -93,7 +102,8 @@ public class UserController {
 		user.setQrCode(getQRCode);
 		System.out.println("\n[User Domain Check]==>" + user.toString());
 		/////////////////////////////////////////////////////////
-
+		
+		
 		userService.addUser(user);
 
 		Map map = new HashMap();
@@ -113,23 +123,28 @@ public class UserController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute User user,HttpSession session,HttpServletRequest request, Map map) throws Exception {
 		System.out.println(this.getClass()+"/login.POST");
+		System.out.println("\n[user domain check]==>" + user.toString());
+		
 		String userId = user.getUserId();
 		String password = user.getPassword();
-		
+
 		user = userService.getUser(userId);
 		System.out.println(user);
 		if(user != null) {
 			if(user.getPassword().equals(password)) {
+				System.out.println("1");
 				session = request.getSession(true);
 				session.setAttribute("loginUser", user);
 				return "redirect:/index.jsp";				
 				
 			}else {
+				System.out.println("2");
 				map.put("systemMessage", "pwError");
 				return "forward:/user/loginView.jsp";
 			}
 			
 		}else {
+			System.out.println("3");
 			map.put("systemMessage", "IdError");
 			return "forward:/user/loginView.jsp";
 		}
@@ -293,21 +308,29 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 
-	//////////////////// 이메일////////////////////////////////
+//////////////////// 이메일////////////////////////////////
 	@RequestMapping(value = "check", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> emailAuth(HttpServletResponse response, HttpServletRequest request, HttpSession session)
+	public Map<String, Object> emailAuth(
+			HttpServletResponse response, 
+			HttpServletRequest request, 
+			HttpSession session
+			)
 			throws Exception {
-		String email = request.getParameter("email");
+		
+		System.out.println("\n/user/check : POST");
+		
+//		String email = request.getParameter("email");
+		String email = request.getParameter("modalUserEmail");
 		String authNum = "";
 
 		authNum = randomNum(); // 램덤 인증번호
-		System.out.println("authNum : " + authNum);
+		System.out.println("\nauthNum : " + authNum);
 		User user = new User();
 		user.setCheckSuccess(authNum);
-		System.out.println("email : " + email);
+		System.out.println("\nemail : " + email);
 		sendEmail(email.toString(), authNum); // 메일발송
-		request.getSession().setAttribute("confirmNum", authNum);
+		request.getSession().setAttribute("modalUserEmailAuth", authNum);
 		Map<String, Object> mv = new HashMap<String, Object>();
 		mv.put("email", email);
 		mv.put("authNum", authNum);
@@ -317,12 +340,13 @@ public class UserController {
 	@RequestMapping(value = "checkSuccess", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> checkSuccess(HttpServletResponse response, HttpServletRequest request) throws Exception {
-		String confirmNum = request.getParameter("code");
+		String modalUserEmailAuth = request.getParameter("modalUserEmailAuth");
+
 
 		Map<String, Object> mv = new HashMap<String, Object>();
 
-		System.out.println("confirmNum : " + confirmNum); // user가 입력한 인증 번호
-		if (confirmNum.equals(request.getSession().getAttribute("confirmNum"))) {
+		System.out.println("modalUserEmailAuth : " + modalUserEmailAuth); // user가 입력한 인증 번호
+		if (modalUserEmailAuth.equals(request.getSession().getAttribute("modalUserEmailAuth"))) {
 			System.out.println(" 인증완료");
 			mv.put("result", "success");
 		} else {
@@ -389,7 +413,7 @@ public class UserController {
 	}
 
 	
-			//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 				
 				@RequestMapping(value="updateUser", method=RequestMethod.POST)
 				public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
