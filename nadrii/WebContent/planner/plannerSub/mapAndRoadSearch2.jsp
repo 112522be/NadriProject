@@ -5,11 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
-.map_wrap, .map_wrap * {
-    font-size: 13.5px !important;
-}
-</style>
 </head>
 <body>
 
@@ -906,7 +901,6 @@
 								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[0]=startInfowindow;
-								
 								$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent().replace('</br>')+'</div>');
 								$("#head1").css("display", "block");
 							}
@@ -916,7 +910,6 @@
 								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[1]=pass1Infowindow;
-								
 								$("#roadPass1Content").append('<strong>경유</strong><div>'+iwArray[1].getContent().replace('</br>')+'</div>');
 								$("#head2").css("display", "block");
 							}
@@ -1314,9 +1307,9 @@
 			success:function(returnData){
 				alert("시외 success 터미널 마커 생성");
 				
-				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">&nbsp;'
-					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">'
-					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">');
+				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right; margin-left: 10px; padding: 0 5px; background: #4580d3;">&nbsp;'
+					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; margin-left: 10px; padding: 0 5px; background: #4580d3;">'
+					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right; margin-left: 10px; padding: 0 5px; background: #4580d3;">');
 				
 				
 				var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
@@ -1344,7 +1337,7 @@
 				outStartInfowindow = new daum.maps.InfoWindow({
 				    map: map, 
 				    position : startSTN.getPosition(), 
-				    content : '<div style="padding:5px; font-size: 12pt;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
+				    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
 				    			+'예상 소요 시간 : '+returnData.time+'분</br>'
 				    			+'요금 : '+returnData.payment+'원</br></div>',
 				    removable : true
@@ -1353,11 +1346,9 @@
 				outEndInfowindow = new daum.maps.InfoWindow({
 				    map: map, 
 				    position : endSTN.getPosition(), 
-				    content : '<div style="padding:5px; font-size: 12pt;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
+				    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
 				    removable : true
 				});
-				
-				/////////////////////////////////////
 				
 				outStartInfowindow.open(map, startSTN); 
 				outEndInfowindow.open(map, endSTN); 

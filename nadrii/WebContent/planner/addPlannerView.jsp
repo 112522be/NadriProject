@@ -57,45 +57,7 @@
 		}	
 		</style>
 		<script>
-		
-		function capture(a) {
-	        html2canvas($("#captureArea").get(0)).then(function(canvas) {
-					console.log(canvas);
-	              
-	                $("#imgSrc").val(canvas.toDataURL("image/png"));
-	                if(a == 1){
-	                		$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
-	                }
-					if(a == 2){
-						$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
-					}
-			});
-		}
-		
-		$(function() {
-			$("#save").on("click",function() {
-				save();
-				capture();
-				
-				$("input[name='lat']").val(lat);
-				$("input[name='lng']").val(lng);
-				
-				$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
-			});
-		});
-		
-		$(function() {
-			$("#update").on("click",function() {
-				save();
-				capture();
-				
-				$("input[name='lat']").val(lat);
-				$("input[name='lng']").val(lng);
 
-				$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
-			});
-		});
-		
 			$(function() {
 				$("#save").on("click",function() {
 					save();
@@ -124,6 +86,20 @@
 				});
 			});
 		
+			function capture(a) {
+		        html2canvas($("#captureArea").get(0)).then(function(canvas) {
+						console.log(canvas);
+		              
+		                $("#imgSrc").val(canvas.toDataURL("image/png"));
+		                if(a == 1){
+		                		$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+		                }
+						if(a == 2){
+							$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
+						}
+				});
+			}	
+			
 		///////////////////////////위 위시 위시리스트///////////////////////////////////
 		$(function(){
 			$("#wish").on("click",function(){
@@ -248,7 +224,9 @@
 										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:3px;width:70%; font-size: 12pt;"/>
 								</div>
 								
-								<div id="exButtonCreate" style="float:right; overflow: hidden;"></div>
+								<div style="overflow: hidden; padding-top: 20px;">
+									<div id="exButtonCreate" style="float:right;"></div>
+								</div>
 								
 								<div id="captureArea" style="padding:30px 45px 30px 30px; overflow: hidden;">
 									<div id="subPointer" style="float: left; overflow: hidden;"></div>
