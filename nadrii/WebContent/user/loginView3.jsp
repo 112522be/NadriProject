@@ -111,6 +111,152 @@
 						<jsp:include page="/layout/toolbar.jsp" />
 
 				</div>
+				
+				<a href="#" class="image featured"><img src="#" alt=""></a>
+		
+				<article id="main" class="container special">
+				<form class="form-horizontal">
+
+						<div class="form-group">
+							<label for="userId" class="col-sm-4 control-label">I&nbsp;D</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해 주세요.">
+								<c:if test="${systemMessage == 'IdError'}">
+									아이디가 잘못되었소이다
+								</c:if>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="col-sm-4 control-label">PASSWORD</label>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" name="password"	id="password" placeholder="비밀번호를 입력해 주세요">
+								<c:if test="${systemMessage == 'pwError'}">
+									비밀번호가 잘못되었소이다
+								</c:if>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-4 col-sm-6 text-center">
+								<button type="button" class="btn btn-primary">로 그 인</button>
+								<a class="btn btn-primary btn" href="#" role="button">회원가입</a> 
+								<a class="btn btn-warning btn" role="button" href="#">아이디 찾기</a> 
+								<a class="btn btn-info" role="button" href="#">비밀번호 찾기</a>
+							</div>
+
+							<div class="col-sm-offset-4 col-sm-6 text-center">
+
+								<br>
+								<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+								Facebook Login	
+								<div class="fb-login-button" data-max-rows="1" data-size="large"
+										data-button-type="continue_with" data-show-faces="false"
+										data-auto-logout-link="false" data-use-continue-as="false">
+									</div>
+								</fb:login-button>
+								<div id="status"></div>
+								<!--  facebook login end -->
+								
+						
+							<a href="#">추가정보 입력</a><br/>
+							
+							<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300" id="kakaoLogin"/>
+							<br/><br/>
+							<img src="/resources/images/userImage/naver_login.png" width="300" id="naverLogin"/>
+							
+					    <script type='text/javascript'>
+					      
+							
+							function setCookie( name , value , expired ){
+								 
+								 var date = new Date();
+								 date.setHours(date.getHours() + expired);
+								 var cookieValue = escape(value) + ((exdys==null) ? "" : "; expires=" + exdate.toGMTString());
+								 document.cookie = name + "=" + cookieValue;
+								}					        
+					        
+														
+							function getCookie(name){
+								 
+							    nameofCookie = name + "=";
+							    var cookieDate = document.cookie
+							    var start = cookieDate.indexOf(cookiename);
+							    var cookieValue = '';
+							    if(start != -1){
+							    	start += cookieName.length;
+							    	var end = cookieDate.indexOf(';',start);
+							    	if(end  == -1)end = cookieDate.length;
+							    	cookieValue = cookieData.subString(start, end);
+							    }
+							    return unescape(cookieValue);
+							}
+							
+					        
+					        Kakao.init('55a2455a0f492f809a761acf2db7e5f9');
+					        function loginWithKakao() {
+					        
+					          Kakao.Auth.login({
+					            success: function(authObj) {
+					              console.log(JSON.stringify(authObj));
+					              //location.href="/user/main";
+					              Kakao.Auth.cleanup();
+					              Kakao.Auth.login({
+					                  persistAccessToken: true,
+					                  persistRefreshToken: true,
+					                  success: function(authObj) {
+					                      setCookie("kakao_login","done",1); // 荑??ㅼ???? (濡?洹몄??)
+					                      //alert(cookiedata);
+					                      $('#kakaoName').val(res.properties.nickname);
+										  $('#kakaoId').val(res.id);
+										  $('#kakaoEmail').val(res.email);
+					                      createLogoutKakao();
+					                      window.location.href="/user/addUserView";
+					                  },
+					                      fail: function(err) {
+					                       alert(JSON.stringify(err));
+					                  }
+					                           
+					              })
+					            },
+					            fail: function(err) {
+					              alert(JSON.stringify(err));
+					            }
+					          });
+					        };
+					        function setCookie( name , value , expired ){
+					        	 
+					        	 var date = new Date();
+					        	 date.setHours(date.getHours() + expired);
+					        	 var expried_set = "expries="+date.toGMTString();
+					        	 document.cookie = name + "=" + value + "; path=/;" + expried_set + ";"
+					        	 
+					        	}
+					        
+					        ////////////////////////////////////////////////////////////
+					        
+				        					        </script>
+							<!-- kakao ligin end-->
+
+							</div>
+						</div>
+
+					</form>
+					<header>
+						<h2>
+							<a href="#">결제가 <strong class="text-danger">완료</strong> 되었습니다.</a>
+						</h2>
+						<p>확인버튼 클릭시 구매한 티켓 목록 화면으로 이동합니다.</p>
+					</header>
+					<footer>
+						<a href="#" class="button">확 인</a>
+					</footer>
+				</article>
+				<br>	
+				<br>	
+				
+				<jsp:include page="/layout/footer.jsp" />
+	
 		</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
