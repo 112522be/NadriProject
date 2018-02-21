@@ -30,18 +30,21 @@
 	}); 
 	
 	var latlng = clickMarker.getPosition();
+	var speInfoWindowContent = '<div style="padding:5px;">'
+		+'<a href="#" id="start" style="color:red;" onclick="javascript:start()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png" style="width:30px;">&nbsp;&nbsp;출발지</a><br>'
+		+'<a href="#" id="pass" style="color:green;" onclick="javascript:pass()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_1.png" style="width:30px;">&nbsp;&nbsp;경유지</a><br>'
+		+'<a href="#" id="end" style="color:blue;" onclick="javascript:end()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png" style="width:30px;">&nbsp;&nbsp;도착지</a></div>';
+
 	
 	var speInfoWindow = new daum.maps.InfoWindow({
 			
 			position : new daum.maps.LatLng(latlng.getLat(),latlng.getLng()),
-			content :  '<div style="padding:5px;">'
-				+'<a href="#" id="start" style="color:red;" onclick="javascript:start()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png" style="width:30px;">&nbsp;&nbsp;출발지</a><br>'
-				+'<a href="#" id="pass" style="color:green;" onclick="javascript:pass()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_1.png" style="width:30px;">&nbsp;&nbsp;경유지</a><br>'
-				+'<a href="#" id="end" style="color:blue;" onclick="javascript:end()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png" style="width:30px;">&nbsp;&nbsp;도착지</a></div>'
-		});	
+			content :  speInfoWindowContent
+	
+	});	
 		
 	var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다    
 	markerSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
@@ -89,7 +92,10 @@
 	});
 	
 	
-	daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+	daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+		
+		speInfoWindow.setContent(speInfoWindowContent);
+		
 		infowindow.close();
 	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	    var latlng = mouseEvent.latLng; 
@@ -163,15 +169,15 @@
 		
 	    // run the currently selected effect
 	    function runEffect() {
-	    
 	      // Run the effect
 	      $( "#placesList" ).toggle( "blind", 300 );
-	    };
+	    }
 	 
 	    // Set effect from select menu value
 	    $( "#button" ).on( "click", function() {
 	      runEffect();
 	    });
+	   	   
 	  });
 	
 	
@@ -933,7 +939,7 @@
 							if(k==0){
 								var startInfowindow = new daum.maps.InfoWindow({
 								    position : startMarker.getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[0]=startInfowindow;
 								
@@ -943,7 +949,7 @@
 							if(k==1){
 								var pass1Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[1].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[1]=pass1Infowindow;
 								
@@ -953,7 +959,7 @@
 							if(k==2){
 								var pass2Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[2].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[2]=pass2Infowindow;
 								alert(1111);
@@ -963,7 +969,7 @@
 							if(k==3){
 								var pass3Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[3].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[3]=pass3Infowindow;
 								$("#roadPass3Content").append('<strong>경유</strong><div>'+iwArray[3].getContent().replace('</br>')+'</div>');
@@ -972,7 +978,7 @@
 							if(k==4){
 								var pass4Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[4].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[4]=pass4Infowindow;
 								$("#roadPass4Content").append('<strong>경유</strong><div>'+iwArray[4].getContent().replace('</br>')+'</div>');
@@ -981,7 +987,7 @@
 							if(k==5){
 								var pass5Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[5].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[5]=pass5Infowindow;
 								$("#roadPass5Content").append('<strong>경유</strong><div>'+iwArray[5].getContent().replace('</br>')+'</div>');
@@ -1080,7 +1086,7 @@
 							}
 
 							var pathIwArray=[];
-							var startContent ='<div style="padding:5px;">'
+							var startContent ='<div style="padding:5px; margin-bottom: -30px;">'
 												+returnData.subPathList[i].startName+laneName+'<br/>'
 												+returnData.subPathList[i].stationCount+' 정거장 이동 후 '
 												+returnData.subPathList[i].endName+stationFlag+' 하차<br/><br/>'
@@ -1099,7 +1105,7 @@
 								endInfo = '도착지';
 							}
 							
-							var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
+							var endContent ='<div style="padding:5px; margin-bottom: -30px;"> '+endInfo+'까지 도보 '
 												+returnData.subPathList[i+1].sectionTime+'분 '+returnData.subPathList[i+1].distance+'m<br/><br/></div>';
 							
 							pathIwArray[1]=endContent;

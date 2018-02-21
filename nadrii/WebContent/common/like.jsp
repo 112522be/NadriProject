@@ -10,6 +10,7 @@ li > span{
 	color: #F05643 !important;
 }
 </style>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript">
 
 var postNo = $("input[name='postNo']").val();

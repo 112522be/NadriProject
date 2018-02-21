@@ -34,15 +34,13 @@
 			margin: 0 !important;
 		}	
 		h4 {
-			color: #6d6d6d !important;
+			color: #506fed !important;
 		}
 		.panel-heading{
 			display: none; 
 			border-style: solid; 
-			border-width: 2px;
-			border-top-left-radius: 12px;
-			border-top-right-radius: 12px;
-			border-color: #afafaf;
+			border-width: 3px;
+			border-color: #adbdf9;;
 		}	
 		.map_wrap, .map_wrap * {
 		    font-size: 15px !important;
@@ -198,19 +196,19 @@
 							</div>
 							<div class="3u 12u(mobile)" id="sidebar" style="float: right; overflow-x: hidden; overflow-y: auto; padding: 115px 15px 0 15px; border-top:1px solid black; border-left: 1px solid black;">
 								<form name="addPlanner">
-								<div>
+								<section>
+									<h4>플래너 제목 : <input type="text" name="title" value="${planner.title }" placeholder="제목을 입력해주세요." style="padding:3px;width:70%"/></h4>
 									<c:if test="${status == 'normal'}">
 										<input type="button" id="save" value="플래너 저장" style="float: right;" />
 									</c:if>
 									<c:if test="${status == 'update'}">
 										<input type="button" id="update" value="플래너 수정" style="float: right;" />
 									</c:if>
-										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:3px;width:70%; font-size: 12pt;"/>
-								</div>
+								</section>
 								
 								<div id="exButtonCreate" style="float:right; overflow: hidden;"></div>
 								
-								<div id="captureArea" style="padding:30px 45px 30px 30px; overflow: hidden;">
+								<div id="captureArea" style="padding:40px 45px 10px 30px; overflow: hidden;">
 									<div id="subPointer" style="float: left; overflow: hidden;"></div>
 									<div style="float: right; overflow: hidden;">
 										<ul id="sortable" class="pointer" style="width: 300px; ">
@@ -223,7 +221,7 @@
 									<input type="button" id="wish" value="위시리스트" style="float:left; background: #f9a11b;" >
 								</div>
 								
-								<div id="roadContent" style="padding: 30px 10px 10px 10px; overflow: hidden; font-size: 12pt">
+								<div id="roadContent" style="padding:10px; overflow: hidden; font-size: 12pt">
 									<div class="panel-group" id="accordion" role="tablist"
 										aria-multiselectable="true">
 										<div class="panel-heading" role="tab" id="head1">

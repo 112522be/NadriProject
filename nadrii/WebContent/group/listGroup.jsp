@@ -231,7 +231,7 @@
 						</h6>
 					</div>
 					<div class="col-sm-9" style="padding-bottom: 25px;">
-						<a class="button" style="float: left; padding: 2px 15px;">write</a>
+						<a class="button write" style="float: left; padding: 2px 15px;">write</a>
 					</div>
 					<div class="col-sm-3">
 						<form class="search" style="float: right;">
