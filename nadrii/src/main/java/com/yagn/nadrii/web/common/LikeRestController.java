@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,27 +59,29 @@ public class LikeRestController {
 		return like;
 	}
 	
-	@RequestMapping(value="json/getLikeList")
-	public Map getLikeList(@RequestBody Search search, HttpSession session) throws Exception{
+	@RequestMapping(value="json/listLikeById")
+	public Map listLikeById(HttpSession session) throws Exception{
 		
-		System.out.println("json/getLikeList");
+		System.out.println("json/listLikeById");
 
+		Search search = new Search();
+		
 		search.setSearchKeyword(((User)session.getAttribute("loginUser")).getUserId());
 		
-		Map<String , Object> map=likeService.getLikeList(search);
+		Map<String , Object> map=likeService.listLikeById(search);
 		
 		return map;
 	}
 	
-	@RequestMapping(value="json/getLikeUserList/{postNo}")
-	public Map getLikeUserList(@PathVariable int postNo) throws Exception{
+	@RequestMapping(value="json/listLikeByPost/{postNo}")
+	public Map listLikeByPost(@PathVariable int postNo) throws Exception{
 		
-		System.out.println("json/getLikeUserList");
+		System.out.println("json/listLikeByPost");
 		
-		Search search = new Search();
-		search.setSearchKeyword(Integer.toString(postNo));
+		Like like = new Like();
+		like.setPostNo(postNo);
 		
-		Map<String , Object> map=likeService.getLikeUserList(search);
+		Map<String , Object> map=likeService.listLikeByPost(like);
 		
 		return map;
 	}
