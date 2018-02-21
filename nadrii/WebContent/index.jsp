@@ -39,11 +39,12 @@
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/js/tripLocation.js"></script>
 	<script src="/resources/helios/assets/js/skel.min.js"></script>
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
-
+	
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -88,6 +89,9 @@
 		
 		alert(userId + " 님 환영합니다.")
 	}
+	
+	
+	
 
 	
 	

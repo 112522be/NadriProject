@@ -190,16 +190,7 @@ pageEncoding="UTF-8"%>
 		});
 	}
 	
-	function makeDialog(){
-		/* 
-		$('#dialog').dialog({
-			 	modal: true,
-			    autoOpen: false,
-			    resizable: false,
-			    width: 800
-		});
-		*/
-	}
+	
 	
 	$(function(){
 		$('#dialog').dialog({
@@ -291,12 +282,12 @@ pageEncoding="UTF-8"%>
 				$("#description").append(tourOverView);
 				
 				makeMap();
-				makeDialog();
+		
 				$('#dialog').dialog('open');
 				
 				
 				makeMap();
-				makeDialog();
+		
 				$('#dialog').dialog('open');
 				
 				
@@ -314,7 +305,7 @@ pageEncoding="UTF-8"%>
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
-			success:function(){
+			success:function(data){
 				alert("선저장");
 			}
 		})
@@ -322,18 +313,18 @@ pageEncoding="UTF-8"%>
 	
 	var contenttypeid;
 	var contentid;
-	
+	var postNo;
 	$(function() {
 	  $(document).on("click","img", function(e){
 	    
 		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
 		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
 		e.preventDefault();	 
-		alert(contentid);
-		alert(contenttypeid);
+		//alert(contentid);
+		//alert(contenttypeid);
 		
 		getTheme(contentid, contenttypeid);
-		
+		addTripToDB(contentid, contenttypeid)
 		
 	  });
 	});	
@@ -628,7 +619,8 @@ pageEncoding="UTF-8"%>
     	</table>
     	
      	<footer>
-			<a href="#banner" class="button circled scrolly">좋아요</a>
+			<input type="hidden" name="postNo" value="">
+			<jsp:include page="../common/like.jsp"></jsp:include>
 			<a href="#banner" class="button circled scrolly">공유</a>
 			<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
 		</footer>

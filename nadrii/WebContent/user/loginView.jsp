@@ -191,7 +191,7 @@ function check(){
 	$.ajax({
 		type:"POST",
 		url:"/user/check",
-		data:"email=" +email,     //    onclick();
+		data:"modalUserEmail=" +email,     //    onclick();
 		success :function(result){
 			makeToast("이메일이 발송되었습니다.");
 		}
@@ -619,7 +619,7 @@ img{
 							<input type="password" name="password2" class="inpt" required="required" placeholder="비밀번호 확인">
 							
 							<ul>
-								<li><input type="text" name="email" class="inpt email" required="required" placeholder="이메일" oninput="emailValid();"></li>
+								<li><input type="text" name="email" class="inpt email" required="required" placeholder="이메일" value="${outerUser.email}" oninput="emailValid();"></li>
 	                			<li><input type="button" class="inpt access" name="sendEmail" value="인증"></li>
 	                		</ul>
 	                		
