@@ -77,9 +77,7 @@ public class PlannerController {
 		planner.setPlannerMakerId(plannerMakerId);
 		
 		
-		//////////////////////////////////
-		
-		
+		//////////////// 캡쳐 기능 //////////////////
 		
 		System.out.println("capture controller 접속");
         String binaryData = request.getParameter("imgSrc");
@@ -92,13 +90,12 @@ public class PlannerController {
 			System.out.println("데이터가 null");
 			throw new Exception();
 		}
-		System.out.println("11111111111");
+
 		binaryData = binaryData.replaceAll("data:image/png;base64,", "");
 		byte[] file = Base64.decodeBase64(binaryData);
 		System.out.println("file  :: " + file + " || " + file.length);
 		String fileName = UUID.randomUUID().toString();
 
-		System.out.println("22222222222");
 		stream = new FileOutputStream("/Users/hansangwoo/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
 		System.out.println("file이름 : " + fileName);
 
@@ -107,9 +104,7 @@ public class PlannerController {
 		System.out.println("파일 작성 완료");
 		mav.addObject("msg", "ok");
 		
-		
-
-		//////////////////////////////
+		/////////////// 캡쳐 기능 ///////////////
 		
 		planner.setPhoto("../resources/images/planner/thumbnail/" + fileName + ".png");
 		
@@ -285,18 +280,50 @@ public class PlannerController {
 	}
 	
 	@RequestMapping(value="updatePlanner", method=RequestMethod.POST)
-	public String updatePlanner(@ModelAttribute("planner")Planner planner,@RequestParam("postNo")int postNo , User user, HttpSession session) throws Exception{
+	public String updatePlanner(@ModelAttribute("planner")Planner planner,@RequestParam("postNo")int postNo, 
+			User user, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("PlannerController/updatePlanner planner정보 수정 접속");
 		
 		user = (User)session.getAttribute("loginUser");
 		String plannerMakerId = user.getUserId();
 		System.out.println("로그인한 유저 ID : "+plannerMakerId);
+
+		//////////////// 캡쳐 기능 //////////////////
+
+		System.out.println("capture controller 접속");
+		String binaryData = request.getParameter("imgSrc");
+		FileOutputStream stream = null;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		System.out.println("binary file :: " + binaryData);
+		if (binaryData == null || binaryData == "") {
+			System.out.println("데이터가 null");
+			throw new Exception();
+		}
+		
+		binaryData = binaryData.replaceAll("data:image/png;base64,", "");
+		byte[] file = Base64.decodeBase64(binaryData);
+		System.out.println("file  :: " + file + " || " + file.length);
+		String fileName = UUID.randomUUID().toString();
+
+		stream = new FileOutputStream(
+				"/Users/hansangwoo/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName
+						+ ".png");
+		System.out.println("file이름 : " + fileName);
+
+		stream.write(file);
+		stream.close();
+		System.out.println("파일 작성 완료");
+		mav.addObject("msg", "ok");
+
+		/////////////// 캡쳐 기능 ///////////////
 		
 		planner.setPostNo(postNo);
 		planner.setFlag("pl");
 		planner.setPlannerMakerId(plannerMakerId);
-		planner.setPhoto("kk");
+		planner.setPhoto("../resources/images/planner/thumbnail/" + fileName + ".png");
 		
 		System.out.println(planner);
 		

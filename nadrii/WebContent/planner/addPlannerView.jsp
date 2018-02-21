@@ -82,7 +82,9 @@
 			$("input[name='lat']").val(lat);
 			$("input[name='lng']").val(lng);
 			
-			capture();
+			var a = 1;
+			
+			capture(a);
 			
 		});
 	});
@@ -90,12 +92,14 @@
 	$(function() {
 		$("#update").on("click",function() {
 			save();
-			capture();
 			
 			$("input[name='lat']").val(lat);
 			$("input[name='lng']").val(lng);
 
-			$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
+			var a = 2;
+			
+			capture(a);
+			
 		});
 	});
 	
@@ -134,12 +138,17 @@
 	
 /*********************** 캡쳐기능 펑션생성 **************************/
 	
-	function capture() {
+	function capture(a) {
         html2canvas($("#captureArea").get(0)).then(function(canvas) {
-              console.log(canvas);
-              alert(43434343);
+				console.log(canvas);
+              
                 $("#imgSrc").val(canvas.toDataURL("image/png"));
-                $("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+                if(a == 1){
+                		$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+                }
+				if(a == 2){
+					$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
+				}
 		});
 	}
 	
