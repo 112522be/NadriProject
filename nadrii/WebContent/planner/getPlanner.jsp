@@ -371,12 +371,12 @@ $(function(){
 		self.location="/planner/getMyPlannerList";
 	});
 	
-	$("#modify").bind("click", function(){
+	$("#postMod").bind("click", function(){
 		self.location="../planner/updatePlanner?postNo=${planner.postNo}";
 	});
 	
 	
-	$("#delete").bind("click", function(){
+	$("#postDel").bind("click", function(){
 		if(confirm("삭제하시겠습니까?")==true){
 			self.location="/planner/deletePlanner?postNo=${planner.postNo}";
 			alert("삭제되었습니다.");
@@ -504,8 +504,8 @@ $(function () {
 						<br />
 						<div class="userMenu" style="float: right; margin-top: 10px">
 							<c:if test="${planner.plannerMakerId eq userId}">
-								<span class="button modify" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
-								<span class="button delete" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>	
+								<span class="button modify" id="postMod" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
+								<span class="button delete" id="postDel" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>	
 							</c:if>
 						</div>
 					</header>

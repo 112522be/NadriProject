@@ -909,6 +909,7 @@
 				}else{
 					
 					alert("시내 success");
+					
 					callMapObjApiAJAX(returnData.info.mapObj);
 								
 					var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -1248,6 +1249,9 @@
 				}//if
 				
 				
+			},
+			error : function(){
+				alert("시외시외시외");
 			}
 		});
 		
@@ -1640,36 +1644,6 @@
 			lat.push(tempMarkerArray[i].getLat());
 		}
 	}
-	
-	/*********************** 캡쳐기능 펑션생성 **************************/
-	
-	function capture() {
-        html2canvas($("#captureArea").get(0)).then(function(canvas) {
-              console.log(canvas) 
-                $("#imgSrc").val(canvas.toDataURL("image/png"));
-
-                $.ajax({
-                    type: "POST",
-                    data : $("form").serialize(),
-                    url: "../planner/capture",
-                    error: function(a, b, c){        
-                        alert("fail!!");
-                    },
-                    success: function (data) {
-                        try{
-                            alert(data+"::::::::ok");
-                            alert(123123123);
-                        }catch(e){                
-                            alert('server Error!!');
-                        }
-                    },
-                    error : function(){
-                    		alert("전송실패했다리");
-                    }
-                });
-		});
-	}
-
 	
 	</script>
 

@@ -78,12 +78,12 @@
 	$(function() {
 		$("#save").on("click",function() {
 			save();
-			capture();
-			
+		
 			$("input[name='lat']").val(lat);
 			$("input[name='lng']").val(lng);
 			
-			$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+			capture();
+			
 		});
 	});
 	
@@ -104,8 +104,8 @@
 	$(function(){
 		$("#wish").on("click",function(){
 			alert("뭐야 이게");
-			//window.open("/wish/listTripFromWish?userId=" +'${loginUser.userId}',"wishList","width=300, height=350,status=no, scrollbars=no, location=no");
-			listWishFromTrip();
+			window.open("/wish/listTripFromWish?userId=" +'${loginUser.userId}',"wishList","width=300, height=350,status=no, scrollbars=no, location=no");
+			//listWishFromTrip();
 		});
 	});
 	
@@ -132,6 +132,17 @@
 		});
 	}
 	
+/*********************** 캡쳐기능 펑션생성 **************************/
+	
+	function capture() {
+        html2canvas($("#captureArea").get(0)).then(function(canvas) {
+              console.log(canvas);
+              alert(43434343);
+                $("#imgSrc").val(canvas.toDataURL("image/png"));
+                $("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+		});
+	}
+	
 	//////////////////////////////////////////////////////////////////////////////
 </script>
 
@@ -145,11 +156,7 @@ h4 {
 	border-width: 3px;
 	border-color: #adbdf9;;
 }
-img{
-width: 300px;
-height: 200px;
 
-}
 </style>
 
 </head>
@@ -209,9 +216,11 @@ height: 200px;
 					<div class="col-md-12">
 						<h4>플래너 제목 : <input type="text" name="title" value="${planner.title }" placeholder="제목을 입력해주세요." style="padding:3px;width:70%"/></h4>
 						<c:if test="${status == 'normal'}">
+							<input type="hidden" name="imgSrc" id="imgSrc" />
 							<input type="button" id="save" value="플래너 저장" style="float: right;" />
 						</c:if>
 						<c:if test="${status == 'update'}">
+							<input type="hidden" name="imgSrc" id="imgSrc" />	
 							<input type="button" id="update" value="플래너 수정" style="float: right;" />
 						</c:if>
 						<hr>
@@ -219,7 +228,7 @@ height: 200px;
 
 					<div class="col-md-12" id=exButtonCreate style="float:right;"></div>
 					<div class="col-md-12" id="captureArea" style="padding:10px;">
-						<div class="col-md-2" id="subPointer"></div>
+						<div class="col-md-2" id="subPointer" style="padding:0;"></div>
 						<div class="col-md-10">
 							<ul id="sortable" class="pointer" style="width: 300px">
 							</ul>
