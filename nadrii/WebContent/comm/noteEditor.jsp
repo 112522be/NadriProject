@@ -230,7 +230,7 @@
 		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail"><img id="selectedThumbnail" src="${community.thumbNailFileName}"></div>
+		<div id="cndThumbnail"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">

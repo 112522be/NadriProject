@@ -23,7 +23,8 @@
 		<script src="../resources/helios/assets/js/main.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
-	
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		
 		<!-- Latest compiled and minified JavaScript -->
 		
 		<style>
@@ -63,7 +64,6 @@
 				
 				if('${group.lat}' == ''){
 					$("#map").css("display","none");
-					
 				}
 				
 				if("${loginUser.userId}" == "${group.join.userId}"){
@@ -134,11 +134,11 @@
 											</a>
 										</div>
 										<div style="float: right;">
-											<span style="padding-right: 30px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;&nbsp;${group.viewCount}</span>
+											<span style="padding-right: 30px;">view : &nbsp;&nbsp;${group.viewCount}</span>
 											<span style="border-left: 1px solid; padding-left: 30px;">${group.regDate}</span>
 										</div>
 										<br/>
-										<div class="userMenu" style="float: right; margin-top: 10px">
+										<div class="userMenu" style="float: right; margin-top: 10px; display: none;">
 											<span class="button modify" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
 											<span class="button delete" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>
 										</div>
@@ -168,8 +168,8 @@
 	
 	<script type="text/javascript">
 		
-		var lat= '${group.lat}'.replace(",","");
-		var lng= '${group.lng}'.replace(",","");
+		var lat= '${group.lat}';
+		var lng= '${group.lng}';
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 

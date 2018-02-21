@@ -38,9 +38,10 @@ public class LikeServiceImpl implements LikeService{
 		likeDao.deleteLike(like);
 	}
 	
-	public Map<String , Object > getLikeList(Search search) throws Exception {
-		List<Like> list= likeDao.getLikeList(search);
-		int totalCount = likeDao.getTotalLikeCount(search);
+	public Map<String , Object > listLikeById(Search search) throws Exception {
+		
+		List<Like> list= likeDao.listLikeById(search);
+		int totalCount = likeDao.getTotalLikeById(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -52,10 +53,10 @@ public class LikeServiceImpl implements LikeService{
 		return map;
 	}
 	
-	public Map<String , Object > getLikeUserList(Search search) throws Exception {
+	public Map<String , Object > listLikeByPost(Like like) throws Exception {
 		
-		List<Like> list= likeDao.getLikeUserList(search);
-		int totalCount = likeDao.getLikeCount(search);
+		List<Like> list= likeDao.listLikeByPost(like);
+		int totalCount = likeDao.getTotalLikeByPost(like);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		

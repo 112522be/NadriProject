@@ -3,7 +3,7 @@ package com.yagn.nadrii.service.domain.kakaoLogin;
 public class TokenRequest {
 	private final static String grant_type = "authorization_code";
 	private final static String client_id="ffbb3cfd77a7b485daca0958078eb74a";
-	private final static String redirect_uri = "http://127.0.0.1:8080/user/kakaoLogin";
+	private final static String redirect_uri = "http://192.168.0.39:8080/user/kakaoLogin";
 	private String code;
 	private final static String client_secret="yMMDvwpl9M355IhZSl82ZmPQ1GLW5GtE";
 	

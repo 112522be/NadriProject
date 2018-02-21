@@ -12,7 +12,12 @@
 		<p>Check your precious holiday by NADRII</p>
 	</header>
 	<footer>
+		<c:if test="${  empty loginUser }">	
 		<a href="#banner" class="button circled scrolly">Start</a>
+		</c:if>
+		<c:if test="${ !empty loginUser }">	
+		<a href="#carousel" class="button circled scrolly">Start</a>
+		</c:if>		
 	</footer>
 </div>
 
