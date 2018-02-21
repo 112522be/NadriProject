@@ -13,129 +13,89 @@
 		<title>나들이 메인화면</title>
 		<meta charset="utf-8" />
 		
-		
-		<!-- ///////////////////////////////////// 기존 CDN ////////////////////////////////////// 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]
+		<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]
+		<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 		
 		<!-- 합쳐지고 최소화된 최신 CSS 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 			 			 
-		<!-- 부가적인 테마 
+		<!-- 부가적인 테마 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
     		
     	<!-- 합쳐지고 최소화된 최신 자바스크립트 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --> 		
     	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
-    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  
+    	<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">-->
+    	<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>  -->
     	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     	<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/jquery-ui.js"></script> 
-		<!-- ///////////////////////////////////// 기존 ////////////////////////////////////// -->
-		
-		
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous"> -->
-
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-
-
-	<!-- Scripts -->
-	<script src="/resources/helios/assets/js/jquery.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-	<script src="/resources/helios/assets/js/skel.min.js"></script>
-	<script src="/resources/helios/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/helios/assets/js/main.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-	//============= 회원원가입화면이동 =============
-	/* $( function() {
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("a[href='#' ]").on("click" , function() {
-			self.location = "/user/addUser"
-		});
-	});  */
 
 	//============= '로그인' 버튼 클릭 Event 처리 =============
 	$(function() {
-		$(".btn.btn-primary:contains('로 그 인')").bind("click", function(event) {
+		$(".button.circled.12u").bind("click", function(event) {
+			
 			event.preventDefault();
-			validateCheck();
+			
+			var userId = $("input[name='userId']").val();
+			var userPw = $("input[name='userPw']").val();
+			
+			fncValidateCheck(userId, userPw);
 		})
 	});
 
-	//================================================================
+	// ========== 아이디, 비밀번호 유효성 검사 ==========
+	function fncValidateCheck(userId, userPw) {
 
-	function validateCheck() {
-		var id = $("#userId").val();
-		var password = $("#password").val();
-		//alert(id+ ":::"+password);
 
-		alert(id)
-		alert(password)
-
-		if (id == null || id == "") {
+		if (userId == null || userId == "") {
 			alert("아이디를 입력해주세요.");
-			return false;
+			return;
 		}
 
-		if (password == null || password == "") {
+		if (userPw == null || userPw == "") {
 			alert("비밀번호를 입력해 주세요.")
-			return false;
+			return;
+		}
+
+		if (id != null || password != null) {
+			alert("아이디 또는 비밀번호가 틀립니다.");
+			return;
 		}
 
 		$("form").attr("method", "POST").attr("action", "/user/login").submit();
 	}
 
-	$(function() {
-		$("#addUserDialog").click(function() {
-			//		alert("되냐?");
-			$("#addUserView").dialog({
-				width : 450,
-				height : 650,
-				model : true,
-				autoOpen : false,
-				resizable : false,
-				position : [ 700, 500 ],
-			})
-
-			//	alert("여기도되냐?");
-			$('#addUserView').dialog('open');
-		})
-	});
+	// ========== Dialog 회원가입 ==========
+		
+		
+		
+	
 
 	// ===============	회원가입	 ==============
+	$(document).ready(function() {
+		$("#userId01").val('');
+		idCheckFlag = false;
+		$(".signupbtn").prop("disabled", true);
+
+	});
+
+	$(document).ready(function() {
+		$("#userId01").val('');
+		idCheckFlag = false;
+		$(".signupbtn").prop("disabled", true);
+
+	});
 
 	//   이메일 인증 
 	function checkSend() {
@@ -241,20 +201,19 @@
 
 	}
 
-	function joinform() {
-		location.href = "getUser.jsp"
-		var str3 = document.getElementById('join');
-
-		str3.submit();
-
-		alert("가입이 완료되었습니다.")
-	}
-
-	var password = $("#password01").val();
-	var password2 = $("#password02").val();
-
 	function checkPwd() {
+		var password = $("#password01").val();
+		var password2 = $("#password02").val();
 		if (password == password2) {
+			$(".signupbtn").prop("disabled", false);
+			$(".signupbtn").css("background-color", "#610B21");
+			$("#password02").css("background-color", "#B0F6AC");
+			return;
+		}
+
+		if (password == "" || password2 == "") {
+			$(".signupbtn").prop("disabled", true);
+			$(".signupbtn").css("background-color", "#aaaaaa");
 			$("#password02").css("background-color", "#B0F6AC");
 			return;
 		}
@@ -302,39 +261,6 @@
 			return;
 		}
 
-		if ($("#password01").val() == '') {
-			alert("비밀번호를 입력해주세요.");
-			$("#password01").focus();
-			return;
-		}
-
-		if ($("#password02").val() == '') {
-			alert("비밀번호 확인을 입력해주세요.");
-			$("#password02").focus();
-			return;
-		}
-
-		if ($("#password01").val() != $("#password2").val()) {
-			alert("비밀번호가 일치하지 않습니다.");
-			$("#password01").val('');
-			$("#password02").val('');
-			$("#password01").focus();
-			return;
-		}
-
-		if ($("#email").val() == '') {
-			alert("이메일을 입력해주세요.");
-			$("#email").focus();
-			return;
-		}
-
-		alert($("#checkNumStatus").val());
-		if ($("#confirmNum").val() == "") {
-			alert("인증번호를 입력해주세요");
-			$("#confirmNum").focus();
-			return false;
-		}
-
 		if ($("#checkNumStatus").val() == "Y") {
 			alert("이메일 인증 완료 되었습니다.");
 			return;
@@ -358,6 +284,33 @@
 				"click",
 				function() {
 
+					if ($("#password01").val() == '') {
+						alert("비밀번호를 입력해주세요.");
+						$("#password01").focus();
+
+						return;
+					}
+
+					if ($("#password02").val() == '') {
+						alert("비밀번호 확인을 입력해주세요.");
+						$("#password02").focus();
+						return;
+					}
+
+					if ($("#email").val() == '') {
+						alert("이메일을 입력해주세요.");
+						$("#email").focus();
+						return;
+					}
+
+					if ($("#confirmNum").val() == "") {
+						alert("인증번호를 입력해주세요");
+						$("#confirmNum").focus();
+						return false;
+					}
+
+					alert("걸린건가?");
+
 					//  		alert("걸린건가?");
 					$("form").attr("method", "POST").attr("action",
 							"/user/addUser").submit();
@@ -367,15 +320,54 @@
 			//alert("걸린건가?");
 			self.location = "addUserViewRestTest.jsp";
 		});
+	});
 
+	////////// TOPbutton////////////////////
+	$(function() {
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 500) {
+				$('#topBtn').fadeIn();
+			} else {
+				$('#topBtn').fadeOut();
+			}
+		});
+
+		$("#topBtn").click(function() {
+			$('html, body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
 	});
 </script>
-
+	
 <style>
 #header {
 	background-image:
 		url(/resources/images/tripIcon/knocker-2163643_1920.jpg);
 	background-color: #3a2748;
+}
+
+.buttonyagn {
+	background-color: #df7366;
+	display: inline-block;
+	border-radius: 100%;
+	width: 4.5em;
+	height: 4.5em;
+	line-height: 4.5em;
+	text-align: center;
+	font-size: 1.25em;
+	color: #fff;
+	padding: 0;
+}
+
+#topBtn{
+				position:fixed;
+				right:2%;
+				bottom:50px;
+				z-index:999;
+				background:#6cc;
+				font-weight: bolder
 }
 </style>
 
@@ -411,7 +403,7 @@
 					</h3>
 				</header>
 				<form>
-					<input type="text" class="12u" name="" placeholder="  ID">
+					<input type="text" class="12u" name="userId" placeholder="  ID">
 				</form>
 			</article>
 			<article class="4u 12u(mobile) special">
@@ -421,7 +413,7 @@
 					</h3>
 				</header>
 				<form>
-					<input type="password" class="12u" name="" placeholder="  Password">
+					<input type="password" class="12u" name="userPw" placeholder="  Password">
 				</form>
 			</article>
 			<article class="2u 12u(mobile) special">
@@ -429,8 +421,7 @@
 					<h3>
 						<a href="#"><strong>&nbsp;</strong></a>
 					</h3>
-					<input type="button" class="button circled 12u" value="로그인">
-					<!-- <a href="#" class="buttonyagn">로그인</a> -->
+					<input type="button" name="loginID" class="button circled 12u" value="로그인">
 				</header>
 			</article>
 			<article class="2u 12u(mobile) special">
@@ -438,7 +429,7 @@
 					<h3>
 						<a href="#"><strong>&nbsp;</strong></a>
 					</h3>
-					<input type="button" class="12u" value="회원가입">
+					<input type="button" name="loginPW" class="12u" value="회원가입">
 					
 				</header>
 			</article>
@@ -451,78 +442,6 @@
 </c:if>
 <!-- /////////////////////////////////////////////////////////// -->				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
-			
-			<!-- 회원가입 다이얼로그 창 -->
-	<div id="addUserView" style="display:none; ">
-		<form id ="frm" class="form-horizontal addUserView01" title="회원가입" style="padding-top:25px;" name="joinform">
-	      <input id="checkNumStatus" name="checkNumStatus" type="hidden" value="N">
-	        <div class="form-group icon01" style="">
-	          <label for="userId" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">아 이 디</label>
-	          <div class="col-sm-4 col-xs-6">
-	            <input type="text" style="padding:10px; width:250px" placeholder="아이디" class="form-control" id="userId01" required class="userid" name="userId" oninput="checkId();"autofocus>
-	            <!-- <span id = "chkMsg"></span> -->
-	          </div>
-	         <div id="htmlId"></div>
-	        </div>
-	        
-	        <div class="form-group" style="display:inline-block; width:404px; padding-top:30px;">
-	          <label for="password01" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호</label>
-	          <div class="col-sm-4 col-xs-6">
-	            <input type="password" style="padding:10px; width:250px" class="form-control password addUerlayoutInput" id="password01" name="password" placeholder="비밀번호"/>
-	          </div>
-	          <div id="htmlId"></div>
-	        </div>
-	        
-	        <div class="form-group" style="padding-top:30px;">
-	          <label for="password2" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호 확인</label>
-	          <div class="col-sm-4">
-	            <input type="password" style="padding:10px; width:250px" class="form-control password02 addUerlayoutInput" id="password02" name="password02" placeholder="비밀번호 확인" oninput="checkPwd();"/>
-	          </div>
-	        </div>
-	         <div class="form-group" style="display:inline-block; width:404px; padding-top:30px;">
-	          <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">이메일</label>
-	          <div class="col-sm-4">
-	            <input type="text" style="padding:10px; width:250px" class="form-control addUerlayoutInput" id="email" name="email" placeholder="이메일" oninput="emailValid();"/>
-	            <input type="button" style="margin-top:15px" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
-	            <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
-	            <input value="인증" style="display:none;" class="btn btn-primary icon fa- circled" id="btn_chkSuccess" onClick="checkSuccess();"/>
-	          </div>
-	        </div> 
-	        
-	        <div class="form-group" style="margin-top:25px;">
-	          <div class="col-sm-offset-4  col-sm-4 text-center">
-	            <button type="button" id="signUp" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="width:70px; height:70px; background:#610B21; padding:0; margin-left: 100px; position: absolute;"><div style="margin-top:-5px; font-size:24px;">가입</div></button>
-	           <a class="btn btn-primary btn icon circled" href="#" style="width:70px; height:70px; padding:0; margin-left:205px; position: absolute; background:#0B615E;" onclick="delchk();">
-	           <div style="font-size:24px; margin-top:-3px">취소</div></a>
-	           <!-- <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="margin-left:290px; padding:0;"><div class="">restTest</div></button>	 -->
-	          </div>
-	        </div>
-     	 </form>
-      </div>
-      
 			<!-- Carousel -->
 				<section class="carousel">
 					<div class="reel">
@@ -569,224 +488,73 @@
 					</div>
 				</section>
 
-			<!-- Main -->
-				<div class="wrapper style2">
 
-					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="/resources/helios/images/pic06.jpg" alt="" /></a>
-						<header>
-							<h2><a href="#">Sed massa imperdiet magnis</a></h2>
-							<p>
-								Sociis aenean eu aenean mollis mollis facilisis primis ornare penatibus aenean. Cursus ac enim
-								pulvinar curabitur morbi convallis. Lectus malesuada sed fermentum dolore amet.
-							</p>
-						</header>
-						<p>
-							Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-							posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-							sit arcu sociis. Nunc fermentum adipiscing tempor cursus nascetur adipiscing adipiscing. Primis aliquam
-							mus lacinia lobortis phasellus suscipit. Fermentum lobortis non tristique ante proin sociis accumsan
-							lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-							consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-							interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-							natoque aenean scelerisque.
-						</p>
-						<footer>
-							<a href="#" class="button">Continue Reading</a>
-						</footer>
-					</article>
+		</div><!-- page-wrapper -->
 
-				</div>
+		<!-- 회원가입 다이얼로그 창 -->
+	<div id="addUserView" style="display:none; ">
+		<form id ="frm" class="form-horizontal addUserView01" title="회원가입" style="padding-top:25px;" name="joinform">
+	     
+	      <input id="checkNumStatus" name="checkNumStatus" type="hidden" value="N">
+	        <div class="form-group icon01" style="">
+	          <label for="userId" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">아 이 디</label>
+	          <div class="col-sm-4 col-xs-6">
+	            <input type="text" style="padding:10px; width:250px; ime-mode:disabled;" 
+	            	placeholder="아이디" class="form-control" id="userId01" required class="userid" 
+	            		name="userId" oninput="checkId();"autofocus>
+	            <!-- <span id = "chkMsg"></span> -->
+	          </div>
+	         <div id="htmlId"></div>
+	        </div>
+	        
+	        <div class="form-group" style="display:inline-block; width:404px; padding-top:30px;">
+	          <label for="password" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호</label>
+	          <div class="col-sm-4 col-xs-6">
+	            <input type="password" style="padding:10px; width:250px; ime-mode:disabled;" class="form-control password addUerlayoutInput" id="password01" required class="password01" name="password" placeholder="비밀번호"/>
+	          </div>
+	          <div id="htmlId"></div>
+	        </div>
+	        
+	        <div class="form-group" style="padding-top:30px;">
+	          <label for="password2" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">비밀번호 확인</label>
+	          <div class="col-sm-4">
+	            <input type="password" style="padding:10px; width:250px" class="form-control password02 addUerlayoutInput" id="password02" name="password02" placeholder="비밀번호 확인" oninput="checkPwd();"/>
+	          </div>
+	        </div>
+	         <div class="form-group" style="display:inline-block; width:404px; padding-top:30px;">
+	          <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label addUerlayout">이메일</label>
+	          <div class="col-sm-4">
+	            <input type="text" style="padding:10px; width:250px" class="form-control addUerlayoutInput" id="email" name="email" placeholder="이메일" oninput="emailValid();"/>
+	            <input type="button" style="margin-top:15px" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" onClick="checkSend();">
+	            <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
+	            <input value="인증" style="display:none;" class="btn btn-primary icon fa- circled" id="btn_chkSuccess" onClick="checkSuccess();"/>
+	          </div>
+	        </div> 
+	        
+	        <div class="form-group" style="margin-top:25px;">
+	          <div class="col-sm-offset-4  col-sm-4 text-center">
+	            <button type="button" id="signUp" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="width:70px; height:70px; background:#610B21; padding:0; margin-left: 100px; position: absolute;"><div style="margin-top:-5px; font-size:24px;">가입</div></button>
+	           <a class="btn btn-primary btn icon circled" href="#" style="width:70px; height:70px; padding:0; margin-left:205px; position: absolute; background:#0B615E;" onclick="delchk();">
+	           <div style="font-size:24px; margin-top:-3px">취소</div></a>
+	           <!-- <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn icon fa- circled" style="margin-left:290px; padding:0;"><div class="">restTest</div></button>	 -->
+	          </div>
+	        </div>
+     	 </form>
+      </div>
 
-			<!-- Features -->
-				<div class="wrapper style1">
+	<!-- top button -->
+	<a id="topBtn" href="#" class="icon fa-arrow-up circled"></a>
 
-					<section id="features" class="container special">
-						<header>
-							<h2>Morbi ullamcorper et varius leo lacus</h2>
-							<p>Ipsum volutpat consectetur orci metus consequat imperdiet duis integer semper magna.</p>
-						</header>
-						<div class="row">
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic07.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Gravida aliquam penatibus</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic08.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic09.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Magna laoreet et aliquam</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-						</div>
-					</section>
 
-				</div>
-
-			<!-- Footer -->
-				<div id="footer">
-					<div class="container">
-						<div class="row">
-
-							<!-- Tweets -->
-								<section class="4u 12u(mobile)">
-									<header>
-										<h2 class="icon fa-twitter circled"><span class="label">Tweets</span></h2>
-									</header>
-									<ul class="divided">
-										<li>
-											<article class="tweet">
-												Amet nullam fringilla nibh nulla convallis tique ante sociis accumsan.
-												<span class="timestamp">5 minutes ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Hendrerit rutrum quisque.
-												<span class="timestamp">30 minutes ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Curabitur donec nulla massa laoreet nibh. Lorem praesent montes.
-												<span class="timestamp">3 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="tweet">
-												Lacus natoque cras rhoncus curae dignissim ultricies. Convallis orci aliquet.
-												<span class="timestamp">5 hours ago</span>
-											</article>
-										</li>
-									</ul>
-								</section>
-
-							<!-- Posts -->
-								<section class="4u 12u(mobile)">
-									<header>
-										<h2 class="icon fa-file circled"><span class="label">Posts</span></h2>
-									</header>
-									<ul class="divided">
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Nisl fermentum integer</a></h3>
-												</header>
-												<span class="timestamp">3 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Phasellus portitor lorem</a></h3>
-												</header>
-												<span class="timestamp">6 hours ago</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Magna tempus consequat</a></h3>
-												</header>
-												<span class="timestamp">Yesterday</span>
-											</article>
-										</li>
-										<li>
-											<article class="post stub">
-												<header>
-													<h3><a href="#">Feugiat lorem ipsum</a></h3>
-												</header>
-												<span class="timestamp">2 days ago</span>
-											</article>
-										</li>
-									</ul>
-								</section>
-
-							<!-- Photos -->
-								<section class="4u 12u(mobile)">
-									<header>
-										<h2 class="icon fa-camera circled"><span class="label">Photos</span></h2>
-									</header>
-									<div class="row 25%">
-										<div class="6u">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic10.jpg" alt="" /></a>
-										</div>
-										<div class="6u$">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic11.jpg" alt="" /></a>
-										</div>
-										<div class="6u">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic12.jpg" alt="" /></a>
-										</div>
-										<div class="6u$">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic13.jpg" alt="" /></a>
-										</div>
-										<div class="6u">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic14.jpg" alt="" /></a>
-										</div>
-										<div class="6u$">
-											<a href="#" class="image fit"><img src="/resources/helios/images/pic15.jpg" alt="" /></a>
-										</div>
-									</div>
-								</section>
-
-						</div>
-						<hr />
-						<div class="row">
-							<div class="12u">
-
-								<!-- Contact -->
-									<section class="contact">
-										<header>
-											<h3>Nisl turpis nascetur interdum?</h3>
-										</header>
-										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
-										<ul class="icons">
-											<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-											<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-											<li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-										</ul>
-									</section>
-
-								<!-- Copyright -->
-									<div class="copyright">
-										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-										</ul>
-									</div>
-
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-		</div>
-
-			
-			
-			
+		<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>	
 
 	</body>
 </html>
