@@ -381,9 +381,9 @@
 	
 	// ========== '카카버' 버튼 Event 처리 ==========
 	$(function() {
-		$("button[name='kakaver']").on("click", function(event) {
-			self.location = "#"
-		})
+		$("input[name='kakaver']").on("click", function(event) {
+			self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code";
+	})
 	});
 	
 	
@@ -506,8 +506,7 @@
 									<h3>
 										<a href="#"><strong>&nbsp;</strong></a>
 									</h3>
-									<input type="button" name="kakaver" 
-										data-toggle="modal" data-target="#myModal" value="카카버">
+									<input type="button" name="kakaver" value="카카버">
 
 								</header>
 							</article>
