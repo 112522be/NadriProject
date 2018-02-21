@@ -32,7 +32,7 @@
 			 	flag_pu,
 			 	THUMBNAIL_IMAGE_FILE,
 			 	text)
-		VALUES ( seq_post_post_no.nextval,
+		VALUES ( seq_post_post_no_pl.nextval,
 			 	#{plannerMakerId},
 			 	#{title},
 			 	#{lat},

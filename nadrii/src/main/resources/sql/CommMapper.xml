@@ -14,6 +14,7 @@
 		<result property="text" column="text" jdbcType="CLOB" />
 		<result property="hashtag" column="hashtag" jdbcType="VARCHAR" />
 		<result property="viewCount" column="view_count" jdbcType="NUMERIC" />
+		<result property="regDate" column="reg_date" jdbcType="NUMERIC" />
 		<result property="lat" column="lat" jdbcType="VARCHAR" />
 		<result property="lng" column="lng" jdbcType="VARCHAR" />
 	</resultMap>
@@ -39,11 +40,12 @@
 	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag
 	  									FROM post
 										<where>
-						 					(title LIKE '%${searchKeyword}%' OR
+						 					(title LIKE '%${searchKeyword}%' OR 
 						 					text LIKE '%${searchKeyword}%' OR
 						 					hashtag LIKE '%${searchKeyword}%') AND
 											flag_pu='UC'
 										</where>
+										ORDER BY reg_date DESC
 										) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 

@@ -107,9 +107,9 @@
 		$('#commentContainer').on('click','span.glyphicon.glyphicon-pencil',function() {
 			text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
-			var editForm = '<span style=" position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
+			var editForm = '<span style="position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
 			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html(editForm);
-			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("display","none");
+			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("overflow", "hidden");
 			$($('div.comments')[$(".glyphicon.glyphicon-pencil").index(this)]).attr("style", "margin-bottom: -10em;");
 			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).removeAttr("style");
 		});
