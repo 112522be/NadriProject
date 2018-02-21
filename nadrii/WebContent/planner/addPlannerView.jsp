@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
 		<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
-				
+
 		<!-- Scripts -->
 		<script src="../resources/helios/assets/js/jquery.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
@@ -58,6 +58,20 @@
 		</style>
 		<script>
 		
+		function capture(a) {
+	        html2canvas($("#captureArea").get(0)).then(function(canvas) {
+					console.log(canvas);
+	              
+	                $("#imgSrc").val(canvas.toDataURL("image/png"));
+	                if(a == 1){
+	                		$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/addPlanner").submit();
+	                }
+					if(a == 2){
+						$("form[name='addPlanner']").attr("method", "POST").attr("action", "/planner/updatePlanner").submit();
+					}
+			});
+		}
+		
 		$(function() {
 			$("#save").on("click",function() {
 				save();
@@ -82,6 +96,33 @@
 			});
 		});
 		
+			$(function() {
+				$("#save").on("click",function() {
+					save();
+				
+					$("input[name='lat']").val(lat);
+					$("input[name='lng']").val(lng);
+					
+					var a = 1;
+					
+					capture(a);
+					
+				});
+			});
+			
+			$(function() {
+				$("#update").on("click",function() {
+					save();
+					
+					$("input[name='lat']").val(lat);
+					$("input[name='lng']").val(lng);
+		
+					var a = 2;
+					
+					capture(a);
+					
+				});
+			});
 		
 		///////////////////////////위 위시 위시리스트///////////////////////////////////
 		$(function(){
@@ -193,7 +234,6 @@
 									</div>
 									<div id="pagination"></div>
 									
-						
 								</div>
 							</div>
 							<div class="3u 12u(mobile)" id="sidebar" style="float: right; overflow-x: hidden; overflow-y: auto; padding: 115px 15px 0 15px; border-top:1px solid black; border-left: 1px solid black;">

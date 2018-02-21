@@ -105,54 +105,12 @@
 	    // 지도에 인포윈도우를 표시합니다.
 		speInfoWindow.setMap(map);
 		
-	    /* 
-	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-	    message += '경도는 ' + latlng.getLng() + ' 입니다' ;
-	    
-	    var resultDiv = document.getElementById('clickLatlng'); 
-	    resultDiv.innerHTML = message;
-	    */
-	    
 	 	// 마커 위치를 클릭한 위치로 옮깁니다
 	    clickMarker.setPosition(latlng);
 	    
 	    speInfoWindow.open(map,clickMarker);
 		
 	});
-	
-	////////////////////////추가 js////////////////
-	
-	///*
-	$(function(){
-		$("#placesWishList").css("display","block");	
-	});
-	
-	/*
-	$(function(){
-		$("#wishButton").on("click",function(){
-			$( "#placesWishList" ).toggle( "blind", 300 );
-		})
-		
-	})
-	//*/
-	
-	$( function() {
-		
-		// run the currently selected effect
-	    function runWishEffect() {
-	    
-	      // Run the effect
-	      $( "#placesWishList" ).toggle( "blind", 300 );
-	    };
-	 
-	    // Set effect from select menu value
-	    $( "#wishButton" ).on( "click", function() {
-	      runWishEffect();
-	    });
-	    
-	  });
-	
-	
 	
 	
 	//////////////////////////////////////////////////////
@@ -915,6 +873,7 @@
 				}else{
 					
 					alert("시내 success");
+					
 					callMapObjApiAJAX(returnData.info.mapObj);
 								
 					var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -1254,6 +1213,9 @@
 				}//if
 				
 				
+			},
+			error : function(){
+				alert("시외시외시외");
 			}
 		});
 		
@@ -1348,9 +1310,9 @@
 			success:function(returnData){
 				alert("시외 success 터미널 마커 생성");
 				
-				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right;width:30%; padding:5px;">&nbsp;'
-					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; width:30%; padding:5px;">'
-					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right;width:30%; padding:5px;">');
+				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right; width:30%; padding: 0 5px; background: #4580d3;">&nbsp;'
+					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; width:30%; padding: 0 5px; background: #4580d3;">'
+					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right; width:30%; padding: 0 5px; background: #4580d3;">');
 				
 				
 				var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
@@ -1646,36 +1608,6 @@
 			lat.push(tempMarkerArray[i].getLat());
 		}
 	}
-	
-	/*********************** 캡쳐기능 펑션생성 **************************/
-	
-	function capture() {
-        html2canvas($("#captureArea").get(0)).then(function(canvas) {
-              console.log(canvas) 
-                $("#imgSrc").val(canvas.toDataURL("image/png"));
-
-                $.ajax({
-                    type: "POST",
-                    data : $("form").serialize(),
-                    url: "../planner/capture",
-                    error: function(a, b, c){        
-                        alert("fail!!");
-                    },
-                    success: function (data) {
-                        try{
-                            alert(data+"::::::::ok");
-                            alert(123123123);
-                        }catch(e){                
-                            alert('server Error!!');
-                        }
-                    },
-                    error : function(){
-                    		alert("전송실패했다리");
-                    }
-                });
-		});
-	}
-
 	
 	</script>
 
