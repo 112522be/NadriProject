@@ -402,7 +402,7 @@
 				scrollTop : 0
 			}, 400);
 			return false;
-		});
+		})
 	});
 </script>
 	

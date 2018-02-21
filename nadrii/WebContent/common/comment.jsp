@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <style type="text/css">
 	#commentContainer{
 		padding-bottom: 10px;
@@ -9,6 +11,8 @@
 		background: #4b3753;
 	}
 </style>
+
+
 <script type="text/javascript"> 
 	var postNo = $('input[name="postNo"]').val();
 	function listComment() {
@@ -18,7 +22,8 @@
 			data:{
 				"postNo": postNo
 			},
-			success: function(JSONData) {
+			
+			/* success: function(JSONData) {
 				$('#commentContainer').empty();
 				for(i=0;i<JSONData.totalCount;i++){
 					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
@@ -36,7 +41,35 @@
 				}
 				$(".comment").empty();
 				$(".comment").append(JSONData.totalCount);
+			} */
+			
+			
+			success: function(JSONData) {
+				$('#commentContainer').empty();
+				
+				for(i=0;i<JSONData.totalCount;i++){
+					
+					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
+					+JSONData.listComment[i].commentNo
+					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					+JSONData.listComment[i].userId
+					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
+					+JSONData.listComment[i].regDate
+					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
+					if("${loginUser.userId}"==JSONData.listComment[i].userId){
+						html += '<span class="glyphicon glyphicon-pencil" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" style="font-size:10pt;"/>';
+					}
+					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
+					$('#commentContainer').append(html);
+				}
+				
+				$(".comment").empty();
+				$(".comment").append(JSONData.totalCount);
 			}
+			
+			
+			
+			
 		});
 	}
 	function addComment() {
@@ -166,3 +199,16 @@
 		<div id="commentContainer"></div>
 	</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
