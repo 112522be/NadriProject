@@ -98,15 +98,19 @@ pageEncoding="UTF-8"%>
 					for(var a =0; a<data.length;++a){
 						
 						var dpValue =						
-							"<article class='4u 12u(mobile) special'>"+
-								"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt=''style='width='282px'; height='187px';' /></a>"+
-								"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"+
-      							"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"+
-								"<header>"+
-									"<h3><a href='#'>"+data[a].title+"</a></h3>"+
-								"</header>"+
-								"<p>"+data[a].addr1+"</p>"+
-							"</article>";
+							"<article class='4u 12u(mobile) special'>"
+							+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
+							+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
+							+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
+  							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
+							+"<header  style='text-align: center;'>"
+								+"<h3><a href='#' name='title'>"+data[a].title+"</a></h3>"
+							+"</header>"
+							+"<div style='text-align: right;'>"
+							+"<p>"+data[a].addr1+"</p>"
+							+"</div>"
+							+"</div>"
+						+"</article>";
 						$(".row").append(dpValue);	
 					}
 
@@ -132,15 +136,21 @@ pageEncoding="UTF-8"%>
 									var dpValue =
 										
 										"<article class='4u 12u(mobile) special'>"
+										+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
 										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 										+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 		      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
-										+"<header>"
-											+"<h3><a href='#'>"+data[a].title+"</a></h3>"
+										+"<header  style='text-align: center;'>"
+											+"<h3><a href='#' name='title'>"+data[a].title+"</a></h3>"
 										+"</header>"
+										+"<div style='text-align: right;'>"
 										+"<p>"+data[a].addr1+"</p>"
+										+"</div>"
+										+"</div>"
 									+"</article>";
 									$(".row").append(dpValue);
+									
+					
 								}
 							}else{
 								//alert("예외발생 광역단위");
@@ -164,13 +174,17 @@ pageEncoding="UTF-8"%>
 												var dpValue =
 													
 													"<article class='4u 12u(mobile) special'>"
+													+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
 													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
 													+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 					      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
-													+"<header>"
-														+"<h3><a href='#'>"+data[a].title+"</a></h3>"
+													+"<header  style='text-align: center;'>"
+														+"<h3><a href='#' name='title'>"+data[a].title+"</a></h3>"
 													+"</header>"
+													+"<div style='text-align: right;'>"
 													+"<p>"+data[a].addr1+"</p>"
+													+"</div>"
+													+"</div>"
 												+"</article>";
 											      												
 												$(".row").append(dpValue);
@@ -193,11 +207,6 @@ pageEncoding="UTF-8"%>
 	
 	
 	$(function(){
-		/*
-		var searchY = $(".jbTableCell.jbText").position().top;
-		var searchX =	$(".jbTableCell.jbText").position().left;
-		alert(searchY+"/////////"+searchX)
-		*/
 		
 		
 		$('#dialog').dialog({
@@ -217,8 +226,6 @@ pageEncoding="UTF-8"%>
 	///////////////////////////////////////////
 	///*
 	
-	// getTrip 대신에 생겨난 다이얼로그 화면(ajax 실행 후의 데이터를 다이얼로그로 송출)
-	// ajax로 나온 좌표값을 기존에 생성했던 지도로 옮기기 위한 전역 변수
 	
 	function getTheme(contentid, contenttypeid){
 		$.ajax({
@@ -243,6 +250,8 @@ pageEncoding="UTF-8"%>
 				$("#tourName").remove();
 				$("#tourImg").remove();
 				$("#tourAddress").remove();
+			
+				
 				$("#tourCharge").remove();
 				$("#tourOverView").remove();
 				
@@ -369,17 +378,13 @@ pageEncoding="UTF-8"%>
 	$(function() {
 	  $(document).on("click","#wish", function(e){
 		  	if(${loginUser !=null}){
-				///*
-				//alert(contentid);
-				//alert(contenttypeid);
-				//*/
 	
 				//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
 				addTripToDB(contentid, contenttypeid);
 				
 				//위에서 저장한 것을 위시리스트에 재저장 
 				addWish(contentid);
-				//makeToast(");
+
 		  	}else{
 		  		makeToast("로그인이 필요합니다");
 		  	
@@ -434,6 +439,7 @@ pageEncoding="UTF-8"%>
 			
 		});
 	});
+
 	//*/
 	/*
 	$(function() {
@@ -455,9 +461,88 @@ pageEncoding="UTF-8"%>
 	
 	$('body').load('like.jsp', function() {
          getLike();
-        
-      })
-		
+    })
+	
+    /*
+    $(function(){
+    	getSomething();
+    })
+      
+    
+	window.onload = function(){
+		 getSomething();
+	}
+    
+	function getSomething(){
+			
+			var totalCount = ${resultPage.totalCount};
+			
+			for(var i=0; i< totalCount ; i++){
+				var groupNo = $($('input[name="groupNo"]')[i]).val();
+
+				var placeName = $($('input[name="placeName"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeName").empty();
+				$("article.special:nth-child("+(i+1)+") .placeName").append(placeName);
+				
+				var placeDetail = $($('input[name="placeDetail"]')[i]).val();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").empty();
+				$("article.special:nth-child("+(i+1)+") .placeDetail").append(placeDetail);
+				
+				$.ajax({
+					url: "../like/json/listLikeByPost/"+groupNo,
+					dataType: "json",
+					async: false,
+					success:function(returnData){
+						
+						$("article.special:nth-child("+(i+1)+") .like").empty();
+						$("article.special:nth-child("+(i+1)+") .like").append(returnData.totalCount);
+						
+						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+		                	$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
+		                }else{
+		                    $("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
+		                }
+					}
+				});	
+				
+				$.ajax({
+					url:"/common/listCommentByPost",
+					method:"GET",
+					async: false,
+					data:{
+						"postNo": groupNo
+					},
+					success: function(JSONData) {
+						
+						$("article.special:nth-child("+(i+1)+") .comment").empty();
+						$("article.special:nth-child("+(i+1)+") .comment").append(JSONData.totalCount);
+						
+					}
+				});
+				
+				if(placeName != ""){
+					$.ajax({
+						url: "../group/json/getThumbNail",
+						method:"POST",
+						data:{
+							"placeName": placeName
+						},
+						async: false,
+						success:function(returnData){
+							var tag =	'<img src="'+returnData+'" alt="" class="filter" height="245px">';
+							$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
+							$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
+						}
+					});	
+				}else{
+					var tag =	'<img src="../resources/images/background_2.jpg" alt="" height="245px">';
+					$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
+					$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
+				}			
+						
+			}//for문
+		}
+	//*/	
 	</script>
 	<!-- 지도 생성하는 CDN 및 맵에 담을 내용 확인 -->
 	
@@ -483,168 +568,227 @@ pageEncoding="UTF-8"%>
 		marker.setMap(map);
 	  }
 	</script>
-	<style>
+<style>
 	
-		img {
-			cursor: pointer;
-			width:"282px";
-			height:"187px";
-			
-		}
+	img {
+		cursor: pointer;
+		width:"282px";
+		height:"187px";
+	}
+	#dialog{
+		background-color: #ffffff;
+		z-index: 1000;
+	}
+	
+	.ui-dialog-titlebar{
+		background-color: #ffffff;
+	}
+	
+	.wrapper.style1{
+		background-color: #e6f9ff;
+	}
+	
+	.4u header{
+		background-color:#fff 
+	}
 		
-		#dialog{
-			background-color: #ffffff;
-			z-index: 1000;
-		}
-		.ui-dialog-titlebar{
-			background-color: #ffffff;
-			
-		}
-		.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close{
-			
-		}
+	#wish{
+		background: #000000;
+		padding: 4px;
+	}
+	
+	td{
+		padding: 4px;
+	}
 		
-		.wrapper.style1{
-			background-color: #e6f9ff;
-		}
-		.4u header{
-			background-color:#fff 
-		}
-		
-		#wish{
-			background: #000000;
-			padding: 4px;
-		}
-		td{
-			padding: 4px;
-		}
-		
-		article{
- 			height: 400px; 
-		}
-		.carousel{
-	background-color: #5d4f7166;
-}
+	article{
+ 		height: 400px; 
+	}
+	
+	.carousel{
+		background-color: #5d4f7166;
+	}
 
-
-.jbTable {
+	.jbTable {
         display: table;
         width: 100%;
-      }
-.jbTableRow {
+    }
+	.jbTableRow {
         display: table-row;
-        
-      }
-.jbTableCell {
+    }
+	.jbTableCell {
         display: table-cell;
-      }
-.jbText {
+    }
+	.jbText {
         width: 100%;
-      }
-.jbSubmit {
+    }
+	.jbSubmit {	
         width: 1%;
-      }
-.jbText input {
-        width: 100%;
-}
+    }
+	.jbText input {
+    	width: 100%;
+	}
 
-#keyword, #search{
-	padding-bottom:10px;
-	padding-top:10px;
+	#keyword, #search{
+		padding-bottom:10px;
+		padding-top:10px;
+	}
+	#search{
+		background: #605b7b;
+	}
+	.toastMessage {
+    	width:400px;
+    	height:auto;
+    	position:fixed;
+    	left:50%;
+	    margin-left:-200px;
+	    bottom:15px;
+	    background-color: #000000;
+	    color: #F0F0F0;
+	    font-size: 18px;
+	    padding:12px;
+	    text-align:center;
+	    border-radius: 2px;
+	    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    z-index: 100;
+	}
 	
-}
-#search{
-	background: #605b7b;
-}
+	#logo{
+		z-index: 10;
+	}
+	.filter {
+		position: relative;
+		-webkit-filter: contrast(140%) sepia(50%);
+		filter: contrast(140%) sepia(50%);
+	}
+	.filter::before {
+		content: "";
+		display: block;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+		pointer-events: none;
+		mix-blend-mode: lighten;
+		background: rgba(161, 44, 199, 0.31);
+	}
+	#nav {
+		background-color: #3b2b48;
+		opacity: 0.7;
+	}
+	div.wrapper.style1{
+		background-image: url("/resources/images/background_3.jpg");
+	}
+	#searchKeyword{
+		border-radius: 30px;
+		width: 400px;
+		height: 50px;
+		padding: 1em 1em 1em 2.5em;
+	}
+	.image.featured{
+		margin: 0 0 1em 0;
+	}
+	article {
+		height: 500px;
+	}
+	.icons {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+	}
+	.author {
+		position: absolute;
+		bottom: 0px;
+		left: 10px;
+	}
+	a.author:hover {
+		text-decoration: none !important;
+	}
+	input:focus{
+		outline:none;
+	}
+	svg[name="full"]{
+		color: #F05643 !important;
+	}
+	.row > * {
+	    padding: 0 0 48px 48px;
+	}
+</style>
 
-.toastMessage {
-    width:400px;
-    height:auto;
-    position:fixed;
-    left:50%;
-    margin-left:-200px;
-    bottom:15px;
-    background-color: #000000;
-    color: #F0F0F0;
-    font-size: 18px;
-    padding:12px;
-    text-align:center;
-    border-radius: 2px;
-    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-    z-index: 100;
-}
-
-#logo{
-	z-index: 10;
-}
-	</style>
-
-	<title>여행지 찾기</title>
+<title>여행지 찾기</title>
 </head>
 <body class="no-sidebar">
-		<div id="page-wrapper">
 
-				<div id="header">
+	<div id="page-wrapper">
 
-						<div class="inner">
-							<header>
-								<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
-							</header>
-						</div>
-						
-						<jsp:include page="/layout/toolbar.jsp" />
+		<div id="header">
 
-				</div>
+			<div class="inner">
+				<header>
+					<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
+				</header>
+			</div>
+			<jsp:include page="/layout/toolbar.jsp" />
+
+		</div>
 				
-				<div class="jbTable">
-      			<div class="jbTableRow">
-        			<div class="jbTableCell jbText">
-          				<form class="search">
-							<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
-							<input type="hidden" name="pageNo" value="" />
-							<input type="hidden" name="areaCode" value="${areaCode}"/>
-		      				<input type="hidden" name="localName" value="${localName}"/>
-				      	</form>
-        			</div>
-        			<div class="jbTableCell jbSubmit">
-          				<input type="button"name="search" id="search" value="검색">
-        			</div>
-        		</div>
-        	</div>
-				<div class="wrapper style1">
+		
+		
+		<div class="wrapper style1">
 
-					<section id="features" class="container special">
-						<div class="row">
-							<c:forEach var ="list" items="${list}">
-								<article class="4u 12u(mobile) special">
-									<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" style="width="282px"; height="187px";"/></a>
-									<input type="hidden" name="contentid" value="${list.contentid}"/>
-		          					<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
-									<header>
-										<h3><a href="#">${list.title}</a></h3>
-										<h3></h3>
-									</header>
+			<section id="features" class="container special">
+				<div class="row">
+					<div class="jbTable">
+			      		<div class="jbTableRow">
+			        		<div class="jbTableCell jbText">
+			        			<form class="search">
+									<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
+									<input type="hidden" name="pageNo" value="" />
+									<input type="hidden" name="areaCode" value="${areaCode}"/>
+					   				<input type="hidden" name="localName" value="${localName}"/>
+						      	</form>
+			        		</div>
+			        		<div class="jbTableCell jbSubmit">
+			        			<input type="button"name="search" id="search" value="검색">
+			        		</div>
+			        	</div>
+			        </div>
+					
+					<c:forEach var ="list" items="${list}">
+						<article class="4u 12u(mobile) special">
+							<div style="background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;">
+								<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" style="width="282px"; height="187px";"/></a>
+								<input type="hidden" name="contentid" value="${list.contentid}"/>
+			          			<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
+								<header style="text-align: center;">
+									<h3><a href="#" name='title'>${list.title}</a></h3>
+									<h3></h3>
+								</header>
+								<div style="text-align: right;">
 									<p>${list.addr1}</p>
-								</article>
+									
+								</div>
 								
-							</c:forEach>
-						</div>
-					</section>
-
-				</div> 		
-				
-		<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>		
-				
+							</div>
+						</article>
+								
+					</c:forEach>
+				</div>
+			</section>
+		</div>
+	</div>
+				 		
+	<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>		
+	
 	<div id="dialog" title="" >
 		<table class="table">
     		<tbody>
         		<tr>
         			<td>
 			        	<div id="map" style="width:400px;height:200px;"></div>
-			  			
-			  	  		
 		        	</td>
         	   		<td id="imageSpace">
         	   		</td>
@@ -674,7 +818,9 @@ pageEncoding="UTF-8"%>
 			
 			<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
 		</footer>
-	</div>	
+	</div> 
+	
+		
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4ea92513a5052cd0e179704e1e5f5f"></script>					
 </body>
 </html>
