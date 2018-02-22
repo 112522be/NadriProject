@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript">
 
 	$( function() {
@@ -51,6 +52,18 @@
 				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
 			
 		});
+		
+		$('#searchKeyword').keydown(function(key) {
+			var data = $(this).val();
+			if(key.keyCode==13){
+				if(data!=""){
+					$('form').attr('method', 'POST').attr('action', '../trip/listSearch').submit();
+				}else{	
+		 			alert("검색어를 입력해주세요");
+				}
+			}
+		});
+		
 	});
 	
 
@@ -58,63 +71,48 @@
 
  
 <style type="text/css">
-
-#header{
+#header {
 	background-color: #ffffcd;
 	background-image: url("/resources/images/tripIcon/tripInfo.jpg");
 }
 
-#nav{
-	background-image: url("../resources/helios/images/header.jpg");	
+#nav {
+	background-image: url("../resources/helios/images/header.jpg");
 	background-color: #44324a;
 	opacity: 0.7;
-	
 }
-.forward{
+
+.forward {
 	opacity: 0.0;
 }
 
-.backward{
+.backward {
 	opacity: 0.0;
 }
 
-
-
-.carousel{
-	background-color: #5d4f7166;
+.carousel {
+	background-color: #5d4f7100;
 }
 
-
-.jbTable {
-        display: table;
-        width: 100%;
-      }
-.jbTableRow {
-        display: table-row;
-        
-      }
-.jbTableCell {
-        display: table-cell;
-      }
-.jbText {
-        width: 100%;
-      }
-.jbSubmit {
-        width: 1%;
-      }
-.jbText input {
-        width: 100%;
+#keyword, #search {
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
-#keyword, #search{
-	padding-bottom:10px;
-	padding-top:10px;
-	
-}
-#search{
+#search {
 	background: #605b7b;
 }
 
+body{
+	background-color: #5d4f7166;
+}
+
+#searchKeyword {
+	border-radius: 30px;
+	width: 400px;
+	height: 50px;
+	padding: 1em 1em 1em 2.5em;
+}
 </style>
  
  
@@ -134,24 +132,15 @@
 				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
 		
-			<div class="jbTable">
-      			<div class="jbTableRow">
-        			<div class="jbTableCell jbText">
-          				<form class="search">
-							<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
-							<input type="hidden" name="pageNo" value="" />
-							<input type="hidden" name="areaCode" value="${areaCode}"/>
-		      				<input type="hidden" name="localName" value="${localName}"/>
-				      	</form>
-        			</div>
-        			<div class="jbTableCell jbSubmit">
-          				<input type="button"name="search" id="search" value="검색">
-        			</div>
-        		</div>
+			<div style="overflow: hidden; padding-top: 30px;">
+          		<form class="search" style="float: right">
+					<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
+					<input type="text" name="keyword" id="searchKeyword" value="" style="width: 100%"/>
+					<input type="hidden" name="pageNo" value="" />
+					<input type="hidden" name="areaCode" value="${areaCode}"/>
+		      		<input type="hidden" name="localName" value="${localName}"/>
+				</form>
         	</div>
-			
-			
-			
 			
 			<section class="carousel">
 				<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">

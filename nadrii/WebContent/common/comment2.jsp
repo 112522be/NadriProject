@@ -8,6 +8,14 @@
 	div[name='submitComment']{
 		background: #4b3753;
 	}
+	input:focus{
+		outline:none !important;
+	}
+	@media screen and (max-width: 736px){
+		.comments > span:nth-child(1) {
+		    padding: 0 !important;
+		}
+	}
 </style>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript"> 
@@ -24,7 +32,7 @@
 				for(i=0;i<JSONData.totalCount;i++){
 					var html = '<div class="comments" style="padding: 0 0 20px 0; overflow: hidden;"><span class="col-xs-1" style="float: left; padding: 10px 0 0 50px;"><input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
-					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-16" style="padding-left: 30px;"><span style="color: black;">'
+					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-13" style="padding-left: 30px;"><span style="color: black;">'
 					+JSONData.listComment[i].userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
 					+JSONData.listComment[i].regDate
@@ -156,7 +164,7 @@
 </script>
 
 <body onload="listComment()">
-	<div style="padding-left: 90px; width: 90%;">
+	<div>
 		<div>
 			<form name="formData">
 				<input type="hidden" name="userId" value="${loginUser.userId}">

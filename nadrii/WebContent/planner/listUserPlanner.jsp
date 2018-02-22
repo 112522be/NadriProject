@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Nadrii :: 나들이 모임</title>
+		<title>Nadrii :: 나들이 플래너 게시판</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
@@ -58,6 +58,10 @@
 			$(".author span").on("click", function(){
 				var userId = $($("input[id='userId']")[$(".author span").index(this)]).val();
 				//self.location="../user/getUserProfile?userId="+userId;	
+			});
+			
+			$(".header.logo").on("click", function(){
+				self.location="../planner/getUserPlannerList";
 			});
 			
 			$('[data-toggle="popover"]').popover({ 
@@ -182,8 +186,12 @@
 				color: #F05643 !important;
 			}
 			.row > * {
-			    padding: 0 0 48px 48px;
+			    padding: 24px 0 0 24px;
+			    margin: 0 !important;
 			}
+			#header{
+				padding: 6.5em 0 1.5em 0;
+ 			}
 		</style>
 	</head>
 	<body>
@@ -192,19 +200,14 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1>
-						<a href="../index.jsp" id="logo">나들이 플래너</a>
-					</h1>
+					<h1><a class="header logo">회원들의 나들이 플래너</a></h1>
+					<p>나의 나들이 플래너를 회원과 공유하세요</p>
 				</header>
 			</div>
 			<jsp:include page="../layout/toolbar.jsp" />
 		</div>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
-				<header>
-					<h2>회원들의 나들이 플래너</h2>
-					<p>나의 나들이 플래너를 회원과 공유하세요</p>
-				</header>
 				<div class="continer">
 					<div class="col-sm-12" style="padding-bottom: 40px;">
 						<h6 style="color: #8a8c91; float: left; font-style:normal;">
@@ -217,10 +220,10 @@
 							 ${resultPage.totalCount}개 게시물
 						</h6>
 					</div>
-					<div class="col-sm-9" style="padding-bottom: 25px;">
-						<a class="button" id="plannerWrite" style="float: left; padding: 2px 15px;">write</a>
-					</div>
-					<div class="col-sm-3">
+					<div style="">
+						<div id="plannerWrite" style="font-size: 30px; float: left; color: #6c5e78; margin: 10px;">
+							<a class="fas fa-plus"></a>
+						</div>
 						<form class="search" style="float: right;">
 							<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
 							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 100%"/>

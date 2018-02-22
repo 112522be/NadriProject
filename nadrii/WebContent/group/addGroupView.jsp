@@ -47,6 +47,13 @@ button[data-original-title='More Color']{
 	margin: 0;
 	padding: 6em 0 10em 0;
 }
+
+@media screen and (max-width: 736px){
+	.wrapper {
+	    padding: 2em 0 4em 0;
+	}
+}
+
 </style>
 
 </head>
@@ -70,7 +77,7 @@ button[data-original-title='More Color']{
 					<form name="postData">
 						<div>
 							<span>
-								<input type="text" class="form" style="font-size: 13pt; width: 100%; padding: 10px; " name="title" value="" placeholder="제목" />
+								<input type="text" class="form" style="font-size: 17pt; width: 100%; padding: 10px; " name="title" value="" placeholder="제목" />
 							</span>
 						</div>					
 						<div style="padding-top: 10px">

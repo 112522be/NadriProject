@@ -27,6 +27,7 @@
 		<!-- Latest compiled and minified JavaScript -->
 		
 		<style>
+		
 		.wrapper{
 			margin: 0 !important;
 		}	
@@ -73,11 +74,11 @@
 					self.location="../group/listGroup";
 				});
 				
-				$(".button.modify").bind("click", function(){
+				$("a#modify").bind("click", function(){
 					self.location="../group/updateGroup?groupNo=${group.join.groupNo}";
 				});
 				
-				$(".button.delete").bind("click", function(){
+				$("a#delete").bind("click", function(){
 					if(confirm("삭제하시겠습니까?")==true){
 						self.location="../group/deleteGroup?groupNo=${group.join.groupNo}";
 						alert("삭제되었습니다.");
@@ -112,7 +113,7 @@
 			<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1>나들이 모임</h1>
+							<h1><a href="../group/listGroup">나들이 모임</a></h1>
 						</header>
 					</div>
 				<jsp:include page="../layout/toolbar.jsp" />		
@@ -123,8 +124,7 @@
 						<div class="row 200%">
 							<div class="8u 12u(mobile)" id="content">
 								<article id="main">
-									<span class="button list" style="float: right; padding: 0; font-size: 12pt; width: 60px; background: #828282;">list</span>
-									<header style="margin-bottom: 5em;">
+									<header style="margin-bottom: 1.5em;">
 										<h2>${group.title}</h2>
 										<div style="float: left;"> 
 											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
@@ -137,11 +137,16 @@
 											<span style="border-left: 1px solid; padding-left: 30px;">${group.regDate}</span>
 										</div>
 										<br/>
-										<div class="userMenu" style="float: right; margin-top: 10px; display: none;">
-											<span class="button modify" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
-											<span class="button delete" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>
-										</div>
 									</header>
+									<div style="border-top: 1px solid; padding: 20px 0;">
+										<c:if test="${group.join.userId == loginUser.userId}">
+											<div align="right">
+												<a id="modify"><span class="fas fa-edit"></span></a>
+												&nbsp;
+												<a id="delete"><span class="fas fa-eraser"></span></a>
+											</div>
+										</c:if>
+									</div>
 									<span id="map"></span>
 									<span>
 										${group.text}

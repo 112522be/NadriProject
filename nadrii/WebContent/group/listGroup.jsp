@@ -41,7 +41,7 @@
 				}
 			});
 			
-			$("a.write").on("click", function(){
+			$('#addGroup').bind("click", function(){
 				self.location="../group/addGroup";
 			});
 			
@@ -210,12 +210,26 @@
 				color: #F05643 !important;
 			}
 			.row > * {
-			    padding: 0 0 48px 48px;
-			}
+			    padding: 24px 0 0 24px;
+			    margin: 0 !important;
+			}			
+			#header{
+				padding: 6.5em 0 1.5em 0;
+ 			}
+			
 		</style>
 	</head>
 	<body>
-		<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+		<div id="header">
+			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+					<h1><a href="../group/listGroup">나들이 모임</a></h1>
+					<p>새로운 장소, 새로운 인연</p>
+				</header>
+			</div>
+		</div>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
 				<div class="continer">
@@ -230,10 +244,10 @@
 							 ${resultPage.totalCount}개 게시물
 						</h6>
 					</div>
-					<div class="col-sm-9" style="padding-bottom: 25px;">
-						<a class="button write" style="float: left; padding: 2px 15px;">write</a>
-					</div>
-					<div class="col-sm-3">
+					<div style="">
+						<div id="addGroup" style="font-size: 30px; float: left; color: #6c5e78; margin: 10px;">
+							<a class="fas fa-plus"></a>
+						</div>
 						<form class="search" style="float: right;">
 							<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
 							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 100%"/>

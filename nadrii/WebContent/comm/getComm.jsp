@@ -34,13 +34,12 @@
 				}		
 			});
 			
-			$( function() {
-			    $( "#accordion" ).accordion({
-			      collapsible: true
-			    });
-			} );
+			var regDate = '${community.regDate}'.slice(0, -5);
+			
+			$("span.regDate").append(regDate);			
+			
 		});
-
+		
 		function clickProfile(){
 			alert('${group.join.userId}');
 		}
@@ -136,7 +135,7 @@
 								</div>
 								<div style="float: right;">
 									<span style="padding-right: 30px;"><span class="fas fa-eye"></span> &nbsp;&nbsp;${community.viewCount}</span>
-									<span style="border-left: 1px solid; padding-left: 30px;">${community.regDate}</span>
+									<span class="regDate" style="border-left: 1px solid; padding-left: 30px;"></span>
 								</div>
 							</header>
 							<br/>

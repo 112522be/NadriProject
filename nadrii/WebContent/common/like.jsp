@@ -1,7 +1,7 @@
 <style type="text/css">
 li > span{
 	position: relative !important;
-	color: #555555 !important;
+	color: #555555;
 }
 .block::before{
 	color: #F05643 !important;
@@ -80,9 +80,9 @@ $(function(){
 
 <div style="padding: 30px">
 <span style="padding-right: 15px">
-<a href="#none" class="icon fa-heart"><span class="heart"></span>&nbsp;<span class="like"></span></a>
+<a href="#none" class="heart"><span class="heart"></span>&nbsp;<span class="like"></span></a>
 </span>
 <span>
-<a href="#none" class="icon fa-comment">&nbsp;<span class="comment"></span></a>
+<span class="icon fa-comment">&nbsp;<span class="comment"></span></span>
 </span>
 </div>

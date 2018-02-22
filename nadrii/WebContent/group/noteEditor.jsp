@@ -10,6 +10,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   
   <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -75,14 +76,14 @@
         	 	var ui = $.summernote.ui;
 
 	        	var button = ui.button({
-	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
+	        		contents: '<i class="fas fa-map-marker-alt"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
 	    				    var uri = "./addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
 	    				    	var html =$('#summernote').summernote('code')+
-	    									'<div style="font-size: 12pt; text-align: center; width: 450px; border: 1px solid;">'+$('#content_pr').val()+'</div></br></br></br>';
+	    									'<div style="font-size: 12pt; text-align: center; width: 330px; border: 1px solid;">'+$('#content_pr').val()+'</div></br></br></br>';
 	    				    	$('#summernote').summernote('code', html);
 						})
 	    			}
@@ -96,7 +97,7 @@
 			var openWin;
             $(document).ready(function() {
                 $('#summernote').summernote({
-                    height: 800,
+                    height: 500,
                     toolbar: [
                     	['style', ['bold', 'italic', 'underline', 'clear']],
                         ['fontsize', ['fontsize']],

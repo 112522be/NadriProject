@@ -9,7 +9,7 @@
 -->
 <html>
 <head>
-<title>나들이 모임~</title>
+<title>나들이 플래너</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- Latest compiled and minified CSS -->
@@ -49,6 +49,9 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
 <style type="text/css">
 
+	a:hover{
+		text-decoration: none;
+	}
 	footer a {
 		color: #555 !important;
 	}
@@ -56,7 +59,7 @@
 	.post>footer {
 		background: #ffff;
 	}
-	
+
 	#groupName {
 		display: inline-block;
 		font-family: "Raleway", Helvetica, sans-serif;
@@ -455,6 +458,9 @@ $(function(){
 		mapMove();
 	});
 	
+	$(".header.logo").on("click", function(){
+		self.location="../planner/getUserPlannerList";
+	});
 	
 });
 
@@ -474,7 +480,7 @@ $(function () {
 			<div class="inner">
 				<header>
 					<h1>
-						<a href="../index.jsp" id="logo">나들이 플래너</a>
+						<a class="header logo">나들이 플래너</a>
 					</h1>
 				</header>
 			</div>
@@ -486,7 +492,7 @@ $(function () {
 
 			<div class="container">
 				<article id="main" class="special">
-					<header style="margin-bottom: 5em;">
+					<header style="margin-bottom: 1.5em;">
 						<h2>${planner.title}</h2>
 						<div style="float: left;">
 							<img src="../resources/assets/images/avatar.jpg" alt=""
@@ -502,16 +508,17 @@ $(function () {
 								style="border-left: 1px solid; padding-left: 30px;">${planner.regDate}</span>
 						</div>
 						<br />
-						<div class="userMenu" style="float: right; margin-top: 10px">
-							<c:if test="${planner.plannerMakerId eq userId}">
-								<span class="button modify" id="postMod" style="padding: 0; font-size: 12pt; width: 60px; background: #0060ad;">modify</span>
-								<span class="button delete" id="postDel" style="padding: 0; font-size: 12pt; width: 60px; background: #9b2114;">delete</span>	
-							</c:if>
-						</div>
 					</header>
-					<a href="#" class="image featured"><img src="images/pic06.jpg"
-						alt="" /></a>
-						
+					<div style="border-top: 1px solid; padding: 20px 0;">
+						<c:if test="${planner.plannerMakerId == loginUser.userId}">
+							<div align="right">
+								<a id="modify"><span class="far fa-edit"></span></a>
+								&nbsp;
+								<a id="delete"><span class="fas fa-eraser"></span></a>
+							</div>
+						</c:if>
+					</div>
+					
 					<div id="map" style="width: 100%; height: 450px;"></div>
 					<section id="pathImg">
 					</section>
@@ -524,7 +531,7 @@ $(function () {
 					<input type="hidden" name="postNo" value="${planner.postNo}">
 					<jsp:include page="../common/like.jsp"></jsp:include>
 					<div>
-						<jsp:include page="../common/comment.jsp"></jsp:include>
+						<jsp:include page="../common/comment2.jsp"></jsp:include>
 					</div>
 				</article>
 			</div>

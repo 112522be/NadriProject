@@ -161,7 +161,7 @@
 			opacity: 0.7;
 		}
 		#nav > ul > li{
-			color: lightgray;
+			color: lightgray;			
 		}	
 	</style>
 <!-- Nav -->
@@ -185,15 +185,15 @@
 										<c:if test="${! isAdmin eq 'user' }">
 										<li><a href="#">회원 리스트</a></li>
 										</c:if>								
-										<li><a href="#">내정보 보기</a></li>
-										<li><a href="#">내정보 수정</a></li>
+										<li><a href="#">내 정보 보기</a></li>
+										<li><a href="#">내 정보 수정</a></li>
 										<li><a href="#">쪽지</a></li>
-										<li><a href="#">로 그 아 웃</a></li>
+										<li><a href="#">로그아웃</a></li>
 									</ul>
 								<!--  </a>-->
 							</li>
 		</c:if>
-		<li><a href="../index.jsp">홈으로 가기</a></li>
+		<li><a href="../index.jsp">H O M E</a></li>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너 ▼</a>
