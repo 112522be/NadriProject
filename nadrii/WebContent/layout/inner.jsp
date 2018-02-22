@@ -6,7 +6,7 @@
 <div class="inner">
 	<header>
 		<h1>
-			<a href="../index.jsp" id="logo">N A D R I I</a>
+			N A D R I I
 		</h1>
 		<hr />
 		<p>Check your precious holiday by NADRII</p>

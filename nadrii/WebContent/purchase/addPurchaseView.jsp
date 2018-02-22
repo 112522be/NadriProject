@@ -47,23 +47,52 @@
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-function fncAddPurchase() {
-	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
-}
 
-$( function(){
-	$("a[name='kakaoPay']").bind("click", function(event){
-		event.preventDefault();
-		fncAddPurchase(); 
-	})
-});
+	function fncAddPurchase() {
 
-//=================== "취소" Event 연결 =================== 
-function goBack() {
-	window.history.back();
-}
+		var myForm = document.popForm;
+		var url = "/purchase/kakaoPay";
+		window.open("",	"popForm", "toolbar=no, width=475, height=700, directories=no, status=no, scrollorbars=no, resizable=no");
+		myForm.action = url;
+		myForm.method = "post";
+		myForm.target = "popForm";
+		myForm.testVal = "${ kakaoUri }";
+		myForm.submit();
+		
+		
+		/*
+		 var openDialog = function (uri, name, options, closeCallback) {
+			    var win = window.open(uri, "", options);
+			    var interval = window.setInterval(function() {
+			        try {
+			            if (win == null || win.closed) {
+			            	
+			                window.clearInterval(interval);
+			                closeCallback(win);
+			            }
+			        }
+			        catch (e) {
+			        }
+			    }, 1000);
+			    return win;
+	        }
+		*/
+		
+		//	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
 
+	}
 
+	$(function() {
+		$("a[name='kakaoPay']").bind("click", function(event) {
+			event.preventDefault();
+			fncAddPurchase();
+		})
+	});
+
+	//=================== "취소" Event 연결 =================== 
+	function goBack() {
+		window.history.back();
+	}
 </script>
 </head>
 
@@ -84,7 +113,7 @@ function goBack() {
 
 				</div>
 
-<form action="navigation">
+<form action="navigation" name="popForm">
 
 		<!-- Purchase Info -->
 		<input type="hidden" name="contentId" 			value="${ purchase.contentId }">
