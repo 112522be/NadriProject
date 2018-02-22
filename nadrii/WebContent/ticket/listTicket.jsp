@@ -204,6 +204,8 @@
 				<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 				</div>
 				
+				<jsp:include page="/common/comment.jsp" />
+				
 </form>
 		
 		<jsp:include page="/layout/footer.jsp" />

@@ -226,6 +226,7 @@
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
 			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
+			<li><a href="/ticket/showMeTheTicket">내 티켓 보여주기</a></li>
 		</ul>
 	</c:if>
 	</li>

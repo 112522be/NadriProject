@@ -405,7 +405,7 @@
 				scrollTop : 0
 			}, 400);
 			return false;
-		});
+		})
 	});
 	///*
 	//=========alert 대신 toast
