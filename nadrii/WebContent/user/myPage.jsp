@@ -167,7 +167,7 @@
 				})
 			}else{
 				$.ajax({
-					url:"/message/json/listMessage/"+'${loginUser.userId}',
+					url:"/message/json/listMessage/"+'${user.userId}',
 					method:"GET",
 					dataType:"json",
 					headers :{
@@ -236,7 +236,7 @@
      		<a class="col-xs-4" align="center"><span class="button01" align="center">´ñ±Û</span></a>
      		<a class="col-xs-4" align="center"><span class="button01" align="center">ÂÊÁö</span></a>
      	</div>
-     	<div style="background-color: white;" id="logContainer"></div>
+     	<div style="background-color: white; margin-top:10pt;" id="logContainer"></div>
      </div>
      <br/>
      <jsp:include page="../layout/footer.jsp"></jsp:include>
