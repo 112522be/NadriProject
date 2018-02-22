@@ -118,7 +118,7 @@
 //================= '내정보 보기' 버튼 클릭 Event 처리========================
 	
 	$(function(){
-     $("a[href='#' ]:contains('내정보 보기')").on("click" , function() {
+     $("[href='#' ]:contains('내정보 보기')").on("click" , function() {
         self.location = "/user/getUser?userId="+$(this).text().trim();
      });
   });
@@ -127,7 +127,7 @@
 	
 	$(function(){
      $("a[href='#' ]:contains('내정보 수정')").on("click" , function() {
-        self.location = "/user/updateUser.jsp";
+        self.location = "/user/updateUser?userId=${loginUser.userId}";
      });
   });
   

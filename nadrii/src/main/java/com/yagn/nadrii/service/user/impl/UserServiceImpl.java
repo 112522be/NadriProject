@@ -63,6 +63,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public void updateUser(User user) throws Exception {
+		user.getBirth().replaceAll("/","").trim();
+		
 		userDao.updateUser(user);
 	}
 
