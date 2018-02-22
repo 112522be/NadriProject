@@ -19,8 +19,8 @@
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	  
 	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 	.button01 {
@@ -303,6 +303,7 @@
 				}
 				$('#logContainer').html(html);
 				$('#logContainer').on('click', 'p#addedTitle', function() {
+					alert($('p#addedTitle').index(this));
 					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 					if(postNo == null){
 						alert("삭제된 게시물입니다.");
@@ -336,7 +337,7 @@
      			<br/>
      			<span style="font-size: 12pt;">${loginUser.email}</span>
      		</span>
-     		<span style="position:absolute; bottom: 10%; margin: 10px; font:bold;"><a style="font-size: 15px;"><span class="glyphicon glyphicon-cog"> 프로필수정</span></a></span>
+	<a style="font-size: 15px; position:absolute; bottom: 10%; margin: 10px; font:bold;" href="/user/updateUser?userId=${loginUser.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
      	</div>
      	<br/>
      	<div style="background-color: white; margin-top:10pt;">
@@ -349,6 +350,6 @@
      	</div>
      </div>
      <br/>
-     <jsp:include page="../layout/footer.jsp"></jsp:include>
+    <%--  <jsp:include page="../layout/footer.jsp"></jsp:include> --%>
 </body>
 </html>

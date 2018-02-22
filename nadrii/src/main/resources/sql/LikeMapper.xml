@@ -32,6 +32,7 @@
 	  				FROM		(	SELECT like_no, post_no, user_id, reg_date
 									FROM likes
 									WHERE user_id = #{searchKeyword}
+									ORDER BY reg_date DESC
 									) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
