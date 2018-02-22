@@ -39,11 +39,12 @@
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script> 
+	<script src="/resources/js/tripLocation.js"></script>
 	<script src="/resources/helios/assets/js/skel.min.js"></script>
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
-
+	
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -68,7 +69,7 @@
 			fncLoginValidateCheck(userId, userPw);
 		})
 	});
-
+///*
 	// ========== 로그인 시 아이디, 비밀번호 유효성 검사 ==========
 	function fncLoginValidateCheck(userId, userPw) {
 
@@ -88,8 +89,11 @@
 		
 		alert(userId + " 님 환영합니다.")
 	}
-
 	
+	
+	
+
+	///*
 	
 	
 // ========== 회원가입 파트 ==========
@@ -141,7 +145,7 @@
 	}
 
 	// ========== Password part ==========
-
+///*
 	// ========== 비밀번호 확인 ==========
 	function checkPwd() {
 
@@ -173,7 +177,7 @@
 			$("#validatePw").html("&nbsp;&nbsp;비밀번호가 일치하지 않습니다.").css('color', 'red');
 		}
 	}
-
+///*
 	// ========== '회원가입 시 인증번호 요청' 버튼 Event 처리 ==========
 	$(function() {
 		$("a[href='#']:contains('인증번호요청')").bind("click", function(event) {
@@ -182,7 +186,7 @@
 
 		})
 	});
-
+///*
 	// ========== '회원가입 시 인증번호 요청' 버튼 Event 처리 ==========
 	function checkSend() {
 
@@ -216,8 +220,7 @@
 
 	}
 
-	
-
+	///*
 	// ========== 회원가입 시 아이디, 비밀번호 유효성 검사 ==========
 	function fncAddValidateCheck() {
 		if ($("input[name='modalUserPw']").val() == '') {
@@ -225,6 +228,7 @@
 			$("input[name='modalUserPw']").focus();
 
 			return;
+		}
 
 		if ($("input[name='modalUserRePw']").val() == '') {
 			alert("비밀번호 확인을 입력해주세요.");
@@ -249,7 +253,7 @@
 	}
 
 	// ========== 회원가입 버튼 Block 처리 ==========
-		
+	//	/*
 	var idCheckFlag = false;
 	var pwdCheck = false;	
 		
@@ -302,7 +306,7 @@
 		}
 
 	}
-
+///*
 	///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
 	var idCheckFlag = false;
 	var pwdCheck = false;
@@ -324,7 +328,7 @@
 	}
 
 	
-	/*
+	///*
 	function addUser() {
 		var data = "userId=" + $("#userId01").val();
 		data += "&password=" + $("#password01").val();
@@ -369,7 +373,7 @@
 	}
 
 	
-	
+	///*
 	// ========== '가입' 버튼 Event 처리 ==========
 	$(function() {
 		$("button:contains('가 입')").on("click", function(event) {
@@ -377,15 +381,15 @@
 			fncAddValidateCheck();
 		})
 	});
-	
+	///*
 	// ========== '카카버' 버튼 Event 처리 ==========
 	$(function() {
-		$("button[name='kakaver']").on("click", function(event) {
-			self.location = "#"
+		$("input[name='kakaver']").on("click", function(event) {
+			self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code";
 		})
 	});
 	
-	
+	///*
 	// ========== TOP button ==========
 	$(function() {
 		$(window).scroll(function() {
@@ -401,8 +405,63 @@
 				scrollTop : 0
 			}, 400);
 			return false;
-		});
+		})
 	});
+	///*
+	//=========alert 대신 toast
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(3000).fadeOut(400);
+	}
+	
+	
+	
+	//=============== img 클릭=======================
+		$(function(){
+			
+			$($(".reel img")[0]).on("click",function(){
+			
+				self.location = "../trip/getTheme"
+		
+				
+			})
+		});
+		
+		$(function(){	
+			$($(".reel img")[1]).on("click",function(){
+				//alert("어디로 갈까?");
+				self.location ="/planner/getUserPlannerList";
+			})
+		});
+			
+		$(function(){	
+			$($(".reel img")[2]).on("click",function(){
+				self.location ="/comm/listComm";
+			})
+		});
+			
+		$(function(){	
+			$($(".reel img")[3]).on("click",function(){
+				
+				self.location ="/ticket/listTicket";
+				
+			})
+		});
+		
+			
+		$(function(){	
+			
+		
+			$($(".reel img")[4]).on("click",function(){
+				self.location ="/group/listGroup";
+			})
+			
+		});
+		
+		//*/ 	
+		
+		
+		
+		
 </script>
 	
 <style>
@@ -433,6 +492,28 @@
 				background:#6cc;
 				font-weight: bolder
 }
+
+
+.toastMessage {
+    width:400px;
+    height:auto;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
+
+
 
 </style>
 
@@ -505,8 +586,7 @@
 									<h3>
 										<a href="#"><strong>&nbsp;</strong></a>
 									</h3>
-									<input type="button" name="kakaver" 
-										data-toggle="modal" data-target="#myModal" value="카카버">
+									<input type="button" name="kakaver" value="카카버">
 
 								</header>
 							</article>
@@ -650,6 +730,7 @@
 	<a id="topBtn" href="#" class="icon fa-arrow-up circled"></a>
 
 </form>
+<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>
 
 </body>
 

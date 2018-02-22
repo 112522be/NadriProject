@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <style type="text/css">
 	#commentContainer{
 		padding-bottom: 10px;
@@ -38,6 +40,7 @@
 				$(".comment").empty();
 				$(".comment").append(JSONData.totalCount);
 			}
+			
 		});
 	}
 	function addComment() {
@@ -169,3 +172,16 @@
 		<div id="commentContainer"></div>
 	</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+

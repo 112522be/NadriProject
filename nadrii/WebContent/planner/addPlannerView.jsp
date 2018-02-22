@@ -235,9 +235,11 @@
 								<form name="addPlanner">
 								<div>
 									<c:if test="${status == 'normal'}">
+										<input type="hidden" name="imgSrc" id="imgSrc" />
 										<input type="button" id="save" value="플래너 저장" style="float: right;" />
 									</c:if>
 									<c:if test="${status == 'update'}">
+										<input type="hidden" name="imgSrc" id="imgSrc" />
 										<input type="button" id="update" value="플래너 수정" style="float: right;" />
 									</c:if>
 										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:8px; width:80%; font-size: 13pt;"/>

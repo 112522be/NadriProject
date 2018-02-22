@@ -193,6 +193,7 @@
 								<!--  </a>-->
 							</li>
 		</c:if>
+		<li><a href="../index.jsp">홈으로 가기</a></li>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너 ▼</a>
@@ -225,6 +226,7 @@
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
 			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
+			<li><a href="/ticket/showMeTheTicket">내 티켓 보여주기</a></li>
 		</ul>
 	</c:if>
 	</li>
