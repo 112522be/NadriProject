@@ -119,7 +119,7 @@
 	
 	$(function(){
      $("a[href='#' ]:contains('내정보 보기')").on("click" , function() {
-        self.location = "/user/getUser?userId="+$(this).text().trim();
+        self.location = "/user/myPage.jsp"
      });
   });
   
