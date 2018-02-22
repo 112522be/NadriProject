@@ -9,6 +9,7 @@
 		background: #4b3753;
 	}
 </style>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript"> 
 	var postNo = $('input[name="postNo"]').val();
 	function listComment() {
@@ -29,7 +30,7 @@
 					+JSONData.listComment[i].regDate
 					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
 					if("${loginUser.userId}"==JSONData.listComment[i].userId){
-						html += '<span class="glyphicon glyphicon-pencil" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" style="font-size:10pt;"/>';
+						html += '<span class="fas fa-edit" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:10pt;"/>';
 					}
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
 					$('#commentContainer').append(html);
@@ -104,14 +105,15 @@
 		var text;
 		var commentNo;
 		
-		$('#commentContainer').on('click','span.glyphicon.glyphicon-pencil',function() {
-			text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
-			commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
+		$('#commentContainer').on('click','.fa-edit',function() {
+			alert(1);
+			text = $($('span.text')[$(".fa-edit").index(this)]).html();
+			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
 			var editForm = '<span style="position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
-			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html(editForm);
-			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("overflow", "hidden");
-			$($('div.comments')[$(".glyphicon.glyphicon-pencil").index(this)]).attr("style", "margin-bottom: -10em;");
-			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).removeAttr("style");
+			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
+			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");
+			$($('div.comments')[$(".fa-edit").index(this)]).attr("style", "margin-bottom: -10em;");
+			$($('span.text')[$(".fa-edit").index(this)]).removeAttr("style");
 		});
 		
 		$('#commentContainer').on('click', 'div[name="update"]', function() {
@@ -120,9 +122,9 @@
 			updateComment(commentNo, text);
 		});
 		
-		$('#commentContainer').on('click', 'span.glyphicon.glyphicon-trash',function() {
+		$('#commentContainer').on('click', '.fa-trash',function() {
 			if(confirm("삭제하시겠습니까?")==true){
-				var commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-trash").index(this)]).val();
+				var commentNo = $($('input[name="commentNo"]')[$(".fa-trash").index(this)]).val();
 				$.ajax({
 					url: '/common/deleteComment',
 					method:'POST',

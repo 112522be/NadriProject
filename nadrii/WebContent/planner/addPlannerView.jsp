@@ -45,7 +45,7 @@
 			border-color: #afafaf;
 		}	
 		.map_wrap, .map_wrap * {
-		    font-size: 15px !important;
+		    font-size: 16px !important;
 		}		
 		th{
 			padding: 10px;
@@ -53,8 +53,18 @@
 		}	
 		input[type="button"]{
 			padding: 0 5px;
-			font-size: 15px !important;
+			font-size: 18px !important;
 		}	
+		.ui-dialog .ui-dialog-titlebar {
+		    padding: 0em 1em;
+		    position: relative;
+		}
+		.ui-widget-header {
+    		background: #f9a11b;
+    	}
+    	.ui-dialog .ui-dialog-title {
+		    color: #ffffff;
+	    }
 		</style>
 		<script>
 
@@ -132,6 +142,7 @@
 						$("#wishTable").dialog({
 							width: 700,
 							height: 500,
+							title: 'WISH LIST',
 							open: function(event, ui){
 								$("#wishTable").css('overflow', 'auto');
 							}
@@ -221,7 +232,7 @@
 									<c:if test="${status == 'update'}">
 										<input type="button" id="update" value="플래너 수정" style="float: right;" />
 									</c:if>
-										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:3px;width:70%; font-size: 12pt;"/>
+										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:8px; width:80%; font-size: 13pt;"/>
 								</div>
 								
 								<div style="overflow: hidden; padding-top: 20px;">
@@ -249,7 +260,7 @@
 												<a role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse1"
 													aria-expanded="true" aria-controls="collapse1"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로1
+													class="fas fa-flag-checkered"></span>&nbsp;경로1
 												</a>
 											</h4>
 										</div>
@@ -264,7 +275,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse2"
 													aria-expanded="false" aria-controls="collapse2"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로2
+													class="fas fa-flag-checkered"></span>&nbsp;경로2
 												</a>
 											</h4>
 										</div>
@@ -279,7 +290,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse3"
 													aria-expanded="false" aria-controls="collapse3"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로3
+													class="fas fa-flag-checkered"></span>&nbsp;경로3
 												</a>
 											</h4>
 										</div>
@@ -294,7 +305,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse4"
 													aria-expanded="false" aria-controls="collapse4"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로4
+													class="fas fa-flag-checkered"></span>&nbsp;경로4
 												</a>
 											</h4>
 										</div>
@@ -309,7 +320,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse5"
 													aria-expanded="false" aria-controls="collapse5"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로5
+													class="fas fa-flag-checkered"></span>&nbsp;경로5
 												</a>
 											</h4>
 										</div>
@@ -324,7 +335,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse6"
 													aria-expanded="false" aria-controls="collapse6"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로6
+													class="fas fa-flag-checkered"></span>&nbsp;경로6
 												</a>
 											</h4>
 										</div>

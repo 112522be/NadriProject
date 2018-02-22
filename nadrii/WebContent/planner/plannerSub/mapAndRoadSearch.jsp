@@ -5,11 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
-.map_wrap, .map_wrap * {
-    font-size: 13.5px !important;
-}
-</style>
 </head>
 <body>
 
