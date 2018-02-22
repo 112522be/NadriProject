@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>No Sidebar - Helios by HTML5 UP</title>
+		<title>나만의 나들이</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -106,16 +106,18 @@
 	</head>
 	<body class="no-sidebar">
 		<div id="page-wrapper">
-			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 			<input type="hidden" name="postNo" value="${community.postNo}">
 			<!-- Header -->
 				<div id="header">
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="../index.jsp" id="logo">NADRII</a></h1>
+								<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
 							</header>
 						</div>
+						
+					<jsp:include page="../layout/toolbar.jsp" />
+						
 				</div>
 
 			<!-- Main -->
@@ -138,7 +140,7 @@
 								</div>
 							</header>
 							<br/>
-							<div>
+							<div >
 							<c:if test="${community.userId == loginUser.userId}">
 								<div align="right">
 									<a id="modify"><span class="glyphicon glyphicon-wrench"></span></a>

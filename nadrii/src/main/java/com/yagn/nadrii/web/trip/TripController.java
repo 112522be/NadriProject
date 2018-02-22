@@ -1,6 +1,5 @@
 package com.yagn.nadrii.web.trip;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,14 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.User;
-import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.wish.WishService;

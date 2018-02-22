@@ -23,7 +23,6 @@
 		<script src="../resources/helios/assets/js/main.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3"></script>
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		
 		<!-- Latest compiled and minified JavaScript -->
 		

@@ -24,10 +24,6 @@
 	opacity: 0.7;
 	
 }
-
-
-
-
 .carousel{
 	background-color: #ffffff;
 }
@@ -69,26 +65,17 @@ img{
 		<div id="page-wrapper">
 
 			<div id="header">
-				<div class="inner">
 					<header>
 						<h1><a href="../index.jsp" id="logo">위시리스트</a></h1>
 					</header>
-				</div>
-						
-				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
-		
-			
-			
-			
+
 			<section class="carousel">
 				<div class="reel" style="overflow: visible; transform: translate(0px, 0px);">
 					<c:forEach var ="list" items="${list}">			
-						
-							<img src="${list.tripNo.thumbnailImageFile}" alt="" style="height: 250.42px; ">
-						
-						
-						
+						<span>	
+							${list.tripNo.tripName}
+						</span>
 					</c:forEach>		
 				</div>
 				<span class="forward" style="display: block;"></span>
