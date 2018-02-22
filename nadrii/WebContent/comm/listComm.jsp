@@ -243,7 +243,7 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a href="../index.jsp" id="logo">NADRII</a></h1>
+					<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
 				</header>
 			</div>
 		</div>
@@ -266,7 +266,7 @@
 					</div>
 				</div>	
 				<div>
-					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="glyphicon glyphicon-pencil"></span></button>
+					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="fas fa-pencil-alt"></span></button>
 				</div>
 				<div class="row" id="listContainer">
 					<c:set var="i" value="0" />

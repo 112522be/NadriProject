@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <style type="text/css">
 	#commentContainer{
 		padding-bottom: 10px;
@@ -24,15 +22,15 @@
 			success: function(JSONData) {
 				$('#commentContainer').empty();
 				for(i=0;i<JSONData.totalCount;i++){
-					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
+					var html = '<div class="comments" style="padding: 0 0 20px 0; overflow: hidden;"><span class="col-xs-1" style="float: left; padding: 10px 0 0 50px;"><input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
-					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-16" style="padding-left: 30px;"><span style="color: black;">'
 					+JSONData.listComment[i].userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
 					+JSONData.listComment[i].regDate
-					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
+					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-1 edit" style="float: right; padding: 0;">';
 					if("${loginUser.userId}"==JSONData.listComment[i].userId){
-						html += '<span class="fas fa-edit" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:10pt;"/>';
+						html += '<span class="fas fa-edit" style="font-size:12pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:12pt;"/>';
 					}
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
 					$('#commentContainer').append(html);
@@ -40,7 +38,6 @@
 				$(".comment").empty();
 				$(".comment").append(JSONData.totalCount);
 			}
-			
 		});
 	}
 	function addComment() {
@@ -109,15 +106,16 @@
 		var commentNo;
 		
 		$('#commentContainer').on('click','.fa-edit',function() {
-			alert(1);
-			text = $($('span.text')[$(".fa-edit").index(this)]).html();
-			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
-			var editForm = '<span style="position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
-			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
-			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");
-			$($('span.edit')[$(".fa-edit").index(this)]).empty();
-			$($('div.comments')[$(".fa-edit").index(this)]).attr("style", "margin-bottom: -10em;");
-			$($('span.text')[$(".fa-edit").index(this)]).removeAttr("style");
+			
+			text = $($('span.text')[$(".fa-edit").index(this)-1]).html();
+			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)-1]).val();
+			alert(commentNo);
+			var editForm = '<span style="position: relative; float: left; width: 76%; padding-left: 25px;"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
+			$($('span.text')[$(".fa-edit").index(this)-1]).html(editForm);
+			$($('span.edit')[$(".fa-edit").index(this)-1]).css("overflow", "hidden");
+			$($('span.edit')[$(".fa-edit").index(this)-1]).empty();
+			$($('div.comments')[$(".fa-edit").index(this)-1]).attr("style", "margin-bottom: -10em;");
+			$($('span.text')[$(".fa-edit").index(this)-1]).removeAttr("style");
 		});
 		
 		$('#commentContainer').on('click', 'div[name="update"]', function() {
@@ -158,12 +156,12 @@
 </script>
 
 <body onload="listComment()">
-	<div>
+	<div style="padding-left: 90px; width: 90%;">
 		<div>
 			<form name="formData">
 				<input type="hidden" name="userId" value="${loginUser.userId}">
 				<div style="float: left; width: 83%;">
-					<input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요...">
+					<input type="text" name="text" class="form-control" style="font-size: 12pt;" placeholder="댓글을 입력하세요...">
 				</div>
 			</form>
 		</div>
@@ -172,16 +170,3 @@
 		<div id="commentContainer"></div>
 	</div>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-

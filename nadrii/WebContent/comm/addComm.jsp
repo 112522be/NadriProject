@@ -37,9 +37,6 @@
 		.body{
 			background: #e6ebed;
 		}
-		button {
-			padding:0 1% 0 1%;
-		}
 	</style>
 </head>
 <body>

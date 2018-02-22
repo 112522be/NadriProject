@@ -12,7 +12,6 @@ public class User {
 	private String password;
 	private String role;
 	private String phone;
-	private String addr;
 	private String email;
 	private Date regDate;
 	private String birth;
@@ -67,12 +66,6 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public String getAddr() {
-		return addr;
-	}
-	public void setAddr(String addr) {
-		this.addr = addr;
 	}
 	public String getEmail() {
 		return email;
@@ -171,7 +164,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
-				+ ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate + ", birth="
+				+ ", phone=" + phone + ", email=" + email + ", regDate=" + regDate + ", birth="
 				+ birth + ", profileImageFile=" + profileImageFile + ", qrCode=" + qrCode + ", children=" + children
 				+ ", gender=" + gender + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
 				+ ", checkSuccess=" + checkSuccess + ", modalUserId=" + modalUserId + ", modalUserPw=" + modalUserPw

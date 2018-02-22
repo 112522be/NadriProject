@@ -1,5 +1,7 @@
 package com.yagn.nadrii.web.user;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +42,6 @@ import com.yagn.nadrii.service.like.LikeService;
 import com.yagn.nadrii.service.message.MessageService;
 import com.yagn.nadrii.service.purchase.PurchaseService;
 import com.yagn.nadrii.service.user.UserService;
-
 
 @Controller
 @RequestMapping("/user/*")
@@ -85,15 +86,14 @@ public class UserController {
 
 		System.out.println("\n[1. user Domain check]==>" + user.toString());
 
-
 		if (user.getUserId() == "" || user.getUserId() == null) {
 			user.setUserId(user.getModalUserId());
 			user.setPassword(user.getModalUserPw());
 			user.setEmail(user.getModalUserEmail());
 		}
-		
+
 		System.out.println("\n[2. user Domain check]==>" + user.toString());
-		
+
 		/// GetQRCode ///////////////////////////////////////////
 		Purchase purchase = new Purchase();
 		purchase.setBuyerId(user.getUserId());
@@ -102,8 +102,7 @@ public class UserController {
 		user.setQrCode(getQRCode);
 		System.out.println("\n[User Domain Check]==>" + user.toString());
 		/////////////////////////////////////////////////////////
-		
-		
+
 		userService.addUser(user);
 
 		Map map = new HashMap();
@@ -119,86 +118,73 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 
 	}
-	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute User user,HttpSession session,HttpServletRequest request, Map map) throws Exception {
-		System.out.println(this.getClass()+"/login.POST");
-		System.out.println("\n[user domain check]==>" + user.toString());
-		
-		String userId = user.getUserId();
-		String password = user.getPassword();
 
-		user = userService.getUser(userId);
-		System.out.println(user);
-		if(user != null) {
-			if(user.getPassword().equals(password)) {
-				System.out.println("1");
-				session = request.getSession(true);
-				session.setAttribute("loginUser", user);
-				return "redirect:/index.jsp";				
-				
-			}else {
-				System.out.println("2");
-				map.put("systemMessage", "pwError");
-				return "forward:/user/loginView.jsp";
-			}
-			
-		}else {
-			System.out.println("3");
-			map.put("systemMessage", "IdError");
-			return "forward:/user/loginView.jsp";
-		}
-		
-	}
-
-	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute User user, HttpSession session, HttpServletRequest request, Map map)
 			throws Exception {
 		System.out.println(this.getClass() + "/login.POST");
+		System.out.println("\n[user domain check]==>" + user.toString());
+
 		String userId = user.getUserId();
 		String password = user.getPassword();
 
 		user = userService.getUser(userId);
-		
-		if(userId != null) {
-			boolean isAdmin = false;
-		
-			System.out.println(user.toString());
-			map =new HashMap();
-				
-			request.getSession().setAttribute("user", user );
-			
-			if(user.getRole().equals("admin")) {
-				System.out.println("관리자 로그인");
-				isAdmin = true;
-				request.getSession().setAttribute("isAdmin",  isAdmin);
-			}else if(user.getRole().equals("user")) {
-				System.out.println("일반 로그인");
-				isAdmin = false;
-				request.getSession().setAttribute("isAdmin",  isAdmin);
-			}		
-			map.put("msg", "success");	
-			
-			return "redirect:/index.jsp";
-		}		
 		System.out.println(user);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
+				System.out.println("1");
 				session = request.getSession(true);
 				session.setAttribute("loginUser", user);
 				return "redirect:/index.jsp";
 
 			} else {
+				System.out.println("2");
 				map.put("systemMessage", "pwError");
 				return "forward:/user/loginView.jsp";
 			}
 
 		} else {
+			System.out.println("3");
 			map.put("systemMessage", "IdError");
 			return "forward:/user/loginView.jsp";
 		}
 
-	}*/
+	}
+
+	/*
+	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
+	 * login(@ModelAttribute User user, HttpSession session, HttpServletRequest
+	 * request, Map map) throws Exception { System.out.println(this.getClass() +
+	 * "/login.POST"); String userId = user.getUserId(); String password =
+	 * user.getPassword();
+	 * 
+	 * user = userService.getUser(userId);
+	 * 
+	 * if(userId != null) { boolean isAdmin = false;
+	 * 
+	 * System.out.println(user.toString()); map =new HashMap();
+	 * 
+	 * request.getSession().setAttribute("user", user );
+	 * 
+	 * if(user.getRole().equals("admin")) { System.out.println("관리자 로그인"); isAdmin =
+	 * true; request.getSession().setAttribute("isAdmin", isAdmin); }else
+	 * if(user.getRole().equals("user")) { System.out.println("일반 로그인"); isAdmin =
+	 * false; request.getSession().setAttribute("isAdmin", isAdmin); }
+	 * map.put("msg", "success");
+	 * 
+	 * return "redirect:/index.jsp"; } System.out.println(user); if (user != null) {
+	 * if (user.getPassword().equals(password)) { session =
+	 * request.getSession(true); session.setAttribute("loginUser", user); return
+	 * "redirect:/index.jsp";
+	 * 
+	 * } else { map.put("systemMessage", "pwError"); return
+	 * "forward:/user/loginView.jsp"; }
+	 * 
+	 * } else { map.put("systemMessage", "IdError"); return
+	 * "forward:/user/loginView.jsp"; }
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/logout")
 	public String logout(Map map, HttpSession session, HttpServletRequest request) throws Exception {
@@ -240,45 +226,35 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "addUserPlus", method = RequestMethod.GET)
-	public String addUserPlus() throws Exception {
-		System.out.println("추가정보입력");
+	/*
+	 * @RequestMapping(value="addUserPlus", method=RequestMethod.POST) public String
+	 * addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession
+	 * session) throws Exception{
+	 * 
+	 * System.out.println("addUserPlus :: POST");
+	 * 
+	 * System.out.println("\n[1] ==>" + user);
+	 * 
+	 * System.out.println("생년 월일 >>" + user.getBirth()); System.out.println("프로필 >>"
+	 * + user.getProfileImageFile()); System.out.println("핸드폰 번호 >>" +
+	 * user.getPhone()); System.out.println("사용자 이름 >>" + user.getUserName());
+	 * System.out.println("자녀수 >>" + user.getChildren());
+	 * System.out.println("성 별 >>" +user.getGender());
+	 * 
+	 * user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
+	 * 
+	 * System.out.println(user);
+	 * 
+	 * if(user.getGender() == null) { user.setGender(""); }
+	 * 
+	 * userService.addUserPlus(user);
+	 * 
+	 * // return null; //return "forward:/user/getUser?userId="+user.getUserId();
+	 * return "redirect:/user/getUser?userId="+user.getUserId(); }
+	 */
 
-		return "forward:/user/addUserViewPlus.jsp";
-	}
-	
-/*	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
-	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
-
-		System.out.println("addUserPlus :: POST");
-		
-		System.out.println("\n[1] ==>" + user);
-		
-		System.out.println("생년 월일 >>" + user.getBirth());
-		System.out.println("프로필 >>" + user.getProfileImageFile());
-		System.out.println("핸드폰 번호 >>" + user.getPhone());
-		System.out.println("사용자 이름 >>" + user.getUserName());
-		System.out.println("자녀수 >>" + user.getChildren());
-		System.out.println("성 별 >>" +user.getGender());
-
-		user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
-		
-		System.out.println(user);
-		
-		if(user.getGender() == null) {
-			user.setGender("");
-		}
-		
-		userService.addUserPlus(user);
-		
-//		return null;
-		//return "forward:/user/getUser?userId="+user.getUserId();
-		return "redirect:/user/getUser?userId="+user.getUserId();
-	}*/
-	
-	
-	@RequestMapping(value="getUser", method=RequestMethod.GET)
-	public String getUser(){
+	@RequestMapping(value = "getUser", method = RequestMethod.GET)
+	public String getUser() {
 		return "forward:/user/getUser.jsp";
 	}
 
@@ -298,19 +274,15 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 
-//////////////////// 이메일////////////////////////////////
+	//////////////////// 이메일////////////////////////////////
 	@RequestMapping(value = "check", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> emailAuth(
-			HttpServletResponse response, 
-			HttpServletRequest request, 
-			HttpSession session
-			)
+	public Map<String, Object> emailAuth(HttpServletResponse response, HttpServletRequest request, HttpSession session)
 			throws Exception {
-		
+
 		System.out.println("\n/user/check : POST");
-		
-//		String email = request.getParameter("email");
+
+		// String email = request.getParameter("email");
 		String email = request.getParameter("modalUserEmail");
 		String authNum = "";
 
@@ -401,87 +373,124 @@ public class UserController {
 		return buffer.toString();
 	}
 
-//////////////////////////////////////////////////////////////////////////////////////////
-				
+	//////////////////////////////////////////////////////////////////////////////////////////
 
-				@RequestMapping(value="updateUser", method=RequestMethod.POST)
-				public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
+	@RequestMapping(value = "updateUser", method = RequestMethod.GET, params={"userId"})
+	public String addUserPlus(@RequestParam("userId") String userId, Model model, HttpSession session) throws Exception {
+		System.out.println("추가정보입력");
 
-					System.out.println("addUserPlus :: POST");
-					
-					System.out.println("\n[1] ==>" + user);
-					
-					System.out.println("비밀번호 >>" + user.getPassword());
-					System.out.println("생년 월일 >>" + user.getBirth());
-					System.out.println("프로필 >>" + user.getProfileImageFile());
-					System.out.println("핸드폰 번호 >>" + user.getPhone());
-					System.out.println("사용자 이름 >>" + user.getUserName());
-					System.out.println("자녀수 >>" + user.getChildren());
-					System.out.println("성 별 >>" +user.getGender());
+		System.out.println("userId >>" + userId);
+		// Business Logic
+		User user = userService.getUser(userId);
+		// Model 과 View 연결
+		System.out.println("userbirthda : " + user.getBirth());
+		System.out.println("userphone : " + user.getPhone());
+		/*
+		 * user.setPhone1(user.getPhone().split("-")[0]);
+		 * user.setPhone2(user.getPhone().split("-")[1]);
+		 * user.setPhone3(user.getPhone().split("-")[2]);
+		 * System.out.println("userphone1 : "+user.getPhone1());
+		 * System.out.println("userphone2 : "+user.getPhone2());
+		 * System.out.println("userphone3 : "+user.getPhone3());
+		 * System.out.println("userchild : "+user.getChildren());
+		 */
+		model.addAttribute("user", user);
 
-					//user.setUserId( ((User) session.getAttribute("user")).getUserId());
-					user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
-					
-					System.out.println(user);
-					
-					if(user.getGender() == null) {
-						user.setGender("");
-					}
-					
-					userService.updateUser(user);
-					
-//					return null;
-					//return "forward:/user/getUser?userId="+user.getUserId();
-					return "redirect:/user/getUser?userId="+user.getUserId();
-				}
+		return "forward:/user/updateUser.jsp";
+	}
 
+	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
+	public String addUserPlus(@ModelAttribute("user") User user, Model model, HttpSession session,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("updateUse :: POST");
+
+		System.out.println("권한 ==" + user.getRole());
+
+		System.out.println("비밀번호 >>" + user.getPassword());
+		System.out.println("생년 월일 >>" + user.getBirth());
+		System.out.println("프로필 >>" + user.getProfileImageFile());
+		System.out.println("request : " + request.getParameter("profileImageFile"));
+		System.out.println("핸드폰 번호 >>" + user.getPhone());
+		System.out.println("사용자 이름 >>" + user.getUserName());
+		System.out.println("자녀수 >>" + user.getChildren());
+		System.out.println("성 별 >>" + user.getGender());
+		
+		String[] birthArray = user.getBirth().split("/");
+		String realBirth = birthArray[2]+birthArray[0]+birthArray[1];
+		System.out.println(realBirth);
+		user.setBirth(realBirth);
+
+		// user.setUserId( ((User) session.getAttribute("user")).getUserId());
+		user.setUserId(((User) session.getAttribute("loginUser")).getUserId());
+		user.setRole(((User) session.getAttribute("loginUser")).getRole());
+		user.setEmail(((User) session.getAttribute("loginUser")).getEmail());
+		user.setRegDate(((User) session.getAttribute("loginUser")).getRegDate());
+		user.setQrCode(((User) session.getAttribute("loginUser")).getQrCode());
+
+		System.out.println(user);
+
+		if (user.getGender() == null) {
+			user.setGender("");
+		}
+		
+		if (user.getBirth() == null) {
+			user.setBirth("");
+		}
+
+		userService.updateUser(user);
+
+		// return null;
+		// return "forward:/user/getUser?userId="+user.getUserId();
+		return "redirect:/user/getUser?userId=" + user.getUserId();
+	}
 
 	@RequestMapping("kakaoLogin")
-	public String kakaoLogin(@RequestParam String code, HttpServletRequest request, HttpSession session) throws Exception {
+	public String kakaoLogin(@RequestParam String code, HttpServletRequest request, HttpSession session)
+			throws Exception {
 		TokenResponse token = LoginRestClient.loginToken(code);
 		JSONObject object = LoginRestClient.getProfile(token.getAccess_token());
 		User user = new User();
 		user.setEmail(object.get("kaccount_email").toString());
-		
+
 		if(((JSONObject) object.get("properties")).get("profile_image") !=null) {
 			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
 		}
+
 		user.setUserId(object.get("id").toString());
 		request.setAttribute("outerUser", user);
 		return "forward:addUserView.jsp";
 	}
-	
+
 	@RequestMapping("naverLogin")
-	public String naverLogin(@RequestParam String code, 
-								@RequestParam String state,
-								HttpServletRequest request, HttpSession session) throws Exception {
+	public String naverLogin(@RequestParam String code, @RequestParam String state, HttpServletRequest request,
+			HttpSession session) throws Exception {
 		NaverLoginResponse response = LoginRestClient.getNaverToken(code, state);
 		User user = LoginRestClient.getNaverUserInfo(response);
-		if(userService.getUserByEmail(user.getEmail()) == null) {
+		if (userService.getUserByEmail(user.getEmail()) == null) {
 			request.setAttribute("outerUser", user);
 			return "forward:addUserView.jsp";
-		}else {
+		} else {
 			session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
 			return "forward:../index.jsp";
 		}
-		
+
 	}
-	
-	@RequestMapping(value="/addUserFacebook" )
-	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session
-		,@ModelAttribute User params 	) throws Exception{
-		
+
+	@RequestMapping(value = "/addUserFacebook")
+	public String addUserFacebook(HttpServletRequest request, Model model, HttpSession session,
+			@ModelAttribute User params) throws Exception {
+
 		System.out.println("facebook회원가입");
-		
-		System.out.println("데이터"+params);		
-		
-		if(request.getParameter("facebookId") != null) {
-			String fbId = request.getParameter("facebookId");		
-			System.out.println("페이스북 아이디 : "+fbId);
-			model.addAttribute("facebookId" , fbId );
-			}
+
+		System.out.println("데이터" + params);
+
+		if (request.getParameter("facebookId") != null) {
+			String fbId = request.getParameter("facebookId");
+			System.out.println("페이스북 아이디 : " + fbId);
+			model.addAttribute("facebookId", fbId);
+		}
 		return "forward:/user/addUserFacebook.jsp";
 	}
 
 }
-

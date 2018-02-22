@@ -86,127 +86,127 @@
 //				 }
 //			 }
 		 
-		 function fncUpdateUser(){
-//			 var data = "userName=" +$("#userName").val();
-//			 if($("userName").val() == ''){
-//		   			alert("당신 이름이 맞습니까?");
-//		   			$("#userName").focus();
-//		   			return;
-//		   		}
-			
-			var radio = $("input:radio[name='gender']:checked").val();   // checked 없으면 체크한 값이 안나옴...
-			console.log("radiobutton : " + radio)
-			var birth = $("input[name='birth']").val();
-			console.log("생년월일 확인 : " + birth)
-			var name = $("input[name='userName']").val();
-			console.log("사용자 이름 : " + name)
-			var phone = $("hidden[name='phone']").val();
-			console.log("핸드폰번호 : " + phone)
-			var img = $("hidden[name='profileImageFile']").val();
-			console.log("프로필 사진 : " + img)
-			
-			var value = "";	
-			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
-				var value = $("option:selected").val() + "-" 
-									+ $("input[name='phone2']").val() + "-" 
-									+ $("input[name='phone3']").val();
+		
+		function fncUpdateUser() {
+			//			 var data = "userName=" +$("#userName").val();
+			//			 if($("userName").val() == ''){
+			//		   			alert("당신 이름이 맞습니까?");
+			//		   			$("#userName").focus();
+			//		   			return;
+			//		   		}
+
+			if ($("#password").val() == '') {
+				alert("비밀번호를 입력해주세요.");
+				$("#password").focus();
+				alert("비밀번호를 입력해주세요.02");
+				alert("111111");
+				return;
 			}
 
-			$("input:hidden[name='phone']").val( value );
-			
-			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
-			
-			 }
-		 //	============== 비밀번호 유효성 검사 =====================
-		 function checkPwd(){
-		      var password = $("#password").val();
-		      var password2 = $("#password2").val();
-		      
-		      if(password == password2 ){
-		    	  $(".signupbtn").prop("disabled", false);
-		    	  $(".signupbtn").css("background-color", "#ef8376");
-		         $("#password2").css("background-color", "#B0F6AC");
-		         return;
-		      }
-		      
-		      if(password == "" || password2 == ""){
-		    	 	 $(".signupbtn").prop("disabled", true);
-		    	 	$(".signupbtn").css("background-color", "#aaaaaa");
-			         return;
-			      }
-		      
-		      if(password != password2 ){
-		    	  $(".signupbtn").prop("disabled", true);
-		         $(".signupbtn").css("background-color", "#aaaaaa");
-		         $("#password2").css("background-color", "#FFCECE");
-		         return;
-		      }
-		     }
-		 
-		 //============= '프로필 사진' ==============
-		 $(function() {
-	            $("#imgInput").on('change', function(){
-	                readURL(this);
-	            });
-	        })
-		 
-		 function readURL(input) {
-			 
-			    if (input.files && input.files[0]) {
-			        var reader = new FileReader();
-			 
-			        reader.onload = function (e) {
-			            $('#image_section').attr('src', e.target.result);
-			        }
-			 
-			        reader.readAsDataURL(input.files[0]);
-			    }
+			if ($("#password2").val() == '') {
+				alert("비밀번호 확인을 입력해주세요.");
+				$("#password2").focus();
+				alert("비밀번호 확인을 입력해주세요.00000");
+				return;
 			}
-			 
-			$("#imgInput").change(function(){
-			    readURL(this);
-			});
+			
+			if($("#password") != null && $("password") != null){
+				alert("되는건가?");
+				var radio = $("input:radio[name='gender']:checked").val(); // checked 없으면 체크한 값이 안나옴...
+				console.log("radiobutton : " + radio)
+				var birth = $("input[name='birth']").val();
+				console.log("생년월일 확인 : " + birth)
+				var name = $("input[name='userName']").val();
+				console.log("사용자 이름 : " + name)
+				var phone = $("hidden[name='phone']").val();
+				console.log("핸드폰번호 : " + phone)
+				var img = $("hidden[name='profileImageFile']").val(
+						$("#image_section").attr("src"));
+				alert(eval(img));
+	
+				var value = "";
+				if ($("input:text[name='phone2']").val() != ""
+						&& $("input:text[name='phone3']").val() != "") {
+					var value = $("option:selected").val() + "-"
+							+ $("input[name='phone2']").val() + "-"
+							+ $("input[name='phone3']").val();
+				}
+				alert("되는건가?!!!!!!!!!!!!");
+				$("input:hidden[name='phone']").val(value);
+	
+				$("form").attr("method", "POST").attr("action", "/user/updateUser")
+						.submit();
+			}
+			return;
+		}
+		//	============== 비밀번호 유효성 검사 =====================
+		function checkPwd() {
+			var password = $("#password").val();
+			var password2 = $("#password2").val();
+
+			if (password == password2) {
+				$(".signupbtn").prop("disabled", false);
+				$(".signupbtn").css("background-color", "#ef8376");
+				$("#password2").css("background-color", "#B0F6AC");
+				return;
+			}
+
+			if (password == "" || password2 == "") {
+				$(".signupbtn").prop("disabled", true);
+				$(".signupbtn").css("background-color", "#aaaaaa");
+				return;
+			}
+
+			if (password != password2) {
+				$(".signupbtn").prop("disabled", true);
+				$(".signupbtn").css("background-color", "#aaaaaa");
+				$("#password2").css("background-color", "#FFCECE");
+				return;
+			}
+		}
+
+		//============= '프로필 사진' ==============
+		/* $(function() {
+		       $("#imgInput").on('change', function(){
+		           readURL(this);
+		       });
+		   })
+		
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
 		 
-		
+		        reader.onload = function (e) {
+		        	$('#image_section').attr('src', e.target.result);
+		        }
+		 
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		 
+		$("#imgInput").change(function(){
+		    readURL(this);
+		}); */
+
 		//	버튼 말풍선
-		 $(document).ready(function(){
-		     $('[data-toggle="popover"]').popover(); 
-		 });
-		
-		
-		
+		$(document).ready(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+
 		// ===== '추가' 버튼 처리 =====
 		/* $(function() {
-	            $("button.btn.btn-success.col-xs-3").on('click', function(){
-	            	fncUpdateUser();
-	            })
-	        }); */
-		
-	        function update(){
-	        	if($("#password").val() == ''){
-		            alert("비밀번호를 입력해주세요.");
-		            $("#password01").focus();
-		            
-		            return;
-		         }
-		         
-		         if($("#password2").val() == ''){
-		            alert("비밀번호 확인을 입력해주세요.");
-		            $("#password02").focus();
-		            return;
-		         }
-	            if(confirm("수정하시겠습니까?")){
-	            	fncUpdateUser();
-	            }
-	        }
-	        
+		        $("button.btn.btn-success.col-xs-3").on('click', function(){
+		        	fncUpdateUser();
+		        })
+		    }); */
+
 		// ===== '취소' 버튼 처리 =====
-		function delchk(){
-        if(confirm("취소하시겠습니까?")){
-            location.href = "/user/main";
-        }
-    }
-		 
+		function delchk() {
+			if (confirm("취소하시겠습니까?")) {
+				location.href = "/user/main";
+			}
+		}
+		    
 	</script>		
     	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -267,7 +267,7 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
+		<h1 class="bg-primary text-center" id="formImg" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" action="updateUser" style="padding-top:50px;">
@@ -291,7 +291,7 @@
 		  <div class="form-group">
 		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생 년 월 일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control datepicker" id="birth" name="birth" value="" placeholder="생 년 월 일" style="border-radius: 25px;">
+		      <input type="text" class="form-control datepicker" id="birth" name="birth" value="${user.birth}" placeholder="생 년 월 일" style="border-radius: 25px;">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
@@ -309,7 +309,7 @@
 		  <div class="form-group">
 		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀수</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="children" name="children" value="${user.children }"placeholder="자녀수" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
@@ -317,15 +317,15 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label style="padding-right: 60px"><input type="radio" name="gender" value="남"style="margin-right: 5px;">남</label>
-			  <label><input type="radio" name="gender" value="여" style="margin-right: 5px;">여</label>
+		      <label style="padding-right: 60px"><input type="radio" name="gender" value="man" ${user.gender == 'man' ? 'checked="checked"' : ''}style="margin-right: 5px;">남</label>
+		      <label style="padding-right: 60px"><input type="radio" name="gender" value="woman" ${user.gender == 'woman' ? 'checked="checked"' : ''}style="margin-right: 5px;">여</label>
 		    </div>
 		   </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름" value="${user.userName}" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
@@ -333,18 +333,18 @@
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1" style="border-radius: 25px;">
-				  	<option value="010" >010</option>
-					<option value="011" >011</option>
-					<option value="016" >016</option>
-					<option value="018" >018</option>
-					<option value="019" >019</option>
+		      		<option value="010" ${user.phone1 == '010' ? 'selected' : ''}>010</option>
+		      		<option value="010" ${user.phone1 == '011' ? 'selected' : ''}>011</option>
+		      		<option value="010" ${user.phone1 == '016' ? 'selected' : ''}>016</option>
+		      		<option value="010" ${user.phone1 == '017' ? 'selected' : ''}>017</option>
+		      		<option value="010" ${user.phone1 == '019' ? 'selected' : ''}>019</option>
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="phone2" name="phone2" value="${user.phone2 }" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="phone3" name="phone3" value="${user.phone3 }" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <input type="hidden" name="phone"/>
 		  </div>
@@ -352,19 +352,20 @@
 		  <div class="form-group">
 		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
-				  <form id="form" runat="server">
-				    <input type="file" id="imgInput"/>
+				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
+				    <input type="file" id="imgInput" name="profileImageFile" value=""/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
-				    <input type="hidden" name="profileImageFile"/>
-				</form>
+				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
+				<!-- </form> -->
 		     </div>
 		   </div>
 		  
 		  <div class="form-group row">
 		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
-		      <button type="button" class="button btn btn-success col-xs-3 signupbtn" data-toggle="popover"
+		      <!-- <button type="button" class="button btn btn-success col-xs-3 signupbtn" data-toggle="popover"
 		      data-trigger="hover"data-placement="bottom" 
-		      style="margin:0 5% 12% 0; " data-content="이름, 핸드폰번호 다시 확인!" onclick="update()">수 정</button>
+		      style="margin:0 5% 12% 0; " data-content="이름, 핸드폰번호 다시 확인!" onclick="update()">수 정</button> -->
+		      <input type='button' id="updateUser" class="button btn btn-success col-xs-3 signupbtn" value="submit" onclick="fncUpdateUser()"/>
 			  <a class="button btn btn-primary col-xs-3 cancel" href="#" role="button" onclick="delchk()">취&nbsp;소</a>
 		    </article>
 		  </div>
