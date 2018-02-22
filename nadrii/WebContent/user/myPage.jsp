@@ -303,7 +303,6 @@
 				}
 				$('#logContainer').html(html);
 				$('#logContainer').on('click', 'p#addedTitle', function() {
-					alert($('p#addedTitle').index(this));
 					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 					if(postNo == null){
 						alert("삭제된 게시물입니다.");
