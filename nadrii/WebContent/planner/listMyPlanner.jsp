@@ -73,7 +73,7 @@
 		}
 		
 		function clickMessage(){
-			window.open("../message/addMessage?recevierId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -201,6 +201,10 @@
 		</div>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
+				<header>
+					<h2>나의 나들이 플래너</h2>
+					<p>내가 직접 만든 나만의 나들이 플래너로 여행을 떠나보세요.</p>
+				</header>
 				<div class="continer">
 					<div class="col-sm-12" style="padding-bottom: 40px;">
 						<h6 style="color: #8a8c91; float: left; font-style:normal;">
@@ -237,7 +241,7 @@
 										<h3><a href="#none" name="title">${planner.title}</a></h3>
 										<time class="published" datetime="${planner.regDate}">${planner.regDate}</time>
 									</header>
-																
+									
 									<div>
 										<div class="author" style="float: left;"> 
 											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>

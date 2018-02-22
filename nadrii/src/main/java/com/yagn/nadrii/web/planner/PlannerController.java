@@ -233,7 +233,6 @@ public class PlannerController {
 		
 		int latLength = lat.length;
 		
-		
 		System.out.println("lat :: "+lat);
 		System.out.println("lng :: "+lng);
 		
@@ -308,9 +307,7 @@ public class PlannerController {
 		System.out.println("file  :: " + file + " || " + file.length);
 		String fileName = UUID.randomUUID().toString();
 
-		stream = new FileOutputStream(
-				"/Users/hansangwoo/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName
-						+ ".png");
+		stream = new FileOutputStream("/Users/hansangwoo/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
 		System.out.println("file이름 : " + fileName);
 
 		stream.write(file);
