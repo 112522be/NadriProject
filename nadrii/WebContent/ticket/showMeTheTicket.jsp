@@ -78,12 +78,12 @@ $(function(){
 				<article id="main" class="container special">
 					<header>
 						<h2>
-						<c:if test="${ user.qrCode eq null }">
-							티켓이 없습니다.
-						</c:if>
-						<c:if test="${ user.qrCode ne null }">
+<%-- 						<c:if test="${ user.qrCode eq null }"> --%>
+<!-- 							티켓이 없습니다. -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${ user.qrCode ne null }"> --%>
 							<img src="../resources/qrcode/${ user.qrCode }" alt="">
-						</c:if>
+<%-- 						</c:if> --%>
 						</h2>
 						<p>입장시 티켓을 보여주세요.</p>
 					</header>
