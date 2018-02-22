@@ -266,7 +266,7 @@
 					</div>
 				</div>	
 				<div>
-					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="fas fa-pencil-alt"></span></button>
+					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="fas fa-plus"></span></button>
 				</div>
 				<div class="row" id="listContainer">
 					<c:set var="i" value="0" />

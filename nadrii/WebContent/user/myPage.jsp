@@ -304,13 +304,16 @@
 				$('#logContainer').html(html);
 				$('#logContainer').on('click', 'p#addedTitle', function() {
 					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
-					if(postNo == null){
-						alert("삭제된 게시물입니다.");
-					}else{
-						if(postNo.indexOf("60") != 0){
-							self.location = "/comm/getComm?postNo="+postNo;
+						if(postNo == null){
+							alert("삭제된 게시물입니다.");
 						}else{
-							self.location = "/group/getGroup?groupNo="+postNo;
+							if(postNo.indexOf("60") != 0){
+								self.location = "/comm/getComm?postNo="+postNo;
+							}else if(postNo.indexOf("40") != 0){
+								self.location = "/group/getGroup?groupNo="+postNo;
+							}else{
+								
+							}
 						}
 					}
 				})

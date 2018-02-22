@@ -92,7 +92,7 @@
 				padding: 10px;
 			}
 			img{
-				max-width: 700;
+				max-width: 90%;
 				height: auto;
 			}
 			hr{
@@ -143,7 +143,7 @@
 							<div >
 							<c:if test="${community.userId == loginUser.userId}">
 								<div align="right">
-									<a id="modify"><span class="fas fa-edit"></span></a>
+									<a id="modify"><span class="fas fa-pencil-alt"></span></a>
 									&nbsp;
 									<a id="delete"><span class="fas fa-eraser"></span></a>
 								</div>
@@ -152,13 +152,13 @@
 							</div>
 							<br/><br/>
 							<div>
-								<div align= "left" class="col-xs-9" style="padding: 30px;">
-									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 13pt;">${community.hashtag}</span>
-								</div>
-								<div align="right" class="col-xs-3">
+								<span align= "left" class="col-xs-9" style="padding: 0;">
+									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 1em;">${community.hashtag}</span>
+								</span>
+								<span align="right" class="col-xs-3">
 									<input type="hidden" name="postNo" value="${community.postNo}">
 									<jsp:include page="../common/like.jsp"></jsp:include>
-								</div>
+								</span>
 							</div>
 						</article>
 						<br/><br/><br/>

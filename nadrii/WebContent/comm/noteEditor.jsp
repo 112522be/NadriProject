@@ -76,7 +76,7 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
 	 	        	}
 				},
 				error : function() {
@@ -85,11 +85,11 @@
         	})
         }
         function addHashTag(value) {
-        	$('button.hashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-ok');
+        	$('button.hashtagButtons[value="'+value+'"]').html('<span class="fas fa-check-circle"></span>&nbsp;#'+value);
 			$('button.hashtagButtons[value="'+value+'"]').attr('class', 'selectedhashtagButtons');
 		}
         function deleteHashTag(value) {
-        	$('button.selectedhashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-plus');
+        	$('button.selectedhashtagButtons[value="'+value+'"]').html('<span class="fas fa-plus"></span>&nbsp;#'+value);
 			$('button.selectedhashtagButtons[value="'+value+'"]').attr('class', 'hashtagButtons');
 		}
         $(function() {
@@ -114,7 +114,7 @@
  				if(key.keyCode==13){
  					if(data!=""){
  		 				$(this).val("");
- 						$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data+'</button>&nbsp;');
+ 						$("#cndHashTags").append('<button type="button" class="selectedhashtagButtons" value="'+data+'"><span class="fas fa-check-circle"></span>&nbsp;#'+data+'</button>&nbsp;');
  					}else{	
  	 					alert("추가하실 해시태그를 입력해주세요");
  					}
@@ -168,7 +168,7 @@
         	 	var ui = $.summernote.ui;
 
 	        	var button = ui.button({
-	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
+	        		contents: '<i class="fas fa-map-marker-alt"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
 	    				    var uri = "addPlace.jsp";
@@ -181,12 +181,12 @@
 	    				    	if(content == null || content=='' || lat=="," || lng == ","){
 									return;
 	    				    	}else{ 
-	    				    		var html =$('#summernote').summernote('code')+'<br/><div class="accordion"><button type="button" class="btn btn-default">'+
-									'<div class="col-xs-3" align="left">'+
+	    				    		var html =$('#summernote').summernote('code')+'<p><br/><button type="button" class="btn btn-default">'+
+									'<span class="col-xs-3">'+
 									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-									'</div>'+
-									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>'+
-									'<div><div id="map" style="width:500px;height:400px;"></div></div></div><br/><p></p>';
+									'</span>'+
+									'<span class="col-xs-9">'+$('#content_pr').val()+'</button>'+
+									'</span><br/><br/></p>';
 				    				$('#summernote').summernote('code', html);
 	    				    	}
 						})
@@ -228,7 +228,7 @@
 		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
+		<div id="cndThumbnail" align="center"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">
