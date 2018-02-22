@@ -69,7 +69,7 @@
 			fncLoginValidateCheck(userId, userPw);
 		})
 	});
-
+///*
 	// ========== 로그인 시 아이디, 비밀번호 유효성 검사 ==========
 	function fncLoginValidateCheck(userId, userPw) {
 
@@ -93,7 +93,7 @@
 	
 	
 
-	
+	///*
 	
 	
 // ========== 회원가입 파트 ==========
@@ -145,7 +145,7 @@
 	}
 
 	// ========== Password part ==========
-
+///*
 	// ========== 비밀번호 확인 ==========
 	function checkPwd() {
 
@@ -177,7 +177,7 @@
 			$("#validatePw").html("&nbsp;&nbsp;비밀번호가 일치하지 않습니다.").css('color', 'red');
 		}
 	}
-
+///*
 	// ========== '회원가입 시 인증번호 요청' 버튼 Event 처리 ==========
 	$(function() {
 		$("a[href='#']:contains('인증번호요청')").bind("click", function(event) {
@@ -186,7 +186,7 @@
 
 		})
 	});
-
+///*
 	// ========== '회원가입 시 인증번호 요청' 버튼 Event 처리 ==========
 	function checkSend() {
 
@@ -220,8 +220,7 @@
 
 	}
 
-	
-
+	///*
 	// ========== 회원가입 시 아이디, 비밀번호 유효성 검사 ==========
 	function fncAddValidateCheck() {
 		if ($("input[name='modalUserPw']").val() == '') {
@@ -229,6 +228,7 @@
 			$("input[name='modalUserPw']").focus();
 
 			return;
+		}
 
 		if ($("input[name='modalUserRePw']").val() == '') {
 			alert("비밀번호 확인을 입력해주세요.");
@@ -253,7 +253,7 @@
 	}
 
 	// ========== 회원가입 버튼 Block 처리 ==========
-		
+	//	/*
 	var idCheckFlag = false;
 	var pwdCheck = false;	
 		
@@ -306,7 +306,7 @@
 		}
 
 	}
-
+///*
 	///     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
 	var idCheckFlag = false;
 	var pwdCheck = false;
@@ -328,7 +328,7 @@
 	}
 
 	
-	/*
+	///*
 	function addUser() {
 		var data = "userId=" + $("#userId01").val();
 		data += "&password=" + $("#password01").val();
@@ -373,7 +373,7 @@
 	}
 
 	
-	
+	///*
 	// ========== '가입' 버튼 Event 처리 ==========
 	$(function() {
 		$("button:contains('가 입')").on("click", function(event) {
@@ -381,15 +381,15 @@
 			fncAddValidateCheck();
 		})
 	});
-	
+	///*
 	// ========== '카카버' 버튼 Event 처리 ==========
 	$(function() {
 		$("input[name='kakaver']").on("click", function(event) {
 			self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code";
-	})
+		})
 	});
 	
-	
+	///*
 	// ========== TOP button ==========
 	$(function() {
 		$(window).scroll(function() {
@@ -407,7 +407,7 @@
 			return false;
 		});
 	});
-	
+	///*
 	//=========alert 대신 toast
 	function makeToast(title) {
 		$('#toastMessage').text(title).fadeIn(400).delay(3000).fadeOut(400);
@@ -418,41 +418,47 @@
 	//=============== img 클릭=======================
 		$(function(){
 			
-			$($(".reel img")[0]).on("click",function(e){
+			$($(".reel img")[0]).on("click",function(){
 			
 				self.location = "../trip/getTheme"
-				e.prevenDefault
+		
 				
 			})
-			
+		});
+		
+		$(function(){	
 			$($(".reel img")[1]).on("click",function(){
-				alert("어디로 갈까?");
-				//self.location ="/comm/listComm";
+				//alert("어디로 갈까?");
+				self.location ="/planner/getUserPlannerList";
 			})
+		});
 			
+		$(function(){	
 			$($(".reel img")[2]).on("click",function(){
 				self.location ="/comm/listComm";
 			})
+		});
 			
+		$(function(){	
 			$($(".reel img")[3]).on("click",function(){
 				
-				if(${loginUser != null}){
-					self.location ="/ticket/listTicket";
-				}else{
-					makeToast("로그인이 필요합니다");
-					self.location ="/user/login";
-				}
+				self.location ="/ticket/listTicket";
 				
 			})
-						
+		});
+		
+			
+		$(function(){	
+			
+		
 			$($(".reel img")[4]).on("click",function(){
 				self.location ="/group/listGroup";
-			
 			})
 			
-			
-			
-		})
+		});
+		
+		//*/ 	
+		
 		
 		
 		

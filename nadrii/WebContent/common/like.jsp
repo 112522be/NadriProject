@@ -51,7 +51,7 @@ function getLike(){
 			$(".like").append(returnData.totalCount);
 			
 			$("span.heart").empty();
-			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='')){
             	$("span.heart").append('<i class="far fa-heart"></i>');
             }else{
                 $("span.heart").append('<i class="fas fa-heart full"></i>');

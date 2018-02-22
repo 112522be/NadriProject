@@ -248,6 +248,9 @@ public class TripRestController {
 			
 		}	
 		
+		Thread.sleep(1000);
+		
+		map.put("result", tripService.getTripFromDB(contentId)	);
 		
 		return map;
 	}
@@ -258,7 +261,7 @@ public class TripRestController {
 		Map map = new HashMap();
 		
 		Trip trip = tripService.getTripFromDB(contentId);
-		
+		System.out.println(trip);
 		if(trip ==null) {
 		
 			TourApiDomain tourApiDomain = tripService.getTrip(contentId, contentTypeId);
@@ -276,6 +279,7 @@ public class TripRestController {
 			tripService.addTriptoDB(trip);
 		}
 		
+		System.out.println(tripService.getTripFromDB(contentId));
 		map.put("result", tripService.getTripFromDB(contentId));
 		return map;
 	}

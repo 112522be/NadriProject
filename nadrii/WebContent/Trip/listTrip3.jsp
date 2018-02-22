@@ -193,11 +193,19 @@ pageEncoding="UTF-8"%>
 	
 	
 	$(function(){
+		/*
+		var searchY = $(".jbTableCell.jbText").position().top;
+		var searchX =	$(".jbTableCell.jbText").position().left;
+		alert(searchY+"/////////"+searchX)
+		*/
+		
+		
 		$('#dialog').dialog({
-		 	modal: true,
+// 		 	modal: true,
 		    autoOpen: false,
 		    resizable: false,
-		    width: 800
+		    width: 800,
+		    /*position: "center"*/
 		});
 		
 	});
@@ -292,13 +300,14 @@ pageEncoding="UTF-8"%>
 		
 				$('#dialog').dialog('open');
 				
-				
+			
 			}
 		});
 	}
 	
 	//우리 디비에 데이터를 호출하고 저장할 때 호출
 	function addTripToDB(contentid, contenttypeid){
+		//alert("우우우우")
 		$.ajax({
 			url:"../trip/json/getTrip/"+contentid+"/"+contenttypeid+"",
 			method:"GET",
@@ -308,7 +317,9 @@ pageEncoding="UTF-8"%>
 				"Content-Type" : "application/json"
 			},
 			success:function(data){
-				alert("선저장");
+				var trip = data.result;
+				//alert(trip.postNo);
+				$("input[name='postNo']").val(trip.postNo);
 			}
 		})
 	}
@@ -326,7 +337,7 @@ pageEncoding="UTF-8"%>
 		//alert(contenttypeid);
 		
 		getTheme(contentid, contenttypeid);
-		addTripToDB(contentid, contenttypeid)
+		addTripToDB(contentid, contenttypeid);
 		
 	  });
 	});	
@@ -344,9 +355,9 @@ pageEncoding="UTF-8"%>
 			success:function(returnData){
 				var message = returnData.message;
 				if(message == "ok"){
-					alert("위시리스트 저장");
+					makeToast("위시리스트 저장되었습니다.");
 				}else{
-					alert("이미 저장된 장소");
+					makeToast("이미 저장된 장소");
 				}
 			}
 		});
@@ -359,8 +370,8 @@ pageEncoding="UTF-8"%>
 	  $(document).on("click","#wish", function(e){
 		  	if(${loginUser !=null}){
 				///*
-				alert(contentid);
-				alert(contenttypeid);
+				//alert(contentid);
+				//alert(contenttypeid);
 				//*/
 	
 				//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
@@ -368,7 +379,7 @@ pageEncoding="UTF-8"%>
 				
 				//위에서 저장한 것을 위시리스트에 재저장 
 				addWish(contentid);
-				
+				//makeToast(");
 		  	}else{
 		  		makeToast("로그인이 필요합니다");
 		  	
@@ -378,7 +389,7 @@ pageEncoding="UTF-8"%>
 		});
 	})
 	
-		
+		/*
 	//getTheme 내에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function(){
 		$("#wishList").on("click",function(e){
@@ -391,7 +402,7 @@ pageEncoding="UTF-8"%>
 			e.preventDefault();
 			
 		});
-	})
+	})*/
 /*
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
@@ -424,21 +435,28 @@ pageEncoding="UTF-8"%>
 		});
 	});
 	//*/
-	
+	/*
 	$(function() {
 		$(document).on("click",".btn.btn-default:contains('좋아요')", function(e){
 			alert("좋아요");
 			
 		});
 	});
-	
-	
+	//*/
+	/*
 	$(function() {
 		$(document).on("click",".btn.btn-default:contains('공유')", function(e){
 			alert("공유");
 		});
 	});
+	//*/
 	
+	///////////////////
+	
+	$('body').load('like.jsp', function() {
+         getLike();
+        
+      })
 		
 	</script>
 	<!-- 지도 생성하는 CDN 및 맵에 담을 내용 확인 -->
@@ -476,7 +494,7 @@ pageEncoding="UTF-8"%>
 		
 		#dialog{
 			background-color: #ffffff;
-			z-index: 100;
+			z-index: 1000;
 		}
 		.ui-dialog-titlebar{
 			background-color: #ffffff;
@@ -558,7 +576,9 @@ pageEncoding="UTF-8"%>
     z-index: 100;
 }
 
-
+#logo{
+	z-index: 10;
+}
 	</style>
 
 	<title>여행지 찾기</title>
@@ -651,7 +671,7 @@ pageEncoding="UTF-8"%>
      	<footer>
 			<input type="hidden" name="postNo" value="">
 			<jsp:include page="../common/like.jsp"></jsp:include>
-			<a href="#banner" class="button circled scrolly">공유</a>
+			
 			<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
 		</footer>
 	</div>	
