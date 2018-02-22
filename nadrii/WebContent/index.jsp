@@ -49,7 +49,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-		
+
 <script type="text/javascript">
 
 
@@ -225,7 +225,6 @@
 			$("input[name='modalUserPw']").focus();
 
 			return;
-		}
 
 		if ($("input[name='modalUserRePw']").val() == '') {
 			alert("비밀번호 확인을 입력해주세요.");
@@ -581,12 +580,7 @@
 												</div>
 											</section><!-- Carousel END -->
 
-
-	
-
-
-
-											<!-- Modal -->
+										<!-- Modal -->
 											<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1"
 												role="dialog" aria-labelledby="mySmallModalLabel">
 												<div class="modal-dialog" role="document">

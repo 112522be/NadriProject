@@ -10,6 +10,7 @@ li > span{
 	color: #F05643 !important;
 }
 </style>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript">
 
 var postNo = $("input[name='postNo']").val();
@@ -51,9 +52,9 @@ function getLike(){
 			
 			$("span.heart").empty();
 			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
-            	$("span.heart").append('<i class="far fa-heart"></i>');
+            	$("span.heart").append('<span class="far fa-heart"></span>');
             }else{
-                $("span.heart").append('<i class="fas fa-heart full"></i>');
+                $("span.heart").append('<span class="fas fa-heart full"></span>');
             }
 		}
 	});	

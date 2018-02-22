@@ -93,7 +93,7 @@
 	
 	function listMessageToRead(){
 		$.ajax({
-			url:"/message/json/listMessageToRead/"+'${loginUser.userId}',
+			url:"/message/json/listMessageToRead/"+'${user.userId}',
 			method:"GET",
 			dataType:"json",
 			headers :{

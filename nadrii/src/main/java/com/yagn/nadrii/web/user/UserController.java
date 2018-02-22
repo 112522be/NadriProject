@@ -250,16 +250,6 @@ public class UserController {
 /*	@RequestMapping(value="addUserPlus", method=RequestMethod.POST)
 	public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
 
-<<<<<<< HEAD
-	@RequestMapping(value = "getUser", method = RequestMethod.GET)
-	public String getUser(HttpSession session, HttpServletRequest request) throws Exception {
-		System.out.println((User)session.getAttribute("loginUser"));
-		String userId = ((User)session.getAttribute("loginUser")).getUserId();
-		List<Comments> comments = commentService.listCommentById(userId);
-		List<Message> messages = messageService.listMessage(userId);
-		request.setAttribute("comments", comments);
-		request.setAttribute("messages", messages);
-=======
 		System.out.println("addUserPlus :: POST");
 		
 		System.out.println("\n[1] ==>" + user);
@@ -383,7 +373,6 @@ public class UserController {
 			});
 			System.out.println("랜덤" + content);
 			MimeMessage message = new MimeMessage(mailSession);
-			// message.setFrom(new InternetAddress("from@no-spam.com"));
 			message.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
 			System.out.println("message!!" + message);
 			InternetAddress[] address = { new InternetAddress(email, authNum) };
@@ -411,9 +400,9 @@ public class UserController {
 		return buffer.toString();
 	}
 
-	
 //////////////////////////////////////////////////////////////////////////////////////////
 				
+
 				@RequestMapping(value="updateUser", method=RequestMethod.POST)
 				public String addUserPlus( @ModelAttribute("user")User user, Model model, HttpSession session) throws Exception{
 
@@ -429,6 +418,7 @@ public class UserController {
 					System.out.println("자녀수 >>" + user.getChildren());
 					System.out.println("성 별 >>" +user.getGender());
 
+					//user.setUserId( ((User) session.getAttribute("user")).getUserId());
 					user.setUserId( ((User) session.getAttribute("loginUser")).getUserId());
 					
 					System.out.println(user);

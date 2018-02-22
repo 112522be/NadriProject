@@ -35,12 +35,12 @@
 		ORDER BY reg_date DESC
  	</select>
  	
- 	<select id="listCommentById" parameterType="int" resultMap="communitySelectMap">
-		SELECT * FROM (SELECT ROWNUM row_num, inner_tabel.*
-		FROM (SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE user_id=#{userId}
+ 	<select id="listCommentById" parameterType="com.yagn.nadrii.common.Search" resultMap="communitySelectMap">
+		SELECT * FROM (SELECT ROWNUM row_num, inner_table.*
+		FROM (SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE user_id=#{searchKeyword}
  		ORDER BY reg_date DESC) inner_table
  		WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+		WHERE row_num BETWEEN #{startRowNum} AND #{endRowNum} 
  		
  	</select>
 	
@@ -52,11 +52,19 @@
 		WHERE comment_no=#{commentNo}
 	</update>
 	
-	<select  id="getTotalCount"  parameterType="int"	 resultType="int">
+	<select  id="getTotalCount_postNo"  parameterType="int"	 resultType="int">
 		SELECT COUNT(*)
 	  	FROM(	SELECT comment_no, user_id, text, reg_date 
 	  	FROM comments 
 	  	WHERE post_no=#{postNo}
+						) countTable						
+	</select>
+	
+	<select  id="getTotalCount_Id"  parameterType="String"	 resultType="int">
+		SELECT COUNT(*)
+	  	FROM(	SELECT comment_no, user_id, text, reg_date 
+	  	FROM comments 
+	  	WHERE user_id=#{userId}
 						) countTable						
 	</select>
 	 
@@ -68,5 +76,13 @@
 	<delete id="deleteCommentByPost" parameterType="int">
 		DELETE FROM comments WHERE post_no=#{value}
 	</delete>
+	
+	<select id="listTitles_post" parameterType="int" resultType="String">
+		SELECT title FROM post WHERE post_no=#{value}
+	</select>
+	
+	<select id="listTitles_groups" parameterType="int" resultType="String">
+		SELECT title FROM groups WHERE group_no=#{value}
+	</select>
 	
 </mapper>
