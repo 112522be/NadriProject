@@ -73,7 +73,7 @@
 		}
 		
 		function clickMessage(){
-			window.open("../message/addMessage?recevierId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -231,7 +231,7 @@
 						</h6>
 					</div>
 					<div class="col-sm-9" style="padding-bottom: 25px;">
-						<a class="button" style="float: left; padding: 2px 15px;">write</a>
+						<a class="button write" style="float: left; padding: 2px 15px;">write</a>
 					</div>
 					<div class="col-sm-3">
 						<form class="search" style="float: right;">

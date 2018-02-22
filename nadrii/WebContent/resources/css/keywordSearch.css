@@ -36,7 +36,7 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 13.5pt; height: 1.5em; }
 html>body #sortable li { height: 1.5em; line-height: 1.2em; }
 -state-highlight { height: 1.5em; line-height: 1.2em; }
 	
