@@ -538,17 +538,17 @@
 								<div class="row">
 									<article class="4u 12u(mobile) special">
 										<header>
-											<a href="#" name="cancel" class="button" onclick="goBack()">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>
+											<a href="#" name="cancel" class="button 12u" onclick="goBack()">취&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</a>
 										</header>
 									</article>
 									<article class="4u 12u(mobile) special">
 										<header>
-											<a href="#" name="basket" class="button" data-toggle="modal" data-target="#myModal">장바구니 담기</a>
+											<a href="#" name="basket" class="button 12u" data-toggle="modal" data-target="#myModal">장바구니 담기</a>
 										</header>
 									</article>
 									<article class="4u 12u(mobile) special">
 										<header>
-											<a href="#" name="purchase" class="button">결제하기</a>
+											<a href="#" name="purchase" class="button 12u">결제하기</a>
 										</header>
 									</article>
 								</div>
