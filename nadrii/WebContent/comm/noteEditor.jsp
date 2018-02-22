@@ -13,24 +13,22 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   <style type="text/css">
   	.selectedhashtagButtons {
-			  height: 30px;
 			  font-size:15px;
 			  font-family: 'Nanum Gothic';
 			  color: white;
 			  text-align: center;
 			  background: #2fade2;
-			  border: solid 2px #2fade2;
 			  border-radius: 30px;
+			  padding:0 1% 0 1%;
 	}
 	.hashtagButtons {
-			  height: 30px;
 			  font-size:15px;
 			  font-family: 'Nanum Gothic';
 			  color: black;
 			  text-align: center;
 			  background: #edeeef;
-			  border: solid 2px #edeeef;
 			  border-radius: 30px;
+			  padding:0 1% 0 1%;
 	}
 	#selectedThumbnail{
 		border: solid 2px red;

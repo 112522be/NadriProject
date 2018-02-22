@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>³ª¸¸ÀÇ ³ªµéÀÌ</title>
+		<title>ë‚˜ë§Œì˜ ë‚˜ë“¤ì´</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -26,9 +26,9 @@
 			});
 			
 			$("a#delete").bind("click", function(){
-				if(confirm("»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")==true){
+				if(confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")==true){
 					self.location="/comm/deleteComm?postNo=${community.postNo}";
-					alert("»èÁ¦µÇ¾ú½À´Ï´Ù.");
+					alert("ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 				}else{
 					return;	
 				}		
@@ -135,7 +135,7 @@
 									</a>
 								</div>
 								<div style="float: right;">
-									<span style="padding-right: 30px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;&nbsp;${community.viewCount}</span>
+									<span style="padding-right: 30px;"><span class="fas fa-eye"></span> &nbsp;&nbsp;${community.viewCount}</span>
 									<span style="border-left: 1px solid; padding-left: 30px;">${community.regDate}</span>
 								</div>
 							</header>
@@ -143,9 +143,9 @@
 							<div >
 							<c:if test="${community.userId == loginUser.userId}">
 								<div align="right">
-									<a id="modify"><span class="glyphicon glyphicon-wrench"></span></a>
+									<a id="modify"><span class="fas fa-edit"></span></a>
 									&nbsp;
-									<a id="delete"><span class="glyphicon glyphicon-erase"></span></a>
+									<a id="delete"><span class="fas fa-eraser"></span></a>
 								</div>
 							</c:if>
 								${community.text}						
@@ -164,39 +164,6 @@
 						<br/><br/><br/>
 						<div>
 						<jsp:include page="../common/comment.jsp"></jsp:include>
-						</div>
-						<hr />
-						<div class="row">
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic07.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Gravida aliquam penatibus</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic08.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic09.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Magna laoreet et aliquam</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
 						</div>
 					</div>
 				</div>
