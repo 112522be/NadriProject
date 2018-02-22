@@ -118,6 +118,7 @@
 //================= '내정보 보기' 버튼 클릭 Event 처리========================
 	
 	$(function(){
+
      $("a[href='#' ]:contains('내정보 보기')").on("click" , function() {
         self.location = "/user/myPage.jsp"
      });
@@ -127,7 +128,7 @@
 	
 	$(function(){
      $("a[href='#' ]:contains('내정보 수정')").on("click" , function() {
-        self.location = "/user/updateUser.jsp";
+        self.location = "/user/updateUser?userId=${loginUser.userId}";
      });
   });
   
@@ -214,10 +215,10 @@
 	</ul>
 	</li>
 	<c:if test="${ empty loginUser }">
-	<li><a href="/ticket/listTicket">나들이 티켓 ▼</a>
-		<ul>
+	<li><a href="/ticket/listTicket">나들이 티켓</a>
+		<!-- <ul>
 			<li><a href="/user/login" data-toggle="tooltip" data-placement="bottom" title="클릭시 로그인 화면으로 이동">로그인 후 나들이 티켓의 추가기능을 사용하실 수 있습니다.</a></li>
-		</ul>	
+		</ul>	 -->
 	</li>	
 	</c:if>
 	<c:if test="${ ! empty loginUser }">
@@ -226,7 +227,7 @@
 			<li><a href="/purchase/listBasket">장바구니</a></li>
 			<li><a href="/purchase/listPurchase">구매한 티켓</a></li>
 			<li><a href="/purchase/listPurchased">지난 티켓 내역</a></li>
-			<li><a href="/ticket/showMeTheTicket">내 티켓 보여주기</a></li>
+			<li><a href="/ticket/getMyTicket">내 티켓 보여주기</a></li>
 		</ul>
 	</c:if>
 	</li>

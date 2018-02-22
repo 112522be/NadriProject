@@ -871,9 +871,7 @@
 					}
 					
 				}else{
-					
-					alert("시내 success");
-					
+										
 					callMapObjApiAJAX(returnData.info.mapObj);
 								
 					var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -1285,7 +1283,6 @@
 					
 					boundaryArray.push(boundary);
 					
-					alert("폴리라인 success");
 				}
 			}
 		});				
@@ -1307,7 +1304,6 @@
 				"Content-type" : "application/json"
 			},
 			success:function(returnData){
-				alert("시외 success 터미널 마커 생성");
 				
 				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">&nbsp;'
 					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">'

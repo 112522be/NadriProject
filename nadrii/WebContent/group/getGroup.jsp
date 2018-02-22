@@ -101,7 +101,7 @@
 			}
 			
 			function clickMessage(){	
-				window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 			}
 			
 		</script>

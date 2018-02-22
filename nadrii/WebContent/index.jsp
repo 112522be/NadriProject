@@ -261,6 +261,7 @@ body{
 		alert("회원가입이 완료 되었습니다.")
 	}
 
+
 	// ========== 회원가입 버튼 Block 처리 ==========
 	//	/*
 	var idCheckFlag = false;
@@ -394,7 +395,7 @@ body{
 	// ========== '카카버' 버튼 Event 처리 ==========
 	$(function() {
 		$("input[name='kakaver']").on("click", function(event) {
-			self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code";
+			self.location="https://kauth.kakao.com/oauth/authorize?client_id=ffbb3cfd77a7b485daca0958078eb74a&redirect_uri=http://192.168.0.78:8080/user/kakaoLogin&response_type=code";
 		})
 	});
 	

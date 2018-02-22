@@ -203,13 +203,13 @@ public class TicketController {
 		return "forward:/ticket/addBookingView.jsp";
 	}
 	
-	@RequestMapping(value = "showMeTheTicket", method = RequestMethod.GET)
+	@RequestMapping(value = "getMyTicket", method = RequestMethod.GET)
 	public String getMyTicket (
 			HttpSession session,
 			Map<String, Object> map
 			) {
 		
-		System.out.println("\n /ticket/showMetheTicket : GET");
+		System.out.println("\n /ticket/getMyTicket : GET");
 		
 		User user = new User();
 		System.out.println(session.toString());
@@ -226,7 +226,7 @@ public class TicketController {
 
 		map.put("user", user);
 		
-		return "forward:/ticket/showMeTheTicket.jsp";
+		return "forward:/ticket/getMyTicket.jsp";
 	}
 			
 	

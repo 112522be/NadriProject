@@ -333,6 +333,7 @@
 	
 	
 </script>
+
 	
 </head>
 
@@ -392,10 +393,10 @@
 									<div class="row 50%">
 										
 										<div class="12u">
-											<a href="/user/login" name="login" class="button">로 그 인</a>&nbsp;
+											<a href="/user/login" name="login" class="button 12u">로 그 인</a>&nbsp;
 										</div>	
 										<div class="12u">
-											<a href="/index.jsp" name="login" class="button">메인으로</a>
+											<a href="/index.jsp" name="login" class="button 12u">메인으로</a>
 										</div>	
 									</div>
 									</c:if>
@@ -411,8 +412,7 @@
 									<div class="row 50%">
 										
 										<div class="4u">
-											<h2 class="icon fa-user circl
-											ed"><span class="label">user</span></h2>
+											<h2 class="icon fa-user circled"><span class="label">user</span></h2>
 										</div>
 										
 										<div class="8u">
@@ -501,25 +501,35 @@
 										<h2><a href="#">${ tourTicket.title }</a></h2>
 									</header>
 									<a href="#" class="image featured">
-										<img src="${ detailImage.originimgurl }" alt="" style="height: 413.86px;"/>
+							<%-- 			<img src="${ detailImage.originimgurl }" alt="" style="height: 413.86px;"/> --%>
+										<img src="${ detailImage.originimgurl }" alt="" />
 									</a>
 									
-									<section>
-										<header>
-											<h3>선택한 예매일자</h3>
-										</header>
-										<p>
-											${ bookingDate }
-										</p>
-									</section>
-									<section>
-										<header>
-											<h3>이용요금</h3>
-										</header>
-										<p>
-											${ detailIntro.usetimefestival }
-										</p>
-									</section>
+									
+									<div class="row">
+										<div class="6u">	
+											<section>
+												<header>
+													<h3>선택한 예매일자</h3>
+												</header>
+												<p>
+													${ bookingDate }
+												</p>
+											</section>
+										</div>
+											
+										<div class="6u">	
+											<section>
+												<header>
+													<h3>이용요금</h3>
+												</header>
+												<p>
+													${ detailIntro.usetimefestival }
+												</p>
+											</section>
+										</div>
+									</div>	
+
 								</article>
 							</div>
 							<c:if test="${ user.userId ne null }">
@@ -560,7 +570,6 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						<span class="glyphicon glyphicon-copy" aria-hidden="true"> </span>
 						장바구니에 저장 하시겠습니까?
 					</h4>
 				</div>

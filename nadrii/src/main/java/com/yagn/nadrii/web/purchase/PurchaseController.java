@@ -148,10 +148,12 @@ public class PurchaseController {
 	public String kakaoPay(
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			@ModelAttribute("purchase") Purchase purchase,
-			HttpSession session
+			HttpSession session,
+			Map<String, Object> map
+			
 			) {
 		
-		System.out.println("\n /purchase/kakaoPay : POST");
+		System.out.println("\n /purchase/kakaoPay : POST"); 
 
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
 
@@ -180,7 +182,12 @@ public class PurchaseController {
 		}
 		
 		session.setAttribute("purchase", purchase);
-		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
+		
+		System.out.println("\n[kakaoPayRsponse check]==> " + kakaoPayResponse.getNext_redirect_pc_url());
+		map.put("kakaoUri", kakaoPayResponse.getNext_redirect_pc_url());
+		
+		return "redirect:" + kakaoPayResponse.getNext_redirect_pc_url();
+		
 	}
 	
 	@RequestMapping(value="kakaoPayComplete")
