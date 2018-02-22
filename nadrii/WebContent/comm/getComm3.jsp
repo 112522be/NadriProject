@@ -178,8 +178,8 @@
 							</header>
 							
 							<div class="row 25% no-collapse">
-								<div class="4u">
-									<h3 class="icon fa-user text-left">&nbsp;&nbsp;${community.userId}</h3>
+								<div class="4u text-center">
+									<h3 class="icon fa-user text-center"><span class="text-center">&nbsp;&nbsp;${community.userId}</span></h3>
 								</div>
 								<div class="4u">
 									<h3 class="icon fa-mouse-pointer text-right">&nbsp;&nbsp;${community.viewCount}</h3>

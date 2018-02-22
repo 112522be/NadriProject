@@ -22,33 +22,9 @@
 			data:{
 				"postNo": postNo
 			},
-			
-			/* success: function(JSONData) {
-				$('#commentContainer').empty();
-				for(i=0;i<JSONData.totalCount;i++){
-					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
-					+JSONData.listComment[i].commentNo
-					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
-					+JSONData.listComment[i].userId
-					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
-					+JSONData.listComment[i].regDate
-					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
-					if("${loginUser.userId}"==JSONData.listComment[i].userId){
-						html += '<span class="glyphicon glyphicon-pencil" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash" style="font-size:10pt;"/>';
-					}
-					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
-					$('#commentContainer').append(html);
-				}
-				$(".comment").empty();
-				$(".comment").append(JSONData.totalCount);
-			} */
-			
-			
 			success: function(JSONData) {
 				$('#commentContainer').empty();
-				
 				for(i=0;i<JSONData.totalCount;i++){
-					
 					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
 					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
@@ -62,13 +38,9 @@
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
 					$('#commentContainer').append(html);
 				}
-				
 				$(".comment").empty();
 				$(".comment").append(JSONData.totalCount);
 			}
-			
-			
-			
 			
 		});
 	}
@@ -140,7 +112,9 @@
 		$('#commentContainer').on('click','span.glyphicon.glyphicon-pencil',function() {
 			text = $($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".glyphicon.glyphicon-pencil").index(this)]).val();
+			
 			var editForm = '<span style=" position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
+			
 			$($('span.text')[$(".glyphicon.glyphicon-pencil").index(this)]).html(editForm);
 			$($('span.edit')[$(".glyphicon.glyphicon-pencil").index(this)]).css("display","none");
 			$($('div.comments')[$(".glyphicon.glyphicon-pencil").index(this)]).attr("style", "margin-bottom: -10em;");
