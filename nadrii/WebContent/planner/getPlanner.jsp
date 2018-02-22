@@ -524,7 +524,7 @@ $(function () {
 					<input type="hidden" name="postNo" value="${planner.postNo}">
 					<jsp:include page="../common/like.jsp"></jsp:include>
 					<div>
-						<jsp:include page="../common/comment.jsp"></jsp:include>
+						<jsp:include page="../common/comment2.jsp"></jsp:include>
 					</div>
 				</article>
 			</div>

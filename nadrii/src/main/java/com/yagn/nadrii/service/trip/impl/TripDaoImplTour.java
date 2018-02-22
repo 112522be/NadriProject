@@ -210,11 +210,11 @@ public class TripDaoImplTour implements TripDao {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 		
 		JSONObject jsonObject = (JSONObject)JSONValue.parse(br);
-//		System.out.println(jsonObject);
+		System.out.println(jsonObject);
 		JSONObject response = (JSONObject) jsonObject.get("response");
 		JSONObject header = (JSONObject) response.get("header");
 		JSONObject body = (JSONObject) response.get("body");
-//		System.out.println(body);
+		System.out.println(body);
 		JSONObject items = (JSONObject) body.get("items");
 		JSONObject jsonobj = (JSONObject)items.get("item");	
 //		System.out.println(jsonobj);

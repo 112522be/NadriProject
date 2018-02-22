@@ -193,7 +193,7 @@
 			
 			}
 			
-			alert(messageNoList);
+			//alert(messageNoList);
 			deleteMessage(messageNoList);
 		});
 	});
