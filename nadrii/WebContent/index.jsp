@@ -408,6 +408,55 @@
 			return false;
 		});
 	});
+	
+	//=========alert 대신 toast
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(3000).fadeOut(400);
+	}
+	
+	
+	
+	//=============== img 클릭=======================
+		$(function(){
+			
+			$($(".reel img")[0]).on("click",function(e){
+			
+				self.location = "../trip/getTheme"
+				e.prevenDefault
+				
+			})
+			
+			$($(".reel img")[1]).on("click",function(){
+				alert("어디로 갈까?");
+				//self.location ="/comm/listComm";
+			})
+			
+			$($(".reel img")[2]).on("click",function(){
+				self.location ="/comm/listComm";
+			})
+			
+			$($(".reel img")[3]).on("click",function(){
+				
+				if(${loginUser != null}){
+					self.location ="/ticket/listTicket";
+				}else{
+					makeToast("로그인이 필요합니다");
+					self.location ="/user/login";
+				}
+				
+			})
+						
+			$($(".reel img")[4]).on("click",function(){
+				self.location ="/group/listGroup";
+			
+			})
+			
+			
+			
+		})
+		
+		
+		
 </script>
 	
 <style>
@@ -438,6 +487,28 @@
 				background:#6cc;
 				font-weight: bolder
 }
+
+
+.toastMessage {
+    width:400px;
+    height:auto;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
+
+
 
 </style>
 
@@ -659,6 +730,7 @@
 	<a id="topBtn" href="#" class="icon fa-arrow-up circled"></a>
 
 </form>
+<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>
 
 </body>
 

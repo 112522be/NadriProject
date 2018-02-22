@@ -198,13 +198,15 @@ pageEncoding="UTF-8"%>
 		    autoOpen: false,
 		    resizable: false,
 		    width: 800
-	});
+		});
 		
 	});
 	
-	
-	
-	
+	///////토스트 창/////////
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(3000).fadeOut(400);
+	}
+	///////////////////////////////////////////
 	///*
 	
 	// getTrip 대신에 생겨난 다이얼로그 화면(ajax 실행 후의 데이터를 다이얼로그로 송출)
@@ -355,18 +357,23 @@ pageEncoding="UTF-8"%>
 	//리스트에 있는 위시리스트 클릭시 발생하는 이벤트
 	$(function() {
 	  $(document).on("click","#wish", function(e){
+		  	if(${loginUser !=null}){
+				///*
+				alert(contentid);
+				alert(contenttypeid);
+				//*/
+	
+				//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
+				addTripToDB(contentid, contenttypeid);
+				
+				//위에서 저장한 것을 위시리스트에 재저장 
+				addWish(contentid);
+				
+		  	}else{
+		  		makeToast("로그인이 필요합니다");
 		  	
-			///*
-			alert(contentid);
-			alert(contenttypeid);
-			//*/
-
-			//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
-			addTripToDB(contentid, contenttypeid);
-			
-			//위에서 저장한 것을 위시리스트에 재저장 
-			addWish(contentid);
-			e.preventDefault();
+		  	}
+		  	e.preventDefault();
 			
 		});
 	})
@@ -385,7 +392,7 @@ pageEncoding="UTF-8"%>
 			
 		});
 	})
-
+/*
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
 		$("a[href='#' ]:contains('시구단위')").on("click" , function() {
@@ -406,7 +413,7 @@ pageEncoding="UTF-8"%>
 			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=national"
 		});
 	});
-	
+*/	
 	///*
 	$( function() {
 		$("#search").on("click" , function() {
@@ -531,6 +538,27 @@ pageEncoding="UTF-8"%>
 #search{
 	background: #605b7b;
 }
+
+.toastMessage {
+    width:400px;
+    height:auto;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
+
+
 	</style>
 
 	<title>여행지 찾기</title>
@@ -585,7 +613,9 @@ pageEncoding="UTF-8"%>
 						</div>
 					</section>
 
-				</div> 				
+				</div> 		
+				
+		<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>		
 				
 	<div id="dialog" title="" >
 		<table class="table">
