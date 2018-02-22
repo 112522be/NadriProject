@@ -45,69 +45,16 @@
 }
 </style>
 <script type="text/javascript">
+	var currentPage;
+	var maxPage;
 	$(function() {
-		var currentPage;
-		var maxPage;
-			$('a.col-xs-4').bind('click', function() {
+		$('a.col-xs-4').bind('click', function() {
 			$('a.col-xs-4').css("border", "0")
 			$('span.button01').css("color", "#5b5b5b")
 			$(this).css("border-bottom", "4px solid #FE8A71");
 			$(this).children().css("color", "#FE8A71")
 			if($(this).children().html() == "좋아요"){
-				$.ajax({
-					url: "/like/json/listLikeById",
-					method: "GET",
-					data: {
-						"searchKeyword": "${loginUser.userId}"
-					},
-					headers: {
-						"Accept": "application/json"
-					},
-					success: function(JSONData) {
-						currentPage = 1;
-						if(JSONData.totalCount%12 == 0){
-							maxPage = JSONData.totalCount / 12;
-						}else{
-							maxPage = Math.floor(JSONData.totalCount / 12)+1;
-						}
-						var html="";
-						console.log(JSONData)
-						for(var i=0;i<JSONData.list.length;i++){
-							html += '<div class="row">'
-								+'<div class="col-xs-2" align="center" style="color: gray;">'
-								+'<span>'+JSONData.yearNMonth[i]+'.</span>'
-								+'<span style="font-size:25pt; font-weight:700">'+JSONData.day[i]+'</span>'
-								+'</div>'
-								+'<div class="col-xs-2">'
-								+'<img alt="" src="" style="height: 10%; width: 13%;">'
-								+'</div>'
-								+'<div class="col-xs-8">'
-								+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
-								if(JSONData.title[i] == null){
-									html += "삭제된 게시물입니다."	
-								}else{
-									html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
-								}
-								html +='</span></p>'
-								+'</div>'
-								+'</div>'
-								+'<hr/>';
-						}
-						$('#logContainer').html(html);
-						$('#logContainer').on('click', 'p#addedTitle', function() {
-							var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
-							if(postNo == null){
-								alert("삭제된 게시물입니다.");
-							}else{
-								if(postNo.indexOf("60") != 0){
-									self.location = "/comm/getComm?postNo="+postNo;
-								}else{
-									self.location = "/group/getGroup?groupNo="+postNo;
-								}
-							}
-						})
-					}
-				})
+				getLike();
 			}else if($(this).children().html() == "댓글"){
 				$.ajax({
 					url: "/common/listCommentById",
@@ -166,53 +113,213 @@
 					}
 				})
 			}else{
-				$.ajax({
-					url:"/message/json/listMessage/"+'${user.userId}',
-					method:"GET",
-					dataType:"json",
-					headers :{
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},						
-					success: function(returnData){
-						$("tbody tr").remove();
-						var message = returnData.list;
-						var tableValue ="";
-										
-						
-						for (var i = 0; i < message.length; i++) {
-							tableValue = "<tr class='warning'>"
-					          	+"<td><input type='checkbox' name='checkbox' id='checkbox' value='"
-					          	+message[i].messageNo+"'></td>"
-					          +"<td>"+message[i].senderId+"</td>"
-					          +"<td>"+message[i].receiverId+"</td>"
-					          +"<td>"+message[i].text+"</td>"
-					          +"<td>"+message[i].regDate+"</td>"
-					        +"</tr>";
-							$("#logContainer").append(tableValue);
-					    }
-					}
-				});
+				listMessage();
 			}
 		})
 		$(window).scroll(function() {
-			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-			      if(currentPage < maxPage){
-				      currentPage++;
-				      var searchKeyword = $('input[name="searchKeyword"]').val();
-				      
-				}else{
-				    return;
-				}
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		    if(currentPage < maxPage){
+			    currentPage++;
+			    var searchKeyword = $('input[name="searchKeyword"]').val();      
+			}else{
+			    return;
 			}
-		})
+		}
+	})	
 	})
 	function infinityScroll() {
+	}
+	function listMessage() {
+		$.ajax({
+			url:"/message/json/listMessage/"+'${loginUser.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(JSONData){
+				$("tbody tr").remove();
+				var message = JSONData.list;
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">받은쪽지</span>&nbsp;&nbsp;<span name="sended">보낸쪽지</span></div>';
+								
+				
+				for (var i = 0; i < message.length; i++) {
+					tableValue += '<div class="row" style="padding-left: 2.5%;">'
+					+'<div class="col-xs-2">'
+					+'<input type="checkbox" name="checkbox" id="checkbox" value="'
+			        +message[i].messageNo+'">&nbsp;'
+			        +message[i].senderId
+					+'</div>'
+					+'<div class="col-xs-7">'
+					+message[i].text
+					+'</div>'
+					+'<div class="col-xs-3" align="center" style="color: gray; font-size:12pt;">'
+					+'<span>'+message[i].regDate+'.</span>'
+					+'</div>'
+					+'</div>'
+					+'<hr/>';
+			    }
+				$('#logContainer').html(tableValue);
+				$('#logContainer').on('click', 'a[name="received"]:contains("받은쪽지")',function() {
+					alert();
+					listMessage();
+				})
+				$('#logContainer').on('click', 'a[name="sended"]:contains("보낸쪽지")',function() {
+					alert();
+					listSendMessage();
+				})
+			}
+		});
+	}
+	function listSendMessage(){
+		$.ajax({
+			url:"/message/json/listSendMessage/"+'${loginUser.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(returnData){
+				var message = returnData.list;
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">받은쪽지</span>&nbsp;&nbsp;<span name="received">보낸쪽지</span></div>';
+								
+				
+				for (var i = 0; i < message.length; i++) {
+					tableValue += '<div class="row" style="padding-left: 2.5%;">'
+						+'<div class="col-xs-2">'
+						+'<input type="checkbox" name="checkbox" id="checkbox" value="'
+				        +message[i].receiverId+'">&nbsp;'
+				        +message[i].senderId
+						+'</div>'
+						+'<div class="col-xs-7">'
+						+message[i].text
+						+'</div>'
+						+'<div class="col-xs-3" align="center" style="color: gray; font-size:12pt;">'
+						+'<span>'+message[i].regDate+'.</span>'
+						+'</div>'
+						+'</div>'
+						+'<hr/>'
+					$("#logContainer").html(tableValue);
+			    }
+			}
+		});
+	}
+	$(function(){
 		
+		$(document).on("click","tr td:nth-child(4)", function(){
+		//$("tr td:nth-child(4)").on("click",function(){
+			var messageNo = $($("input[name='checkbox']")[$("tr td:nth-child(4)").index(this)]).val();
+			//alert(messageNo)
+			window.open("/message/getMessage?messageNo="+messageNo,"getMessge","width=300, height=350,status=no, scrollbars=no, location=no");
+		});
+	});
+	
+	
+	function deleteMessage(messageNoList){
+		$.ajax({
+			url:"/message/json/deleteMessage/"+messageNoList,
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(returnData){
+				var count = returnData.count;
+				alert(count+"개의 메시지가 삭제되었습니다");
+				for (var i = 0; i < count; i++) {
+					$($("input[name=checkbox]:checked").parents("td")).parents("tr").remove();					
+				}
+				
+				
+			}
+			
+		});
+	}
+	
+	$(function(){
+		$("button[type='button']:contains('삭제')").on("click",function(){
+			//alert("삭제");
+			var checkedMessageCount = $("input[name=checkbox]:checked").length;
+			var messageNoList="";
+			
+			
+			for (var i = 0; i < checkedMessageCount; i++) {
+				if(i != checkedMessageCount-1){
+					var value = $($("input[name=checkbox]:checked")[i]).val()+","; 
+				}else{
+					var value = $($("input[name=checkbox]:checked")[i]).val();
+				}
+				
+				messageNoList += value;
+			
+			}
+			
+			alert(messageNoList);
+			deleteMessage(messageNoList);
+		});
+	});
+	function getLike() {
+		$.ajax({
+			url: "/like/json/listLikeById",
+			method: "GET",
+			data: {
+				"searchKeyword": "${loginUser.userId}"
+			},
+			headers: {
+				"Accept": "application/json"
+			},
+			success: function(JSONData) {
+				currentPage = 1;
+				if(JSONData.totalCount%12 == 0){
+					maxPage = JSONData.totalCount / 12;
+				}else{
+					maxPage = Math.floor(JSONData.totalCount / 12)+1;
+				}
+				var html="";
+				console.log(JSONData)
+				for(var i=0;i<JSONData.list.length;i++){
+					html += '<div class="row">'
+						+'<div class="col-xs-2" align="center" style="color: gray;">'
+						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+						+'<span style="font-size:25pt; font-weight:700">'+JSONData.day[i]+'</span>'
+						+'</div>'
+						+'<div class="col-xs-2">'
+						+'<img alt="" src="" style="height: 10%; width: 13%;">'
+						+'</div>'
+						+'<div class="col-xs-8">'
+						+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
+						if(JSONData.title[i] == null){
+							html += "삭제된 게시물입니다."	
+						}else{
+							html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
+						}
+						html +='</span></p>'
+						+'</div>'
+						+'</div>'
+						+'<hr/>';
+				}
+				$('#logContainer').html(html);
+				$('#logContainer').on('click', 'p#addedTitle', function() {
+					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
+					if(postNo == null){
+						alert("삭제된 게시물입니다.");
+					}else{
+						if(postNo.indexOf("60") != 0){
+							self.location = "/comm/getComm?postNo="+postNo;
+						}else{
+							self.location = "/group/getGroup?groupNo="+postNo;
+						}
+					}
+				})
+			}
+		})
 	}
 </script>
 </head>
-<body>
+<body onload="javascript:getLike();">
 	  <div id="header">
 			<div class="inner">
 				<header>
@@ -221,7 +328,7 @@
 			</div>	
 			<jsp:include page="/layout/toolbar.jsp" />
      </div>
-     <div class="container">
+     <div class="container" style=" position: relative; ">
      	<div name="userProfile" style="margin: 20px; position: relative; height: auto;">
       		<a><img alt="" src="/resources/images/00742106_105752.jpg" width="10%" style="margin: 10px;"></a>
      		<span style="position:absolute; top: 10%; margin: 10px; font:bold; font-size: 20pt; color: #3b2b48;">
@@ -231,12 +338,15 @@
      		</span>
      		<span style="position:absolute; bottom: 10%; margin: 10px; font:bold;"><a style="font-size: 15px;"><span class="glyphicon glyphicon-cog"> 프로필수정</span></a></span>
      	</div>
-     	<div style="margin: 20px; position: relative; height: inherit;">
-     		<a class="col-xs-4" align="center"><span class="button01" align="center">좋아요</span></a>
-     		<a class="col-xs-4" align="center"><span class="button01" align="center">댓글</span></a>
-     		<a class="col-xs-4" align="center"><span class="button01" align="center">쪽지</span></a>
+     	<br/>
+     	<div style="background-color: white; margin-top:10pt;">
+	     	<div style="margin: 20px; position: relative; height: inherit;">
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">좋아요</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">댓글</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">쪽지</span></a>
+	     	</div>
+	     	<div id="logContainer"></div>
      	</div>
-     	<div style="background-color: white; margin-top:10pt;" id="logContainer"></div>
      </div>
      <br/>
      <jsp:include page="../layout/footer.jsp"></jsp:include>
