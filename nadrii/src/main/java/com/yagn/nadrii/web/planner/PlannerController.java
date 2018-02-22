@@ -1,10 +1,13 @@
 package com.yagn.nadrii.web.planner;
 
+import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.portlet.ModelAndView;
 
 import com.yagn.nadrii.common.Page;
 import com.yagn.nadrii.common.Search;
@@ -61,7 +65,7 @@ public class PlannerController {
 	}
 	
 	@RequestMapping(value="addPlanner", method=RequestMethod.POST)
-	public String addPlanner(@ModelAttribute("planner")Planner planner, User user, HttpSession session) throws Exception{
+	public String addPlanner(@ModelAttribute("planner")Planner planner, User user, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("PlannerController/addPlanner 접속");
 		
@@ -71,7 +75,38 @@ public class PlannerController {
 		
 		planner.setFlag("pl");
 		planner.setPlannerMakerId(plannerMakerId);
-		planner.setPhoto("kk");
+		
+		
+		//////////////// 캡쳐 기능 //////////////////
+		
+		System.out.println("capture controller 접속");
+        String binaryData = request.getParameter("imgSrc");
+        FileOutputStream stream = null;
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("jsonView");        
+
+		System.out.println("binary file :: " + binaryData);
+		if (binaryData == null || binaryData == "") {
+			System.out.println("데이터가 null");
+			throw new Exception();
+		}
+
+		binaryData = binaryData.replaceAll("data:image/png;base64,", "");
+		byte[] file = Base64.decodeBase64(binaryData);
+		System.out.println("file  :: " + file + " || " + file.length);
+		String fileName = UUID.randomUUID().toString();
+
+		stream = new FileOutputStream("C:/Users/user/git/NadriiProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
+		System.out.println("file이름 : " + fileName);
+
+		stream.write(file);
+		stream.close();
+		System.out.println("파일 작성 완료");
+		mav.addObject("msg", "ok");
+		
+		/////////////// 캡쳐 기능 ///////////////
+		
+		planner.setPhoto("../resources/images/planner/thumbnail/" + fileName + ".png");
 		
 		System.out.println("planner :: "+planner);
 		
@@ -82,7 +117,7 @@ public class PlannerController {
 		return "redirect:/planner/getMyPlannerList";
 	}
 	
-	@RequestMapping(value="getMyPlannerList", method=RequestMethod.GET)
+	@RequestMapping(value="getMyPlannerList")
 	public String getMyPlannerList(@ModelAttribute("search")Search search, User user,
 			HttpServletRequest request, HttpSession session) throws Exception{
 		
@@ -112,6 +147,9 @@ public class PlannerController {
 			pageSize = search.getPageSize();
 		}
 		
+		search.setSearchCondition("0");
+		System.out.println(search);
+		
 		String plannerMakerId = user.getUserId();
 		System.out.println("UserId :: " + plannerMakerId);
 		
@@ -131,7 +169,7 @@ public class PlannerController {
 		return "forward:/planner/listMyPlanner.jsp";
 	}
 	
-	@RequestMapping(value="getUserPlannerList", method=RequestMethod.GET)
+	@RequestMapping(value="getUserPlannerList")
 	public String getUserPlannerList(@ModelAttribute("search")Search search, String plannerMakerId, 
 			HttpServletRequest request) throws Exception{
 		
@@ -152,6 +190,9 @@ public class PlannerController {
 		}else {
 			pageSize = search.getPageSize();
 		}
+		
+		search.setSearchCondition("0");
+		System.out.println(search);
 		
 		Map<String , Object> map = plannerService.getUserPlannerList(search, plannerMakerId);
 		
@@ -192,7 +233,6 @@ public class PlannerController {
 		
 		int latLength = lat.length;
 		
-		
 		System.out.println("lat :: "+lat);
 		System.out.println("lng :: "+lng);
 		
@@ -204,6 +244,7 @@ public class PlannerController {
 		request.setAttribute("lat", lat);
 		request.setAttribute("lng", lng);
 		request.setAttribute("latLength", latLength);
+		
 		
 		System.out.println("PlannerController/getPlanner 접속완료");
 		
@@ -238,18 +279,48 @@ public class PlannerController {
 	}
 	
 	@RequestMapping(value="updatePlanner", method=RequestMethod.POST)
-	public String updatePlanner(@ModelAttribute("planner")Planner planner,@RequestParam("postNo")int postNo , User user, HttpSession session) throws Exception{
+	public String updatePlanner(@ModelAttribute("planner")Planner planner,@RequestParam("postNo")int postNo, 
+			User user, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("PlannerController/updatePlanner planner정보 수정 접속");
 		
 		user = (User)session.getAttribute("loginUser");
 		String plannerMakerId = user.getUserId();
 		System.out.println("로그인한 유저 ID : "+plannerMakerId);
+
+		//////////////// 캡쳐 기능 //////////////////
+
+		System.out.println("capture controller 접속");
+		String binaryData = request.getParameter("imgSrc");
+		FileOutputStream stream = null;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		System.out.println("binary file :: " + binaryData);
+		if (binaryData == null || binaryData == "") {
+			System.out.println("데이터가 null");
+			throw new Exception();
+		}
+		
+		binaryData = binaryData.replaceAll("data:image/png;base64,", "");
+		byte[] file = Base64.decodeBase64(binaryData);
+		System.out.println("file  :: " + file + " || " + file.length);
+		String fileName = UUID.randomUUID().toString();
+
+		stream = new FileOutputStream("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\images\\planner\\thumbnail/" + fileName + ".png");
+		System.out.println("file이름 : " + fileName);
+
+		stream.write(file);
+		stream.close();
+		System.out.println("파일 작성 완료");
+		mav.addObject("msg", "ok");
+
+		/////////////// 캡쳐 기능 ///////////////
 		
 		planner.setPostNo(postNo);
 		planner.setFlag("pl");
 		planner.setPlannerMakerId(plannerMakerId);
-		planner.setPhoto("kk");
+		planner.setPhoto("../resources/images/planner/thumbnail/" + fileName + ".png");
 		
 		System.out.println(planner);
 		

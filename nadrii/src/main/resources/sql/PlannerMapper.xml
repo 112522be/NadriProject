@@ -32,7 +32,7 @@
 			 	flag_pu,
 			 	THUMBNAIL_IMAGE_FILE,
 			 	text)
-		VALUES ( seq_post_post_no.nextval,
+		VALUES ( seq_post_post_no_pl.nextval,
 			 	#{plannerMakerId},
 			 	#{title},
 			 	#{lat},
@@ -75,16 +75,11 @@
 	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag, lat, lng
 	  									FROM post
 										<where>
-											<if test="searchCondition != null">
-												<if test="searchCondition == 0 and searchKeyword !='' ">
+											<if test="#{search.searchCondition} != null">
+												<if test="#{search.searchKeyword} !='' ">
 						 							title LIKE '%${search.searchKeyword}%' AND
 												</if>
-												<if test="searchCondition == 1 and searchKeyword !='' ">
-						 							text LIKE '%${search.searchKeyword}%' AND
-												</if>
-												<if test="searchCondition == 2 and searchKeyword !='' ">
-						 							hashtag LIKE '%${search.searchKeyword}%' AND
-												</if>
+												
 											</if>
 											<if test="plannerMakerId != null">
 											 	user_id in #{plannerMakerId} AND

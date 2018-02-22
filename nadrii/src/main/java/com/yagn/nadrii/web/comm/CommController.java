@@ -61,6 +61,7 @@ public class CommController {
 				temp += " #"+temps[i];
 			}
 		}
+		System.out.println(community.getRegDate());
 		community.setHashtag(temp);
 		request.setAttribute("community", community);
 		return "forward:/comm/getComm.jsp";

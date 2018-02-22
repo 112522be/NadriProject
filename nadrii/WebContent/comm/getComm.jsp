@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>No Sidebar - Helios by HTML5 UP</title>
+		<title>ÎÇòÎßåÏùò ÎÇòÎì§Ïù¥</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -26,9 +26,9 @@
 			});
 			
 			$("a#delete").bind("click", function(){
-				if(confirm("ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?")==true){
+				if(confirm("ÏÇ≠Ï†úÌïòÏãúÍ≤†ÏäµÎãàÍπå?")==true){
 					self.location="/comm/deleteComm?postNo=${community.postNo}";
-					alert("ªË¡¶µ«æ˙Ω¿¥œ¥Ÿ.");
+					alert("ÏÇ≠Ï†úÎêòÏóàÏäµÎãàÎã§.");
 				}else{
 					return;	
 				}		
@@ -106,16 +106,18 @@
 	</head>
 	<body class="no-sidebar">
 		<div id="page-wrapper">
-			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
 			<input type="hidden" name="postNo" value="${community.postNo}">
 			<!-- Header -->
 				<div id="header">
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="../index.jsp" id="logo">NADRII</a></h1>
+								<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
 							</header>
 						</div>
+						
+					<jsp:include page="../layout/toolbar.jsp" />
+						
 				</div>
 
 			<!-- Main -->
@@ -123,7 +125,7 @@
 
 					<div class="container">
 						<article id="main" class="special" align="center" style="position: relative; height:auto;">
-							<header>
+							<header style="border-bottom: 1px solid; padding-bottom: 60px;">
 								<h2><a href="#">${community.title}</a></h2>
 								<br/>
 								<div style="float: left;"> 
@@ -133,17 +135,17 @@
 									</a>
 								</div>
 								<div style="float: right;">
-									<span style="padding-right: 30px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;&nbsp;${community.viewCount}</span>
+									<span style="padding-right: 30px;"><span class="fas fa-eye"></span> &nbsp;&nbsp;${community.viewCount}</span>
 									<span style="border-left: 1px solid; padding-left: 30px;">${community.regDate}</span>
 								</div>
 							</header>
 							<br/>
-							<div>
+							<div >
 							<c:if test="${community.userId == loginUser.userId}">
 								<div align="right">
-									<a id="modify"><span class="glyphicon glyphicon-wrench"></span></a>
+									<a id="modify"><span class="fas fa-edit"></span></a>
 									&nbsp;
-									<a id="delete"><span class="glyphicon glyphicon-erase"></span></a>
+									<a id="delete"><span class="fas fa-eraser"></span></a>
 								</div>
 							</c:if>
 								${community.text}						
@@ -151,7 +153,7 @@
 							<br/><br/>
 							<div>
 								<div align= "left" class="col-xs-9" style="padding: 30px;">
-									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 11pt;">${community.hashtag}</span>
+									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 13pt;">${community.hashtag}</span>
 								</div>
 								<div align="right" class="col-xs-3">
 									<input type="hidden" name="postNo" value="${community.postNo}">
@@ -161,40 +163,7 @@
 						</article>
 						<br/><br/><br/>
 						<div>
-						<jsp:include page="../common/comment.jsp"></jsp:include>
-						</div>
-						<hr />
-						<div class="row">
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic07.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Gravida aliquam penatibus</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic08.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="4u 12u(mobile) special">
-								<a href="#" class="image featured"><img src="/resources/helios/images/pic09.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Magna laoreet et aliquam</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
+						<jsp:include page="../common/comment2.jsp"></jsp:include>
 						</div>
 					</div>
 				</div>

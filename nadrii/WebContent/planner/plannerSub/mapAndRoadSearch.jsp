@@ -30,18 +30,21 @@
 	}); 
 	
 	var latlng = clickMarker.getPosition();
+	var speInfoWindowContent = '<div style="padding:5px;">'
+		+'<a href="#" id="start" style="color:red;" onclick="javascript:start()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png" style="width:30px;">&nbsp;&nbsp;출발지</a><br>'
+		+'<a href="#" id="pass" style="color:green;" onclick="javascript:pass()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_1.png" style="width:30px;">&nbsp;&nbsp;경유지</a><br>'
+		+'<a href="#" id="end" style="color:blue;" onclick="javascript:end()">'
+		+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png" style="width:30px;">&nbsp;&nbsp;도착지</a></div>';
+
 	
 	var speInfoWindow = new daum.maps.InfoWindow({
 			
 			position : new daum.maps.LatLng(latlng.getLat(),latlng.getLng()),
-			content :  '<div style="padding:5px;">'
-				+'<a href="#" id="start" style="color:red;" onclick="javascript:start()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png" style="width:30px;">&nbsp;&nbsp;출발지</a><br>'
-				+'<a href="#" id="pass" style="color:green;" onclick="javascript:pass()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_1.png" style="width:30px;">&nbsp;&nbsp;경유지</a><br>'
-				+'<a href="#" id="end" style="color:blue;" onclick="javascript:end()">'
-				+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png" style="width:30px;">&nbsp;&nbsp;도착지</a></div>'
-		});	
+			content :  speInfoWindowContent
+	
+	});	
 		
 	var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다    
 	markerSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
@@ -89,7 +92,10 @@
 	});
 	
 	
-	daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+	daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+		
+		speInfoWindow.setContent(speInfoWindowContent);
+		
 		infowindow.close();
 	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	    var latlng = mouseEvent.latLng; 
@@ -99,54 +105,12 @@
 	    // 지도에 인포윈도우를 표시합니다.
 		speInfoWindow.setMap(map);
 		
-	    /* 
-	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-	    message += '경도는 ' + latlng.getLng() + ' 입니다' ;
-	    
-	    var resultDiv = document.getElementById('clickLatlng'); 
-	    resultDiv.innerHTML = message;
-	    */
-	    
 	 	// 마커 위치를 클릭한 위치로 옮깁니다
 	    clickMarker.setPosition(latlng);
 	    
 	    speInfoWindow.open(map,clickMarker);
 		
 	});
-	
-	////////////////////////추가 js////////////////
-	
-	///*
-	$(function(){
-		$("#placesWishList").css("display","block");	
-	});
-	
-	/*
-	$(function(){
-		$("#wishButton").on("click",function(){
-			$( "#placesWishList" ).toggle( "blind", 300 );
-		})
-		
-	})
-	//*/
-	
-	$( function() {
-		
-		// run the currently selected effect
-	    function runWishEffect() {
-	    
-	      // Run the effect
-	      $( "#placesWishList" ).toggle( "blind", 300 );
-	    };
-	 
-	    // Set effect from select menu value
-	    $( "#wishButton" ).on( "click", function() {
-	      runWishEffect();
-	    });
-	    
-	  });
-	
-	
 	
 	
 	//////////////////////////////////////////////////////
@@ -163,15 +127,15 @@
 		
 	    // run the currently selected effect
 	    function runEffect() {
-	    
 	      // Run the effect
 	      $( "#placesList" ).toggle( "blind", 300 );
-	    };
+	    }
 	 
 	    // Set effect from select menu value
 	    $( "#button" ).on( "click", function() {
 	      runEffect();
 	    });
+	   	   
 	  });
 	
 	
@@ -909,6 +873,7 @@
 				}else{
 					
 					alert("시내 success");
+					
 					callMapObjApiAJAX(returnData.info.mapObj);
 								
 					var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -933,7 +898,7 @@
 							if(k==0){
 								var startInfowindow = new daum.maps.InfoWindow({
 								    position : startMarker.getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[0]=startInfowindow;
 								
@@ -943,7 +908,7 @@
 							if(k==1){
 								var pass1Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[1].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[1]=pass1Infowindow;
 								
@@ -953,17 +918,16 @@
 							if(k==2){
 								var pass2Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[2].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[2]=pass2Infowindow;
-								alert(1111);
 								$("#roadPass2Content").append('<strong>경유</strong><div>'+iwArray[2].getContent().replace('</br>')+'</div>');
 								$("#head3").css("display", "block");
 							}
 							if(k==3){
 								var pass3Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[3].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[3]=pass3Infowindow;
 								$("#roadPass3Content").append('<strong>경유</strong><div>'+iwArray[3].getContent().replace('</br>')+'</div>');
@@ -972,7 +936,7 @@
 							if(k==4){
 								var pass4Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[4].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[4]=pass4Infowindow;
 								$("#roadPass4Content").append('<strong>경유</strong><div>'+iwArray[4].getContent().replace('</br>')+'</div>');
@@ -981,7 +945,7 @@
 							if(k==5){
 								var pass5Infowindow = new daum.maps.InfoWindow({
 								    position : passMarker[5].getPosition(), 
-								    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
+								    content : '<div style="padding:5px; margin-bottom: -30px;">'+returnData.subPathList[1].startName+traffic+iwContent
 								});
 								iwArray[5]=pass5Infowindow;
 								$("#roadPass5Content").append('<strong>경유</strong><div>'+iwArray[5].getContent().replace('</br>')+'</div>');
@@ -1080,7 +1044,7 @@
 							}
 
 							var pathIwArray=[];
-							var startContent ='<div style="padding:5px;">'
+							var startContent ='<div style="padding:5px; margin-bottom: -30px;">'
 												+returnData.subPathList[i].startName+laneName+'<br/>'
 												+returnData.subPathList[i].stationCount+' 정거장 이동 후 '
 												+returnData.subPathList[i].endName+stationFlag+' 하차<br/><br/>'
@@ -1099,7 +1063,7 @@
 								endInfo = '도착지';
 							}
 							
-							var endContent ='<div style="padding:5px;"> '+endInfo+'까지 도보 '
+							var endContent ='<div style="padding:5px; margin-bottom: -30px;"> '+endInfo+'까지 도보 '
 												+returnData.subPathList[i+1].sectionTime+'분 '+returnData.subPathList[i+1].distance+'m<br/><br/></div>';
 							
 							pathIwArray[1]=endContent;
@@ -1248,6 +1212,9 @@
 				}//if
 				
 				
+			},
+			error : function(){
+				alert("시외시외시외");
 			}
 		});
 		
@@ -1342,9 +1309,9 @@
 			success:function(returnData){
 				alert("시외 success 터미널 마커 생성");
 				
-				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right;width:30%; padding:5px;">&nbsp;'
-					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; width:30%; padding:5px;">'
-					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right;width:30%; padding:5px;">');
+				$("#exButtonCreate").append('<input type="button" value="기차" onClick="javascript:search1(3)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">&nbsp;'
+					+'<input type="button" value="고속버스" onClick="javascript:search1(2)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">'
+					+'<input type="button" value="시외버스" onClick="javascript:search1(1)" style="float:right; margin-left: 6px; padding: 0 5px; background: #4580d3;">');
 				
 				
 				var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
@@ -1372,7 +1339,7 @@
 				outStartInfowindow = new daum.maps.InfoWindow({
 				    map: map, 
 				    position : startSTN.getPosition(), 
-				    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
+				    content : '<div style="padding:5px; font-size: 12pt;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
 				    			+'예상 소요 시간 : '+returnData.time+'분</br>'
 				    			+'요금 : '+returnData.payment+'원</br></div>',
 				    removable : true
@@ -1381,9 +1348,11 @@
 				outEndInfowindow = new daum.maps.InfoWindow({
 				    map: map, 
 				    position : endSTN.getPosition(), 
-				    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
+				    content : '<div style="padding:5px; font-size: 12pt;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
 				    removable : true
 				});
+				
+				/////////////////////////////////////
 				
 				outStartInfowindow.open(map, startSTN); 
 				outEndInfowindow.open(map, endSTN); 
@@ -1640,36 +1609,6 @@
 			lat.push(tempMarkerArray[i].getLat());
 		}
 	}
-	
-	/*********************** 캡쳐기능 펑션생성 **************************/
-	
-	function capture() {
-        html2canvas($("#captureArea").get(0)).then(function(canvas) {
-              console.log(canvas) 
-                $("#imgSrc").val(canvas.toDataURL("image/png"));
-
-                $.ajax({
-                    type: "POST",
-                    data : $("form").serialize(),
-                    url: "../planner/capture",
-                    error: function(a, b, c){        
-                        alert("fail!!");
-                    },
-                    success: function (data) {
-                        try{
-                            alert(data+"::::::::ok");
-                            alert(123123123);
-                        }catch(e){                
-                            alert('server Error!!');
-                        }
-                    },
-                    error : function(){
-                    		alert("전송실패했다리");
-                    }
-                });
-		});
-	}
-
 	
 	</script>
 

@@ -1,89 +1,89 @@
-package com.yagn.nadrii.service.comment;
-
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.yagn.nadrii.service.common.CommentService;
-import com.yagn.nadrii.service.domain.Comments;
-
-
-/*
- *	FileName :  UserServiceTest.java
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹Ý ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ý¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-
-//==> Meta-Data ¸¦ ´Ù¾çÇÏ°Ô Wiring ÇÏÀÚ...
-//@ContextConfiguration(locations = { "classpath:config/context-*.xml" })
-@ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
-										"classpath:config/context-aspect.xml",
-										"classpath:config/context-mybatis.xml",
-										"classpath:config/context-transaction.xml" })
-//@ContextConfiguration(locations = { "classpath:config/context-common.xml" })
-public class CommentServiceTest{
-	
-	@Autowired
-	@Qualifier("commentServiceImpl")
-	private CommentService commentService;
-	private Comments comment;
-
-	//@Test
-	public void testAddUser() throws Exception {
-		comment = new Comments();
-		comment.setPostNo(30003);
-		comment.setText("°¨»çÇÕ´Ï´Ù~");
-		comment.setUserId("test01");
-//		List<Comments> listComment = commentService.addComment(comment);
-//		System.out.println(listComment);
-	}
-	
-	@Test
-	public void testGetUser() throws Exception {
-		List<Comments> comm = commentService.listCommentById("test01");
-		System.out.println(comm);
-		
-	}
-	
-	//@Test
-	 public void testUpdateUser() throws Exception{
-		Comments com = new Comments();
-		com.setCommentNo(10011);
-		com.setText("°¨»çÇÕ´Ï´Ù~!");
-		
-		commentService.updateComment(com);
-		
-		Map<String, Object> comments = commentService.listCommentByPost(30003);
-		System.out.println(comments.get("totalCount")+" , "+comments.get("listComment"));
-		
-	 }
-	 
-	 //==>  ÁÖ¼®À» Ç®°í ½ÇÇàÇÏ¸é....
-	 //@Test
-	 public void testGetUserListAll() throws Exception{
-		 Map<String, Object> comments = commentService.listCommentByPost(30003);
-		 
-		 System.out.println(comments.get("totalCount")+" , "+comments.get("listComment"));
-	 }
-	 
-	 //@Test
-	 public void testGetUserListByUserId() throws Exception{
-		 
-	 }
-	 
-	 //@Test
-	 public void testGetUserListByUserName() throws Exception{
-		 
-	 }	 
-
-}
+//package com.yagn.nadrii.service.comment;
+//
+//import java.util.List;
+//import java.util.Map;
+//
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//
+//import com.yagn.nadrii.service.common.CommentService;
+//import com.yagn.nadrii.service.domain.Comments;
+//
+//
+///*
+// *	FileName :  UserServiceTest.java
+// * ï¿½ï¿½ JUnit4 (Test Framework) ï¿½ï¿½ Spring Framework ï¿½ï¿½ï¿½ï¿½ Test( Unit Test)
+// * ï¿½ï¿½ Spring ï¿½ï¿½ JUnit 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Úµå¸¦ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+// * ï¿½ï¿½ @RunWith : Meta-data ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ wiring(ï¿½ï¿½ï¿½ï¿½,DI) ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+// * ï¿½ï¿½ @ContextConfiguration : Meta-data location ï¿½ï¿½ï¿½ï¿½
+// * ï¿½ï¿½ @Test : ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½
+// */
+//@RunWith(SpringJUnit4ClassRunner.class)
+//
+////==> Meta-Data ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½Ï°ï¿½ Wiring ï¿½ï¿½ï¿½ï¿½...
+////@ContextConfiguration(locations = { "classpath:config/context-*.xml" })
+//@ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
+//										"classpath:config/context-aspect.xml",
+//										"classpath:config/context-mybatis.xml",
+//										"classpath:config/context-transaction.xml" })
+////@ContextConfiguration(locations = { "classpath:config/context-common.xml" })
+//public class CommentServiceTest{
+//	
+//	@Autowired
+//	@Qualifier("commentServiceImpl")
+//	private CommentService commentService;
+//	private Comments comment;
+//
+//	//@Test
+//	public void testAddUser() throws Exception {
+//		comment = new Comments();
+//		comment.setPostNo(30003);
+//		comment.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½~");
+//		comment.setUserId("test01");
+////		List<Comments> listComment = commentService.addComment(comment);
+////		System.out.println(listComment);
+//	}
+//	
+//	@Test
+//	public void testGetUser() throws Exception {
+////		List<Comments> comm = commentService.listCommentById("test01");
+//		System.out.println(comm);
+//		
+//	}
+//	
+//	//@Test
+//	 public void testUpdateUser() throws Exception{
+//		Comments com = new Comments();
+//		com.setCommentNo(10011);
+//		com.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½~!");
+//		
+//		commentService.updateComment(com);
+//		
+//		Map<String, Object> comments = commentService.listCommentByPost(30003);
+//		System.out.println(comments.get("totalCount")+" , "+comments.get("listComment"));
+//		
+//	 }
+//	 
+//	 //==>  ï¿½Ö¼ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½....
+//	 //@Test
+//	 public void testGetUserListAll() throws Exception{
+//		 Map<String, Object> comments = commentService.listCommentByPost(30003);
+//		 
+//		 System.out.println(comments.get("totalCount")+" , "+comments.get("listComment"));
+//	 }
+//	 
+//	 //@Test
+//	 public void testGetUserListByUserId() throws Exception{
+//		 
+//	 }
+//	 
+//	 //@Test
+//	 public void testGetUserListByUserName() throws Exception{
+//		 
+//	 }	 
+//
+//}

@@ -203,5 +203,33 @@ public class TicketController {
 		return "forward:/ticket/addBookingView.jsp";
 	}
 	
+	@RequestMapping(value = "showMeTheTicket", method = RequestMethod.GET)
+	public String getMyTicket (
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /ticket/showMetheTicket : GET");
+		
+		User user = new User();
+		System.out.println(session.toString());
+		
+		try {
+			
+			user = (User) session.getAttribute("loginUser");
+			System.out.println(user.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+
+		map.put("user", user);
+		
+		return "forward:/ticket/showMeTheTicket.jsp";
+	}
+			
+	
+	
 	
 } // end of class

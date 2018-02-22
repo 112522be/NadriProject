@@ -36,12 +36,19 @@
 	<style type="text/css">
 		.body{
 			background: #e6ebed;
-			padding-top: 5em;
 		}
 	</style>
 </head>
-	<body>
-	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+<body>
+	<div id="header">
+			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+					<h1><a href="../index.jsp" id="logo">NADRII</a></h1>
+				</header>
+			</div>
+		</div>
 	<div class="body">
 	<div class="container" align="center">
 	<br/>
@@ -73,8 +80,6 @@
 		<br/>
 	</div>	
 	</div>
-	<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<link rel="stylesheet" href="/resources/skins/default.css"/>
 	</body>
+		<link rel="stylesheet" href="/resources/helios/assets/css/main.css">
 </html>
