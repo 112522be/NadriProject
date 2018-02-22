@@ -157,6 +157,7 @@
 			    var interval = window.setInterval(function() {
 			        try {
 			            if (win == null || win.closed) {
+			            	
 			                window.clearInterval(interval);
 			                closeCallback(win);
 			            }
