@@ -125,7 +125,7 @@
 
 					<div class="container">
 						<article id="main" class="special" align="center" style="position: relative; height:auto;">
-							<header>
+							<header style="border-bottom: 1px solid; padding-bottom: 60px;">
 								<h2><a href="#">${community.title}</a></h2>
 								<br/>
 								<div style="float: left;"> 
@@ -153,7 +153,7 @@
 							<br/><br/>
 							<div>
 								<div align= "left" class="col-xs-9" style="padding: 30px;">
-									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 11pt;">${community.hashtag}</span>
+									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 13pt;">${community.hashtag}</span>
 								</div>
 								<div align="right" class="col-xs-3">
 									<input type="hidden" name="postNo" value="${community.postNo}">
@@ -163,7 +163,7 @@
 						</article>
 						<br/><br/><br/>
 						<div>
-						<jsp:include page="../common/comment.jsp"></jsp:include>
+						<jsp:include page="../common/comment2.jsp"></jsp:include>
 						</div>
 						<hr />
 						<div class="row">
