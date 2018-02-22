@@ -198,10 +198,6 @@
 		});
 	});
 	
-	$( function() {
-		$( "#tabs" ).tabs();
-	} );
-	
 </script>
 <!--  -->
 <style >
@@ -314,5 +310,12 @@ th{
 			</div><!-- row end -->
 		</div><!-- container end -->
 	</div><!-- page end -->
+	<script src="../resources/helios/assets/js/jquery.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="../resources/helios/assets/js/skel.min.js"></script>
+		<script src="../resources/helios/assets/js/util.js"></script>
+		<script src="../resources/helios/assets/js/main.js"></script>
 </body>
 </html>
