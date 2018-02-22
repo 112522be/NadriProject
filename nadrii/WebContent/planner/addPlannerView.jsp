@@ -28,6 +28,8 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="../resources/script/html2canvas.js"></script>
 		
 		<style>
 		.wrapper{
@@ -45,7 +47,7 @@
 			border-color: #afafaf;
 		}	
 		.map_wrap, .map_wrap * {
-		    font-size: 15px !important;
+		    font-size: 16px !important;
 		}		
 		th{
 			padding: 10px;
@@ -53,8 +55,24 @@
 		}	
 		input[type="button"]{
 			padding: 0 5px;
-			font-size: 15px !important;
+			font-size: 18px !important;
 		}	
+		.ui-dialog .ui-dialog-titlebar {
+		    padding: 0em 1em;
+		    position: relative;
+		}
+		.ui-widget-header {
+    		background: #f9a11b;
+    	}
+    	.ui-dialog .ui-dialog-title {
+		    color: #ffffff;
+	    }
+	    input:focus{
+			outline:none;
+		}
+		textarea:focus{
+			outline:none;
+		}
 		</style>
 		<script>
 
@@ -132,6 +150,7 @@
 						$("#wishTable").dialog({
 							width: 700,
 							height: 500,
+							title: 'WISH LIST',
 							open: function(event, ui){
 								$("#wishTable").css('overflow', 'auto');
 							}
@@ -184,7 +203,7 @@
 				<div style="background: #ffffff;">
 					<div style="margin: 0; padding: 0;">
 						<div class="row 200%">
-							<div class="9u 12u(mobile)" id="content">
+							<div id="content" style="width: 70%; height: 800px; float: left; border-top:1px solid black;">
 								<div class="map_wrap">
 									<div id="map" style="height: 830px; position: relative; overflow: hidden; padding:10px;"></div>
 										
@@ -212,7 +231,7 @@
 									
 								</div>
 							</div>
-							<div class="3u 12u(mobile)" id="sidebar" style="float: right; overflow-x: hidden; overflow-y: auto; padding: 115px 15px 0 15px; border-top:1px solid black; border-left: 1px solid black;">
+							<div id="sidebar" style="width: 30%; padding: 140px 40px 40px 40px; height: 940px; float: left; overflow-x:hidden; overflow-y: auto; border-top:1px solid black; border-left: 1px solid black;">
 								<form name="addPlanner">
 								<div>
 									<c:if test="${status == 'normal'}">
@@ -221,18 +240,20 @@
 									<c:if test="${status == 'update'}">
 										<input type="button" id="update" value="플래너 수정" style="float: right;" />
 									</c:if>
-										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:3px;width:70%; font-size: 12pt;"/>
+										<input type="text" name="title" value="${planner.title}" placeholder="플래너 제목" style="padding:8px; width:80%; font-size: 13pt;"/>
 								</div>
 								
 								<div style="overflow: hidden; padding-top: 20px;">
 									<div id="exButtonCreate" style="float:right;"></div>
 								</div>
 								
-								<div id="captureArea" style="padding:30px 45px 30px 30px; overflow: hidden;">
-									<div id="subPointer" style="float: left; overflow: hidden;"></div>
-									<div style="float: right; overflow: hidden;">
-										<ul id="sortable" class="pointer" style="width: 300px; ">
-										</ul>
+								<div id="captureArea">
+									<div style="padding:30px 45px 30px 30px; overflow: hidden;">
+										<div id="subPointer" style="float: left; overflow: hidden;"></div>
+										<div style="float: right; overflow: hidden;">
+											<ul id="sortable" class="pointer" style="width: 300px; ">
+											</ul>
+										</div>
 									</div>
 								</div>
 								
@@ -249,7 +270,7 @@
 												<a role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse1"
 													aria-expanded="true" aria-controls="collapse1"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로1
+													class="fas fa-flag-checkered"></span>&nbsp;경로1
 												</a>
 											</h4>
 										</div>
@@ -264,7 +285,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse2"
 													aria-expanded="false" aria-controls="collapse2"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로2
+													class="fas fa-flag-checkered"></span>&nbsp;경로2
 												</a>
 											</h4>
 										</div>
@@ -279,7 +300,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse3"
 													aria-expanded="false" aria-controls="collapse3"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로3
+													class="fas fa-flag-checkered"></span>&nbsp;경로3
 												</a>
 											</h4>
 										</div>
@@ -294,7 +315,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse4"
 													aria-expanded="false" aria-controls="collapse4"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로4
+													class="fas fa-flag-checkered"></span>&nbsp;경로4
 												</a>
 											</h4>
 										</div>
@@ -309,7 +330,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse5"
 													aria-expanded="false" aria-controls="collapse5"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로5
+													class="fas fa-flag-checkered"></span>&nbsp;경로5
 												</a>
 											</h4>
 										</div>
@@ -324,7 +345,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse"
 													data-parent="#accordion" href="#collapse6"
 													aria-expanded="false" aria-controls="collapse6"> <span
-													class="glyphicon glyphicon-flag"></span>&nbsp;경로6
+													class="fas fa-flag-checkered"></span>&nbsp;경로6
 												</a>
 											</h4>
 										</div>
@@ -338,7 +359,7 @@
 								</div>
 								
 								<div>
-									<textarea class="form-control" rows="25" cols="blue" name="text" placeholder="플랜세부계획을 작성해주세요~!">${planner.text}</textarea>
+									<textarea class="form" rows="7" cols="blue" name="text" placeholder="플랜세부계획을 작성해주세요~!">${planner.text}</textarea>
 								</div>
 								
 								<input type="hidden" name="lat" value=""> 

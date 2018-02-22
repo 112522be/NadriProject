@@ -51,10 +51,12 @@ function getLike(){
 			$(".like").append(returnData.totalCount);
 			
 			$("span.heart").empty();
-			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='')){
-            	$("span.heart").append('<i class="far fa-heart"></i>');
+
+			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+            	$("span.heart").append('<span class="far fa-heart"></span>');
+
             }else{
-                $("span.heart").append('<i class="fas fa-heart full"></i>');
+                $("span.heart").append('<span class="fas fa-heart full"></span>');
             }
 		}
 	});	

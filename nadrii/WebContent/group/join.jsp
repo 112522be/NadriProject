@@ -86,13 +86,12 @@ function getMemberList(){
 				
 			}
 			
-			$('[data-toggle="popover"]').popover(
-					{ html: true,
-					 container: 'body',
-					 content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
-					 placement: 'bottom',
-					 }
-					);	
+			$('[data-toggle="popover"]').popover({ 
+				html: true,
+				container: 'body',
+				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				placement: 'bottom',
+			});	
 			
 			$("a[name='join']").on("click", function(){
 				addJoin();
@@ -126,7 +125,7 @@ function getMemberList(){
 
 		<thead>
 			<tr>
-				<th><span class="glyphicon glyphicon-ok-sign"></span> 참여자 목록 <div class="totalCount" style="position: relative; float: right;"></div></th>
+				<th><span class="fas fa-users"></span>&nbsp;&nbsp;참여자 목록 <div class="totalCount" style="position: relative; float: right;"></div></th>
 			</tr>
 		</thead>
 		

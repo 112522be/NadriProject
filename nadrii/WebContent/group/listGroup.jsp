@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
 		<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
-				
+			
 		<script src="../resources/helios/assets/js/jquery.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
@@ -63,7 +63,7 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 				placement: 'bottom',
 			});	
 		});
