@@ -44,6 +44,137 @@ $(function(){
 	    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
 	});
 })
+
+function makeToast(title) {
+	$('#toastMessage').text(title).fadeIn(400).delay(2000).fadeOut(400);
+}
+
+/////////////////////////////////컨트롤러 연결////////////////////
+
+/////////////////로그인/////////////////
+$(function(){
+	$("input[value='Login']").on("click",function(){
+ 		var userId = $("form[name='Login'] input[name='userId']").val();
+ 		var password =$("form[name='Login'] input[name='password']").val();
+		
+  		if(userId==null || userId==""){
+  			makeToast("아이디를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(password=null||password==""){
+  			makeToast("비밀번호를 입력하지 않았습니다");
+  			return;
+  		}
+  		//alert("로그인");
+  		$("form[name='Login']").attr("method","POST").attr("action","/user/login").submit();
+	})
+})
+
+///////////////////회원가입/////////////////////////
+$(function(){
+	
+	$("input[value='가입']").on("click",function(){
+		
+		var userId = $("form[name='join'] input[name='userId']").val();
+		var password = $("form[name='join'] input[name='password']").val();
+		var password2 = $("input[name='password2']").val();
+		var email = $("input[name='email']").val();
+		var code = $("input[name='code']").val();
+		
+		if(userId==null || userId==""){
+  			makeToast("아이디를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(password=null||password==""){
+  			makeToast("비밀번호를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(password2=null||password2==""){
+  			makeToast("확인영 비밀번호를 입력하세요");
+  			return;
+  		}
+  		
+  		if(password2 != password){
+  			makeToast("비밀번호가 서로 다릅니다");
+  			return;
+  		}
+  		
+  		if(email=null||email==""){
+  			makeToast("이메일 주소를 입력하지 않았습니다");
+  			return;
+  		}
+  		if(code=null||code==""){
+  			makeToast("인증번호를 입력해주세요");
+  			return;
+  		}
+  		/*
+  		if(code !=${session.code}){
+  			makeToast("인증번호가 일치하지 않습니다");
+  			return;
+  		}
+  		*/
+  		alert("회원가입");
+		
+	})
+	
+	$("input[name='sendEmail']").on("click",function(){
+		alert("이메일 전송");
+	})
+	
+	$("input[name='checkCode']").on("click",function(){
+		alert("확인");
+	})
+	
+	
+})
+
+////////////////////////////빨강 파랑
+
+function checkId() {
+    
+        var data = "userId=" + $("form[name='join'] input[name='userId']").val();
+        $.ajax({
+            	type:"POST",
+            	data : data,
+				url : "/user/json/checkId",     
+            
+            success : function(result) {
+            	if(result.check == 1){
+            		//alert("아이디가 중복되었습니다.");
+            		idCheckFlag = false;
+            		$("#userId").css("background-color", "#FFCECE");
+            		$(".signupbtn").prop("disabled", true);
+	                $(".signupbtn").css("background-color", "#aaaaaa");
+	                $("#htmlId").html("아이디 중복입니다.").css('color','red');
+            		return;
+            	}else{
+            		//alert("사용 가능합니다.");
+            		idCheckFlag = true;
+            		$("#userId").css("background-color", "#B0F6AC");
+            		$(".signupbtn").prop("disabled", false);
+            		$("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
+            	}
+            }
+        });    
+        
+    }
+
+
+//////////////////외부 로그인
+
+$(function(){
+	$("img[name='kakaoLogin']").on("click",function(){
+		alert("카카오");
+	})
+	$("img[name='naverLogin']").on("click",function(){
+		alert("네이버");
+	})
+})
+
+
+
+
+
 </script>
 
 <style rel="stylesheet">
@@ -296,7 +427,7 @@ body .container .content input:focus {
 }
 
 body .container .content .submit-wrap {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
@@ -371,6 +502,35 @@ img{
 	
 }
 
+.btn.btn-info{
+	font-size: 20px;
+	max-width: 100%;
+ 	width: auto; 
+	height: auto;
+	float:right;
+	margin-left: 5%;
+
+}
+
+
+.toastMessage {
+    width:400px;
+    height:auto;
+    position:fixed;
+    left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
 
 
 
@@ -395,8 +555,8 @@ img{
 		    <article class="">
 		       
 		        <div class="tabs">
-		            <span class="tab signin active"><a href="#signin">Sign in</a></span>
-		            <span class="tab signup"><a href="#signup">Sign up</a></span>
+		            <span class="tab signin active"><a href="#signin">로그인</a></span>
+		            <span class="tab signup"><a href="#signup">가입하기</a></span>
 		        </div>
 		        <div class="content">
 		            <div class="signin-cont cont">
@@ -404,9 +564,12 @@ img{
 			                <input type="text" name="userId" class="inpt" required="required" placeholder="아이디">
 			                
 			                <input type="password" name="password" class="inpt" required="required" placeholder="비밀번호">
-	        			    			                
+									        			    			                
 				            <div class="submit-wrap">
-			 	               <input type="submit" value="Login" class="submit">
+				            <a class="btn btn-info" role="button" href="#">비밀번호 찾기</a>
+				            <a class="btn btn-info" role="button" href="#" >아이디 찾기</a>
+							
+			 	               <input type="button" value="Login" class="submit">
 				 	        </div>
         		    	</form>
     				</div>
@@ -418,16 +581,20 @@ img{
 							
 							<ul>
 								<li><input type="text" name="email" class="inpt email" required="required" placeholder="이메일" ></li>
-	                			<li><input type="button" class="inpt access" name="checkEmail" value="인증"></li>
+	                			<li><input type="button" class="inpt access" name="sendEmail" value="인증"></li>
 	                		</ul>
 	                		
+	                		<ul>
+								<li><input type="text" name="code" class="inpt email" required="required" placeholder="인증번호" ></li>
+	                			<li><input type="button" class="inpt access" name="checkCode" value="확인"></li>
+	                		</ul>
 	                		
-
+							
 	                		
 							<div class="submit-wrap">
-							<img src="../resources/images/userImage/kakao_account_login_btn_medium_narrow.png" class="6u 12u(mobile) special" name="kakaoLogin">
-	                		<img src="../resources/images/userImage/naverLongBar-iloveimg-resized.png" class="6u 12u(mobile) special" name ="naverLogin">
-								<input type="submit" value="가입" class="submit">
+								<img src="../resources/images/userImage/kakao_account_login_btn_medium_narrow.png" class="6u 12u(mobile) special" name="kakaoLogin">
+	                			<img src="../resources/images/userImage/naverLongBar-iloveimg-resized.png" class="6u 12u(mobile) special" name ="naverLogin">
+								<input type="button" value="가입" class="submit">
 							</div>
 							
 	        			</form>
@@ -438,7 +605,8 @@ img{
 
 	</div>
 
- 
+ 	<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>
+ 	
 
 </body>
 </html>

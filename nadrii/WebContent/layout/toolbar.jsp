@@ -193,6 +193,7 @@
 								<!--  </a>-->
 							</li>
 		</c:if>
+		<li><a href="../index.jsp">홈으로 가기</a></li>
 		<li><a href="../trip/getTheme">나들이 정보</a></li>
 		<li><a href="../comm/listComm">나만의 나들이</a></li>
 		<li><a href="#">나들이 플래너 ▼</a>

@@ -48,6 +48,13 @@ public class TripController {
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
+		if(areaCode==null ||areaCode=="") {
+			areaCode="1";
+		}
+		
+		if(localName ==null || localName=="") {
+			localName ="23";
+		}
 		
 		//
 		if(area.equals("federal")) {
