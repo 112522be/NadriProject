@@ -475,12 +475,12 @@ public class UserController {
 			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
 		}
 		if (userService.getUserByEmail(user.getEmail()) == null) {
-	         request.setAttribute("outerUser", user);
-	         return "forward:addUserView.jsp";
-	      } else {
-	         session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
-	         return "forward:../index.jsp";
-	      }
+			request.setAttribute("outerUser", user);
+			return "forward:addUserView.jsp";
+		} else {
+			session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
+			return "forward:../index.jsp";
+		}
 	}
 
 	@RequestMapping("naverLogin")

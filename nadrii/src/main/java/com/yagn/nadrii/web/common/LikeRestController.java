@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.common.Search;
@@ -71,11 +72,12 @@ public class LikeRestController {
 	}
 	
 	@RequestMapping(value="json/listLikeById")
-	public Map listLikeById(HttpSession session) throws Exception{
+	public Map listLikeById(HttpSession session, @RequestParam int currentPage) throws Exception{
 		
 		System.out.println("json/listLikeById");
 
 		Search search = new Search();
+		search.setCurrentPage(currentPage);
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}

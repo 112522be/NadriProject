@@ -45,7 +45,7 @@
 }
 </style>
 <script type="text/javascript">
-	var currentPage;
+	var currentPage = 1;
 	var maxPage;
 	$(function() {
 		$('a.col-xs-4').bind('click', function() {
@@ -54,81 +54,29 @@
 			$(this).css("border-bottom", "4px solid #FE8A71");
 			$(this).children().css("color", "#FE8A71")
 			if($(this).children().html() == "좋아요"){
-				getLike();
+				getLike('add');
 			}else if($(this).children().html() == "댓글"){
-				$.ajax({
-					url: "/common/listCommentById",
-					method: "GET",
-					data: {
-						"searchKeyword": '${loginUser.userId}'
-					},
-					headers: {
-						"Accept": "application/json",
-						"Content-Type": "application/json"
-					},
-					success: function(JSONData) {
-						console.log(JSONData)
-						currentPage = 1;
-						if(JSONData.totalCount%12 == 0){
-							maxPage = JSONData.totalCount / 12;
-						}else{
-							maxPage = (JSONData.totalCount / 12)+1;
-						}
-						var html = '';
-						for(var i=0;i<JSONData.comments.length;i++){
-							html += '<div class="row">'
-								+'<div class="col-xs-2" align="center" style="color: gray;">'
-								+'<span>'+JSONData.yearNMonth[i]+'.</span>'
-								+'<span style="font-size:25pt; font-weight:700">'+JSONData.day[i]+'</span>'
-								+'</div>'
-								+'<div class="col-xs-2">'
-								+'<img alt="" src="" style="height: 10%; width: 13%;">'
-								+'</div>'
-								+'<div class="col-xs-8">'
-								+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
-								if(JSONData.title[i] == null){
-									html += "삭제된 게시물입니다."	
-								}else{
-									html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">'
-								}
-								html +='</span></p>'
-								+JSONData.comments[i].text
-								+'</div>'
-								+'</div>'
-								+'<hr/>';
-						}
-						$('#logContainer').html(html);
-						$('#logContainer').on('click', 'p#addedTitle', function() {
-							var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
-							if(postNo == null){
-								alert("삭제된 게시물입니다.");
-							}else{
-								if(postNo.indexOf("60") != 0){
-									self.location = "/comm/getComm?postNo="+postNo;
-								}else{
-									self.location = "/group/getGroup?groupNo="+postNo;
-								}
-							}
-						})
-					}
-				})
+				getComments('add');
 			}else{
-				listMessage();
 			}
 		})
-		$(window).scroll(function() {
-		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-		    if(currentPage < maxPage){
+		$('#logContainer').on('click', 'a.more', function() {
+			if(currentPage < maxPage){
 			    currentPage++;
-			    var searchKeyword = $('input[name="searchKeyword"]').val();      
+			    if($('#logContainer').find('input[name="type"]').val() == "좋아요"){
+			    	getLike("update");
+			    }else if($('#logContainer').find('input[name="type"]').val() == "댓글"){
+			    	getComments("update");
+			    }else{
+			    	
+			    }
+			        
 			}else{
 			    return;
 			}
-		}
-	})	
+		})	
 	})
-	function infinityScroll() {
-	}
+
 	function listMessage() {
 		$.ajax({
 			url:"/message/json/listMessage/"+'${loginUser.userId}',
@@ -261,47 +209,148 @@
 			deleteMessage(messageNoList);
 		});
 	});
-	function getLike() {
+	
+	function getLike(menu) {
+		if(menu == 'add'){
+			currentPage=1;
+		}
 		$.ajax({
 			url: "/like/json/listLikeById",
 			method: "GET",
 			data: {
+				"currentPage": currentPage,
 				"searchKeyword": "${loginUser.userId}"
 			},
 			headers: {
 				"Accept": "application/json"
 			},
 			success: function(JSONData) {
-				currentPage = 1;
 				if(JSONData.totalCount%12 == 0){
 					maxPage = JSONData.totalCount / 12;
 				}else{
 					maxPage = Math.floor(JSONData.totalCount / 12)+1;
 				}
-				var html="";
+				console.log(maxPage);
+				var html='<div class="likes" align="center"><input type="hidden" name="type" value="좋아요">';
+				if(currentPage > 1){
+					html += '<hr/>';
+				}
 				console.log(JSONData)
 				for(var i=0;i<JSONData.list.length;i++){
-					html += '<div class="row">'
-						+'<div class="col-xs-2" align="center" style="color: gray;">'
+					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
 						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
-						+'<span style="font-size:25pt; font-weight:700">'+JSONData.day[i]+'</span>'
+						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
 						+'</div>'
-						+'<div class="col-xs-2">'
-						+'<img alt="" src="" style="height: 10%; width: 13%;">'
-						+'</div>'
-						+'<div class="col-xs-8">'
-						+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
-						if(JSONData.title[i] == null){
-							html += "삭제된 게시물입니다."	
+						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
+						if(JSONData.title[i] != null){
+							html += '<i class="fas fa-heart" style="color: #F05643; font-size:1em; "></i>&nbsp;좋아요'
+							+'</div>'
+							+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
+							+'<p id="addedTitle" style="padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">';
 						}else{
-							html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
+							html += '</div>'
+								+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
+							+'<p id="addedTitle" style="padding: 0 0 0 5%;;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
+							+"삭제된 게시물입니다."
 						}
 						html +='</span></p>'
 						+'</div>'
-						+'</div>'
-						+'<hr/>';
+						+'</div>';
+						if(i != JSONData.list.length-1){
+							html += '<hr/>';
+						}
 				}
-				$('#logContainer').html(html);
+				if(currentPage < maxPage){
+					html+='<a class="more">+ 더보기</a></div>'
+				}
+				if(menu == 'add'){
+					$('#logContainer').html(html);
+				}else{
+					$('#logContainer').find('a.more').remove();
+					$('#logContainer').append(html);
+				}
+				$('#logContainer').on('click', 'p#addedTitle', function() {
+					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
+						if(postNo == null){
+							alert("삭제된 게시물입니다.");
+						}else{
+							if(postNo.indexOf("60") != 0 && postNo.indexOf("40") != 0){
+								self.location = "/comm/getComm?postNo="+postNo;
+							}else if(postNo.indexOf("40") != 0){
+								self.location = "/group/getGroup?groupNo="+postNo;
+							}else{
+								self.location = "/planner/getPlanner?postNo="+postNo;
+							}
+						}
+					})
+				}
+			})
+		}
+	function getComments(menu) {
+		if(menu == 'add'){
+			currentPage=1;
+		}
+		$.ajax({
+			url: "/common/listCommentById",
+			method: "GET",
+			data: {
+				"currentPage": currentPage,
+				"searchKeyword": '${loginUser.userId}'
+			},
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			},
+			success: function(JSONData) {
+				console.log(JSONData)
+				if(JSONData.totalCount%12 == 0){
+					maxPage = JSONData.totalCount / 12;
+				}else{
+					maxPage = Math.floor(JSONData.totalCount / 12)+1;
+				}
+				console.log(maxPage);
+				var html = '<div class="comments" align="center"><input type="hidden" name="type" value="댓글">';
+				if(currentPage > 1){
+					html += '<hr/>';
+				}
+				for(var i=0;i<JSONData.comments.length;i++){
+					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
+						+'</div>'
+						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
+						if(JSONData.title[i] != null){
+							html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;댓글'
+							+'</div>'
+							+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
+							+'<p id="addedTitle" style="padding: padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">';
+						}else{
+							html += '</div>'
+								+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
+							+'<p id="addedTitle" style="padding: padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
+							+"삭제된 게시물입니다."
+						}
+						html +='</span></p>'
+						+JSONData.comments[i].text
+						+'</div>'
+						+'</div>';
+						if(i != JSONData.comments.length-1){
+							html += '<hr/>';
+						}
+				}
+				if(currentPage < maxPage){
+					html+='<a class="more">+ 더보기</a></div>'
+				}
+				if(menu == 'add'){
+					$('#logContainer').html(html);
+				}else{
+					$('#logContainer').find('a.more').remove();
+					$('#logContainer').append(html);
+				}
 				$('#logContainer').on('click', 'p#addedTitle', function() {
 					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 					if(postNo == null){
@@ -317,6 +366,7 @@
 			}
 		})
 	}
+<<<<<<< HEAD
 	
 	
 	////////////////////////////////////////////
@@ -335,10 +385,14 @@
 	
 	
 	/////////////////////////////////////
+=======
+
+>>>>>>> refs/heads/team/yr
 </script>
 </head>
-<body onload="javascript:getLike();">
-	  <div id="header">
+<body onload="javascript:getLike('add');">
+<input type="hidden" name="searchKeyword" value="${loginUser.userId}">
+ 	  <div id="header">
 			<div class="inner">
 				<header>
 					<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
@@ -346,22 +400,32 @@
 			</div>	
 			<jsp:include page="/layout/toolbar.jsp" />
      </div>
-     <div class="container" style=" position: relative; ">
-     	<div name="userProfile" style="margin: 20px; position: relative; height: auto;">
-      		<a><img alt="" src="/resources/images/00742106_105752.jpg" width="10%" style="margin: 10px;"></a>
-     		<span style="position:absolute; top: 10%; margin: 10px; font:bold; font-size: 20pt; color: #3b2b48;">
-     			<a style="font-weight: 700;">${loginUser.userId}</a>
-     			<br/>
-     			<span style="font-size: 12pt;">${loginUser.email}</span>
+     <div class="container" align="center">
+     	<div name="userProfile" style="margin: 20px;height: auto;">
+     		<span class="col-xs-4" style="width: 30%" align="right">
+     			<c:if test="${! empty loginUser.profileImageFile}">
+     				<a><img alt="" src="/resources/images/${loginUser.profileImageFile}" style="width: 100%"></a>
+     			</c:if>
+      			<c:if test="${empty loginUser.profileImageFile}">
+      				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 100%"></a>
+     			</c:if>
      		</span>
-	<a style="font-size: 15px; position:absolute; bottom: 10%; margin: 10px; font:bold;" href="/user/updateUser?userId=${loginUser.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
+     		<span style="font:bold; font-size: 2em !important; color: #3b2b48;" class="col-xs-8">
+     			<p style="padding: 0.5em 0.5em 0.5em 0;">
+	     			<a style="font-weight: 700;">${loginUser.userId}</a>
+	     			<br/>
+	     			<span style="font-size: 12pt;">${loginUser.email}</span>
+     			</p>
+     			<a style="float: left; font-size: 0.5em; margin: 10px; font:bold;" href="/user/updateUser?userId=${loginUser.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
+     		</span>
      	</div>
-     	<br/>
+     </div>
+     <div class="container">
      	<div style="background-color: white; margin-top:10pt;">
-	     	<div style="margin: 20px; position: relative; height: inherit;">
+	     	<div style="margin: 20px; padding-bottom:1em; height: inherit;">
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">좋아요</span></a>
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">댓글</span></a>
-	     		<a class="col-xs-4" align="center"><span class="button01" align="center">쪽지</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">내 모임</span></a>
 	     	</div>
 	     	<div id="logContainer"></div>
      	</div>
@@ -379,4 +443,9 @@
      
 
 </body>
+<style type="text/css">
+	p{
+		margin-bottom: 0;
+	}
+</style>
 </html>
