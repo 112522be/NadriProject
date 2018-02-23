@@ -366,28 +366,6 @@
 			}
 		})
 	}
-<<<<<<< HEAD
-	
-	
-	////////////////////////////////////////////
-	
-	$(function(){
-	 	$(document).on("click","a[name='received']", function(){
-	
-			alert("받은 쪽지")
-			
-		
-		})
-		
-		
-	})
-	
-	
-	
-	/////////////////////////////////////
-=======
-
->>>>>>> refs/heads/team/yr
 </script>
 </head>
 <body onload="javascript:getLike('add');">
