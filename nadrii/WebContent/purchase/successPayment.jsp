@@ -50,7 +50,10 @@
 $(function(){
 	$( "a[href='#']:contains('확 인')" ).bind("click", function(){
 //		alert("확인")
-		self.location = "/purchase/listPurchase"
+
+		window.close();
+
+//		self.location = "/purchase/listPurchase"
 	});
 });
 
@@ -80,7 +83,8 @@ $(function(){
 						<h2>
 							<a href="#">결제가 <strong class="text-danger">완료</strong> 되었습니다.</a>
 						</h2>
-						<p>확인버튼 클릭시 구매한 티켓 목록 화면으로 이동합니다.</p>
+						<!-- <p>확인버튼 클릭시 구매한 티켓 목록 화면으로 이동합니다.</p> -->
+						<p>나들이 티켓을 이용해 주셔서 감사합니다.</p>
 					</header>
 					<footer>
 						<a href="#" class="button">확 인</a>

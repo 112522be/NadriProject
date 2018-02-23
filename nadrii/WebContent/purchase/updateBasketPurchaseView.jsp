@@ -47,7 +47,17 @@
 <script type="text/javascript">
 
 function fncUpdateBasketPurchase() {
-	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
+	
+	var myForm = document.popForm;
+	var url = "/purchase/kakaoPay";
+	window.open("",	"popForm", "toolbar=no, width=475, height=700, directories=no, status=no, scrollorbars=no, resizable=no");
+	myForm.action = url;
+	myForm.method = "post";
+	myForm.target = "popForm";
+	myForm.testVal = "${ kakaoUri }";
+	myForm.submit();
+	
+//	$("form").attr("method", "POST").attr('action', '/purchase/kakaoPay').submit();
 }
 
 $( function(){

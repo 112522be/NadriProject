@@ -19,8 +19,8 @@
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	  
 	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 	.button01 {
@@ -141,7 +141,7 @@
 			success: function(JSONData){
 				$("tbody tr").remove();
 				var message = JSONData.list;
-				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">받은쪽지</span>&nbsp;&nbsp;<span name="sended">보낸쪽지</span></div>';
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><a id="received" name="received">받은쪽지</a>&nbsp;&nbsp;<a name="sended">보낸쪽지</a></div>';
 								
 				
 				for (var i = 0; i < message.length; i++) {
@@ -183,7 +183,7 @@
 			},						
 			success: function(returnData){
 				var message = returnData.list;
-				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">받은쪽지</span>&nbsp;&nbsp;<span name="received">보낸쪽지</span></div>';
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><a id="received" name="received">받은쪽지</a>&nbsp;&nbsp;<a name="send">보낸쪽지</a></div>';
 								
 				
 				for (var i = 0; i < message.length; i++) {
@@ -317,6 +317,24 @@
 			}
 		})
 	}
+	
+	
+	////////////////////////////////////////////
+	
+	$(function(){
+	 	$(document).on("click","a[name='received']", function(){
+	
+			alert("받은 쪽지")
+			
+		
+		})
+		
+		
+	})
+	
+	
+	
+	/////////////////////////////////////
 </script>
 </head>
 <body onload="javascript:getLike();">
@@ -336,7 +354,7 @@
      			<br/>
      			<span style="font-size: 12pt;">${loginUser.email}</span>
      		</span>
-     		<span style="position:absolute; bottom: 10%; margin: 10px; font:bold;"><a style="font-size: 15px;"><span class="glyphicon glyphicon-cog"> 프로필수정</span></a></span>
+	<a style="font-size: 15px; position:absolute; bottom: 10%; margin: 10px; font:bold;" href="/user/updateUser?userId=${loginUser.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
      	</div>
      	<br/>
      	<div style="background-color: white; margin-top:10pt;">
@@ -349,6 +367,16 @@
      	</div>
      </div>
      <br/>
+
      <jsp:include page="../layout/footer.jsp"></jsp:include>
+   		<script src="../resources/helios/assets/js/jquery.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="../resources/helios/assets/js/skel.min.js"></script>
+		<script src="../resources/helios/assets/js/util.js"></script>
+		<script src="../resources/helios/assets/js/main.js"></script>
+     
+
 </body>
 </html>

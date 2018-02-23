@@ -126,7 +126,7 @@ function fncAddBooking() {
 					
 					<header>
 						<h2>
-							<a href="#">${ tourTicket.title }</a>
+							${ tourTicket.title }
 						</h2>
 						<p>
 							관람등급 : ${ detailIntro.agelimit }
@@ -258,7 +258,7 @@ function fncAddBooking() {
 					<article class="4u 12u(mobile) special">
 						<header>
 							<h3>
-								<a href="#" class="button">
+								<a href="#" class="button 12u">
 									<c:if test="${ detailIntro.usetimefestival ne '무료' }">
 										예매하기 / 장바구니 담기
 									</c:if>
@@ -272,7 +272,7 @@ function fncAddBooking() {
 					<article class="4u 12u(mobile) special">
 						<header>
 							<h3>
-								<a href="#" class="button">
+								<a href="#" class="button 12u">
 	  								취 소
 								</a>
 							</h3>

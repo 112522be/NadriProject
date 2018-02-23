@@ -52,8 +52,7 @@
 	function fncGetList(pageNo) {
 //		alert("pageNo")
 		$("#pageNo").val(pageNo);
-		$("form").attr("method", "POST").attr("action", "/ticket/listTicket")
-				.submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
 
 	}
 
@@ -100,34 +99,53 @@
 	//=================== "상세조회" Event 연결 ===================
 	$(function() {
 		$("a[href='#']:contains('상세조회')").bind("click", function(event) {
-//					alert("상세조회")
+//			alert("상세조회")
+			event.preventDefault();
+			
+			var contentId = $( $('input[name="contentId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var contentTypeId = $( $('input[name="contentTypeId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var title = $( $('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var encodeTitle = encodeURI(encodeURIComponent(title));
+			
+			console.log('contentId : ' + contentId)
+			console.log('contentTypeId : ' + contentTypeId)
+			console.log('title : ' + title)
+			console.log('encodeTitle : ' + encodeTitle)
 
-					event.preventDefault();
+			self.location = "/ticket/getTicket?" + "contentId="
+					+ contentId + "&contentTypeId=" + contentTypeId
+					+ "&title=" + encodeTitle;
 
-					var contentId = $(
-							$('input[name="contentId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
-					var contentTypeId = $(
-							$('input[name="contentTypeId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
-					var title = $(
-							$('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
-					var encodeTitle = encodeURI(encodeURIComponent(title));
-					
-					console.log('contentId : ' + contentId)
-					console.log('contentTypeId : ' + contentTypeId)
-					console.log('title : ' + title)
-					console.log('encodeTitle : ' + encodeTitle)
-
-					self.location = "/ticket/getTicket?" + "contentId="
-							+ contentId + "&contentTypeId=" + contentTypeId
-							+ "&title=" + encodeTitle;
-
-				});
+		})
+		
 	});
 
-	function fncGetTicket() {
-		$(".page-wrapper").attr("method", "POST").attr("action", "/ticket/getTicket")
-				.submit();
-	}
+	$(function() {
+		$(".image.featured").bind("click", function(event) {
+//			alert("사진")
+			event.preventDefault();
+			
+			var contentId = $( $('input[name="contentId"]')[$(".image.featured").index(this)]).val();
+			var contentTypeId = $( $('input[name="contentTypeId"]')[$(".image.featured").index(this)]).val();
+			var title = $( $('input[name="title"]')[$(".image.featured").index(this)]).val();
+			var encodeTitle = encodeURI(encodeURIComponent(title));
+			
+			console.log('contentId : ' + contentId)
+			console.log('contentTypeId : ' + contentTypeId)
+			console.log('title : ' + title)
+			console.log('encodeTitle : ' + encodeTitle)
+
+			self.location = "/ticket/getTicket?" + "contentId="
+					+ contentId + "&contentTypeId=" + contentTypeId
+					+ "&title=" + encodeTitle;
+			
+		})
+	});
+	
+	
+ 	function fncGetTicket() {
+		$(".page-wrapper").attr("method", "POST").attr("action", "/ticket/getTicket").submit();
+	} 
 </script>
 
 
@@ -158,10 +176,10 @@
 							<p>조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.</p>
 						</header>
 						<footer>
-							<a href="#" class="button">제목순</a>&nbsp;&nbsp;
-							<a href="#" class="button">조회순</a>&nbsp;&nbsp;
-							<a href="#" class="button">수정일순</a>&nbsp;&nbsp;
-							<a href="#" class="button">생성일순</a>
+							<a href="#" class="button 2u">제목순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">조회순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">수정일순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">생성일순</a>
 						</footer>
 						<br>
 						<p> 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건 </p>
@@ -175,12 +193,12 @@
 										<img src="${ tt.firstimage }" alt="" style="height: 302.36px;"/>
 									</a>
 									<header style="height: 70px;">
-										<h3><a href="#">${ num.count }. ${ tt.title }</a></h3>
+										<h3>${ num.count }. ${ tt.title }</h3>
 									</header>
 									<p>
 										기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }
 									</p>
-									<a href="#" class="button">상세조회</a>
+									<a href="#" class="button 6u">상세조회</a>
 									
 								</article>
 								
@@ -203,8 +221,6 @@
 				<hr/>			
 				<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 				</div>
-				
-				<jsp:include page="/common/comment.jsp" />
 				
 </form>
 		

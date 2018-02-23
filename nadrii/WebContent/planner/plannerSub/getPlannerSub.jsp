@@ -781,7 +781,6 @@
 					"Content-type" : "application/json"
 				},
 				success:function(returnData){
-					alert("시외 success 터미널 마커 생성");
 					
 					var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
 					markerSize = new daum.maps.Size(25, 25), // 출발 마커이미지의 크기입니다 

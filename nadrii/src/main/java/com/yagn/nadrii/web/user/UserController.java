@@ -460,7 +460,7 @@ public class UserController {
 
 		// return null;
 		return "redirect:/user/getUser?userId="+user.getUserId();
-		//return "redirect:user/myPage2.jsp";
+		//return "redirect:user/myPage2.jsp";ㅇ
 	}
 
 	@RequestMapping("kakaoLogin")
@@ -474,10 +474,13 @@ public class UserController {
 		if(((JSONObject) object.get("properties")).get("profile_image") !=null) {
 			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
 		}
-
-		user.setUserId(object.get("id").toString());
-		request.setAttribute("outerUser", user);
-		return "forward:addUserView.jsp";
+		if (userService.getUserByEmail(user.getEmail()) == null) {
+	         request.setAttribute("outerUser", user);
+	         return "forward:addUserView.jsp";
+	      } else {
+	         session.setAttribute("loginUser", userService.getUserByEmail(user.getEmail()));
+	         return "forward:../index.jsp";
+	      }
 	}
 
 	@RequestMapping("naverLogin")

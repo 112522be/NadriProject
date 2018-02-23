@@ -123,7 +123,10 @@ function fncGetList(pageNo) {
 							<header>
 								<h2><a href="#">나들이 QR코드 <br>티켓 확인 시스템</a></h2>
 								<p>
-									구매자 아이디 : <strong class="text-danger">${ userId }</strong>
+									구매자 아이디 : <strong class="text-danger">${ list.userId }</strong>
+								</p>
+								<p>
+									구매자 이 름 : <strong class="text-danger">${ list.userName }</strong>
 								</p>
 							</header>
 							
