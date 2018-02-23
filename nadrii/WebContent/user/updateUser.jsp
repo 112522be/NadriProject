@@ -98,15 +98,18 @@
 			if ($("#password").val() == '') {
 				alert("비밀번호를 입력해주세요.");
 				$("#password").focus();
-				alert("비밀번호를 입력해주세요.02");
-				alert("111111");
 				return;
 			}
 
 			if ($("#password2").val() == '') {
 				alert("비밀번호 확인을 입력해주세요.");
 				$("#password2").focus();
-				alert("비밀번호 확인을 입력해주세요.00000");
+				return;
+			}
+			
+			if($("#birth").val() == ''){
+				alert("생 년 월 일 입력해주세요.");
+				$("#birth").focus();
 				return;
 			}
 			
@@ -166,7 +169,7 @@
 		}
 
 		//============= '프로필 사진' ==============
-		/* $(function() {
+		 $(function() {
 		       $("#imgInput").on('change', function(){
 		           readURL(this);
 		       });
@@ -186,7 +189,7 @@
 		 
 		$("#imgInput").change(function(){
 		    readURL(this);
-		}); */
+		}); 
 
 		//	버튼 말풍선
 		$(document).ready(function() {
@@ -244,6 +247,14 @@
     	padding:50px 0 70px 0;
     }
     
+    @media screen and (max-width: 680px){
+    	.cancel{ margin:10% 0 10% 0;}
+    	.signupbtn{margin-top:10%;}
+    	.container{padding:5%}
+    	
+    } 
+    
+    .butgroup{margin-bottom:10%;}
     </style>
  
 </head>
@@ -317,7 +328,7 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label style="padding-right: 60px"><input type="radio" name="gender" value="man" ${user.gender == 'man' ? 'checked="checked"' : ''}style="margin-right: 5px;">남</label>
+		      <label style="padding-right: 60px; float:left;"><input type="radio" name="gender" value="man" ${user.gender == 'man' ? 'checked="checked"' : ''}style="margin-right: 5px;">남</label>
 		      <label style="padding-right: 60px"><input type="radio" name="gender" value="woman" ${user.gender == 'woman' ? 'checked="checked"' : ''}style="margin-right: 5px;">여</label>
 		    </div>
 		   </div>
@@ -360,7 +371,7 @@
 		     </div>
 		   </div>
 		  
-		  <div class="form-group row">
+		  <div class="form-group row butgroup">
 		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
 		      <!-- <button type="button" class="button btn btn-success col-xs-3 signupbtn" data-toggle="popover"
 		      data-trigger="hover"data-placement="bottom" 
@@ -376,7 +387,7 @@
 	<!--  화면구성 div end /////////////////////////////////////-->
 
 	<!-- 메인 script-->
-		
+	<jsp:include page="../layout/footer.jsp"></jsp:include>	
 		
 </body>
 

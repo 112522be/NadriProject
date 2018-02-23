@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -21,30 +21,20 @@
 	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  
 	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-	  <!-- Scripts 
-			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
-			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-			<script src="/resources/helios/assets/js/skel.min.js"></script>
-			<script src="/resources/helios/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-		    <script src="/resources/helios/assets/js/main.js"></script>
-   
 <title>Insert title here</title>
 
 <script type="text/javascript">
 	var currentPage;
 	var maxPage;
-	/* $(function() {
+	$(function() {
 		$('a.col-xs-4').bind('click', function() {
 			$('a.col-xs-4').css("border", "0")
 			$('span.button01').css("color", "#5b5b5b")
 			$(this).css("border-bottom", "4px solid #FE8A71");
 			$(this).children().css("color", "#FE8A71")
-			if($(this).children().html() == "ì¢‹ì•„ìš”"){
+			if($(this).children().html() == "ÁÁ¾Æ¿ä"){
 				getLike();
-			}else if($(this).children().html() == "ëŒ“ê¸€"){
+			}else if($(this).children().html() == "´ñ±Û"){
 				$.ajax({
 					url: "/common/listCommentById",
 					method: "GET",
@@ -76,7 +66,7 @@
 								+'<div class="col-xs-8">'
 								+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
 								if(JSONData.title[i] == null){
-									html += "ì‚­ì œëœ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤."	
+									html += "»èÁ¦µÈ °Ô½Ã¹°ÀÔ´Ï´Ù."	
 								}else{
 									html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">'
 								}
@@ -90,7 +80,7 @@
 						$('#logContainer').on('click', 'p#addedTitle', function() {
 							var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 							if(postNo == null){
-								alert("ì‚­ì œëœ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
+								alert("»èÁ¦µÈ °Ô½Ã¹°ÀÔ´Ï´Ù.");
 							}else{
 								if(postNo.indexOf("60") != 0){
 									self.location = "/comm/getComm?postNo="+postNo;
@@ -130,7 +120,7 @@
 			success: function(JSONData){
 				$("tbody tr").remove();
 				var message = JSONData.list;
-				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">ë°›ì€ìª½ì§€</span>&nbsp;&nbsp;<span name="sended">ë³´ë‚¸ìª½ì§€</span></div>';
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">¹ŞÀºÂÊÁö</span>&nbsp;&nbsp;<span name="sended">º¸³½ÂÊÁö</span></div>';
 								
 				
 				for (var i = 0; i < message.length; i++) {
@@ -150,11 +140,11 @@
 					+'<hr/>';
 			    }
 				$('#logContainer').html(tableValue);
-				$('#logContainer').on('click', 'a[name="received"]:contains("ë°›ì€ìª½ì§€")',function() {
+				$('#logContainer').on('click', 'a[name="received"]:contains("¹ŞÀºÂÊÁö")',function() {
 					alert();
 					listMessage();
 				})
-				$('#logContainer').on('click', 'a[name="sended"]:contains("ë³´ë‚¸ìª½ì§€")',function() {
+				$('#logContainer').on('click', 'a[name="sended"]:contains("º¸³½ÂÊÁö")',function() {
 					alert();
 					listSendMessage();
 				})
@@ -172,7 +162,7 @@
 			},						
 			success: function(returnData){
 				var message = returnData.list;
-				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">ë°›ì€ìª½ì§€</span>&nbsp;&nbsp;<span name="received">ë³´ë‚¸ìª½ì§€</span></div>';
+				var tableValue ='<div align="right" style="font-size:12pt; padding:1%;"><span name="received">¹ŞÀºÂÊÁö</span>&nbsp;&nbsp;<span name="received">º¸³½ÂÊÁö</span></div>';
 								
 				
 				for (var i = 0; i < message.length; i++) {
@@ -217,7 +207,7 @@
 			},						
 			success: function(returnData){
 				var count = returnData.count;
-				alert(count+"ê°œì˜ ë©”ì‹œì§€ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤");
+				alert(count+"°³ÀÇ ¸Ş½ÃÁö°¡ »èÁ¦µÇ¾ú½À´Ï´Ù");
 				for (var i = 0; i < count; i++) {
 					$($("input[name=checkbox]:checked").parents("td")).parents("tr").remove();					
 				}
@@ -229,8 +219,8 @@
 	}
 	
 	$(function(){
-		$("button[type='button']:contains('ì‚­ì œ')").on("click",function(){
-			//alert("ì‚­ì œ");
+		$("button[type='button']:contains('»èÁ¦')").on("click",function(){
+			//alert("»èÁ¦");
 			var checkedMessageCount = $("input[name=checkbox]:checked").length;
 			var messageNoList="";
 			
@@ -281,7 +271,7 @@
 						+'<div class="col-xs-8">'
 						+'<p id="addedTitle"><span style="font-size: 9pt; font-weight: 900; color: #3b2b48">';
 						if(JSONData.title[i] == null){
-							html += "ì‚­ì œëœ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤."	
+							html += "»èÁ¦µÈ °Ô½Ã¹°ÀÔ´Ï´Ù."	
 						}else{
 							html += JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
 						}
@@ -294,7 +284,7 @@
 				$('#logContainer').on('click', 'p#addedTitle', function() {
 					var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 					if(postNo == null){
-						alert("ì‚­ì œëœ ê²Œì‹œë¬¼ì…ë‹ˆë‹¤.");
+						alert("»èÁ¦µÈ °Ô½Ã¹°ÀÔ´Ï´Ù.");
 					}else{
 						if(postNo.indexOf("60") != 0){
 							self.location = "/comm/getComm?postNo="+postNo;
@@ -305,7 +295,7 @@
 				})
 			}
 		})
-	} */
+	}
 	
 	$("#userProfile").load("/user/myPage2.jsp #a");
 </script>
@@ -351,15 +341,14 @@
 </style>
 
 </head>
-<body>
+<body onload="javascript:getLike();">
 	  <div id="header">
-<div class="inner">
-						<header>
-							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
-						</header>
-					</div>
-					
-					<jsp:include page="/layout/toolbar.jsp" />
+			<div class="inner">
+				<header>
+					<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+				</header>
+			</div>	
+			<jsp:include page="/layout/toolbar.jsp" />
      </div>
      <div class="container" style=" position: relative; ">
      	<div name="userProfile" style="margin: 20px; position: relative; height: auto;">
@@ -371,31 +360,31 @@
      			<br/>
      			<span style="font-size: 12pt;">${loginUser.email}</span>
      		</span>
-     		<!-- <span style="position:absolute; bottom: 10%; margin: 10px; font:bold;"><a style="font-size: 15px;"><span class="glyphicon glyphicon-cog"> í”„ë¡œí•„ìˆ˜ì •</span></a></span>-->     	</div>
+     		<!-- <span style="position:absolute; bottom: 10%; margin: 10px; font:bold;"><a style="font-size: 15px;"><span class="glyphicon glyphicon-cog"> ÇÁ·ÎÇÊ¼öÁ¤</span></a></span>-->     	</div>
      	<br/>
      	<div class="mypage">    	
 	     	<div class="col-md-6 userName">
-	     		<div>ì´ ë¦„</div>
+	     		<div>ÀÌ ¸§</div>
 	     		<div class="userName">${user.userName}</div>
 	     	</div>
      		<div class="gender col-md-6">
-     			<div>ì„± ë³„</div>
+     			<div>¼º º°</div>
      			<div class="usergender">${user.gender}</div>
      		</div>   		
      		<div class="gender col-md-6">
-     			<div>ì´ ë©” ì¼</div>
+     			<div>ÀÌ ¸Ş ÀÏ</div>
      			<div class="usergender">${user.email}</div>
      		</div>
      		<div class="gender col-md-6">
-     			<div>ì ë…€ ìˆ˜</div>
+     			<div>ÀÚ ³à ¼ö</div>
      			<div class="usergender">${user.children}</div>
      		</div>
      		<div class="gender col-md-6">
-     			<div>ìƒ ì¼</div>
+     			<div>»ı ÀÏ</div>
      			<div class="usergender">${user.birth}</div>
      		</div>
      		<div class="gender col-md-6">
-     			<div>í•¸ ë“œ í°  ë²ˆ í˜¸</div>
+     			<div>ÇÚ µå Æù  ¹ø È£</div>
      			<div class="usergender">${user.phone}</div>
      		</div>    		
      		<div class="gender col-md-6">
@@ -405,9 +394,9 @@
      	</div>
      	<!-- <div style="background-color: white; margin-top:10pt;">
 	     	<div style="margin: 20px; position: relative; height: inherit;">
-	     		<a class="col-xs-4" align="center"><span class="button01" align="center">ì¢‹ì•„ìš”</span></a>
-	     		<a class="col-xs-4" align="center"><span class="button01" align="center">ëŒ“ê¸€</span></a>
-	     		<a class="col-xs-4" align="center"><span class="button01" align="center">ìª½ì§€</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">ÁÁ¾Æ¿ä</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">´ñ±Û</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">ÂÊÁö</span></a>
 	     	</div>
 	     	<div id="logContainer"></div> -->
      	</div>

@@ -251,7 +251,7 @@
 		$("form").attr("method", "POST").attr("action", "/user/addUser").submit();
 		alert("회원가입이 완료 되었습니다.")
 	}
-}
+
 
 	// ========== 회원가입 버튼 Block 처리 ==========
 	//	/*

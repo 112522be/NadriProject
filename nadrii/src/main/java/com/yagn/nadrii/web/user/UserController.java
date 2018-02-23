@@ -254,8 +254,22 @@ public class UserController {
 	 */
 
 	@RequestMapping(value = "getUser", method = RequestMethod.GET)
-	public String getUser() {
+	public String getUser(@RequestParam("userId") String userId , Model model, HttpSession session) 
+			throws Exception {
+		System.out.println("/user/getUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		
+		System.out.println("userId" + userId);
+		
+		System.out.println("생년월일 >>" +user.getBirth());
+		System.out.println("userName >>" + user.getUserName());
+
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		
 		return "forward:/user/getUser.jsp";
+	   //return "forward/user/myPage2.jsp";
 	}
 
 	// email 인증
@@ -385,15 +399,19 @@ public class UserController {
 		// Model 과 View 연결
 		System.out.println("userbirthda : " + user.getBirth());
 		System.out.println("userphone : " + user.getPhone());
-		/*
-		 * user.setPhone1(user.getPhone().split("-")[0]);
-		 * user.setPhone2(user.getPhone().split("-")[1]);
-		 * user.setPhone3(user.getPhone().split("-")[2]);
-		 * System.out.println("userphone1 : "+user.getPhone1());
-		 * System.out.println("userphone2 : "+user.getPhone2());
-		 * System.out.println("userphone3 : "+user.getPhone3());
-		 * System.out.println("userchild : "+user.getChildren());
+		System.out.println("userprofileImageFile : " + user.getProfileImageFile());
+		System.out.println("useremail : " + user.getEmail());
+		
+		  /*user.setPhone1(user.getPhone().split("-")[0]);
+		  user.setPhone2(user.getPhone().split("-")[1]);
+		  user.setPhone3(user.getPhone().split("-")[2]);
+		  System.out.println("userphone1 : "+user.getPhone1());
+		  System.out.println("userphone2 : "+user.getPhone2());
+		  System.out.println("userphone3 : "+user.getPhone3());
+		  System.out.println("userchild : "+user.getChildren());
 		 */
+		
+		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 
 		return "forward:/user/updateUser.jsp";
@@ -441,8 +459,8 @@ public class UserController {
 		userService.updateUser(user);
 
 		// return null;
-		// return "forward:/user/getUser?userId="+user.getUserId();
-		return "redirect:/user/getUser?userId=" + user.getUserId();
+		return "redirect:/user/getUser?userId="+user.getUserId();
+		//return "redirect:user/myPage2.jsp";
 	}
 
 	@RequestMapping("kakaoLogin")
