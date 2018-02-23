@@ -28,13 +28,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 
 	@Override
 	public String naverImageSearch(String target) throws Exception {
+		System.out.println("카카오 이미지 서치");
 		List list = new ArrayList();
 		int display = 100;
         String kakaoRestKey = "KakaoAK 61ac37b7b651475f235157189e22f998";
         
         try {
             String text = URLEncoder.encode(target, "UTF-8");
-            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=80";  
+            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=10";  
 
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -42,7 +43,7 @@ public class TripDaoImplImageSearchKakao implements TripDao{
             con.setRequestProperty("Authorization", kakaoRestKey);
             
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
                                     
             JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
             System.out.println("JsonObject : "+jsonobj);

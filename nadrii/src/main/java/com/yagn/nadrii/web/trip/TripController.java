@@ -90,7 +90,7 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-		
+		Thread.sleep(1000);
 		
 
 		return "forward:/Trip/listTrip3.jsp";
@@ -136,7 +136,7 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
+		Thread.sleep(1000);		
 
 		return "forward:/Trip/listTrip3.jsp";
 
@@ -169,7 +169,7 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
+		Thread.sleep(1000);		
 
 		return "forward:/Trip/listTrip3.jsp";
 	}
@@ -199,7 +199,7 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
+		Thread.sleep(1000);
 
 		return "forward:/Trip/listTrip3.jsp";
 
@@ -230,14 +230,13 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
+		Thread.sleep(1000);
 
 		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="/getTheme")
 	public String getTheme(HttpSession session,Map map) throws Exception{
-		
 		
 		
 		Map tripMap = tripService.listTrip(1,"14","A02","A0206","","","");
@@ -256,6 +255,8 @@ public class TripController {
 		
 		map.put("trip", tourApiDomain);
 		map.put("fee", feeDomain);
+		
+		Thread.sleep(1000);
 		return"forward:/Trip/getTheme.jsp";
 	}
 	
@@ -271,7 +272,7 @@ public class TripController {
 		map.put("list", searchMap.get("list"));
 		map.put("pageNo", pageNo);
 		
-		
+		Thread.sleep(1000);
 
 		return "forward:/Trip/listTrip3.jsp";
 

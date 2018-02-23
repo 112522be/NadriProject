@@ -39,6 +39,7 @@ public class TripDaoImplTour implements TripDao {
 	public TripDaoImplTour() {
 		System.out.println(this.getClass());		
 	}
+	
 
 	public List listTrip(int pageNo, String contentTypeId, String cat1,String cat2, String cat3,String areaCode, String localName) throws Exception {
 
@@ -103,21 +104,24 @@ public class TripDaoImplTour implements TripDao {
 							
 					TourApiDomain tourDomain = new TourApiDomain();
 					tourDomain = objectMapper.readValue(obj.toJSONString(), TourApiDomain.class);
-					//System.out.println(tourDomain);
 					
 					if(tourDomain.getFirstimage2()==null) {
-
+						
+						System.out.println("카카오 이미지 검색");
 						System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
-
+						System.out.println(tourDomain.getTitle());
+						
 						String image = tripDaoImplImageSearchKakao.naverImageSearch(tourDomain.getTitle());
+						System.out.println("어디냐1");
 						if(image ==null) {
+							System.out.println( "다음 이미지 널");
 							tripDaoImplImageSearch = new TripDaoImplImageSearch();
 							
 							image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
 									
 						}
 						
-						System.out.println(image);
+						System.out.println("결과 이미지 URL --> "+image);
 						tourDomain.setFirstimage2(image);
 					}
 								
@@ -133,12 +137,18 @@ public class TripDaoImplTour implements TripDao {
 				JSONObject jsonObject = (JSONObject)items.get("item");
 				TourApiDomain tourDomain = new TourApiDomain();
 				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
-				if(tourDomain.getFirstimage2() ==null) {
-					tripDaoImplImageSearch = new TripDaoImplImageSearch();
+				
+				if(tourDomain.getFirstimage2()==null) {
 
 					System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
 
-					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+					String image = tripDaoImplImageSearchKakao.naverImageSearch(tourDomain.getTitle());
+					if(image ==null) {
+						tripDaoImplImageSearch = new TripDaoImplImageSearch();
+						
+						image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+								
+					}
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
 				}
@@ -185,6 +195,22 @@ public class TripDaoImplTour implements TripDao {
 		JSONObject jsonobj = (JSONObject)items.get("item");
 		ObjectMapper objectMapper = new ObjectMapper();
 		TourApiDomain tourApiDomain = objectMapper.readValue(jsonobj.toJSONString(), TourApiDomain.class);
+		
+		if(tourApiDomain.getFirstimage2()==null) {
+
+			System.out.println("이미지 없음-->>  "+tourApiDomain.getTitle());
+
+			String image = tripDaoImplImageSearchKakao.naverImageSearch(tourApiDomain.getTitle());
+			if(image ==null) {
+				tripDaoImplImageSearch = new TripDaoImplImageSearch();
+				
+				image = tripDaoImplImageSearch.naverImageSearch(tourApiDomain.getTitle());
+						
+			}
+			
+			System.out.println(image);
+			tourApiDomain.setFirstimage2(image);
+		}
 		
 		return tourApiDomain;		
 	}
@@ -350,10 +376,19 @@ public class TripDaoImplTour implements TripDao {
 				JSONObject jsonObject = (JSONObject)items.get("item");
 				TourApiDomain tourDomain = new TourApiDomain();
 				tourDomain = objectMapper.readValue(jsonObject.toJSONString(), TourApiDomain.class);
-				if(tourDomain.getFirstimage2() ==null) {
-					tripDaoImplImageSearch = new TripDaoImplImageSearch();
+				
+				if(tourDomain.getFirstimage2()==null) {
+
 					System.out.println("이미지 없음-->>  "+tourDomain.getTitle());
-					String image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+
+					String image = tripDaoImplImageSearchKakao.naverImageSearch(tourDomain.getTitle());
+					if(image ==null) {
+						tripDaoImplImageSearch = new TripDaoImplImageSearch();
+						
+						image = tripDaoImplImageSearch.naverImageSearch(tourDomain.getTitle());
+								
+					}
+					
 					System.out.println(image);
 					tourDomain.setFirstimage2(image);
 				}
