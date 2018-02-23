@@ -52,10 +52,6 @@ input:focus{
 select:focus{
 	outline:none;
 }
-button{
-	width: auto;
-	position: relative;
-}
 button[data-original-title='More Color']{
 	width: 20px !important;
 }
@@ -117,4 +113,13 @@ button[data-original-title='More Color']{
 		</div>
 	</div>
 </body>
+<style type="text/css">
+#cndHashTags > button{
+	width: auto !important;
+	height: auto;
+	line-height: 1.5em;
+	position: relative;
+	font-weight: 400;
+}
+</style>
 </html>
