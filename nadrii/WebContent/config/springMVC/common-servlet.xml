@@ -51,6 +51,17 @@
 	<!--  :: ViewResolver 선언 -->	
     <bean id="viewResolver"
 				class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
+				
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name = "maxUploadSize" value="1000000"/>
+		<property name="uploadTempDir" ref="uploadDirResource"/>
+	</bean>
+	
+	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg>
+			<value>C:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\nadrii\resources\images\profileImages</value>
+		</constructor-arg>
+	</bean>
 	
 	
 	<!--	

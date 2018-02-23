@@ -2,8 +2,12 @@ package com.yagn.nadrii.web.user;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -30,7 +34,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Comments;
 import com.yagn.nadrii.service.domain.Message;
@@ -409,8 +417,8 @@ public class UserController {
 		  System.out.println("userphone2 : "+user.getPhone2());
 		  System.out.println("userphone3 : "+user.getPhone3());
 		  System.out.println("userchild : "+user.getChildren());
-		 */
-		
+		  
+		 */		
 		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 
@@ -420,7 +428,23 @@ public class UserController {
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	public String addUserPlus(@ModelAttribute("user") User user, Model model, HttpSession session,
 			HttpServletRequest request) throws Exception {
-
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");  
+		String realUploadPath = rootPath+"resources\\images\\profileImages\\";
+		MultipartHttpServletRequest mpRequest = (MultipartHttpServletRequest)request;
+		Iterator fileNameIterator = mpRequest.getFileNames();
+		
+		List boardFileList = new ArrayList();
+		while(fileNameIterator.hasNext()) {
+			MultipartFile multiFile = mpRequest.getFile((String)fileNameIterator.next());
+			
+			if(multiFile.getSize() > 0 ) {
+				
+				multiFile.transferTo(new java.io.File(realUploadPath+multiFile.getOriginalFilename()));
+				multiFile.getInputStream().close();
+			}	
+		}
+		
 		System.out.println("updateUse :: POST");
 
 		System.out.println("권한 ==" + user.getRole());
@@ -448,6 +472,7 @@ public class UserController {
 
 		System.out.println(user);
 
+		
 		if (user.getGender() == null) {
 			user.setGender("");
 		}

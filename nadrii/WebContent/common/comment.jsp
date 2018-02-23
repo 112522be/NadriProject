@@ -112,7 +112,7 @@
 			alert(1);
 			text = $($('span.text')[$(".fa-edit").index(this)]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
-			var editForm = '<span style="position: relative; float: left; width: 78%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
+			var editForm = '<span style="position: relative; float: left; width: 70%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 0.7em; width: 12%; height: 1.8%" name="update">수정</div>';
 			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
 			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");
 			$($('span.edit')[$(".fa-edit").index(this)]).empty();

@@ -136,6 +136,8 @@
 				}
 				alert("되는건가?!!!!!!!!!!!!");
 				$("input:hidden[name='phone']").val(value);
+				
+				$("input").attr("class", "form-control")
 	
 				$("form").attr("method", "POST").attr("action", "/user/updateUser")
 						.submit();
@@ -281,7 +283,7 @@
 		<h1 class="bg-primary text-center" id="formImg" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" action="updateUser" style="padding-top:50px;">
+		<form class="form-horizontal" enctype="multipart/form-data" style="padding-top:50px;">
 		
 		  <div class="form-group">
           <label for="password" class="col-sm-offset-1 col-sm-3 control-label" style="color:#68A4C4">비밀번호</label>
@@ -364,7 +366,7 @@
 		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
-				    <input type="file" id="imgInput" name="profileImageFile" value=""/>
+				    <input type="file" id="fileName" name="fileName" value=""/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
 				<!-- </form> -->

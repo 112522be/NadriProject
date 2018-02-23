@@ -154,62 +154,7 @@
 			}
 		});
 	}
-	$(function(){
-		
-		$(document).on("click","tr td:nth-child(4)", function(){
-		//$("tr td:nth-child(4)").on("click",function(){
-			var messageNo = $($("input[name='checkbox']")[$("tr td:nth-child(4)").index(this)]).val();
-			//alert(messageNo)
-			window.open("/message/getMessage?messageNo="+messageNo,"getMessge","width=300, height=350,status=no, scrollbars=no, location=no");
-		});
-	});
-	
-	
-	function deleteMessage(messageNoList){
-		$.ajax({
-			url:"/message/json/deleteMessage/"+messageNoList,
-			method:"GET",
-			dataType:"json",
-			headers :{
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},						
-			success: function(returnData){
-				var count = returnData.count;
-				alert(count+"개의 메시지가 삭제되었습니다");
-				for (var i = 0; i < count; i++) {
-					$($("input[name=checkbox]:checked").parents("td")).parents("tr").remove();					
-				}
-				
-				
-			}
-			
-		});
-	}
-	
-	$(function(){
-		$("button[type='button']:contains('삭제')").on("click",function(){
-			//alert("삭제");
-			var checkedMessageCount = $("input[name=checkbox]:checked").length;
-			var messageNoList="";
-			
-			
-			for (var i = 0; i < checkedMessageCount; i++) {
-				if(i != checkedMessageCount-1){
-					var value = $($("input[name=checkbox]:checked")[i]).val()+","; 
-				}else{
-					var value = $($("input[name=checkbox]:checked")[i]).val();
-				}
-				
-				messageNoList += value;
-			
-			}
-			
-			alert(messageNoList);
-			deleteMessage(messageNoList);
-		});
-	});
-	
+
 	function getLike(menu) {
 		if(menu == 'add'){
 			currentPage=1;
@@ -325,13 +270,13 @@
 						if(JSONData.title[i] != null){
 							html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;댓글'
 							+'</div>'
-							+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
-							+'<p id="addedTitle" style="padding: padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+							+'<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
+							+'<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
 							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">';
 						}else{
 							html += '</div>'
-								+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
-							+'<p id="addedTitle" style="padding: padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
+								+'<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
+							+'<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
 							+"삭제된 게시물입니다."
 						}
 						html +='</span></p>'
@@ -356,10 +301,12 @@
 					if(postNo == null){
 						alert("삭제된 게시물입니다.");
 					}else{
-						if(postNo.indexOf("60") != 0){
+						if(postNo.indexOf("30") == 0){
 							self.location = "/comm/getComm?postNo="+postNo;
-						}else{
+						}else if(postNo.indexOf("60") == 0){
 							self.location = "/group/getGroup?groupNo="+postNo;
+						}else{
+							self.location = "/planner/getPlanner?postNo="+postNo;
 						}
 					}
 				})

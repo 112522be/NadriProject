@@ -33,7 +33,10 @@ $(document).ready(function() {
 		                    	//혹여 type:"POST",로 되어 있음// method:"POST"로 바꾸고
 		                        method: "POST",
 		                        url: "../trip/json/getClientAddress/",
-		                        contentType: "application/json",
+		                        headers:{
+		                        	"Content-Type": "application/json",
+		                        	"Accept": "application/json"
+		                        },
 		                        data:jsonData,
 		                        dataType: "json",
 		                        success: function() {
