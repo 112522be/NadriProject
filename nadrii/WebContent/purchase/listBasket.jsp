@@ -265,7 +265,7 @@ function fncGetList(pageNo) {
 						
 						<article id="main" class="special">
 							<header>
-								<h2><a href="#">장바구니 목록</a></h2>
+								<h2>장바구니 목록</h2>
 								<p>
 									<strong class="text-success">
 									<c:if test="${ user.userName eq null }">

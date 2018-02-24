@@ -52,8 +52,7 @@
 	function fncGetList(pageNo) {
 //		alert("pageNo")
 		$("#pageNo").val(pageNo);
-		$("form").attr("method", "POST").attr("action", "/ticket/listTicket")
-				.submit();
+		$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
 
 	}
 
@@ -177,10 +176,10 @@
 							<p>조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.</p>
 						</header>
 						<footer>
-							<a href="#" class="button">제목순</a>&nbsp;&nbsp;
-							<a href="#" class="button">조회순</a>&nbsp;&nbsp;
-							<a href="#" class="button">수정일순</a>&nbsp;&nbsp;
-							<a href="#" class="button">생성일순</a>
+							<a href="#" class="button 2u">제목순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">조회순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">수정일순</a>&nbsp;&nbsp;
+							<a href="#" class="button 2u">생성일순</a>
 						</footer>
 						<br>
 						<p> 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건 </p>
@@ -199,7 +198,7 @@
 									<p>
 										기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }
 									</p>
-									<a href="#" class="button">상세조회</a>
+									<a href="#" class="button 6u">상세조회</a>
 									
 								</article>
 								

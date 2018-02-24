@@ -114,15 +114,14 @@
 		var commentNo;
 		
 		$('#commentContainer').on('click','.fa-edit',function() {
-			
 			text = $($('span.text')[$(".fa-edit").index(this)-1]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)-1]).val();
 			var editForm = '<span style="position: relative; float: left; width: 76%; padding-left: 25px;"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
-			$($('span.text')[$(".fa-edit").index(this)-1]).html(editForm);
-			$($('span.edit')[$(".fa-edit").index(this)-1]).css("overflow", "hidden");
-			$($('span.edit')[$(".fa-edit").index(this)-1]).empty();
-			$($('div.comments')[$(".fa-edit").index(this)-1]).attr("style", "margin-bottom: -10em;");
-			$($('span.text')[$(".fa-edit").index(this)-1]).removeAttr("style");
+			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
+			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");
+			$($('span.edit')[$(".fa-edit").index(this)]).empty();
+			$($('div.comments')[$(".fa-edit").index(this)]).attr("style", "margin-bottom: -10em;");
+			$($('span.text')[$(".fa-edit").index(this)]).removeAttr("style");
 		});
 		
 		$('#commentContainer').on('click', 'div[name="update"]', function() {

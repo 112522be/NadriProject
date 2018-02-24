@@ -98,15 +98,18 @@
 			if ($("#password").val() == '') {
 				alert("비밀번호를 입력해주세요.");
 				$("#password").focus();
-				alert("비밀번호를 입력해주세요.02");
-				alert("111111");
 				return;
 			}
 
 			if ($("#password2").val() == '') {
 				alert("비밀번호 확인을 입력해주세요.");
 				$("#password2").focus();
-				alert("비밀번호 확인을 입력해주세요.00000");
+				return;
+			}
+			
+			if($("#birth").val() == ''){
+				alert("생 년 월 일 입력해주세요.");
+				$("#birth").focus();
 				return;
 			}
 			
@@ -133,6 +136,8 @@
 				}
 				alert("되는건가?!!!!!!!!!!!!");
 				$("input:hidden[name='phone']").val(value);
+				
+				$("input").attr("class", "form-control")
 	
 				$("form").attr("method", "POST").attr("action", "/user/updateUser")
 						.submit();
@@ -166,7 +171,7 @@
 		}
 
 		//============= '프로필 사진' ==============
-		/* $(function() {
+		 $(function() {
 		       $("#imgInput").on('change', function(){
 		           readURL(this);
 		       });
@@ -186,7 +191,7 @@
 		 
 		$("#imgInput").change(function(){
 		    readURL(this);
-		}); */
+		}); 
 
 		//	버튼 말풍선
 		$(document).ready(function() {
@@ -244,6 +249,14 @@
     	padding:50px 0 70px 0;
     }
     
+    @media screen and (max-width: 680px){
+    	.cancel{ margin:10% 0 10% 0;}
+    	.signupbtn{margin-top:10%;}
+    	.container{padding:5%}
+    	
+    } 
+    
+    .butgroup{margin-bottom:10%;}
     </style>
  
 </head>
@@ -270,7 +283,7 @@
 		<h1 class="bg-primary text-center" id="formImg" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" action="updateUser" style="padding-top:50px;">
+		<form class="form-horizontal" enctype="multipart/form-data" style="padding-top:50px;">
 		
 		  <div class="form-group">
           <label for="password" class="col-sm-offset-1 col-sm-3 control-label" style="color:#68A4C4">비밀번호</label>
@@ -317,7 +330,7 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label style="padding-right: 60px"><input type="radio" name="gender" value="man" ${user.gender == 'man' ? 'checked="checked"' : ''}style="margin-right: 5px;">남</label>
+		      <label style="padding-right: 60px; float:left;"><input type="radio" name="gender" value="man" ${user.gender == 'man' ? 'checked="checked"' : ''}style="margin-right: 5px;">남</label>
 		      <label style="padding-right: 60px"><input type="radio" name="gender" value="woman" ${user.gender == 'woman' ? 'checked="checked"' : ''}style="margin-right: 5px;">여</label>
 		    </div>
 		   </div>
@@ -353,14 +366,14 @@
 		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
-				    <input type="file" id="imgInput" name="profileImageFile" value=""/>
+				    <input type="file" id="fileName" name="fileName" value=""/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
 				<!-- </form> -->
 		     </div>
 		   </div>
 		  
-		  <div class="form-group row">
+		  <div class="form-group row butgroup">
 		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
 		      <!-- <button type="button" class="button btn btn-success col-xs-3 signupbtn" data-toggle="popover"
 		      data-trigger="hover"data-placement="bottom" 
@@ -376,7 +389,7 @@
 	<!--  화면구성 div end /////////////////////////////////////-->
 
 	<!-- 메인 script-->
-		
+	<jsp:include page="../layout/footer.jsp"></jsp:include>	
 		
 </body>
 

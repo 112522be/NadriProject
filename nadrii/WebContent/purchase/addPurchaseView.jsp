@@ -91,7 +91,7 @@
 
 	//=================== "취소" Event 연결 =================== 
 	function goBack() {
-		window.history.back();
+		history.go(-1);
 	}
 </script>
 </head>
@@ -151,9 +151,9 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2><a href="#">결제정보입력</a></h2>
+								<h2>결제정보확인</h2>
 								<p>
-									선택하신 티켓의 결제 진행을 위해 <strong class="text-danger">형식에 맞게 </strong>작성해 주세요.
+									결제를 진행하시려면 <br><strong class="text-danger">KakaoPay 결제</strong> 버튼을 눌러 주세요.
 								</p>
 							</header>
 						</article>
@@ -176,7 +176,7 @@
 											<article class="post stub">
 												<span class="timestamp">티켓명</span>
 												<header>
-													<h3><a href="#">${ purchase.ticketTitle }</a></h3>
+													<h3>${ purchase.ticketTitle }</h3>
 												</header>
 											</article>
 										</li>
@@ -184,7 +184,7 @@
 											<article class="post stub">
 												<span class="timestamp">예매일</span>
 												<header>
-													<h3><a href="#">${ purchase.bookingDate }</a></h3>
+													<h3>${ purchase.bookingDate }</h3>
 												</header>
 											</article>
 										</li>
@@ -201,7 +201,7 @@
 											<article class="post stub">
 												<span class="timestamp">아이디</span>
 												<header>
-													<h3><a href="#">${ purchase.buyerId }</a></h3>
+													<h3>${ purchase.buyerId }</h3>
 													<input type="hidden" name="buyerId" value="${ purchase.buyerId }">
 												</header>
 											</article>
@@ -210,7 +210,7 @@
 											<article class="post stub">
 												<span class="timestamp">이 름</span>
 												<header>
-													<h3><a href="#">${ purchase.buyerName }</a></h3>
+													<h3>${ purchase.buyerName }</h3>
 													<input type="hidden" name="buyerName" value="${ purchase.buyerName }">
 												</header>
 											</article>
@@ -219,7 +219,7 @@
 											<article class="post stub">
 												<span class="timestamp">연락처</span>
 												<header>
-													<h3><a href="#">${ purchase.buyerPhone }</a></h3>
+													<h3>${ purchase.buyerPhone }</h3>
 													<input type="hidden" name="buyerPhone" value="${ purchase.buyerPhone }">
 												</header>
 											</article>
@@ -228,7 +228,7 @@
 											<article class="post stub">
 												<span class="timestamp">E-mail</span>
 												<header>
-													<h3><a href="#">${ purchase.buyerEmail }</a></h3>
+													<h3>${ purchase.buyerEmail }</h3>
 													<input type="hidden" name="buyerEmail" value="${ purchase.buyerEmail }">
 												</header>
 											</article>
@@ -246,13 +246,13 @@
 											<article class="post stub">
 												<span class="timestamp">선택한 티켓</span>
 												<header>
-													<h3><a href="#">
+													<h3>
 													<c:forEach items="${ purchase.ticketCount }" varStatus="status">
 														<c:if test="${ purchase.ticketCount[status.index] ne '0' }">
 															￦ ${ purchase.ticketPrice[status.index] } : ${ purchase.ticketCount[status.index] } 장
 														</c:if>
 													</c:forEach>
-													</a></h3>
+													</h3>
 												</header>
 											</article>
 										</li>
@@ -260,10 +260,10 @@
 											<article class="post stub">
 												<header>
 													<span class="timestamp">티켓금액</span>
-													<h3><a href="#">￦ ${ purchase.totalTicketPrice }</a></h3>
+													<h3>￦ ${ purchase.totalTicketPrice }</h3>
 													<h3>+</h3>
 													<span class="timestamp">구매대행 금액</span>
-													<h3><a href="#">￦ ${ purchase.taxFree }</a></h3>
+													<h3>￦ ${ purchase.taxFree }</h3>
 												</header>
 											</article>
 										</li>
@@ -271,7 +271,7 @@
 											<article class="post stub">
 												<header>
 													<span class="timestamp">총 결제 금액</span>
-													<h3><a href="#">￦ ${ purchase.ticketPayment }</a></h3>
+													<h3>￦ ${ purchase.ticketPayment }</h3>
 												</header>
 											</article>
 										</li>
@@ -284,8 +284,8 @@
 						
 						<article id="main" class="container special">
 							<footer>
-								<a href="#" class="button" onclick="goBack()">취 소</a>&nbsp;
-								<a href="#" class="button icon fa-credit-card" name="kakaoPay"> KakaoPay 결제</a>
+								<a href="#" class="button 3u" onclick="goBack()">취 소</a>&nbsp;
+								<a href="#" class="button icon fa-credit-card 3u" name="kakaoPay"> KakaoPay 결제</a>
 							</footer>
 						</article>
 						

@@ -104,7 +104,6 @@
                         ['color', ['color']],
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['height', ['height']],
-                        ['insert', ['picture']],
                     	['mybutton', ['place']]
                     ],
                     buttons: {
