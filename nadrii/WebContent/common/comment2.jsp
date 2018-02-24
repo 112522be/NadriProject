@@ -35,7 +35,7 @@
 					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-13" style="padding-left: 30px;"><span style="color: black;">'
 					+JSONData.listComment[i].userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
-					+JSONData.listComment[i].regDate
+					+(JSONData.listComment[i].regDate).slice(0, -5)
 					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-1 edit" style="float: right; padding: 0;">';
 					if("${loginUser.userId}"==JSONData.listComment[i].userId){
 						html += '<span class="fas fa-edit" style="font-size:12pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:12pt;"/>';
@@ -117,7 +117,6 @@
 			
 			text = $($('span.text')[$(".fa-edit").index(this)-1]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)-1]).val();
-			alert(commentNo);
 			var editForm = '<span style="position: relative; float: left; width: 76%; padding-left: 25px;"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
 			$($('span.text')[$(".fa-edit").index(this)-1]).html(editForm);
 			$($('span.edit')[$(".fa-edit").index(this)-1]).css("overflow", "hidden");
@@ -127,7 +126,6 @@
 		});
 		
 		$('#commentContainer').on('click', 'div[name="update"]', function() {
-			alert(commentNo);
 			text = $('input[name="editText"]').val();
 			updateComment(commentNo, text);
 		});

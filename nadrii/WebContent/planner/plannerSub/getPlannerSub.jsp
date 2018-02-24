@@ -393,7 +393,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[0]=startInfowindow;
-									
+									$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent().replace('</br>')+'</div>');
+									$("#head1").css("display", "block");
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
@@ -403,6 +404,7 @@
 									iwArray[1]=pass1Infowindow;
 									
 									$("#roadPass1Content").append('<strong>경유1</strong><div>'+iwArray[1].getContent().replace('</br>')+'</div>');
+									$("#head2").css("display", "block");
 								}
 								if(k==2){
 									var pass2Infowindow = new daum.maps.InfoWindow({
@@ -412,6 +414,7 @@
 									iwArray[2]=pass2Infowindow;
 									
 									$("#roadPass2Content").append('<strong>경유2</strong><div>'+iwArray[2].getContent().replace('</br>')+'</div>');
+									$("#head3").css("display", "block");
 								}
 								if(k==3){
 									var pass3Infowindow = new daum.maps.InfoWindow({
@@ -420,6 +423,7 @@
 									});
 									iwArray[3]=pass3Infowindow;
 									$("#roadPass3Content").append('<strong>경유3</strong><div>'+iwArray[3].getContent().replace('</br>')+'</div>');
+									$("#head4").css("display", "block");
 								}
 								if(k==4){
 									var pass4Infowindow = new daum.maps.InfoWindow({
@@ -428,6 +432,7 @@
 									});
 									iwArray[4]=pass4Infowindow;
 									$("#roadPass4Content").append('<strong>경유4</strong><div>'+iwArray[4].getContent().replace('</br>')+'</div>');
+									$("#head5").css("display", "block");
 								}
 								if(k==5){
 									var pass5Infowindow = new daum.maps.InfoWindow({
@@ -436,6 +441,7 @@
 									});
 									iwArray[5]=pass5Infowindow;
 									$("#roadPass5Content").append('<strong>경유5</strong><div>'+iwArray[5].getContent().replace('</br>')+'</div>');
+									$("#head6").css("display", "block");
 								}			
 								
 								///////인포윈도우

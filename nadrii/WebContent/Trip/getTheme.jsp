@@ -113,6 +113,11 @@ body{
 	height: 50px;
 	padding: 1em 1em 1em 2.5em;
 }
+.reel article{
+	border: 1px solid;
+	border-color: #878787;
+}
+
 </style>
  
  
@@ -193,17 +198,14 @@ body{
 				<div class="wrapper style2">
 
 					<article id="main" class="container special">
-					<h3><a href="#">이런 곳은 어때요?</a></h3>
-						<a href="#" class="image featured"><img src="${trip.firstimage2}" alt="" /></a>
+						<h3>이런 곳은 어때요?</h3>
+						<a href="#" class="image featured"><img src="${trip.firstimage2}" style="width: 300px;" alt="" /></a>
 						<header>
 							<h2><a href="#">${trip.title}</a></h2>
-							
 						</header>
 						<p>
 							${fee.overview}
 						</p>
-						<footer>
-						</footer>
 					</article>
 
 				</div>

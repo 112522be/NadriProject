@@ -9,14 +9,25 @@
 -->
 <html>
 <head>
-	<title>나들이 플래너</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>나들이 플래너</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
 
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+
 
 	<!-- Scripts -->
 	<script src="/resources/helios/assets/js/jquery.min.js"></script>
@@ -27,10 +38,16 @@
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
-	
-	<style type="text/css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=162ee19a901cbbe89c0c4b261ddecca3&libraries=services"></script>
+<style type="text/css">
 
 	a:hover{
 		text-decoration: none;
@@ -100,30 +117,7 @@
 		text-align: center;
 		margin: 14px;
 	}
-		
-	.panel-heading{
-		display: none; 
-		border-style: solid; 
-		border-width: 2px;
-		border-top-left-radius: 12px;
-		border-top-right-radius: 12px;
-		border-color: #afafaf;
-	}
 	
-	#sidebar{
-		padding-top: 210px;
-	}
-	
-	@media screen and (max-width: 736px){
-		#sidebar{
-			padding-top: 40px;
-			margin-top: -70px;
-		}
-	}
-	
-	.popover.fade.top.in > h3{
-		font-weight: bold;
-	}
 	
 	/************************애니메이션 종료위치를 설정하기 위해 변수별로 따로 css지정***************************/
 	.transport1 {
@@ -370,7 +364,7 @@
 	    margin-top: 51px;
 		margin-left: -36px;
 	}
-
+	
 </style>
 
 <script>
@@ -478,7 +472,7 @@ $(function () {
 </script>
 
 </head>
-<body class="right-sidebar">
+<body class="no-sidebar">
 	<div id="page-wrapper">
 		<!-- Header -->
 		<div id="header">
@@ -497,162 +491,49 @@ $(function () {
 		<div class="wrapper style1">
 
 			<div class="container">
-				<div class="row 200%">
-					<div class="8u 12u(mobile)" id="content">
-						<article id="main">
-							<header style="margin-bottom: 1.5em;">
-								<h2>${planner.title}</h2>
-								<div style="float: left;">
-									<img src="../resources/assets/images/avatar.jpg" alt=""
-										style="border-radius: 5em; height: 100%" /> <a href="#none"
-										style="position: relative;"> <span
-										style="vertical-align: top;" class="name" data-container="body"
-										data-toggle="popover">&nbsp;&nbsp;${planner.plannerMakerId}</span>
-									</a>
-								</div>
-								<div style="float: right;">
-									<span style="padding-right: 30px;">view :
-										&nbsp;${planner.viewCount}</span> <span
-										style="border-left: 1px solid; padding-left: 30px;">${planner.regDate}</span>
-								</div>
-								<br />
-							</header>
-							<div style="border-top: 1px solid; padding: 20px 0;">
-								<c:if test="${planner.plannerMakerId == loginUser.userId}">
-									<div align="right">
-										<a id="modify"><span class="far fa-edit"></span></a>
-										&nbsp;
-										<a id="delete"><span class="fas fa-eraser"></span></a>
-									</div>
-								</c:if>
-							</div>
-							
-							<div id="map" style="width: 100%; height: 450px;"></div>
-							<section id="pathImg">
-							</section>
-							
-							<br>
-							
-							<section>
-								${planner.text}
-							</section>
-							
-						</article>
-					</div>
-					
-					
-					<div class="4u 12u(mobile)" id="sidebar">
-					
-						<hr class="first" style="margin-bottom: 40px;"/>
-						
-						
-						<div id="roadContent" style="padding: 30px 10px 10px 10px; overflow: hidden; font-size: 12pt">
-							<div class="panel-group" id="accordion" role="tablist"
-								aria-multiselectable="true">
-								<div class="panel-heading" role="tab" id="head1">
-									<h4 class="panel-title">
-										<a role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse1"
-											aria-expanded="true" aria-controls="collapse1"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로1
-										</a>
-									</h4>
-								</div>
-								<div id="collapse1" class="panel-collapse collapse in"
-									role="tabpanel" aria-labelledby="head1">
-									<div class="panel-body">
-										<div id="roadStartContent"></div>
-									</div>
-								</div>
-								<div class="panel-heading" role="tab" id="head2">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse2"
-											aria-expanded="false" aria-controls="collapse2"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로2
-										</a>
-									</h4>
-								</div>
-								<div id="collapse2" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="head2">
-									<div class="panel-body">
-										<div id="roadPass1Content"></div>
-									</div>
-								</div>
-								<div class="panel-heading" role="tab" id="head3">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse3"
-											aria-expanded="false" aria-controls="collapse3"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로3
-										</a>
-									</h4>
-								</div>
-								<div id="collapse3" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="head3">
-									<div class="panel-body">
-										<div id="roadPass2Content"></div>
-									</div>
-								</div>
-								<div class="panel-heading" role="tab" id="head4">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse4"
-											aria-expanded="false" aria-controls="collapse4"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로4
-										</a>
-									</h4>
-								</div>
-								<div id="collapse4" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="head4">
-									<div class="panel-body">
-										<div id="roadPass3Content"></div>
-									</div>
-								</div>
-								<div class="panel-heading" role="tab" id="head5">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse5"
-											aria-expanded="false" aria-controls="collapse5"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로5
-										</a>
-									</h4>
-								</div>
-								<div id="collapse5" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="head5">
-									<div class="panel-body">
-										<div id="roadPass4Content"></div>
-									</div>
-								</div>
-								<div class="panel-heading" role="tab" id="head6">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse"
-											data-parent="#accordion" href="#collapse6"
-											aria-expanded="false" aria-controls="collapse6"> <span
-											class="fas fa-flag-checkered"></span>&nbsp;경로6
-										</a>
-									</h4>
-								</div>
-								<div id="collapse6" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="head6">
-									<div class="panel-body">
-										<div id="roadPass5Content"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-											
-					</div>
-				</div>
-				
 				<article id="main" class="special">
+					<header style="margin-bottom: 1.5em;">
+						<h2>${planner.title}</h2>
+						<div style="float: left;">
+							<img src="../resources/assets/images/avatar.jpg" alt=""
+								style="border-radius: 5em; height: 100%" /> <a href="#none"
+								style="position: relative;"> <span
+								style="vertical-align: top;" class="name" data-container="body"
+								data-toggle="popover">&nbsp;&nbsp;${planner.plannerMakerId}</span>
+							</a>
+						</div>
+						<div style="float: right;">
+							<span style="padding-right: 30px;">view :
+								&nbsp;${planner.viewCount}</span> <span
+								style="border-left: 1px solid; padding-left: 30px;">${planner.regDate}</span>
+						</div>
+						<br />
+					</header>
+					<div style="border-top: 1px solid; padding: 20px 0;">
+						<c:if test="${planner.plannerMakerId == loginUser.userId}">
+							<div align="right">
+								<a id="modify"><span class="far fa-edit"></span></a>
+								&nbsp;
+								<a id="delete"><span class="fas fa-eraser"></span></a>
+							</div>
+						</c:if>
+					</div>
+					
+					<div id="map" style="width: 100%; height: 450px;"></div>
+					<section id="pathImg">
+					</section>
+					
+					<br>
+					
+					<section>
+						${planner.text}
+					</section>
 					<input type="hidden" name="postNo" value="${planner.postNo}">
 					<jsp:include page="../common/like.jsp"></jsp:include>
 					<div>
 						<jsp:include page="../common/comment2.jsp"></jsp:include>
 					</div>
 				</article>
-				
 			</div>
 
 		</div>
