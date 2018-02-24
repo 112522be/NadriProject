@@ -33,16 +33,16 @@
    		border: 0;
 	}
 	hr {
-    position: relative;
-    display: block;
-    top: 0;
-    margin-bottom: 0;
-    height: 0;
-    border: 0;
-    width: 95%;
-    border-top: solid 1px rgba(128, 128, 128, 0.2);
-    border-bottom: solid 1px rgba(128, 128, 128, 0.2);
-}
+	    position: relative;
+	    display: block;
+	    top: 0;
+	    margin-bottom: 0;
+	    height: 0;
+	    border: 0;
+	    width: 95%;
+	    border-top: solid 1px rgba(128, 128, 128, 0.2);
+	    border-bottom: solid 1px rgba(128, 128, 128, 0.2);
+	}
 </style>
 <script type="text/javascript">
 	var currentPage = 1;
@@ -79,7 +79,7 @@
 
 	function listMessage() {
 		$.ajax({
-			url:"/message/json/listMessage/"+'${loginUser.userId}',
+			url:"/message/json/listMessage/"+'${user.userId}',
 			method:"GET",
 			dataType:"json",
 			headers :{
@@ -122,7 +122,7 @@
 	}
 	function listSendMessage(){
 		$.ajax({
-			url:"/message/json/listSendMessage/"+'${loginUser.userId}',
+			url:"/message/json/listSendMessage/"+'${user.userId}',
 			method:"GET",
 			dataType:"json",
 			headers :{
@@ -164,7 +164,7 @@
 			method: "GET",
 			data: {
 				"currentPage": currentPage,
-				"searchKeyword": "${loginUser.userId}"
+				"searchKeyword": "${user.userId}"
 			},
 			headers: {
 				"Accept": "application/json"
@@ -182,33 +182,28 @@
 				}
 				console.log(JSONData)
 				for(var i=0;i<JSONData.list.length;i++){
-					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
-						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
-						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
-						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
-						+'</div>'
-						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
-						if(JSONData.title[i] != null){
-							html += '<i class="fas fa-heart" style="color: #F05643; font-size:1em; "></i>&nbsp;좋아요'
+					if(JSONData.title[i] != null){
+						html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+							+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+							+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+							+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
+							+'</div>'
+							+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">'
+							+'<i class="fas fa-heart" style="color: #F05643; font-size:1em; "></i>&nbsp;좋아요'
 							+'</div>'
 							+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
 							+'<p id="addedTitle" style="padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
-							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">';
-						}else{
-							html += '</div>'
-								+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
-							+'<p id="addedTitle" style="padding: 0 0 0 5%;;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
-							+"삭제된 게시물입니다."
-						}
-						html +='</span></p>'
-						+'</div>'
-						+'</div>';
+							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
+							+'</span></p>'
+							+'</div>'
+							+'</div>';
 						if(i != JSONData.list.length-1){
 							html += '<hr/>';
 						}
-				}
-				if(currentPage < maxPage){
-					html+='<a class="more">+ 더보기</a></div>'
+					}
+					if(currentPage < maxPage){
+						html+='<a class="more">+ 더보기</a></div>'
+					}
 				}
 				if(menu == 'add'){
 					$('#logContainer').html(html);
@@ -242,7 +237,7 @@
 			method: "GET",
 			data: {
 				"currentPage": currentPage,
-				"searchKeyword": '${loginUser.userId}'
+				"searchKeyword": '${user.userId}'
 			},
 			headers: {
 				"Accept": "application/json",
@@ -261,31 +256,26 @@
 					html += '<hr/>';
 				}
 				for(var i=0;i<JSONData.comments.length;i++){
-					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
-						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
-						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
-						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
-						+'</div>'
-						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
-						if(JSONData.title[i] != null){
+					if(JSONData.title[i] != null){
+						html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+							+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+							+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+							+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
+							+'</div>'
+							+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
 							html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;댓글'
 							+'</div>'
 							+'<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
 							+'<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
-							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">';
-						}else{
-							html += '</div>'
-								+'<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
-							+'<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">' 
-							+"삭제된 게시물입니다."
-						}
-						html +='</span></p>'
-						+JSONData.comments[i].text
-						+'</div>'
-						+'</div>';
-						if(i != JSONData.comments.length-1){
-							html += '<hr/>';
-						}
+							+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">'
+							+'</span></p>'
+							+JSONData.comments[i].text
+							+'</div>'
+							+'</div>';
+							if(i != JSONData.comments.length-1){
+								html += '<hr/>';
+							}	
+					}
 				}
 				if(currentPage < maxPage){
 					html+='<a class="more">+ 더보기</a></div>'
@@ -316,7 +306,7 @@
 </script>
 </head>
 <body onload="javascript:getLike('add');">
-<input type="hidden" name="searchKeyword" value="${loginUser.userId}">
+<input type="hidden" name="searchKeyword" value="${user.userId}">
  	  <div id="header">
 			<div class="inner">
 				<header>
@@ -328,20 +318,27 @@
      <div class="container" align="center">
      	<div name="userProfile" style="margin: 20px;height: auto;">
      		<span class="col-xs-4" style="width: 30%" align="right">
-     			<c:if test="${! empty loginUser.profileImageFile}">
-     				<a><img alt="" src="/resources/images/${loginUser.profileImageFile}" style="width: 100%"></a>
+     			<c:if test="${! empty user.profileImageFile}">
+     				<a><img alt="" src="${user.profileImageFile}" style="width: 100%"></a>
      			</c:if>
-      			<c:if test="${empty loginUser.profileImageFile}">
+      			<c:if test="${empty user.profileImageFile}">
       				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 100%"></a>
      			</c:if>
      		</span>
      		<span style="font:bold; font-size: 2em !important; color: #3b2b48;" class="col-xs-8">
      			<p style="padding: 0.5em 0.5em 0.5em 0;">
-	     			<a style="font-weight: 700;">${loginUser.userId}</a>
+	     			<a style="font-weight: 700;">${user.userId}</a>
 	     			<br/>
-	     			<span style="font-size: 12pt;">${loginUser.email}</span>
+	     			<span style="font-size: 12pt;">${user.email}</span>
      			</p>
-     			<a style="float: left; font-size: 0.5em; margin: 10px; font:bold;" href="/user/updateUser?userId=${loginUser.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
+     			<c:if test="${! empty user.userName}">
+     				<p><span style="font-size: 0.4em; color: gray; font-weight:700">이름</span><span style="font-size:0.6em; padding: 0.3em !important;">${! empty user.userName? user.userName:'-'}</span>&nbsp;<span style="font-size: 0.4em; color: gray; font-weight:700">휴대전화</span><span style="padding: 0.3em !important; font-size: 0.6em;">${! empty user.phone? user.phone:'-'}</span>&nbsp;
+     				<span style="font-size: 0.4em; color: gray; font-weight:700">성별</span><span style="font-size:0.6em; padding: 0.3em !important;">${! empty user.gender? user.gender:'-'}</span>&nbsp;<span style="font-size: 0.4em; color: gray; font-weight:700">생년월일</span><span style="font-size:0.6em; padding: 0.3em !important;">${!empty user.birth? user.birth:'-'}</span>&nbsp;<span style="font-size: 0.4em; color: gray; font-weight:700">자녀</span><span style="font-size:0.6em; padding: 0.3em !important;">${!empty user.children? user.children:'-'}명</span></p>
+     				<a style="float: left; font-size: 0.5em; margin: 10px;" href="/user/updateUser?userId=${user.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
+     			</c:if>
+     			<c:if test="${empty user.userName}">
+     				<a style="float: left; font-size: 0.5em; margin: 10px;" href="/user/updateUser?userId=${user.userId}"><span class="far fa-plus-square"></span> 추가 정보를 입력하고 더 다양한 나들이를 즐겨보세요</a>
+     			</c:if>
      		</span>
      	</div>
      </div>

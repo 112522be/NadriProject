@@ -109,11 +109,15 @@
 											+community[i].hashtag
 											+'</p>'
 											+'<div>'
-											+'<div class="author" style="float: left; position: absolute; bottom: 0px; left: 10px;">'
-											+'<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>'
-											+'<a href="#none" style="position: relative;">'
-											+'<input type="hidden" name="userId" value="'+community[i].userId+'">'
-											+'<span style="vertical-align: top; position: absolute; bottom: 0px;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;'+community[i].userId+'</span>'
+											+'<div class="author" style="float: left; position: absolute; bottom: 10px; left: 10px;">';
+											if(community[i].user.profileImageFile == null || community[i].user.profileImageFile == ''){
+												html +='<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>';
+											}else{	
+												html += '<img src="${community.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>';
+											}
+											html += '<a href="#none" style="position: relative;">'
+											+'<input type="hidden" name="userId" value="'+community[i].user.userId+'">'
+											+'<span style="vertical-align: top; position: absolute; bottom: 0px;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;'+community[i].user.userId+'</span>'
 											+'</a>'
 											+'</div>'
 											+'<div class="icons" style="float: right;">'
@@ -284,10 +288,15 @@
 									</p>
 									<div>
 										<div class="author" style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<c:if test="${empty community.user.profileImageFile}">
+												<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
+											<c:if test="${!empty community.user.profileImageFile}">
+												<img src="${community.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="userId" value="${community.userId}">
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${community.userId}</span>
+												<input type="hidden" name="userId" value="${community.user.userId}">
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${community.user.userId}</span>
 											</a>
 										</div>
 										<div class="icons" style="float: right;">

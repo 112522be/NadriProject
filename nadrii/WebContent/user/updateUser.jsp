@@ -44,9 +44,9 @@
 	<script type="text/javascript">
 	
 		// 생일
-		 $( function() {
-			    $( ".datepicker" ).datepicker();
-			  } );
+		$( function() {
+			$( ".datepicker" ).datepicker();
+		} );
 		 
 		 
 //		 function addUserPlus(){		 
@@ -172,10 +172,11 @@
 
 		//============= '프로필 사진' ==============
 		 $(function() {
-		       $("#imgInput").on('change', function(){
-		           readURL(this);
-		       });
-		   })
+			 $("#fileName").change(function(){
+				 alert();
+				 sendFile(this);
+			}); 
+		 })
 		
 		function readURL(input) {
 		    if (input.files && input.files[0]) {
@@ -188,10 +189,6 @@
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
-		 
-		$("#imgInput").change(function(){
-		    readURL(this);
-		}); 
 
 		//	버튼 말풍선
 		$(document).ready(function() {
@@ -211,7 +208,26 @@
 				location.href = "/user/main";
 			}
 		}
-		    
+		function sendFile(input) {              
+	         // 파일 전송을 위한 폼생성
+			data = new FormData();
+		 	data.append("uploadFile", input.files[0]);
+		 	$.ajax({ // ajax를 통해 파일 업로드 처리
+		 	    data : data,
+		 	    type : "POST",
+		 	    url : "uploadImage",
+		 	    cache : false,
+		 	    contentType : false,
+		 	    processData : false,
+		 	    success : function(data) { // 처리가 성공할 경우
+	                $('#image_section').attr("src", data.relativeUrl)
+	                $('#profileImageFile').val(data.relativeUrl)
+	 	        },
+ 	        	error : function() {
+					alert("파일 업로드에 실패했습니다.")
+				}
+		 	});
+		 }
 	</script>		
     	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -283,7 +299,7 @@
 		<h1 class="bg-primary text-center" id="formImg" style="background:#f0f4f4; border-bottom: 2px solid #ddd; font-size:30px; padding-bottom: 30px; color:#656565;">내 정 보 수 정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" enctype="multipart/form-data" style="padding-top:50px;">
+		<form class="form-horizontal" style="padding-top:50px;">
 		
 		  <div class="form-group">
           <label for="password" class="col-sm-offset-1 col-sm-3 control-label" style="color:#68A4C4">비밀번호</label>
