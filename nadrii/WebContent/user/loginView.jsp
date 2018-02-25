@@ -5,7 +5,7 @@
 <html  lang="ko">
 	<head>
 	<meta charset="UTF-8">
-	<title>http://www.blueb.co.kr</title>
+	<title>NADRI LOGIN</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
@@ -252,7 +252,7 @@ body .container {
   overflow: hidden;
   max-width: 700px;
   width: auto;
-  height:700px;  
+  height:650px;  
   margin: 80px auto 0;
   background-color: #ffffff;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -364,7 +364,7 @@ body .container .content label:not([for='remember']) {
   display: none;
 }
 body .container .content input.inpt {
-  font-size: 14px;
+  font-size: 13pt;
   display: block;
   width: 100%;
   height: 42px;
@@ -484,17 +484,17 @@ body .container .content input:focus {
 }
 
 body .container .content .submit-wrap {
+  padding-top: 10px;
   position: relative;
   bottom: 0;
   width: 100%;
 }
 body .container .content .submit-wrap a {
-  font-size: 12px;
+  font-size: 14px;
   display: block;
-  margin-top: 20px;
   text-align: center;
   text-decoration: none;
-  color: #999999;
+  color: #6b6b6b;
 }
 body .container .content .submit-wrap a:hover {
   text-decoration: underline;
@@ -554,19 +554,18 @@ article{
 img{
 	max-width: 100%;
  	width: auto; 
-	height: auto;
-	float: left;
-	
+	height: auto;	
 }
 
-.btn.btn-info{
-	font-size: 20px;
-	max-width: 100%;
- 	width: auto; 
-	height: auto;
-	float:right;
-	margin-left: 5%;
-
+.white{
+	width: 90px;
+    float: right;
+    font-size: 10pt;
+    padding: 0;
+    background: #ffffff;
+}
+.white:hover{
+	background: none;
 }
 
 
@@ -589,14 +588,16 @@ img{
     z-index: 100;
 }
 
-
+input[type="button"]{
+	padding: 0;
+}
 
 </style>
 <!-- </head> -->
 	
 <body class="no-sidebar">
 	
-	<div id="page-wrapper">
+	<div id="page-wrapper" style="padding-bottom: 100px;">
 
 		<div id="header">
 
@@ -612,8 +613,8 @@ img{
 		    <article class="">
 		       
 		        <div class="tabs">
-		            <span class="tab signin active"><a href="#signin">로그인</a></span>
-		            <span class="tab signup"><a href="#signup">가입하기</a></span>
+		            <span class="tab signin active"><a href="#signin" style="font-size: 15pt;">로그인</a></span>
+		            <span class="tab signup"><a href="#signup" style="font-size: 15pt;">가입하기</a></span>
 		        </div>
 		        <div class="content">
 		            <div class="signin-cont cont">
@@ -623,10 +624,12 @@ img{
 			                <input type="password" name="password" class="inpt" required="required" placeholder="비밀번호">
 									        			    			                
 				            <div class="submit-wrap">
-				            <a class="btn btn-info" role="button" href="#">비밀번호 찾기</a>
-				            <a class="btn btn-info" role="button" href="#" >아이디 찾기</a>
-							
-			 	               <input type="button" value="Login" class="submit">
+					            <a class="button white" role="button" href="#">비밀번호 찾기</a>
+					            <a class="button white" role="button" href="#" >아이디 찾기</a>
+								
+								<div style="padding-top: 10px;">
+			 	               		<input type="button" value="Login" class="submit">
+			 	               </div>
 				 	        </div>
         		    	</form>
     				</div>
@@ -649,8 +652,10 @@ img{
 							
 	                		
 							<div class="submit-wrap">
-								<img src="../resources/images/userImage/kakao_account_login_btn_medium_narrow.png" class="6u 12u(mobile) special" name="kakaoLogin">
-	                			<img src="../resources/images/userImage/naverLongBar-iloveimg-resized.png" class="6u 12u(mobile) special" name ="naverLogin">
+							<div >
+								<img src="../resources/images/userImage/kakao_account_login_btn_medium_narrow.png" class="6u 12u(mobile) special" name="kakaoLogin" style="float: left;">
+	                			<img src="../resources/images/userImage/naverLongBar-iloveimg-resized.png" class="6u 12u(mobile) special" name ="naverLogin" style="float: right;">
+							</div>								
 								<input type="button" value="가입" class="submit">
 							</div>
 							

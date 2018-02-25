@@ -679,6 +679,9 @@ pageEncoding="UTF-8"%>
 	.full{
 		color: #F05643 !important;
 	}
+	.wrapper{
+		margin: 0;
+	}
 </style>
 
 <title>여행지 찾기</title>
@@ -744,7 +747,7 @@ pageEncoding="UTF-8"%>
 									<div class="icons" style="float: right;">
 										<span class="wishIcon"></span>&nbsp;<span class="wishCount"></span>
 									</div>
-								</div>
+								</div> 
 							</div>
 						</article>
 								

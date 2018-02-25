@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -195,22 +196,7 @@ body{
 				<span class="forward" style="display: block;"></span>
 				<span class="backward" style="display: block;"></span>
 			</section>
-			
-				<div class="wrapper style2">
 
-					<article id="main" class="container special">
-						<h3>이런 곳은 어때요?</h3>
-						<a href="#" class="image featured"><img src="${trip.firstimage2}" style="width: 300px;" alt="" /></a>
-						<header>
-							<h2><a href="#">${trip.title}</a></h2>
-						</header>
-						<p>
-							${fee.overview}
-						</p>
-					</article>
-
-				</div>
-			
 			
 		</div>
 		

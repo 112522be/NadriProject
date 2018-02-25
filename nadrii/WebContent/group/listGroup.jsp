@@ -220,7 +220,9 @@
 			#header{
 				padding: 6.5em 0 1.5em 0;
  			}
-			
+			.wrapper{
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
