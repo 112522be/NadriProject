@@ -328,10 +328,15 @@
 									</div>								
 									<div>
 										<div class="author" style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<c:if test="${empty group.join.user.profileImageFile}">
+												<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
+											<c:if test="${! empty group.join.user.profileImageFile}">
+												<img src="${group.join.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="userId" value="${group.join.userId}"/>
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${group.join.userId}</span>
+												<input type="hidden" name="userId" value="${group.join.user.userId}"/>
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${group.join.user.userId}</span>
 											</a>
 										</div>
 										<div class="icons" style="float: right;">

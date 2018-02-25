@@ -10,6 +10,10 @@
 	div[name='submitComment']{
 		background: #4b3753;
 	}
+	img.img-circle{
+		width: 36px;
+		height: 36px;
+	}
 </style>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript"> 
@@ -26,12 +30,17 @@
 				for(i=0;i<JSONData.totalCount;i++){
 					var html = '<div class="comments"><span class="col-xs-1" style="float: left; padding: 0;"><input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
-					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
-					+JSONData.listComment[i].userId
+					+'">'
+					if(JSONData.listComment[i].user.profileImageFile == null){
+						html += '<img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					}else{
+						html += '<img src="'+JSONData.listComment[i].user.profileImageFile+'" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					}
+					html += JSONData.listComment[i].user.userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
 					+JSONData.listComment[i].regDate
 					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
-					if("${loginUser.userId}"==JSONData.listComment[i].userId){
+					if("${loginUser.userId}"==JSONData.listComment[i].user.userId){
 						html += '<span class="fas fa-edit" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:10pt;"/>';
 					}
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
@@ -157,7 +166,7 @@
 	})
 </script>
 
-<body onload="listComment()">
+<body onload="javascript:listComment();">
 	<div>
 		<div>
 			<form name="formData">

@@ -9,22 +9,24 @@
 	<resultMap id="joinSelectMap" type="join">
 		<result property="joinNo"			column="join_no"		jdbcType="NUMERIC"/>
 		<result property="groupNo"		column="group_no"	jdbcType="NUMERIC"/>
-		<result property="userId"			column="user_id"		jdbcType="VARCHAR"/>
+		<result property="user.userId"			column="user_id"		jdbcType="VARCHAR"/>
+		<result property="user.profileImageFile"		column="profile_image_file"			jdbcType="VARCHAR"/>
 		<result property="groupRole"	column="group_role"	jdbcType="NUMERIC"/>	
 		<result property="regDate" 		column="reg_date"		jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="addJoin"		parameterType="join" >
 	 	INSERT
-		INTO join ( join_no, group_no, user_id, group_role, reg_date ) 
-		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole}, SYSDATE )
+		INTO join ( join_no, group_no, user_id, group_role ) 
+		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{user.userId}, #{groupRole} )
 	</insert>
 
 	<select id="getJoinList"		parameterType="Search"	resultMap="joinSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  				FROM		(	SELECT join_no, group_no, user_id, group_role, reg_date
-									FROM join
+
+	  				FROM		(	SELECT join_no, group_no, user_id, group_role
+									FROM join 
 									WHERE user_id = #{searchKeyword}
 									) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
@@ -32,16 +34,17 @@
 	</select>
 	
 	<select id="getJoinMemberList"		parameterType="Search"	resultMap="joinSelectMap">
-		SELECT join_no, group_no, user_id, group_role, reg_date
-		FROM join
+		SELECT join_no, group_no, j.user_id, group_role, profile_image_file
+		FROM join j, users u
 		WHERE group_no = #{searchKeyword}
+		AND j.user_id = u.user_id
 		ORDER BY join_no ASC
 	</select>
 		
 	<delete id="deleteJoin"	parameterType="join">
 	 	DELETE FROM join
 	 	<where>
-	 		group_no = #{groupNo} AND user_id = #{userId}
+	 		group_no = #{groupNo} AND user_id = #{user.userId}
 	 	</where>
 	 </delete>
 	 

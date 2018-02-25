@@ -2,7 +2,7 @@ package com.yagn.nadrii.service.domain;
 
 public class Comments {
 	private int commentNo;
-	private String userId;
+	private User user;
 	private String regDate;
 	private int postNo;
 	private String text;
@@ -24,11 +24,11 @@ public class Comments {
 	public void setCommentNo(int commentNo) {
 		this.commentNo = commentNo;
 	}
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(User user) {
+		this.user = user;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -42,7 +42,7 @@ public class Comments {
 
 	@Override
 	public String toString() {
-		return "Comments [commentNo=" + commentNo + ", userId=" + userId + ", regDate=" + regDate + ", text=" + text
+		return "Comments [commentNo=" + commentNo + ", user=" + user + ", regDate=" + regDate + ", text=" + text
 				+ ", postNo=" + postNo + "]";
 	}
 }

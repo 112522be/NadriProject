@@ -47,7 +47,7 @@ public class GroupServiceTest {
 
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId("test01");
+		//join.setUserId("test01");
 		
 		group.setJoin(join);
 		
@@ -93,7 +93,7 @@ public class GroupServiceTest {
 		Join join = new Join();
 		
 		join.setGroupNo(60124);
-		join.setUserId("test01");
+		//join.setUserId("test01");
 		
 		joinService.deleteJoin(join);
 		

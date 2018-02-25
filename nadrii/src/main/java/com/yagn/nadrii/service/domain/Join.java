@@ -4,8 +4,8 @@ public class Join {
 
 	private int joinNo;
 	private int groupNo;
-	private String userId;
-	private int groupRole;
+	private User user;
+	private int groupRole;	// 1 - �۾���, 2 - ������
 	private String regDate;
 	
 	public Join(){
@@ -27,12 +27,12 @@ public class Join {
 		this.groupNo = groupNo;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int getGroupRole() {
@@ -53,8 +53,8 @@ public class Join {
 
 	@Override
 	public String toString() {
-		return "Join [joinNo=" + joinNo + ", groupNo=" + groupNo + ", userId=" + userId + ", groupRole=" + groupRole
-				+ ", regDate=" + regDate + "]";
+		return "Join [joinNo=" + joinNo + ", groupNo=" + groupNo + ", user=" + user + ", groupRole=" + groupRole
+				+ "]";
 	}
 
 	

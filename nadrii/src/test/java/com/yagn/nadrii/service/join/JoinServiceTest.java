@@ -31,7 +31,7 @@ public class JoinServiceTest {
 		
 		join.setGroupNo(60036);
 		join.setGroupRole(2);
-		join.setUserId("test02");
+		//join.setUserId("test02");
 				
 		joinService.addJoin(join);
 		
@@ -46,7 +46,7 @@ public class JoinServiceTest {
 		
 		join.setGroupNo(60033);
 		join.setGroupRole(1);
-		join.setUserId("test01");
+		//join.setUserId("test01");
 				
 		joinService.addJoin(join);
 		
@@ -60,7 +60,7 @@ public class JoinServiceTest {
 		Join join = new Join();
 		
 		join.setGroupNo(60033);
-		join.setUserId("test02");
+		//join.setUserId("test02");
 		
 		joinService.deleteJoin(join);
 		
@@ -75,8 +75,8 @@ public class JoinServiceTest {
 		search.setCurrentPage(1);
 	 	search.setPageSize(3);
 		
-		join.setUserId("test01");
-		search.setSearchKeyword(join.getUserId());
+		//join.setUserId("test01");
+		//search.setSearchKeyword(join.getUserId());
 		
 		Map<String , Object> map=joinService.getJoinList(search);
 		

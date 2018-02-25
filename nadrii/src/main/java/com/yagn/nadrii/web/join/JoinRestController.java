@@ -52,7 +52,9 @@ public class JoinRestController {
 		
 		join.setGroupNo(groupNo);
 		join.setGroupRole(2);
-		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		User user = new User();
+		user.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		join.setUser(user);
 				
 		joinService.addJoin(join);
 		
@@ -67,7 +69,9 @@ public class JoinRestController {
 		Join join = new Join();
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		User user = new User();
+		user.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		join.setUser(user);
 				
 		joinService.deleteJoin(join);
 		
