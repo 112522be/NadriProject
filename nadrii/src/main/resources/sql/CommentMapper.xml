@@ -18,13 +18,13 @@
 	<!-- comm의 Create(insert) -->
 	<insert id="addComment" parameterType="com.yagn.nadrii.service.domain.Comments">
 		INSERT INTO comments(comment_no, user_id, post_no, text, reg_date)
-		VALUES(seq_comments_comment_no.nextval, #{userId}, #{postNo}, #{text}, SYSDATE) 
+		VALUES(seq_comments_comment_no.nextval, #{user.userId}, #{postNo}, #{text}, SYSDATE) 
 	</insert>
 
 	
 	<!-- comm의 Read(select) -->
 	<select id="getCommentNo" parameterType="com.yagn.nadrii.service.domain.Comments" resultType="int">
-		SELECT comment_no FROM comments WHERE user_id=#{userId} AND reg_date=#{regDage}
+		SELECT comment_no FROM comments WHERE user_id=#{user.userId} AND reg_date=#{regDage}
 	</select>
 	
 	<select id="getComment" parameterType="int" resultMap="communitySelectMap">

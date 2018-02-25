@@ -8,7 +8,8 @@
 
 	<resultMap type="com.yagn.nadrii.service.domain.Planner" id="plannerSelectMap">
 		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>
-		<result property="plannerMakerId" column="user_id" jdbcType="VARCHAR"/>
+		<result property="user.userId" column="user_id" jdbcType="VARCHAR"/>
+		<result property="user.profileImageFile"	column="profile_image_file"		jdbcType="VARCHAR"/>
 		<result property="title" column="title" jdbcType="VARCHAR"/>
 		<result property="lat" column="lat" jdbcType="VARCHAR"/>
 		<result property="lng" column="lng" jdbcType="VARCHAR"/>
@@ -33,7 +34,7 @@
 			 	THUMBNAIL_IMAGE_FILE,
 			 	text)
 		VALUES ( seq_post_post_no_pl.nextval,
-			 	#{plannerMakerId},
+			 	#{user.userId},
 			 	#{title},
 			 	#{lat},
 			 	#{lng},
@@ -72,8 +73,8 @@
 	<select id="listPlanner" parameterType="map" resultMap="plannerSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag, lat, lng
-	  									FROM post
+	  					FROM		(	SELECT post_no, p.user_id, title, text, thumbnail_image_file, p.reg_date, view_count, hashtag, lat, lng, profile_image_file
+	  									FROM post p, users u
 										<where>
 											<if test="#{search.searchCondition} != null">
 												<if test="#{search.searchKeyword} !='' ">
@@ -84,6 +85,7 @@
 											<if test="plannerMakerId != null">
 											 	user_id in #{plannerMakerId} AND
 											</if>
+											p.user_id = u.user_id AND
 											flag_pu='pl'
 											ORDER BY post_no DESC
 										</where>
@@ -94,9 +96,9 @@
 	
 	
 	<select id="getPlanner" parameterType="int" resultMap = "plannerSelectMap">
-		SELECT * 
-		FROM post
-		WHERE post_no in #{postNo}
+		SELECT p.*, profile_image_file 
+		FROM post p, users u
+		WHERE post_no in #{postNo} AND p.user_id = u.user_id
 	</select>
 	
 	<update id="updatePlanner" parameterType="planner">

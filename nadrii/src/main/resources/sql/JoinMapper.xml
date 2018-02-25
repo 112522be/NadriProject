@@ -17,7 +17,7 @@
 	<insert id="addJoin"		parameterType="join" >
 	 	INSERT
 		INTO join ( join_no, group_no, user_id, group_role ) 
-		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole} )
+		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{user.userId}, #{groupRole} )
 	</insert>
 
 	<select id="getJoinList"		parameterType="Search"	resultMap="joinSelectMap">
@@ -42,7 +42,7 @@
 	<delete id="deleteJoin"	parameterType="join">
 	 	DELETE FROM join
 	 	<where>
-	 		group_no = #{groupNo} AND user_id = #{userId}
+	 		group_no = #{groupNo} AND user_id = #{user.userId}
 	 	</where>
 	 </delete>
 	 

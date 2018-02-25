@@ -503,11 +503,16 @@ $(function () {
 							<header style="margin-bottom: 1.5em;">
 								<h2>${planner.title}</h2>
 								<div style="float: left;">
-									<img src="../resources/assets/images/avatar.jpg" alt=""
-										style="border-radius: 5em; height: 100%" /> <a href="#none"
+									<c:if test="${empty planner.user.profileImageFile}">
+										<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 36px; width: 36px;"/>
+									</c:if>
+									<c:if test="${! empty planner.user.profileImageFile}">
+										<img src="${planner.user.profileImageFile}" alt="" style="border-radius: 5em; height: 36px; width: 36px;"/>
+									</c:if>
+									 <a href="#none"
 										style="position: relative;"> <span
 										style="vertical-align: top;" class="name" data-container="body"
-										data-toggle="popover">&nbsp;&nbsp;${planner.plannerMakerId}</span>
+										data-toggle="popover">&nbsp;&nbsp;${planner.user.userId}</span>
 									</a>
 								</div>
 								<div style="float: right;">
@@ -518,7 +523,7 @@ $(function () {
 								<br />
 							</header>
 							<div style="border-top: 1px solid; padding: 20px 0;">
-								<c:if test="${planner.plannerMakerId == loginUser.userId}">
+								<c:if test="${planner.user.userId == loginUser.userId}">
 									<div align="right">
 										<a id="modify"><span class="far fa-edit"></span></a>
 										&nbsp;

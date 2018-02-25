@@ -247,10 +247,15 @@
 																	
 									<div>
 										<div class="author" style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<c:if test="${empty planner.user.profileImageFile}">
+												<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
+											<c:if test="${! empty planner.user.profileImageFile}">
+												<img src="${planner.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="plannerMakerId" value="${planner.plannerMakerId}"/>
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${planner.plannerMakerId}</span>
+												<input type="hidden" name="plannerMakerId" value="${planner.user.userId}"/>
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${planner.user.userId}</span>
 											</a>
 										</div>
 										<div class="icons" style="float: right;">

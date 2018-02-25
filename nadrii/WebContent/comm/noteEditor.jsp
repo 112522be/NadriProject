@@ -231,7 +231,11 @@
 		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail" align="center"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
+		<div id="cndThumbnail" align="center">
+		<c:if test="${! empty community.thumbNailFileName}">
+			<img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px">
+		</c:if>
+		</div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">

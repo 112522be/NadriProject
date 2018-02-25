@@ -1,4 +1,4 @@
-package com.yagn.nadrii.web.comm;
+ package com.yagn.nadrii.web.comm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.comm.CommService;
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Community;
+import com.yagn.nadrii.service.domain.User;
 
 @Controller
 @RequestMapping("/comm/*")
@@ -38,8 +39,10 @@ public class CommController {
 	int pageSize;
 	
 	@RequestMapping(value = "addComm", method=RequestMethod.POST)
-	public String addComm(@ModelAttribute Community community) {
+	public String addComm(@ModelAttribute Community community, HttpSession session) {
 		System.out.println("--------"+community);
+		User user = (User)session.getAttribute("loginUser");
+		community.setUser(user);
 		int postNo = commService.addComm(community);
 		return "redirect:/comm/getComm?postNo="+postNo;
 	}
