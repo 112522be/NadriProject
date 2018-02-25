@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public User getUser(String userId) throws Exception {
+		System.out.println("userId ==" + userId);
 		return userDao.getUser(userId);
 	}
 	
@@ -62,6 +63,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public void updateUser(User user) throws Exception {
+		user.getBirth().replaceAll("/","").trim();
+		
 		userDao.updateUser(user);
 	}
 
@@ -73,6 +76,11 @@ public class UserServiceImpl implements UserService{
 		}
 			
 		return result;
+	}
+
+	@Override
+	public int checkId(String userId) throws Exception {
+		return userDao.checkId(userId);
 	}
 			  
 }

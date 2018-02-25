@@ -11,12 +11,14 @@ public interface GroupService {
 	
 	public Group getGroup(int groupNo) throws Exception;
 	 
-	public Map<String , Object> getGroupList(Search search) throws Exception;
+	public Map<String , Object> listGroup(Search search) throws Exception;
 	
 	public void updateViewCount(int groupNo) throws Exception;
 	
 	public void updateGroup(Group group) throws Exception;
 	
 	public void deleteGroup(Group group) throws Exception;
+	
+	public String getThumbNail(String placeName) throws Exception;
 	
 }

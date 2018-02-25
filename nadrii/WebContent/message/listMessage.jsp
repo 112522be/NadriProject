@@ -5,80 +5,152 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+  
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>  
 <script type="text/javascript">
 
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
-		$(".list-group-item:contains('받은 쪽지함')").on("click" , function() {
+		
+		$("a[href='#tabs-1']:contains('받은 쪽지함')").on("click" , function() {
 			//alert("받은 쪽지함")
-			self.location= "/message/listMessage"
-		});
-	});
-	
-	$( function() {
-		//==> 추가된부분 : "addUser"  Event 연결
-		$(".list-group-item:contains('보낸 쪽지함')").on("click" , function() {
-			//alert("보낸 쪽지함")
-			self.location ="/message/listSendMessage"
-		});
-	});
-	
-	$( function() {
-		//==> 추가된부분 : "addUser"  Event 연결
-		$(".list-group-item:contains('읽을 쪽지함')").on("click" , function() {
-			//alert("읽을 쪽지함")
-			self.location ="/message/listMessageToRead"
-		});
-	});
-	/*
-	$(function(){
-		$("tr td:nth-child(4)").on("click",function(){
-			var messageNo = $($("input[name='messageNo']")[$("tr td:nth-child(4)").index(this)]).val();
-			self.location="/message/getMessage?messageNo="+messageNo
-			//alert($("tr td:nth-child(3)").index(this));
-			//alert("겟메시지");
+			//self.location= "/message/listMessage"
+			listMessage();
 			
-			//alert(messageNo);
 		});
 	});
-	*/
+	
+	
+	function listMessage(){
+		$.ajax({
+			url:"/message/json/listMessage/"+'${loginUser.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(returnData){
+				$("tbody tr").remove();
+				var message = returnData.list;
+				var tableValue ="";
+								
+				
+				for (var i = 0; i < message.length; i++) {
+					tableValue = "<tr class='warning'>"
+			          	+"<td><input type='checkbox' name='checkbox' id='checkbox' value='"
+			          	+message[i].messageNo+"'></td>"
+			          +"<td>"+message[i].senderId+"</td>"
+			          +"<td>"+message[i].receiverId+"</td>"
+			          +"<td>"+message[i].text+"</td>"
+			          +"<td>"+message[i].regDate+"</td>"
+			        +"</tr>";
+					$("tbody").append(tableValue);
+			    }
+			}
+		});
+	}
+	
+	function listSendMessage(){
+		$.ajax({
+			url:"/message/json/listSendMessage/"+'${loginUser.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(returnData){
+				$("tbody tr").remove();
+				var message = returnData.list;
+				var tableValue ="";
+								
+				
+				for (var i = 0; i < message.length; i++) {
+					tableValue = "<tr class='warning'>"
+			          	+"<td><input type='checkbox' name='checkbox' id='checkbox' value='"
+			          	+message[i].messageNo+"'></td>"
+			          +"<td>"+message[i].senderId+"</td>"
+			          +"<td>"+message[i].receiverId+"</td>"
+			          +"<td>"+message[i].text+"</td>"
+			          +"<td>"+message[i].regDate+"</td>"
+			        +"</tr>";
+					$("tbody").append(tableValue);
+			    }
+			}
+		});
+	}
+	
+	
+	function listMessageToRead(){
+		$.ajax({
+			url:"/message/json/listMessageToRead/"+'${user.userId}',
+			method:"GET",
+			dataType:"json",
+			headers :{
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},						
+			success: function(returnData){
+				$("tbody tr").remove();
+				var message = returnData.list;
+				var tableValue ="";
+								
+				
+				for (var i = 0; i < message.length; i++) {
+					tableValue = "<tr class='warning'>"
+			          	+"<td><input type='checkbox' name='checkbox' id='checkbox' value='"
+			          	+message[i].messageNo+"'></td>"
+			          +"<td>"+message[i].senderId+"</td>"
+			          +"<td>"+message[i].receiverId+"</td>"
+			          +"<td>"+message[i].text+"</td>"
+			          +"<td>"+message[i].regDate+"</td>"
+			        +"</tr>";
+					$("tbody").append(tableValue);
+			    }
+			}
+		});
+	}
+	
+	
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$("a[href='#tabs-1']:contains('보낸 쪽지함')").on("click" , function() {
+			//alert("보낸 쪽지함")
+			//self.location ="/message/listSendMessage"
+			listSendMessage();
+		});
+	});
+	
+	$( function() {
+		//==> 추가된부분 : "addUser"  Event 연결
+		$("a[href='#tabs-1']:contains('읽을 쪽지함')").on("click" , function() {
+			//alert("읽을 쪽지함")
+			//self.location ="/message/listMessageToRead"
+			listMessageToRead();
+		});
+	});
+	
 	
 	$(function(){
-		$("tr td:nth-child(4)").on("click",function(){
+		$(document).on("click","tr td:nth-child(4)", function(){
+		//$("tr td:nth-child(4)").on("click",function(){
 			var messageNo = $($("input[name='checkbox']")[$("tr td:nth-child(4)").index(this)]).val();
-			alert(messageNo)
-			//self.location="/message/getMessage?messageNo="+messageNo
+			//alert(messageNo)
 			window.open("/message/getMessage?messageNo="+messageNo,"getMessge","width=300, height=350,status=no, scrollbars=no, location=no");
 		});
 	});
 	
-	$(function(){
-		$("a[href='#']:contains('삭제')").on("click", function(){
-			var checkedMessage = $("input[name=checkbox]").length;
-			var checkedMessageCount = $("input[name=checkbox]:checked").length;
-			var messageNoList="";
-			//var array = new Array();
-			
-			for (var i = 0; i < checkedMessageCount; i++) {
-				if(i != checkedMessageCount-1){
-					var value = $($("input[name=checkbox]:checked")[i]).val()+","; 
-				}else{
-					var value = $($("input[name=checkbox]:checked")[i]).val();
-				}
-				
-				messageNoList += value;
-			
-			}
-			
-			alert(messageNoList);
-			deleteMessage(messageNoList);
-		});
-	});
+	
 	
 	function deleteMessage(messageNoList){
 		$.ajax({
@@ -92,104 +164,158 @@
 			success: function(returnData){
 				var count = returnData.count;
 				alert(count+"개의 메시지가 삭제되었습니다");
+				
+				for (var i = 0; i < count; i++) {
+					$($("input[name=checkbox]:checked").parents("td")).parents("tr").remove();					
+				}
+				
+				
 			}
 			
 		});
 	}
 	
+	$(function(){
+		$("button[type='button']:contains('삭제')").on("click",function(){
+			//alert("삭제");
+			var checkedMessageCount = $("input[name=checkbox]:checked").length;
+			var messageNoList="";
+			
+			
+			for (var i = 0; i < checkedMessageCount; i++) {
+				if(i != checkedMessageCount-1){
+					var value = $($("input[name=checkbox]:checked")[i]).val()+","; 
+				}else{
+					var value = $($("input[name=checkbox]:checked")[i]).val();
+				}
+				
+				messageNoList += value;
+			
+			}
+			
+			//alert(messageNoList);
+			deleteMessage(messageNoList);
+		});
+	});
+	
 </script>
+<!--  -->
+<style >
+#tabs{
+	margin-left : 10%;
+	margin-right: 10%;
+}
+.ui-tabs-nav.ui-corner-all.ui-helper-reset.ui-helper-clearfix.ui-widget-header{
+	padding: :0px;
 
+}
+.ui-tabs.ui-corner-all.ui-widget.ui-widget-content{
+	padding: :0px;
+}
 
+#header{
+	
+	background-image: url("/resources/images/tripIcon/desktop-background-3091211_1920.jpg");
+}
+
+#nav{
+	background-image: url("../resources/helios/images/header.jpg");	
+	background: #6d4532;
+	opacity: 0.7;
+}
+.ui-tabs.ui-corner-all.ui-widget.ui-widget-content{
+	padding: 0px;
+}
+.ui-tabs-panel.ui-corner-bottom.ui-widget-content{
+	background:#400f0f; 
+}
+.ui-tabs-nav.ui-corner-all.ui-helper-reset.ui-helper-clearfix.ui-widget-header{
+	background: #c1a8b1;
+	padding: 0px;
+}
+.ui-tabs-tab.ui-corner-top.ui-state-default.ui-tab.ui-tabs-active.ui-state-active{
+	background: #400f0f;
+}
+
+th{
+	background: #ca9975;
+}
+.ui-tabs-tab.ui-corner-top.ui-state-default.ui-tab{
+	background: #e6bfa2;
+}
+
+</style>
 <title>Insert title here</title>
 </head>
-<body>
-	<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+<body class="no-sidebar">
+		<div id="page-wrapper">
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-2" align="center" style="padding-left: 0px; padding-right: 0px;">
-				<li class="list-group-item list-group-item-warning" >받은 쪽지함</li>
-				<li class="list-group-item list-group-item-success" >보낸 쪽지함</li>
-				<li class="list-group-item list-group-item-info" >읽을 쪽지함</li>
+			<div id="header">
+
+				<div class="inner">
+					<header>
+						<h1><a href="../index.jsp" id="logo">쪽지함</a></h1>
+					</header>
+				</div>
+						
+				<jsp:include page="/layout/toolbar.jsp" />
+
 			</div>
-			<div class="col-xs-1"></div>
-			<div class="col-xs-9" align="center" style="padding-left: 0px; padding-right: 0px;">
-				
-		<div class="panel panel-warning" >
-	      <!-- Default panel contents -->
-	      <div class="panel-heading"style="padding-bottom: 0px;padding-top: 0px;">쪽지함 내용</div>
-	      <div class="panel-body" style="padding-bottom: 0px;padding-top: 0px; height: 0px"></div>
-	
-	      <!-- Table -->
-	      <table class="table">
-	        <thead>
-	          <tr>
-	            <th></th>
-	            <th>보낸 사람</th>
-	            <th>받는 사람</th>
-	            <th>내용</th>
-	            <th>보낸 시간</th>
-	          </tr>
-	        </thead>
-	        <div class="widget">
-  				
-		        <tbody class="message">
-		        	<c:forEach var ="list" items="${list}">
-		        	
-		          <tr>
-		        	
-		        	<td>
-		        		<input type="checkbox" name="checkbox" id="checkbox" value="${list.messageNo}">
-		        	</td>		        	
-		        	
-		        	
-		        	<!-- 이놈 클릭시 답장 보내기 -->
-		        	<td>
-		        	<c:if test="${! empty list.senderId}">
-		        	${list.senderId}
-		    	        <input type="hidden" id ="senderId" name="senderId" value="${list.senderId}"/>
-		    	    </c:if>
-		            </td>
-		            
-		            <td>
-		            <c:if test="${! empty list.receiverId}">
-		            	${list.receiverId }
-		            </c:if>
-		            
-		            
-		            </td>
-		            
-		            <!-- 이놈 클릭시 내용 보기 -->
-		            <td>
-		            <c:if test="${! empty list.text}">
-		            	${list.text}
-		            </c:if>	
-		            </td>
-		            
-		            <td>
-		            <c:if test="${! empty list.text}">
-		            	${list.regDate}
-		            </c:if>
-		            </td>
-		            
-		            
-		          </tr>
-		          </c:forEach>
-		          
-		        </tbody>
-		      </table>
-		   </div>
-		   <a class="btn btn-default btn-md" href="#" role="button">삭제</a>
-		   <a class="btn btn-default btn-md" href="#" role="button">창 닫기</a>
-    	</div>
-	</div>			
-		<!-- row 끝 -->
-		
-		</div>
-		
-	
-	<!-- 컨테이너 끝 -->
-	</div>
-
+			
+			<!-- 
+			
+		 -->
+		 	</br>
+			<div class="container">
+		  		<div class="row">
+		  			<div class="col-md-12">
+					<div id="tabs">
+					  <ul>
+					  	<li><a href="#tabs-1">받은 쪽지함</a></li>
+					    <li><a href="#tabs-1">보낸 쪽지함</a></li>
+					    <li><a href="#tabs-1">읽을 쪽지함</a></li>
+					  
+					  </ul>
+					  
+					  
+					  <div id="tabs-1">
+					    <table class="table">
+					      <thead>
+					        <tr>
+					          <th></th>
+					          <th>보낸 사람</th>
+					          <th>받는 사람</th>
+					          <th>내용</th>
+					          <th>보낸 날짜</th>
+					        </tr>
+					      </thead>
+					      <tbody>
+					      <c:forEach var ="list" items="${list}">
+						        <tr class="warning">
+						          <td><input type="checkbox" name="checkbox" id="checkbox" value="${list.messageNo}"></td>
+						          <td>${list.senderId}</td>
+						          <td>${list.receiverId}</td>
+						          <td>${list.text}</td>
+						          <td>${list.regDate}</td>
+						        </tr>
+					        </c:forEach>  
+					        
+					      </tbody>
+					      
+					    </table>
+					    <button type="button" class="btn btn-danger">삭제</button>
+					  </div>
+				  </div><!-- tab end -->
+			   </div>><!-- grid end -->
+			</div><!-- row end -->
+		</div><!-- container end -->
+	</div><!-- page end -->
+	<script src="../resources/helios/assets/js/jquery.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="../resources/helios/assets/js/skel.min.js"></script>
+		<script src="../resources/helios/assets/js/util.js"></script>
+		<script src="../resources/helios/assets/js/main.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@ import com.yagn.nadrii.service.purchase.PurchaseService;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 import com.yagn.nadrii.service.ticket.impl.NaverApiDaoImpl;
+import com.yagn.nadrii.service.user.UserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,6 +41,10 @@ public class TicketServiceTest {
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
 
+
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 	
 	
 	@Test
@@ -130,10 +135,10 @@ public class TicketServiceTest {
 		
 		User user = new User();
 		Purchase purchase = new Purchase();
-		purchase.setBuyerId("yumaKim88");
-		purchase.setTicketTitle("태안 세계튤립축제");
-		purchase.setBookingDate("2018년 3월 15일"); ;
-		purchase.setBuyerName("김연아 테스트 이름 길게 붙여서 뒤에 값 어떻게 보여지는지 확인중");
+		purchase.setBuyerId("user6364");
+//		purchase.setTicketTitle("태안 세계튤립축제");
+//		purchase.setBookingDate("2018년 3월 15일"); ;
+//		purchase.setBuyerName("김연아 테스트 이름 길게 붙여서 뒤에 값 어떻게 보여지는지 확인중");
 		
 		String getQRCode = purchaseService.getQRCode(purchase);
 		
@@ -143,5 +148,24 @@ public class TicketServiceTest {
 //		Assert.assertEquals(null, detailImage.getContentid());
 
 	}
+	
+	//@Test
+		public void testAddPurchase() throws Exception {
+
+			System.out.println("\n[addPurchase : addBasket TEST]");
+			
+			Purchase purchase = new Purchase();
+			
+			
+			
+			String getQRCode = purchaseService.getQRCode(purchase);
+			
+			System.out.println("\n[testGetQRCode] : " + getQRCode);
+
+
+		}
+	
+	
+	
 	 
 } // end of class

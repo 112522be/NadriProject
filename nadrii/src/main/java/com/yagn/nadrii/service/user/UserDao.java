@@ -27,4 +27,6 @@ public interface UserDao {
 	public User getUser(User user) throws Exception;
 	
 	public User getUserByEmail(String email) throws Exception;
+	
+	public int checkId(String userId) throws Exception;
 }

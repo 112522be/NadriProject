@@ -18,15 +18,15 @@
 	<insert id="addWishFromTrip" parameterType="wish">
 		INSERT
 		INTO wish(wish_no, user_id, trip_no, post_no)
-		
-		VALUES(
-		seq_wish_wish_no.nextval,
-		#{userId:VARCHAR},
-		#{trip.postNo:NUMERIC},
-		null)
-	
+		VALUES( seq_wish_wish_no.nextval, #{userId:VARCHAR}, #{trip.postNo:NUMERIC}, null)
 	</insert>
-	
+
+	<delete id="deleteWish" parameterType="integer">
+		DELETE 
+		FROM wish
+		WHERE trip_no = #{postNo:NUMERIC} AND user_id = #{userId}
+	</delete>
+
 	<insert id="addWishFromPost" parameterType="wish">
 		INSERT
 		INTO wish(wish_no, user_id, trip_no, post_no)
@@ -67,16 +67,30 @@
 			trip_no, 
 			post_no
 		FROM wish
-		WHERE user_id = #{userId}	
-	
-	
+		WHERE user_id = #{userId}
 	</select>
 	
-	<delete id="deleteWish" parameterType="integer">
-		DELETE 
+	<select id="checkDuplication" parameterType="integer" resultMap="WishSelectMap">
+		SELECT
+			wish_no,
+			user_id, 
+			trip_no, 
+			post_no
 		FROM wish
-		WHERE wish_no = #{wishNo}
-		
-	</delete>
+		WHERE trip_no = #{postNo}
+	</select>
+	
+	<select id="listWishByPost"	parameterType="wish"	 resultMap="WishSelectMap">
+		SELECT wish_no, user_id, trip_no, post_no			
+		FROM wish
+		WHERE trip_no = #{postNo:NUMERIC}	
+	</select>
+	
+	<select id="getTotalWishByPost"	parameterType="wish"	 resultType="int">
+		SELECT COUNT(*)
+		FROM ( SELECT wish_no, user_id, trip_no, post_no			
+				  FROM wish
+				  WHERE trip_no = #{postNo:NUMERIC} ) countTable	
+	</select>
 	 
 </mapper>

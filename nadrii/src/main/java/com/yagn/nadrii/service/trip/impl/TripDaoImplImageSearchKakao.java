@@ -28,37 +28,23 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 
 	@Override
 	public String naverImageSearch(String target) throws Exception {
+		System.out.println("카카오 이미지 서치");
 		List list = new ArrayList();
 		int display = 100;
         String kakaoRestKey = "KakaoAK 61ac37b7b651475f235157189e22f998";
         
         try {
             String text = URLEncoder.encode(target, "UTF-8");
-            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=80"; // json ���
-            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml ���
+            String apiURL = "https://dapi.kakao.com/v2/search/image?query="+ text+"&page=1&size=10";  
+
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Authorization", kakaoRestKey);
             
-            int responseCode = con.getResponseCode();
-            BufferedReader br;
-            if(responseCode==200) { // ���� ȣ��
-                br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
-            } else {  // ���� �߻�
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
-            }
             
-            /*
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            while ((inputLine = br.readLine()) != null) {
-                response.append(inputLine);
-            }
-            br.close();
-            
-            System.out.println(response.toString());
-            */
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+                                    
             JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
             System.out.println("JsonObject : "+jsonobj);
             JSONArray items = (JSONArray)jsonobj.get("documents");
@@ -75,14 +61,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 				System.out.println(kakaoImage.getImage_url());
 			}
             	
-            //https://developers.kakao.com/docs/restapi/search#�̹���-�˻�
+            
         } catch (Exception e) {
             System.out.println(e);
         }
         if(list.size()!=0) {
         	return ( (KakaoImage)list.get(0) ).getImage_url();
         }else {
-        	return "�̹��� ����";
+        	return "이미지 없음";
         }
     }
 
@@ -162,6 +148,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 
 	@Override
 	public List listTourBySearch(int pageNo,String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public List listTripinDB() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

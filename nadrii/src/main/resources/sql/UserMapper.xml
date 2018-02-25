@@ -13,7 +13,7 @@
 		<result property="role" 				column="role" 				jdbcType="VARCHAR" />
 		<result property="gender" 				column="gender" 			jdbcType="VARCHAR" />
 		<result property="phone" 				column="phone" 				jdbcType="VARCHAR" />
-		<result property="birth" 				column="birth" 				jdbcType="VARCHAR" />
+		<result property="birth" 				column="birth" 				jdbcType="DATE" />
 		<result property="profileImageFile" 	column="PROFILE_IMAGE_FILE" jdbcType="VARCHAR" />
 		<result property="email" 				column="email" 				jdbcType="VARCHAR"  />
 		<result property="children" 			column="children" 			jdbcType="NUMERIC" />
@@ -57,9 +57,10 @@
 	 	AND password = #{password}	
 	 </select>
 	 
-	 <update	id="updateUser"	parameterType="user" >
+	 <update	id="updateUser"	parameterType="user">
 	   	UPDATE users
 	   	<set>
+	   		PASSWORD = #{password},
 	   		NAME 	= #{userName} ,
 			PHONE	= #{phone},
 			GENDER 	= #{gender} ,
@@ -74,7 +75,7 @@
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
 		user_id , name , password , 
-		birth , role ,  children , 
+		to_char(birth, 'MM/DD/YYYY') as birth , role ,  children , 
 		gender , phone , qr_code , 
 		email , profile_image_file , reg_date 		
 

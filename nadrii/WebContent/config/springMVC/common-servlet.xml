@@ -52,7 +52,6 @@
     <bean id="viewResolver"
 				class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
 	
-	
 	<!--	
 		■ / 형식의 Mapping 은 모든(정적,동적 자원) 요청시 처리책임
 		■ 정적자원 요청시 DispatcherServlet 에게 처리방법지정
@@ -69,6 +68,7 @@
    	
    	
    	<mvc:resources mapping="/resources/**" location="/resources/" />
+   	<mvc:resources mapping="/imperfect/**" location="/imperfect/" />
    	
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 

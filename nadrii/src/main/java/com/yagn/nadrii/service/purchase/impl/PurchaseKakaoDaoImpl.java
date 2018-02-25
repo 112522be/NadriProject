@@ -160,5 +160,13 @@ public class PurchaseKakaoDaoImpl implements PurchaseDao {
 		return null;
 	}
 	
+	@Override
+	public void updatePurchaseQR(int postNo) throws Exception {
+	}
+	
+	@Override
+	public List<Purchase> getPurchasedList(Map<String, Object> map) throws Exception {
+		return null;
+	}
 	
 } // end of class

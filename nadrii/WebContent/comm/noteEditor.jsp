@@ -8,29 +8,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Summernote</title>
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"><!--    -->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   <style type="text/css">
   	.selectedhashtagButtons {
-			  height: 30px;
 			  font-size:15px;
 			  font-family: 'Nanum Gothic';
 			  color: white;
 			  text-align: center;
 			  background: #2fade2;
-			  border: solid 2px #2fade2;
 			  border-radius: 30px;
+			  padding:0 1% 0 1%;
 	}
 	.hashtagButtons {
-			  height: 30px;
 			  font-size:15px;
 			  font-family: 'Nanum Gothic';
 			  color: black;
 			  text-align: center;
 			  background: #edeeef;
-			  border: solid 2px #edeeef;
 			  border-radius: 30px;
+			  padding:0 1% 0 1%;
 	}
 	#selectedThumbnail{
 		border: solid 2px red;
@@ -78,7 +77,7 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
 	 	        	}
 				},
 				error : function() {
@@ -87,11 +86,11 @@
         	})
         }
         function addHashTag(value) {
-        	$('button.hashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-ok');
+        	$('button.hashtagButtons[value="'+value+'"]').html('<span class="fas fa-check-circle"></span>&nbsp;#'+value);
 			$('button.hashtagButtons[value="'+value+'"]').attr('class', 'selectedhashtagButtons');
 		}
         function deleteHashTag(value) {
-        	$('button.selectedhashtagButtons[value="'+value+'"]>span').attr('class', 'glyphicon glyphicon-plus');
+        	$('button.selectedhashtagButtons[value="'+value+'"]').html('<span class="fas fa-plus"></span>&nbsp;#'+value);
 			$('button.selectedhashtagButtons[value="'+value+'"]').attr('class', 'hashtagButtons');
 		}
         $(function() {
@@ -116,7 +115,7 @@
  				if(key.keyCode==13){
  					if(data!=""){
  		 				$(this).val("");
- 						$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data+',"><span class="glyphicon glyphicon-plus"></span>&nbsp;#'+data+'</button>&nbsp;');
+ 						$("#cndHashTags").append('<button type="button" class="selectedhashtagButtons" value="'+data+'"><span class="fas fa-check-circle"></span>&nbsp;#'+data+'</button>&nbsp;');
  					}else{	
  	 					alert("추가하실 해시태그를 입력해주세요");
  					}
@@ -157,6 +156,7 @@
 			    var interval = window.setInterval(function() {
 			        try {
 			            if (win == null || win.closed) {
+			            	
 			                window.clearInterval(interval);
 			                closeCallback(win);
 			            }
@@ -170,7 +170,7 @@
         	 	var ui = $.summernote.ui;
 
 	        	var button = ui.button({
-	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
+	        		contents: '<i class="fas fa-map-marker-alt"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
 	    				    var uri = "addPlace.jsp";
@@ -183,12 +183,13 @@
 	    				    	if(content == null || content=='' || lat=="," || lng == ","){
 									return;
 	    				    	}else{ 
-	    				    		var html =$('#summernote').summernote('code')+'<br/><div class="accordion"><button type="button" class="btn btn-default">'+
-									'<div class="col-xs-3" align="left">'+
-									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-									'</div>'+
-									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>'+
-									'<div><div id="map" style="width:500px;height:400px;"></div></div></div><br/><p></p>';
+	    				    		console.log($('#summernote').summernote('code'));
+	    				    		var html =$('#summernote').summernote('code')+'<button type="button" class="placeButton">'+
+									'<span class="col-xs-3">'+
+									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px">'+
+									'</span>'+
+									'<span class="col-xs-9">'+$('#content_pr').val()+'</button>'+
+									'</span><br/><p style="text-align: center;"><br><br></p>';
 				    				$('#summernote').summernote('code', html);
 	    				    	}
 						})
@@ -198,14 +199,13 @@
         	}
 			var openWin;
             $(document).ready(function() {
-
                 $('#summernote').summernote({
                     height: 800,
                     toolbar: [
                     	['style', ['bold', 'italic', 'underline', 'clear']],
                         ['fontsize', ['fontsize']],
                         ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['para', ['ul', 'ol']],
                         ['height', ['height']],
                         ['insert', ['picture']],
                     	['mybutton', ['place']]
@@ -222,6 +222,7 @@
 						}
 					}
 				});
+                $('#summernote').summernote('justifyCenter');
 			});
 		</script>
 		<input type="hidden" name="hashtag" value="${community.hashtag}">
@@ -230,7 +231,7 @@
 		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail"><img id="selectedThumbnail" src="${community.thumbNailFileName}"></div>
+		<div id="cndThumbnail" align="center"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">
@@ -241,4 +242,41 @@
 	 		 </div>
 		</form>
 </body>
+<style type="text/css">
+		input[type="submit"],
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-webkit-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		-ms-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+		background-color: #FFFFFF;
+		border: 0;
+		box-shadow: inset 0 0 0 1px rgba(160, 160, 160, 0.3);
+		color: #3c3b3b;
+		cursor: pointer;
+		display: inline-block;
+		font-family: "Raleway", Helvetica, sans-serif;
+		font-size: 0.6em;
+		font-weight: 800;
+		width: 4em !important;
+		height: 2.8125em;
+		letter-spacing: 0.25em;
+		line-height: 2.8125em;
+		padding: 0;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	.note-mybutton > .note-btn{
+		width: 8em !important;
+	}
+	</style>
 </html>

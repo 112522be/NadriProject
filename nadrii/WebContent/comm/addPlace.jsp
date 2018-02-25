@@ -4,24 +4,33 @@
 
 <html>
 <head>
-	<meta charset="UTF-8"/>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Daum 지도 시작하기</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
+	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
+			
+	<script src="../resources/helios/assets/js/jquery.min.js"></script>
+	<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="../resources/helios/assets/js/skel.min.js"></script>
+	<script src="../resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="../resources/helios/assets/js/main.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-	<script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		var x='';
 		var y='';
 		function getSearchResult(keyword, page){
+				if(keyword == ''){
+					alert("검색어를 입력해주세요")
+					return;
+				}
 				$('#result').empty();
 				$.ajax({
 					url : "https://dapi.kakao.com/v2/local/search/keyword.json",
@@ -45,7 +54,7 @@
 							return;
 						}
 						for( i=0;i<documents.length;i++){
-							var displayValue = "<div class=\"result\"><hr/>"+
+							var displayValue = "<div class=\"result\" style=\"padding: 30px 0 0 25px;\">"+
 												"<h5>"+documents[i].place_name+"</h5>"+
 												"<h6>지번 "+documents[i].address_name+"</h6>"+
 												"<h6>도로명 "+documents[i].road_address_name+"</h6>"+
@@ -60,7 +69,7 @@
 													+"<a href=\"javascript:getSearchResult(\'"+keyword+"\', "+olderPage+")\"><span aria-hidden=\"true\">&larr;</span>이전으로</a></li>"
 								}
 
-								if((JSONData.meta.total_count%4!=0&&newerPage<JSONData.meta.total_count/4+1) || (JSONData.meta.total_count%4 == 0 && newerPage<(JSONData.meta.total_count/4) ) ){
+								if(((JSONData.meta.total_count%4!=0)&&(newerPage<JSONData.meta.total_count/4+1)) || ((JSONData.meta.total_count%4 == 0) && (newerPage<(JSONData.meta.total_count/4)) ) ){
 
 
 									displayValue+= "<li class=\"next\"><a href=\"javascript:getSearchResult(\'"+keyword+"\', "+newerPage+")\">다음으로<span aria-hidden=\"true\">&rarr;</span></a></li>";
@@ -87,13 +96,13 @@
 							searchDetailAddrFromCoords(marker.getPosition(), function(result, status) {
 						        if (status === daum.maps.services.Status.OK) {
 						            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-						            var buildingName = !!result[0].road_address ? '<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>' : '';
+						            var buildingName ='<div class="buildingName"><h3>' + documents[index].place_name + '</h3></div>';
 						            
 						            var content = '<div class="bAddr">' +
 						            				buildingName+
 						                            detailAddr + 
 						                        '</div>';
-						            $('#content').val(content)
+						            $('#content').val(content);
 
 						            var resultDiv = document.getElementById('clickLatlng'); 
 								    resultDiv.innerHTML = content;
@@ -108,34 +117,38 @@
 				var keyword = $('#keyword').val(); 
 				getSearchResult(keyword, 1);
 			})
-		})
+			$('#keyword').bind('keyup input',function(key) {
+				if(key.keyCode==13){
+					var keyword = $('#keyword').val();
+					getSearchResult(keyword, 1);
+				}
+				
+			});
+		});
 	</script>
 </head>
 <body>
 	<div class="container">
 		<br/>
 		<div class="col-sm-5">
-			<form class="navbar-form navbar-left" role="search">
 				<div class="col-sm-10">
-					<input id="keyword" type="text" class="form-control" placeholder="키워드 입력">
+					<input id="keyword" type="text" class="form-control" style="font-size: 12pt" placeholder="키워드 입력">
 				</div>
 				<div class="col-sm-2">
 					<button type="button" class="btn btn-default">검색</button>
 
 				</div> 
-			</form>
-			<hr/>
-			<div id="result">
+			<div id="result" style="padding-top: 1em;">
 			</div>
 		</div>
 		<div class="col-sm-7">
 			<div align="center">
 			  	<div id="map" style="width:360px;height:430px;"></div>
 				<div id="clickLatlng"></div>
-				<div align="right">
+				<div align="right" style="padding-right: 30px;">
 					<br/>
 
-					<p><button type="button" class="btn btn-primary btn-sm">추가하기</button></p>
+					<p><button type="button" class="button addButton">추가하기</button></p>
 				</div>
 			</div> 
 		</div>
@@ -193,7 +206,7 @@
 		}
 		
 		$(function() {
-			$('button.btn.btn-primary.btn-sm:contains("추가하기")').bind('click', function() {
+			$('button.button.addButton:contains("추가하기")').bind('click', function() {
 				$('#lat', opener.document).val($('#lat', opener.document).val()+","+$("#x").val());
 				$('#lng', opener.document).val($('#lng', opener.document).val()+","+$("#y").val());
 				$('#content_pr', opener.document).val($("#content").val());

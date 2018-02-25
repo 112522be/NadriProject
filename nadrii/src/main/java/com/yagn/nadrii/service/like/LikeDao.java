@@ -11,11 +11,11 @@ public interface LikeDao {
 
 	public void deleteLike(Like like) throws Exception;
 	
-	public List<Like> getLikeList(Search search) throws Exception ;
+	public List<Like> listLikeById(Search search) throws Exception;
 
-	public int getTotalLikeCount(Search search) throws Exception;
+	public int getTotalLikeById(Search search) throws Exception;
 	
-	public List<Like> getLikeUserList(Search search) throws Exception ;
+	public List<Like> listLikeByPost(Like like) throws Exception;
 	
-	public int getLikeCount(Search search) throws Exception;
+	public int getTotalLikeByPost(Like like) throws Exception;
 }

@@ -8,42 +8,46 @@
  	
 	<resultMap id="communitySelectMap" type="com.yagn.nadrii.service.domain.Community">
 		<result property="postNo" column="post_no" jdbcType="NUMERIC" />
-		<result property="userId" column="user_id" jdbcType="VARCHAR" />
+		<result property="user.userId" column="user_id" jdbcType="VARCHAR" />
 		<result property="title" column="title" jdbcType="VARCHAR" />
 		<result property="thumbNailFileName" column="thumbnail_image_file" jdbcType="VARCHAR" />
 		<result property="text" column="text" jdbcType="CLOB" />
 		<result property="hashtag" column="hashtag" jdbcType="VARCHAR" />
 		<result property="viewCount" column="view_count" jdbcType="NUMERIC" />
+		<result property="regDate" column="reg_date" jdbcType="NUMERIC" />
 		<result property="lat" column="lat" jdbcType="VARCHAR" />
 		<result property="lng" column="lng" jdbcType="VARCHAR" />
+		<result property="user.profileImageFile" column="profile_image_file" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- comm의 Create(insert) -->
 	<insert id="addComm" parameterType="com.yagn.nadrii.service.domain.Community">
 		INSERT INTO post(post_no, user_id, title, text, thumbnail_image_file, reg_date, lat, lng, hashtag, flag_pu) 
-		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS'), #{lat}, #{lng}, #{hashtag}, 'UC') 
+		VALUES(seq_post_post_no.nextval, #{userId}, #{title}, #{text}, #{thumbNailFileName}, TO_DATE(#{regDate}, 'YYYY-MM-DD HH24:MI:SS'), #{lat}, #{lng}, #{hashtag}, 'UC') 
 	</insert>
 	
 	<!-- comm의 Read(select) -->
 	<select id="getPostNo" parameterType="com.yagn.nadrii.service.domain.Community" resultType="int">
-		SELECT post_no FROM post WHERE title=#{title} AND reg_date=TO_DATE(#{regDate}, 'YYYY-DD-MM HH24:MI:SS')
+		SELECT post_no FROM post WHERE title=#{title} AND reg_date=TO_DATE(#{regDate}, 'YYYY-MM-DD HH24:MI:SS')
 	</select>
 	
 	<select id="getComm" parameterType="int" resultMap="communitySelectMap">
-		SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, lat, lng, hashtag FROM post WHERE post_no=#{postNo}
+		SELECT post_no, post.user_id as user_id, title, text, thumbnail_image_file, post.reg_date as reg_date, view_count, lat, lng, hashtag, profile_image_file FROM post, users WHERE post_no=#{postNo} AND post.user_id = users.user_id
  	</select>
 	
 	<select id="listComm" parameterType="com.yagn.nadrii.common.Search" resultMap="communitySelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT post_no, user_id, title, text, thumbnail_image_file, reg_date, view_count, hashtag
-	  									FROM post
+	  					FROM		(	SELECT post_no, post.user_id as user_id, title, text, thumbnail_image_file, post.reg_date as reg_date, view_count, hashtag, profile_image_file
+	  									FROM post, users
 										<where>
-						 					(title LIKE '%${searchKeyword}%' OR
+						 					(title LIKE '%${searchKeyword}%' OR 
 						 					text LIKE '%${searchKeyword}%' OR
 						 					hashtag LIKE '%${searchKeyword}%') AND
-											flag_pu='UC'
+											flag_pu='UC' AND
+											post.user_id = users.user_id
 										</where>
+										ORDER BY reg_date DESC
 										) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 

@@ -23,6 +23,7 @@ import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.NaverImage;
 import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 
@@ -98,7 +99,8 @@ public class NaverApiDaoImpl implements TicketDao {
 					.sendGetNaverURL(new StringBuilder(searchImageURL + "query=" + encodeTitle 
 							+ "&display=100" 
 //							+ "&filter=large" 
-//							+ "&sort=sim" 
+							+ "&sort=sim" 
+//							+ "&sort=date" 
 			), clientID, clientSecret);
 
 			JSONObject niJsonObj = (JSONObject) JSONValue.parse(naverImageSB.toString());
@@ -107,11 +109,9 @@ public class NaverApiDaoImpl implements TicketDao {
 
 				System.out.println("[Naver has not found Image...idiot]");
 
-				String image = ticketService.getKakaoImage(title);
-				System.out.println("\n[getKakaoImage give this image :: ]==>" + image);
+				naverReturnImage = ticketService.getKakaoImage(title);
+				System.out.println("\n[getKakaoImage give this image :: ]==>" + naverReturnImage);
 //				String rePresntImage = "http://pimage.design.co.kr/cms/contents/direct/info_id/63068/1371545650140.jpg";
-
-				return image;
 
 			} else {
 
@@ -128,11 +128,22 @@ public class NaverApiDaoImpl implements TicketDao {
 					naverImage = objectMapper.readValue(itemsValue.toJSONString(), NaverImage.class);
 
 					if (Integer.parseInt(naverImage.getSizeheight()) > minImage) {
-
+						
+//						System.out.println(naverImage.toString());
+						
 						minImage = Integer.parseInt(naverImage.getSizeheight());
-						naverReturnImage = naverImage.getThumbnail();
+//						naverReturnImage = naverImage.getThumbnail();
+						naverReturnImage = naverImage.getLink();
 					}
 				}
+				
+				if (naverReturnImage.equals("")) {
+					System.out.println("[Naver was fxxking liyer. it's a NULL!!!]");
+					naverReturnImage = ticketService.getKakaoImage(title);
+				}
+				
+				System.out.println("\n[getNaverImage from the KakaoImage :: selected image url]==>" + naverReturnImage);
+				
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -156,6 +167,12 @@ public class NaverApiDaoImpl implements TicketDao {
 	public List<String> getTicketPrice(String priceInfo) throws Exception {
 		return null;
 	}
-	
-	
+	public Map<String, Object> getSearchTicketList(OpenApiSearch openApiSearch) {
+		return null;
+	}
+	public void addTicketLog(Ticket ticket) {
+	}
+	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) {
+		return null;
+	}
 } // end of class

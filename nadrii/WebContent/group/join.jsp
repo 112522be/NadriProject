@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.fit {
+	    width: 100% !important;
+}
+</style>
 <script>
 
 var groupNo = ${group.join.groupNo};
@@ -81,20 +86,24 @@ function getMemberList(){
 				
 			}
 			
-			$('[data-toggle="popover"]').popover(
-					{ html: true,
-					 container: 'body',
-					 content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
-					 placement: 'bottom',
-					 }
-					);	
+			$('[data-toggle="popover"]').popover({ 
+				html: true,
+				container: 'body',
+				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				placement: 'bottom',
+			});	
 			
 			$("a[name='join']").on("click", function(){
 				addJoin();
 			});	
 			
+			if('${loginUser.userId}' == '${group.join.userId}'){
+				$('.joinButtonContainer').empty();
+				$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
+			}
+
 			$("a[name='cancel']").on("click", function(){
-				if(returnData.totalCount == 1){
+				if('${loginUser.userId}' == '${group.join.userId}'){
 					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
@@ -107,18 +116,16 @@ function getMemberList(){
 			});	
 		}
 	});	
-	
-	getLike();
 }
 
 </script>
 </head>
-<body onload="getMemberList()">
-	<table>
+<body>
+	<table class="default">
 
 		<thead>
 			<tr>
-				<th>참여자 목록<div class="totalCount" style="position: relative; float: right;"></div></th>
+				<th><span class="fas fa-users"></span>&nbsp;&nbsp;참여자 목록 <div class="totalCount" style="position: relative; float: right;"></div></th>
 			</tr>
 		</thead>
 		
@@ -126,7 +133,7 @@ function getMemberList(){
 		
 		<tfoot>
 			<tr>
-				<td class="joinButtonContainer"></td>
+				<td class="joinButtonContainer" style="padding: 1em 2em 1em 2em;"></td>
 			</tr>
 		</tfoot>
 

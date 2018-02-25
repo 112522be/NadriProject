@@ -26,37 +26,37 @@
 	 	</where>
 	 </delete>
 	 
-	<select id="getLikeList"		parameterType="Search"	resultMap="likeSelectMap">
+	<select id="listLikeById"		parameterType="search"	resultMap="likeSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  				FROM		(	SELECT like_no, post_no, user_id, reg_date
-									FROM likes
-									WHERE user_id = #{searchKeyword}
+	  				FROM		(	SELECT like_no, likes.post_no, likes.user_id, likes.reg_date
+									FROM likes, post
+									WHERE likes.user_id = #{searchKeyword} AND likes.post_no = post.post_no
+									ORDER BY likes.reg_date DESC
 									) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
 
-	 <select  id="getTotalLikeCount"  parameterType="search"	 resultType="int">
+	 <select  id="getTotalLikeById"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT like_no, post_no, user_id, reg_date
-					FROM likes
-					WHERE user_id = #{searchKeyword}
+	  	FROM  (	SELECT like_no, likes.post_no, likes.user_id, likes.reg_date
+					FROM likes, post
+					WHERE likes.user_id = #{searchKeyword} AND likes.post_no = post.post_no
 					 ) countTable		
 	 </select>
 	 
-	 <select id="getLikeUserList"		parameterType="Search"	resultMap="likeSelectMap">
+	 <select id="listLikeByPost"		parameterType="like"	resultMap="likeSelectMap">
 		SELECT like_no, post_no, user_id, reg_date
 		FROM likes
-		WHERE post_no = #{searchKeyword}
+		WHERE post_no = #{postNo}
 	</select>
 	 
-	 <select  id="getLikeCount"  parameterType="Search"	 resultType="int">
+	 <select  id="getTotalLikeByPost"  parameterType="like"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT like_no, post_no, user_id, reg_date
 					FROM likes
-					WHERE post_no = #{searchKeyword}
-					 ) countTable		
+					WHERE post_no = #{postNo}	) countTable		
 	 </select>
 	
 </mapper>

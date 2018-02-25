@@ -12,7 +12,6 @@ public class User {
 	private String password;
 	private String role;
 	private String phone;
-	private String addr;
 	private String email;
 	private Date regDate;
 	private String birth;
@@ -25,6 +24,16 @@ public class User {
 	private String phone2;
 	private String phone3;
 	private String checkSuccess;
+	
+	/////////////////////
+	private String modalUserId;
+	private String modalUserPw;
+	private String modalUserEmail;
+	
+	
+	
+	
+	
 	///Constructor
 	public User(){
 	}
@@ -57,12 +66,6 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public String getAddr() {
-		return addr;
-	}
-	public void setAddr(String addr) {
-		this.addr = addr;
 	}
 	public String getEmail() {
 		return email;
@@ -137,13 +140,41 @@ public class User {
 		this.phone3 = phone3;
 	}
 	
+	
+	
+	
+	public String getModalUserId() {
+		return modalUserId;
+	}
+	public void setModalUserId(String modalUserId) {
+		this.modalUserId = modalUserId;
+	}
+	public String getModalUserPw() {
+		return modalUserPw;
+	}
+	public void setModalUserPw(String modalUserPw) {
+		this.modalUserPw = modalUserPw;
+	}
+	public String getModalUserEmail() {
+		return modalUserEmail;
+	}
+	public void setModalUserEmail(String modalUserEmail) {
+		this.modalUserEmail = modalUserEmail;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
-				+ ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate + ", birth="
+				+ ", phone=" + phone + ", email=" + email + ", regDate=" + regDate + ", birth="
 				+ birth + ", profileImageFile=" + profileImageFile + ", qrCode=" + qrCode + ", children=" + children
 				+ ", gender=" + gender + ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3
-				+ ", checkSuccess=" + checkSuccess + "]";
+				+ ", checkSuccess=" + checkSuccess + ", modalUserId=" + modalUserId + ", modalUserPw=" + modalUserPw
+				+ ", modalUserEmail=" + modalUserEmail + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 }

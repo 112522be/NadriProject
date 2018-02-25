@@ -5,22 +5,44 @@
 <html>
 
 <head>
+<title>결제완료</title>
 <meta charset="utf-8">
 
-<title>구매완료</title>
 
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-	<!-- //////////////////// CSS //////////////////// -->
-	<style>
-    </style>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
+
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+
+
+	<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -28,39 +50,52 @@
 $(function(){
 	$( "a[href='#']:contains('확 인')" ).bind("click", function(){
 //		alert("확인")
-		self.location = "/purchase/listPurchase"
+
+		window.close();
+
+//		self.location = "/purchase/listPurchase"
 	});
 });
 
 	</script>
 </head>
 
-<body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-		<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+<body class="no-sidebar">
+		<div id="page-wrapper">
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+			<!-- Header -->
+				<div id="header">
+					
+					<div class="inner">
+						<header>
+							<h1><a href="#" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+					<jsp:include page="/layout/toolbar.jsp" />
 
-		<div class="jumbotron">
-			<h1 class="text-center text-danger">결제가 <code>완료</code> 되었습니다.</h1>
-			<p>
-				구매하신 티켓의 결제가 완료 되었습니다.
-			</p>
-			<p>
-				확인버튼 클릭시 구매한 티켓 목록 화면으로 이동합니다.
-			</p>
-			<p>
-				<a class="btn btn-default btn-lg" href="#" role="button">
-					확 인
-				</a>
-			</p>
+				</div>
+				
+				<a href="#" class="image featured"><img src="#" alt=""></a>
+		
+				<article id="main" class="container special">
+					<header>
+						<h2>
+							<a href="#">결제가 <strong class="text-danger">완료</strong> 되었습니다.</a>
+						</h2>
+						<!-- <p>확인버튼 클릭시 구매한 티켓 목록 화면으로 이동합니다.</p> -->
+						<p>나들이 티켓을 이용해 주셔서 감사합니다.</p>
+					</header>
+					<footer>
+						<a href="#" class="button">확 인</a>
+					</footer>
+				</article>
+				<br>	
+				<br>	
+				
+				<jsp:include page="/layout/footer.jsp" />
+		
 		</div>
-		<!--  table End /////////////////////////////////////-->
-	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
  	
 </body>
 </html>

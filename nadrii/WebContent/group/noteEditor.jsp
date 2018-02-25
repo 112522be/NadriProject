@@ -10,6 +10,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   
   <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -40,23 +41,24 @@
 		}
         function addThumbnail(filePath) {
 			$('input[name="thumbNailFileName"]').val(filePath);
-			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected")
+			$('img.cndThumbnail[value="'+filePath+'"]').attr("class", "selected");
 			console.log($('input[name="thumbNailFileName"]').val());
 		}
         
         $(function() {
 	 	    			
   			$('div#cndThumbnail').on('click', 'img.cndThumbnail', function() {
-  				addThumbnail($(this).attr('src'))
- 			}) 
-		})
+  				addThumbnail($(this).attr('src'));
+ 			});
+		});
 	</script>
 </head>
 <body>
 		<form name="textForm">
-		<textarea id="summernote" name="text"></textarea>
+		<textarea id="summernote" name="text">${group.text}</textarea>
         <script>
-	        var openDialog = function (uri, name, options, closeCallback) {
+        	
+        	var openDialog = function (uri, name, options, closeCallback) {
 			    var win = window.open(uri, "", options);
 			    var interval = window.setInterval(function() {
 			        try {
@@ -74,37 +76,34 @@
         	 	var ui = $.summernote.ui;
 
 	        	var button = ui.button({
-	        		contents: '<i class="glyphicon glyphicon-map-marker"/> Place',
+	        		contents: '<i class="fas fa-map-marker-alt"/> Place',
 	        		click: function() {
 	    				//openWin = window.open(popUrl,"",popOption);    
-	    				    var uri = "addPlace.jsp";
+	    				    var uri = "./addPlace.jsp";
 		    				var options = "width=800, height=600, resizable=no, scrollbars=no, status=no;"
 	    				    openDialog(uri, "", options, function(win) {
-	    				    	alert($('#content_pr').val());
-	    				    	alert($('#lat').val());
-	    				    	alert($('#lng').val());
-	    				    	var html =$('#summernote').summernote('code')+'<button type="button" class="btn btn-default">'+
-	    									'<div class="col-xs-3" align="left">'+
-	    									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
-	    									'</div>'+
-	    									'<div class="col-xs-9" align="left">'+$('#content_pr').val()+'</div></button>';
+	    				    	var html =$('#summernote').summernote('code')+
+	    									'<div style="font-size: 12pt; text-align: center; width: 330px; border: 1px solid;">'+$('#content_pr').val()+'</div></br></br></br>';
 	    				    	$('#summernote').summernote('code', html);
 						})
 	    			}
 	        	}) 
+	        	
+	        
+		    	
 	        	return button.render();
         	}
+        	
 			var openWin;
             $(document).ready(function() {
                 $('#summernote').summernote({
-                    height: 800,
+                    height: 500,
                     toolbar: [
                     	['style', ['bold', 'italic', 'underline', 'clear']],
                         ['fontsize', ['fontsize']],
                         ['color', ['color']],
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['height', ['height']],
-                        ['insert', ['picture']],
                     	['mybutton', ['place']]
                     ],
                     buttons: {
@@ -123,17 +122,18 @@
 		</script>
 		<input type="hidden" name="lat" id="lat">
 		<input type="hidden" name="lng" id="lng">
-		<input type="hidden" name="thumbNailFileName">
-		<input type="hidden" id="content_pr">
+		<input type="hidden" id="content_pr" name="content_pr">
+		<input type="hidden" name="placeName" id="placeName_pr">
+		<input type="hidden" name="placeDetail" id="placeDetail_pr">
 		<div id="cndThumbnail"></div>
 		</form>
 </body>
 	<style type="text/css">
 		input[type="submit"],
-	input[type="reset"],
-	input[type="button"],
-	button,
-	.button {
+		input[type="reset"],
+		input[type="button"],
+		button,
+		.button {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;

@@ -70,7 +70,7 @@ public class GroupController {
 		
 		joinService.addJoin(join);
 		
-		return "forward:/group/getGroup?groupNo="+groupNo;
+		return "redirect:/group/getGroup?groupNo="+groupNo;
 	}
 	
 	@RequestMapping(value="getGroup")
@@ -83,6 +83,8 @@ public class GroupController {
 		Group group = groupService.getGroup(groupNo);
 		
 		model.addAttribute("group", group);
+		
+		System.out.println(group);
 		
 		return "forward:/group/getGroup.jsp";
 		
@@ -101,13 +103,17 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="updateGroup", method=RequestMethod.POST)
-	public String updateGroup(@ModelAttribute("group") Group group, @ModelAttribute("join") Join join) throws Exception{
+	public String updateGroup(@RequestParam("groupNo") int groupNo, @ModelAttribute("group") Group group, @ModelAttribute("join") Join join) throws Exception{
 
 		System.out.println("/updateGroup");
 		
+		Join join2 = new Join();
+		join2.setGroupNo(groupNo);
+		group.setJoin(join2);
+		
 		groupService.updateGroup(group);
 		
-		return "forward:/group/getGroup.jsp";
+		return "redirect:/group/getGroup?groupNo="+groupNo;
 	}
 	
 	@RequestMapping(value="deleteGroup")
@@ -130,7 +136,7 @@ public class GroupController {
 		
 		model.addAttribute("group", group);
 		
-		return "forward:/group/listGroup";
+		return "redirect:/group/listGroup";
 	}
 	
 	@RequestMapping(value="listGroup")
@@ -143,10 +149,10 @@ public class GroupController {
 		}
 		search.setPageSize(pageSize);
 		search.setSearchCondition("0");
-		Map<String , Object> map=groupService.getGroupList(search);
+		Map<String , Object> map=groupService.listGroup(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-				
+		System.out.println(map.get("list"));
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

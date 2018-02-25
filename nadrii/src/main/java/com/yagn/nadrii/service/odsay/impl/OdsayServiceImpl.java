@@ -56,7 +56,6 @@ public class OdsayServiceImpl implements OdsayService{
 		System.out.println("mapObj :: "+trimMapObj);
 		String url = "https://api.odsay.com/v1/api/loadLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&mapObject=0:0@"+trimMapObj;
 		
-
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
@@ -120,7 +119,7 @@ public class OdsayServiceImpl implements OdsayService{
 		return map;
 	}
 
-	public Map getInfo(double sx, double sy, double ex, double ey) throws Exception{
+	public Map getInfo(double sx, double sy, double ex, double ey){
 		
 		System.out.println("@ sx : "+sx);
 		System.out.println("@ sy : "+sy);
@@ -138,78 +137,86 @@ public class OdsayServiceImpl implements OdsayService{
 		httpGet.setHeader("Accept", "application/json");
 		httpGet.setHeader("Content-Type", "application/json;charset=UTF-8");
 		
-		HttpResponse res = httpclient.execute(httpGet);
-		
-		System.out.println(res);
-		System.out.println();
-		
-		HttpEntity httpEntity = res.getEntity();
-
-		InputStream is = httpEntity.getContent();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-
-		List subPathList = new ArrayList();
-		List laneList = new ArrayList();
-
 		Map map = new HashMap();
 		
-		JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
-		JSONObject errorMessage = (JSONObject)jsonobj.get("error");
-		if( errorMessage != null) {
-			System.out.println("@@@error@@@");
-			System.out.println(errorMessage);
-			Object code = errorMessage.get("code");
-			System.out.println(code);
-			map.put("code", code);
+		try{
+			HttpResponse res = httpclient.execute(httpGet);
 			
-		}else {
+			System.out.println(res);
+			System.out.println();
+			
+			HttpEntity httpEntity = res.getEntity();
+
+			InputStream is = httpEntity.getContent();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+			List subPathList = new ArrayList();
+			List laneList = new ArrayList();
+
+			
+			
+			JSONObject jsonobj = (JSONObject)JSONValue.parse(br);
+			JSONObject errorMessage = (JSONObject)jsonobj.get("error");
+			if( errorMessage != null) {
+				System.out.println("@@@error@@@");
+				System.out.println(errorMessage);
+				Object code = errorMessage.get("code");
+				System.out.println(code);
+				map.put("code", code);
+				
+			}else {
+			
+				JSONObject result = (JSONObject)jsonobj.get("result");
+				JSONArray pathArray = (JSONArray)result.get("path");
+				JSONObject path = (JSONObject) pathArray.get(0);
+			//	System.out.println("[4] path : " + path);
+				
+				///////////////
+				JSONObject info = (JSONObject) path.get("info");
+				System.out.println("[5] info : " + info);
+				ObjectMapper objectMapper = new ObjectMapper();
+				Info odsayinfo = new Info();
+				odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
 		
-			JSONObject result = (JSONObject)jsonobj.get("result");
-			JSONArray pathArray = (JSONArray)result.get("path");
-			JSONObject path = (JSONObject) pathArray.get(0);
-		//	System.out.println("[4] path : " + path);
-			
-			///////////////
-			JSONObject info = (JSONObject) path.get("info");
-			System.out.println("[5] info : " + info);
-			ObjectMapper objectMapper = new ObjectMapper();
-			Info odsayinfo = new Info();
-			odsayinfo = objectMapper.readValue(info.toJSONString(), Info.class);
-	
-			map.put("info", odsayinfo);
-			
-			///////////////
-			JSONArray subPathArray = (JSONArray)path.get("subPath");
-			for (int i = 0; i < subPathArray.size(); i++) {
-				JSONObject subPath = (JSONObject)subPathArray.get(i);
-				System.out.println("[6] subPath["+i+"] : "+subPath);
-
-				ObjectMapper objectMapper2 = new ObjectMapper();
-				SubPath odsaysubPath = new SubPath();
-				odsaysubPath = objectMapper2.readValue(subPath.toJSONString(), SubPath.class);
-				subPathList.add(subPath);
+				map.put("info", odsayinfo);
 				
-				
-				JSONArray laneArray = (JSONArray)subPath.get("lane");	
-				if(laneArray != null) {
-					System.out.println("[7] laneArray : "+laneArray);		
-					JSONObject lane = (JSONObject) laneArray.get(0);
-					System.out.println("[8] lane : " + lane);
+				///////////////
+				JSONArray subPathArray = (JSONArray)path.get("subPath");
+				for (int i = 0; i < subPathArray.size(); i++) {
+					JSONObject subPath = (JSONObject)subPathArray.get(i);
+					System.out.println("[6] subPath["+i+"] : "+subPath);
 
-					ObjectMapper objectMapper3 = new ObjectMapper();
-					Lane odsayLane = new Lane();
-					odsayLane = objectMapper3.readValue(lane.toJSONString(), Lane.class);
-					laneList.add(lane);
-				}
-				System.out.println();
-			}//for��
-			map.put("subPathList", subPathList);	
-			map.put("laneList", laneList);	
+					ObjectMapper objectMapper2 = new ObjectMapper();
+					SubPath odsaysubPath = new SubPath();
+					odsaysubPath = objectMapper2.readValue(subPath.toJSONString(), SubPath.class);
+					subPathList.add(subPath);
+					
+					
+					JSONArray laneArray = (JSONArray)subPath.get("lane");	
+					if(laneArray != null) {
+						System.out.println("[7] laneArray : "+laneArray);		
+						JSONObject lane = (JSONObject) laneArray.get(0);
+						System.out.println("[8] lane : " + lane);
+
+						ObjectMapper objectMapper3 = new ObjectMapper();
+						Lane odsayLane = new Lane();
+						odsayLane = objectMapper3.readValue(lane.toJSONString(), Lane.class);
+						laneList.add(lane);
+					}
+					System.out.println();
+				}//for 종료
+				map.put("subPathList", subPathList);	
+				map.put("laneList", laneList);	
+				
+			}
 			
+			System.out.println();
+			System.out.println("@@@map@@@ "+map);
+			
+			
+		}catch(Exception e){
+			System.out.println("시외구간");
 		}
-		System.out.println();
-		System.out.println("@@@map@@@ "+map);
-		 
 		return map;
 	}
 		
@@ -251,7 +258,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("outBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("�ÿܹ����� ��� ��ӹ����� ��� ����");
+					System.out.println("시외버스가 없어서 고속버스로 탐색");
 					trans = "exBusRequest";
 				}else {
 					trans="outBusRequest";
@@ -262,7 +269,7 @@ public class OdsayServiceImpl implements OdsayService{
 				JSONObject transRequest = (JSONObject)result.get("exBusRequest");
 				JSONArray OBJArray = (JSONArray)transRequest.get("OBJ");
 				if(OBJArray == null) {
-					System.out.println("��ӹ����� ��� ������ ��� ����");
+					System.out.println("고속버스가없어서 기차로 탐색");
 					trans = "trainRequest";
 				}else {
 					trans = "exBusRequest";
@@ -307,7 +314,7 @@ public class OdsayServiceImpl implements OdsayService{
 		obj.setPayment(Integer.parseInt(payment));
 		obj.setMapOBJ(mapOBJ);
 
-		// trainRequest�϶���
+		// trainRequest
 		if (element.getAsJsonObject().get("trainType") != null) {
 			String trainType = element.getAsJsonObject().get("trainType").getAsString();
 			obj.setTrainType(trainType);

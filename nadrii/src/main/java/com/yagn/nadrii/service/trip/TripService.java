@@ -18,6 +18,8 @@ public interface TripService {
 	
 	public void addTriptoDB(Trip trip) throws Exception;
 	
+	public Trip getTrip(int postNo) throws Exception;
+	
 	public Trip getTripFromDB(String contentId)throws Exception;
 	
 	public void updateViewCount(String contentId) throws Exception;
@@ -27,4 +29,6 @@ public interface TripService {
 	public String getAreaCode(String placeName, String areaCode) throws Exception;
 	
 	public Map listTourBySearch(int pageNo, String keyword) throws Exception;
+	
+	public List lsitTripinDB() throws Exception;
 }

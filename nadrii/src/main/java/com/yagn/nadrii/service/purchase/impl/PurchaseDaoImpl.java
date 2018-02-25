@@ -34,6 +34,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	
 	@Override
 	public void addPurchase(Purchase purchase) throws Exception {
+		System.out.println("\n[purchaseDaImpl.java / addPurchase]");
 		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
 	}
 	
@@ -45,6 +46,11 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	@Override
 	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception {
 		return sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
+	}
+
+	@Override
+	public List<Purchase> getPurchasedList(Map<String, Object> map) throws Exception {
+		return sqlSession.selectList("PurchaseMapper.getPurchasedList", map);
 	}
 	
 	@Override
@@ -60,6 +66,11 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	@Override
 	public void updateBasketPurchase(List<Integer> postNo) throws Exception {
 		sqlSession.insert("PurchaseMapper.updateBasketPurchase", postNo);
+	}
+	
+	@Override
+	public void updatePurchaseQR(int postNo) throws Exception {
+		sqlSession.insert("PurchaseMapper.updatePurchaseQR", postNo);
 	}
 	
 	@Override

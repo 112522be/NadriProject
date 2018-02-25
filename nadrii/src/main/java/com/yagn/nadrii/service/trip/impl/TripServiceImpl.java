@@ -140,6 +140,23 @@ public class TripServiceImpl implements TripService {
 		map.put("list", list);
 		return map;
 	}
+
+
+
+	@Override
+	public Trip getTrip(int postNo) throws Exception {
+		System.out.println("getTrip tripServiceImpl");
+		Trip trip = tripDaoDB.getTrip(postNo);
+		return trip;
+	}
+
+
+
+	@Override
+	public List lsitTripinDB() throws Exception {
+		System.out.println("listTrip in the DB");
+		return tripDaoDB.listTripinDB();
+	}
 	
 	
 	

@@ -1,9 +1,12 @@
 package com.yagn.nadrii.web.ticket;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +24,8 @@ import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.ticket.TicketService;
@@ -74,6 +79,7 @@ public class TicketController {
 			}
 			
 			returnMap = ticketService.getTicketList(openApiSearch);
+			
 			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
 					pageUnit, pageSize);
 
@@ -83,11 +89,13 @@ public class TicketController {
 			System.out.println(e);
 		}
 		
+		map.put("search", openApiSearch);
 		map.put("resultPage", resultPage);
 		map.put("tourTicket", returnMap.get("tourTicketList"));
 		
 		return "forward:/ticket/listTicket.jsp";
 	}
+	
 	
 	@RequestMapping(value = "getTicket", method = RequestMethod.GET)
 	public String getTicket(
@@ -105,12 +113,17 @@ public class TicketController {
 		TourTicket tourTicket = new TourTicket();
 		User user = new User();
 		
+		Map<String, Object> returnMap = new HashMap<>();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+		SearchFestival searchFestival = new SearchFestival();
+		Ticket ticket = new Ticket();
+		
 		try {
 
 			String decodeTitle = URLDecoder.decode(encodeTitle, "UTF-8");
 
 			detailIntro = ticketService.getTicket(contentId, contentTypeId);
-			detailImage = ticketService.getDetailImage(tourTicket.getContentid(), decodeTitle);
+			detailImage = ticketService.getDetailImage(tourTicket.getContentid(), decodeTitle + " 2018");
 
 			System.out.println("\n\n[entrance Fee check] ==> " + detailIntro.getUsetimefestival());
 			
@@ -124,7 +137,23 @@ public class TicketController {
 			System.out.println("\n\n[1]==> " + detailIntro.toString());
 			System.out.println("\n\n[2]==> " + detailImage.toString());
 			System.out.println("\n\n[3]==> " + tourTicket.toString());
-
+			System.out.println("\n\n[4]==> " + searchFestival.toString());
+			
+			
+			/*openApiSearch.setSearchKeyword(tourTicket.getTitle());
+			System.out.println(openApiSearch.toString());
+			returnMap = ticketService.getSearchTicket(openApiSearch);
+			
+			System.out.println("\n\n[5]==> " + returnMap.get("searchTicket") );
+			ticket.setLat(searchFestival.getMapy());
+			ticket.setLng(searchFestival.getMapx());
+			ticket.setTickeTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
+			ticket.setContentId(searchFestival.getContentid());
+			ticket.setContentTypeId(searchFestival.getContenttypeid());
+			ticket.setTicketImage(tourTicket.getFirstimage());*/
+			
+			ticketService.addTicketLog(ticket);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -157,15 +186,31 @@ public class TicketController {
 		String priceInfo = detailIntro.getUsetimefestival();
 		
 		User user = new User();
+		
+		Set<String> set = new HashSet<>();
+		
+		
+		
 		try {
 			
 			List<String> priceList = ticketService.getTicketPrice(priceInfo);
+			List<String> sendPriceList = new ArrayList<>();
 			
 			for (int i = 0; i < priceList.size(); i++) {
 				System.out.println("[리턴 값 확인]==>"+priceList.get(i));
+				set.add(priceList.get(i));		
 			}
 			
-			tourTicket.setUsetimefestival(priceList);
+			System.out.println("[set size()]" + set.size());
+			System.out.println("[set toString()]" + set.toString());
+			
+			Object[] obj = set.toArray();
+			for (int i = 0; i < obj.length; i++) {
+				sendPriceList.add((String) obj[i]);
+			}
+			System.out.println("[sendPriceList.toString()]" + sendPriceList.toString());
+			
+			tourTicket.setUsetimefestival(sendPriceList);
 			System.out.println("\n[tourTicket 도메인 확인]==>" + tourTicket.getUsetimefestival());
 			
 			user = (User) session.getAttribute("loginUser");
@@ -182,6 +227,33 @@ public class TicketController {
 		
 		return "forward:/ticket/addBookingView.jsp";
 	}
+	
+	@RequestMapping(value = "getMyTicket", method = RequestMethod.GET)
+	public String getMyTicket (
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /ticket/getMyTicket : GET");
+		
+		User user = new User();
+		System.out.println(session.toString());
+		
+		try {
+			
+			user = (User) session.getAttribute("loginUser");
+			System.out.println(user.toString());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+
+		map.put("user", user);
+		
+		return "forward:/ticket/getMyTicket.jsp";
+	}
+			
 	
 	
 } // end of class

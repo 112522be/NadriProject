@@ -148,14 +148,16 @@ public class PurchaseController {
 	public String kakaoPay(
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			@ModelAttribute("purchase") Purchase purchase,
-			HttpSession session
+			HttpSession session,
+			Map<String, Object> map
+			
 			) {
 		
-		System.out.println("\n /purchase/kakaoPay : POST");
-//		System.out.println("\n[kakaoPayRequest]==>" + kakaoPayRequest.toString());
-		System.out.println("\n[purchase]==>" + purchase.toString());
+		System.out.println("\n /purchase/kakaoPay : POST"); 
 
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+
+		User user = new User();
 		
 		try {
 			
@@ -163,37 +165,53 @@ public class PurchaseController {
 			kakaoPayRequest.setTid(kakaoPayResponse.getTid());
 			this.kakaoPayRequest = kakaoPayRequest;
 			
+			System.out.println("\n[2. kakaoPay / kakaoPayRequest Check]==>" + kakaoPayRequest.toString());
+			
+			if (purchase.getBuyer() == null) {
+				user.setUserId(purchase.getBuyerId());
+				user.setUserName(purchase.getBuyerName());
+				user.setEmail(purchase.getBuyerEmail());
+				user.setPhone(purchase.getBuyerPhone());
+			}
+			
+			purchase.setBuyer(user);
+			
+			System.out.println("\n[3. kakaoPay/purchase]==>" + purchase.toString());
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		
 		session.setAttribute("purchase", purchase);
 		
-		return "redirect:"+kakaoPayResponse.getNext_redirect_pc_url();
+		System.out.println("\n[kakaoPayRsponse check]==> " + kakaoPayResponse.getNext_redirect_pc_url());
+		map.put("kakaoUri", kakaoPayResponse.getNext_redirect_pc_url());
+		
+		return "redirect:" + kakaoPayResponse.getNext_redirect_pc_url();
+		
 	}
 	
 	@RequestMapping(value="kakaoPayComplete")
 	public String kakaoPayComplete(
 			@RequestParam String pg_token,
-			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
+//			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
-//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayComplete : POST");
 		
 		KakaoPayResponse kakaoPayResponse = new KakaoPayResponse();
+		System.out.println("\n[1. kakaoPayComplete / kakaoPayResponse Check]==>" + kakaoPayResponse.toString());
 		Purchase purchase = new Purchase();
 		
 		try {
 			kakaoPayRequest.setPg_token(pg_token);
 			kakaoPayResponse = purchaseService.addKakaoPayComplete(kakaoPayRequest);
 			
-			System.out.println("\n[kakaoPayResponse]==>"+kakaoPayResponse.toString());
+			System.out.println("\n[2. kakaoPayComplete / kakaoPayResponse Check]==>" + kakaoPayResponse.toString());
 			
 			purchase = (Purchase) session.getAttribute("purchase");
 			
-			System.out.println("\n[1. Purchase Domain Check] ==> " + purchase.toString());
+			System.out.println("\n[3. kakaoPayComplete / purchase Check]==>" + purchase.toString());
 			
 			// cancelDate making algorithm
 			DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -207,17 +225,12 @@ public class PurchaseController {
 
 			// cancelDate set
 			purchase.setCancelDate(cancelDate);
-			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
+//			purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 
-			/*
-			if (purchase.getFlag().equals("purchase")) {
-				System.out.println("\n[2. Purchase Domain Check] ==> " + purchase.toString());
-				String getQRCode = purchaseService.getQRCode(purchase);
-				System.out.println("\n[getQRCode Check]==>" + getQRCode);
-				purchase.setQrCode(getQRCode);
+			if (kakaoPayResponse.getMsg().equals("payment is already done!")) {
+				
+				purchaseService.addPurchase(purchase);
 			}
-			//*/
-			purchaseService.addPurchase(purchase);
 			
 
 		} catch (Exception e) {
@@ -232,7 +245,6 @@ public class PurchaseController {
 			@RequestParam String pg_token,
 			@ModelAttribute("kakaoPayRequest") KakaoPayRequest kakaoPayRequest,
 			HttpSession session
-//			Map<String, Object> map
 			) {
 		
 		System.out.println("\n /purchase/kakaoPayCompleteB : POST");
@@ -248,6 +260,7 @@ public class PurchaseController {
 			
 			System.out.println("\n[check] ==> " + purchase.toString());
 			System.out.println("\n[check] ==> " + purchase.getSumPostNo());
+			
 			
 			purchaseService.updateBasketPurchase(purchase);
 			
@@ -283,12 +296,6 @@ public class PurchaseController {
 			System.out.println("\n[purchase]==>"+purchase);
 
 			list = purchaseService.addBasketTicket(purchase);
-			/*
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println("//[1]=====" + i);
-				System.out.println(list.get(i));
-			}
-			//*/
 			
 			// ticketPrice split
 			for (int i = 0; i < list.size(); i++) {
@@ -396,7 +403,7 @@ public class PurchaseController {
 		OpenApiSearch openApiSearch = new OpenApiSearch();
 
 		User user = new User();
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<>();    
 		
 		try {
 			
@@ -428,9 +435,92 @@ public class PurchaseController {
 		return "forward:/purchase/listPurchase.jsp";
 	}
 	
+	@RequestMapping(value = "listPurchaseQR")
+	public String listPurchaseQR(
+			@RequestParam("userId") String userId,
+//			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/listPurchaseQR");
+		
+		OpenApiPage resultPage = new OpenApiPage();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+
+		User user = new User();
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		try {
+			
+			if (openApiSearch.getPageNo() == 0) {
+				openApiSearch.setPageNo(1);
+			}
+			openApiSearch.setNumOfRows(pageSize);
+			
+			returnMap = purchaseService.getPurchaseList(openApiSearch, userId);
+			
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
+			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
+					pageUnit, pageSize);
+			System.out.println("[resultPage]" + resultPage);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("userId", userId);
+		map.put("list", returnMap.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("openApiSearch", openApiSearch);
+		
+		
+		return "forward:/purchase/listPurchaseQR.jsp";
+	}
 	
-	
-	
-	
+	@RequestMapping(value = "listPurchased")
+	public String listPurchased(
+//			@ModelAttribute("openApiSearch") OpenApiSearch openApiSearch,
+			HttpSession session,
+			Map<String, Object> map
+			) {
+		
+		System.out.println("\n /purchase/listPurchased");
+		
+		OpenApiPage resultPage = new OpenApiPage();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+
+		User user = new User();
+		Map<String, Object> returnMap = new HashMap<>();    
+		
+		try {
+			
+			if (openApiSearch.getPageNo() == 0) {
+				openApiSearch.setPageNo(1);
+			}
+			openApiSearch.setNumOfRows(pageSize);
+			
+			user = (User) session.getAttribute("loginUser");
+
+			returnMap = purchaseService.getPurchasedList(openApiSearch, user.getUserId());
+			
+			System.out.println("\n[1]" + returnMap.get("list"));
+			
+			resultPage = new OpenApiPage(openApiSearch.getPageNo(), ((Integer) returnMap.get("totalCount")).intValue(),
+					pageUnit, pageSize);
+			System.out.println("[resultPage]" + resultPage);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("user", user);
+		map.put("list", returnMap.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("openApiSearch", openApiSearch);
+		
+		
+		return "forward:/purchase/listPurchased.jsp";
+	}
 	
 } // end of class

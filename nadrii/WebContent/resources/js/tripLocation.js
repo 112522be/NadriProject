@@ -1,3 +1,8 @@
+/**
+ * 
+ */
+
+
 
 $(document).ready(function() {
 	
@@ -13,22 +18,25 @@ $(document).ready(function() {
 						function(position) {
 		                    var lat = position.coords.latitude;
 		                    var lon = position.coords.longitude;
-		                   
-		                    //alert(lat);
-		                    //alert(lon);
+		                    
+
 		    
 		                    
 		                    var location ={
-		                    		"lat" : lat+"",
-		                    		"lng" : lon+""
+		                    		"lat" : lat,
+		                    		"lng" : lon
 		                    }
 		                    
 		                    var jsonData = JSON.stringify(location);
-		                    console.log(jsonData);
+
 		                    $.ajax({
+		                    	//혹여 type:"POST",로 되어 있음// method:"POST"로 바꾸고
 		                        method: "POST",
-		                        url: "/trip/json/getClientAddress/",
-		                        contentType: "application/json;charset=UTF-8",
+		                        url: "../trip/json/getClientAddress/",
+		                        headers:{
+		                        	"Content-Type": "application/json",
+		                        	"Accept": "application/json"
+		                        },
 		                        data:jsonData,
 		                        dataType: "json",
 		                        success: function() {
@@ -39,37 +47,53 @@ $(document).ready(function() {
 		                    });
 		                },
 		                function(error) {
+		                	/*
+		                	var lat = position.coords.latitude;
+		                    var lon = position.coords.longitude;
 
-		                    //alert("브라우저의 위치추적을 허용하지 않으셨습니다. 기본좌표로 이동합니다.");
-
-		                    var lat = 37.5327619;
-		                    var lon = 127.0139427;
-		                   
+		                    
+		                	
+		                	 var location ={
+			                    		"lat" : lat,
+			                    		"lng" : lon
+			                    }
+			                
+		                	 var jsonData = JSON.stringify(location);
+		                	 
 		                    $.ajax({
-		                    	url: "/trip/json/getClientAddress/",
-		                        contentType: "application/json;charset=UTF-8",
-		                        data:location,
+		                    	url: "../trip/json/getClientAddress/",
+		                        contentType: "application/json",
+		                        data:jsonData,
 		                        dataType: "json",
 		                        success: function() {
 		                       
 		                        }
-		                    });  
+		                    });*/  
 		                }
 		        );
 		    }   
 		        else {
+		        	/*
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
 
-		            var lat = 37.5327619;
-		            var lon = 127.0139427;
+		        	 var location ={
+	                    		"lat" : lat,
+	                    		"lng" : lon
+	                 }
+		        	 var jsonData = JSON.stringify(location);    
 		           
 		            $.ajax({
-                    	url: "/trip/json/getClientAddress/",
-                        contentType: "application/json;charset=UTF-8",
-                        data:location,
+                    	url: "../trip/json/getClientAddress/",
+                        contentType: "application/json",
+                        data:jsonData,
                         dataType: "json",
                         success: function() {
                          
                         }
-		            });  
+		            }); 
+		            */ 
 		        }
 		    });
+
+		

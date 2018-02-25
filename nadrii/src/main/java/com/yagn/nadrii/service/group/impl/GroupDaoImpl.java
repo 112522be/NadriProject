@@ -42,8 +42,12 @@ public class GroupDaoImpl implements GroupDao{
 		sqlSession.update("GroupMapper.updateViewCount", group);
 	}
 
-	public List<Group> getGroupList(Search search) throws Exception {
-		return sqlSession.selectList("GroupMapper.getGroupList", search);
+	public List<Group> listGroup(Search search) throws Exception {
+		return sqlSession.selectList("GroupMapper.listGroup", search);
+	}
+	
+	public int getTotalCount(Search search) throws Exception {
+		return sqlSession.selectOne("GroupMapper.getTotalCount", search);
 	}
 	
 	public void updateGroup(Group group) throws Exception {
@@ -54,7 +58,4 @@ public class GroupDaoImpl implements GroupDao{
 		sqlSession.delete("GroupMapper.deleteGroup", group);
 	}
 	
-	public int getTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("GroupMapper.getTotalCount", search);
-	}
 }

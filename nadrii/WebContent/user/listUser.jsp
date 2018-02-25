@@ -18,27 +18,30 @@
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- tabs -->
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  
+	  <!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
-            padding-top : 50px;
-        }
+	 
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -124,14 +127,25 @@
 <body>
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>회원목록조회</h3>
+	       <h1 class="bg-primary text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">회원목록조회</h1>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -139,7 +153,7 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건수,    현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    </div>
 		    
@@ -174,13 +188,14 @@
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
       
-        <thead>
+        <thead style="    background: #DDC;">
           <tr>
-            <th align="center">No</th>
+            <th align="center">No.</th>
             <th align="left">회원 ID</th>
-            <th align="left">회원명</th>
+            <!-- <th align="left">회원명</th> -->
             <th align="left">이메일</th>
-            <th align="left">간략정보</th>
+            <!-- <th align="left">간략정보</th> -->
+            <th align="left">가입 날짜</th>
           </tr>
         </thead>
        

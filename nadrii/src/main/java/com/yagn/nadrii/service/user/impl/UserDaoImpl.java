@@ -44,6 +44,7 @@ public class UserDaoImpl implements UserDao{
 	
 	public void updateUser(User user) throws Exception {
 		System.out.println(this.getClass()+"/updateUser");
+		System.out.println("프로필 사진 >>" + user.getProfileImageFile());
 		sqlSession.update("UserMapper.updateUser", user);
 	}
 
@@ -65,6 +66,11 @@ public class UserDaoImpl implements UserDao{
 
 	public User getUser(User user) throws Exception{
 		return sqlSession.selectOne("UserMapper.getPassword",user);		
+	}
+	
+	@Override
+	public int checkId (String userId) throws Exception{
+		return sqlSession.selectOne("UserMapper.checkId", userId);
 	}
 	
 }

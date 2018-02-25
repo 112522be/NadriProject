@@ -15,16 +15,35 @@
    <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-   <!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
-   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.js"></script> -->
+   <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+   <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
+   <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+   
+   <!-- tabs -->
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  
+	  <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	  
+	  <!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
    
    <!--  ///////////////////////// CSS ////////////////////////// -->
    <style>
        body > div.container{
            border: 3px solid #D6CDB7;
             margin-top: 10px;
+            border:none;
         }
         
         .container-fluid {
@@ -38,24 +57,15 @@
     
               
 <script>
-/*
-$(document).ready(function() { 
-   $("#userId").val('');
-   idCheckFlag = false;
-   $(".signupbtn").prop("disabled", true);
-   
-   
-});
 
 $(document).ready(function() { 
+
    $("#userId").val('');
    idCheckFlag = false;
    $(".signupbtn").prop("disabled", true);
-   
-   $("#userId").val($("#uid").val());
-   $("#email").val($("#uid").val());
-   
+
 });
+
 
 //   이메일 인증 
 function checkSend(){
@@ -100,10 +110,10 @@ function checkSuccess(){
          success :function(result){
             if(result.result == "success"){
                alert("인증 확인되었습니다.");
-               $("$checkNumStatus").val("Y");
+               $("#checkNumStatus").val("Y");
             }else{
                alert("인증 번호가 다릅니다.");
-               $("$checkNumStatus").val("N");
+               $("#checkNumStatus").val("N");
             }
          },
          error:function(request,status,error){
@@ -127,15 +137,21 @@ function checkSuccess(){
      
     function checkId() {
     
+        //var data = "userId=" + $("#userId").val();
+        //var userId = $("#userId").val();
         var data = "userId=" + $("#userId").val();
+        $.ajaxSettings.traditional = true;
+  	    //var frm = $("#frm").serialize();
+  	    //alert("아이디 중복체크");
         $.ajax({
                type:"POST",
-               data : data,
+        //  data : frm,
+            data : data,
             url : "/user/json/checkId",     
-            
-            success : function(result) {
+            dataType: "json",
+            success : function(result) {			/* function(result) */
                if(result.check == 1){
-                  //alert("아이디가 중복되었습니다.");
+                  alert("아이디가 중복되었습니다.");
                   idCheckFlag = false;
                   $("#userId").css("background-color", "#FFCECE");
                   $(".signupbtn").prop("disabled", true);
@@ -149,6 +165,8 @@ function checkSuccess(){
                   $(".signupbtn").prop("disabled", false);
                   $("#htmlId").html("사용가능한 아이디 입니다.").css('color','blue');
                }
+            },error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });    
         
@@ -170,6 +188,7 @@ function checkSuccess(){
       var password = $("#password").val();
       var password2 = $("#password2").val();
       
+      function checkPwd(){
       if(password == password2 ){
          $("#password2").css("background-color", "#B0F6AC");
          return;
@@ -181,8 +200,8 @@ function checkSuccess(){
          $("#password2").css("background-color", "#FFCECE");
          return;
       }
+     }
    
-   }
    
    function emailValid(){
       var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/; 
@@ -198,9 +217,10 @@ function checkSuccess(){
          $("#email").css("background-color", "#B0F6AC");
       }
    }
+
   //*/  
      
-   /*
+   
     function addUser(){
        var data = "userId=" + $("#userId").val();
        data += "&password=" + $("#password").val(); 
@@ -252,33 +272,22 @@ function checkSuccess(){
           return false;
        }
        
-       if($("#checkNumStatus").val() == "N"){
-          alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
+        if($("#checkNumStatus").val() == "Y"){
+          alert("이메일 인증 완료 되었습니다.");
           return;
        }
        
-       
-       if(confirm("회원가입을 하시겠습니까?")){
-           $.ajax({
-             data : data,
-             url : "/user/addUser",
-             type : "POST",
-             success : function(result){
-                if(result.msg == "success"){
-                   alert("가입이 완료되었습니다.");
-                   location.href="/user/main";
-                }
-             }
-          }); 
-       }
-    }
+       if($("#checkNumStatus").val() != "N"){
+           alert("이메일 인증이 실패 되었습니다. \n 재인증 해주세요");
+           return;
+        } 
+  }
     
     function delchk(){
         if(confirm("취소하시겠습니까?")){
             location.href = "/user/main";
         }
     }
-   //*/ 
    
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
@@ -301,25 +310,32 @@ function checkSuccess(){
 <body>
 
    <!-- ToolBar Start /////////////////////////////////////-->
-   <div class="navbar  navbar-default">
-        <div class="container">
-           <a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-         </div>
-      </div>
-      <!-- ToolBar End /////////////////////////////////////-->
+   <!-- Header -->
+				<div id="header">
 
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
+      <!-- ToolBar End /////////////////////////////////////-->
    <!--  화면구성 div Start /////////////////////////////////////-->
    <div class="container">
-   
-      <h1 class="bg-success text-center">회 원 가 입</h1>
+  	 <div class="page-header text-info" style="border:none;">
+     	 <h1 class="bg-success text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">나 들 이 회 원 가 입</h1>
+      </div>
       
       <!-- form Start /////////////////////////////////////-->
-      <form id ="frm" class="form-horizontal">
+      <form id ="frm" class="form-horizontal" style="padding-top:50px;">
       <input id="checkNumStatus" name="checkNumStatus" type="hidden" value="N">
-        <div class="form-group">
+        <div class="form-group icon01">
           <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
           <div class="col-sm-4">
-            <input type="text" placeholder="Enter ID" class="form-control" id="userId" required class="userid" name="userId" value="${kakaoId}" autofocus>
+            <input type="text" placeholder="Enter ID" class="form-control" oninput="checkId();" id="userId" required class="userid" name="userId" value="${kakaoId}" autofocus>
             <span id = "chkMsg"></span>
           </div>
          <div id="htmlId"></div>
@@ -342,7 +358,7 @@ function checkSuccess(){
          <div class="form-group">
           <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" />
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${outerUser.email}" />
             <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" />
             <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
             <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" />

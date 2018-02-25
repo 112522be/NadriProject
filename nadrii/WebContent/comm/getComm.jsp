@@ -1,229 +1,181 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="../resources/assets/js/1jquery.min.js"></script>
-<script src="../resources/assets/js/1skel.min.js"></script>
-<script src="../resources/assets/js/1util.js"></script>
-<script src="../resources/assets/js/1main.js"></script>
-<script
-  src="http://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
-<style type="text/css">
-
-img{
-	max-width: 800px;
-	height: auto;
-}
-
-footer a{
-	color: #555 !important;
-}
-
-footer{
-	padding: 0 0 0 0;
-	background: #ffffff !important;
-}
-
-.button.fit {
-	margin-top: 10px !important; 
-	font-size: 1em;
-}
-
-.navbar {
-    margin-bottom: 0px !important;
-	}
-
-#count {
-					display: inline-block;
-					font-family: "Raleway", Helvetica, sans-serif;
-					font-size: 0.6em;
-					font-weight: 400;
-					letter-spacing: 0.25em;
-					line-height: 1;
-					margin: 0 0 0 2em;
-					padding: 10px 2em 0 2em;
-					float: right;
-				}
-
- .btn.btn-default {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		-moz-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-		-webkit-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-		-ms-transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-		transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-		background-color: #FFFFFF;
-		border: 0;
-		width: auto;
-		height: auto;
-		box-shadow: inset 0 0 0 1px rgba(160, 160, 160, 0.3);
-		color: #3c3b3b;
-		cursor: pointer;
-		display: inline-block;
-		letter-spacing: 0.25em;
-		line-height: 2.8125em;
-		padding: 0;
-		text-align: center;
-		text-decoration: none;
-		text-transform: uppercase;
-		white-space: nowrap;
-	}
-	
-	h3{
-		font-size: 14pt;
+	<head>
+		<title>나만의 나들이</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		
-	}
-</style>
-<script>
-$(function(){
-	$("a.button.small.write:contains('write')").bind("click", function(){
-		self.location="addComm.jsp";
-	});
-	
-	$("a.button.small:contains('link')").bind("click", function(){
-		self.location="/comm/listComm";
-	});
-	
-	$("a.button.small.modify:contains('modify')").bind("click", function(){
-		self.location="/comm/updateCommView?postNo=${community.postNo}";
-	});
-	
-	$("a.button.small.delete:contains('delete')").bind("click", function(){
-		if(confirm("삭제하시겠습니까?")==true){
-			self.location="/comm/deleteComm?postNo=${community.postNo}";
-			alert("삭제되었습니다.");
-		}else{
-			return;	
-		}		
-	});
-	
-	$( function() {
-	    $( "#accordion" ).accordion({
-	      collapsible: true
-	    });
-	} );
-});
-
-function clickProfile(){
-	alert('${group.join.userId}');
-}
-
-function clickMessage(){	
-	window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
-}
-
-function addLike(){
-	
-	$.ajax({
-		url: "../like/json/addLike/"+groupNo,
-		method: "POST",
-		dataType: "json",
-		success:function(returnData){
-			getCountLike();
-		}
-	});	
-	
-}
-
-var likeCount;
-
-function getCountLike(){
-	
-	$.ajax({
-		url: "../like/json/getCountLike/"+groupNo,
-		method: "POST",
-		dataType: "json",
-		success:function(returnData){
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$("a#modify").bind("click", function(){
+				self.location="/comm/updateCommView?postNo=${community.postNo}";
+			});
 			
-			likeCount = returnData.totalCount;
-
+			$("a#delete").bind("click", function(){
+				if(confirm("삭제하시겠습니까?")==true){
+					self.location="/comm/deleteComm?postNo=${community.postNo}";
+					alert("삭제되었습니다.");
+				}else{
+					return;	
+				}		
+			});
+			
+			var regDate = '${community.regDate}'.slice(0, -5);
+			
+			$("span.regDate").append(regDate);			
+			
+		});
+		
+		function clickProfile(){
+			alert('${group.join.userId}');
 		}
-	});	
-}
 
-$(function(){
-	$(".like").bind("click", function(){
-		alert(1);
-	});
-});
+		function clickMessage(){	
+			window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+		}
 
+		function addLike(){
+			
+			$.ajax({
+				url: "../like/json/addLike/"+groupNo,
+				method: "POST",
+				dataType: "json",
+				success:function(returnData){
+					getCountLike();
+				}
+			});	
+			
+		}
 
-</script>
+		var likeCount;
 
-</head>
-<body>
-<jsp:include page="/layout/toolbar.jsp"></jsp:include>
-<div id="main">
-<section class="two">
-	<div class="container" style="height: auto;">
-		<a href="#" class="button small write" style="position: relative; float:right; margin-top: -40px; margin-right: 80px">write</a>
-		<a href="#" class="button small" style="position: relative; float:right; margin-top: -40px;">list</a>
-			<article class="post">
-				<header>
-					<div class="title" style="overflow: hidden">
-						<h2>${community.title}</h2>
+		function getCountLike(){
+			
+			$.ajax({
+				url: "../like/json/getCountLike/"+groupNo,
+				method: "POST",
+				dataType: "json",
+				success:function(returnData){
+					
+					likeCount = returnData.totalCount;
+
+				}
+			});	
+		}
+
+		$(function(){
+			$(".like").bind("click", function(){
+				alert(1);
+			});
+		});
+		</script>
+		<style type="text/css">
+			.btn.btn-default{
+				background-color: lightgray;
+				width: auto;
+				height: auto;
+				padding: 10px;
+			}
+			img{
+				max-width: 90%;
+				height: auto;
+			}
+			hr{
+				top: 2em;
+				margin-bottom: 4em;
+			}
+			input.form-control{
+				margin: 1px;
+			}
+		</style>
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+			<input type="hidden" name="postNo" value="${community.postNo}">
+			<!-- Header -->
+				<div id="header">
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
+							</header>
+						</div>
+						
+					<jsp:include page="../layout/toolbar.jsp" />
+						
+				</div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special" align="center" style="position: relative; height:auto;">
+							<header style="border-bottom: 1px solid; padding-bottom: 60px;">
+								<h2><a href="#">${community.title}</a></h2>
+								<br/>
+								<div style="float: left;"> 
+									<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+									<a href="#none" style="position: relative;">
+										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.userId}</span>
+									</a>
+								</div>
+								<div style="float: right;">
+									<span style="padding-right: 30px;"><span class="fas fa-eye"></span> &nbsp;&nbsp;${community.viewCount}</span>
+									<span class="regDate" style="border-left: 1px solid; padding-left: 30px;"></span>
+								</div>
+							</header>
+							<br/>
+							<div >
+							<c:if test="${community.userId == loginUser.userId}">
+								<div align="right">
+									<a id="modify"><span class="far fa-edit"></span></a>
+									&nbsp;
+									<a id="delete"><span class="fas fa-eraser"></span></a>
+								</div>
+							</c:if>
+								${community.text}						
+							</div>
+							<br/><br/>
+							<div>
+								<span align= "left" class="col-xs-9" style="padding: 0;">
+									<img alt="" src="/resources/images/hashtag.png" width="30" height="30">&nbsp;&nbsp;<span style="font-size: 1em;">${community.hashtag}</span>
+								</span>
+								<span align="right" class="col-xs-3">
+									<input type="hidden" name="postNo" value="${community.postNo}">
+									<jsp:include page="../common/like.jsp"></jsp:include>
+								</span>
+							</div>
+						</article>
+						<br/><br/><br/>
 						<div>
-							<ul id="count">
-								<li>view : ${community.viewCount}</li>
-							</ul>
+						<jsp:include page="../common/comment2.jsp"></jsp:include>
 						</div>
 					</div>
-					
-					<div class="meta">
-						<time class="published" datetime="${community.regDate}">${community.regDate}</time>
-						<a href="#" class="author"><span class="name" data-container="body" data-toggle="popover">${community.userId}</span>
-						<img src="../resources/assets/images/avatar.jpg" alt="" /></a>
-					</div>
-				</header>
-				<br/>
-				<div align="center">
-					${community.text}
 				</div>
-				<c:if test="${community.userId==loginUser.userId}">		
-					<div align="right">
-						<a href="#" class="button small modify">modify</a>
-						<a href="#" class="button small delete">delete</a>
-					</div>
-				</c:if>	
-				<footer>
-					<div class="col-xs-4">
-						<ul class="stats">
-							<li class="like"><a href="#" class="icon fa-heart" onclick="javascript:addLike();">28</a></li>
-							<li class="comment"><a href="#" class="icon fa-comment">128</a></li>
-						</ul>
-					</div>
-					<div class="col-xs-8" align="right">
-						<img src="/resources/images/hashtag.png" width="30px" height="30px"><span style="color: gray; font-size: 10pt;">&nbsp;&nbsp;${community.hashtag}</span>
-					</div>
-				</footer>
-			</article>
-		<jsp:include page="../common/comment.jsp"></jsp:include>
-	</div>
-	</section>
-	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2a580a6a043772106fd68ca5e3561"></script>
-	<script>
-		function map(lat, lng) {	
-			var container = document.getElementById('map');
-			var options = {
-				center: new daum.maps.LatLng(lat, lng),
-				level: 3
-			};
-	
-			var map = new daum.maps.Map(container, options);
-		}
-	</script>
-</body>
-<link rel="stylesheet" href="../resources/assets/css/main.css?version=0206455" />
+		</div>
+		<!-- Scripts -->
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/resources/helios/assets/js/main.js"></script>
+
+	</body>
 </html>

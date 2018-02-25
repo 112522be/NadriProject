@@ -33,33 +33,28 @@ public class WishServiceImpl implements WishService{
 		System.out.println(this.getClass());
 	}
 	
-
 	@Override
 	public void addWishListFromTrip(Wish wish) throws Exception {
-		System.out.println("WishService addWishListFromTrip");
 		wishDao.addWishListFromTrip(wish);
-		
-		
 	}
-
+	
+	@Override
+	public void deleteWish(Wish wish) throws Exception {
+		wishDao.deleteWish(wish);		
+	}
+	
 	@Override
 	public void addWishListFromPost(Wish wish) throws Exception {
-		System.out.println("WishService addWishListFromPost");
 		wishDao.addWishListFromPost(wish);
-		
-		
 	}
 
 	@Override
 	public Wish getWish(int wishNo) throws Exception {
-		System.out.println("WishService getWish");
 		return wishDao.getWish(wishNo)	;
 	}
-
 	
 	@Override
 	public Map listWish(String userId) throws Exception {
-		System.out.println("WishService listwish");
 		Map map = new HashMap();
 		List list = wishDao.listWish(userId);
 		map.put("list", list);
@@ -68,16 +63,7 @@ public class WishServiceImpl implements WishService{
 	}
 
 	@Override
-	public void deleteWish(int wishNo) throws Exception {
-		System.out.println("WishService deleteWish");
-		wishDao.deleteWish(wishNo);		
-		
-	}
-
-
-	@Override
 	public Wish getWishByTripNo(String userId,int tripNo) throws Exception {
-		System.out.println("WishService getWishByTripNo");
 		Map map = new HashMap();
 		map.put("userId", userId);
 		map.put("tripNo", tripNo);
@@ -89,7 +75,6 @@ public class WishServiceImpl implements WishService{
 	//플래너에서 사용할 위시리스트 내용 
 	@Override
 	public List listTripFromWish(String userId) throws Exception {
-		System.out.println("WishService listTripFromWish");
 		
 		List wishList = new ArrayList();
 		
@@ -100,18 +85,30 @@ public class WishServiceImpl implements WishService{
 			Trip trip = tripDao.getTrip(wish.getTripNo().getPostNo());
 			
 			wish.setTripNo(trip);
-			
 			wishList.add(wish);
-			
 		}
-		
-		
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(wishList.get(i));
 		}
-		
 		return wishList;
 	}
 
+	@Override
+	public Wish checkDuplication(int postNo) throws Exception {
+		return wishDao.checkDuplication(postNo);
+	}
+
+	public Map<String , Object > listWishByPost(Wish wish) throws Exception {
+
+		List<Wish> list= wishDao.listWishByPost(wish);
+		int totalCount = wishDao.getTotalWishByPost(wish);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list );
+		map.put("totalCount", new Integer(totalCount));
+	
+		return map;
+	}
 	
 }

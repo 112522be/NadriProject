@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	$( function() {
 		$("a[href='#']:contains('보내기')").on("click",function(){
-			alert("보내기");
+			//alert("보내기");
 			$("form").attr("method","POST").attr("action","/message/addMessage").submit();			
 
 		});

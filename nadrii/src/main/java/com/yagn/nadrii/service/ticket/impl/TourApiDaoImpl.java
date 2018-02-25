@@ -27,6 +27,7 @@ import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
@@ -43,6 +44,7 @@ public class TourApiDaoImpl implements TicketDao {
 	private DetailIntro	 detailIntro;
 	private DetailImage detailImgae;
 	private TourTicket tourTicket;
+	private Ticket ticket;
 	
 	/// TourAPI properties
 	@Value("#{tourApiProperties['searchFestivalURL']}")
@@ -53,6 +55,8 @@ public class TourApiDaoImpl implements TicketDao {
 	private String detailIntroURL;
 	@Value("#{tourApiProperties['detailImageURL']}")
 	private String detailImageURL;
+	@Value("#{tourApiProperties['keywordSearchURL']}")
+	private String keywordSearchURL;
 	
 	/// Constructor
 	public TourApiDaoImpl() {
@@ -90,6 +94,199 @@ public class TourApiDaoImpl implements TicketDao {
 
 	}
 	
+	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) {
+		
+		System.out.println("\n[tourApiDaoImpl.java]::getSearchTicket");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		tourTicket = new TourTicket();
+		
+		OpenApiPage openApiPage = new OpenApiPage();
+		
+		try {
+			
+			String encodeKeyword = URLEncoder.encode(openApiSearch.getSearchKeyword(), "UTF-8");
+			
+			StringBuilder keywordSearchSB = TourApiDaoImpl.sendGetTourURL
+					(new StringBuilder(keywordSearchURL + essentialURL 
+							+ "&listYN=Y" 
+//							+ "&pageNo=" + openApiSearch.getPageNo() 
+//							+ "&contentTypeId=15" 
+							+ "&keyword=" + encodeKeyword ));
+			
+			System.out.println("\n[keywordSearchSB]==>" + keywordSearchSB);
+
+			JSONObject ksJsonObj = (JSONObject) JSONValue.parse(keywordSearchSB.toString());
+			System.out.println("\n[ksJsonObj Check]==>" + ksJsonObj.toString());
+			
+			
+			JSONObject ksResponse = (JSONObject) ksJsonObj.get("response");
+//			System.out.println("\n[ksResponse Check]==>" + ksResponse.toString());
+			
+			JSONObject ksHeader = (JSONObject) ksResponse.get("header");
+//			System.out.println("\n[ksHeader Check]==>" + ksHeader.toString());
+			
+			JSONObject ksBody = (JSONObject) ksResponse.get("body");
+//			ObjectMapper ksBodyMapper = new ObjectMapper();
+//			openApiPage = ksBodyMapper.readValue(ksBody.toJSONString(), OpenApiPage.class);
+//			System.out.println("\n[ksBody Check]==>" + ksBody.toString());
+			
+			JSONObject ksItems = (JSONObject) ksBody.get("items");
+//			System.out.println("\n[ksItems]==> " + ksItems.get("item").toString());
+			
+			JSONObject ksItem = (JSONObject) ksItems.get("item");
+			System.out.println("\n[ksItem Check]==>" + ksItem.toString());
+
+			List<Ticket> searchTicket = new ArrayList<Ticket>();
+
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			ticket = new Ticket();
+			ticket = objectMapper.readValue(ksItem.toJSONString(), Ticket.class);
+/*
+				detailIntro = new DetailIntro();
+				detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
+
+				tourTicket = new TourTicket();
+
+				tourTicket.setTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
+				tourTicket.setContentid(searchFestival.getContentid());
+				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
+				
+				System.out.println("\n[1. Title Check] ==> " + searchFestival.getTitle());
+				System.out.println("\n[2. searchFestival.getFirstimage() Check] ==> " + searchFestival.getFirstimage());
+				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
+					String image = ticketService.getNaverImage(searchFestival.getTitle() + " 2018");
+					tourTicket.setFirstimage(image);
+				} else {
+					tourTicket.setFirstimage(searchFestival.getFirstimage());
+				}
+				
+				tourTicket.setEventstartdate(detailIntro.getEventstartdate());
+				tourTicket.setEventenddate(detailIntro.getEventenddate());
+				tourTicket.setReadcount(searchFestival.getReadcount());
+				tourTicket.setEventplace(detailIntro.getEventplace());
+				tourTicket.setUsetimefestival(ticketService.getTicketPrice(detailIntro.getUsetimefestival()));
+*/				
+				System.out.println("\n[searchFestival damain check]==>" + searchFestival.toString());
+				System.out.println("\n[detailIntro damain check]==>" + detailIntro.toString());
+				System.out.println("\n[tourTicket damain check]==>" + tourTicket.toString());
+				
+//				searchTicket.add(tourTicket);
+				
+				map.put("searchTicket", searchTicket);
+				
+//				map.put("totalCount", openApiPage.getTotalCount());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("totalCount", openApiPage.getTotalCount());
+//		map.put("tourTicketList", tourTicketList);
+		
+		return map;
+	}
+	
+	
+	
+	public Map<String, Object> getSearchTicketList(OpenApiSearch openApiSearch) {
+		
+		System.out.println("\n[tourApiDaoImpl.java]::getSearchTicketList");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		tourTicket = new TourTicket();
+		
+		OpenApiPage openApiPage = new OpenApiPage();
+		
+		try {
+			
+			String encodeKeyword = URLEncoder.encode(openApiSearch.getSearchKeyword(), "UTF-8");
+			
+			StringBuilder keywordSearchSB = TourApiDaoImpl.sendGetTourURL
+					(new StringBuilder(keywordSearchURL + essentialURL 
+							+ "&listYN=Y" 
+//							+ "&pageNo=" + openApiSearch.getPageNo() 
+							+ "&contentTypeId=15" 
+							+ "&keyword=" + encodeKeyword ));
+
+			JSONObject ksJsonObj = (JSONObject) JSONValue.parse(keywordSearchSB.toString());
+//			JSONArray ksJsonObj = (JSONArray) JSONValue.parse(keywordSearchSB.toString());
+			System.out.println("\n[ksJsonObj Check]==>" + ksJsonObj.toString());
+			
+			JSONObject ksResponse = (JSONObject) ksJsonObj.get("response");
+			System.out.println("\n[ksResponse Check]==>" + ksResponse.toString());
+			
+			JSONObject ksHeader = (JSONObject) ksResponse.get("header");
+			System.out.println("\n[ksHeader Check]==>" + ksHeader.toString());
+			
+			JSONObject ksBody = (JSONObject) ksResponse.get("body");
+			ObjectMapper ksBodyMapper = new ObjectMapper();
+			openApiPage = ksBodyMapper.readValue(ksBody.toJSONString(), OpenApiPage.class);
+			System.out.println("\n[ksBody Check]==>" + ksBody.toString());
+			
+			JSONObject ksItems = (JSONObject) ksBody.get("items");
+			System.out.println("\n[ksItems]==> " + ksItems.get("item").toString());
+			
+			JSONArray ksItem = (JSONArray) ksItems.get("item");
+			
+			System.out.println("\n[ksItem Check]==>" + ksItem.toString());
+
+			List<TourTicket> tourTicketList = new ArrayList<TourTicket>();
+
+			for (int i = 0; i < ksItem.size(); i++) {
+
+				JSONObject itemValue = (JSONObject) ksItem.get(i);
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				searchFestival = new SearchFestival();
+				searchFestival = objectMapper.readValue(itemValue.toJSONString(), SearchFestival.class);
+
+				detailIntro = new DetailIntro();
+				detailIntro = this.getDetailIntro(searchFestival.getContentid(), searchFestival.getContenttypeid());
+
+				tourTicket = new TourTicket();
+
+				tourTicket.setTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
+				tourTicket.setContentid(searchFestival.getContentid());
+				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
+				
+				System.out.println("\n[1. Title Check] ==> " + searchFestival.getTitle());
+				System.out.println("\n[2. searchFestival.getFirstimage() Check] ==> " + searchFestival.getFirstimage());
+				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
+					String image = ticketService.getNaverImage(searchFestival.getTitle() + " 2018");
+					tourTicket.setFirstimage(image);
+				} else {
+					tourTicket.setFirstimage(searchFestival.getFirstimage());
+				}
+				
+				tourTicket.setEventstartdate(detailIntro.getEventstartdate());
+				tourTicket.setEventenddate(detailIntro.getEventenddate());
+				tourTicket.setReadcount(searchFestival.getReadcount());
+				tourTicket.setEventplace(detailIntro.getEventplace());
+				tourTicket.setUsetimefestival(ticketService.getTicketPrice(detailIntro.getUsetimefestival()));
+				
+				System.out.println("\n[searchFestival damain check]==>" + searchFestival.toString());
+				System.out.println("\n[detailIntro damain check]==>" + detailIntro.toString());
+				System.out.println("\n[tourTicket damain check]==>" + tourTicket.toString());
+				
+				tourTicketList.add(tourTicket);
+
+				map.put("tourTicketList", tourTicketList);
+//				map.put("totalCount", openApiPage.getTotalCount());
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		map.put("totalCount", openApiPage.getTotalCount());
+//		map.put("tourTicketList", tourTicketList);
+		
+		return map;
+	}
 	
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) {
 		
@@ -144,12 +341,14 @@ public class TourApiDaoImpl implements TicketDao {
 				tourTicket.setContenttypeid(searchFestival.getContenttypeid());
 				
 				System.out.println("\n[1. Title Check] ==> " + searchFestival.getTitle());
+				System.out.println("\n[2. searchFestival.getFirstimage() Check] ==> " + searchFestival.getFirstimage());
 				if (searchFestival.getFirstimage() == null || searchFestival.getFirstimage() == "") {
-					String image = ticketService.getNaverImage(searchFestival.getTitle());
+					String image = ticketService.getNaverImage(searchFestival.getTitle() + " 2018");
 					tourTicket.setFirstimage(image);
 				} else {
 					tourTicket.setFirstimage(searchFestival.getFirstimage());
 				}
+				
 				tourTicket.setEventstartdate(searchFestival.getEventstartdate());
 				tourTicket.setEventenddate(searchFestival.getEventenddate());
 				tourTicket.setReadcount(searchFestival.getReadcount());
@@ -239,7 +438,12 @@ public class TourApiDaoImpl implements TicketDao {
 			if (detailIntro.getSubevent() == "" || detailIntro.getSubevent() == null) {
 				detailIntro.setSubevent("정보 제공 없음");
 			}
+			
+			System.out.println("\n[detailIntro.getUsetimefestival()]==> " + detailIntro.getUsetimefestival());
+			
 			if (detailIntro.getUsetimefestival() == "" || detailIntro.getUsetimefestival() == null) {
+				detailIntro.setUsetimefestival("무료");
+			} else if ( detailIntro.getUsetimefestival().contains("000") == false || detailIntro.getUsetimefestival().contains("00") == false ) {
 				detailIntro.setUsetimefestival("무료");
 			}
 		} catch (Exception e) {
@@ -268,7 +472,6 @@ public class TourApiDaoImpl implements TicketDao {
 			String image = ticketService.getNaverImage(title);
 			detailImage.setOriginimgurl(image);	
 			
-			return detailImage;
 			
 		} else {
 			
@@ -371,6 +574,9 @@ public class TourApiDaoImpl implements TicketDao {
 	
 	public String getKakaoImage(String title) throws Exception {
 		return null;
+	}
+	
+	public void addTicketLog(Ticket ticket) {
 	}
 	
 } // end of class

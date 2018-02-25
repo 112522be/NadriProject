@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yagn.nadrii.common.Page;
@@ -36,7 +37,7 @@ public class CommController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@RequestMapping("addComm")
+	@RequestMapping(value = "addComm", method=RequestMethod.POST)
 	public String addComm(@ModelAttribute Community community) {
 		System.out.println("--------"+community);
 		int postNo = commService.addComm(community);
@@ -60,6 +61,7 @@ public class CommController {
 				temp += " #"+temps[i];
 			}
 		}
+		System.out.println(community.getRegDate());
 		community.setHashtag(temp);
 		request.setAttribute("community", community);
 		return "forward:/comm/getComm.jsp";
@@ -82,10 +84,24 @@ public class CommController {
 		}
 		
 		Map<String , Object> map=commService.listComm(search);
+		List<Community> list = (List<Community>)map.get("listComm");
+		for(int i=0;i<list.size();i++) {
+			String[] temps = list.get(i).getHashtag().split(",");
+			String temp ="";
+			for(int j=1;j<temps.length;j++) {
+				if(i == 1) {
+					temp = "#"+temps[j];
+				}else {
+					temp += " #"+temps[j];
+				}
+			}
+			list.get(i).setHashtag(temp);
+		}
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		
-		request.setAttribute("list", map.get("listComm"));
+		List arrayList = (List) map.get("listComm");
+		request.setAttribute("list", arrayList);
+		request.setAttribute("resultSize", arrayList.size());
 		request.setAttribute("resultPage", resultPage);
 		request.setAttribute("search", search);
 		return "forward:/comm/listComm.jsp";

@@ -1,16 +1,22 @@
 package com.yagn.nadrii.web.message;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.domain.Message;
+import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.message.MessageService;
 
 @RestController
@@ -51,8 +57,9 @@ public class MessageRestController {
 	}
 	
 	@RequestMapping("json/getMessage/{messageNo}")
-	public Map getMessage(@PathVariable("messageNo") int messageNo,Map map)throws Exception {
+	public Map getMessage(@PathVariable("messageNo") int messageNo)throws Exception {
 		System.out.println(this.getClass()+"/message/getMessage/");
+		Map map = new HashMap();
 		Message message = messageService.getMessage(messageNo);
 		this.updateReadFlag(messageNo);
 		
@@ -60,9 +67,52 @@ public class MessageRestController {
 		return map;
 	}
 	
+		
+	@RequestMapping("json/listMessage/{userId}")
+	public Map listMessage(@PathVariable("userId") String userId) throws Exception{
+		System.out.println(this.getClass()+".listMessage()");
+		Map map = new HashMap();
+		
+		System.out.println(userId);
+		
+		List<Message> list = messageService.listMessage(userId);
+		
+		System.out.println(list.size());
+		map.put("list", list);
+		
+		return map;
+	}
+	
+
 	private void updateReadFlag(int messageNo) throws Exception{
 		System.out.println(this.getClass()+"  updateReadFlag");
 		
 		messageService.updateReadFlag(messageNo);		
+	}
+	
+	@RequestMapping("/json/listMessageToRead/{userId}")
+	public Map listMessageToRead(@PathVariable("userId") String userId) throws Exception{
+		System.out.println(this.getClass()+"  listMessageToRead");
+		Map map = new HashMap();
+		
+			
+		List list = messageService.listMessageToRead(userId);
+		
+		
+		map.put("list",list);
+		
+		return map;
+	}
+	
+	@RequestMapping("/json/listSendMessage/{userId}")
+	public Map listSendMessage(@PathVariable("userId") String userId) throws Exception{
+		System.out.println(this.getClass()+"  listSendMessage");
+		Map map = new HashMap();		
+				
+		List list = messageService.listSendMessage(userId);
+				
+		map.put("list",list);
+	
+		return map;
 	}
 }

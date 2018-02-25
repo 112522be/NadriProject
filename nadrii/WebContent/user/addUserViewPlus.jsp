@@ -25,27 +25,24 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-        
-        .container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-    </style>
-    
+	
+	<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		   <link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+		    <script src="/resources/helios/assets/js/main.js"></script>
+		       
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
 		// 생일
 		 $( function() {
-			    $( "#datepicker" ).datepicker();
+			    $( ".datepicker" ).datepicker();
 			  } );
 		 
 		 
@@ -150,37 +147,78 @@
 		
 		// ===== '추가' 버튼 처리 =====
 		$(function() {
-	            $("button:contains('추 가')").bind('click', function(){
-	            	addUserPlus();
+	            $("button.btn.btn-success.col-xs-3").on('click', function(){
+	            	fncAddUserPlus();
 	            })
 	        });
+		
+		$(function() {
+            $("button.btn.btn-primary.col-xs-3").on('click', function(){
+            	fncAddUserPlus();
+            })
+        });
 		 
-	</script>		
+	</script>	
+	
+		<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+            border:none;
+        }
+        
+        .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#nav{
+   background-color: #44324a;
+   opacity: 0.5;
+   color:#ddd;
+   
+}
+
+@margin-bottom:10%
+    </style>	
     
 </head>
 
 <body>
 
+
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<!-- Header -->
+				<div id="header">
+
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+						<jsp:include page="/layout/toolbar.jsp" />
+
+				</div>
+	
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<h1 class="bg-primary text-center">추 가 정 보 입 력</h1>
+	<div class="container" style="margin-top:70px;">
+		<div class="page-header text-info">
+			<h1 class="bg-primary text-center" style="background:#f0f4f4; font-size:30px; border-bottom: 2px solid #ddd; padding-bottom: 30px; color:#656565">추 가 정 보 입 력</h1>
+		</div>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" action="addUserPlus">
+		<form class="form-horizontal" action="addUserPlus" style="padding-top:50px;">
 		
 		  <div class="form-group">
-		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label">생 년 월 일</label>
+		    <label for="birth" class="col-sm-offset-1 col-sm-3 control-label" >생 년 월 일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="datepicker" name="birth" placeholder="생 년 월 일">
+		      <input type="text" class="form-control datepicker" id="birth" name="birth" placeholder="생 년 월 일" style="border-radius: 25px;">
 		      <span id = "chkMsg"></span>
 		    </div>
 		
@@ -198,7 +236,7 @@
 		  <div class="form-group">
 		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀수</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수">
+		      <input type="text" class="form-control" id="children" name="children" placeholder="자녀수" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
@@ -206,22 +244,22 @@
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">
 		      <input type="hidden" id="check02" value="abcd">
-		      <label><input type="radio" name="gender" value="남">남</label>
-			  <label><input type="radio" name="gender" value="여">여</label>
+		      <label style="padding-right: 60px; float:left;"><input type="radio" name="gender" value="남"style="margin-right: 5px; ">남</label>
+			  <label><input type="radio" name="gender" value="여" style="margin-right: 5px; ">여</label>
 		    </div>
 		   </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름" style="border-radius: 25px;">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
 		     <div class="col-sm-2">
-		      <select class="form-control" name="phone1" id="phone1">
+		      <select class="form-control" name="phone1" id="phone1" style="border-radius: 25px;">
 				  	<option value="010" >010</option>
 					<option value="011" >011</option>
 					<option value="016" >016</option>
@@ -230,10 +268,10 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="번호" style="border-radius: 25px;">
 		    </div>
 		    <input type="hidden" name="phone"/>
 		  </div>
@@ -243,18 +281,18 @@
 			  <div class="col-sm-2">
 				  <form id="form" runat="server">
 				    <input type="file" id="imgInput"/>
-				    <img id="image_section" src="#" alt="your image" />
+				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" name="profiIeimageFile"/>
 				</form>
 		     </div>
 		   </div>
 		  
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-info cancelbtn" data-toggle="popover"
-		      data-trigger="hover"data-placement="bottom" data-content="이름, 핸드폰번호 다시 확인!" >추 가</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-		    </div>
+		  <div class="form-group row">
+		    <article class="col-sm-offset-4  col-sm-4 text-center" style="width:90%;">
+		      <button type="button" class="button btn btn-success col-xs-3" data-toggle="popover"
+		      data-trigger="hover"data-placement="bottom" style="margin:0 5% 12% 0; " data-content="이름, 핸드폰번호 다시 확인!" >추 가</button>
+			  <a class="button btn btn-primary col-xs-3" href="#" role="button">취&nbsp;소</a>
+		    </article>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
@@ -262,6 +300,17 @@
  	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 
+	<!-- 메인 script-->
+		
+		<!-- Scripts 
+			<script src="/resources/helios/assets/js/jquery.min.js"></script>-->
+			<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+			<script src="/resources/helios/assets/js/skel.min.js"></script>
+			<script src="/resources/helios/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+		    <script src="/resources/helios/assets/js/main.js"></script>
 </body>
 
 </html>

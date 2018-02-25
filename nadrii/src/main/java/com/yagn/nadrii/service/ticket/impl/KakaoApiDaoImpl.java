@@ -22,6 +22,7 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.KakaoImage;
 import com.yagn.nadrii.service.domain.NaverImage;
 import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
 @Repository("kakaoApiDaoImpl")
@@ -79,16 +80,19 @@ public class KakaoApiDaoImpl implements TicketDao {
 
 		System.out.println("\n[KakaoApiDaoImpl.java]::getKakaoImage");
 		System.out.println("[getKakaoImage title check]==>" + title);
-
+		System.out.println("[getKakaoImage title.replaceAll check]==>" + title.replaceAll(" 2018", ""));
+		
 		int minImage = 200;
 		String kakaoReturnImage = "";
 
 		try {
 			
-			String encodeTitle = URLEncoder.encode(title, "UTF-8");
+			String encodeTitle = URLEncoder.encode(title.replaceAll(" 2018", ""), "UTF-8");
 			
 			StringBuilder kakaoImageSB = KakaoApiDaoImpl.sendGetKakaoURL
-					(new StringBuilder(searchImageURL + encodeTitle),	kakaoKey);
+					(new StringBuilder(searchImageURL 
+//							+ "&sort=recency"
+							+ encodeTitle),	kakaoKey);
 
 			JSONObject kiJsonObj = (JSONObject) JSONValue.parse(kakaoImageSB.toString());
 			JSONArray kiItems = (JSONArray) kiJsonObj.get("documents");
@@ -110,12 +114,12 @@ public class KakaoApiDaoImpl implements TicketDao {
 //					System.out.println("\n[kakaoImage height]==>" +kakaoImage.getHeight());
 				}		
 			}
+			System.out.println("\n[getKakaoImage :: selected image url]==>" + kakaoReturnImage);
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 
-		System.out.println("\n[getKakaoImage :: selected image url]==>" + kakaoReturnImage);
 		
 		return kakaoReturnImage;
 	}
@@ -134,6 +138,14 @@ public class KakaoApiDaoImpl implements TicketDao {
 		return null;
 	}
 	public List<String> getTicketPrice(String priceInfo) throws Exception {
+		return null;
+	}
+	public Map<String, Object> getSearchTicketList(OpenApiSearch openApiSearch) {
+		return null;
+	}
+	public void addTicketLog(Ticket ticket) {
+	}
+	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) {
 		return null;
 	}
 	

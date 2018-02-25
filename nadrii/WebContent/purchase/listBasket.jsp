@@ -8,19 +8,49 @@
 <html lang="ko">
 
 <head>
+<title>장바구니 목록</title>
 <meta charset="UTF-8">
 
-<title>장바구니 목록</title>
 
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous"> -->
+
+
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
+
+
+	<!-- Scripts -->
+	<script src="/resources/helios/assets/js/jquery.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+	<script src="/resources/helios/assets/js/skel.min.js"></script>
+	<script src="/resources/helios/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/resources/helios/assets/js/main.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->	 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	
-
-	<!-- //////////////////// CSS //////////////////// -->
-
+	
+	
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
@@ -33,8 +63,9 @@ function fncGetList(pageNo) {
 
 	//=================== "전체티켓결제" 버튼 Event 연결 =================== 
 	$(function() {
-		$("button:contains('전체티켓결제')").bind("click", function() {
-			
+//		$("button:contains('전체티켓결제')").bind("click", function() {
+		$("a[href='#']:contains('전체티켓결제')").bind("click", function(event) {
+			event.preventDefault();
 //			alert("전체티켓결제 버튼")
 			
 			$("input[name='postNo']").prop("checked", true);
@@ -58,7 +89,9 @@ function fncGetList(pageNo) {
 	
 	//=================== "전체선택취소" 버튼 Event 연결 =================== 
 	$(function() {
-		$("button:contains('전체선택취소')").bind("click", function() {
+//		$("button:contains('전체선택취소')").bind("click", function() {
+		$("a[href='#']:contains('전체선택취소')").bind("click", function(event) {
+			event.preventDefault();		
 			$("input[name='postNo']").prop("checked", false);
 		})
 	});
@@ -66,7 +99,8 @@ function fncGetList(pageNo) {
 	//=================== "선택티켓결제" 버튼 Event 연결 ===================
 
 	$(function() {
-		$("button:contains('선택티켓결제')").bind("click", function() {
+//		$("button:contains('선택티켓결제')").bind("click", function() {
+		$("a[href='#']:contains('선택티켓결제')").bind("click", function() {
 
 					var postCount = $("input[name='postNo']:checked").length;
 					var postNoCheck = $("input[name='postNo']:checked").val();
@@ -87,7 +121,7 @@ function fncGetList(pageNo) {
 							}
 							sumPostNo += postNo;
 						}
-//						alert("선택티켓결제 " + sumPostNo)
+						alert("선택하신 티켓 번호 확인 : " + sumPostNo)
 						$("input[name='sumPostNo']").val(sumPostNo);
 						$("span[name='ticketCount']").append(postCount);
 					}
@@ -96,7 +130,8 @@ function fncGetList(pageNo) {
 
 	//=================== "선택티켓삭제" 버튼 Event 연결 ===================
 	$(function() {
-		$("button:contains('선택티켓삭제')").bind("click", function() {
+//		$("button:contains('선택티켓삭제')").bind("click", function() {
+		$("a[href='#']:contains('선택티켓삭제')").bind("click", function() {
 
 			var postCount = $("input[name='postNo']:checked").length;
 			if (postCount == 0) {
@@ -204,94 +239,137 @@ function fncGetList(pageNo) {
 </script>
 
 </head>
-<body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-   	
-   	<div class="container">
 
-		<div class="page-header text-right">
-			<h3 class="text-info">
-				<p class="bg-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 장바구니</p>
-			</h3>
-			<h5 class="text-muted">
-				<strong class="text-success">
-				<c:if test="${ user.userName eq null }">
-					${ user.userId }
-				</c:if>
-					${ user.userName }
-				</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
-			</h5>
-		</div>
+<body class="no-sidebar">
+		<div id="page-wrapper">
 
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+			<!-- Header -->
+				<div id="header">
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>티켓이미지</th>
-						<th>티켓명</th>
-						<th>상세정보</th>
-					</tr>
-				</thead>
+					<div class="inner">
+						<header>
+							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+						</header>
+					</div>
+					
+					<jsp:include page="/layout/toolbar.jsp" /> 
+
+				</div>
+
+<form action="navigation">
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						
+						<article id="main" class="special">
+							<header>
+								<h2>장바구니 목록</h2>
+								<p>
+									<strong class="text-success">
+									<c:if test="${ user.userName eq null }">
+										${ user.userId }
+									</c:if>
+										${ user.userName }
+									</strong> 회원님의  <strong class="text-danger">장바구니</strong> 목록 입니다.
+								</p>
+							</header>
+							
+						</article>
+					
+					</div>
+					
+					
+					<div class="container">
+					
+						<c:forEach var="list" items="${list}" varStatus="num">
+						<span class="timestamp">No.${ num.count } ${ list.postNo }</span>
+						<div class="row">
+
+							<!-- Photos -->
+								<section class="4u 12u(mobile)">
+									<div class="row 25% no-collapse">
+										<div class="12u">
+											<a href="#" class="image fit"><img src="${ list.ticketImage }" alt="" /></a>
+										</div>
+									</div>
+								</section>	
+							
+							<!-- content -->
+								<section class="4u 12u(mobile)">
+									<ul class="divided">
+										<li>
+											<article class="tweet">
+												<h3><a href="#">${ list.ticketTitle }</a></h3>
+												<span class="timestamp">&nbsp;</span>
+												<h4>예매일자</h4>
+												<p>&nbsp;&nbsp;${ list.bookingDate }</p>
+												<h4>취소 가능일자</h4>
+												<p>&nbsp;&nbsp;${ list.cancelDate } 까지</p>
+												<p>
+													<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
+														￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장
+													</c:forEach>
+												</p>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+							<!-- selectBox -->
+								<section class="4u 12u(mobile)">
+									<ul class="divided">
+										<li>
+											<article class="post stub">
+												<header>
+													<label class="button">
+														<input type="checkbox" name="postNo" value="${ list.postNo }"> 
+															선택하기
+													</label>
+												</header>
+											</article>
+										</li>
+									</ul>
+								</section>
+
+						</div><!-- row end -->
+						<br>
+						</c:forEach>
+					
+							<input type="hidden" name="sumPostNo">
+							<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+							<input type="hidden" id="pageNo" name="pageNo" value=""/>
+						
+							<c:if test="${ empty list }">
+								<article id="main" class="special">
+									<header>
+										<h2><a href="/ticket/listTicket" class="text-danger" data-toggle="tooltip" data-placement="bottom" title="클릭시 나들이 티켓 목록으로 이동">장바구니에 등록된 티켓이 없습니다.</a></h2>
+									</header>
+								</article>	
+							</c:if>
+							<c:if test="${ !empty list }">	
+								<article id="main" class="container special">
+									<footer>
+										<a href="#" class="button">전체선택취소</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</a>&nbsp;
+										<a href="#" class="button" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</a>
+									</footer>
+								</article>
+							</c:if>
+							
+							
+					</div><!-- container end -->
+					
+					
+					
+					<hr/>	
+					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
+					
+				</div><!-- wrapper style1 End -->
 				
-				<c:forEach var="list" items="${list}" varStatus="num">
-				<tbody>
-					<tr>
-						<th scope="row">
-							<h4>${ num.count }. [NO:${ list.postNo }]</h4>
-							
-								<label class="btn btn-info">
-									<input type="checkbox" name="postNo" value="${ list.postNo }"> 
-									선택하기
-								</label>
-							
-							</th>
-						<td><img class="media-object" src="${ list.ticketImage }" alt="There is no image" ></td>
-						<td>
-							<h3>${ list.ticketTitle }</h3>
-						</td>
-						<td>
-							<h5>● 예매일자 : ${ list.bookingDate }</h5>
-							<h5>● 취소 가능일자 : ${ list.cancelDate } 까지</h5>
-							<a class="btn btn-default btn-lg btn-block" role="button" data-toggle="collapse"
-								href="#${ num.index }" aria-expanded="false" aria-controls="collapseExample">
-									<h4>예매티켓정보</h4>
-							</a>
-							<div class="collapse" id="${ num.index }">
-								<div class="well text-center">
-								<c:forEach var="ticketInfo" items="${list.ticketP}" varStatus="num">
-									<h5 class="text-danger">￦ ${ ticketInfo } = ${ list.ticketC[num.index] } 장</h5>								
-								</c:forEach>
-								</div>
-							</div>
-						</td>
-				</tbody>
-				</c:forEach>
-			</table>
-			
-			<input type="hidden" name="sumPostNo">
-			
-			<hr>
-			<div class="row">
-				<div class="col-xs-6 text-left">
-					<button type="button" class="btn btn-danger">전체선택취소</button>
-				</div>
-				<div class="col-xs-6 text-right">
-					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#allTicketPayment">전체티켓결제</button>
-					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#selectedTicketPayment">선택티켓결제</button>
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#selectedTicketDelete">선택티켓삭제</button>
-				</div>
-			</div>
-			
-			<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-			<input type="hidden" id="pageNo" name="pageNo" value=""/>
-
-			<!-- '전체티켓결제' Modal -->
+				<!-- '전체티켓결제' Modal -->
 			<div class="modal fade" id="allTicketPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -302,8 +380,8 @@ function fncGetList(pageNo) {
 							<h4 class="modal-title" id="myModalLabel">전체결제</h4>
 						</div>
 						<div class="modal-body">
-							<h2 class="text-center">장바구니에 있는 모든 티켓을</h2> 
-							<h2 class="text-center text-danger">결제 하시겠습니까?</h2>
+							<h3 class="text-center">장바구니에 있는 모든 티켓을</h3> 
+							<h3 class="text-center text-danger">결제 하시겠습니까?</h3>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -328,8 +406,8 @@ function fncGetList(pageNo) {
 							<h4 class="modal-title" id="myModalLabel">선택결제</h4>
 						</div>
 						<div class="modal-body">
-							<h2 class="text-center">선택하신 <span class="label label-warning" name='ticketCount'></span> 장의 티켓을</h2> 
-							<h2 class="text-center text-danger">결제 하시겠습니까?</h2>
+							<h3 class="text-center">선택하신 <span class="label label-warning" name='ticketCount'></span> 장의 티켓을</h3> 
+							<h3 class="text-center text-danger">결제 하시겠습니까?</h3>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -354,8 +432,8 @@ function fncGetList(pageNo) {
 							<h4 class="modal-title" id="myModalLabel">선택티켓삭제</h4>
 						</div>
 						<div class="modal-body">
-							<h2 class="text-center">선택하신 <span class="label label-warning" name='ticketCount'></span> 장의 티켓을</h2> 
-							<h2 class="text-center text-danger">삭제 하시겠습니까?</h2>
+							<h3 class="text-center">선택하신 <span class="label label-warning" name='ticketCount'></span> 장의 티켓을</h3> 
+							<h3 class="text-center text-danger">삭제 하시겠습니까?</h3>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -368,16 +446,17 @@ function fncGetList(pageNo) {
 					</div>
 				</div>
 			</div>
+				
+				
+				
+				
+</form>			
 
-		</form>
-		<!-- form End /////////////////////////////////////-->
+		<jsp:include page="/layout/footer.jsp" />
+							
+		</div><!-- page-wrapper End -->	
+	</body>
 
-	</div>
-	<!--  화면구성 div End /////////////////////////////////////-->
-	
-	<!-- PageNavigation Start... -->
-		<jsp:include page="../common/pageNavigator_openApi.jsp"/>
-	<!-- PageNavigation End... -->
 
-</body>
+
 </html>

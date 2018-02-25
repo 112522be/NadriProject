@@ -7,19 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		var markers = [];
-		var keywordMarkerPosition; //키워드 검색 마커 좌표
+	<script type="text/javascript">
 	
-	
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = { 
-		    center: new daum.maps.LatLng(37.50187873437067, 127), // 지도의 중심좌표
-		    level: 10 // 지도의 확대 레벨
+		/*******************Array insert 사용**********************/
+		Array.prototype.insert = function ( index, item ) {
+	    		this.splice( index, 0, item );
 		};
+		/*********************절대 지우지 말것************************/
 		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new daum.maps.LatLng(37.50187873437067, 127), // 지도의 중심좌표
+		        level: 10 // 지도의 확대 레벨
+		    };
+		
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new daum.maps.Map(mapContainer, mapOption); 
 		
+		
+		//startMarker 생성 및 지도에 선언
 		var startSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다    
 		markerSize = new daum.maps.Size(50, 45), // 출발 마커이미지의 크기입니다 
 		markerOption = { 
@@ -27,24 +33,31 @@
 							};
 							
 		var startImage = new daum.maps.MarkerImage(startSrc, markerSize, markerOption);
-		var startPosition = new daum.maps.LatLng(x,y);	
+		var startPosition = new daum.maps.LatLng('${lat[0]}','${lng[0]}');	
 		
 		var startMarker = new daum.maps.Marker({
-			map : map,
 			position: startPosition,
 			image: startImage
 		});
+		startMarker.setMap(map);
 		
+		
+		
+		//passMarker 생성 및 지도에 선언
 		var passSrc = [];
 		var passImage = [];
 		var passPosition = [];
 		var passMarker = [];
-				
+		
+		//출발 도착지를 뺀 남은 갯수가 패스카운트
+		var passCount = ${latLength}-2
+		
+		// setMap(null)처리를 위해 보이지 않는 passMarker 5개 생성
 		for(i=1; i<6; i++){
 			
 			passSrc[i] = 'http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_'+i+'.png';
 			passImage[i] = new daum.maps.MarkerImage(passSrc[i], markerSize, markerOption);
-			passPosition[i] = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
+			passPosition[i] = new daum.maps.LatLng(37.50187873437067,127);	
 			
 			passMarker[i] = new daum.maps.Marker({
 				
@@ -53,175 +66,119 @@
 			});
 		}
 		
-		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 출발 마커이미지의 주소입니다    
+		
+		
+		//passMarker passMarker위치를 DB에서 받은 정보 위치로 변경
+		for(var i=0; i<passCount; i++){
+			if(i==0){
+				passPosition[1] = new daum.maps.LatLng('${lat[1]}', '${lng[1]}');
+				passMarker[1] = new daum.maps.Marker({
 	
+					position: passPosition[1],
+					image: passImage[1]
+				});				
+			}else if(i==1){
+				passPosition[2] = new daum.maps.LatLng('${lat[2]}', '${lng[2]}');
+				passMarker[2] = new daum.maps.Marker({
+	
+					position: passPosition[2],
+					image: passImage[2]
+				});
+			}else if(i==2){
+				passPosition[3] = new daum.maps.LatLng('${lat[3]}', '${lng[3]}');
+				passMarker[3] = new daum.maps.Marker({
+	
+					position: passPosition[3],
+					image: passImage[3]
+				});
+			}else if(i==3){
+				passPosition[4] = new daum.maps.LatLng('${lat[4]}', '${lng[4]}');
+				passMarker[4] = new daum.maps.Marker({
+	
+					position: passPosition[4],
+					image: passImage[4]
+				});
+			}else if(i==4){
+				passPosition[5] = new daum.maps.LatLng('${lat[5]}', '${lng[5]}');
+				passMarker[5] = new daum.maps.Marker({
+	
+					position: passPosition[5],
+					image: passImage[5]
+				});
+			}
+			
+		}
+		
+		//passMarker를 지도에 출력
+		if(passCount == 1){
+			passMarker[1].setMap(map);	
+			
+		}
+		if(passCount == 2){
+			passMarker[1].setMap(map);	
+			passMarker[2].setMap(map);
+		}
+		if(passCount == 3){
+			passMarker[1].setMap(map);	
+			passMarker[2].setMap(map);
+			passMarker[3].setMap(map);	
+		}
+		if(passCount == 4){
+			passMarker[1].setMap(map);	
+			passMarker[2].setMap(map);
+			passMarker[3].setMap(map);
+			passMarker[4].setMap(map);
+		}
+		if(passCount == 5){
+			passMarker[1].setMap(map);	
+			passMarker[2].setMap(map);
+			passMarker[3].setMap(map);
+			passMarker[4].setMap(map);
+			passMarker[5].setMap(map);	
+		}
+	
+		
+		//endMarker 생성 및 지도에 선언
+		var endSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지의 주소입니다    
+
 		var endImage = new daum.maps.MarkerImage(endSrc, markerSize, markerOption);
-		var endPosition = new daum.maps.LatLng(latlng.getLat(),latlng.getLng());	
+		var endPosition = new daum.maps.LatLng('${lat[latLength-1]}', '${lng[latLength-1]}');	
 		
 		var endMarker = new daum.maps.Marker({
-		
 			position: endPosition,
 			image: endImage
 		});
+		endMarker.setMap(map);
 		
 		
-		//////////////////////////////////////////////////////
+		var geoPosition =[];		//마커위치를 배열에 담아 줌이동과 주소append에 활용
 		
-		var sort =[];	//sortable 배열선언
-		var markerSort;
+		function geoStart(){
 			
-		$( function() {
-			
-			$("#searchListSubmit").on("click", function(){
-				$("#placesList").css("display","block");
-			});
-			
-		    // run the currently selected effect
-		    function runEffect() {
-		    
-		      // Run the effect
-		      $( "#placesList" ).toggle( "blind", 300 );
-		    };
-		 
-		    // Set effect from select menu value
-		    $( "#button" ).on( "click", function() {
-		      runEffect();
-		    });
-		  } );
-		
-		
-		$( function() {
-			$( "#sortable" ).sortable({
-				placeholder: "ui-state-highlight"
-			});
-			$( "#sortable" ).disableSelection();
-		} );			
-		
-		$( "#sortable" ).on( "sortupdate", function( event, ui ) {
-			
-			if(startMarker.getMap() != null){
-				startMarker.setMap(null);
-			}
+			geoPosition.push(startMarker.getPosition());
 			if(passMarker[1].getMap() != null){
-				passMarker[1].setMap(null);
+				geoPosition.push(passMarker[1].getPosition());	
 			}
 			if(passMarker[2].getMap() != null){
-				passMarker[2].setMap(null);
+				geoPosition.push(passMarker[2].getPosition());	
 			}
 			if(passMarker[3].getMap() != null){
-				passMarker[3].setMap(null);
+				geoPosition.push(passMarker[3].getPosition());	
 			}
 			if(passMarker[4].getMap() != null){
-				passMarker[4].setMap(null);
+				geoPosition.push(passMarker[4].getPosition());	
 			}
 			if(passMarker[5].getMap() != null){
-				passMarker[5].setMap(null);
+				geoPosition.push(passMarker[5].getPosition());	
 			}
-			if(endMarker.getMap() != null){
-				endMarker.setMap(null);
+			geoPosition.push(endMarker.getPosition());
+			
+			var k=0;
+			for(var i=0; i<geoPosition.length; i++){	
+				geo(i);
 			}
-			
-			markerSort =[];
-			markerSort = sort;
-			
-			var k=1; //.pointer의 자식값의 변화를 위한 초기화값
-			for(var i=0; i<7; i++){
-				if(markerSort[i] != null){
-					markerSort[i]=$($(".pointer :nth-child("+k+")")[0]).attr("value");
-					k++;
-				}
-			} 
-			sort = markerSort;
-			
-			/*******데이터 타입이 달라서 맵에 넣을수가 없어서 전달 받은 value값을 파싱하여 latlng 데이터 타입으로 변환하여 마커 위치 재생성********/
-			
-			if(sort[0] != null){
-				var parseStartPoint = sort[0].replace("(","");
-				parseStartPoint = parseStartPoint.replace(")","");
-				parseStartPoint = parseStartPoint.split(',');
-				
-				sort[0] = new daum.maps.LatLng(parseStartPoint[0], parseStartPoint[1]);
-				
-				startMarker.setPosition(sort[0]);
-				startMarker.setMap(map);
-			}
-			
-			
-			
-			if(sort[1] != null){
-				var parsePassPoint1 = sort[1].replace("(","");
-				parsePassPoint1 = parsePassPoint1.replace(")","");
-				parsePassPoint1 = parsePassPoint1.split(',');
-				
-				sort[1] = new daum.maps.LatLng(parsePassPoint1[0], parsePassPoint1[1]);
-				
-				passMarker[1].setPosition(sort[1]);
-				passMarker[1].setMap(map);
-			}
-			
-			
-			if(sort[2] != null){
-				var parsePassPoint2 = sort[2].replace("(","");
-				parsePassPoint2 = parsePassPoint2.replace(")","");
-				parsePassPoint2 = parsePassPoint2.split(',');
-				
-				sort[2] = new daum.maps.LatLng(parsePassPoint2[0], parsePassPoint2[1]);
-	
-				passMarker[2].setPosition(sort[2]);
-				passMarker[2].setMap(map);
-			}
-			
-			
-			if(sort[3] != null){
-				var parsePassPoint3 = sort[3].replace("(","");
-				parsePassPoint3 = parsePassPoint3.replace(")","");
-				parsePassPoint3 = parsePassPoint3.split(',');
-				
-				sort[3] = new daum.maps.LatLng(parsePassPoint3[0], parsePassPoint3[1]);
-				
-				passMarker[3].setPosition(sort[3]);
-				passMarker[3].setMap(map);
-			}
-			
-			
-			
-			if(sort[4] != null){
-				var parsePassPoint4 = sort[4].replace("(","");
-				parsePassPoint4 = parsePassPoint4.replace(")","");
-				parsePassPoint4 = parsePassPoint4.split(',');
-				
-				sort[4] = new daum.maps.LatLng(parsePassPoint4[0], parsePassPoint4[1]);
-				
-				passMarker[4].setPosition(sort[4]);
-				passMarker[4].setMap(map);
-			}
-			
+		}
 		
-			if(sort[5] != null){
-				var parsePassPoint5 = sort[5].replace("(","");
-				parsePassPoint5 = parsePassPoint5.replace(")","");
-				parsePassPoint5 = parsePassPoint5.split(',');
-				
-				sort[5] = new daum.maps.LatLng(parsePassPoint5[0], parsePassPoint5[1]);
-				
-				passMarker[5].setPosition(sort[5]);
-				passMarker[5].setMap(map);
-			}
-			
-			
-			if(sort[6] != null){
-				var parseEndPoint = sort[6].replace("(","");
-				parseEndPoint = parseEndPoint.replace(")","");
-				parseEndPoint = parseEndPoint.split(',');
-				
-				sort[6] = new daum.maps.LatLng(parseEndPoint[0], parseEndPoint[1]);
-				
-				endMarker.setPosition(sort[6]);
-				endMarker.setMap(map);
-			}
-			
-		} );
-	
 		//좌표를 주소로 바꿔주는 geo 호출
 		function geo(i){
 			$.ajax({
@@ -232,347 +189,138 @@
 					"Authorization":"KakaoAK 162ee19a901cbbe89c0c4b261ddecca3"
 				},
 				data : {
-					"x": sort[i].getLng(),
-					"y": sort[i].getLat()
+					"x": geoPosition[i].getLng(),
+					"y": geoPosition[i].getLat()
 				},
 				success : function(returnData){
-					console.log(returnData.documents[0].address.address_name);
-					if(i == 0){
-						$("#subPointer").append('<div style="height:31px">출발</div>')
-					}else if(i == 1){
-						$("#subPointer").append('<div style="height:31px">경유지1</div>')
-					}else if(i == 2){
-						$("#subPointer").append('<div style="height:31px">경유지2</div>')
-					}else if(i == 3){
-						$("#subPointer").append('<div style="height:31px">경유지3</div>')
-					}else if(i == 4){
-						$("#subPointer").append('<div style="height:31px">경유지4</div>')
-					}else if(i == 5){
-						$("#subPointer").append('<div style="height:31px">경유지5</div>')
-					}else if(i == 6){
-						$("#subPointer").append('<div style="height:31px">도착</div>')
+					console.log(returnData.documents[0].address.address_name); 
+					
+					//출발지를 출력하면서 애니메이션 효과의 길이 설정을 위해 geoPosition의 개수별로 조건문을 처리함
+					if(i==0 && geoPosition.length == 2){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport1" src="../resources/images/planner/transport.gif">'
+								+'<img class="road1" src="../resources/images/planner/roadImg.gif"></div>');
+					}
+					if(i==0 && geoPosition.length == 3){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport2" src="../resources/images/planner/transport.gif">'
+								+'<img class="road2" src="../resources/images/planner/roadImg.gif"></div>');
+					}
+					if(i==0 && geoPosition.length == 4){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport3" src="../resources/images/planner/transport.gif">'
+								+'<img class="road3" src="../resources/images/planner/roadImg.gif"></div>');
+					}
+					if(i==0 && geoPosition.length == 5){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport4" src="../resources/images/planner/transport.gif">'
+								+'<img class="road4" src="../resources/images/planner/roadImg.gif"></div>');
+					}
+					if(i==0 && geoPosition.length == 6){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport5" src="../resources/images/planner/transport.gif">'
+								+'<img class="road5" src="../resources/images/planner/roadImg.gif"></div>');
+					}
+					if(i==0 && geoPosition.length == 7){
+						$("#pathImg").append('<div id="markerImg" class="startImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="출발지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+startSrc+'" style="width:50px; height:45px"></button>'
+								+'<img class="transport6" src="../resources/images/planner/transport.gif">'
+								+'<img class="road6" src="../resources/images/planner/roadImg.gif"></div>');
 					}
 					
-					$(".pointer").append('<li class="ui-state-default" id="'+i+'" value="'+sort[i]+'" style="width:300px">'+returnData.documents[0].address.address_name+'</li><br>');
+					//경유지와 도착지를 설정
+					if(i == 1 && i != geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="passImg1"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="경유지1" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+passSrc[1]+'" style="width:50px; height:45px"></button></div>');
+					}else if( i==1 && i == geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
+					
+					if(i == 2 && i != geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="passImg2"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="경유지2" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+passSrc[2]+'" style="width:50px; height:45px"></button></div>');
+					}else if( i==2 && i == geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
+					
+					if(i == 3 && i != geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="passImg3"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="경유지3" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+passSrc[3]+'" style="width:50px; height:45px"></button></div>');	
+					}else if( i==3 && i == geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
+					
+					if(i == 4 && i != geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="passImg4"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="경유지4" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+passSrc[4]+'" style="width:50px; height:45px"></button></div>');
+					}else if( i==4 && i == geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
+					
+					if(i == 5 && i != geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="passImg5"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="경유지5" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+passSrc[5]+'" style="width:50px; height:45px"></button></div>');
+					}else if( i==5 && i == geoPosition.length-1){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
+					
+					if(i == 6){
+						$("#pathImg").append('<div id="markerImg" class="endImg"><button style="outline: none; border: none;background-image: none; width:50px; height:45px;'
+								+' box-shadow:none;padding:0;background-color: white;" data-toggle="popover" data-placement="top"'
+								+' title="도착지" data-content="'+returnData.documents[0].address.address_name+'">'
+								+'<img src="'+endSrc+'" style="width:50px; height:45px"></button></div>');
+					}
 				}
 			})
 		}
 		
-		//start marker 표시
-		function start(){
-			
-			var latlng;
-			
-			if(clickMarker.getMap() != null){
-				
-				latlng = clickMarker.getPosition();
-				
-				speInfoWindow.close();
-				infowindow.close();
-				
-				clickMarker.setMap(null);
-				
-			}else if(markers[0].getMap() != null){
-				
-				latlng = keywordMarkerPosition;
-				
-				infowindow.close();
-				speInfoWindow.close();
-				
-			}
-			
-			sort[0] = latlng;			
-			
-			startMarker.setPosition(sort[0]);
-			startMarker.setMap(map);
-			
-			//sortable 기존에있는거 지우기
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-			
-		}
+		geoStart(); //지도바로 아래 정보생성
 		
-		//passMarker 표시
-		function pass(){
+		///////////////////////////////////////////////////
 		
-			var latlng;
-			
-			if(clickMarker.getMap() != null){
-				latlng = clickMarker.getPosition();
-				
-				speInfoWindow.close();
-				infowindow.close();
-				
-				clickMarker.setMap(null);
-				
-			}else if(markers[0].getMap() != null){
-				latlng = keywordMarkerPosition;
-				
-				infowindow.close();
-				speInfoWindow.close();		
-			}
-			
-			speInfoWindow.close();
-			clickMarker.setMap(null);
-				
-			if(passMarker[1].getMap() == null){
-				
-				sort[1] = latlng;
-				
-				passMarker[1].setPosition(sort[1]);
-				passMarker[1].setMap(map);
-				
-				if($(".pointer").length > 0){
-					$(".pointer").empty();
-				}
-				//출발,경유,도착 글자 지우기
-				if($("#subPointer").length > 0){
-					$("#subPointer").empty();
-				}
-				for(var i=0;i<sort.length;i++){
-	
-					if(sort[i] !=null){
-						geo(i);
-					}
-				}
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() == null){
-				
-				sort[2] = latlng;
-				
-				passMarker[2].setPosition(sort[2]);
-				passMarker[2].setMap(map);
-				
-				if($(".pointer").length > 0){
-					$(".pointer").empty();
-				}
-				//출발,경유,도착 글자 지우기
-				if($("#subPointer").length > 0){
-					$("#subPointer").empty();
-				}
-				for(var i=0;i<sort.length;i++){
-	
-					if(sort[i] !=null){
-						geo(i);
-					}
-				}
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() == null){
-				
-				sort[3] = latlng;
-				
-				passMarker[3].setPosition(sort[3]);
-				passMarker[3].setMap(map);
-				
-				if($(".pointer").length > 0){
-					$(".pointer").empty();
-				}
-				//출발,경유,도착 글자 지우기
-				if($("#subPointer").length > 0){
-					$("#subPointer").empty();
-				}
-				for(var i=0;i<sort.length;i++){
-	
-					if(sort[i] !=null){
-						geo(i);
-					}
-				}
-	
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() == null){
-				
-				sort[4] = latlng;
-				
-				passMarker[4].setPosition(sort[4]);
-				passMarker[4].setMap(map);
-				
-				if($(".pointer").length > 0){
-					$(".pointer").empty();
-				}
-				//출발,경유,도착 글자 지우기
-				if($("#subPointer").length > 0){
-					$("#subPointer").empty();
-				}
-				for(var i=0;i<sort.length;i++){
-	
-					if(sort[i] !=null){
-						geo(i);
-					}
-				}
-				
-			}else if(passMarker[1].getMap() != null && passMarker[2].getMap() != null && passMarker[3].getMap() != null && passMarker[4].getMap() != null && passMarker[5].getMap() == null){
-				
-				sort[5] = latlng;
-				
-				passMarker[5].setPosition(sort[5]);
-				passMarker[5].setMap(map);
-	
-				if($(".pointer").length > 0){
-					$(".pointer").empty();
-				}
-				//출발,경유,도착 글자 지우기
-				if($("#subPointer").length > 0){
-					$("#subPointer").empty();
-				}
-				for(var i=0;i<sort.length;i++){
-	
-					if(sort[i] !=null){
-						geo(i);
-					}
-				}
-			}		
-		}
 		
-		//endMarker표시
-		function end(){
-		
-			var latlng;
-			
-			if(clickMarker.getMap() != null){
-				latlng = clickMarker.getPosition();
-				
-				speInfoWindow.close();
-				infowindow.close();
-				
-				clickMarker.setMap(null);
-				
-			}else if(markers[0].getMap() != null){
-				latlng = keywordMarkerPosition;
-				
-				infowindow.close();
-				speInfoWindow.close();		
-			}
-			
-			sort[6] = latlng;
-	
-			endMarker.setPosition(sort[6]);
-			endMarker.setMap(map);
-			
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-		}
-		
-		////////////////////////////////////////////////////////
-		
-		//passMarker클릭시 지우기
-		daum.maps.event.addListener(passMarker[1], 'click', function() {
-	    
-			passMarker[1].setMap(null);
-			
-			sort[1] = null;
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-	  	});
-	  	daum.maps.event.addListener(passMarker[2], 'click', function() {
-	     
-			passMarker[2].setMap(null);
-			
-			sort[2] = null;
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-	 	 });
-	  	daum.maps.event.addListener(passMarker[3], 'click', function() {
-	     
-			passMarker[3].setMap(null);
-			
-			sort[3] = null;
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-	 	 });
-	  	daum.maps.event.addListener(passMarker[4], 'click', function() {
-	     
-			passMarker[4].setMap(null);
-			
-			sort[4] = null;
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-	  	});
-		daum.maps.event.addListener(passMarker[5], 'click', function() {
-	    
-			passMarker[5].setMap(null);
-			
-			sort[5] = null;
-			if($(".pointer").length > 0){
-				$(".pointer").empty();
-			}
-			//출발,경유,도착 글자 지우기
-			if($("#subPointer").length > 0){
-				$("#subPointer").empty();
-			}
-			for(var i=0;i<sort.length;i++){
-	
-				if(sort[i] !=null){
-					geo(i);
-				}
-			}
-		});
-	
-	
 		var iwArray=[];
 		var arrayStart =[];
 		var arrayEnd = [];
@@ -618,7 +366,6 @@
 						
 					}else{
 						
-						alert("시내 success");
 						callMapObjApiAJAX(returnData.info.mapObj);
 									
 						var pathSize = new daum.maps.Size(18, 30), // 출발 마커이미지의 크기입니다 
@@ -646,8 +393,8 @@
 									    content : '<div style="padding:5px;">'+returnData.subPathList[1].startName+traffic+iwContent
 									});
 									iwArray[0]=startInfowindow;
-									
 									$("#roadStartContent").append('<strong>출발</strong><div>'+iwArray[0].getContent().replace('</br>')+'</div>');
+									$("#head1").css("display", "block");
 								}
 								if(k==1){
 									var pass1Infowindow = new daum.maps.InfoWindow({
@@ -657,6 +404,7 @@
 									iwArray[1]=pass1Infowindow;
 									
 									$("#roadPass1Content").append('<strong>경유1</strong><div>'+iwArray[1].getContent().replace('</br>')+'</div>');
+									$("#head2").css("display", "block");
 								}
 								if(k==2){
 									var pass2Infowindow = new daum.maps.InfoWindow({
@@ -666,6 +414,7 @@
 									iwArray[2]=pass2Infowindow;
 									
 									$("#roadPass2Content").append('<strong>경유2</strong><div>'+iwArray[2].getContent().replace('</br>')+'</div>');
+									$("#head3").css("display", "block");
 								}
 								if(k==3){
 									var pass3Infowindow = new daum.maps.InfoWindow({
@@ -674,6 +423,7 @@
 									});
 									iwArray[3]=pass3Infowindow;
 									$("#roadPass3Content").append('<strong>경유3</strong><div>'+iwArray[3].getContent().replace('</br>')+'</div>');
+									$("#head4").css("display", "block");
 								}
 								if(k==4){
 									var pass4Infowindow = new daum.maps.InfoWindow({
@@ -682,6 +432,7 @@
 									});
 									iwArray[4]=pass4Infowindow;
 									$("#roadPass4Content").append('<strong>경유4</strong><div>'+iwArray[4].getContent().replace('</br>')+'</div>');
+									$("#head5").css("display", "block");
 								}
 								if(k==5){
 									var pass5Infowindow = new daum.maps.InfoWindow({
@@ -690,6 +441,7 @@
 									});
 									iwArray[5]=pass5Infowindow;
 									$("#roadPass5Content").append('<strong>경유5</strong><div>'+iwArray[5].getContent().replace('</br>')+'</div>');
+									$("#head6").css("display", "block");
 								}			
 								
 								///////인포윈도우
@@ -722,7 +474,7 @@
 									daum.maps.event.addListener(passMarker[2], 'mouseout', function() {
 										iwArray[2].close();
 									});
-	
+
 								}else if(iwArray[3] != null){
 									
 									daum.maps.event.addListener(passMarker[3], 'mouseover', function() {
@@ -783,7 +535,7 @@
 									laneName = '정류장에서 '+returnData.laneList[Math.floor(i/2)].busNo+'번 버스 승차';
 									stationFlag = '정류장';
 								}
-	
+
 								var pathIwArray=[];
 								var startContent ='<div style="padding:5px;">'
 													+returnData.subPathList[i].startName+laneName+'<br/>'
@@ -861,12 +613,7 @@
 										}
 									}
 								}	
-								
-								
-						
-							}
-							
-																
+							}								
 						}//for문
 						
 						arrayStart = pathStartSTN;
@@ -874,7 +621,6 @@
 					
 						for( var z=0; z<arrayStart.length ; z++){
 							
-							console.log(":::::   "+arrayStart);
 							arrayStart[z].setMap(map);
 							kk.push(arrayStart[z]);
 							arrayEnd[z].setMap(map);
@@ -954,23 +700,20 @@
 							    pathEndInfowindow[3].close();
 							});
 						}
-						
 					}//if
-					
 				}
 			});
-			
 		}// getInfo 끝
 		
 		var kk=[];
 		var qq=[];
-	
+
 		function callMapObjApiAJAX(mabObj){
 							
 			/****************폴리라인배열 선언 및 초기화****************/
 			polylineArray = [];
 			boundaryArray = [];
-	
+
 			for(var i=0; i<polylineArray.length; i++){
 				polylineArray[i]=null;
 			}
@@ -991,7 +734,7 @@
 					"Content-type" : "application/json"
 				},
 				success:function(returnData){
-	
+
 					var error = returnData.error;
 					
 					if(error != null){
@@ -1002,18 +745,18 @@
 																	
 						lineArray = null;
 						lineArray = new Array();
-	
+
 						for (var k = 0; k < returnData.listY.length; k++) {
 							lineArray.push(new daum.maps.LatLng(returnData.listY[k], returnData.listX[k]));
 						}
-	
+
 						polyline = new daum.maps.Polyline({
 							path : lineArray,
 							strokeWeight : 3
 						});
-	
+
 						polylineArray.push(polyline);
-	
+
 						if (polyline.getMap() == null) {
 							for (var i = 0; i < polylineArray.length; i++) {
 								polylineArray[i].setMap(map);
@@ -1026,8 +769,6 @@
 							          	);
 						
 						boundaryArray.push(boundary);
-						
-						alert("폴리라인 success");
 						
 					}
 				}
@@ -1046,10 +787,9 @@
 					"Content-type" : "application/json"
 				},
 				success:function(returnData){
-					alert("시외 success 터미널 마커 생성");
 					
-					var markerSrc = '../resources/images/marker/mint.png', // 출발 마커이미지의 주소입니다    
-					markerSize = new daum.maps.Size(30, 45), // 출발 마커이미지의 크기입니다 
+					var markerSrc = '../resources/images/planner/exTransport.gif', // 출발 마커이미지의 주소입니다    
+					markerSize = new daum.maps.Size(25, 25), // 출발 마커이미지의 크기입니다 
 					markerOption = { 
 										    offset: new daum.maps.Point(15, 15) // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
 										};
@@ -1073,16 +813,16 @@
 					var outStartInfowindow = new daum.maps.InfoWindow({
 					    map: map, 
 					    position : startSTN.getPosition(), 
-					    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
+					    content : '<div style="padding:5px; font-size:5px;"><span style="font-weight:bold;">'+returnData.startSTN+'</span></br>'
 					    			+'예상 소요 시간 : '+returnData.time+'분</br>'
-					    			+'요금 : '+returnData.payment+'원</br></div>',
+					    			+'요금 : '+returnData.payment+'원</div>',
 					    removable : true
 					});
 					
 					var outEndInfowindow = new daum.maps.InfoWindow({
 					    map: map, 
 					    position : endSTN.getPosition(), 
-					    content : '<div style="padding:5px;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
+					    content : '<div style="padding:5px; font-size:5px;"><span style="font-weight:bold;">'+returnData.endSTN+'</span></br></div>',
 					    removable : true
 					});
 					
@@ -1098,8 +838,8 @@
 						    	startSTN.getPosition(), endSTN.getPosition()
 						    ],
 						    strokeWeight: 2,
-						    strokeColor: '#FF00FF',
-						    strokeOpacity: 0.8,
+						    strokeColor: 'blue',
+						    strokeOpacity: 2,
 						    strokeStyle: 'dashed'
 						});	
 						
@@ -1113,7 +853,7 @@
 		}// getOBJ 끝
 		
 		////////////////////////////////////
-	
+
 		var polyline;
 		var STNpolyline;
 		var startSTN;
@@ -1127,32 +867,13 @@
 		var ey;
 	
 		function search1(flag){
-				
-			deleteRoadContent();		//우측 경로탐색 정보 지우기
-			
-			if(startMarker.getMap() == null){
-				alert("출발지를 지정해주세요!");
-				return;
-			}
-			
-			if(endMarker.getMap() == null){
-				alert("도착지를 지정해주세요!");
-				return;
-			}
-			
-			if(STNpolyline != null ){
-				deleteExSearch();
-			}
-			if(STNpolyline != null || polylineArray != null){
-				deleteInSearch();
-			}
-			deletePathMarker();
 			
 			tempMarkerArray=[];
 			realMarkerArray=[];
 			
 			tempMarkerArray.push(startMarker.getPosition());
 			realMarkerArray.push(startMarker.getPosition());
+			
 			if(passMarker[1].getMap() != null){
 				tempMarkerArray.push(passMarker[1].getPosition());
 				realMarkerArray.push(passMarker[1].getPosition());
@@ -1214,19 +935,32 @@
 				sy = first.getLat();
 				ex = last.getLng();
 				ey = last.getLat();
-	
+
 				getInfo(k);
 				
 			}//for문 끝
 			
 		} // search끝
-	
 		
-		function showBoundary(i){
-			console.log("boundaryArray["+i+"] 보여주는중");
-			map.setBounds(boundaryArray[i]);
-		}
+		search1(1);
+		///////////////////////////////////////////////////
 
+		//경로가 다 보이게 화면이동//
+		function mapMove(){
+			var zoomMove = geoPosition;
+			
+			var bounds = new daum.maps.LatLngBounds();
+			
+			for(var i=0; i<zoomMove.length; i++){
+				bounds.extend(zoomMove[i]);				
+			}		
+			map.setBounds(bounds);
+		}
+		//경로 줌이동 화면이동 완료//
+		
+		mapMove();	//초기 화면이 경로가 다보이는 전체화면으로 보이게 줌인
+		
+		
 	</script>
 </body>
 </html>

@@ -1,20 +1,8 @@
 package com.yagn.nadrii.web.user;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,20 +11,23 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.json.simple.JSONObject;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.yagn.nadrii.service.domain.User;
+import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.user.UserService;
 
 @RestController
@@ -50,9 +41,31 @@ public class UserRestController extends SupportController {
 	public UserRestController(){
 		System.out.println(this.getClass());
 	}
+		
+	@RequestMapping("uploadImage")
+	public JSONObject uploadImage(HttpServletRequest request) {
+		String rootPath = request.getSession().getServletContext().getRealPath("/");  
+	    String uploadPath = rootPath+"resources\\images\\profileImages\\";
+		String fileName = "";
+		
+		int size = 10 * 1024 * 1024;
+		try {
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
+			Enumeration files = multi.getFileNames();
+			String file = (String) files.nextElement();
+			fileName = multi.getFilesystemName(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		uploadPath += fileName;
+		JSONObject jobj = new JSONObject();	
+		String filePath = "/resources/images/profileImages/"+fileName;
+		jobj.put("url", uploadPath);
+		jobj.put("relativeUrl", filePath);
+		return jobj;
+	}
 	
-		
-		
 	@RequestMapping(value="json/addUser", method= RequestMethod.POST )
 	public Map addUser(@RequestBody JSONObject jsonObject) throws Exception{
 		System.out.println(this.getClass()+"/user/json/addUser.POST");
@@ -82,19 +95,7 @@ public class UserRestController extends SupportController {
 		return map;
 		
 	}
-			
-	private String randomNum() {
-		StringBuffer buffer = new StringBuffer();
-		for(int i = 0; i <= 6; i++) {
-			int n = (int) (Math.random() *10);
-				buffer.append(n);
-			}
-		return buffer.toString(); 
-	}
-	
-	
-	
-		
+
 	@RequestMapping(value="json/login", method=RequestMethod.POST)
 	public Map login(@RequestBody JSONObject jsonObject,HttpSession session,HttpServletRequest request) throws Exception {
 		
@@ -156,6 +157,51 @@ public class UserRestController extends SupportController {
 		map.put("systemMessage", user);
 		return map;
 	}
+	
+	@RequestMapping(value = "json/checkId2", method=RequestMethod.POST)
+    public String checkId(
+    		@RequestBody String userId
+    		) throws Exception {
+
+		System.out.println("\n/user/json/checkId : POST");
+		System.out.println("\n[input userId]==>" + userId);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int userIdCheck = userService.checkId(userId);
+		System.out.println("[DB userIdCheck]==>" + userIdCheck);
+		
+		///*
+		String resultIdCheck = "";
+		if (userIdCheck == 1) {
+			resultIdCheck = "incorrect";
+		} else {
+			resultIdCheck = "correct";
+		}
+		//*/
+		
+		System.out.println("[resultIdCheck]==>" + resultIdCheck);
+		
+		return resultIdCheck;
+    }	
+	
+	@RequestMapping(value = "json/checkId", method=RequestMethod.POST)
+    public Map idCheck(
+    		String userId 
+    		) throws Exception {
+
+		System.out.println("[check]");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("[check]==>"+userId);
+		int check = userService.checkId(userId);
+		map.put("check", String.valueOf(check));
+		return map;
+    }	
+
+	
+	
 	
 }
+
+

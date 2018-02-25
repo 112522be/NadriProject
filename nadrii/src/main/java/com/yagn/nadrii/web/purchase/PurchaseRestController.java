@@ -71,11 +71,19 @@ public class PurchaseRestController {
 				purchase.setCancelDate(cancelDate);
 				purchase.setBuyer(userService.getUser(purchase.getBuyerId()));
 				purchase.setQrCode("StepOfBasket");
-				
+
 				System.out.println("\n[purchase.buyer check] ==> " + purchase.getBuyer() );
 				System.out.println("\n[Purchase Domain check] ==> " + purchase.toString());
+				System.out.println("\n[Purchase Domain buyer check] ==> " + purchase.getBuyer());
 				System.out.println("\n");
 
+				if (purchase.getBuyer().getUserName() == null) {
+					purchase.getBuyer().setUserName(purchase.getBuyerName());
+				}
+				if (purchase.getBuyer().getPhone() == null) {
+					purchase.getBuyer().setPhone(purchase.getBuyerPhone());
+				}
+				
 				purchaseService.addPurchase(purchase);
 			
 		} catch (Exception e) {
@@ -105,6 +113,28 @@ public class PurchaseRestController {
 			purchase = objectMapper.readValue(jsonObj.toJSONString(), Purchase.class);
 			
 			purchaseService.deleteBasketList(purchase);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+	
+	@RequestMapping(value="json/updatePurchaseList", method=RequestMethod.POST) 
+	public void updatePurchaseList(
+			@RequestBody String postNo
+			) {
+		
+		System.out.println("\n /purchase/json/updatePurchaseList : POST");
+		
+		System.out.println("\n[check]==>" + postNo);
+		
+		Purchase purchase = new Purchase();
+		
+		try {
+			
+			purchaseService.updatePurchaseQR( Integer.parseInt(postNo) );
+			
 			
 		} catch (Exception e) {
 			System.out.println(e);

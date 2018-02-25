@@ -1,6 +1,5 @@
 package com.yagn.nadrii.web.trip;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,14 +8,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.User;
-import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.wish.WishService;
@@ -51,6 +48,13 @@ public class TripController {
 		String areaCode = (String)session.getAttribute("areaCode");
 		String localName = (String)session.getAttribute("localName");		
 		
+		if(areaCode==null ||areaCode=="") {
+			areaCode="1";
+		}
+		
+		if(localName ==null || localName=="") {
+			localName ="23";
+		}
 		
 		//
 		if(area.equals("federal")) {
@@ -62,12 +66,10 @@ public class TripController {
 				
 		System.out.println(areaCode +":" +localName);
 		
-		 
-		
-		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode,localName); 
 		
 		List list =(List)tripMap.get("list");
+		
 		System.out.println("size of list ====>"+list.size());
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -75,10 +77,9 @@ public class TripController {
 			System.out.println(tourApiDomain);
 			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
 			System.out.println(trip);
-						 
+			tourApiDomain.setTrip(trip);
+									 
 		}
-		
-				
 				
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
@@ -86,10 +87,10 @@ public class TripController {
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
+		Thread.sleep(1000);
 		
-		
-		return "forward:/Trip/listTrip2.jsp";
-		//return "forward:/Trip/listTrip2.jsp";
+
+		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")
@@ -126,14 +127,30 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode,localName);
 		
+		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		map.put("trip", "Exhibit");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
-		return "forward:/Trip/listTrip2.jsp";
+		Thread.sleep(1000);		
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 	
@@ -157,14 +174,28 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode,localName);
 		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		map.put("trip", "Gallery");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
-		return "forward:/Trip/listTrip2.jsp";
+		Thread.sleep(1000);		
+
+		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="/listExperience")
@@ -186,14 +217,29 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode,localName);
 		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		map.put("trip", "Experience");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);	
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
-		return "forward:/Trip/listTrip2.jsp";
+		Thread.sleep(1000);
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 
 	@RequestMapping(value="/listTradition")
@@ -215,18 +261,53 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode,localName);
 		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		
 		map.put("trip", "Tradition");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		
-				
-		return "forward:/Trip/listTrip2.jsp";
+		Thread.sleep(1000);
+
+		return "forward:/Trip/listTrip3.jsp";
 	}
 	
 	@RequestMapping(value="/getTheme")
-	public String getTheme() {
+	public String getTheme(HttpSession session,Map map) throws Exception{
+		
+		
+		Map tripMap = tripService.listTrip(1,"14","A02","A0206","","","");
+		
+		List list = (List)tripMap.get("list");
+		
+		TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
+		TourApiDomain feeDomain = tripService.getTripDetail(tourApiDomain.getContentid()+"",tourApiDomain.getContenttypeid()+"");
+				
+		
+		System.out.println(tourApiDomain);
+		System.out.println(feeDomain);
+		
+		
+		
+		
+		map.put("trip", tourApiDomain);
+		map.put("fee", feeDomain);
+		
+		Thread.sleep(1000);
 		return"forward:/Trip/getTheme.jsp";
 	}
 	
@@ -238,12 +319,29 @@ public class TripController {
 		System.out.println("전달 메시지 ---->" +keyword);
 		
 		Map searchMap = tripService.listTourBySearch(pageNo, keyword);
+		
+		List list =(List)searchMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		
 		map.put("trip", "Search");
 		map.put("list", searchMap.get("list"));
 		map.put("pageNo", pageNo);
 		
-		
-		return "forward:/Trip/listTrip2.jsp";
+		Thread.sleep(1000);
+
+		return "forward:/Trip/listTrip3.jsp";
+
 	}
 	
 }
