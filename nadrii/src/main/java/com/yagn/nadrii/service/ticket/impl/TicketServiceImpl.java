@@ -69,10 +69,10 @@ public class TicketServiceImpl implements TicketService {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if (openApiSearch.getSearchKeyword() != null) {
-			map = tourApiDao.getSearchTicketList(openApiSearch);
-		} else {
+		if (openApiSearch.getSearchKeyword() == null || openApiSearch.getSearchKeyword() == "") {
 			map = tourApiDao.getTicketList(openApiSearch);
+		} else {
+			map = tourApiDao.getSearchTicketList(openApiSearch);
 		}
 		
 		return map;
