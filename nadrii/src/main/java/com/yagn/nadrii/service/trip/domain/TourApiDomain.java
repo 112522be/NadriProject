@@ -3,6 +3,8 @@ package com.yagn.nadrii.service.trip.domain;
 
 import java.util.Map;
 
+import com.yagn.nadrii.service.domain.Trip;
+
 
 public class TourApiDomain {
 	
@@ -72,6 +74,7 @@ public class TourApiDomain {
 	private String chkcreditcard;
 	private String usetime;
 	private String chkbabycarriage;
+	private Trip trip;
 	
 	////
 	private int flag;
@@ -88,10 +91,15 @@ public class TourApiDomain {
 		this.sponser2tel = sponser2tel;
 	}
 
+	public Trip getTrip() {
+		return trip;
+	}
 
-	
-	
-	
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
 	public int getFlag() {
 		return flag;
 	}

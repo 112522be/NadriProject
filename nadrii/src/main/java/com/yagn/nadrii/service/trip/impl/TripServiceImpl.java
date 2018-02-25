@@ -149,6 +149,14 @@ public class TripServiceImpl implements TripService {
 		Trip trip = tripDaoDB.getTrip(postNo);
 		return trip;
 	}
+
+
+
+	@Override
+	public List lsitTripinDB() throws Exception {
+		System.out.println("listTrip in the DB");
+		return tripDaoDB.listTripinDB();
+	}
 	
 	
 	

@@ -47,16 +47,16 @@ function getLike(){
 		url: "../like/json/listLikeByPost/"+postNo,
 		dataType: "json",
 		success:function(returnData){
-			$(".like").empty();
-			$(".like").append(returnData.totalCount);
+			$(".likeConut").empty();
+			$(".likeConut").append(returnData.totalCount);
 			
-			$("span.heart").empty();
+			$("span.likeIcon").empty();
 
 			if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
-            	$("span.heart").append('<span class="far fa-heart"></span>');
+            	$("span.likeIcon").append('<span class="far fa-heart"></span>');
 
             }else{
-                $("span.heart").append('<span class="fas fa-heart full"></span>');
+                $("span.likeIcon").append('<span class="fas fa-heart full"></span>');
             }
 		}
 	});	
@@ -66,7 +66,7 @@ $(function(){
 
 	$("a.heart").bind("click", function(){
 		
-		if( $("span.heart svg").attr("data-prefix") == 'fas' ){
+		if( $("span.likeIcon svg").attr("data-prefix") == 'fas' ){
 			deleteLike();
 		}else{
 			addLike();
@@ -80,7 +80,7 @@ $(function(){
 
 <div style="padding: 30px">
 <span style="padding-right: 15px">
-<a href="#none" class="heart"><span class="heart"></span>&nbsp;<span class="like"></span></a>
+<a href="#none" class="heart"><span class="likeIcon"></span>&nbsp;<span class="likeConut"></span></a>
 </span>
 <span>
 <span class="icon fa-comment">&nbsp;<span class="comment"></span></span>

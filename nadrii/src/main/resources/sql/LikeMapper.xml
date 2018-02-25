@@ -56,8 +56,7 @@
 	  	SELECT COUNT(*)
 	  	FROM  (	SELECT like_no, post_no, user_id, reg_date
 					FROM likes
-					WHERE post_no = #{postNo}
-					 ) countTable		
+					WHERE post_no = #{postNo}	) countTable		
 	 </select>
 	
 </mapper>

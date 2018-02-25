@@ -8,10 +8,10 @@ pageEncoding="UTF-8"%>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
 	
-
 	<script src="/resources/helios/assets/js/jquery.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
 	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
@@ -21,9 +21,14 @@ pageEncoding="UTF-8"%>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
 	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="../resources/css/keywordSearch.css" rel="stylesheet">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  	
 	<script type="text/javascript">
 	
@@ -48,9 +53,6 @@ pageEncoding="UTF-8"%>
 			listTrip();
 		}
 	});
-	
-	
-	
 	
 	//스크롤이 끝에 닿을 때를 캐치
 	$(window).scroll(function() { 
@@ -97,25 +99,37 @@ pageEncoding="UTF-8"%>
 																
 					for(var a =0; a<data.length;++a){
 						
+						var postNo;
+						if(!(data[a].trip == '' || data[a].trip == null)){
+							postNo = data[a].trip.postNo;
+						}else{
+							postNo = '';
+						}
+						
 						var dpValue =						
 							"<article class='4u 12u(mobile) special'>"
 							+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
-							+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
+							+"<input type='hidden' name='postNo' value='"+postNo+"'/>"
+							+"<a href='#' class='image featured'><img src='"+data[a].firstimage+"' alt='' style='height: 245px;'/></a>"
 							+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
   							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 							+"<header  style='text-align: center;'>"
-								+"<h3><a href='#' name='title'>"+data[a].title+"</a></h3>"
+							+"<h3><a href='#' name='title'>"+data[a].title+"</a></h3>"
 							+"</header>"
 							+"<div style='text-align: right;'>"
 							+"<p>"+data[a].addr1+"</p>"
 							+"</div>"
+							+"<div>"
+							+"<div class='icons' style='float: right;'>"
+							+"<span class='wishIcon'></span>&nbsp;<span class='wishCount'></span>"
+							+"</div></div>"
 							+"</div>"
 						+"</article>";
 						$(".row").append(dpValue);	
 					}
-
+					getSomething($("article").length);
+					
 				}else{
-					//alert("예외발생");
 					federalPage++;
 					$.ajax({
 						url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+areaCode+"/"+"0",
@@ -132,12 +146,18 @@ pageEncoding="UTF-8"%>
 							if(data.length!=0){
 																											
 								for(var a =0; a<data.length;++a){
-									
+									var postNo;
+									if( !(data[a].trip == '' || data[a].trip == null)){
+										postNo = data[a].trip.postNo;
+									}else{
+										postNo = '';
+									}
 									var dpValue =
 										
 										"<article class='4u 12u(mobile) special'>"
 										+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
-										+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
+										+"<input type='hidden' name='postNo' value='"+postNo+"'/>"
+										+"<a href='#' class='image featured'><img src='"+data[a].firstimage+"' alt='' style='height: 245px;'/></a>"
 										+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 		      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 										+"<header  style='text-align: center;'>"
@@ -146,14 +166,18 @@ pageEncoding="UTF-8"%>
 										+"<div style='text-align: right;'>"
 										+"<p>"+data[a].addr1+"</p>"
 										+"</div>"
+										+"<div>"
+										+"<div class='icons' style='float: right;'>"
+										+"<span class='wishIcon'></span>&nbsp;<span class='wishCount'></span>"
+										+"</div></div>"
 										+"</div>"
 									+"</article>";
 									$(".row").append(dpValue);
 									
-					
 								}
+								getSomething($("article").length);
+								
 							}else{
-								//alert("예외발생 광역단위");
 								nationalPage++;
 								$.ajax({
 									url:"../trip/json/list"+'${trip}'+"/"+federalPage+"/"+"0"+"/"+"0",
@@ -170,12 +194,18 @@ pageEncoding="UTF-8"%>
 										if(data.length!=0){
 																														
 											for(var a =0; a<data.length;++a){
-												
+												var postNo;
+												if(!(data[a].trip == '' || data[a].trip == null)){
+													postNo = data[a].trip.postNo;
+												}else{
+													postNo = '';
+												}
 												var dpValue =
 													
 													"<article class='4u 12u(mobile) special'>"
 													+"<div style='background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;'>"
-													+"<a href='#' class='image featured'><img src='"+data[a].firstimage2+"' alt='' style='width='282px'; height='187px';'/></a>"
+													+"<input type='hidden' name='postNo' value='"+postNo+"'/>"
+													+"<a href='#' class='image featured'><img src='"+data[a].firstimage+"' alt='' style='height: 245px;'/></a>"
 													+"<input type='hidden' name='contentid' value='"+data[a].contentid+"'/>"
 					      							+"<input type='hidden' name='contenttypeid' value='"+data[a].contenttypeid+"'/>"
 													+"<header  style='text-align: center;'>"
@@ -184,12 +214,17 @@ pageEncoding="UTF-8"%>
 													+"<div style='text-align: right;'>"
 													+"<p>"+data[a].addr1+"</p>"
 													+"</div>"
+													+"<div>"
+													+"<div class='icons' style='float: right;'>"
+													+"<span class='wishIcon'></span>&nbsp;<span class='wishCount'></span>"
+													+"</div></div>"
 													+"</div>"
 												+"</article>";
 											      												
 												$(".row").append(dpValue);
 											}
 										}
+										getSomething($("article").length);
 									}
 								});
 										
@@ -204,20 +239,51 @@ pageEncoding="UTF-8"%>
 		});
 	}
 	
+	window.onload = function(){
+		getSomething($("article").length);
+	}		
 	
-	
-	$(function(){
+	function getSomething(k){
 		
-		
-		$('#dialog').dialog({
-// 		 	modal: true,
-		    autoOpen: false,
-		    resizable: false,
-		    width: 800,
-		    /*position: "center"*/
-		});
-		
-	});
+		for(var i=0; i< k ; i++){
+			var postNo = $($('input[name="postNo"]')[i]).val();
+			console.log(postNo);
+			if( !(postNo == '' || postNo == null )){
+				
+				$.ajax({
+					url:"../wish/json/listWishByPost/"+postNo,
+					method:"GET",
+					async: false,
+					success:function(returnData){
+						
+						console.log(i+" wish::"+postNo);
+						console.log(returnData);
+						
+						$("article.special:nth-child("+(i+1)+") .wishCount").empty();
+						$("article.special:nth-child("+(i+1)+") .wishCount").append(returnData.totalCount);
+						
+						$("article.special:nth-child("+(i+1)+") .wishIcon").empty();
+						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
+		                	$("article.special:nth-child("+(i+1)+") .wishIcon").append('<i class="far fa-bookmark"></i>');
+		                }else{
+		                    $("article.special:nth-child("+(i+1)+") .wishIcon").append('<i class="fas fa-bookmark" name="full"></i>');
+		                }
+					}
+				});
+			}else{
+				 
+				$("article.special:nth-child("+(i+1)+") .wishCount").empty();
+				$("article.special:nth-child("+(i+1)+") .wishCount").append('0');
+				
+				$("article.special:nth-child("+(i+1)+") .wishIcon").empty();
+                $("article.special:nth-child("+(i+1)+") .wishIcon").append('<i class="far fa-bookmark"></i>');
+               
+			}
+			
+			
+					
+		}//for문
+	}
 	
 	///////토스트 창/////////
 	function makeToast(title) {
@@ -244,30 +310,19 @@ pageEncoding="UTF-8"%>
 				mapy = common.mapy;
 				contentid =common.contentid;
 				contenttypeid = common.contenttypeid;
-				//alert(contenttypeid);
-				//alert(contentid);
-				
+
 				$("#tourName").remove();
-				$("#tourImg").remove();
 				$("#tourAddress").remove();
 			
-				
 				$("#tourCharge").remove();
 				$("#tourOverView").remove();
-				
 				
 				var tourName = "";
 				var tourImage = "";
 				var tourAddress ="";
 				var tourCharge ="";
 				var tourOverView ="";
-				
-				
-				if(common.firstimage2 !=null){
-					tourImage = "<img id ='tourImg' src='"+common.firstimage2+"' style='width:300px; height:200px;'/>";
-				}else{
-					tourImage = "<h5 id ='tourImg'> 제공사진 없음 </h5>";
-				}				
+						
 				
 				if(common.title != null){
 					tourName= "<h5 id='tourName'><strong> "+ common.title+"</strong></h5>";
@@ -294,13 +349,27 @@ pageEncoding="UTF-8"%>
 					tourOverView= "<h5 id='tourOverView'> 제공정보 없음 </h5>";
 				}
 				
-				$("#imageSpace").append(tourImage);
 				$("#titleName").append(tourName);	
 				$("#address").append(tourAddress);
 				$("#fee").append(tourCharge);
 				$("#description").append(tourOverView);
 				
 				makeMap();
+			
+				$('#dialog').dialog({
+				    autoOpen: false,
+				    resizable: false,
+				    width: 800,
+				    height: 700,
+				    open: function(event, ui){
+				    	
+						$("#dialog").css('overflow', 'auto');
+						$(".ui-dialog .ui-dialog-titlebar").css("padding","0");
+						$(".ui-widget-header").css("border","0");
+						$(".table>tbody>tr>td").css("border","0");
+						
+					}					
+				});
 		
 				$('#dialog').dialog('open');
 				
@@ -308,241 +377,139 @@ pageEncoding="UTF-8"%>
 				makeMap();
 		
 				$('#dialog').dialog('open');
-				
-			
+
 			}
 		});
 	}
 	
-	//우리 디비에 데이터를 호출하고 저장할 때 호출
-	function addTripToDB(contentid, contenttypeid){
-		//alert("우우우우")
-		$.ajax({
-			url:"../trip/json/getTrip/"+contentid+"/"+contenttypeid+"",
-			method:"GET",
-			dataType:"json",
-			headers :{
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success:function(data){
-				var trip = data.result;
-				//alert(trip.postNo);
-				$("input[name='postNo']").val(trip.postNo);
-			}
-		})
-	}
-	
-	var contenttypeid;
-	var contentid;
-	var postNo;
-	$(function() {
-	  $(document).on("click","img", function(e){
-	    
-		contentid =$($("input[name = 'contentid']")[$("img").index(this)]).val();
-		contenttypeid =$($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
-		e.preventDefault();	 
-		//alert(contentid);
-		//alert(contenttypeid);
-		
-		getTheme(contentid, contenttypeid);
-		addTripToDB(contentid, contenttypeid);
-		
-	  });
-	});	
-	
-	//위시리스트에 저장할 때 사용
-	function addWish(contentid){
-		$.ajax({
-			url:"../wish/json/addWishFromTrip/"+contentid+"",
-			method:"GET",
-			dataType:"json",
-			headers :{
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success:function(returnData){
-				var message = returnData.message;
-				if(message == "ok"){
-					makeToast("위시리스트 저장되었습니다.");
-				}else{
-					makeToast("이미 저장된 장소");
+	/////////////////////////
+
+		function addWish(contentid) {
+			$.ajax({
+				url : "../wish/json/addWishFromTrip/" + contentid + "",
+				method : "GET",
+				dataType : "json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(returnData) {
+					var message = returnData.message;
+					if (message == "ok") {
+						makeToast("위시리스트 저장되었습니다.");
+					} else {
+						makeToast("이미 저장된 장소");
+					}
+					getWish();
 				}
-			}
-		});
-		
-	}
-	
-	
-	//리스트에 있는 위시리스트 클릭시 발생하는 이벤트
-	$(function() {
-	  $(document).on("click","#wish", function(e){
-		  	if(${loginUser !=null}){
-	
-				//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
-				addTripToDB(contentid, contenttypeid);
-				
-				//위에서 저장한 것을 위시리스트에 재저장 
-				addWish(contentid);
-
-		  	}else{
-		  		makeToast("로그인이 필요합니다");
-		  	
-		  	}
-		  	e.preventDefault();
-			
-		});
-	})
-	
-		/*
-	//getTheme 내에 있는 위시리스트 클릭시 발생하는 이벤트
-	$(function(){
-		$("#wishList").on("click",function(e){
-			e.preventDefault();
-			alert(contentid);
-			alert(contenttypeid);
-			alert("다이얼로그 위시리스트 클릭");
-			addTripToDB(contentid, contenttypeid);
-			addWish(contentid);
-			e.preventDefault();
-			
-		});
-	})*/
-/*
-	$( function() {
-		//==> 추가된부분 : "addUser"  Event 연결
-		$("a[href='#' ]:contains('시구단위')").on("click" , function() {
-			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=local"
-		});
-	});
-		
-	$( function() {
-		//==> 추가된부분 : "addUser"  Event 연결
-		$("a[href='#' ]:contains('광역단위')").on("click" , function() {
-			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=federal"
-		});
-	});
-	
-	$( function() {
-		//==> 추가된부분 : "addUser"  Event 연결
-		$("a[href='#' ]:contains('전국단위')").on("click" , function() {
-			self.location = "/trip/list"+'${trip}'+"?pageNo=1&area=national"
-		});
-	});
-*/	
-	///*
-	$( function() {
-		$("#search").on("click" , function() {
-				var keyword = $(".form-control").val();
-				$("form input:nth-child(2)").val(page-1);
-				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
-			
-		});
-	});
-
-	//*/
-	/*
-	$(function() {
-		$(document).on("click",".btn.btn-default:contains('좋아요')", function(e){
-			alert("좋아요");
-			
-		});
-	});
-	//*/
-	/*
-	$(function() {
-		$(document).on("click",".btn.btn-default:contains('공유')", function(e){
-			alert("공유");
-		});
-	});
-	//*/
-	
-	///////////////////
-	
-	$('body').load('like.jsp', function() {
-         getLike();
-    })
-	
-    /*
-    $(function(){
-    	getSomething();
-    })
-      
-    
-	window.onload = function(){
-		 getSomething();
-	}
-    
-	function getSomething(){
-			
-			var totalCount = ${resultPage.totalCount};
-			
-			for(var i=0; i< totalCount ; i++){
-				var groupNo = $($('input[name="groupNo"]')[i]).val();
-
-				var placeName = $($('input[name="placeName"]')[i]).val();
-				$("article.special:nth-child("+(i+1)+") .placeName").empty();
-				$("article.special:nth-child("+(i+1)+") .placeName").append(placeName);
-				
-				var placeDetail = $($('input[name="placeDetail"]')[i]).val();
-				$("article.special:nth-child("+(i+1)+") .placeDetail").empty();
-				$("article.special:nth-child("+(i+1)+") .placeDetail").append(placeDetail);
-				
-				$.ajax({
-					url: "../like/json/listLikeByPost/"+groupNo,
-					dataType: "json",
-					async: false,
-					success:function(returnData){
-						
-						$("article.special:nth-child("+(i+1)+") .like").empty();
-						$("article.special:nth-child("+(i+1)+") .like").append(returnData.totalCount);
-						
-						if( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}"=='') || ("${loginUser.userId}" == null) ){
-		                	$("article.special:nth-child("+(i+1)+") .heart").append('<i class="far fa-heart"></i>');
-		                }else{
-		                    $("article.special:nth-child("+(i+1)+") .heart").append('<i class="fas fa-heart" name="full"></i>');
-		                }
-					}
-				});	
-				
-				$.ajax({
-					url:"/common/listCommentByPost",
-					method:"GET",
-					async: false,
-					data:{
-						"postNo": groupNo
-					},
-					success: function(JSONData) {
-						
-						$("article.special:nth-child("+(i+1)+") .comment").empty();
-						$("article.special:nth-child("+(i+1)+") .comment").append(JSONData.totalCount);
-						
-					}
-				});
-				
-				if(placeName != ""){
-					$.ajax({
-						url: "../group/json/getThumbNail",
-						method:"POST",
-						data:{
-							"placeName": placeName
-						},
-						async: false,
-						success:function(returnData){
-							var tag =	'<img src="'+returnData+'" alt="" class="filter" height="245px">';
-							$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
-							$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
-						}
-					});	
-				}else{
-					var tag =	'<img src="../resources/images/background_2.jpg" alt="" height="245px">';
-					$("article.special:nth-child("+(i+1)+") .thumbNail").empty();
-					$("article.special:nth-child("+(i+1)+") .thumbNail").append(tag);
-				}			
-						
-			}//for문
+			});
 		}
-	//*/	
+	
+		function deleteWish(k){
+			
+			$.ajax({
+				url: "../wish/json/deleteWish/"+k,
+				method: "POST",
+				dataType: "json",
+				success:function(returnData){
+					getWish(k);
+				}
+			});	
+		}
+
+		function getWish(k) {
+
+			$.ajax({
+				url : "../wish/json/listWishByPost/" + k,
+				dataType : "json",
+				success : function(returnData) {
+					$(".wishCount1").empty();
+					$(".wishCount1").append(returnData.totalCount);
+
+					$("span.wishIcon1").empty();
+
+					if ( ((JSON.stringify(returnData.list)).indexOf("${loginUser.userId}") == -1) || ("${loginUser.userId}" == '') || ("${loginUser.userId}" == null) ) {
+						$("span.wishIcon1").append('<span class="far fa-bookmark"></span>');
+					} else {
+						$("span.wishIcon1").append('<span class="fas fa-bookmark full"></span>');
+					}
+				}
+			});
+		}
+
+		$(function() {
+
+			$("a.wish1").bind("click", function(e) {
+				if ($("span.wishIcon1 svg").attr("data-prefix") == 'fas') {
+					deleteWish($("#dialog tr td input[name='postNo']").val());
+				} else {
+					if(${ loginUser != null }){
+									
+						//해당 컨텐츠아이디에 있는 여행지를 호출없으면 저장, 있으면 업데이트 카운트
+						addTripToDB(contentid, contenttypeid);
+						
+						//위에서 저장한 것을 위시리스트에 재저장 
+						addWish(contentid);
+						//makeToast(");
+				  	}else{
+				  		makeToast("로그인이 필요합니다");
+				  	}
+				  	e.preventDefault();
+				}
+
+			});
+		});
+
+		/////////////////////
+
+		//우리 디비에 데이터를 호출하고 저장할 때 호출
+		function addTripToDB(contentid, contenttypeid) {
+			$.ajax({
+				url : "../trip/json/getTrip/" + contentid + "/" + contenttypeid
+						+ "",
+				method : "GET",
+				dataType : "json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(data) {
+					var trip = data.result;
+					$("#dialog tr td input[name='postNo']").val(trip.postNo);
+					getWish(trip.postNo);
+				}
+			})
+		}
+
+		var contenttypeid;
+		var contentid;
+		var postNo;
+		$(function() {
+			$(document).on("click", "img", function(e) {
+				contentid = $($("input[name = 'contentid']")[$("img").index(this)]).val();
+				contenttypeid = $($("input[name = 'contenttypeid']")[$("img").index(this)]).val();
+				e.preventDefault();
+				getTheme(contentid, contenttypeid);
+				addTripToDB(contentid, contenttypeid);
+			});
+		});
+
+		$(function() {
+			$('#searchKeyword').keydown(
+				function(key) {
+					var data = $(this).val();
+					if (key.keyCode == 13) {
+						if (data != "") {
+							$("form input[name='pageNo']").val(page);
+							$('form').attr('method', 'POST').attr('action','../trip/listSearch').submit();
+						} else {
+							alert("검색어를 입력해주세요");
+						}
+					}
+			});
+		});
+
+		///////////////////
 	</script>
 	<!-- 지도 생성하는 CDN 및 맵에 담을 내용 확인 -->
 	
@@ -569,7 +536,6 @@ pageEncoding="UTF-8"%>
 	  }
 	</script>
 <style>
-	
 	img {
 		cursor: pointer;
 		width:"282px";
@@ -607,26 +573,6 @@ pageEncoding="UTF-8"%>
 	
 	.carousel{
 		background-color: #5d4f7166;
-	}
-
-	.jbTable {
-        display: table;
-        width: 100%;
-    }
-	.jbTableRow {
-        display: table-row;
-    }
-	.jbTableCell {
-        display: table-cell;
-    }
-	.jbText {
-        width: 100%;
-    }
-	.jbSubmit {	
-        width: 1%;
-    }
-	.jbText input {
-    	width: 100%;
 	}
 
 	#keyword, #search{
@@ -692,7 +638,7 @@ pageEncoding="UTF-8"%>
 		margin: 0 0 1em 0;
 	}
 	article {
-		height: 500px;
+		height: 430px;
 	}
 	.icons {
 		position: absolute;
@@ -713,8 +659,25 @@ pageEncoding="UTF-8"%>
 	svg[name="full"]{
 		color: #F05643 !important;
 	}
-	.row > * {
-	    padding: 0 0 48px 48px;
+	#header{
+		padding: 6.5em 0 1.5em 0;
+ 	}
+ 	.wrapper{
+ 		padding-top: 0;
+ 	}
+ 	.row > * {
+		padding: 24px 0 0 24px;
+		margin: 0 !important;
+	}	
+	li > span{
+		position: relative !important;
+		color: #555555;
+	}
+	.block::before{
+		color: #F05643 !important;
+	}
+	.full{
+		color: #F05643 !important;
 	}
 </style>
 
@@ -734,33 +697,40 @@ pageEncoding="UTF-8"%>
 			<jsp:include page="/layout/toolbar.jsp" />
 
 		</div>
-				
-		
 		
 		<div class="wrapper style1">
 
 			<section id="features" class="container special">
+			
+				<div class="continer">
+	
+					<div class="col-sm-12" style="padding-bottom: 40px;">
+						<h6 style="color: #8a8c91; float: left; font-style: normal;">
+							<c:if test="${search.searchKeyword != null}">
+								'${search.searchKeyword}' 검색 결과 &nbsp;&nbsp;>> &nbsp; ${resultPage.totalCount}개 게시물
+							</c:if>							
+						</h6>
+					</div>
+	
+					<div>
+						<form class="search" style="float: right">
+							<span class="fas fa-search"
+								style="position: relative; margin-right: -40px;"></span> <input
+								type="text" name="keyword" id="searchKeyword" value=""
+								style="width: 100%" /> <input type="hidden" name="pageNo"
+								value="" /> <input type="hidden" name="areaCode"
+								value="${areaCode}" /> <input type="hidden" name="localName"
+								value="${localName}" />
+						</form>
+					</div>
+				</div>
+				
 				<div class="row">
-					<div class="jbTable">
-			      		<div class="jbTableRow">
-			        		<div class="jbTableCell jbText">
-			        			<form class="search">
-									<input type="text" name="keyword" id="keyword" value="" placeholder="검색어를 입력하세요" >
-									<input type="hidden" name="pageNo" value="" />
-									<input type="hidden" name="areaCode" value="${areaCode}"/>
-					   				<input type="hidden" name="localName" value="${localName}"/>
-						      	</form>
-			        		</div>
-			        		<div class="jbTableCell jbSubmit">
-			        			<input type="button"name="search" id="search" value="검색">
-			        		</div>
-			        	</div>
-			        </div>
-					
 					<c:forEach var ="list" items="${list}">
 						<article class="4u 12u(mobile) special">
 							<div style="background-color: white; height: 400px; padding: 10px 10px 0 10px; position: relative;">
-								<a href="#" class="image featured"><img src="${list.firstimage2}" alt="" style="width="282px"; height="187px";"/></a>
+								<input type='hidden' name='postNo' value='${list.trip.postNo}'/>
+								<a href="#" class="image featured"><img src="${list.firstimage}" alt="" style="height: 245px;"/></a>
 								<input type="hidden" name="contentid" value="${list.contentid}"/>
 			          			<input type="hidden" name="contenttypeid" value="${list.contenttypeid}"/>
 								<header style="text-align: center;">
@@ -769,9 +739,12 @@ pageEncoding="UTF-8"%>
 								</header>
 								<div style="text-align: right;">
 									<p>${list.addr1}</p>
-									
 								</div>
-								
+								<div>
+									<div class="icons" style="float: right;">
+										<span class="wishIcon"></span>&nbsp;<span class="wishCount"></span>
+									</div>
+								</div>
 							</div>
 						</article>
 								
@@ -781,43 +754,40 @@ pageEncoding="UTF-8"%>
 		</div>
 	</div>
 				 		
-	<div id="toastMessage" class='toastMessage' style='display:none'>Toast</div>		
+	<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>		
 	
-	<div id="dialog" title="" >
+	<div id="dialog" style='display:none;'>
 		<table class="table">
     		<tbody>
         		<tr>
-        			<td>
-			        	<div id="map" style="width:400px;height:200px;"></div>
+        			<td colspan="2">
+			        	<div id="map" style="width:100%;height:300px;"></div>
 		        	</td>
-        	   		<td id="imageSpace">
-        	   		</td>
-        		</tr>
-        		<tr >
-   					<td id="titleName"> </td>
-          			<td></td>
-          	
-        		</tr>
-        		<tr >
-	        	 	<td id="address"></td>
-          			<td></td>
         		</tr>
         		<tr>
-					<td colspan="2"  id="fee"></td>
+   					<td id="titleName" style="font-size: 18pt;">
+   						<input type="hidden" name="postNo" value=""/>
+   					</td>       
+   					<td align="right">
+						<span>
+						<a href="#none" class="wish1" style="font-size: 17pt;"><span class="wishIcon1"></span>&nbsp;<span class="wishCount1"></span></a>
+						</span>
+   					</td>   	
+        		</tr>
+        		<tr >
+	        	 	<td colspan="2" id="address"></td>
+        		</tr>
+        		<tr>
+					<td colspan="2" id="fee"></td>
           	    </tr>
         		<tr>
-                  	<td colspan="2"   id="description"></td>
+                  	<td colspan="2" id="description"></td>
           		</tr>
       		</tbody>
       		
     	</table>
     	
-     	<footer>
-			<input type="hidden" name="postNo" value="">
-			<jsp:include page="../common/like.jsp"></jsp:include>
-			
-			<a href="#banner" id="wish" class="button circled scrolly">위시리스트</a>
-		</footer>
+     	
 	</div> 
 	
 		

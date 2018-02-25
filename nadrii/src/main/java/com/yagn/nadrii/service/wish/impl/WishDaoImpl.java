@@ -21,7 +21,6 @@ public class WishDaoImpl implements WishDao {
 
 	public WishDaoImpl() {
 		System.out.println(this.getClass());
-		
 	}
 
 	public void setSqlSession(SqlSession sqlSession) {
@@ -34,9 +33,13 @@ public class WishDaoImpl implements WishDao {
 	}
 
 	@Override
+	public void deleteWish(Wish wish) throws Exception {
+		sqlSession.delete("WishMapper.deleteWish", wish);
+	}
+	
+	@Override
 	public void addWishListFromPost(Wish wish) throws Exception {
 		sqlSession.insert("WishMapper.addWishFromPost",wish);
-		
 	}
 
 	@Override
@@ -50,21 +53,21 @@ public class WishDaoImpl implements WishDao {
 	}
 
 	@Override
-	public void deleteWish(int wishNo) throws Exception {
-		sqlSession.delete("WishMapper.deleteWish",wishNo);
-	}
-
-	@Override
 	public Wish getWishByTripNo(Map map) throws Exception {
-		
 		return sqlSession.selectOne("WishMapper.getWishByTripNo",map);
 	}
 
 	@Override
 	public Wish checkDuplication(int postNo) throws Exception {
-		
-		return sqlSession.selectOne("WishMapper.checkDuplication",postNo);
-		
+		return sqlSession.selectOne("WishMapper.checkDuplication",postNo);	
+	}
+	
+	public List<Wish> listWishByPost(Wish wish) throws Exception{
+		return sqlSession.selectList("WishMapper.listWishByPost", wish);		
+	}
+	
+	public int getTotalWishByPost(Wish wish) throws Exception{
+		return sqlSession.selectOne("WishMapper.getTotalWishByPost", wish);
 	}
 		
 	

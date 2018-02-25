@@ -71,6 +71,22 @@
 		WHERE post_no = #{postNo}
 	</select>
 	
+	<select id="listTripinDB" resultMap="tripSelectMap">
+		Select 
+			post_no,
+			lat,
+			lng,
+			address,
+			thumbnail_image_file,
+			view_count,
+			description,
+			trip_name,
+			createdtime,
+			contentid,
+			contenttypeid
+		FROM trip
+	</select>
+	
 	<select id="listTrip" parameterType="search" resultMap="tripSelectMap" >
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq

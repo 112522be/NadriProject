@@ -29,4 +29,6 @@ public interface TripService {
 	public String getAreaCode(String placeName, String areaCode) throws Exception;
 	
 	public Map listTourBySearch(int pageNo, String keyword) throws Exception;
+	
+	public List lsitTripinDB() throws Exception;
 }

@@ -60,6 +60,10 @@
 				//self.location="../user/getUserProfile?userId="+userId;	
 			});
 			
+			$("header h1").on("click", function(){
+				self.location="../group/listGroup";
+			});
+			
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
@@ -225,7 +229,7 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a href="../group/listGroup">나들이 모임</a></h1>
+					<h1>나들이 모임</h1>
 					<p>새로운 장소, 새로운 인연</p>
 				</header>
 			</div>

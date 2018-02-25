@@ -131,6 +131,12 @@ public class TripDaoImplgetAddress implements TripDao {
 		return null;
 	}
 
+	@Override
+	public List listTripinDB() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 

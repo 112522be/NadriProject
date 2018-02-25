@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.comm.CommService;
@@ -55,10 +54,8 @@ public class WishRestController {
 		User user = (User)session.getAttribute("loginUser");
 		System.out.println(user);
 		
-		
 		Thread.sleep(1000);
 		
-		//
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println(trip);
 		
@@ -75,6 +72,22 @@ public class WishRestController {
 		}else {
 			map.put("message", "fail");
 		}
+		return map;
+	}
+	
+	@RequestMapping("/json/deleteWish/{postNo}")
+	public Map deleteWish(@PathVariable("postNo") int postNo, HttpSession session) throws Exception{
+		
+		System.out.println("/wish/json/deleteWish");
+		
+		Map map = new HashMap();
+		Wish wish = new Wish();
+		
+		wish.setPostNo(postNo);
+		wish.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		
+		wishService.deleteWish(wish);
+		map.put("message", "ok");
 		
 		return map;
 	}
@@ -100,10 +113,7 @@ public class WishRestController {
 		
 		
 	}
-	
-	
-	//
-	
+
 	private Wish getWishByTripNo(HttpSession session,HttpServletRequest request,@PathVariable("tripNo") int tripNo) throws Exception {
 		session =request.getSession(true);
 		User user = (User)session.getAttribute("loginUser");
@@ -113,8 +123,6 @@ public class WishRestController {
 		Wish wish = wishService.getWishByTripNo(user.getUserId(), tripNo);
 		return wish;
 	}
-	
-	
 	
 	@RequestMapping("/json/listWish/{userId}")
 	public Map listWish(HttpSession session, HttpServletRequest request) throws Exception {
@@ -130,16 +138,7 @@ public class WishRestController {
 		
 		return map;
 	}
-	
-	
-	@RequestMapping("/json/deleteWish/{wishNo}")
-	public void deleteWish(int wishNo) throws Exception{
-		System.out.println("deleteWish");
-		wishService.deleteWish(wishNo);
 		
-		
-	}
-	
 	@RequestMapping("json/listTripFromWish/{userId}")
 	public Map listTripFromWish(@PathVariable("userId") String userId) throws Exception{
 		System.out.println(this.getClass()+".json/listTripFromWish()");
@@ -163,6 +162,19 @@ public class WishRestController {
 		
 		
 		map.put("list", list);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="json/listWishByPost/{postNo}")
+	public Map listWishByPost(@PathVariable int postNo) throws Exception{
+		
+		System.out.println("json/listWishByPost");
+		
+		Wish wish = new Wish();
+		wish.setPostNo(postNo);
+		
+		Map<String , Object> map=wishService.listWishByPost(wish);
 		
 		return map;
 	}
