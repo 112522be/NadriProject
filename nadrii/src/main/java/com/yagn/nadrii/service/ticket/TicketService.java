@@ -7,6 +7,7 @@ import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.Ticket;
+import com.yagn.nadrii.service.domain.Trip;
 
 public interface TicketService {
 
@@ -23,7 +24,7 @@ public interface TicketService {
 	
 	public void addTicketLog(Ticket ticket) throws Exception;
 	
-	
+	public Ticket getTicketFromDB(String contentId)throws Exception;
 	
 	/// NaverAPI
 	public String getNaverImage(String title) throws Exception;

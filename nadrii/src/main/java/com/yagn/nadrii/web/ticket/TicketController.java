@@ -139,18 +139,15 @@ public class TicketController {
 			System.out.println("\n\n[3]==> " + tourTicket.toString());
 			System.out.println("\n\n[4]==> " + searchFestival.toString());
 			
-			
-			/*openApiSearch.setSearchKeyword(tourTicket.getTitle());
-			System.out.println(openApiSearch.toString());
+			openApiSearch.setSearchKeyword(tourTicket.getTitle());
+			System.out.println("\n[openApiSearch Domain Check]==>" + openApiSearch.toString());
 			returnMap = ticketService.getSearchTicket(openApiSearch);
 			
-			System.out.println("\n\n[5]==> " + returnMap.get("searchTicket") );
-			ticket.setLat(searchFestival.getMapy());
-			ticket.setLng(searchFestival.getMapx());
-			ticket.setTickeTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
-			ticket.setContentId(searchFestival.getContentid());
-			ticket.setContentTypeId(searchFestival.getContenttypeid());
-			ticket.setTicketImage(tourTicket.getFirstimage());*/
+			System.out.println("\n\n[6]==> " + returnMap.get("TicketDomain") );
+			
+			ticket = (Ticket) returnMap.get("TicketDomain"); 
+			ticket.setContentid(contentId);
+			System.out.println("\n\n[7]==> " + ticket.toString() );
 			
 			ticketService.addTicketLog(ticket);
 			

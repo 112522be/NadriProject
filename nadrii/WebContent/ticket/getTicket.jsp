@@ -113,7 +113,7 @@ function fncAddBooking() {
 //위시리스트에 저장할 때 사용
 function addWish(contentid){
 	$.ajax({
-		url:"../wish/json/addWishFromTrip/"+contentid+"",
+		url:"../wish/json/addWishFromTicket/"+contentid+"",
 		method:"GET",
 		dataType:"json",
 		headers :{

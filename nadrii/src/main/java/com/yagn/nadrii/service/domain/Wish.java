@@ -9,6 +9,9 @@ public class Wish {
 	private String imageFile;
 		
 	
+	private Ticket ticket;
+	
+	
 	public Wish() {
 		
 	}
@@ -44,12 +47,21 @@ public class Wish {
 		this.imageFile = imageFile;
 	}
 
+	
+	public Ticket getTicketNo() {
+		return ticket;
+	}
+
+	public void setTicketNo(Ticket ticket) {
+		this.ticket = ticket;
+	}
+
 	@Override
 	public String toString() {
-		return "Wish [wishNo=" + wishNo + ", userId=" + userId + ", TripNo=" + trip + ", postNo=" + postNo
-				+ ", imageFile=" + imageFile + "]";
+		return "Wish [wishNo=" + wishNo + ", userId=" + userId + ", trip=" + trip + ", postNo=" + postNo
+				+ ", imageFile=" + imageFile + ", ticket=" + ticket + "]";
 	}
-	
+
 	
 
 }

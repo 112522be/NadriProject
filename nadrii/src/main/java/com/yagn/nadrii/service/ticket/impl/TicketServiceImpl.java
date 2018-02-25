@@ -14,6 +14,7 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.SearchFestival;
 import com.yagn.nadrii.service.domain.Ticket;
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 
@@ -60,7 +61,7 @@ public class TicketServiceImpl implements TicketService {
 	
 	@Override
 	public void addTicketLog(Ticket ticket) throws Exception {
-		System.out.println("\n[ticketServiceImpl.java / addTicketLog");
+		System.out.println("\n[ticketServiceImpl.java / addTicketLog]");
 		ticketDao.addTicketLog(ticket);
 	}
 
@@ -110,6 +111,10 @@ public class TicketServiceImpl implements TicketService {
 	
 	public List<String> getTicketPrice(String priceInfo) throws Exception {
 		return tourApiDao.getTicketPrice(priceInfo);
+	}
+	
+	public Ticket getTicketFromDB(String contentId)throws Exception {
+		return ticketDao.getTicketFromDB(contentId);
 	}
 	
 }

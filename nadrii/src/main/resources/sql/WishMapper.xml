@@ -10,6 +10,7 @@
 		<result property="wishNo" column="wish_no" jdbcType="NUMERIC"/>
 		<result property="userId" column="user_id" jdbcType="VARCHAR"/>
 		<result property="trip.postNo" column="trip_no" jdbcType="NUMERIC"/>
+		<result property="ticket.postNo" column="ticket_no" jdbcType="NUMERIC"/>
 		<result property="postNo" column="post_no" jdbcType="NUMERIC"/>		
 	</resultMap>
 	
@@ -19,6 +20,12 @@
 		INSERT
 		INTO wish(wish_no, user_id, trip_no, post_no)
 		VALUES( seq_wish_wish_no.nextval, #{userId:VARCHAR}, #{trip.postNo:NUMERIC}, null)
+	</insert>
+
+	<insert id="addWishFromTicket" parameterType="wish">
+		INSERT
+		INTO wish(wish_no, user_id, ticket_no, post_no)
+		VALUES( seq_wish_wish_no.nextval, #{userId:VARCHAR}, #{ticket.postNo:NUMERIC}, null)
 	</insert>
 
 	<delete id="deleteWish" parameterType="integer">
