@@ -87,90 +87,6 @@ hr {
 						})
 	})
 
-	function listMessage() {
-		$.ajax({
-					url : "/message/json/listMessage/" + '${user.userId}',
-					method : "GET",
-					dataType : "json",
-					headers : {
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},
-					success : function(JSONData) {
-						$("tbody tr").remove();
-						var message = JSONData.list;
-						var tableValue = '<div align="right" style="font-size:12pt; padding:1%;"><a id="received" name="received">받은쪽지</a>&nbsp;&nbsp;<a name="sended">보낸쪽지</a></div>';
-
-						for (var i = 0; i < message.length; i++) {
-							tableValue += '<div class="row" style="padding-left: 2.5%;">'
-									+ '<div class="col-xs-2">'
-									+ '<input type="checkbox" name="checkbox" id="checkbox" value="'
-			        +message[i].messageNo+'">&nbsp;'
-									+ message[i].senderId
-									+ '</div>'
-									+ '<div class="col-xs-7">'
-									+ message[i].text
-									+ '</div>'
-									+ '<div class="col-xs-3" align="center" style="color: gray; font-size:12pt;">'
-									+ '<span>'
-									+ message[i].regDate
-									+ '.</span>'
-									+ '</div>'
-									+ '</div>'
-									+ '<hr/>';
-						}
-						$('#logContainer').html(tableValue);
-						$('#logContainer').on('click',
-								'a[name="received"]:contains("받은쪽지")',
-								function() {
-									alert();
-									listMessage();
-								})
-						$('#logContainer').on('click',
-								'a[name="sended"]:contains("보낸쪽지")',
-								function() {
-									alert();
-									listSendMessage();
-								})
-					}
-				});
-	}
-	function listSendMessage() {
-		$.ajax({
-					url : "/message/json/listSendMessage/" + '${user.userId}',
-					method : "GET",
-					dataType : "json",
-					headers : {
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},
-					success : function(returnData) {
-						var message = returnData.list;
-						var tableValue = '<div align="right" style="font-size:12pt; padding:1%;"><a id="received" name="received">받은쪽지</a>&nbsp;&nbsp;<a name="send">보낸쪽지</a></div>';
-
-						for (var i = 0; i < message.length; i++) {
-							tableValue += '<div class="row" style="padding-left: 2.5%;">'
-									+ '<div class="col-xs-2">'
-									+ '<input type="checkbox" name="checkbox" id="checkbox" value="'
-				        +message[i].receiverId+'">&nbsp;'
-									+ message[i].senderId
-									+ '</div>'
-									+ '<div class="col-xs-7">'
-									+ message[i].text
-									+ '</div>'
-									+ '<div class="col-xs-3" align="center" style="color: gray; font-size:12pt;">'
-									+ '<span>'
-									+ message[i].regDate
-									+ '.</span>'
-									+ '</div>'
-									+ '</div>'
-									+ '<hr/>'
-							$("#logContainer").html(tableValue);
-						}
-					}
-				});
-	}
-
 	function getLike(menu) {
 		if (menu == 'add') {
 			currentPage = 1;
@@ -332,7 +248,7 @@ hr {
 	}
 	
 	
-	function getJoin(menu) {
+	/**/ function getJoin(menu) {
 		if (menu == 'add') {
 			currentPage = 1;
 		}
@@ -407,7 +323,7 @@ hr {
 						})
 					}
 				})
-	}
+	} 
 </script>
 </head>
 <body onload="javascript:getLike('add');">
