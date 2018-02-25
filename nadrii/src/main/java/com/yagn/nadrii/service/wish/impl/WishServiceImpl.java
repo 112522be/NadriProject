@@ -39,6 +39,11 @@ public class WishServiceImpl implements WishService{
 	}
 	
 	@Override
+	public void addWishListFromTicket(Wish wish) throws Exception {
+		wishDao.addWishListFromTicket(wish);
+	}
+	
+	@Override
 	public void deleteWish(Wish wish) throws Exception {
 		wishDao.deleteWish(wish);		
 	}

@@ -12,6 +12,7 @@ import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.Ticket;
+import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
 @Repository("ticketDaoImpl")
@@ -35,7 +36,9 @@ public class TicketDaoImpl implements TicketDao {
 		sqlSession.insert("TicketMapper.addTicketLog", ticket);
 	}
 	
-	
+	public Ticket getTicketFromDB(String contentId) {
+		return sqlSession.selectOne("TicketMapper.ticketCheckDuplication",contentId);
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////
 	public String getKakaoImage(String title) {

@@ -9,6 +9,8 @@ public interface WishService {
 	
 	public void addWishListFromTrip(Wish wish) throws Exception;
 
+	public void addWishListFromTicket(Wish wish) throws Exception;
+
 	public void deleteWish(Wish wish) throws Exception;
 	
 	public void addWishListFromPost(Wish wish) throws Exception;

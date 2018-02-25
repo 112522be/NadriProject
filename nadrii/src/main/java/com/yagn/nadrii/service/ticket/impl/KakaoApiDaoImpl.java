@@ -148,5 +148,8 @@ public class KakaoApiDaoImpl implements TicketDao {
 	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) {
 		return null;
 	}
+	public Ticket getTicketFromDB(String contentId) {
+		return null;
+	}
 	
 } // end of class

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.comm.CommService;
 import com.yagn.nadrii.service.domain.Community;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.Wish;
+import com.yagn.nadrii.service.ticket.TicketService;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.wish.WishService;
 
@@ -38,6 +40,9 @@ public class WishRestController {
 	@Qualifier("tripServiceImpl")
 	private TripService tripService;
 	
+	@Autowired
+	@Qualifier("ticketServiceImpl")
+	private TicketService ticketService;
 		
 	public WishRestController() {
 		System.out.println(this.getClass());
@@ -68,6 +73,43 @@ public class WishRestController {
 			System.out.println(wish);
 			
 			wishService.addWishListFromTrip(wish);
+			map.put("message", "ok");
+		}else {
+			map.put("message", "fail");
+		}
+		return map;
+	}
+	
+	@RequestMapping("json/addWishFromTicket/{contentId}")
+	public Map addWishFromTicket(
+			HttpServletRequest request, 
+			@PathVariable("contentId") String contentId
+			) throws Exception{
+		
+		
+		System.out.println("RestController addWishFromTicket");
+		Map map = new HashMap();
+
+		HttpSession session = request.getSession(true);
+		User user = (User)session.getAttribute("loginUser");
+		System.out.println(user);
+		
+		Thread.sleep(1000);
+		
+		System.out.println("\n[contentId Check]==>" + contentId);
+		
+		Ticket ticket = ticketService.getTicketFromDB(contentId);
+		System.out.println(ticket);
+		
+		Wish wish = wishService.checkDuplication(ticket.getPostNo());
+		
+		if(wish==null) {
+			wish = new Wish();
+			wish.setUserId(user.getUserId());
+			wish.setTicketNo(ticket);
+			System.out.println(wish);
+			
+			wishService.addWishListFromTicket(wish);
 			map.put("message", "ok");
 		}else {
 			map.put("message", "fail");

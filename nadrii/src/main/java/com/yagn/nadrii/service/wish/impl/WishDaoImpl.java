@@ -31,6 +31,11 @@ public class WishDaoImpl implements WishDao {
 	public void addWishListFromTrip(Wish wish) throws Exception {
 		sqlSession.insert("WishMapper.addWishFromTrip",wish);
 	}
+	
+	@Override
+	public void addWishListFromTicket(Wish wish) throws Exception {
+		sqlSession.insert("WishMapper.addWishFromTicket",wish);
+	}
 
 	@Override
 	public void deleteWish(Wish wish) throws Exception {
