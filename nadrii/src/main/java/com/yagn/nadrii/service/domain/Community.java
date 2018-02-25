@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Community {
 	private int postNo;
-	private String userId;
+	private User user;
 	private String title;
 	private String thumbNailFileName;
 	private String text;
@@ -30,12 +30,6 @@ public class Community {
 	}
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	public String getTitle() {
 		return title;
@@ -82,36 +76,13 @@ public class Community {
 	
 	@Override
 	public String toString() {
-		return "Community [postNo=" + postNo + ", userId=" + userId + ", title=" + title + ", thumbNailFileName="
+		return "Community [postNo=" + postNo + ", title=" + title + ", thumbNailFileName="
 				+ thumbNailFileName + ", text=" + text + ", hashtag=" + hashtag + ", viewCount=" + viewCount + ", lat="
 				+ lat + ", lng=" + lng + ", regDate=" + regDate + "]";
 	}
 	
 	private static String parser(String date) {
 		String[] temp = date.split(" ");
-		switch(temp[0]) {
-			case "Mon" : 
-				temp[0]="월";
-				break;
-			case "Tue" :
-				temp[0]="화";
-				break;
-			case "Wed" :
-				temp[0]="수";
-				break;
-			case "Thu" :
-				temp[0]="목";
-				break;
-			case "Fri" :
-				temp[0]="금";
-				break;
-			case "Sat" :
-				temp[0]="토";
-				break;
-			case "Sun" :
-				temp[0]="일";
-				break;
-		}
 		switch(temp[1]) {
 			case "Jan" :
 				temp[1]="01";
@@ -153,5 +124,13 @@ public class Community {
 		
 		date = temp[5]+"-"+temp[1]+"-"+temp[2]+" "+temp[3];
 		return date;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

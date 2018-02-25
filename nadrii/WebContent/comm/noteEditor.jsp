@@ -183,12 +183,13 @@
 	    				    	if(content == null || content=='' || lat=="," || lng == ","){
 									return;
 	    				    	}else{ 
-	    				    		var html =$('#summernote').summernote('code')+'<p><br/><button type="button" class="btn btn-default">'+
+	    				    		console.log($('#summernote').summernote('code'));
+	    				    		var html =$('#summernote').summernote('code')+'<button type="button" class="placeButton">'+
 									'<span class="col-xs-3">'+
-									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">'+
+									'<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px">'+
 									'</span>'+
 									'<span class="col-xs-9">'+$('#content_pr').val()+'</button>'+
-									'</span><br/><br/></p>';
+									'</span><br/><p style="text-align: center;"><br><br></p>';
 				    				$('#summernote').summernote('code', html);
 	    				    	}
 						})
@@ -204,7 +205,7 @@
                     	['style', ['bold', 'italic', 'underline', 'clear']],
                         ['fontsize', ['fontsize']],
                         ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['para', ['ul', 'ol']],
                         ['height', ['height']],
                         ['insert', ['picture']],
                     	['mybutton', ['place']]
@@ -221,6 +222,7 @@
 						}
 					}
 				});
+                $('#summernote').summernote('justifyCenter');
 			});
 		</script>
 		<input type="hidden" name="hashtag" value="${community.hashtag}">
