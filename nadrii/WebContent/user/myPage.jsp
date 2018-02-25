@@ -58,6 +58,7 @@
 			}else if($(this).children().html() == "¥Ò±€"){
 				getComments('add');
 			}else{
+				
 			}
 		})
 		$('#logContainer').on('click', 'a.more', function() {
@@ -319,7 +320,7 @@
      	<div name="userProfile" style="margin: 20px;height: auto;">
      		<span class="col-xs-4" style="width: 30%" align="right">
      			<c:if test="${! empty user.profileImageFile}">
-     				<a><img alt="" src="${user.profileImageFile}" style="width: 100%"></a>
+     				<a><img alt="" src="${user.profileImageFile}" style="width: 55%"></a>
      			</c:if>
       			<c:if test="${empty user.profileImageFile}">
       				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 100%"></a>
@@ -343,7 +344,7 @@
      	</div>
      </div>
      <div class="container">
-     	<div style="background-color: white; margin-top:10pt;">
+     	<div style="background-color: white; margin-top:20pt; height: 40px;">
 	     	<div style="margin: 20px; padding-bottom:1em; height: inherit;">
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">¡¡æ∆ø‰</span></a>
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">¥Ò±€</span></a>

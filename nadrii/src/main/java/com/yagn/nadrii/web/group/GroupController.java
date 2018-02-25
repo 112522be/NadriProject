@@ -61,7 +61,6 @@ public class GroupController {
 		int groupNo = groupService.addGroup(group);
 		
 		Join join = new Join();
-		
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
 		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());

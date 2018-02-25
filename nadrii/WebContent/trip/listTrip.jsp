@@ -452,7 +452,7 @@ pageEncoding="UTF-8"%>
 						addWish(contentid);
 						//makeToast(");
 				  	}else{
-				  		makeToast("로그인이 필요합니다");
+				  		makeToast("로그인 해주세요");
 				  	}
 				  	e.preventDefault();
 				}

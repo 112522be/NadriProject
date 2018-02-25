@@ -82,9 +82,7 @@ public class JoinController {
 		}
 		search.setPageSize(pageSize);
 		
-		User user = (User)session.getAttribute("loginUser");
-		
-		join.setUserId(user.getUserId());
+		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
 		search.setSearchKeyword(join.getUserId());
 		
 		Map<String , Object> map=joinService.getJoinList(search);

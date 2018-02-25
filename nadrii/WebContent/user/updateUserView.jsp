@@ -49,7 +49,6 @@
 				changeMonth: true,
 				changeYear: true,
 				yearRange: "1900:2018",
-				dateFormat: "yy-mm-dd"
 			});
 		} );
 		 
@@ -278,6 +277,10 @@
     } 
     
     .butgroup{margin-bottom:10%;}
+    
+    body {
+    	background: #ffffff;
+    }
     </style>
  
 </head>
@@ -387,7 +390,7 @@
 		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
-				    <input type="file" id="fileName" class="button" value=""/>
+				    <input type="file" id="fileName" value=""/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
 				<!-- </form> -->
