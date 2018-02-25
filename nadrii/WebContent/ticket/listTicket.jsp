@@ -146,6 +146,41 @@
  	function fncGetTicket() {
 		$(".page-wrapper").attr("method", "POST").attr("action", "/ticket/getTicket").submit();
 	} 
+ 	
+ 	
+ 	$( function() {
+ 		$("a[href='#']:contains('검 색')").bind("click", function(event) {
+ 			event.preventDefault();
+ 			var keyword = $("input[name='searchKeyword']").val();
+
+ 			if (keyword == "") {
+ 				alert("입력된 검색어가 없습니다.")
+ 				return ;
+ 			} else {
+	 			fncGetList("${search.pageNo}");
+	 			$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
+ 			}
+ 		})
+ 	})
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </script>
 
 
@@ -171,16 +206,38 @@
 				<div class="wrapper style1">
 
 					<section id="features" class="container special">
+
+						<div class="row">
+							<article class="9u 12u(mobile) special">
+								<header>
+									<input type="text" name="searchKeyword" placeholder="검색어를 입력하세요.">
+								</header>	
+							</article>
+					
+							<article class="3u 12u(mobile) special">
+								<header>
+									<h3>
+										<a href="#" class="button">검 색</a>
+									</h3>
+								</header>
+							</article>
+						</div><!-- row End -->
+
+						<br>
+
 						<header>
 							<h2>나들이 티켓</h2>
 							<p>조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.</p>
 						</header>
+						
 						<footer>
 							<a href="#" class="button 2u">제목순</a>&nbsp;&nbsp;
 							<a href="#" class="button 2u">조회순</a>&nbsp;&nbsp;
 							<a href="#" class="button 2u">수정일순</a>&nbsp;&nbsp;
 							<a href="#" class="button 2u">생성일순</a>
 						</footer>
+
+						
 						<br>
 						<p> 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건 </p>
 						

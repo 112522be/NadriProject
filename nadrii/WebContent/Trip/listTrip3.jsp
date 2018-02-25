@@ -391,8 +391,8 @@ pageEncoding="UTF-8"%>
 		  	}
 		  	e.preventDefault();
 			
-		});
-	})
+		})
+	});
 	
 		/*
 	//getTheme 내에 있는 위시리스트 클릭시 발생하는 이벤트

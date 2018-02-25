@@ -27,6 +27,7 @@
 		<typeAlias alias="message" type="com.yagn.nadrii.service.domain.Message"/>
 		<typeAlias alias="planner" type="com.yagn.nadrii.service.domain.Planner"/>
 		<typeAlias alias="searchContent" type="com.yagn.nadrii.service.domain.SearchContent"/>
+		<typeAlias alias="ticket" type="com.yagn.nadrii.service.domain.Ticket"/>
 
 	</typeAliases>
 	
@@ -44,6 +45,7 @@
 		<mapper resource="sql/MessageMapper.xml"/>
 		<mapper resource="sql/PlannerMapper.xml"/>
 		<mapper resource="sql/SearchContentsMapper.xml"/>
+		<mapper resource="sql/TicketMapper.xml"/>
 	</mappers>
 	
 
