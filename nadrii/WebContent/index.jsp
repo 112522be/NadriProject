@@ -747,9 +747,7 @@ function emailValid(){
 	padding: 0;
 }
 
-#navPanel, #titleBar {
-		display: block !important;
-	}
+
 
 </style>
 

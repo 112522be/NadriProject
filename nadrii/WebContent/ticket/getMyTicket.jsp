@@ -73,7 +73,7 @@ $(function(){
 					
 					<div class="inner">
 						<header>
-							<h1>내 티켓</h1>
+							<h1>나들이 티켓</h1>
 						</header>
 					</div>
 					

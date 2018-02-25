@@ -6,6 +6,7 @@ public class Join {
 	private int groupNo;
 	private String userId;
 	private int groupRole;
+	private String regDate;
 	
 	public Join(){
 	}
@@ -42,10 +43,18 @@ public class Join {
 		this.groupRole = groupRole;
 	}
 
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Join [joinNo=" + joinNo + ", groupNo=" + groupNo + ", userId=" + userId + ", groupRole=" + groupRole
-				+ "]";
+				+ ", regDate=" + regDate + "]";
 	}
 
 	

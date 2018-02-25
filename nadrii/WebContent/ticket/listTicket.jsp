@@ -86,6 +86,7 @@
 			var contentId = $( $('input[name="contentId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var title = $( $('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var title = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
 			console.log('contentId : ' + contentId)
@@ -95,7 +96,7 @@
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
-					+ "&title=" + encodeTitle;
+					+ "&title=" + encodeTitle+"&firstimage="+firstimage ;
 
 		})
 		
@@ -109,6 +110,7 @@
 			var contentId = $( $('input[name="contentId"]')[$(".image.featured").index(this)]).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$(".image.featured").index(this)]).val();
 			var title = $( $('input[name="title"]')[$(".image.featured").index(this)]).val();
+			var firstimage = $( $('input[name="firstimage"]')[$(".image.featured").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
 			console.log('contentId : ' + contentId)
@@ -118,7 +120,7 @@
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
-					+ "&title=" + encodeTitle;
+					+ "&title=" + encodeTitle+"&firstimage="+firstimage ;
 			
 		})
 	});
@@ -207,9 +209,12 @@
  				padding: 0 10px;
  			}
  			.wrapper{
+ 				padding-top: 4em;
  				margin: 0;
  			}
-
+			#nav{
+				padding: 22px 0;
+			}
 
 </style>
 </head>
@@ -249,7 +254,7 @@
 							</div>
 							
 							<div>
-								<span style="float: left; position: relative;">
+								<span style="float: left; padding-bottom: 13px;">
 									<a href="#" style="border-bottom: 1px solid; padding: 6px;">제목순</a>&nbsp;
 									<a href="#" style="border-bottom: 1px solid; padding: 6px;">조회순</a>&nbsp;
 									<a href="#" style="border-bottom: 1px solid; padding: 6px;">수정일순</a>&nbsp;
@@ -284,6 +289,7 @@
 									
 										
 										<!-- PageNavigation을 위한 값을 보내는 부분  -->
+										<input type="hidden" name="firstimage" value="${ tt.firstimage }">
 										<input type="hidden" name="contentId" value="${ tt.contentid }">
 										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
 										<input type="hidden" name="title" value="${ tt.title }">
@@ -291,7 +297,7 @@
 										<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
 									</div>
 								</article>
-							</c:forEach>
+							</c:forEach> 
 								
 						</div>
 						

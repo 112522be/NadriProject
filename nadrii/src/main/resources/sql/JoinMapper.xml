@@ -11,18 +11,19 @@
 		<result property="groupNo"		column="group_no"	jdbcType="NUMERIC"/>
 		<result property="userId"			column="user_id"		jdbcType="VARCHAR"/>
 		<result property="groupRole"	column="group_role"	jdbcType="NUMERIC"/>	
+		<result property="regDate" 		column="reg_date"		jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="addJoin"		parameterType="join" >
 	 	INSERT
-		INTO join ( join_no, group_no, user_id, group_role ) 
-		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole} )
+		INTO join ( join_no, group_no, user_id, group_role, reg_date ) 
+		VALUES (	seq_join_member_join_no.nextval, #{groupNo}, #{userId}, #{groupRole}, SYSDATE )
 	</insert>
 
 	<select id="getJoinList"		parameterType="Search"	resultMap="joinSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  				FROM		(	SELECT join_no, group_no, user_id, group_role
+	  				FROM		(	SELECT join_no, group_no, user_id, group_role, reg_date
 									FROM join
 									WHERE user_id = #{searchKeyword}
 									) inner_table
@@ -31,7 +32,7 @@
 	</select>
 	
 	<select id="getJoinMemberList"		parameterType="Search"	resultMap="joinSelectMap">
-		SELECT join_no, group_no, user_id, group_role
+		SELECT join_no, group_no, user_id, group_role, reg_date
 		FROM join
 		WHERE group_no = #{searchKeyword}
 		ORDER BY join_no ASC
@@ -46,7 +47,7 @@
 	 
 	 <select  id="getTotalJoinCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT join_no, group_no, user_id, group_role
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role, reg_date
 					FROM join
 					WHERE user_id = #{searchKeyword}
 					 ) countTable		
@@ -54,7 +55,7 @@
 	 
 	 <select  id="getTotalMemberCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT join_no, group_no, user_id, group_role
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role, reg_date
 					FROM join
 					WHERE group_no = #{searchKeyword}
 					ORDER BY join_no ASC

@@ -93,6 +93,10 @@
 					content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 					placement: 'bottom',
 				});	
+				
+				$("header h1").on("click", function(){
+					self.location="../group/listGroup";
+				})
 			
 			});
 			
@@ -113,7 +117,7 @@
 			<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1><a href="../group/listGroup">나들이 모임</a></h1>
+							<h1>나들이 모임</h1>
 						</header>
 					</div>
 				<jsp:include page="../layout/toolbar.jsp" />		

@@ -41,13 +41,56 @@
 	<script src="/resources/helios/assets/js/util.js"></script>
 	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="/resources/helios/assets/js/main.js"></script>
-
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
+<style>
+	input:focus {
+		outline: none;
+	}
+	
+	.wrapper {
+		margin: 0;
+	}
+
+	.toastMessage {
+    	width:400px;
+    	height:auto;
+    	position:fixed;
+    	left:50%;
+	    margin-left:-200px;
+	    bottom:15px;
+	    background-color: #000000;
+	    color: #F0F0F0;
+	    font-size: 18px;
+	    padding:12px;
+	    text-align:center;
+	    border-radius: 2px;
+	    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    z-index: 100;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	#nav{
+		padding: 22px 0;
+	}
+	@media screen and (max-width: 736px){
+		.row > section, .row > article {
+			margin: 0;
+		}	
+		div #sidebar{
+			margin-top: -50px;
+		}
+	}
+
+</style>
 
 
 
@@ -55,6 +98,10 @@
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
 
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+	}
+	
 	var totalTicketCount = "";
 	var ticketPrice = "";
 	var ticketCount = "";
@@ -63,6 +110,9 @@
 	//=================== "장바구니 담기" Event 연결 =================== 
 	$(function() {
 		$("a[href='#']:contains('장바구니 담기')").bind('click', function() {
+	//		$(".modal-body .text-center.title").empty();
+		//	$(".modal-body h3:contains('- 선택한 티켓매수')").empty();
+			//$(".modal-body h3:contains('- 총 결제요금 : ￦ ')").empty();
 			fncBasketList();
 		})
 	});
@@ -70,6 +120,7 @@
 	function fncBasketList() {
 		
 		totalTicketPrice = 0;
+		
 		
 		$(".modal-body .text-center.title").append('${ tourTicket.title }');
 		
@@ -177,7 +228,7 @@
 			//*/
 			
 			if (currentVal <= 0) {
-				alert("티켓 수량을 확인 하시기 바랍니다.")
+				makeToast("티켓 수량을 확인 하시기 바랍니다.")
 			}
 
 			fncTicketCount(indexVal, currentVal, countVal);
@@ -219,7 +270,7 @@
 //		console.log("티켓 몇장 구매 했니? " + totalTicketPrice)
 		
 		if (totalTicketCount == 0 || totalTicketCount == "") {
-			alert("티켓 수량을 확인하시기 바랍니다.")
+			makeToast("티켓 수량을 확인하시기 바랍니다.")
 /*			
 			history.go(0);
 			$(".label.label-warning[name='titleB']").empty();
@@ -229,7 +280,7 @@
 			return;
 		}
 		if (name == null || name.length < 1) {
-			alert("이름은 반드시 입력해야 합니다.");
+			makeToast("이름은 반드시 입력해야 합니다.");
 /*
 			$(".label.label-warning[name='titleB']").empty();
 			$(".modal-body").empty();
@@ -238,7 +289,7 @@
 			return;
 		}
 		if (phone == null || phone.length < 1) {
-			alert("연락처는 반드시 입력해야 합니다.");
+			makeToast("연락처는 반드시 입력해야 합니다.");
 /*	
 			$(".label.label-warning[name='titleB']").empty();
 			$(".modal-body").empty();
@@ -251,7 +302,7 @@
 			$("input[name='email']").bind( "change", function() {
 				var email = $("input[name='email']").val();
 				if (email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)) {
-					alert("이메일 형식이 아닙니다.");
+					makeToast("이메일 형식이 아닙니다.");
 				}
 			});
 		});
@@ -274,7 +325,7 @@
 			
 			var basketData = {
 					"ticketTitle" : '${ tourTicket.title }' ,
-					"ticketImage" : '${ detailImage.originimgurl }' , 
+					"ticketImage" : '${ tourTicket.firstimage }' , 
 					"bookingDate" : '${ bookingDate }' ,
 					"ticketPriceAll" : ticketPriceAll ,
 					"contentId" : '${ tourTicket.contentid }' ,
@@ -303,8 +354,9 @@
 					//		alert("들어온거 확인");
 						}
 					});		
-					alert("저장하기 완료");
+					makeToast("장바구니 저장 완료");
 					location.reload();
+					history.go(-1)();
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)
@@ -326,6 +378,10 @@
 					$("strong.text-danger[name='totalTicketCount']").empty();
 					$("strong.text-danger[name='totalTicketCount']").val('0');
 				})
+				
+		$("header h1").on("click", function(){
+			self.location="../ticket/listTicket";
+		})				
 	});	
 	
 	
@@ -345,7 +401,7 @@
 
 					<div class="inner">
 						<header>
-							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+							<h1>나들이 티켓</h1>
 						</header>
 					</div>
 					
@@ -358,9 +414,10 @@
 			<!-- Main -->
 				<div class="wrapper style1">
 				
+				<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+				
 				<input type="hidden" name="contentId" value="${ tourTicket.contentid }">
 				<input type="hidden" name="contentTypeId" value="${ tourTicket.contenttypeid }">
-
 				<input type="hidden" name="ticketTitle" value="${ tourTicket.title }">
 				<input type="hidden" name="eventstartdate" value="${ tourTicket.eventstartdate }">
 				<input type="hidden" name="eventenddate" value="${ tourTicket.eventenddate }">
@@ -498,11 +555,11 @@
 							<div class="8u 12u(mobile) important(mobile)" id="content">
 								<article id="main">
 									<header>
-										<h2><a href="#">${ tourTicket.title }</a></h2>
+										<h2 style="margin-top: -20px; padding-bottom: 20px;"><a href="#">${ tourTicket.title }</a></h2>
 									</header>
 									<a href="#" class="image featured">
 							<%-- 			<img src="${ detailImage.originimgurl }" alt="" style="height: 413.86px;"/> --%>
-										<img src="${ detailImage.originimgurl }" alt="" />
+										<img src="${ tourTicket.firstimage }" alt="" />
 									</a>
 									
 									
@@ -510,7 +567,7 @@
 										<div class="6u">	
 											<section>
 												<header>
-													<h3>선택한 예매일자</h3>
+													<h3><span class="fas fa-check-circle"></span>&nbsp;선택한 예매일자</h3>
 												</header>
 												<p>
 													${ bookingDate }
@@ -521,7 +578,7 @@
 										<div class="6u">	
 											<section>
 												<header>
-													<h3>이용요금</h3>
+													<h3><span class="far fa-money-bill-alt"></span>&nbsp;이용요금</h3>
 												</header>
 												<p>
 													${ detailIntro.usetimefestival }

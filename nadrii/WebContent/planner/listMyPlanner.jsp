@@ -66,6 +66,10 @@
 				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
 				placement: 'bottom',
 			});	
+			
+			$("header h1").on("click", function(){
+				self.location="../planner/getMyPlannerList";
+			});
 		});
 		
 		function clickProfile(){
@@ -196,7 +200,7 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a class="header logo">나의 나들이 플래너</a></h1>
+					<h1>나들이 플래너</h1>
 					<p>내가 직접 만든 나만의 나들이 플래너로 여행을 떠나보세요.</p>
 				</header>
 			</div>

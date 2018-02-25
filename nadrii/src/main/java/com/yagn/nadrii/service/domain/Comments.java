@@ -1,8 +1,5 @@
 package com.yagn.nadrii.service.domain;
 
-import java.util.Date;
-import java.util.Calendar;
-
 public class Comments {
 	private int commentNo;
 	private String userId;

@@ -60,7 +60,7 @@
 				//self.location="../user/getUserProfile?userId="+userId;	
 			});
 			
-			$(".header.logo").on("click", function(){
+			$("header h1").on("click", function(){
 				self.location="../planner/getUserPlannerList";
 			});
 			
@@ -200,7 +200,7 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a class="header logo">회원들의 나들이 플래너</a></h1>
+					<h1>나들이 플래너</h1>
 					<p>나의 나들이 플래너를 회원과 공유하세요</p>
 				</header>
 			</div>

@@ -65,14 +65,10 @@ hr {
 			} else if ($(this).children().html() == "댓글") {
 				getComments('add');
 			} else {
-
+				getJoin('add');
 			}
 		})
-		$('#logContainer')
-				.on(
-						'click',
-						'a.more',
-						function() {
+		$('#logContainer').on('click','a.more',function() {
 							if (currentPage < maxPage) {
 								currentPage++;
 								if ($('#logContainer').find(
@@ -82,7 +78,7 @@ hr {
 										'input[name="type"]').val() == "댓글") {
 									getComments("update");
 								} else {
-
+									getJoin('update');
 								}
 
 							} else {
@@ -92,8 +88,7 @@ hr {
 	})
 
 	function listMessage() {
-		$
-				.ajax({
+		$.ajax({
 					url : "/message/json/listMessage/" + '${user.userId}',
 					method : "GET",
 					dataType : "json",
@@ -141,8 +136,7 @@ hr {
 				});
 	}
 	function listSendMessage() {
-		$
-				.ajax({
+		$.ajax({
 					url : "/message/json/listSendMessage/" + '${user.userId}',
 					method : "GET",
 					dataType : "json",
@@ -181,8 +175,7 @@ hr {
 		if (menu == 'add') {
 			currentPage = 1;
 		}
-		$
-				.ajax({
+		$.ajax({
 					url : "/like/json/listLikeById",
 					method : "GET",
 					data : {
@@ -237,29 +230,17 @@ hr {
 							$('#logContainer').find('a.more').remove();
 							$('#logContainer').append(html);
 						}
-						$('#logContainer')
-								.on(
-										'click',
-										'p#addedTitle',
-										function() {
-											var postNo = $(
-													$('input[name="postNo"]')[$(
-															'p#addedTitle')
-															.index(this)])
-													.val();
+						$('#logContainer').on('click','p#addedTitle',function() {
+											var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 											if (postNo == null) {
 												alert("삭제된 게시물입니다.");
 											} else {
-												if (postNo.indexOf("60") != 0
-														&& postNo.indexOf("40") != 0) {
-													self.location = "/comm/getComm?postNo="
-															+ postNo;
+												if (postNo.indexOf("60") != 0 && postNo.indexOf("40") != 0) {
+													self.location = "/comm/getComm?postNo="+ postNo;
 												} else if (postNo.indexOf("40") != 0) {
-													self.location = "/group/getGroup?groupNo="
-															+ postNo;
+													self.location = "/group/getGroup?groupNo="+ postNo;
 												} else {
-													self.location = "/planner/getPlanner?postNo="
-															+ postNo;
+													self.location = "/planner/getPlanner?postNo="+ postNo;
 												}
 											}
 										})
@@ -270,8 +251,7 @@ hr {
 		if (menu == 'add') {
 			currentPage = 1;
 		}
-		$
-				.ajax({
+		$.ajax({
 					url : "/common/listCommentById",
 					method : "GET",
 					data : {
@@ -330,16 +310,8 @@ hr {
 							$('#logContainer').find('a.more').remove();
 							$('#logContainer').append(html);
 						}
-						$('#logContainer')
-								.on(
-										'click',
-										'p#addedTitle',
-										function() {
-											var postNo = $(
-													$('input[name="postNo"]')[$(
-															'p#addedTitle')
-															.index(this)])
-													.val();
+						$('#logContainer').on('click','p#addedTitle',function() {
+											var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
 											if (postNo == null) {
 												alert("삭제된 게시물입니다.");
 											} else {
@@ -355,6 +327,84 @@ hr {
 												}
 											}
 										})
+					}
+				})
+	}
+	
+	
+	function getJoin(menu) {
+		if (menu == 'add') {
+			currentPage = 1;
+		}
+		$.ajax({
+					url : "/join/json/listJoinById",
+					method : "GET",
+					data : {
+						"currentPage" : currentPage
+					},
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					success : function(JSONData) {
+						console.log(JSONData);
+						if (JSONData.totalCount % 12 == 0) {
+							maxPage = JSONData.totalCount / 12;
+						} else {
+							maxPage = Math.floor(JSONData.totalCount / 12) + 1;
+						}
+						console.log(maxPage);
+						var html = '<div class="joins" align="center"><input type="hidden" name="type" value="모임">';
+						if (currentPage > 1) {
+							html += '<hr/>';
+						}
+						for (var i = 0; i < JSONData.totalCount; i++) {
+							if (JSONData.title[i] != null) {
+								html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+										+ '<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+										+ '<span>'
+										+ JSONData.yearNMonth[i]
+										+ '.</span>'
+										+ '<span style="font-size:2em; font-weight:700">'
+										+ JSONData.day[i]
+										+ '</span>'
+										+ '</div>'
+										+ '<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
+								html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;모임'
+										+ '</div>'
+										+ '<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
+										+ '<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+										+ JSONData.title[i]
+										+ '<input type="hidden" name="postNo" value="'+JSONData.list[i].groupNo+'">'
+										+ '</span></p>' + '</div>' + '</div>';
+								if (i != JSONData.totalCount - 1) {
+									html += '<hr/>';
+								}
+							}
+						}
+						if (currentPage < maxPage) {
+							html += '<a class="more">+ 더보기</a></div>'
+						}
+						if (menu == 'add') {
+							$('#logContainer').html(html);
+						} else {
+							$('#logContainer').find('a.more').remove();
+							$('#logContainer').append(html);
+						}
+						$('#logContainer').on('click','p#addedTitle',function() {
+							var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
+							if (postNo == null) {
+								alert("삭제된 게시물입니다.");
+							} else {
+								if (postNo.indexOf("30") == 0) {
+									self.location = "/comm/getComm?postNo="+ postNo;
+								} else if (postNo.indexOf("60") == 0) {
+									self.location = "/group/getGroup?groupNo="+ postNo;
+								} else {
+									self.location = "/planner/getPlanner?postNo="+ postNo;
+								}
+							}
+						})
 					}
 				})
 	}

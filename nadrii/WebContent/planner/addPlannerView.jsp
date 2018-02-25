@@ -32,9 +32,9 @@
 		<script src="../resources/script/html2canvas.js"></script>
 		
 		<style>
-		.wrapper{
-			margin: 0 !important;
-		}	
+		#nav{
+			padding: 22px;
+		}
 		h4 {
 			color: #6d6d6d !important;
 		}
@@ -196,7 +196,7 @@
 	<body class="right-sidebar">
 		<div id="page-wrapper">	
 		<!-- Header -->
-			<div id="header"  style="padding: 20px 0 2em 0;">
+			<div id="header"  style="padding: 5px 0 2em 0;">
 				<jsp:include page="../layout/toolbar.jsp" />		
 			</div>		
 		<!-- Main -->
