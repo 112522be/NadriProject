@@ -27,6 +27,10 @@
 		var x='';
 		var y='';
 		function getSearchResult(keyword, page){
+				if(keyword == ''){
+					alert("검색어를 입력해주세요")
+					return;
+				}
 				$('#result').empty();
 				$.ajax({
 					url : "https://dapi.kakao.com/v2/local/search/keyword.json",
@@ -113,14 +117,20 @@
 				var keyword = $('#keyword').val(); 
 				getSearchResult(keyword, 1);
 			})
-		})
+			$('#keyword').bind('keyup input',function(key) {
+				if(key.keyCode==13){
+					var keyword = $('#keyword').val();
+					getSearchResult(keyword, 1);
+				}
+				
+			});
+		});
 	</script>
 </head>
 <body>
 	<div class="container">
 		<br/>
 		<div class="col-sm-5">
-			<form class="navbar-form navbar-left" role="search">
 				<div class="col-sm-10">
 					<input id="keyword" type="text" class="form-control" style="font-size: 12pt" placeholder="키워드 입력">
 				</div>
@@ -128,9 +138,7 @@
 					<button type="button" class="btn btn-default">검색</button>
 
 				</div> 
-			</form>
-			<hr/>
-			<div id="result" style="padding-top: 50px;">
+			<div id="result" style="padding-top: 1em;">
 			</div>
 		</div>
 		<div class="col-sm-7">

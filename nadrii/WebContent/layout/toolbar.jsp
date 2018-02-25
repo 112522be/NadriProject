@@ -100,7 +100,7 @@
   //================= '로그아웃' 버튼 클릭 Event 처리========================
 	
 	$(function(){
-     $("a[href='#' ]:contains('로 그 아 웃')").on("click" , function() {
+     $("a[href='#' ]:contains('로그아웃')").on("click" , function() {
         if(confirm("로그아웃을 하시겠습니까?")){
         self.location = "/user/logout";
         }
@@ -119,15 +119,15 @@
 	
 	$(function(){
 
-     $("a[href='#' ]:contains('내정보 보기')").on("click" , function() {
-        self.location = "/user/myPage.jsp"
+     $("a[href='#' ]:contains('내 정보 보기')").on("click" , function() {
+        self.location = "/user/getUser"
      });
   });
   
 //================= '내정보 보기' 버튼 클릭 Event 처리========================
 	
 	$(function(){
-     $("a[href='#' ]:contains('내정보 수정')").on("click" , function() {
+     $("a[href='#' ]:contains('내 정보 수정')").on("click" , function() {
         self.location = "/user/updateUser?userId=${loginUser.userId}";
      });
   });

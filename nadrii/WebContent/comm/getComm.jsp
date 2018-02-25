@@ -142,7 +142,7 @@
 							<div >
 							<c:if test="${community.userId == loginUser.userId}">
 								<div align="right">
-									<a id="modify"><span class="fas fa-pencil-alt"></span></a>
+									<a id="modify"><span class="far fa-edit"></span></a>
 									&nbsp;
 									<a id="delete"><span class="fas fa-eraser"></span></a>
 								</div>

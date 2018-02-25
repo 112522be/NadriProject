@@ -1,6 +1,5 @@
 package com.yagn.nadrii.web.trip;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yagn.nadrii.service.domain.Trip;
 import com.yagn.nadrii.service.domain.User;
-import com.yagn.nadrii.service.domain.Wish;
 import com.yagn.nadrii.service.trip.TripService;
 import com.yagn.nadrii.service.trip.domain.TourApiDomain;
 import com.yagn.nadrii.service.wish.WishService;
@@ -71,9 +69,16 @@ public class TripRestController {
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode, localName);
 		List list =(List)tripMap.get("list");
 		
-		
-		
-		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+				
+		map.put("trip", "Museum");		
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));
@@ -105,7 +110,18 @@ public class TripRestController {
 		System.out.println("/trip/json/listExhibit");
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode, localName);
+		List list =(List)tripMap.get("list");
 		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		map.put("trip", "Exhibit");
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));
@@ -136,7 +152,20 @@ public class TripRestController {
 		System.out.println("/trip/json/listExperience");
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode, localName);
+		List list =(List)tripMap.get("list");
 		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		map.put("trip", "Experience");
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));
@@ -167,7 +196,21 @@ public class TripRestController {
 		System.out.println("/trip/json/listTradition");
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode, localName);
+		List list =(List)tripMap.get("list");
 		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		
+		map.put("trip", "Tradition");
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));
@@ -192,11 +235,20 @@ public class TripRestController {
 		System.out.println(areaCode +" : "+localName);
 		Map map = new HashMap();
 		
-		System.out.println("/trip/json/listMuseum");
+		System.out.println("/trip/json/listGallery");
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode, localName);
+		List list =(List)tripMap.get("list");
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
 		
-		
+		map.put("trip", "Gallery");
 		map.put("areaCode", areaCode);
 		map.put("localName", localName);
 		map.put("list", tripMap.get("list"));

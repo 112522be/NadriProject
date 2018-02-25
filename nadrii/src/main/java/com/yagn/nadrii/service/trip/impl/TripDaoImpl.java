@@ -119,6 +119,13 @@ public class TripDaoImpl implements TripDao {
 	}
 
 
+	@Override
+	public List listTripinDB() throws Exception {
+
+		return sqlSession.selectList("TripMapper.listTripinDB");
+	}
+
+
 	
 	
 	

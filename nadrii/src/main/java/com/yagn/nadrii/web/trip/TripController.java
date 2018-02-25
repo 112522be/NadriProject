@@ -66,12 +66,10 @@ public class TripController {
 				
 		System.out.println(areaCode +":" +localName);
 		
-		 
-		
-		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060100",areaCode,localName); 
 		
 		List list =(List)tripMap.get("list");
+		
 		System.out.println("size of list ====>"+list.size());
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -79,10 +77,9 @@ public class TripController {
 			System.out.println(tourApiDomain);
 			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
 			System.out.println(trip);
-						 
+			tourApiDomain.setTrip(trip);
+									 
 		}
-		
-				
 				
 		map.put("trip", "Museum");
 		map.put("list", tripMap.get("list"));
@@ -130,6 +127,20 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060300",areaCode,localName);
 		
+		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		map.put("trip", "Exhibit");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
@@ -163,6 +174,19 @@ public class TripController {
 		
 		Map tripMap = tripService.listTrip(pageNo,"14","A02","A0206","A02060500",areaCode,localName);
 		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		map.put("trip", "Gallery");
 		map.put("list", tripMap.get("list"));
 		map.put("pageNo", pageNo);		
@@ -192,6 +216,19 @@ public class TripController {
 		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0203","A02030200",areaCode,localName);
+		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
 		
 		map.put("trip", "Experience");
 		map.put("list", tripMap.get("list"));
@@ -223,6 +260,20 @@ public class TripController {
 		System.out.println(areaCode +":" +localName);
 		
 		Map tripMap = tripService.listTrip(pageNo,"12","A02","A0201","A02010600",areaCode,localName);
+		
+		List list =(List)tripMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
 		
 		map.put("trip", "Tradition");
 		map.put("list", tripMap.get("list"));
@@ -268,6 +319,21 @@ public class TripController {
 		System.out.println("전달 메시지 ---->" +keyword);
 		
 		Map searchMap = tripService.listTourBySearch(pageNo, keyword);
+		
+		List list =(List)searchMap.get("list");
+		
+		System.out.println("size of list ====>"+list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			TourApiDomain tourApiDomain = (TourApiDomain)list.get(i);
+			System.out.println(tourApiDomain);
+			Trip trip = tripService.getTripFromDB(tourApiDomain.getContentid()+"");
+			System.out.println(trip);
+			tourApiDomain.setTrip(trip);
+									 
+		}
+		
+		
 		map.put("trip", "Search");
 		map.put("list", searchMap.get("list"));
 		map.put("pageNo", pageNo);

@@ -153,6 +153,14 @@ public class TripDaoImplImageSearchKakao implements TripDao{
 	}
 
 
+
+	@Override
+	public List listTripinDB() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 

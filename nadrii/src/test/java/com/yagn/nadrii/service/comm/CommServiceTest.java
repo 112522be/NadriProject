@@ -17,15 +17,15 @@ import com.yagn.nadrii.service.domain.Community;
 
 /*
  *	FileName :  UserServiceTest.java
- * ¤· JUnit4 (Test Framework) °ú Spring Framework ÅëÇÕ Test( Unit Test)
- * ¤· Spring Àº JUnit 4¸¦ À§ÇÑ Áö¿ø Å¬·¡½º¸¦ ÅëÇØ ½ºÇÁ¸µ ±â¹Ý ÅëÇÕ Å×½ºÆ® ÄÚµå¸¦ ÀÛ¼º ÇÒ ¼ö ÀÖ´Ù.
- * ¤· @RunWith : Meta-data ¸¦ ÅëÇÑ wiring(»ý¼º,DI) ÇÒ °´Ã¼ ±¸ÇöÃ¼ ÁöÁ¤
- * ¤· @ContextConfiguration : Meta-data location ÁöÁ¤
- * ¤· @Test : Å×½ºÆ® ½ÇÇà ¼Ò½º ÁöÁ¤
+ * ï¿½ï¿½ JUnit4 (Test Framework) ï¿½ï¿½ Spring Framework ï¿½ï¿½ï¿½ï¿½ Test( Unit Test)
+ * ï¿½ï¿½ Spring ï¿½ï¿½ JUnit 4ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Úµå¸¦ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+ * ï¿½ï¿½ @RunWith : Meta-data ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ wiring(ï¿½ï¿½ï¿½ï¿½,DI) ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @ContextConfiguration : Meta-data location ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ @Test : ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 
-//==> Meta-Data ¸¦ ´Ù¾çÇÏ°Ô Wiring ÇÏÀÚ...
+//==> Meta-Data ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½Ï°ï¿½ Wiring ï¿½ï¿½ï¿½ï¿½...
 //@ContextConfiguration(locations = { "classpath:config/context-*.xml" })
 @ContextConfiguration	(locations = {	"classpath:config/context-common.xml",
 										"classpath:config/context-aspect.xml",
@@ -42,25 +42,25 @@ public class CommServiceTest{
 	public void testAddUser() throws Exception {
 		
 		Community community = new Community();
-		community.setTitle("³²»êÅ¸¿ö °¡º¸½Ç·¡¿ä?");
-		community.setText("<h3>Àç¹ÌÀÖ¾ú½À´Ï´Ù~</h3><img src=\"#\">");
-		community.setUserId("test01");
+		community.setTitle("ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½?");
+		community.setText("<h3>ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½~</h3><img src=\"#\">");
+		//community.setUser(user);("test01");
 		community.setLat("35.8294096");
 		community.setLng("129.2251832");
 		community.setThumbNailFileName("abc.jpg");
-		community.setHashtag(",¼­¿ï,·£µå¸¶Å©,³²»ê,nÅ¸¿ö,ÈÞ°¡,");
+		community.setHashtag(",ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½å¸¶Å©,ï¿½ï¿½ï¿½ï¿½,nÅ¸ï¿½ï¿½,ï¿½Þ°ï¿½,");
 
 		commService.addComm(community);
 
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 		//System.out.println(community);
 		
-		//==> API È®ÀÎ
+		//==> API È®ï¿½ï¿½
 //		Assert.assertEquals("testUserId", community.getUserId());
 //		Assert.assertEquals("testUserName", community.getUserName());
 //		Assert.assertEquals("testPasswd", community.getPassword());
 //		Assert.assertEquals("111-2222-3333", community.getPhone());
-//		Assert.assertEquals("°æ±âµµ", community.getAddr());
+//		Assert.assertEquals("ï¿½ï¿½âµµ", community.getAddr());
 //		Assert.assertEquals("test@test.com", community.getEmail());
 	}
 	
@@ -68,26 +68,26 @@ public class CommServiceTest{
 	public void testGetUser() throws Exception {
 		
 		Community community = new Community();
-		//==> ÇÊ¿äÇÏ´Ù¸é...
+		//==> ï¿½Ê¿ï¿½ï¿½Ï´Ù¸ï¿½...
 //			community.setUserId("testUserId");
 //			community.setUserName("testUserName");
 //			community.setPassword("testPasswd");
 //			community.setSsn("1111112222222");
 //			community.setPhone("111-2222-3333");
-//			community.setAddr("°æ±âµµ");
+//			community.setAddr("ï¿½ï¿½âµµ");
 //			community.setEmail("test@test.com");
 		
 		community = commService.getComm(30003);
 
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 		//System.out.println(community);
 		
-		//==> API È®ÀÎ
+		//==> API È®ï¿½ï¿½
 //		Assert.assertEquals("testUserId", community.getUserId());
 //		Assert.assertEquals("testUserName", community.getUserName());
 //		Assert.assertEquals("testPasswd", community.getPassword());
 //		Assert.assertEquals("111-2222-3333", community.getPhone());
-//		Assert.assertEquals("°æ±âµµ", community.getAddr());
+//		Assert.assertEquals("ï¿½ï¿½âµµ", community.getAddr());
 //		Assert.assertEquals("test@test.com", community.getEmail());
 
 		System.out.println(community);
@@ -101,7 +101,7 @@ public class CommServiceTest{
 		
 //		Assert.assertEquals("testUserName", community.getUserName());
 //		Assert.assertEquals("111-2222-3333", community.getPhone());
-//		Assert.assertEquals("°æ±âµµ", community.getAddr());
+//		Assert.assertEquals("ï¿½ï¿½âµµ", community.getAddr());
 //		Assert.assertEquals("test@test.com", community.getEmail());
 
 //		community.setUserName("change");
@@ -113,17 +113,17 @@ public class CommServiceTest{
 		
 		community = commService.getComm(30003);
 		
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 		//System.out.println(community);
 			
-		//==> API È®ÀÎ
+		//==> API È®ï¿½ï¿½
 //		Assert.assertEquals("change", community.getUserName());
 //		Assert.assertEquals("777-7777-7777", community.getPhone());
 //		Assert.assertEquals("change", community.getAddr());
 //		Assert.assertEquals("change@change.com", community.getEmail());
 	 }
 	 
-	 //==>  ÁÖ¼®À» Ç®°í ½ÇÇàÇÏ¸é....
+	 //==>  ï¿½Ö¼ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½....
 	 //@Test
 	 public void testGetUserListAll() throws Exception{
 		 
@@ -135,7 +135,7 @@ public class CommServiceTest{
 	 	List<Object> list = (List<Object>)map.get("listComm");
 	 	Assert.assertEquals(2, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -146,13 +146,13 @@ public class CommServiceTest{
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
 	 	search.setSearchCondition("2");
-	 	search.setSearchKeyword(",°æÁÖ,");
+	 	search.setSearchKeyword(",ï¿½ï¿½ï¿½ï¿½,");
 	 	map = commService.listComm(search);
 	 	
 	 	list = (List<Object>)map.get("listComm");
 	 	Assert.assertEquals(1, list.size());
 	 	
-	 	//==> console È®ÀÎ
+	 	//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
@@ -172,7 +172,7 @@ public class CommServiceTest{
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(1, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -187,7 +187,7 @@ public class CommServiceTest{
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(0, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");
@@ -207,7 +207,7 @@ public class CommServiceTest{
 	 	List<Object> list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(3, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	Integer totalCount = (Integer)map.get("totalCount");
@@ -222,7 +222,7 @@ public class CommServiceTest{
 	 	list = (List<Object>)map.get("list");
 	 	Assert.assertEquals(0, list.size());
 	 	
-		//==> console È®ÀÎ
+		//==> console È®ï¿½ï¿½
 	 	//System.out.println(list);
 	 	
 	 	totalCount = (Integer)map.get("totalCount");

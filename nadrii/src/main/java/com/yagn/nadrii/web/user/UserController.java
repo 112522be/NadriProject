@@ -262,22 +262,27 @@ public class UserController {
 	 */
 
 	@RequestMapping(value = "getUser", method = RequestMethod.GET)
-	public String getUser(@RequestParam("userId") String userId , Model model, HttpSession session) 
-			throws Exception {
+	public String getUser(Model model, HttpSession session) throws Exception {
 		System.out.println("/user/getUser : GET");
-		//Business Logic
+		// Business Logic
+		String userId = ((User) session.getAttribute("loginUser")).getUserId();
 		User user = userService.getUser(userId);
-		
-		System.out.println("userId" + userId);
-		
-		System.out.println("생년월일 >>" +user.getBirth());
-		System.out.println("userName >>" + user.getUserName());
 
-		// Model 과 View 연결
+		if (user.getBirth() != null) {
+			String[] temp = user.getBirth().split("/");
+			user.setBirth(temp[2] + "년 " + temp[0] + "월 " + temp[1] + "일");
+		}
+		if (user.getGender() != null) {
+			if (user.getGender().equals("man")) {
+				user.setGender("남");
+			} else {
+				user.setGender("여");
+			}
+		}
 		model.addAttribute("user", user);
-		
-		return "forward:/user/getUser.jsp";
-	   //return "forward/user/myPage2.jsp";
+
+		return "forward:/user/myPage.jsp";
+		// return "forward/user/myPage2.jsp";
 	}
 
 	// email 인증
@@ -325,7 +330,6 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> checkSuccess(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		String modalUserEmailAuth = request.getParameter("modalUserEmailAuth");
-
 
 		Map<String, Object> mv = new HashMap<String, Object>();
 
@@ -397,8 +401,9 @@ public class UserController {
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "updateUser", method = RequestMethod.GET, params={"userId"})
-	public String addUserPlus(@RequestParam("userId") String userId, Model model, HttpSession session) throws Exception {
+	@RequestMapping(value = "updateUser", method = RequestMethod.GET, params = { "userId" })
+	public String addUserPlus(@RequestParam("userId") String userId, Model model, HttpSession session)
+			throws Exception {
 		System.out.println("추가정보입력");
 
 		System.out.println("userId >>" + userId);
@@ -409,16 +414,17 @@ public class UserController {
 		System.out.println("userphone : " + user.getPhone());
 		System.out.println("userprofileImageFile : " + user.getProfileImageFile());
 		System.out.println("useremail : " + user.getEmail());
-		
-		  /*user.setPhone1(user.getPhone().split("-")[0]);
-		  user.setPhone2(user.getPhone().split("-")[1]);
-		  user.setPhone3(user.getPhone().split("-")[2]);
-		  System.out.println("userphone1 : "+user.getPhone1());
-		  System.out.println("userphone2 : "+user.getPhone2());
-		  System.out.println("userphone3 : "+user.getPhone3());
-		  System.out.println("userchild : "+user.getChildren());
-		  
-		 */		
+
+		/*
+		 * user.setPhone1(user.getPhone().split("-")[0]);
+		 * user.setPhone2(user.getPhone().split("-")[1]);
+		 * user.setPhone3(user.getPhone().split("-")[2]);
+		 * System.out.println("userphone1 : "+user.getPhone1());
+		 * System.out.println("userphone2 : "+user.getPhone2());
+		 * System.out.println("userphone3 : "+user.getPhone3());
+		 * System.out.println("userchild : "+user.getChildren());
+		 * 
+		 */
 		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 
@@ -428,23 +434,6 @@ public class UserController {
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	public String addUserPlus(@ModelAttribute("user") User user, Model model, HttpSession session,
 			HttpServletRequest request) throws Exception {
-		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");  
-		String realUploadPath = rootPath+"resources\\images\\profileImages\\";
-		MultipartHttpServletRequest mpRequest = (MultipartHttpServletRequest)request;
-		Iterator fileNameIterator = mpRequest.getFileNames();
-		
-		List boardFileList = new ArrayList();
-		while(fileNameIterator.hasNext()) {
-			MultipartFile multiFile = mpRequest.getFile((String)fileNameIterator.next());
-			
-			if(multiFile.getSize() > 0 ) {
-				
-				multiFile.transferTo(new java.io.File(realUploadPath+multiFile.getOriginalFilename()));
-				multiFile.getInputStream().close();
-			}	
-		}
-		
 		System.out.println("updateUse :: POST");
 
 		System.out.println("권한 ==" + user.getRole());
@@ -457,9 +446,9 @@ public class UserController {
 		System.out.println("사용자 이름 >>" + user.getUserName());
 		System.out.println("자녀수 >>" + user.getChildren());
 		System.out.println("성 별 >>" + user.getGender());
-		
+
 		String[] birthArray = user.getBirth().split("/");
-		String realBirth = birthArray[2]+birthArray[0]+birthArray[1];
+		String realBirth = birthArray[2] + birthArray[0] + birthArray[1];
 		System.out.println(realBirth);
 		user.setBirth(realBirth);
 
@@ -472,11 +461,10 @@ public class UserController {
 
 		System.out.println(user);
 
-		
 		if (user.getGender() == null) {
 			user.setGender("");
 		}
-		
+
 		if (user.getBirth() == null) {
 			user.setBirth("");
 		}
@@ -484,8 +472,8 @@ public class UserController {
 		userService.updateUser(user);
 
 		// return null;
-		return "redirect:/user/getUser?userId="+user.getUserId();
-		//return "redirect:user/myPage2.jsp";ㅇ
+		return "redirect:/user/getUser?userId=" + user.getUserId();
+		// return "redirect:user/myPage2.jsp";ㅇ
 	}
 
 	@RequestMapping("kakaoLogin")
@@ -496,7 +484,7 @@ public class UserController {
 		User user = new User();
 		user.setEmail(object.get("kaccount_email").toString());
 
-		if(((JSONObject) object.get("properties")).get("profile_image") !=null) {
+		if (((JSONObject) object.get("properties")).get("profile_image") != null) {
 			user.setProfileImageFile(((JSONObject) object.get("properties")).get("profile_image").toString());
 		}
 		if (userService.getUserByEmail(user.getEmail()) == null) {
@@ -538,5 +526,4 @@ public class UserController {
 		}
 		return "forward:/user/addUserFacebook.jsp";
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.yagn.nadrii.web.user;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.json.simple.JSONObject;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.domain.kakaoLogin.TokenResponse;
 import com.yagn.nadrii.service.user.UserService;
@@ -39,6 +42,30 @@ public class UserRestController extends SupportController {
 		System.out.println(this.getClass());
 	}
 		
+	@RequestMapping("uploadImage")
+	public JSONObject uploadImage(HttpServletRequest request) {
+		String rootPath = request.getSession().getServletContext().getRealPath("/");  
+	    String uploadPath = rootPath+"resources\\images\\profileImages\\";
+		String fileName = "";
+		
+		int size = 10 * 1024 * 1024;
+		try {
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
+			Enumeration files = multi.getFileNames();
+			String file = (String) files.nextElement();
+			fileName = multi.getFilesystemName(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		uploadPath += fileName;
+		JSONObject jobj = new JSONObject();	
+		String filePath = "/resources/images/profileImages/"+fileName;
+		jobj.put("url", uploadPath);
+		jobj.put("relativeUrl", filePath);
+		return jobj;
+	}
+	
 	@RequestMapping(value="json/addUser", method= RequestMethod.POST )
 	public Map addUser(@RequestBody JSONObject jsonObject) throws Exception{
 		System.out.println(this.getClass()+"/user/json/addUser.POST");

@@ -48,7 +48,7 @@
 	$( function() {
 		$("#search").on("click" , function() {
 				var keyword = $(".form-control").val();
-				$("form input:nth-child(2)").val(1);
+				$("form input[name='pageNo']").val(1);
 				$("form").attr("method","POST").attr("action","/trip/listSearch").submit();
 			
 		});
@@ -57,6 +57,7 @@
 			var data = $(this).val();
 			if(key.keyCode==13){
 				if(data!=""){
+					$("form input[name='pageNo']").val(1);
 					$('form').attr('method', 'POST').attr('action', '../trip/listSearch').submit();
 				}else{	
 		 			alert("검색어를 입력해주세요");

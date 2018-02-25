@@ -574,18 +574,14 @@ body{
 							</article>
 							<article class="2u 12u(mobile) special">
 								<header>
-									<h3>
-										<a href="#"><strong>&nbsp;</strong></a>
-									</h3>
+
 									<input type="button" name="loginID" 
 										value="로그인">
 								</header>
 							</article>
 							<article class="2u 12u(mobile) special">
 								<header>
-									<h3>
-										<a href="#"><strong>&nbsp;</strong></a>
-									</h3>
+
 									<input type="button" name="loginPW" 
 										data-toggle="modal" data-target="#myModal" value="회원가입">
 
@@ -593,9 +589,6 @@ body{
 							</article>
 							<article class="2u 12u(mobile) special">
 								<header>
-									<h3>
-										<a href="#"><strong>&nbsp;</strong></a>
-									</h3>
 									<input type="button" name="kakaver" value="카카버">
 
 								</header>

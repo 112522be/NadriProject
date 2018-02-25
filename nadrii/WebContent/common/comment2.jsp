@@ -30,7 +30,8 @@
 			success: function(JSONData) {
 				$('#commentContainer').empty();
 				for(i=0;i<JSONData.totalCount;i++){
-					var html = '<div class="comments" style="padding: 0 0 20px 0; overflow: hidden;"><span class="col-xs-1" style="float: left; padding: 10px 0 0 50px;"><input type="hidden" name="commentNo" value="'
+					var html = '<div class="comments" style="padding: 0 0 20px 0; overflow: hidden;"><span class="col-xs-1" style="float: left; padding: 10px 0 0 50px;"><input type="hidden" name="index" value="'+i+'">'
+					+'<input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
 					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-13" style="padding-left: 30px;"><span style="color: black;">'
 					+JSONData.listComment[i].userId
@@ -114,8 +115,8 @@
 		var commentNo;
 		
 		$('#commentContainer').on('click','.fa-edit',function() {
-			text = $($('span.text')[$(".fa-edit").index(this)-1]).html();
-			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)-1]).val();
+			text = $($('span.text')[$(".fa-edit").index(this)]).html();
+			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
 			var editForm = '<span style="position: relative; float: left; width: 76%; padding-left: 25px;"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 12%; height: 1.8%" name="update">수정</div>';
 			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
 			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");
@@ -151,7 +152,6 @@
 						alert("삭제에 실패했습니다.");
 						listComment();
 					}
-					
 				});
 			}else{
 				return;
@@ -163,14 +163,12 @@
 <body onload="listComment()">
 	<div>
 		<div>
-			<form name="formData">
-				<input type="hidden" name="userId" value="${loginUser.userId}">
-				<div style="float: left; width: 83%;">
-					<input type="text" name="text" class="form-control" style="font-size: 12pt;" placeholder="댓글을 입력하세요...">
-				</div>
-			</form>
+			<input type="hidden" name="userId" value="${loginUser.userId}">
+			<div style="float: left; width: 83%;">
+				<input type="text" name="text" class="form-control" style="font-size: 12pt;" placeholder="댓글을 입력하세요...">
+			</div>
 		</div>
-		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
+		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">댓글등록</div>
 		<br/><br/><br/>
 		<div id="commentContainer"></div>
 	</div>

@@ -62,6 +62,12 @@ button[data-original-title='More Color']{
 	margin: 0;
 	padding: 6em 0 10em 0;
 }
+.placeButton{
+	width: auto !important;
+	height: auto;
+	padding: 0.5em;
+	align-items: unset;
+}
 </style>
 
 </head>

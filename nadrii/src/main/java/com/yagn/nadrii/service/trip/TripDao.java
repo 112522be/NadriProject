@@ -35,4 +35,6 @@ public interface TripDao {
 	
 	public List listTourBySearch(int pageNo,String keyword) throws Exception ;
 	
+	public List listTripinDB() throws Exception;
+	
 }
