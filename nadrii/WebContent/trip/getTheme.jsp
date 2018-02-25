@@ -66,6 +66,10 @@
 			}
 		});
 		
+		$("header h1").on("click", function(){
+			self.location = "../trip/getTheme";
+		});
+		
 	});
 	
 
@@ -73,17 +77,17 @@
 
  
 <style type="text/css">
-#header {
-	background-color: #ffffcd;
-	background-image: url("/resources/images/tripIcon/tripInfo.jpg");
-}
-
 #nav {
 	background-image: url("../resources/helios/images/header.jpg");
 	background-color: #44324a;
 	opacity: 0.7;
 }
 
+.background {
+	background-image: url("../resources/images/60.png");
+	background-size: 100%
+	
+}
 .forward {
 	opacity: 0.0;
 }
@@ -105,10 +109,6 @@
 	background: #605b7b;
 }
 
-body{
-	background-color: #5d4f7166;
-}
-
 #searchKeyword {
 	border-radius: 30px;
 	width: 400px;
@@ -119,7 +119,9 @@ body{
 	border: 1px solid;
 	border-color: #878787;
 }
-
+#header{
+	padding: 6.5em 0 1.5em 0;
+}
 </style>
  
  
@@ -132,13 +134,15 @@ body{
 			<div id="header">
 				<div class="inner">
 					<header>
-						<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
+						<h1>나들이 정보</h1>
+						<p>어디로 떠나야할지 모르겠다면</p>
 					</header>
 				</div>
 						
 				<jsp:include page="/layout/toolbar.jsp" />
 			</div>
 		
+			<div class="background">
 			<div style="overflow: hidden; padding-top: 30px;">
           		<form class="search" style="float: right">
 					<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
@@ -193,12 +197,16 @@ body{
 					</article>
 
 				</div>
+				<br>
+				<br>
 				<span class="forward" style="display: block;"></span>
 				<span class="backward" style="display: block;"></span>
 			</section>
 
-			
+			</div>
 		</div>
+
+</body>
 		
 		<script src="../resources/helios/assets/js/jquery.min.js"></script>
 		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
@@ -207,8 +215,4 @@ body{
 		<script src="../resources/helios/assets/js/skel.min.js"></script>
 		<script src="../resources/helios/assets/js/util.js"></script>
 		<script src="../resources/helios/assets/js/main.js"></script>
-		
-
-</body>
-
 </html>

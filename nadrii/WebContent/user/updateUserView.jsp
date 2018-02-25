@@ -343,13 +343,7 @@
 		    </div>
 		  </form>
 		  -->
-		  <div class="form-group">
-		    <label for="children" class="col-sm-offset-1 col-sm-3 control-label">자녀수</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="children" name="children" value="${user.children }"placeholder="자녀수" style="border-radius: 25px;">
-		    </div>
-		  </div>
-		  
+		  		  
 		  <div class="form-group">
 		    <label for="gender" class="col-sm-offset-1 col-sm-3 control-label">성 별</label>
 		    <div class="col-sm-4">

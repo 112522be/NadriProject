@@ -93,9 +93,9 @@
 			alert(userId);
 		}
 		
-		function clickMessage(){
+		function clickMessage1(){
 			if(${loginUser != null}){
-				window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 			}else{
 				makeToast("로그인 해주세요.");
 			}
@@ -259,6 +259,14 @@
 			    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
 			    z-index: 100;
 			}
+			
+			input:focus{
+				outline:none;
+			}
+			
+			.wrapper{
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -315,8 +323,8 @@
 									<div style="text-align: right;">
 										<input type="hidden" name="placeName" value="${group.placeName}"/>
 										<input type="hidden" name="placeDetail" value="${group.placeDetail}"/>
-										<span class="placeName" style="font-size: 11pt; font-weight: bold;"></span>
-										:&nbsp;&nbsp;<span class="placeDetail" style="font-size: 11pt"></span>
+										<span class="placeName" style="font-size: 12.5pt; font-weight: bold;"></span>
+										:&nbsp;&nbsp;<span class="placeDetail" style="font-size: 12.5pt"></span>
 									</div>								
 									<div>
 										<div class="author" style="float: left;"> 

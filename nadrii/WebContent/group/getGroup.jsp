@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>나들이 모임~</title>
+		<title>나들이 모임</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -101,7 +101,7 @@
 			}
 			
 			function clickMessage(){	
-				window.open("../message/addMessage?receiverId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+'${group.join.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 			}
 			
 		</script>

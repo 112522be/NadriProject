@@ -110,6 +110,7 @@
 	    
 	    speInfoWindow.open(map,clickMarker);
 		
+	    removeMarker();
 	});
 	
 	
@@ -122,22 +123,22 @@
 		
 		$("#searchListSubmit").on("click", function(){
 			$("#placesList").css("display","block");
-			
+			searchPlaces(); return false;
 		});
 		
 	    // run the currently selected effect
-	    function runEffect() {
-	      // Run the effect
-	      $( "#placesList" ).toggle( "blind", 300 );
-	    }
-	 
+	   
 	    // Set effect from select menu value
-	    $( "#button" ).on( "click", function() {
+	    $( "#toggleButton" ).on( "click", function() {
 	      runEffect();
 	    });
 	   	   
 	  });
-	
+	 function runEffect() {
+	      // Run the effect
+	      $( "#placesList" ).toggle( "blind", 300 );
+	    }
+	 
 	
 	$( function() {
 		$( "#sortable" ).sortable({
@@ -812,11 +813,17 @@
 	// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 	// 인포윈도우에 장소명을 표시합니다
 	function displayInfowindow(marker, title, keyPosition) {
-	    var content = '<div style="padding:5px;"><a href="#" id="start" onclick="javascript:start()">출발지</a><br>'
-			+'<a href="#" id="pass" onclick="javascript:pass()">경유지</a><br>'+'<a href="#" id="end" onclick="javascript:end()">도착지</a><br></div>'
-			+'<div style="padding:5px;z-index:1;">' + title + '<br></div>';
-	    keywordMarkerPosition = keyPosition;
-	    infowindow.setContent(content);
+	    var content ='<div style="padding:5px;">'
+			+'<a href="#" id="start" style="color:red;" onclick="javascript:start()">'
+			+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png" style="width:30px;">&nbsp;&nbsp;출발지</a><br>'
+			+'<a href="#" id="pass" style="color:green;" onclick="javascript:pass()">'
+			+'<img src="http://t1.daumcdn.net/localimg/localimages/07/2013/img/green_b_1.png" style="width:30px;">&nbsp;&nbsp;경유지</a><br>'
+			+'<a href="#" id="end" style="color:blue;" onclick="javascript:end()">'
+			+'<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png" style="width:30px;">&nbsp;&nbsp;도착지</a></div>';
+
+		var searchInfoContent = '<span style="padding-left: 10px;">'+title+'</span></br>'+content;
+		keywordMarkerPosition = keyPosition;
+		infowindow.setContent(searchInfoContent);
 	    infowindow.open(map, marker);
 	}
 

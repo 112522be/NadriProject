@@ -1,62 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
-pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en" class="">
+
+<html lang="ko">
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<title>네이버 :: Smart Editor 2 &#8482;</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<script
-	src="//production-assets.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js"></script>
-<script
-	src="//production-assets.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js"></script>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex">
-<link rel="shortcut icon" type="image/x-icon"
-	href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
-<link rel="mask-icon" type=""
-	href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
-	color="#111">
-<link rel="canonical" href="https://codepen.io/koenigsegg1/pen/KdmBOe">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-	rel="stylesheet" type="text/css">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
+		
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+<script src="../resources/helios/assets/js/skel.min.js"></script>
+<script src="../resources/helios/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="../resources/helios/assets/js/main.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/resources/smartEditor2/js/service/HuskyEZCreator.js" charset="UTF-8"></script>
-
-<link href="../css/floating.css" rel="stylesheet">
+<script type="text/javascript">
+$(function() {
+	$(document).ready(function() {
+		if($('input[name="userId"]').val()==null || $('input[name="userId"]').val()==""){
+			self.location="../user/loginView.jsp"
+		}
+	})
+	$('a#submit').bind('click', function() {
+		var hashtags=',';
+		$('button.selectedhashtagButtons').each(function() {
+			hashtags += $(this).val()+',';
+		})
+		$('input[name="hashtag"]').val(hashtags);
+		if("${menu}"=="update"){
+			$('form[name=postData]').attr("action", "updateComm").attr("method", "POST").submit();
+		}else{
+			$('form[name="postData"]').attr("action", "addComm").attr("method", "POST").submit();
+		}
+	})
+	
+	$("header h1").on("click", function(){
+		self.location = "../comm/listComm";
+	});
+})
+</script>
+<style type="text/css">
+input:focus{
+	outline:none;
+}
+select:focus{
+	outline:none;
+}
+button[data-original-title='More Color']{
+	width: 20px !important;
+}
+.panel-heading{
+	text-align: center !important;
+}
+.wrapper{
+	margin: 0;
+	padding: 6em 0 10em 0;
+}
+.placeButton{
+	width: auto !important;
+	height: auto;
+	padding: 0.5em;
+	align-items: unset;
+}
+</style>
 
 </head>
-<body>
-
-	<div class="container">
-		<button type="button" class="btn btn-default">
-			<div class="col-xs-3" align="left">
-				<img src="../resources/images/marker/marker_uc.png" width="50px" height="80px" align="middle">
+<body class="no-sidebar">
+	<div id="page-wrapper">
+				<div id="header">
+			<jsp:include page="../layout/toolbar.jsp"></jsp:include>
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+					<h1>나만의 나들이</h1>
+				</header>
 			</div>
-			<div class="col-xs-9" align="left">
-				<h3>비트교육센터빌딩</h3>
-				<h5>서울시 서초구 어쩌구 저쩌구</h5>
+		</div>
+		<div class="body">
+			<div class="wrapper style1">
+				<div class="container" align="center">
+				<br/>
+					<form name="postData">
+					<c:if test="${community.postNo != null}">			
+						<input type="hidden" name="postNo" value="${community.postNo}">
+					</c:if>
+						<input type="hidden" name="userId" value="${loginUser.userId}">
+						<%-- ${loginUser.userId} --%>
+						<div class="form-group">
+						    <input type="title" class="form-control" name="title" placeholder="제목을 입력하세요" value="${community.title}">
+						 </div>
+						 <div>
+						  	<jsp:include page="noteEditor.jsp"></jsp:include>
+						 </div>
+				 		 <br/>
+						 <div id="cndHashTags">
+							 <c:if test="${! empty hashtags}">
+							 	<c:set var="i" value="0" />
+							 	<c:forEach var="hashtags" items="${hashtags}">
+							 		<c:set var="i" value="${i+1}" />
+							 			<button type="button" class="selectedhashtagButtons" value="${hashtags}"><span class="fas fa-check-circle"></span>&nbsp;#${hashtags}</button>&nbsp;
+							 	</c:forEach>
+							 </c:if>
+						 </div>
+						 <br/>	
+					</form> 
+					<div class="box-bottom" >
+						<a id="submit">저장하기</a>
+					</div>
+					<br/>
+				</div>	
 			</div>
-		</button>	
-		<img alt="aa" src="../resources/images/marker/marker_uc.png" border="2">
+		</div>
 	</div>
-
-	<nav class="container">
-	<a class="buttons" href="#" tooltip="게시물 작성"><span><span class="rotate"></span></span></a></nav>
-
-
-
 </body>
+<style type="text/css">
+#cndHashTags > button{
+	width: auto !important;
+	height: auto;
+	line-height: 1.5em;
+	position: relative;
+	font-weight: 400;
+}
+</style>
 </html>

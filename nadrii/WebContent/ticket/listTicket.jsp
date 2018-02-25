@@ -215,24 +215,22 @@
 </head>
 
 <body class="no-sidebar">
-		<div id="page-wrapper">
 
 			<!-- Header -->
 				<div id="header">
+					<jsp:include page="/layout/toolbar.jsp" />
 					
 					<div class="inner">
 						<header>
 							<h1>나들이 티켓</h1>
 							<p>새로운 장소, 새로운 인연</p>
 						</header>
-					</div>
-					
-					<jsp:include page="/layout/toolbar.jsp" />
-
+					</div>		
 				</div>
+				
 			<form action="navigation">
 			<!-- Features -->
-				<div class="wrapper style1" style="padding-top: 3em;">
+				<div class="wrapper style1">
 					<section id="features" class="container special">
 						<div class="continer">
 						
@@ -264,6 +262,8 @@
 							</div>
 							
 						</div>
+						
+						
 						
 						<div class="row">
 						
@@ -306,12 +306,6 @@
 		</form>
 		
 		<jsp:include page="/layout/footer.jsp" />
-
-
-
-	</div>
-
-		
 
 	</body>
 </html>

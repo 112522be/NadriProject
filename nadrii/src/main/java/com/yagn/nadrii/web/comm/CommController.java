@@ -37,6 +37,14 @@ public class CommController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	@RequestMapping(value = "addComm", method=RequestMethod.GET)
+	public String addComm() {
+
+		System.out.println("/addCommView");
+		
+		return "forward:/comm/addCommView.jsp";
+	}
+	
 	@RequestMapping(value = "addComm", method=RequestMethod.POST)
 	public String addComm(@ModelAttribute Community community) {
 		System.out.println("--------"+community);

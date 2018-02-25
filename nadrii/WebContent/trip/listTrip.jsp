@@ -507,6 +507,10 @@ pageEncoding="UTF-8"%>
 						}
 					}
 			});
+			
+			$("header h1").on("click", function(){
+				self.location = "../trip/getTheme";
+			});
 		});
 
 		///////////////////
@@ -694,7 +698,7 @@ pageEncoding="UTF-8"%>
 
 			<div class="inner">
 				<header>
-					<h1><a href="../index.jsp" id="logo">나들이 정보</a></h1>
+					<h1>나들이 정보</h1>
 				</header>
 			</div>
 			<jsp:include page="/layout/toolbar.jsp" />

@@ -3,7 +3,16 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<style>
+.pagination>li>a, .pagination>li>span{
+	color: #df7366 !important;
+}
+.pagination>.active>a{
+	color: #ffffff !important;
+	background-color: #df7366 !important;
+	border-color: #df7366 !important;
+}
+</style>
 
 <div class="container text-center">
 

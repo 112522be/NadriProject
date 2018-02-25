@@ -28,6 +28,10 @@
 		$('a[name="submit"]').bind('click', function() {
 			$('form[name="postData"]').attr("action", "addGroup").attr("method", "POST").submit();
 		});
+		
+		$("header h1").on("click", function(){
+			self.location = "../group/listGroup";
+		});
 	});
 </script>
 <style type="text/css">

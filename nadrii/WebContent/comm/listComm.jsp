@@ -74,12 +74,12 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="fas fa-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="fas fa-envelope"></span></a>',
 				placement: 'bottom',
 			});	
 			
-			$('button[name="addComm"]').bind('click', function() {
-				self.location="addComm.jsp"
+			$('div[name="addComm"]').bind('click', function() {
+				self.location="../comm/addComm";
 			})
 
 			$(window).scroll(function() {
@@ -155,7 +155,7 @@
 		}
 		
 		function clickMessage(){
-			window.open("../message/addMessage?recevierId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -213,7 +213,7 @@
 			    opacity: 0.7;
 			}
 			div.wrapper.style1{
-				background-image: url("/resources/images/background.png");
+				background-image: url("/resources/images/background_3.jpg");
 			}
 			#searchKeyword{
 				border-radius: 30px;

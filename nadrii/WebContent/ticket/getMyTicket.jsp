@@ -55,6 +55,14 @@ $(function(){
 });
 
 	</script>
+	<style>
+	#nav{
+		padding: 22px;
+	}
+	body{
+		background-color: white;
+	}
+	</style>
 </head>
 
 <body class="no-sidebar">
@@ -65,7 +73,7 @@ $(function(){
 					
 					<div class="inner">
 						<header>
-							<h1><a href="#" id="logo">N A D R I I</a></h1>
+							<h1>내 티켓</h1>
 						</header>
 					</div>
 					

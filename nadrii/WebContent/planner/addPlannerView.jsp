@@ -47,7 +47,7 @@
 			border-color: #afafaf;
 		}	
 		.map_wrap, .map_wrap * {
-		    font-size: 16px !important;
+		    font-size: 15px !important;
 		}		
 		th{
 			padding: 10px;
@@ -216,12 +216,12 @@
 										
 									<div id="menu_wrap" class="bg_white">
 										<div class="option">
-											<form onsubmit="searchPlaces(); return false;" style="margin: -8px">
-												키워드 : <input type="text" value="" id="keyword" size="15" style="padding:0; width:50%;">
+											<form onsubmit="searchPlaces(); return false; runEffect();" style="margin: -8px">
+												키워드 : <input type="text" value="" id="keyword" size="15" style="padding: 0; width:50%;">
 												<span type="submit" id="searchListSubmit" style="color: #ffffff; padding: 5px; font-size: 10pt !important; background-color: #df7366; border-radius: 0.5em;">검색</span>
 											</form>
 											<ul id="placesList" style="display: none;"></ul>
-											<a id="button"><span class="fas fa-chevron-circle-down" style="color: #df7366; width: 25px"></span></a>
+											<a id="toggleButton"><span class="fas fa-chevron-circle-down" style="color: #df7366; width: 25px"></span></a>
 											
 											<ul id="placesWishList" style="display: none;"></ul>
 											

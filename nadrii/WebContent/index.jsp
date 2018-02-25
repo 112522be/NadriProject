@@ -55,8 +55,12 @@ body{
 	background-color: #e1dae266;
 }
 .reel article{
+	width: 16.5em;
 	border: 1px solid;
 	border-color: #878787;
+}
+a:active{
+	text-decoration: none;
 }
 
 </style>
@@ -324,6 +328,9 @@ function check(){
 		data:"modalUserEmail=" +email,     //    onclick();
 		success :function(result){
 			makeToast("이메일이 발송되었습니다.");
+		},
+		error: function(){
+			makeToast("이메일 발송을 실패하였습니다.");
 		}
 	});
 }
