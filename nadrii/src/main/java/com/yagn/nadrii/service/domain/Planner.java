@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Planner {
 	
 	private int postNo;
-	private String plannerMakerId;
+	private User user;
 	private String title;
 	private String lat;
 	private String lng;
@@ -22,11 +22,11 @@ public class Planner {
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
-	public String getPlannerMakerId() {
-		return plannerMakerId;
+	public User getUser() {
+		return user;
 	}
-	public void setPlannerMakerId(String plannerMakerId) {
-		this.plannerMakerId = plannerMakerId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getTitle() {
 		return title;
@@ -82,7 +82,7 @@ public class Planner {
 	
 	@Override
 	public String toString() {
-		return "Planner [postNo=" + postNo + ", plannerMakerId=" + plannerMakerId + ", title=" + title + ", lat=" + lat
+		return "Planner [postNo=" + postNo + ", user=" + user + ", title=" + title + ", lat=" + lat
 				+ ", lng=" + lng + ", regDate=" + regDate + ", viewCount=" + viewCount + ", flag=" + flag + ", photo="
 				+ photo + ", text=" + text + "]";
 	}

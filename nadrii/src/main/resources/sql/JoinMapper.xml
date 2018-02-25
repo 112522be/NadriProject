@@ -9,7 +9,8 @@
 	<resultMap id="joinSelectMap" type="join">
 		<result property="joinNo"			column="join_no"		jdbcType="NUMERIC"/>
 		<result property="groupNo"		column="group_no"	jdbcType="NUMERIC"/>
-		<result property="userId"			column="user_id"		jdbcType="VARCHAR"/>
+		<result property="user.userId"			column="user_id"		jdbcType="VARCHAR"/>
+		<result property="user.profileImageFile"		column="profile_image_file"			jdbcType="VARCHAR"/>
 		<result property="groupRole"	column="group_role"	jdbcType="NUMERIC"/>	
 	</resultMap>
 	
@@ -23,7 +24,7 @@
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT join_no, group_no, user_id, group_role
-									FROM join
+									FROM join 
 									WHERE user_id = #{searchKeyword}
 									) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
@@ -31,9 +32,10 @@
 	</select>
 	
 	<select id="getJoinMemberList"		parameterType="Search"	resultMap="joinSelectMap">
-		SELECT join_no, group_no, user_id, group_role
-		FROM join
+		SELECT join_no, group_no, j.user_id, group_role, profile_image_file
+		FROM join j, users u
 		WHERE group_no = #{searchKeyword}
+		AND j.user_id = u.user_id
 		ORDER BY join_no ASC
 	</select>
 		

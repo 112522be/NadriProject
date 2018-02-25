@@ -64,7 +64,9 @@ public class GroupController {
 		
 		join.setGroupNo(groupNo);
 		join.setGroupRole(1);
-		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		User user = new User();
+		user.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		join.setUser(user);
 		
 		group.setJoin(join);
 		
@@ -126,7 +128,9 @@ public class GroupController {
 		Join join = new Join();
 		
 		join.setGroupNo(groupNo);
-		join.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		User user = new User();
+		user.setUserId(((User)session.getAttribute("loginUser")).getUserId());
+		join.setUser(user);
 				
 		joinService.deleteJoin(join);
 		

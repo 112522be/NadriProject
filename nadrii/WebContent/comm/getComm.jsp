@@ -45,7 +45,7 @@
 		}
 
 		function clickMessage(){	
-			window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("/message/addMessage?recevierId="+'${community.user.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
 		}
 
 		function addLike(){
@@ -130,7 +130,7 @@
 								<div style="float: left;"> 
 									<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
 									<a href="#none" style="position: relative;">
-										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.userId}</span>
+										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.user.userId}</span>
 									</a>
 								</div>
 								<div style="float: right;">
@@ -140,7 +140,7 @@
 							</header>
 							<br/>
 							<div >
-							<c:if test="${community.userId == loginUser.userId}">
+							<c:if test="${community.user.userId == loginUser.userId}">
 								<div align="right">
 									<a id="modify"><span class="fas fa-pencil-alt"></span></a>
 									&nbsp;

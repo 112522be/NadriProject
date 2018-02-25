@@ -8,10 +8,11 @@
  	
 	<resultMap id="communitySelectMap" type="com.yagn.nadrii.service.domain.Comments">
 		<result property="commentNo" column="comment_no" jdbcType="NUMERIC" />
-		<result property="userId" column="user_id" jdbcType="VARCHAR" />
+		<result property="user.userId" column="user_id" jdbcType="VARCHAR" />
 		<result property="postNo" column="post_no" jdbcType="NUMERIC" />
 		<result property="regDate" column="reg_date" jdbcType="VARCHAR" />
 		<result property="text" column="text" jdbcType="VARCHAR" />
+		<result property="user.profileImageFile" column="profile_image_file" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- comm의 Create(insert) -->
@@ -31,8 +32,8 @@
  	</select>
 	
 	<select id="listCommentByPost" parameterType="int" resultMap="communitySelectMap">
-		SELECT comment_no, user_id, post_no, text, reg_date FROM comments WHERE post_no=#{postNo}
-		ORDER BY reg_date DESC
+		SELECT comment_no, comments.user_id, post_no, text, comments.reg_date, profile_image_file FROM comments, users WHERE post_no=#{postNo} AND comments.user_id = users.user_id
+		ORDER BY comments.reg_date DESC
  	</select>
  	
  	<select id="listCommentById" parameterType="com.yagn.nadrii.common.Search" resultMap="communitySelectMap">

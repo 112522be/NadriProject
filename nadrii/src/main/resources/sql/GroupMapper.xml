@@ -9,7 +9,8 @@
 	<resultMap id="groupSelectMap" type="group">
 		<result property="join.joinNo"		column="join_no"			jdbcType="NUMERIC"/>
 		<result property="join.groupNo"		column="group_no"		jdbcType="NUMERIC"/>
-		<result property="join.userId"		column="user_id"			jdbcType="VARCHAR"/>
+		<result property="join.user.userId"		column="user_id"			jdbcType="VARCHAR"/>
+		<result property="join.user.profileImageFile"		column="profile_image_file"			jdbcType="VARCHAR"/>
 		<result property="join.groupRole"	column="group_role"		jdbcType="NUMERIC"/>
 		<result property="title"					column="title" 				jdbcType="VARCHAR" />
 		<result property="text"					column="text" 				jdbcType="CLOB" />
@@ -40,11 +41,12 @@
 	 <!-- SQL : SELECT ONE -->
 	<select 	id="getGroup"	parameterType="int"	resultMap="groupSelectMap">
 		SELECT
-		j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.place_detail, g.lat, g.lng, g.meeting_date, g.reg_date
-		FROM groups g, join j
+		j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.place_detail, g.lat, g.lng, g.meeting_date, g.reg_date, profile_image_file
+		FROM groups g, join j, users u
 		WHERE g.group_no = j.group_no
 				AND j.group_role = 1
 				AND g.group_no = #{value}
+				AND j.user_id = u.user_id
 	</select>
 	
 	<update	id="updateViewCount"		parameterType="group" >
@@ -82,10 +84,11 @@
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM		(	SELECT
-									j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.place_detail, g.lat, g.lng, g.meeting_date, g.reg_date
-									FROM groups g, join j
+									j.user_id, g.group_no, g.title, g.text, g.view_count, g.place_name, g.place_detail, g.lat, g.lng, g.meeting_date, g.reg_date, profile_image_file
+									FROM groups g, join j, users u
 									WHERE g.group_no = j.group_no
 											AND j.group_role = 1
+											AND j.user_id = u.user_id
 									<if test="searchCondition != null">
 										<if test="searchCondition == 0 and searchKeyword !='' ">
 											AND (g.title LIKE '%${searchKeyword}%' OR g.text LIKE '%${searchKeyword}%')
