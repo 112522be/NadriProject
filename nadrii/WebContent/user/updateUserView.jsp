@@ -45,7 +45,12 @@
 	
 		// 생일
 		$( function() {
-			$( ".datepicker" ).datepicker();
+			$( ".datepicker" ).datepicker({
+				changeMonth: true,
+				changeYear: true,
+				yearRange: "1900:2018",
+				dateFormat: "yy-mm-dd"
+			});
 		} );
 		 
 		 
@@ -370,10 +375,10 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" value="${user.phone2 }" placeholder="번호" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="phone2" name="phone2" value="${user.phone2 }" style="border-radius: 25px;">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" value="${user.phone3 }" placeholder="번호" style="border-radius: 25px;">
+		      <input type="text" class="form-control" id="phone3" name="phone3" value="${user.phone3 }" style="border-radius: 25px;">
 		    </div>
 		    <input type="hidden" name="phone"/>
 		  </div>
@@ -382,7 +387,7 @@
 		  	<label for="profileImageFile" class="col-sm-offset-1 col-sm-3 control-label">프로필 사진</label>
 			  <div class="col-sm-2">
 				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
-				    <input type="file" id="fileName" name="fileName" value=""/>
+				    <input type="file" id="fileName" class="button" value=""/>
 				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
 				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
 				<!-- </form> -->

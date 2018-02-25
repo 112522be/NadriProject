@@ -428,7 +428,7 @@ public class UserController {
 		session.setAttribute("user", user);
 		model.addAttribute("user", user);
 
-		return "forward:/user/updateUser.jsp";
+		return "forward:/user/updateUserView.jsp";
 	}
 
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
