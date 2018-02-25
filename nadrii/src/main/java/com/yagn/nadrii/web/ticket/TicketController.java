@@ -24,6 +24,8 @@ import com.yagn.nadrii.common.OpenApiPage;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.domain.TourTicket;
 import com.yagn.nadrii.service.domain.User;
 import com.yagn.nadrii.service.ticket.TicketService;
@@ -87,11 +89,13 @@ public class TicketController {
 			System.out.println(e);
 		}
 		
+		map.put("search", openApiSearch);
 		map.put("resultPage", resultPage);
 		map.put("tourTicket", returnMap.get("tourTicketList"));
 		
 		return "forward:/ticket/listTicket.jsp";
 	}
+	
 	
 	@RequestMapping(value = "getTicket", method = RequestMethod.GET)
 	public String getTicket(
@@ -108,6 +112,11 @@ public class TicketController {
 		DetailImage detailImage = new DetailImage();
 		TourTicket tourTicket = new TourTicket();
 		User user = new User();
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		OpenApiSearch openApiSearch = new OpenApiSearch();
+		SearchFestival searchFestival = new SearchFestival();
+		Ticket ticket = new Ticket();
 		
 		try {
 
@@ -128,7 +137,23 @@ public class TicketController {
 			System.out.println("\n\n[1]==> " + detailIntro.toString());
 			System.out.println("\n\n[2]==> " + detailImage.toString());
 			System.out.println("\n\n[3]==> " + tourTicket.toString());
-
+			System.out.println("\n\n[4]==> " + searchFestival.toString());
+			
+			
+			/*openApiSearch.setSearchKeyword(tourTicket.getTitle());
+			System.out.println(openApiSearch.toString());
+			returnMap = ticketService.getSearchTicket(openApiSearch);
+			
+			System.out.println("\n\n[5]==> " + returnMap.get("searchTicket") );
+			ticket.setLat(searchFestival.getMapy());
+			ticket.setLng(searchFestival.getMapx());
+			ticket.setTickeTitle(searchFestival.getTitle().replaceAll(" 2018", ""));
+			ticket.setContentId(searchFestival.getContentid());
+			ticket.setContentTypeId(searchFestival.getContenttypeid());
+			ticket.setTicketImage(tourTicket.getFirstimage());*/
+			
+			ticketService.addTicketLog(ticket);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -229,7 +254,6 @@ public class TicketController {
 		return "forward:/ticket/getMyTicket.jsp";
 	}
 			
-	
 	
 	
 } // end of class

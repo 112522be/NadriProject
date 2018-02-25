@@ -22,6 +22,7 @@ import com.yagn.nadrii.service.domain.DetailIntro;
 import com.yagn.nadrii.service.domain.KakaoImage;
 import com.yagn.nadrii.service.domain.NaverImage;
 import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 
 @Repository("kakaoApiDaoImpl")
@@ -137,6 +138,14 @@ public class KakaoApiDaoImpl implements TicketDao {
 		return null;
 	}
 	public List<String> getTicketPrice(String priceInfo) throws Exception {
+		return null;
+	}
+	public Map<String, Object> getSearchTicketList(OpenApiSearch openApiSearch) {
+		return null;
+	}
+	public void addTicketLog(Ticket ticket) {
+	}
+	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) {
 		return null;
 	}
 	

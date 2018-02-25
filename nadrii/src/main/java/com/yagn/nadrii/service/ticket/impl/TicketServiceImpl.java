@@ -1,5 +1,6 @@
 package com.yagn.nadrii.service.ticket.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.yagn.nadrii.common.OpenApiSearch;
 import com.yagn.nadrii.service.domain.DetailImage;
 import com.yagn.nadrii.service.domain.DetailIntro;
+import com.yagn.nadrii.service.domain.Purchase;
 import com.yagn.nadrii.service.domain.SearchFestival;
+import com.yagn.nadrii.service.domain.Ticket;
 import com.yagn.nadrii.service.ticket.TicketDao;
 import com.yagn.nadrii.service.ticket.TicketService;
 
@@ -42,15 +45,46 @@ public class TicketServiceImpl implements TicketService {
 		this.kakaoApiDao = kakaoApiDao;
 	}
 	
+	@Autowired
+	@Qualifier("ticketDaoImpl")
+	private TicketDao ticketDao;
+	
+	public void setTicketDao(TicketDao ticketDao) {
+		this.ticketDao = ticketDao;
+	}
 	
 	/// Constructor
 	public TicketServiceImpl() {
 		System.out.println(this.getClass());
 	}
+	
+	@Override
+	public void addTicketLog(Ticket ticket) throws Exception {
+		System.out.println("\n[ticketServiceImpl.java / addTicketLog");
+		ticketDao.addTicketLog(ticket);
+	}
 
 	@Override
 	public Map<String, Object> getTicketList(OpenApiSearch openApiSearch) throws Exception {
-		Map<String, Object> map = tourApiDao.getTicketList(openApiSearch);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (openApiSearch.getSearchKeyword() != null) {
+			map = tourApiDao.getSearchTicketList(openApiSearch);
+		} else {
+			map = tourApiDao.getTicketList(openApiSearch);
+		}
+		
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> getSearchTicket(OpenApiSearch openApiSearch) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = tourApiDao.getSearchTicket(openApiSearch);
+		
 		return map;
 	}
 	

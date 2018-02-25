@@ -39,12 +39,29 @@
 	
 	<script type="text/javascript">
 	
-
 // ========== '예매하기 / 장바구니 담기' Event 연결 ==========
 $(function(){
 	$("a[href='#']:contains('예매하기')").bind("click", function(event){
 		event.preventDefault();
 		fncAddBooking();
+	})
+});
+	
+	
+// ========== '위시리스트 담기' Event 연결 ==========
+$(function(){
+	$("a[href='#']:contains('위시리스트 담기')").bind("click", function(event){
+		event.preventDefault();
+		var yesOrNo = confirm("위시리스트에 저장하시겠습니까?")
+		
+		if (yesOrNo) {
+			// yes
+			addWish( $("input[name='contentid']").val() );	
+			
+		} else {
+			// no
+		}
+		
 	})
 });
 
@@ -91,6 +108,28 @@ function fncAddBooking() {
 	.attr("method", "POST")
 	.attr("action", "/ticket/addBooking")
 	.submit();
+}
+
+//위시리스트에 저장할 때 사용
+function addWish(contentid){
+	$.ajax({
+		url:"../wish/json/addWishFromTrip/"+contentid+"",
+		method:"GET",
+		dataType:"json",
+		headers :{
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
+		},
+		success:function(returnData){
+			var message = returnData.message;
+			if(message == "ok"){
+				makeToast("위시리스트 저장되었습니다.");
+			}else{
+				makeToast("이미 저장된 장소");
+			}
+		}
+	});
+	
 }
 	</script>
 </head>
@@ -259,6 +298,27 @@ function fncAddBooking() {
 						<header>
 							<h3>
 								<a href="#" class="button 12u">
+	  								취 소
+								</a>
+							</h3>
+						</header>
+					</article>
+					<article class="4u 12u(mobile) special">
+						<header>
+							<h3>
+								<a href="#" class="button 12u">
+	  								위시리스트 담기
+								</a>
+							</h3>
+						</header>
+					</article>
+				</div><!-- row end -->
+				
+				<div class="row">
+					<article class="4u 12u(mobile) special">
+						<header>
+							<h3>
+								<a href="#" class="button 12u">
 									<c:if test="${ detailIntro.usetimefestival ne '무료' }">
 										예매하기 / 장바구니 담기
 									</c:if>
@@ -269,17 +329,9 @@ function fncAddBooking() {
 							</h3>
 						</header>	
 					</article>
-					<article class="4u 12u(mobile) special">
-						<header>
-							<h3>
-								<a href="#" class="button 12u">
-	  								취 소
-								</a>
-							</h3>
-						</header>
-					</article>
-				</div>
-			</div>
+				</div><!-- row end -->
+				
+			</div><!-- container end -->
 
 		</div>
 </form>
