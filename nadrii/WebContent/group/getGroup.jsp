@@ -90,7 +90,7 @@
 				$('[data-toggle="popover"]').popover({ 
 					html: true,
 					container: 'body',
-					content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+					content: '<a href="#none" class="message" onclick="javascript:clickMessage()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 					placement: 'bottom',
 				});	
 				

@@ -86,7 +86,7 @@
 			var contentId = $( $('input[name="contentId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var title = $( $('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
-			var title = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var firstimage = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 
 			self.location = "/ticket/getTicket?" + "contentId="

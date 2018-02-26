@@ -140,7 +140,7 @@
 								<br/>
 								<div style="float: left;"> 
 								<c:if test="${community.user.profileImageFile != null}">
-									<img src="${community.user.profileImageFile}" alt="" style="width: 36px; height: 36px; border-radius: 5em; height: 100%"/>
+									<img src="${community.user.profileImageFile}" alt="" style="width: 36px; height: 36px; border-radius: 5em;"/>
 								</c:if>
 								<c:if test="${community.user.profileImageFile == null}">
 									<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>

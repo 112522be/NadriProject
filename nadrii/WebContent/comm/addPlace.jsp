@@ -126,6 +126,11 @@
 			});
 		});
 	</script>
+	<style>
+		body{
+			background-color: white;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -138,7 +143,7 @@
 					<button type="button" class="btn btn-default">검색</button>
 
 				</div> 
-			<div id="result" style="padding-top: 1em;">
+			<div id="result" style="padding-top: 50px;">
 			</div>
 		</div>
 		<div class="col-sm-7">

@@ -139,9 +139,9 @@
 		<input type="hidden" name="quantity" 			value="1">
 		<input type="hidden" name="total_amount" 		value=${ purchase.totalTicketPrice }>
 		<input type="hidden" name="tax_free_amount" 	value="${ purchase.taxFree }">
-		<input type="hidden" name="approval_url" 		value="http://127.0.0.1:8080/purchase/kakaoPayComplete">
-		<input type="hidden" name="cancel_url" 			value="http://127.0.0.1:8080/purchase/cancelPayment.jsp">
-		<input type="hidden" name="fail_url" 			value="http://127.0.0.1:8080/purchase/failPayment.jsp">
+		<input type="hidden" name="approval_url" 		value="http://192.168.0.39:8080/purchase/kakaoPayComplete">
+		<input type="hidden" name="cancel_url" 			value="http://192.168.0.39:8080/purchase/cancelPayment.jsp">
+		<input type="hidden" name="fail_url" 			value="http://192.168.0.39:8080/purchase/failPayment.jsp">
 	
 	
 	

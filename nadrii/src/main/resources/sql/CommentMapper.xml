@@ -38,7 +38,7 @@
  	
  	<select id="listCommentById" parameterType="com.yagn.nadrii.common.Search" resultMap="communitySelectMap">
 		SELECT * FROM (SELECT ROWNUM row_num, inner_table.*
-		FROM (SELECT comment_no, comments.user_id, comments.post_no, comments.text, comments.reg_date FROM comments, post WHERE comments.user_id=#{searchKeyword} AND comments.post_no = post.post_no
+		FROM (SELECT distinct comment_no, comments.user_id, comments.post_no, comments.text, comments.reg_date FROM comments, post, groups WHERE comments.user_id=#{searchKeyword} AND (comments.post_no = post.post_no OR comments.post_no = groups.group_no)
  		ORDER BY comments.reg_date DESC) inner_table
  		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_num BETWEEN #{startRowNum} AND #{endRowNum} 
@@ -63,9 +63,9 @@
 	
 	<select  id="getTotalCount_Id"  parameterType="String"	 resultType="int">
 		SELECT COUNT(*)
-	  	FROM(	SELECT comment_no, comments.user_id, comments.text, comments.reg_date 
-	  	FROM comments, post
-	  	WHERE comments.user_id=#{userId} AND comments.post_no = post.post_no
+	  	FROM(	SELECT distinct comment_no, comments.user_id, comments.text, comments.reg_date 
+	  	FROM comments, post, groups
+	  	WHERE comments.user_id=#{userId} AND (comments.post_no = post.post_no OR comments.post_no = groups.group_no)
 						) countTable						
 	</select>
 	 

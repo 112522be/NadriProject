@@ -29,9 +29,9 @@
 	<select id="listLikeById"		parameterType="search"	resultMap="likeSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  				FROM		(	SELECT like_no, likes.post_no, likes.user_id, likes.reg_date
-									FROM likes, post
-									WHERE likes.user_id = #{searchKeyword} AND likes.post_no = post.post_no
+	  				FROM		(	SELECT distinct like_no, likes.post_no, likes.user_id, likes.reg_date
+									FROM likes, post, groups
+									WHERE likes.user_id = #{searchKeyword} AND (likes.post_no = post.post_no OR likes.post_no = groups.group_no)
 									ORDER BY likes.reg_date DESC
 									) inner_table
 					WHERE ROWNUM &lt;= #{endRowNum} )
@@ -40,9 +40,9 @@
 
 	 <select  id="getTotalLikeById"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT like_no, likes.post_no, likes.user_id, likes.reg_date
-					FROM likes, post
-					WHERE likes.user_id = #{searchKeyword} AND likes.post_no = post.post_no
+	  	FROM  (	SELECT distinct like_no, likes.post_no, likes.user_id, likes.reg_date
+					FROM likes, post, groups
+					WHERE likes.user_id = #{searchKeyword} AND (likes.post_no = post.post_no OR likes.post_no = groups.group_no)
 					 ) countTable		
 	 </select>
 	 

@@ -129,7 +129,7 @@ public class CommController {
 		request.setAttribute("community", community);
 		request.setAttribute("hashtags", hashtags);
 		request.setAttribute("menu", "update");
-		return "forward:/comm/addComm.jsp";
+		return "forward:/comm/addCommView.jsp";
 	}
 	
 	@RequestMapping("updateComm")
