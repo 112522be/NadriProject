@@ -118,7 +118,7 @@ function getMemberList(){
 	});	
 }
 $(function() {
-	if(${loginUser.userId} == null || ${loginUser.userId} == ''){
+	if('${loginUser.userId}' == null || '${loginUser.userId}' == ''){
 		alert("로그인 후 이용해주세요.")
 		self.location="../user/loginView.jsp"
 	}

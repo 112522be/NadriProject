@@ -12,8 +12,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script
@@ -52,203 +53,189 @@ hr {
 }
 </style>
 <script type="text/javascript">
-	var currentPage = 1;
-	var maxPage;
-	$(function() {
-		$('a.col-xs-4').bind('click', function() {
-			$('a.col-xs-4').css("border", "0")
-			$('span.button01').css("color", "#5b5b5b")
-			$(this).css("border-bottom", "4px solid #FE8A71");
-			$(this).children().css("color", "#FE8A71")
-			if ($(this).children().html() == "좋아요") {
-				getLike('add');
-			} else if ($(this).children().html() == "댓글") {
-				getComments('add');
-			} else {
-				getJoin('add');
+var currentPage = 1;
+var maxPage;
+$(function() {
+	$('a.col-xs-4').bind('click', function() {
+		$('a.col-xs-4').css("border", "0")
+		$('span.button01').css("color", "#5b5b5b")
+		$(this).css("border-bottom", "4px solid #FE8A71");
+		$(this).children().css("color", "#FE8A71")
+		if($(this).children().html() == "좋아요"){
+			
+			getLike('add');
+			$('#logContainer').html("왜 안될까....")
+		}else if($(this).children().html() == "댓글"){
+			getComments('add');
+		}else{
+		}
+	})
+	$('#logContainer').on('click', 'a.more', function() {
+		if(currentPage < maxPage){
+		    currentPage++;
+		    if($('#logContainer').find('input[name="type"]').val() == "좋아요"){
+		    	getLike("update");
+		    }else if($('#logContainer').find('input[name="type"]').val() == "댓글"){
+		    	getComments("update");
+		    }else{
+		    	
+		    }
+		        
+		}else{
+		    return;
+		}
+	})	
+})
+
+function getLike(menu) {
+	if(menu == 'add'){
+		currentPage=1;
+	}
+	$.ajax({
+		url: "/like/json/listLikeById",
+		method: "GET",
+		data: {
+			"currentPage": currentPage,
+			"searchKeyword": "${user.userId}"
+		},
+		headers: {
+			"Accept": "application/json"
+		},
+		success: function(JSONData) {
+			if(JSONData.totalCount%12 == 0){
+				maxPage = JSONData.totalCount / 12;
+			}else{
+				maxPage = Math.floor(JSONData.totalCount / 12)+1;
+			}
+			console.log(maxPage);
+			var html='<div class="likes" align="center"><input type="hidden" name="type" value="좋아요">';
+			if(currentPage > 1){
+				html += '<hr/>';
+			}
+			console.log(JSONData)
+			for(var i=0;i<JSONData.list.length;i++){
+				if(JSONData.title[i] != null){
+					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
+						+'</div>'
+						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">'
+						+'<i class="fas fa-heart" style="color: #F05643; font-size:1em; "></i>&nbsp;좋아요'
+						+'</div>'
+						+'<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
+						+'<p id="addedTitle" style="padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+						+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
+						+'</span></p>'
+						+'</div>'
+						+'</div>';
+					if(i != JSONData.list.length-1){
+						html += '<hr/>';
+					}
+				}
+				if(currentPage < maxPage){
+					html+='<a class="more">+ 더보기</a></div>'
+				}
+			}
+			if(menu == 'add'){
+				$('#logContainer').html(html);
+			}else{
+				$('#logContainer').find('a.more').remove();
+				$('#logContainer').append(html);
+			}
+			$('#logContainer').on('click', 'p#addedTitle', function() {
+				var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
+					if(postNo == null){
+						alert("삭제된 게시물입니다.");
+					}else{
+						if(postNo.indexOf("60") != 0 && postNo.indexOf("40") != 0){
+							self.location = "/comm/getComm?postNo="+postNo;
+						}else if(postNo.indexOf("40") != 0){
+							self.location = "/group/getGroup?groupNo="+postNo;
+						}else{
+							self.location = "/planner/getPlanner?postNo="+postNo;
+						}
+					}
+				})
 			}
 		})
-		$('#logContainer').on('click','a.more',function() {
-							if (currentPage < maxPage) {
-								currentPage++;
-								if ($('#logContainer').find(
-										'input[name="type"]').val() == "좋아요") {
-									getLike("update");
-								} else if ($('#logContainer').find(
-										'input[name="type"]').val() == "댓글") {
-									getComments("update");
-								} else {
-									getJoin('update');
-								}
-
-							} else {
-								return;
-							}
-						})
+	}
+function getComments(menu) {
+	if(menu == 'add'){
+		currentPage=1;
+	}
+	$.ajax({
+		url: "/common/listCommentById",
+		method: "GET",
+		data: {
+			"currentPage": currentPage,
+			"searchKeyword": '${user.userId}'
+		},
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json"
+		},
+		success: function(JSONData) {
+			console.log(JSONData)
+			if(JSONData.totalCount%12 == 0){
+				maxPage = JSONData.totalCount / 12;
+			}else{
+				maxPage = Math.floor(JSONData.totalCount / 12)+1;
+			}
+			console.log(maxPage);
+			var html = '<div class="comments" align="center"><input type="hidden" name="type" value="댓글">';
+			if(currentPage > 1){
+				html += '<hr/>';
+			}
+			for(var i=0;i<JSONData.comments.length;i++){
+				if(JSONData.title[i] != null){
+					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
+						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
+						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
+						+'</div>'
+						+'<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
+						html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;댓글'
+						+'</div>'
+						+'<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
+						+'<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
+						+JSONData.title[i]+'<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">'
+						+'</span></p>'
+						+JSONData.comments[i].text
+						+'</div>'
+						+'</div>';
+						if(i != JSONData.comments.length-1){
+							html += '<hr/>';
+						}	
+				}
+			}
+			if(currentPage < maxPage){
+				html+='<a class="more">+ 더보기</a></div>'
+			}
+			if(menu == 'add'){
+				$('#logContainer').html(html);
+			}else{
+				$('#logContainer').find('a.more').remove();
+				$('#logContainer').append(html);
+			}
+			$('#logContainer').on('click', 'p#addedTitle', function() {
+				var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
+				if(postNo == null){
+					alert("삭제된 게시물입니다.");
+				}else{
+					if(postNo.indexOf("30") == 0){
+						self.location = "/comm/getComm?postNo="+postNo;
+					}else if(postNo.indexOf("60") == 0){
+						self.location = "/group/getGroup?groupNo="+postNo;
+					}else{
+						self.location = "/planner/getPlanner?postNo="+postNo;
+					}
+				}
+			})
+		}
 	})
-
-	function getLike(menu) {
-		if (menu == 'add') {
-			currentPage = 1;
-		}
-		$.ajax({
-					url : "/like/json/listLikeById",
-					method : "GET",
-					data : {
-						"currentPage" : currentPage,
-						"searchKeyword" : "${user.userId}"
-					},
-					headers : {
-						"Accept" : "application/json"
-					},
-					success : function(JSONData) {
-						if (JSONData.totalCount % 12 == 0) {
-							maxPage = JSONData.totalCount / 12;
-						} else {
-							maxPage = Math.floor(JSONData.totalCount / 12) + 1;
-						}
-						console.log(maxPage);
-						var html = '<div class="likes" align="center"><input type="hidden" name="type" value="좋아요">';
-						if (currentPage > 1) {
-							html += '<hr/>';
-						}
-						console.log(JSONData)
-						for (var i = 0; i < JSONData.list.length; i++) {
-							if (JSONData.title[i] != null) {
-								html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
-										+ '<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
-										+ '<span>'
-										+ JSONData.yearNMonth[i]
-										+ '.</span>'
-										+ '<span style="font-size:2em; font-weight:700">'
-										+ JSONData.day[i]
-										+ '</span>'
-										+ '</div>'
-										+ '<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">'
-										+ '<i class="fas fa-heart" style="color: #F05643; font-size:1em; "></i>&nbsp;좋아요'
-										+ '</div>'
-										+ '<div class="col-xs-6" align="left" style="padding-top:0; padding-left: 0;">'
-										+ '<p id="addedTitle" style="padding: 0 0 0 5%;"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
-										+ JSONData.title[i]
-										+ '<input type="hidden" name="postNo" value="'+JSONData.list[i].postNo+'">'
-										+ '</span></p>' + '</div>' + '</div>';
-								if (i != JSONData.list.length - 1) {
-									html += '<hr/>';
-								}
-							}
-							if (currentPage < maxPage) {
-								html += '<a class="more">+ 더보기</a></div>'
-							}
-						}
-						if (menu == 'add') {
-							$('#logContainer').html(html);
-						} else {
-							$('#logContainer').find('a.more').remove();
-							$('#logContainer').append(html);
-						}
-						$('#logContainer').on('click','p#addedTitle',function() {
-											var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
-											if (postNo == null) {
-												alert("삭제된 게시물입니다.");
-											} else {
-												if (postNo.indexOf("60") != 0 && postNo.indexOf("40") != 0) {
-													self.location = "/comm/getComm?postNo="+ postNo;
-												} else if (postNo.indexOf("40") != 0) {
-													self.location = "/group/getGroup?groupNo="+ postNo;
-												} else {
-													self.location = "/planner/getPlanner?postNo="+ postNo;
-												}
-											}
-										})
-					}
-				})
-	}
-	function getComments(menu) {
-		if (menu == 'add') {
-			currentPage = 1;
-		}
-		$.ajax({
-					url : "/common/listCommentById",
-					method : "GET",
-					data : {
-						"currentPage" : currentPage,
-						"searchKeyword" : '${user.userId}'
-					},
-					headers : {
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-					},
-					success : function(JSONData) {
-						console.log(JSONData)
-						if (JSONData.totalCount % 12 == 0) {
-							maxPage = JSONData.totalCount / 12;
-						} else {
-							maxPage = Math.floor(JSONData.totalCount / 12) + 1;
-						}
-						console.log(maxPage);
-						var html = '<div class="comments" align="center"><input type="hidden" name="type" value="댓글">';
-						if (currentPage > 1) {
-							html += '<hr/>';
-						}
-						for (var i = 0; i < JSONData.comments.length; i++) {
-							if (JSONData.title[i] != null) {
-								html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
-										+ '<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
-										+ '<span>'
-										+ JSONData.yearNMonth[i]
-										+ '.</span>'
-										+ '<span style="font-size:2em; font-weight:700">'
-										+ JSONData.day[i]
-										+ '</span>'
-										+ '</div>'
-										+ '<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
-								html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;댓글'
-										+ '</div>'
-										+ '<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
-										+ '<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
-										+ JSONData.title[i]
-										+ '<input type="hidden" name="postNo" value="'+JSONData.comments[i].postNo+'">'
-										+ '</span></p>'
-										+ JSONData.comments[i].text
-										+ '</div>'
-										+ '</div>';
-								if (i != JSONData.comments.length - 1) {
-									html += '<hr/>';
-								}
-							}
-						}
-						if (currentPage < maxPage) {
-							html += '<a class="more">+ 더보기</a></div>'
-						}
-						if (menu == 'add') {
-							$('#logContainer').html(html);
-						} else {
-							$('#logContainer').find('a.more').remove();
-							$('#logContainer').append(html);
-						}
-						$('#logContainer').on('click','p#addedTitle',function() {
-											var postNo = $($('input[name="postNo"]')[$('p#addedTitle').index(this)]).val();
-											if (postNo == null) {
-												alert("삭제된 게시물입니다.");
-											} else {
-												if (postNo.indexOf("30") == 0) {
-													self.location = "/comm/getComm?postNo="
-															+ postNo;
-												} else if (postNo.indexOf("60") == 0) {
-													self.location = "/group/getGroup?groupNo="
-															+ postNo;
-												} else {
-													self.location = "/planner/getPlanner?postNo="
-															+ postNo;
-												}
-											}
-										})
-					}
-				})
-	}
-	
-	
-	/**/ function getJoin(menu) {
+}
+	/* function getJoin(menu) {
 		if (menu == 'add') {
 			currentPage = 1;
 		}
@@ -323,7 +310,7 @@ hr {
 						})
 					}
 				})
-	} 
+	} */
 </script>
 </head>
 <body onload="javascript:getLike('add');">
