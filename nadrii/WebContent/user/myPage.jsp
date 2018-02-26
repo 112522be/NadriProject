@@ -326,10 +326,10 @@ function getComments(menu) {
      	<div name="userProfile" style="margin: 20px;height: auto;">
      		<span class="col-xs-4" style="width: 30%" align="right">
      			<c:if test="${! empty user.profileImageFile}">
-     				<a><img alt="" src="${user.profileImageFile}" style="width: 100%"></a>
+     				<a><img alt="" src="${user.profileImageFile}" style="width: 60%;"></a>
      			</c:if>
       			<c:if test="${empty user.profileImageFile}">
-      				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 100%"></a>
+      				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 60%;"></a>
      			</c:if>
      		</span>
      		<span style="font:bold; font-size: 2em !important; color: #3b2b48;" class="col-xs-8">
@@ -351,7 +351,7 @@ function getComments(menu) {
      </div>
      <div class="container">
      	<div style="background-color: white; margin-top:10pt;">
-	     	<div style="margin: 20px; padding-bottom:1em; height: inherit;">
+	     	<div style="margin: 20px; padding-bottom:2em; height: inherit;">
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">좋아요</span></a>
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">댓글</span></a>
 	     		<a class="col-xs-4" align="center"><span class="button01" align="center">내 모임</span></a>
