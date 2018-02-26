@@ -27,6 +27,11 @@
 		var currentSize = 0;
 		var resultSize=${resultSize}
 		$(function() {
+			
+			$("header h1").on("click", function(){
+				self.location="../comm/listComm";
+			});
+			
 			var currentPage = 1;
 			var maxPage = ${resultPage.maxPage}
 			$('#searchKeyword').keydown(function(key) {
@@ -69,12 +74,12 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="fas fa-envelope"></span></a>',
 				placement: 'bottom',
 			});	
 			
-			$('button[name="addComm"]').bind('click', function() {
-				self.location="addComm.jsp"
+			$('div[name="addComm"]').bind('click', function() {
+				self.location="../comm/addComm";
 			})
 
 			$(window).scroll(function() {
@@ -133,7 +138,7 @@
 					    		  $('[data-toggle="popover"]').popover({ 
 					  				html: true,
 					  				container: 'body',
-					  				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+					  				content: '<a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="fas fa-envelope"></span></a>',
 					  				placement: 'bottom',
 					  			});	
 					    	 }
@@ -150,7 +155,7 @@
 		}
 		
 		function clickMessage(){
-			window.open("../message/addMessage?recevierId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -200,12 +205,15 @@
 		}
 		</script>
 		<style type="text/css">
+			.wrapper{
+				margin: 0;
+			}
 			#nav {
 			    background-color: #3b2b48;
 			    opacity: 0.7;
 			}
 			div.wrapper.style1{
-				background-image: url("/resources/images/background.png");
+				background-image: url("/resources/images/background_3.jpg");
 			}
 			#searchKeyword{
 				border-radius: 30px;
@@ -238,6 +246,13 @@
 			svg[name="full"]{
 				color: #F05643 !important;
 			}
+			.row > * {
+			    padding: 24px 0 0 24px;
+			    margin: 0 !important;
+			}			
+			#header{
+				padding: 6.5em 0 1.5em 0;
+ 			}
 			
 		</style>
 	</head>
@@ -247,30 +262,35 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
+					<h1>나만의 나들이</h1>
+					<p>세상에 하나뿐인 당신의 추억을 공유하세요</p>
 				</header>
 			</div>
 		</div>
 		<div class="wrapper style1">
 			<section id="features" class="container special">
-				<header>
-					<h2>나만의 나들이</h2>
-					<p>세상에 하나뿐인 당신의 추억을 공유하세요</p>
-				</header>
 				<div class="continer">
-					<div class="col-sm-9" align="left">
-						<h6 style="color: lightgray;font-style:normal;">전체 ${resultPage.totalCount}개 게시물</h6>
+					<div class="col-sm-12" style="padding-bottom: 40px;">
+						<h6 style="color: #8a8c91; float: left; font-style:normal;">
+						<c:if test="${search.searchKeyword != null}">
+							'${search.searchKeyword}' 검색 결과 &nbsp;&nbsp;>> &nbsp;
+						</c:if>
+						<c:if test="${search.searchKeyword == null}">
+							전체
+						</c:if>
+							 ${resultPage.totalCount}개 게시물
+						</h6>
 					</div>
-					<div class="col-sm-3" align="right">
-						<form class="search" name="search">
+					<div style="">
+						<div name="addComm" style="font-size: 30px; float: left; color: #6c5e78; margin: 10px;">
+							<a class="fas fa-plus"></a>
+						</div>
+						<form class="search" style="float: right;">
 							<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
-							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 80%"/>
+							<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 100%"/>
 							<input type="hidden" name="currentPage"	value="${search.currentPage}">
- 						</form>
+						</form>
 					</div>
-				</div>	
-				<div>
-					<button style="margin-top: 5px;" type="button" class="btn btn-default" name="addComm"><span class="fas fa-plus"></span></button>
 				</div>
 				<div class="row" id="listContainer">
 					<c:set var="i" value="0" />

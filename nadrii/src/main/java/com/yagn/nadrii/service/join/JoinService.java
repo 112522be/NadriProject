@@ -15,7 +15,5 @@ public interface JoinService {
 	 
 	public Map<String , Object> getJoinList(Search search) throws Exception;
 	
-	public void updateJoin(Join join) throws Exception;
-	
 	public void deleteJoin(Join join) throws Exception;
 }

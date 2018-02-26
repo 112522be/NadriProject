@@ -74,7 +74,7 @@ public class PlannerController {
 		System.out.println("로그인한 유저 ID : "+plannerMakerId);
 		
 		planner.setFlag("pl");
-		planner.setPlannerMakerId(plannerMakerId);
+		planner.setUser(user);
 		
 		
 		//////////////// 캡쳐 기능 //////////////////
@@ -96,7 +96,7 @@ public class PlannerController {
 		System.out.println("file  :: " + file + " || " + file.length);
 		String fileName = UUID.randomUUID().toString();
 
-		stream = new FileOutputStream("C:/Users/user/git/NadriiProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
+		stream = new FileOutputStream("C:/Users/bitcamp/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
 		System.out.println("file이름 : " + fileName);
 
 		stream.write(file);
@@ -307,7 +307,7 @@ public class PlannerController {
 		System.out.println("file  :: " + file + " || " + file.length);
 		String fileName = UUID.randomUUID().toString();
 
-		stream = new FileOutputStream("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\images\\planner\\thumbnail/" + fileName + ".png");
+		stream = new FileOutputStream("C:/Users/bitcamp/git/NadriProject/nadrii/WebContent/resources/images/planner/thumbnail/" + fileName + ".png");
 		System.out.println("file이름 : " + fileName);
 
 		stream.write(file);
@@ -319,7 +319,7 @@ public class PlannerController {
 		
 		planner.setPostNo(postNo);
 		planner.setFlag("pl");
-		planner.setPlannerMakerId(plannerMakerId);
+		planner.setUser(user);
 		planner.setPhoto("../resources/images/planner/thumbnail/" + fileName + ".png");
 		
 		System.out.println(planner);

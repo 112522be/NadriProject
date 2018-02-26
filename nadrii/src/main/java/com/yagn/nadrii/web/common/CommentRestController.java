@@ -1,16 +1,15 @@
 package com.yagn.nadrii.web.common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yagn.nadrii.common.Search;
 import com.yagn.nadrii.service.common.CommentService;
 import com.yagn.nadrii.service.domain.Comments;
+import com.yagn.nadrii.service.domain.User;
 
 @RestController
 @RequestMapping("/common/*")
@@ -32,7 +32,9 @@ public class CommentRestController {
 	int pageSize;
 	
 	@RequestMapping("addComment")
-	public Map<String, Object> addComment(@ModelAttribute Comments comments) throws Exception {
+	public Map<String, Object> addComment(@ModelAttribute Comments comments, HttpSession session) throws Exception {
+		User user = (User)session.getAttribute("loginUser");
+		comments.setUser(user);
 		commentService.addComment(comments);
 		return commentService.listCommentByPost(comments.getPostNo());
 	}

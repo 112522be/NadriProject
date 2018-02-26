@@ -46,12 +46,6 @@ public class JoinDaoImpl implements JoinDao{
 	}
 
 	@Override
-	public void updateJoin(Join join) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public int getTotalJoinCount(Search search) throws Exception {
 		return sqlSession.selectOne("JoinMapper.getTotalJoinCount", search);
 	}

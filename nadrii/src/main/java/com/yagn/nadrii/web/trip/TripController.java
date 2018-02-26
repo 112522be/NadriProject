@@ -90,7 +90,7 @@ public class TripController {
 		Thread.sleep(1000);
 		
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 	}
 	
 	@RequestMapping(value="getTrip")
@@ -103,7 +103,7 @@ public class TripController {
 		
 		map.put("getTrip", tourApiDomain);
 		map.put("getDetail",feeDomain );			
-		return "forward:/Trip/getTrip.jsp";
+		return "forward:/trip/getTrip.jsp";
 	}
 	
 	
@@ -149,7 +149,7 @@ public class TripController {
 		
 		Thread.sleep(1000);		
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 
 	}
 	
@@ -195,7 +195,7 @@ public class TripController {
 		
 		Thread.sleep(1000);		
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 	}
 	
 	@RequestMapping(value="/listExperience")
@@ -238,7 +238,7 @@ public class TripController {
 		
 		Thread.sleep(1000);
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 
 	}
 
@@ -283,7 +283,7 @@ public class TripController {
 		
 		Thread.sleep(1000);
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 	}
 	
 	@RequestMapping(value="/getTheme")
@@ -294,21 +294,18 @@ public class TripController {
 		
 		List list = (List)tripMap.get("list");
 		
-		TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
-		TourApiDomain feeDomain = tripService.getTripDetail(tourApiDomain.getContentid()+"",tourApiDomain.getContenttypeid()+"");
+		//TourApiDomain tourApiDomain = (TourApiDomain)list.get(0);
+		
 				
 		
-		System.out.println(tourApiDomain);
-		System.out.println(feeDomain);
+//		System.out.println(tourApiDomain);
 		
+				
+		map.put("trip", list);
 		
-		
-		
-		map.put("trip", tourApiDomain);
-		map.put("fee", feeDomain);
 		
 		Thread.sleep(1000);
-		return"forward:/Trip/getTheme.jsp";
+		return"forward:/trip/getTheme.jsp";
 	}
 	
 	
@@ -340,7 +337,7 @@ public class TripController {
 		
 		Thread.sleep(1000);
 
-		return "forward:/Trip/listTrip3.jsp";
+		return "forward:/trip/listTrip.jsp";
 
 	}
 	

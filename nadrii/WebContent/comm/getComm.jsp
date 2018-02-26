@@ -36,7 +36,11 @@
 			
 			var regDate = '${community.regDate}'.slice(0, -5);
 			
-			$("span.regDate").append(regDate);			
+			$("span.regDate").append(regDate);		
+			
+			$("header h1").on("click", function(){
+				self.location = "../comm/listComm";				
+			});
 			
 		});
 		
@@ -45,7 +49,7 @@
 		}
 
 		function clickMessage(){	
-			window.open("/message/addMessage?recevierId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("/message/addMessage?recevierId="+'${community.user.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 
 		function addLike(){
@@ -101,6 +105,13 @@
 			input.form-control{
 				margin: 1px;
 			}
+			.wrapper{
+				margin: 0 !important;
+			}	
+			a:hover{
+				border: none;
+				text-decoration: none;
+			}
 		</style>
 	</head>
 	<body class="no-sidebar">
@@ -111,7 +122,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="../index.jsp" id="logo">N A D R I I</a></h1>
+								<h1>나만의 나들이</h1>
 							</header>
 						</div>
 						
@@ -128,9 +139,14 @@
 								<h2><a href="#">${community.title}</a></h2>
 								<br/>
 								<div style="float: left;"> 
+								<c:if test="${community.user.profileImageFile != null}">
+									<img src="${community.user.profileImageFile}" alt="" style="width: 36px; height: 36px; border-radius: 5em; height: 100%"/>
+								</c:if>
+								<c:if test="${community.user.profileImageFile == null}">
 									<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+								</c:if>
 									<a href="#none" style="position: relative;">
-										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.userId}</span>
+										<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${community.user.userId}</span>
 									</a>
 								</div>
 								<div style="float: right;">
@@ -140,11 +156,18 @@
 							</header>
 							<br/>
 							<div >
-							<c:if test="${community.userId == loginUser.userId}">
+							<c:if test="${community.user.userId == loginUser.userId}">
 								<div align="right">
 									<a id="modify"><span class="far fa-edit"></span></a>
 									&nbsp;
 									<a id="delete"><span class="fas fa-eraser"></span></a>
+								</div>
+							</c:if>
+							<c:if test="${community.user.userId != loginUser.userId}">
+								<div align="right">
+									<a id="modify"><span class="far fa-edit" style="display: none;"></span></a>
+									&nbsp;
+									<a id="delete"><span class="fas fa-eraser" style="display: none;"></span></a>
 								</div>
 							</c:if>
 								${community.text}						

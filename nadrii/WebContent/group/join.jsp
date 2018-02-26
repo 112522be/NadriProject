@@ -45,7 +45,7 @@ function clickProfile1(){
 }
 
 function clickMessage1(){
-	window.open("/message/addMessage?recevierId="+$($("input[type='hidden']")[memberIndex]).val(),"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+	window.open("/message/addMessage?receiverId="+$($("input[type='hidden']")[memberIndex]).val(),"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 //	alert($($("input[type='hidden']")[memberIndex]).val());
 }
 
@@ -64,15 +64,15 @@ function getMemberList(){
 		method: "GET",
 		dataType: "json",
 		success:function(returnData){
-			
+			console.log(returnData);
 			$('.totalCount').empty();
 			$(".totalCount").append("<sub>총 참여자 수 "+returnData.totalCount+"명</sub>");
 									
 			for(var i=0; i<returnData.totalCount; i++){
 				
-				$(".userIdContainer").append('<tr onclick="javascript:trClick(this);"><td><input type="hidden" class="member" value="'+returnData.list[i].userId+'"><a href="#none" class="joinMemberId" data-container="body" data-toggle="popover">'+returnData.list[i].userId+'</a></td></tr>');
-				
-				if( returnData.list[i].userId == '${loginUser.userId}' ){
+				$(".userIdContainer").append('<tr onclick="javascript:trClick(this);"><td><input type="hidden" class="member" value="'+returnData.list[i].user.userId+'"><a href="#none" class="joinMemberId" data-container="body" data-toggle="popover">'+returnData.list[i].user.userId+'</a></td></tr>');
+				console.log( returnData.list[i].user.userId == '${loginUser.userId}' )
+				if( returnData.list[i].user.userId == '${loginUser.userId}' ){
 					$('.joinButtonContainer').empty();
 					$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
 				}else{
@@ -80,7 +80,7 @@ function getMemberList(){
 					$(".joinButtonContainer").append('<a href="#none" class="button fit modify" name="join" style="float: right">join</a>');
 				}
 				
-				if( '${group.join.userId}' == returnData.list[i].userId ){
+				if( '${group.join.user.userId}' == returnData.list[i].user.userId ){
 					$(".joinMemberId").append(" (master)");					
 				}
 				
@@ -89,7 +89,7 @@ function getMemberList(){
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 				placement: 'bottom',
 			});	
 			
@@ -97,13 +97,13 @@ function getMemberList(){
 				addJoin();
 			});	
 			
-			if('${loginUser.userId}' == '${group.join.userId}'){
+			if('${loginUser.userId}' == '${group.join.user.userId}'){
 				$('.joinButtonContainer').empty();
 				$(".joinButtonContainer").append('<a href="#none" class="button fit delete" name="cancel" style="float: right">cancel</a>');
 			}
 
 			$("a[name='cancel']").on("click", function(){
-				if('${loginUser.userId}' == '${group.join.userId}'){
+				if('${loginUser.userId}' == '${group.join.user.userId}'){
 					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
@@ -117,6 +117,12 @@ function getMemberList(){
 		}
 	});	
 }
+$(function() {
+	if('${loginUser.userId}' == null || '${loginUser.userId}' == ''){
+		alert("로그인 후 이용해주세요.")
+		self.location="../user/loginView.jsp"
+	}
+})
 
 </script>
 </head>

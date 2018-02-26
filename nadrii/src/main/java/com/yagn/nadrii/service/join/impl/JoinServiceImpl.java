@@ -69,10 +69,6 @@ public class JoinServiceImpl implements JoinService{
 		return map;
 	}
 
-	public void updateJoin(Join join) throws Exception {
-		joinDao.updateJoin(join);
-	}
-	
 	public void deleteJoin(Join join) throws Exception {
 		joinDao.deleteJoin(join);
 	}

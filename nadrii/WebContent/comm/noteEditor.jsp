@@ -52,8 +52,11 @@
                     // 에디터에 이미지 출력
 
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	        if($('#cndThumbnail').html().indexOf('<img') == -1){
+	 	        	$('div#cndThumbnail').html('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
+	 	        }else{
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
-
+	 	        }
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -77,7 +80,14 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+        				var hashtagsTemp=',';
+        				$('button.cdn').each(function() {
+        					hashtagsTemp += $(this).val()+',';
+        				})
+        				console.log(hashtagsTemp)
+        				if(hashtagsTemp.indexOf(','+data[i]+',') == -1){
+	 	        			$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+        				}
 	 	        	}
 				},
 				error : function() {
@@ -231,7 +241,14 @@
 		<input type="hidden" name="thumbNailFileName" value="${community.thumbNailFileName}">
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
-		<div id="cndThumbnail" align="center"><img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px"></div>
+		<div id="cndThumbnail" align="center">
+		<c:if test="${empty community.thumbNailFileName}">
+			<span style="padding-left: 10px; font-color: gray; font-size:15px;">게시물에 등록하신 이미지 중 선택하실 수 있습니다.</span>
+		</c:if>
+		<c:if test="${! empty community.thumbNailFileName}">
+			<img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px">
+		</c:if>
+		</div>
 		<br/>
 		<h5 align="left">해시태그</h5>
 			 <div class="ui-widget">

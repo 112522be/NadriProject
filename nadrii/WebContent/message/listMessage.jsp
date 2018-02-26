@@ -146,7 +146,7 @@
 		//$("tr td:nth-child(4)").on("click",function(){
 			var messageNo = $($("input[name='checkbox']")[$("tr td:nth-child(4)").index(this)]).val();
 			//alert(messageNo)
-			window.open("/message/getMessage?messageNo="+messageNo,"getMessge","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("/message/getMessage?messageNo="+messageNo,"getMessge","width=400, height=360,status=no, scrollbars=no, location=no");
 		});
 	});
 	
@@ -196,11 +196,20 @@
 			//alert(messageNoList);
 			deleteMessage(messageNoList);
 		});
+		
+		
+		$("header h1").on("click", function(){
+			self.location = "../message/listMessage";
+		});
+		
 	});
 	
 </script>
 <!--  -->
 <style >
+body {
+	background: #ffffff;
+}
 #tabs{
 	margin-left : 10%;
 	margin-right: 10%;
@@ -214,7 +223,6 @@
 }
 
 #header{
-	
 	background-image: url("/resources/images/tripIcon/desktop-background-3091211_1920.jpg");
 }
 
@@ -244,6 +252,7 @@ th{
 	background: #e6bfa2;
 }
 
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -254,7 +263,7 @@ th{
 
 				<div class="inner">
 					<header>
-						<h1><a href="../index.jsp" id="logo">쪽지함</a></h1>
+						<h1>쪽지함</h1>
 					</header>
 				</div>
 						
@@ -271,10 +280,8 @@ th{
 		  			<div class="col-md-12">
 					<div id="tabs">
 					  <ul>
-					  	<li><a href="#tabs-1">받은 쪽지함</a></li>
-					    <li><a href="#tabs-1">보낸 쪽지함</a></li>
-					    <li><a href="#tabs-1">읽을 쪽지함</a></li>
-					  
+					  	<a href="#tabs-1">받은 쪽지함</a>&nbsp;&nbsp;&nbsp;
+					    <a href="#tabs-1">보낸 쪽지함</a>
 					  </ul>
 					  
 					  

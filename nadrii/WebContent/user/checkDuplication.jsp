@@ -101,15 +101,15 @@
 		  <button type="button" class="btn btn-primary">닫 기</button>
 		  
 		  <c:if test="${ empty result }">
-		  	<span class="text-info glyphicon glyphicon-ok">입력후중복확인</span>
+		  	<span class="text-info fas fa-check">입력후중복확인</span>
 		  </c:if>
 		  
 		  <c:if test="${ ! empty result }">
 		  	<c:if test="${ result =='true' }">
-				<span class="text-success glyphicon glyphicon-ok">사용가능 &nbsp;</span>
+				<span class="text-success fas fa-check">사용가능 &nbsp;</span>
 			</c:if>
 			<c:if test="${ result=='false' }">
-		 		<span class="text-danger glyphicon glyphicon-remove">사용불가능</span>
+		 		<span class="text-danger fas fa-times">사용불가능</span>
 			</c:if>
 		  </c:if>
 		 

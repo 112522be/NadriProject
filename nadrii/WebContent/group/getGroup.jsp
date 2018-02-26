@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>나들이 모임~</title>
+		<title>나들이 모임</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -66,7 +66,7 @@
 					$("#map").css("display","none");
 				}
 				
-				if("${loginUser.userId}" == "${group.join.userId}"){
+				if("${loginUser.userId}" == "${group.join.user.userId}"){
 					$(".userMenu").css("display","block");
 				}
 	
@@ -90,18 +90,22 @@
 				$('[data-toggle="popover"]').popover({ 
 					html: true,
 					container: 'body',
-					content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+					content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 					placement: 'bottom',
 				});	
+				
+				$("header h1").on("click", function(){
+					self.location="../group/listGroup";
+				})
 			
 			});
 			
 			function clickProfile(){
-				alert('${group.join.userId}');
+				alert('${group.join.user.userId}');
 			}
 			
 			function clickMessage(){	
-				window.open("../message/addMessage?receiverId="+'${group.join.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+'${group.join.user.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 			}
 			
 		</script>
@@ -113,7 +117,7 @@
 			<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1><a href="../group/listGroup">나들이 모임</a></h1>
+							<h1>나들이 모임</h1>
 						</header>
 					</div>
 				<jsp:include page="../layout/toolbar.jsp" />		
@@ -127,9 +131,14 @@
 									<header style="margin-bottom: 1.5em;">
 										<h2>${group.title}</h2>
 										<div style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+										<c:if test="${empty group.join.user.profileImageFile}">
+											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 36px; width: 36px;"/>
+										</c:if>
+										<c:if test="${! empty group.join.user.profileImageFile}">
+											<img src="${group.join.user.profileImageFile}" alt="" style="border-radius: 5em; height: 36px; width: 36px;"/>
+										</c:if>
 											<a href="#none" style="position: relative;">
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${group.join.userId}</span>
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover">&nbsp;&nbsp;${group.join.user.userId}</span>
 											</a>
 										</div>
 										<div style="float: right;">
@@ -139,7 +148,7 @@
 										<br/>
 									</header>
 									<div style="border-top: 1px solid; padding: 20px 0;">
-										<c:if test="${group.join.userId == loginUser.userId}">
+										<c:if test="${group.join.user.userId == loginUser.userId}">
 											<div align="right">
 												<a id="modify"><span class="fas fa-edit"></span></a>
 												&nbsp;

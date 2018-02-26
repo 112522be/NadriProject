@@ -65,8 +65,7 @@
 			PHONE	= #{phone},
 			GENDER 	= #{gender} ,
 			BIRTH	=	#{birth},
-  			PROFILE_IMAGE_FILE  = #{profileImageFile}, 
-			CHILDREN  = #{children}
+  			PROFILE_IMAGE_FILE  = #{profileImageFile}
 		</set>
 	   	WHERE user_id = #{userId}
 	 </update>	

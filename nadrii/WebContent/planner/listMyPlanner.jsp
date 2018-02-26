@@ -63,9 +63,13 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="fas fa-envelope"></span></a>',
 				placement: 'bottom',
 			});	
+			
+			$("header h1").on("click", function(){
+				self.location="../planner/getMyPlannerList";
+			});
 		});
 		
 		function clickProfile(){
@@ -73,7 +77,7 @@
 		}
 		
 		function clickMessage(){
-			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -196,7 +200,7 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a class="header logo">나의 나들이 플래너</a></h1>
+					<h1>나들이 플래너</h1>
 					<p>내가 직접 만든 나만의 나들이 플래너로 여행을 떠나보세요.</p>
 				</header>
 			</div>
@@ -244,10 +248,15 @@
 									
 									<div>
 										<div class="author" style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<c:if test="${empty planner.user.profileImageFile}">
+												<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
+											<c:if test="${! empty planner.user.profileImageFile}">
+												<img src="${planner.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="plannerMakerId" value="${planner.plannerMakerId}"/>
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${planner.plannerMakerId}</span>
+												<input type="hidden" name="plannerMakerId" value="${planner.user.userId}"/>
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${planner.user.userId}</span>
 											</a>
 										</div>
 										<div class="icons" style="float: right;">

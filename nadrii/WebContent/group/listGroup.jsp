@@ -29,6 +29,10 @@
 			 getSomething();
 		}
 		
+		function makeToast(title) {
+			$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+		}
+		
 		$(function() {
 			$('#searchKeyword').keydown(function(key) {
 				var data = $(this).val();
@@ -42,17 +46,30 @@
 			});
 			
 			$('#addGroup').bind("click", function(){
-				self.location="../group/addGroup";
+				if(${loginUser != null}){
+					self.location="../group/addGroup";
+				}else{
+					makeToast("로그인 해주세요.");
+				}
+				
 			});
 			
 			$('.image.featured').on('click', function() {
 				var groupNo = $($('input[name="groupNo"]')[$('.image.featured').index(this)]).val();
-				self.location = "../group/getGroup?groupNo="+groupNo;
+				if(${loginUser != null}){
+					self.location = "../group/getGroup?groupNo="+groupNo;
+				}else{
+					makeToast("로그인 해주세요.");
+				}				
 			});
 			
 			$('a[name="title"]').on('click', function() {
 				var groupNo = $($('input[name="groupNo"]')[$('a[name="title"]').index(this)]).val();
-				self.location = "../group/getGroup?groupNo="+groupNo;
+				if(${loginUser != null}){
+					self.location = "../group/getGroup?groupNo="+groupNo;
+				}else{
+					makeToast("로그인 해주세요.");
+				}
 			});	
 			
 			$(".author span").on("click", function(){
@@ -67,7 +84,7 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 				placement: 'bottom',
 			});	
 		});
@@ -76,8 +93,12 @@
 			alert(userId);
 		}
 		
-		function clickMessage(){
-			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+		function clickMessage1(){
+			if(${loginUser != null}){
+				window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
+			}else{
+				makeToast("로그인 해주세요.");
+			}
 		}
 		
 		var userId;
@@ -220,7 +241,32 @@
 			#header{
 				padding: 6.5em 0 1.5em 0;
  			}
+			.toastMessage {
+		    	width:400px;
+		    	height:auto;
+		    	position:fixed;
+		    	left:50%;
+			    margin-left:-200px;
+			    bottom:15px;
+			    background-color: #000000;
+			    color: #F0F0F0;
+			    font-size: 18px;
+			    padding:12px;
+			    text-align:center;
+			    border-radius: 2px;
+			    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    z-index: 100;
+			}
 			
+			input:focus{
+				outline:none;
+			}
+			
+			.wrapper{
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -230,7 +276,7 @@
 			<div class="inner">
 				<header>
 					<h1>나들이 모임</h1>
-					<p>새로운 장소, 새로운 인연</p>
+					<p>새로운 장소, 새로운 인연, 새로운 추억</p>
 				</header>
 			</div>
 		</div>
@@ -258,7 +304,11 @@
 						</form>
 					</div>
 				</div>	
+				
+				<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+				
 				<div class="row">
+				
 					<c:set var="i" value="0" />
 					<c:forEach var="group" items="${list}">
 						<c:set var="i" value="${i+1}"/>
@@ -273,15 +323,20 @@
 									<div style="text-align: right;">
 										<input type="hidden" name="placeName" value="${group.placeName}"/>
 										<input type="hidden" name="placeDetail" value="${group.placeDetail}"/>
-										<span class="placeName" style="font-size: 11pt; font-weight: bold;"></span>
-										:&nbsp;&nbsp;<span class="placeDetail" style="font-size: 11pt"></span>
+										<span class="placeName" style="font-size: 12.5pt; font-weight: bold;"></span>
+										:&nbsp;&nbsp;<span class="placeDetail" style="font-size: 12.5pt"></span>
 									</div>								
 									<div>
 										<div class="author" style="float: left;"> 
-											<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 5em; height: 100%"/>
+											<c:if test="${empty group.join.user.profileImageFile}">
+												<img src="../resources/assets/images/avatar.jpg" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
+											<c:if test="${! empty group.join.user.profileImageFile}">
+												<img src="${group.join.user.profileImageFile}" alt="" style="border-radius: 15em; height: 1.8em; width: 1.8em"/>
+											</c:if>
 											<a href="#none" style="position: relative;">
-												<input type="hidden" name="userId" value="${group.join.userId}"/>
-												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${group.join.userId}</span>
+												<input type="hidden" name="userId" value="${group.join.user.userId}"/>
+												<span style="vertical-align: top;" class="name" data-container="body" data-toggle="popover" onclick="javascript:getIndex(this);">&nbsp;&nbsp;${group.join.user.userId}</span>
 											</a>
 										</div>
 										<div class="icons" style="float: right;">

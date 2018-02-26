@@ -8,7 +8,7 @@
 <html lang="ko">
 
 <head>
-<title>구매한 티켓 목록</title>
+<title>지난 티켓 목록</title>
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -79,7 +79,7 @@ function fncGetList(pageNo) {
 
 					<div class="inner">
 						<header>
-							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+							<h1>나들이 티켓</h1>
 						</header>
 					</div>
 					
@@ -172,8 +172,9 @@ function fncGetList(pageNo) {
 					
 					
 					<hr/>	
-					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
-					
+					<c:if test="${ !empty list }">	
+						<jsp:include page="../common/pageNavigator_openApi.jsp"/>
+					</c:if>
 				</div><!-- wrapper style1 End -->
 
 	</form>

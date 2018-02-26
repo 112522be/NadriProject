@@ -105,7 +105,7 @@
 
 					<div class="inner">
 						<header>
-							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+							<h1></h1>
 						</header>
 					</div>
 					

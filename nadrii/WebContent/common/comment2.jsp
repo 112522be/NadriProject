@@ -16,6 +16,13 @@
 		    padding: 0 !important;
 		}
 	}
+	img.img-circle{
+		width: 40px;
+		height: 40px;
+	}
+	.col-xs-1{
+		width: auto;
+	}
 </style>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript"> 
@@ -33,13 +40,18 @@
 					var html = '<div class="comments" style="padding: 0 0 20px 0; overflow: hidden;"><span class="col-xs-1" style="float: left; padding: 10px 0 0 50px;"><input type="hidden" name="index" value="'+i+'">'
 					+'<input type="hidden" name="commentNo" value="'
 					+JSONData.listComment[i].commentNo
-					+'"><img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-13" style="padding-left: 30px;"><span style="color: black;">'
-					+JSONData.listComment[i].userId
+					+'">'
+					if(JSONData.listComment[i].user.profileImageFile == null){
+						html += '<img src="/resources/images/00742106_105752.jpg" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					}else{
+						html += '<img src="'+JSONData.listComment[i].user.profileImageFile+'" alt="${user.userId}" class="img-circle" width="40px" height="40px"></span><span class="col-xs-15" style="padding-left: 30px;"><span style="color: black;">'
+					}
+					html += JSONData.listComment[i].user.userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
 					+(JSONData.listComment[i].regDate).slice(0, -5)
 					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-1 edit" style="float: right; padding: 0;">';
-					if("${loginUser.userId}"==JSONData.listComment[i].userId){
-						html += '<span class="fas fa-edit" style="font-size:12pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:12pt;"/>';
+					if("${loginUser.userId}"==JSONData.listComment[i].user.userId){
+						html += '<span class="fas fa-edit" style="font-size:15px;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:15px;"/>';
 					}
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
 					$('#commentContainer').append(html);
@@ -168,8 +180,8 @@
 				<input type="text" name="text" class="form-control" style="font-size: 12pt;" placeholder="댓글을 입력하세요...">
 			</div>
 		</div>
-		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">댓글등록</div>
-		<br/><br/><br/>
+		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
+		<br/><br/>
 		<div id="commentContainer"></div>
 	</div>
 </body>

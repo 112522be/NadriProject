@@ -13,7 +13,7 @@
 	</header>
 	<footer>
 		<c:if test="${  empty loginUser }">	
-		<a href="#banner" class="button circled scrolly">Start</a>
+		<a id="startButton" class="button circled scrolly">Start</a>
 		</c:if>
 		<c:if test="${ !empty loginUser }">	
 		<a href="#carousel" class="button circled scrolly">Start</a>

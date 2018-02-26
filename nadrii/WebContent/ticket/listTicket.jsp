@@ -10,42 +10,23 @@
 <head>
 <title>나들이 티켓 목록</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if lte IE 8]><script src="../resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="../resources/helios/assets/css/bootstrap.min.css" />	
+<link rel="stylesheet" href="../resources/helios/assets/css/main.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="../resources/helios/assets/css/ie8.css" /><![endif]-->
 
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous"> -->
-
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="/resources/helios/assets/css/main.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="/resources/helios/assets/css/ie8.css" /><![endif]-->
-
-
-	<!-- Scripts -->
-	<script src="/resources/helios/assets/js/jquery.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
-	<script src="/resources/helios/assets/js/skel.min.js"></script>
-	<script src="/resources/helios/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/resources/helios/assets/js/main.js"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+<!-- Scripts -->
+<script src="/resources/helios/assets/js/jquery.min.js"></script>
+<script src="/resources/helios/assets/js/jquery.dropotron.min.js"></script>
+<script src="/resources/helios/assets/js/jquery.scrolly.min.js"></script>
+<script src="/resources/helios/assets/js/jquery.onvisible.min.js"></script>
+<script src="/resources/helios/assets/js/skel.min.js"></script>
+<script src="/resources/helios/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="/resources/helios/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="/resources/helios/assets/js/main.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 <!-- //////////////////// JavaScript //////////////////// -->
 <script type="text/javascript">
@@ -105,6 +86,7 @@
 			var contentId = $( $('input[name="contentId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var title = $( $('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
+			var title = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
 			console.log('contentId : ' + contentId)
@@ -114,7 +96,7 @@
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
-					+ "&title=" + encodeTitle;
+					+ "&title=" + encodeTitle+"&firstimage="+firstimage ;
 
 		})
 		
@@ -128,6 +110,7 @@
 			var contentId = $( $('input[name="contentId"]')[$(".image.featured").index(this)]).val();
 			var contentTypeId = $( $('input[name="contentTypeId"]')[$(".image.featured").index(this)]).val();
 			var title = $( $('input[name="title"]')[$(".image.featured").index(this)]).val();
+			var firstimage = $( $('input[name="firstimage"]')[$(".image.featured").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
 			console.log('contentId : ' + contentId)
@@ -137,7 +120,7 @@
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
-					+ "&title=" + encodeTitle;
+					+ "&title=" + encodeTitle+"&firstimage="+firstimage ;
 			
 		})
 	});
@@ -149,124 +132,172 @@
  	
  	
  	$( function() {
- 		$("a[href='#']:contains('검 색')").bind("click", function(event) {
- 			event.preventDefault();
- 			var keyword = $("input[name='searchKeyword']").val();
 
- 			if (keyword == "") {
- 				alert("입력된 검색어가 없습니다.")
- 				return ;
- 			} else {
-	 			fncGetList("${search.pageNo}");
-	 			$("form").attr("method", "POST").attr("action", "/ticket/listTicket").submit();
- 			}
- 		})
+ 		$("header h1").on("click", function(){
+			self.location="../ticket/listTicket";
+		});
+ 		
  	})
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+
  	
 </script>
 
+<style>
+			.filter {
+			  position: relative;
+			  -webkit-filter: contrast(140%) sepia(50%);
+			  filter: contrast(140%) sepia(50%);
+			}
+			.filter::before {
+			  content: "";
+			  display: block;
+			  height: 100%;
+			  width: 100%;
+			  top: 0;
+			  left: 0;
+			  position: absolute;
+			  pointer-events: none;
+			  mix-blend-mode: lighten;
+			  background: rgba(161, 44, 199, 0.31);
+			}
+			#nav {
+			    background-color: #3b2b48;
+			    opacity: 0.7;
+			}
+			div.wrapper.style1{
+				background-image: url("/resources/images/background_3.jpg");
+			}
+			#searchKeyword{
+				border-radius: 30px;
+				width: 400px;
+				height: 50px;
+				padding: 1em 1em 1em 2.5em;
+			}
+			.image.featured{
+				margin: 0 0 1em 0;
+			}
+			article {
+				height: 550px;
+			}
+			.icons {
+				position: absolute;
+				bottom: 10px;
+				right: 10px;
+			}
+			.author {
+				position: absolute;
+				bottom: 0px;
+				left: 10px;
+			}
+			a.author:hover {
+				text-decoration: none !important;
+			}
+			input:focus{
+				outline:none;
+			}
+			svg[name="full"]{
+				color: #F05643 !important;
+			}
+			.row > * {
+			    padding: 24px 0 0 24px;
+			    margin: 0 !important;
+			}			
+			#header{
+				padding: 6.5em 0 1.5em 0;
+ 			}
+ 			a.button{
+ 				padding: 0 10px;
+ 			}
+ 			.wrapper{
+ 				padding-top: 4em;
+ 				margin: 0;
+ 			}
+			#nav{
+				padding: 22px 0;
+			}
 
+</style>
 </head>
 
 <body class="no-sidebar">
-		<div id="page-wrapper">
 
 			<!-- Header -->
 				<div id="header">
+					<jsp:include page="/layout/toolbar.jsp" />
 					
 					<div class="inner">
 						<header>
-							<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+							<h1>나들이 티켓</h1>
+							<p>기다리지말고 예매하세요</p>
 						</header>
-					</div>
-					
-					<jsp:include page="/layout/toolbar.jsp" />
-
+					</div>		
 				</div>
-<form action="navigation">
+				
+			<form action="navigation">
 			<!-- Features -->
 				<div class="wrapper style1">
-
 					<section id="features" class="container special">
-
-						<div class="row">
-							<article class="9u 12u(mobile) special">
-								<header>
-									<input type="text" name="searchKeyword" placeholder="검색어를 입력하세요.">
-								</header>	
-							</article>
-					
-							<article class="3u 12u(mobile) special">
-								<header>
-									<h3>
-										<a href="#" class="button">검 색</a>
-									</h3>
-								</header>
-							</article>
-						</div><!-- row End -->
-
-						<br>
-
-						<header>
-							<h2>나들이 티켓</h2>
-							<p>조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.</p>
-						</header>
+						<div class="continer">
 						
-						<footer>
-							<a href="#" class="button 2u">제목순</a>&nbsp;&nbsp;
-							<a href="#" class="button 2u">조회순</a>&nbsp;&nbsp;
-							<a href="#" class="button 2u">수정일순</a>&nbsp;&nbsp;
-							<a href="#" class="button 2u">생성일순</a>
-						</footer>
-
+							<header>
+								<p>조회하실 티켓 정보를 <strong class="text-danger">선택</strong>해 주세요.</p>
+							</header>
+							
+							<footer>
+								
+							</footer>
+							
+							<div class="col-sm-12" style="padding-bottom: 40px;">
+								<h6 style="color: #8a8c91; float: left; font-style:normal;">
+									현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건
+								</h6>
+							</div>
+							
+							<div>
+								<span style="float: left; padding-bottom: 13px;">
+									<a href="#" style="border-bottom: 1px solid; padding: 6px;">제목순</a>&nbsp;
+									<a href="#" style="border-bottom: 1px solid; padding: 6px;">조회순</a>&nbsp;
+									<a href="#" style="border-bottom: 1px solid; padding: 6px;">수정일순</a>&nbsp;
+									<a href="#" style="border-bottom: 1px solid; padding: 6px;">생성일순</a>
+								</span>
+								<div style="float: right;">
+									<span class="fas fa-search" style="position: relative; margin-right: -40px;"></span>
+									<input type="text" name="searchKeyword" id="searchKeyword" value="" style="width: 100%"/>
+								</div>
+							</div>
+							
+						</div>
 						
-						<br>
-						<p> 현재 ${ resultPage.pageNo } 페이지 / 전체 ${ resultPage.totalCount } 건 </p>
+						
 						
 						<div class="row">
 						
 							<c:forEach var="tt" items="${tourTicket}" varStatus="num">
 								<article class="4u 12u(mobile) special">
-								<span class="timestamp">조회수 : ${ tt.readcount }</span>
-									<a href="#" class="image featured">
-										<img src="${ tt.firstimage }" alt="" style="height: 302.36px;"/>
-									</a>
-									<header style="height: 70px;">
-										<h3>${ num.count }. ${ tt.title }</h3>
-									</header>
-									<p>
-										기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }
-									</p>
-									<a href="#" class="button 6u">상세조회</a>
+									<div style="background-color: white; height: 490px; padding: 10px 10px 0 10px; position: relative;">
+										<a href="#" class="image featured">
+											<img src="${ tt.firstimage }" alt="" style="height: 302.36px;"/>
+										</a>
+										<header style="height: 30px;">
+											<h3>${ num.count }. ${ tt.title }</h3>
+										</header>
+										<span class="timestamp" style="float: right;">조회수 : ${ tt.readcount }</span>
+										<p>
+											기&nbsp;간 : ${ tt.eventstartdate } ~ ${ tt.eventenddate }
+										</p>
+										<a href="#" class="button 6u" style="float: right;">상세조회</a>
 									
+										
+										<!-- PageNavigation을 위한 값을 보내는 부분  -->
+										<input type="hidden" name="firstimage" value="${ tt.firstimage }">
+										<input type="hidden" name="contentId" value="${ tt.contentid }">
+										<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
+										<input type="hidden" name="title" value="${ tt.title }">
+										<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
+										<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
+									</div>
 								</article>
-								
-								<!-- PageNavigation을 위한 값을 보내는 부분  -->
-								<input type="hidden" name="contentId" value="${ tt.contentid }">
-								<input type="hidden" name="contentTypeId" value="${ tt.contenttypeid }">
-								<input type="hidden" name="title" value="${ tt.title }">
-								<input type="hidden" name="eventstartdate" value="${ tt.eventstartdate }">
-								<input type="hidden" name="eventenddate" value="${ tt.eventenddate }">
-								
-							</c:forEach>
+							</c:forEach> 
 								
 						</div>
 						
@@ -274,20 +305,13 @@
 					
 					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 					<input type="hidden" id="pageNo" name="pageNo" value="" /> 
-					<input type="hidden" name="searchCondition" id="searchCondition" value="">
-				<hr/>			
-				<jsp:include page="../common/pageNavigator_openApi.jsp"/>
+					<input type="hidden" name="searchCondition" id="searchCondition" value="">		
+					<jsp:include page="../common/pageNavigator_openApi.jsp"/>
 				</div>
-				
-</form>
+						
+		</form>
 		
 		<jsp:include page="/layout/footer.jsp" />
-
-
-
-	</div>
-
-		
 
 	</body>
 </html>

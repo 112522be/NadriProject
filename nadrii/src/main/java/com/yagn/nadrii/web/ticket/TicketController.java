@@ -99,6 +99,7 @@ public class TicketController {
 	
 	@RequestMapping(value = "getTicket", method = RequestMethod.GET)
 	public String getTicket(
+		@RequestParam("firstimage") String firstimage,	
 		@RequestParam("contentId") int contentId,	
 		@RequestParam("contentTypeId") int contentTypeId,
 		@RequestParam("title") String encodeTitle,
@@ -128,6 +129,7 @@ public class TicketController {
 			System.out.println("\n\n[entrance Fee check] ==> " + detailIntro.getUsetimefestival());
 			
 			tourTicket = new TourTicket();
+			tourTicket.setFirstimage(firstimage);
 			tourTicket.setTitle(decodeTitle);
 			tourTicket.setContentid(contentId);
 			tourTicket.setContenttypeid(contentTypeId);
