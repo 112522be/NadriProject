@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	//========== '나들이 정보' 버튼 처리 Event ==========
 	$(function() {
+		/*
 		$("a[href='#' ]:contains('나들이 정보')").on("click", function() {
 			self.location = "../trip/getTheme";
 		});
@@ -24,7 +25,7 @@
 		$("a[href='#' ]:contains('나들이 모임')").bind("click", function() {
 			self.location = "../group/listGroTicket";
 		});
-
+		*/
 	});
 
 	$(document).ready(function() {
@@ -178,10 +179,10 @@
 				</ul> <!--  </a>-->
 			</li>
 		</c:if>
-		<li><a href="../index.jsp">H O M E</a></li>
-		<li><a href="../trip/getTheme">나들이 정보</a></li>
-		<li><a href="../comm/listComm">나만의 나들이</a></li>
-		<li><a href="#">나들이 플래너 ▼</a>
+		<li><a href="/index.jsp">H O M E</a></li>
+		<li><a href="/trip/getTheme">나들이 정보</a></li>
+		<li><a href="/comm/listComm">나만의 나들이</a></li>
+		<li><a href="/planner/getUserPlannerList">나들이 플래너 ▼</a>
 
 			<ul>
 				<li><a href="/planner/getUserPlannerList">플래너 게시판</a></li>

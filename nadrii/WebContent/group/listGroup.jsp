@@ -84,7 +84,7 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 				placement: 'bottom',
 			});	
 		});
@@ -276,7 +276,7 @@
 			<div class="inner">
 				<header>
 					<h1>나들이 모임</h1>
-					<p>새로운 장소, 새로운 인연</p>
+					<p>새로운 장소, 새로운 인연, 새로운 추억</p>
 				</header>
 			</div>
 		</div>

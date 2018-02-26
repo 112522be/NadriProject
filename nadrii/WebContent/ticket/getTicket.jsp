@@ -42,8 +42,12 @@
 	// ========== '예매하기 / 장바구니 담기' Event 연결 ==========
 	$(function() {
 		$("a[href='#']:contains('예매하기')").bind("click", function(event) {
-			event.preventDefault();
-			fncAddBooking();
+			if(${loginUser != null}){
+				event.preventDefault();
+				fncAddBooking();	
+			}else{
+				alert("로그인 후 사용 가능합니다.");				
+			}			
 		})
 	});
 
@@ -154,6 +158,9 @@ form select{
 #nav{
 	padding: 22px 0;
 }
+.ui-datepicker{
+	width: 16em;
+}
 </style>
 
 <body class="no-sidebar">
@@ -209,11 +216,12 @@ form select{
 								<div id="datepicker"></div>
 								<input type="hidden" name="bookingDate" />
 							</h3>
-
+<!--
 							<h3>
 								<a href="#" class="button 12u"> 위시리스트 담기 </a>
 							</h3>
-
+ -->
+ 							<br>
 							<h3>
 								<a href="#" class="button 12u" > <c:if
 										test="${ detailIntro.usetimefestival ne '무료' }">

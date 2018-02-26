@@ -149,6 +149,8 @@
 				+ totalTicketPrice
 				+ "</strong>"
 		);
+		
+		
 	}
 	
 </script>
@@ -161,7 +163,6 @@
 			fncAddPurchase(flag);
 //			alert("저장하기 완료")
 			return;
-			
 		});
 	});
 
@@ -354,9 +355,8 @@
 					//		alert("들어온거 확인");
 						}
 					});		
-					makeToast("장바구니 저장 완료");
+					alert("장바구니 저장 완료");
 					location.reload();
-					history.go(-1)();
 		} else {
 			
 //			alert("flag 값 확인 : " + flag)

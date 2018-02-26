@@ -90,7 +90,7 @@
 				$('[data-toggle="popover"]').popover({ 
 					html: true,
 					container: 'body',
-					content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+					content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 					placement: 'bottom',
 				});	
 				
@@ -105,7 +105,7 @@
 			}
 			
 			function clickMessage(){	
-				window.open("../message/addMessage?receiverId="+'${group.join.user.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+'${group.join.user.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 			}
 			
 		</script>

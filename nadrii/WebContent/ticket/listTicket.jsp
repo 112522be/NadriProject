@@ -228,7 +228,7 @@
 					<div class="inner">
 						<header>
 							<h1>나들이 티켓</h1>
-							<p>새로운 장소, 새로운 인연</p>
+							<p>기다리지말고 예매하세요</p>
 						</header>
 					</div>		
 				</div>
