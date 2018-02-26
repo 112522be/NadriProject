@@ -153,7 +153,7 @@
 							<header>
 								<h2>결제정보확인</h2>
 								<p>
-									결제를 진행하시려면 <br><strong class="text-danger">KakaoPay 결제</strong> 버튼을 눌러 주세요.
+									결제를 진행하시려면  아래의 <br><strong class="text-danger">KakaoPay 결제</strong> 버튼을 눌러 주세요.
 								</p>
 							</header>
 						</article>

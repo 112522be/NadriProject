@@ -114,7 +114,7 @@ function getLike(menu) {
 			console.log(JSONData)
 			for(var i=0;i<JSONData.list.length;i++){
 				if(JSONData.title[i] != null){
-					html += '<div class="row" style="padding: 1em 0 0 0; margin: 1em 0 1em 0;">'
+					html += '<div class="row" style="padding: 1em 0; margin: 1em 0 1em 0;">'
 						+'<div class="col-xs-3" align="center" style="padding:0; color: gray;">'
 						+'<span>'+JSONData.yearNMonth[i]+'.</span>'
 						+'<span style="font-size:2em; font-weight:700">'+JSONData.day[i]+'</span>'
