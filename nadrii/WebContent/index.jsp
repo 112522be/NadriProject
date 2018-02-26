@@ -222,7 +222,7 @@ $(function(){
   			return;
   		}
   		if(password2=null||password2==""){
-  			makeToast("확인영 비밀번호를 입력하세요");
+  			makeToast("확인용 비밀번호를 입력하세요");
   			return;
   		}
   		

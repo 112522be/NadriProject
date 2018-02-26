@@ -292,12 +292,10 @@ function checkSuccess(){
 	$( function() {
 		$("button[type='button']:contains('가입')").on("click",function(){
 
-    		alert("걸린건가?");
     		$("form").attr("method","POST").attr("action","/user/addUser").submit();
     	});
 		
 		$("button[type='button']:contains('restTest')").on("click",function(){
-    		//alert("걸린건가?");
     		self.location ="addUserViewRestTest.jsp"; 
     	});
 		
@@ -359,9 +357,6 @@ function checkSuccess(){
           <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
           <div class="col-sm-4">
             <input type="text" class="form-control" id="email" name="email" placeholder="이메일" value="${outerUser.email}" />
-            <input type="button" value="인증발송" class="btn btn-primary btn-sm" id="btn_submit" />
-            <input type="text" style="display:none;" class="form-contorl" id="confirmNum" name="confirmNum"/>
-            <input type="button" value="인증" style="display:none;" class="btn btn-primary btn-sm" id="btn_chkSuccess" />
           </div>
         </div> 
         
@@ -369,7 +364,6 @@ function checkSuccess(){
           <div class="col-sm-offset-4  col-sm-4 text-center">
             <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn" >가입</button>
            <a class="btn btn-primary btn" href="#" role="button" >취소</a>
-           <button type="button" class="btn btn-success cancelbtn signupCheck signupbtn">restTest</button>
 
           </div>
         </div>

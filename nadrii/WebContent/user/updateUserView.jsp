@@ -118,7 +118,6 @@
 			}
 			
 			if($("#password") != null && $("password") != null){
-				alert("되는건가?");
 				var radio = $("input:radio[name='gender']:checked").val(); // checked 없으면 체크한 값이 안나옴...
 				console.log("radiobutton : " + radio)
 				var birth = $("input[name='birth']").val();
@@ -129,7 +128,6 @@
 				console.log("핸드폰번호 : " + phone)
 				var img = $("hidden[name='profileImageFile']").val(
 						$("#image_section").attr("src"));
-				alert(eval(img));
 	
 				var value = "";
 				if ($("input:text[name='phone2']").val() != ""
@@ -138,7 +136,6 @@
 							+ $("input[name='phone2']").val() + "-"
 							+ $("input[name='phone3']").val();
 				}
-				alert("되는건가?!!!!!!!!!!!!");
 				$("input:hidden[name='phone']").val(value);
 				
 				$("input").attr("class", "form-control")
