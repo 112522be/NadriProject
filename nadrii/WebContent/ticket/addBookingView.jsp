@@ -204,7 +204,7 @@
 			inputVal = $(".ticketCount").eq(indexVal).val(currentVal * 1 - 1);
 			textVal = $("h3[name='priceCount']").eq(indexVal).text(currentVal * 1 - 1);
 		} else if (countVal == 'minus' && currentVal <= 0) {
-			console.log("[티켓 수량이 0 보다 작음]")
+	//		console.log("[티켓 수량이 0 보다 작음]")
 		}
 		
 	}
@@ -263,7 +263,7 @@
 		for (var i = 0; i < $(".ticketPrice").length; i++) {		
 			ticketPrice = $(".ticketPrice").eq(i).val();
 			ticketCount = $(".ticketCount").eq(i).val();
-			console.log('2. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
+//			console.log('2. 티켓 구매수량 확인 : ' + ticketPrice + " = " + ticketCount)
 			totalTicketCount += ticketCount * 1;
 		}
 		

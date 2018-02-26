@@ -34,6 +34,28 @@
 	#selectedThumbnail{
 		border: solid 2px red;
 	}
+	input:focus{
+		outline:none;
+	}
+	
+	.toastMessage {
+	   	width:400px;
+	   	height:auto;
+	   	position:fixed;
+	   	left:50%;
+	    margin-left:-200px;
+	    bottom:15px;
+	    background-color: #000000;
+	    color: #F0F0F0;
+	    font-size: 18px;
+	    padding:12px;
+	    text-align:center;
+	    border-radius: 2px;
+	    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+	    z-index: 100;
+	}	
   </style>
   <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -57,7 +79,7 @@
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
-					alert("파일 업로드에 실패했습니다.")
+					makeToast("파일 업로드에 실패했습니다.")
 				}
 	 	    });
 	 	}
@@ -85,6 +107,10 @@
 				}
         	})
         }
+        function makeToast(title) {
+        	$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+        }
+        
         function addHashTag(value) {
         	$('button.hashtagButtons[value="'+value+'"]').html('<span class="fas fa-check-circle"></span>&nbsp;#'+value);
 			$('button.hashtagButtons[value="'+value+'"]').attr('class', 'selectedhashtagButtons');
@@ -117,7 +143,7 @@
  		 				$(this).val("");
  						$("#cndHashTags").append('<button type="button" class="selectedhashtagButtons" value="'+data+'"><span class="fas fa-check-circle"></span>&nbsp;#'+data+'</button>&nbsp;');
  					}else{	
- 	 					alert("추가하실 해시태그를 입력해주세요");
+ 	 					makeToast("추가하실 해시태그를 입력해주세요");
  					}
  				}
 			})
@@ -140,7 +166,7 @@
 						 });
 					},
 					error: function() {
-						alert("오류")
+						makeToast("오류")
 					}
 				})
 		 	})
@@ -150,6 +176,9 @@
 <body>
 		<form name="textForm">
 		<textarea id="summernote" name="text">${community.text}</textarea>
+		<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+
+		
         <script>
 	        var openDialog = function (uri, name, options, closeCallback) {
 			    var win = window.open(uri, "", options);

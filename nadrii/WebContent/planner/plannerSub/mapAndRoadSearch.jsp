@@ -1219,7 +1219,7 @@
 				
 			},
 			error : function(){
-				alert("시외시외시외");
+				//alert("시외시외시외");
 			}
 		});
 		
@@ -1259,7 +1259,7 @@
 				
 				if(error != null){
 					
-					alert("polyline을 그리던 중 "+error.message);
+					makeToast("polyline을 그리던 중 "+error.message);
 					
 				}else{
 																
@@ -1431,17 +1431,22 @@
 	var ex;
 	var ey;
 
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+	}
+
+	
 	function search1(flag){
 			
 		deleteRoadContent();		//우측 경로탐색 정보 지우기
 		
 		if(startMarker.getMap() == null){
-			alert("출발지를 지정해주세요!");
+			makeToast("출발지를 지정해주세요!");
 			return;
 		}
 		
 		if(endMarker.getMap() == null){
-			alert("도착지를 지정해주세요!");
+			makeToast("도착지를 지정해주세요!");
 			return;
 		}
 		

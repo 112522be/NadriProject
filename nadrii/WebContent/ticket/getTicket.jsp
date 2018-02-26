@@ -103,7 +103,7 @@
 		var bookingDate = $('input[name="bookingDate"]').val();
 
 		if (bookingDate == null || bookingDate.length < 1) {
-			alert("예매일자를 선택해 주세요");
+			makeToast("예매일자를 선택해 주세요");
 			return;
 		}
 
@@ -153,6 +153,9 @@ form select{
 }
 #nav{
 	padding: 22px 0;
+}
+.ui-datepicker{
+	width: 16em;
 }
 </style>
 
@@ -209,11 +212,12 @@ form select{
 								<div id="datepicker"></div>
 								<input type="hidden" name="bookingDate" />
 							</h3>
-
+							<br>
+<!-- 
 							<h3>
 								<a href="#" class="button 12u"> 위시리스트 담기 </a>
 							</h3>
-
+ -->
 							<h3>
 								<a href="#" class="button 12u" > <c:if
 										test="${ detailIntro.usetimefestival ne '무료' }">

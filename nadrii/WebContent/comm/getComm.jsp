@@ -28,7 +28,7 @@
 			$("a#delete").bind("click", function(){
 				if(confirm("삭제하시겠습니까?")==true){
 					self.location="/comm/deleteComm?postNo=${community.postNo}";
-					alert("삭제되었습니다.");
+					makeToast("삭제되었습니다.");
 				}else{
 					return;	
 				}		
@@ -81,11 +81,9 @@
 			});	
 		}
 
-		$(function(){
-			$(".like").bind("click", function(){
-				alert(1);
-			});
-		});
+		function makeToast(title) {
+			$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+		}
 		</script>
 		<style type="text/css">
 			.btn.btn-default{
@@ -112,6 +110,27 @@
 				border: none;
 				text-decoration: none;
 			}
+.toastMessage {
+   	width:400px;
+   	height:auto;
+   	position:fixed;
+   	left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}	
+input:focus{
+	outline:none;
+}
 		</style>
 	</head>
 	<body class="no-sidebar">
@@ -155,6 +174,8 @@
 								</div>
 							</header>
 							<br/>
+							<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+							
 							<div >
 							<c:if test="${community.user.userId == loginUser.userId}">
 								<div align="right">

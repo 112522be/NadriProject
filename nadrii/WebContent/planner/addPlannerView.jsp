@@ -32,6 +32,25 @@
 		<script src="../resources/script/html2canvas.js"></script>
 		
 		<style>
+		.toastMessage {
+		   	width:400px;
+		   	height:auto;
+		   	position:fixed;
+		   	left:50%;
+		    margin-left:-200px;
+		    bottom:15px;
+		    background-color: #000000;
+		    color: #F0F0F0;
+		    font-size: 18px;
+		    padding:12px;
+		    text-align:center;
+		    border-radius: 2px;
+		    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    z-index: 100;
+		}
+
 		#nav{
 			padding: 22px;
 		}
@@ -359,6 +378,8 @@
 										</div>
 									</div>
 								</div>
+								
+								<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
 								
 								<div>
 									<textarea class="form" rows="7" cols="blue" name="text" placeholder="플랜세부계획을 작성해주세요~!">${planner.text}</textarea>

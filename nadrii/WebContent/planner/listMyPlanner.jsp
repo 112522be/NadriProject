@@ -24,7 +24,9 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 				
 		<script type="text/javascript">
-		
+		function makeToast(title) {
+			$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+		}
 		window.onload = function(){
 			 getSomething();
 		}
@@ -36,7 +38,7 @@
 					if(data!=""){
 						$('form.search').attr('method', 'POST').attr('action', '../planner/getMyPlannerList').submit();
 					}else{	
-			 			alert("검색어를 입력해주세요");
+			 			("검색어를 입력해주세요");
 					}
 				}
 			});
@@ -63,7 +65,7 @@
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" style="color: #656565;" onclick="javascript:clickProfile()">프로필 조회 <span class="glyphicon glyphicon-user"></span></a> <br/><a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="glyphicon glyphicon-envelope"></span></a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage()" style="color: #656565;"> 쪽지 보내기 <span class="fas fa-envelope"></span></a>',
 				placement: 'bottom',
 			});	
 			
@@ -71,13 +73,9 @@
 				self.location="../planner/getMyPlannerList";
 			});
 		});
-		
-		function clickProfile(){
-			alert(plannerMakerId);
-		}
-		
+	
 		function clickMessage(){
-			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("../message/addMessage?receiverId="+userId,"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 		
 		var userId;
@@ -192,6 +190,24 @@
 			#header{
 				padding: 6.5em 0 1.5em 0;
  			}
+ 			.toastMessage {
+			   	width:400px;
+			   	height:auto;
+			   	position:fixed;
+			   	left:50%;
+			    margin-left:-200px;
+			    bottom:15px;
+			    background-color: #000000;
+			    color: #F0F0F0;
+			    font-size: 18px;
+			    padding:12px;
+			    text-align:center;
+			    border-radius: 2px;
+			    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+			    z-index: 100;
+			}
 		</style>
 	</head>
 	<body>
@@ -221,6 +237,9 @@
 							 ${resultPage.totalCount}개 게시물
 						</h6>
 					</div>
+					<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+
+					
 					<div style="">
 						<div id="plannerWrite" style="font-size: 30px; float: left; color: #6c5e78; margin: 10px;">
 							<a class="fas fa-plus"></a>

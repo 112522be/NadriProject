@@ -43,7 +43,28 @@
 			height:350px;
 			position: relative; 
 			display: block;			
-		}						
+		}					
+		.toastMessage {
+		   	width:400px;
+		   	height:auto;
+		   	position:fixed;
+		   	left:50%;
+		    margin-left:-200px;
+		    bottom:15px;
+		    background-color: #000000;
+		    color: #F0F0F0;
+		    font-size: 18px;
+		    padding:12px;
+		    text-align:center;
+		    border-radius: 2px;
+		    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+		    z-index: 100;
+		}	
+		input:focus{
+			outline:none;
+		}
 		</style>
 		
 		<script>
@@ -58,6 +79,10 @@
 			            func();
 			        };
 			    }
+			}
+			
+			function makeToast(title) {
+				$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
 			}
 			
 			$(function(){
@@ -81,7 +106,7 @@
 				$("a#delete").bind("click", function(){
 					if(confirm("삭제하시겠습니까?")==true){
 						self.location="../group/deleteGroup?groupNo=${group.join.groupNo}";
-						alert("삭제되었습니다.");
+						makeToast("삭제되었습니다.");
 					}else{
 						return;	
 					}		
@@ -90,7 +115,7 @@
 				$('[data-toggle="popover"]').popover({ 
 					html: true,
 					container: 'body',
-					content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+					content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 					placement: 'bottom',
 				});	
 				
@@ -105,7 +130,7 @@
 			}
 			
 			function clickMessage(){	
-				window.open("../message/addMessage?receiverId="+'${group.join.user.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+				window.open("../message/addMessage?receiverId="+'${group.join.user.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 			}
 			
 		</script>
@@ -147,6 +172,8 @@
 										</div>
 										<br/>
 									</header>
+									<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+																		
 									<div style="border-top: 1px solid; padding: 20px 0;">
 										<c:if test="${group.join.user.userId == loginUser.userId}">
 											<div align="right">

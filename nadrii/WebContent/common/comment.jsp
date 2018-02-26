@@ -14,6 +14,27 @@
 		width: 36px;
 		height: 36px;
 	}
+	.toastMessage {
+   	width:400px;
+   	height:auto;
+   	position:fixed;
+   	left:50%;
+    margin-left:-200px;
+    bottom:15px;
+    background-color: #000000;
+    color: #F0F0F0;
+    font-size: 18px;
+    padding:12px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    z-index: 100;
+}
+input:focus{
+	outline:none;
+}
 </style>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script type="text/javascript"> 
@@ -73,7 +94,7 @@
 						listComment();
 					},
 					error: function() {
-						alert("알 수 없는 오류가 발생했습니다.")
+						makeToast("알 수 없는 오류가 발생했습니다.")
 					}
 		})
 	}
@@ -91,19 +112,22 @@
 			success: function() {
 				$('input[name="text"]').val("");
 				$('#commentContainer').empty();
-				alert('수정을 완료했습니다.');
+				makeToast('수정을 완료했습니다.');
 				listComment();
 			},
 			error: function() {
 				$('input[name="text"]').val("");
 				$('#commentContainer').empty();
-				alert("수정을 실패했습니다.");
+				makeToast("수정을 실패했습니다.");
 				listComment();
 			}
 			
 		})
 	} 
-		
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+	}
+	
 	$(function() {
 		$('body').load('like.jsp', function() {
 			getLike();
@@ -118,7 +142,6 @@
 		var commentNo;
 		
 		$('#commentContainer').on('click','.fa-edit',function() {
-			alert(1);
 			text = $($('span.text')[$(".fa-edit").index(this)]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
 			var editForm = '<span style="position: relative; float: left; width: 70%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 0.7em; width: 12%; height: 1.8%" name="update">수정</div>';
@@ -130,7 +153,6 @@
 		});
 		
 		$('#commentContainer').on('click', 'div[name="update"]', function() {
-			alert(commentNo);
 			text = $('input[name="editText"]').val();
 			updateComment(commentNo, text);
 		});
@@ -148,13 +170,13 @@
 					success: function(JSONData) {
 						$('input[name="text"]').val("");
 						$('#commentContainer').empty();
-						alert('삭제를 완료했습니다.');
+						makeToast('삭제를 완료했습니다.');
 						listComment();
 					},
 					error: function() {
 						$('input[name="text"]').val("");
 						$('#commentContainer').empty();
-						alert("삭제에 실패했습니다.");
+						makeToast("삭제에 실패했습니다.");
 						listComment();
 					}
 					
@@ -176,6 +198,9 @@
 				</div>
 			</form>
 		</div>
+		<div id="toastMessage" class='toastMessage' style='display:none;'>Toast</div>	
+
+		
 		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
 		<br/><br/><br/>
 		<div id="commentContainer"></div>

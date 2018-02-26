@@ -89,10 +89,10 @@
 			var title = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
-			console.log('contentId : ' + contentId)
-			console.log('contentTypeId : ' + contentTypeId)
-			console.log('title : ' + title)
-			console.log('encodeTitle : ' + encodeTitle)
+		//	console.log('contentId : ' + contentId)
+		//	console.log('contentTypeId : ' + contentTypeId)
+		//	console.log('title : ' + title)
+		//	console.log('encodeTitle : ' + encodeTitle)
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
@@ -113,10 +113,10 @@
 			var firstimage = $( $('input[name="firstimage"]')[$(".image.featured").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
 			
-			console.log('contentId : ' + contentId)
-			console.log('contentTypeId : ' + contentTypeId)
-			console.log('title : ' + title)
-			console.log('encodeTitle : ' + encodeTitle)
+		//	console.log('contentId : ' + contentId)
+		//	console.log('contentTypeId : ' + contentTypeId)
+		//	console.log('title : ' + title)
+		//	console.log('encodeTitle : ' + encodeTitle)
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
@@ -228,7 +228,7 @@
 					<div class="inner">
 						<header>
 							<h1>나들이 티켓</h1>
-							<p>새로운 장소, 새로운 인연</p>
+							<p>기다리지말고 예매하세요</p>
 						</header>
 					</div>		
 				</div>

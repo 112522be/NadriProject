@@ -9,6 +9,10 @@
 <body>
 	<script type="text/javascript">
 	
+	function makeToast(title) {
+		$('#toastMessage').text(title).fadeIn(400).delay(1500).fadeOut(400);
+	}
+	
 		/*******************Array insert 사용**********************/
 		Array.prototype.insert = function ( index, item ) {
 	    		this.splice( index, 0, item );
@@ -739,7 +743,7 @@
 					
 					if(error != null){
 						
-						alert("polyline을 그리던 중 "+error.message);
+						makeToast("polyline을 그리던 중 "+error.message);
 						
 					}else{
 																	

@@ -89,7 +89,7 @@ function getMemberList(){
 			$('[data-toggle="popover"]').popover({ 
 				html: true,
 				container: 'body',
-				content: '<a href="#none" class="profile" onclick="javascript:clickProfile1()"><span class="fas fa-user"></span> 프로필 조회</a> <br/><a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
+				content: '<a href="#none" class="message" onclick="javascript:clickMessage1()"><span class="fas fa-envelope"></span> 쪽지 보내기 </a>',
 				placement: 'bottom',
 			});	
 			
@@ -104,12 +104,12 @@ function getMemberList(){
 
 			$("a[name='cancel']").on("click", function(){
 				if('${loginUser.userId}' == '${group.join.user.userId}'){
-					alert("글쓴이는 모임 참여 취소를 할 수 없습니다.");
+					makeToast("글쓴이는 모임 참여 취소를 할 수 없습니다.");
 					return;
 				}
 				if(confirm("참여를 취소하시겠습니까?")==true){
 					deleteJoin();
-					alert("취소되었습니다.");
+					makeToast("취소되었습니다.");
 				}else{
 					return;	
 				}	
@@ -119,7 +119,7 @@ function getMemberList(){
 }
 $(function() {
 	if(${loginUser.userId} == null || ${loginUser.userId} == ''){
-		alert("로그인 후 이용해주세요.")
+		makeToast("로그인 후 이용해주세요.")
 		self.location="../user/loginView.jsp"
 	}
 })
