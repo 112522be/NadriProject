@@ -38,16 +38,21 @@
 					}
 					html += JSONData.listComment[i].user.userId
 					+'</span>&nbsp;<span style="color: gray; font-size:10pt; padding: 0;">'
-					+JSONData.listComment[i].regDate
+					+(JSONData.listComment[i].regDate).slice(0, -2)
 					+'</span><br/><span class="text" style="padding-left: 30px;">'+JSONData.listComment[i].text+'</span></span><span class="col-xs-2 edit" style="float: right; padding: 0;">';
-					if("${loginUser.userId}"==JSONData.listComment[i].user.userId){
-						html += '<span class="fas fa-edit" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:10pt;"/>';
-					}
+					html += '<span class="fas fa-edit" style="font-size:10pt;"/>&nbsp;&nbsp;<span class="fas fa-trash" style="font-size:10pt;"/>';
 					html += '</span></div><hr style="margin-bottom: 5em; position: absolute; border: 0; top: 0; height: 0;"/>'
 					$('#commentContainer').append(html);
+										
+					if("${loginUser.userId}" != JSONData.listComment[i].user.userId){
+						$($("span.fas.fa-edit")[i]).css("display", "none");
+						$($("span.fas.fa-trash")[i]).css("display", "none");
+					}
 				}
 				$(".comment").empty();
 				$(".comment").append(JSONData.totalCount);
+				
+				
 			}
 			
 		});
@@ -105,6 +110,8 @@
 	} 
 		
 	$(function() {
+		
+		
 		$('body').load('like.jsp', function() {
 			getLike();
 			listComment();
@@ -118,9 +125,9 @@
 		var commentNo;
 		
 		$('#commentContainer').on('click','.fa-edit',function() {
-			alert(1);
 			text = $($('span.text')[$(".fa-edit").index(this)]).html();
 			commentNo = $($('input[name="commentNo"]')[$(".fa-edit").index(this)]).val();
+			alert(commentNo);
 			var editForm = '<span style="position: relative; float: left; width: 70%; padding-left: 25px"><input name="editText" class="form-control" type="text" value="'+text+'"/></span><div class="button" style="float: right; position: relative; padding: 0; font-size: 0.7em; width: 12%; height: 1.8%" name="update">수정</div>';
 			$($('span.text')[$(".fa-edit").index(this)]).html(editForm);
 			$($('span.edit')[$(".fa-edit").index(this)]).css("overflow", "hidden");

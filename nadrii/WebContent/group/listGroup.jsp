@@ -276,7 +276,7 @@
 			<div class="inner">
 				<header>
 					<h1>나들이 모임</h1>
-					<p>새로운 장소, 새로운 인연</p>
+					<p>새로운 장소, 새로운 인연, 새로운 추억</p>
 				</header>
 			</div>
 		</div>
