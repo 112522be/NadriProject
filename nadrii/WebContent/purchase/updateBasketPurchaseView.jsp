@@ -92,7 +92,7 @@ function goBack() {
 
 				</div>
 
-<form action="navigation">
+<form action="navigation" name="popForm">
 
 		<input type="hidden" name="sumPostNo" value="${ purchase.sumPostNo }">
 		

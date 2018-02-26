@@ -216,12 +216,17 @@ public class TourApiDaoImpl implements TicketDao {
 		
 		try {
 			
+			// Date currentDate = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+			// System.out.println("current date check :: " + simpleDateFormat.format(new Date()));
+			
 			String encodeKeyword = URLEncoder.encode(openApiSearch.getSearchKeyword(), "UTF-8");
 			
 			StringBuilder keywordSearchSB = TourApiDaoImpl.sendGetTourURL
 					(new StringBuilder(keywordSearchURL + essentialURL 
 							+ "&listYN=Y" 
 //							+ "&pageNo=" + openApiSearch.getPageNo() 
+							+ "&eventStartDate=" + simpleDateFormat.format(new Date())
 							+ "&contentTypeId=15" 
 							+ "&keyword=" + encodeKeyword ));
 
