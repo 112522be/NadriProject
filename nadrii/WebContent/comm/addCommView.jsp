@@ -45,9 +45,6 @@ $(function() {
 		}else if($('input[name="thumbNailFileName"]').val() == null || $('input[name="thumbNailFileName"]').val() == ''){
 			alert('썸네일 이미지를 선택해주세요')
 			return;
-		}else if($('input[name="hashtag"]').val() == null || $('input[name="hashtag"]').val() == ''){
-			alert('해시태그를 하나 이상 등록해주세요')
-			return;
 		}	
 		var hashtags=',';
 		$('button.selectedhashtagButtons').each(function() {

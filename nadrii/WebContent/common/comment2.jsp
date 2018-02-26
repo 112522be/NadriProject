@@ -180,8 +180,8 @@
 				<input type="text" name="text" class="form-control" style="font-size: 12pt;" placeholder="댓글을 입력하세요...">
 			</div>
 		</div>
-		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">댓글등록</div>
-		<br/><br/><br/>
+		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
+		<br/><br/>
 		<div id="commentContainer"></div>
 	</div>
 </body>

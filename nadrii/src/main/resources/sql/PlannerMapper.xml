@@ -73,17 +73,17 @@
 	<select id="listPlanner" parameterType="map" resultMap="plannerSelectMap">
 		SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT post_no, p.user_id, title, text, thumbnail_image_file, p.reg_date, view_count, hashtag, lat, lng, profile_image_file
+	  					FROM		(	SELECT p.post_no, p.user_id, p.title, p.text, p.thumbnail_image_file, p.reg_date, p.view_count, p.hashtag, p.lat, p.lng, u.profile_image_file
 	  									FROM post p, users u
 										<where>
 											<if test="#{search.searchCondition} != null">
 												<if test="#{search.searchKeyword} !='' ">
-						 							title LIKE '%${search.searchKeyword}%' AND
+						 							p.title LIKE '%${search.searchKeyword}%' AND
 												</if>
 												
 											</if>
 											<if test="plannerMakerId != null">
-											 	user_id in #{plannerMakerId} AND
+											 	p.user_id in #{plannerMakerId} AND
 											</if>
 											p.user_id = u.user_id AND
 											flag_pu='pl'

@@ -52,8 +52,11 @@
                     // 에디터에 이미지 출력
 
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	        if($('#cndThumbnail').html().indexOf('<img') == -1){
+	 	        	$('div#cndThumbnail').html('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
+	 	        }else{
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
-
+	 	        }
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
@@ -77,7 +80,14 @@
         				if(data[i]==("음식")){
         					data[i] = "맛집"
         				}
-	 	        		$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+        				var hashtagsTemp=',';
+        				$('button.cdn').each(function() {
+        					hashtagsTemp += $(this).val()+',';
+        				})
+        				console.log(hashtagsTemp)
+        				if(hashtagsTemp.indexOf(','+data[i]+',') == -1){
+	 	        			$("#cndHashTags").append('<button type="button" class="hashtagButtons" value="'+data[i]+'"><span class="fas fa-plus"></span>&nbsp;#'+data[i]+'</button>&nbsp;');
+        				}
 	 	        	}
 				},
 				error : function() {
