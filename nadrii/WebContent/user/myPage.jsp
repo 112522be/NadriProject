@@ -62,12 +62,11 @@ $(function() {
 		$(this).css("border-bottom", "4px solid #FE8A71");
 		$(this).children().css("color", "#FE8A71")
 		if($(this).children().html() == "좋아요"){
-			
 			getLike('add');
-			$('#logContainer').html("왜 안될까....")
 		}else if($(this).children().html() == "댓글"){
 			getComments('add');
 		}else{
+			getJoin('add');
 		}
 	})
 	$('#logContainer').on('click', 'a.more', function() {
@@ -78,7 +77,7 @@ $(function() {
 		    }else if($('#logContainer').find('input[name="type"]').val() == "댓글"){
 		    	getComments("update");
 		    }else{
-		    	
+		    	getJoin('update');	
 		    }
 		        
 		}else{
@@ -235,7 +234,7 @@ function getComments(menu) {
 		}
 	})
 }
-	/* function getJoin(menu) {
+	function getJoin(menu) {
 		if (menu == 'add') {
 			currentPage = 1;
 		}
@@ -310,86 +309,72 @@ function getComments(menu) {
 						})
 					}
 				})
-	} */
+	} 
 </script>
 </head>
 <body onload="javascript:getLike('add');">
-	<input type="hidden" name="searchKeyword" value="${user.userId}">
-	<div id="header">
-		<div class="inner">
-			<header>
-			<h1>
-				<a href="/index.jsp" id="logo">N A D R I I</a>
-			</h1>
-			</header>
-		</div>
-		<jsp:include page="/layout/toolbar.jsp" />
-	</div>
-	<div class="container" align="center">
-		<div name="userProfile" style="margin: 20px; height: auto;">
-			<span class="col-xs-4" style="width: 30%" align="right"> <c:if
-					test="${! empty user.profileImageFile}">
-					<a><img alt="" src="${user.profileImageFile}"
-						style="width: 55%"></a>
-				</c:if> <c:if test="${empty user.profileImageFile}">
-					<a><img alt="" src="/resources/images/00742106_105752.jpg"
-						style="width: 55%"></a>
-				</c:if>
-			</span> <span style="font: bold; font-size: 2em !important; color: #3b2b48;"
-				class="col-xs-8">
-				<p style="padding: 0.5em 0.5em 0.5em 0;">
-					<a style="font-weight: 700;">${user.userId}</a> <br /> <span
-						style="font-size: 15pt;">${user.email}</span>
-				</p> <c:if test="${! empty user.userName}">
-					<p>
-						<span style="font-size: 0.4em; color: gray; font-weight: 700">이름</span>
-						<span style="font-size: 0.6em; padding: 0.3em !important;">${! empty user.userName? user.userName:'-'}</span>&nbsp;&nbsp;
-						<span style="font-size: 0.4em; color: gray; font-weight: 700">휴대전화</span>
-						<span style="padding: 0.3em !important; font-size: 0.6em;">${! empty user.phone? user.phone:'-'}</span>&nbsp;&nbsp;
-						<span style="font-size: 0.4em; color: gray; font-weight: 700">성별</span>
-						<span style="font-size: 0.6em; padding: 0.3em !important;">${! empty user.gender? user.gender:'-'}</span>&nbsp;&nbsp;
-						<span style="font-size: 0.4em; color: gray; font-weight: 700">생년월일</span>
-						<span style="font-size: 0.6em; padding: 0.3em !important;">${!empty user.birth? user.birth:'-'}</span>
-					</p>
-					<a style="float: left; font-size: 0.5em; margin: 10px;"
-						href="/user/updateUser?userId=${user.userId}"><span
-						class="fas fa-cog"></span> 프로필수정</a>
-				</c:if> <c:if test="${empty user.userName}">
-					<a style="float: left; font-size: 0.5em; margin: 10px;"
-						href="/user/updateUser?userId=${user.userId}"><span
-						class="far fa-plus-square"></span> 추가 정보를 입력하고 더 다양한 나들이를 즐겨보세요</a>
-				</c:if>
-			</span>
-		</div>
-	</div>
-	<div class="container">
-		<div style="background-color: white; margin-top: 20pt; height: 40px;">
-			<div style="margin: 20px; padding-bottom: 1em; height: inherit;">
-				<a class="col-xs-4" align="center"><span class="button01"
-					align="center">좋아요</span></a> <a class="col-xs-4" align="center"><span
-					class="button01" align="center">댓글</span></a> <a class="col-xs-4"
-					align="center"><span class="button01" align="center">내
-						모임</span></a>
-			</div>
-			<div id="logContainer"></div>
-		</div>
-	</div>
-	<br />
+<input type="hidden" name="searchKeyword" value="${user.userId}">
+ 	  <div id="header">
+			<div class="inner">
+				<header>
+					<h1><a href="/index.jsp" id="logo">N A D R I I</a></h1>
+				</header>
+			</div>	
+			<jsp:include page="/layout/toolbar.jsp" />
+     </div>
+     <div class="container" align="center">
+     	<div name="userProfile" style="margin: 20px;height: auto;">
+     		<span class="col-xs-4" style="width: 30%" align="right">
+     			<c:if test="${! empty user.profileImageFile}">
+     				<a><img alt="" src="${user.profileImageFile}" style="width: 100%"></a>
+     			</c:if>
+      			<c:if test="${empty user.profileImageFile}">
+      				<a><img alt="" src="/resources/images/00742106_105752.jpg" style="width: 100%"></a>
+     			</c:if>
+     		</span>
+     		<span style="font:bold; font-size: 2em !important; color: #3b2b48;" class="col-xs-8">
+     			<p style="padding: 0.5em 0.5em 0.5em 0;">
+	     			<a style="font-weight: 700;">${user.userId}</a>
+	     			<br/>
+	     			<span style="font-size: 12pt;">${user.email}</span>
+     			</p>
+     			<c:if test="${! empty user.userName}">
+     				<p><span style="font-size: 0.4em; color: gray; font-weight:700">이름</span><span style="font-size:0.6em; padding: 0.3em !important;">${! empty user.userName? user.userName:'-'}</span>&nbsp;<span style="font-size: 0.4em; color: gray; font-weight:700">휴대전화</span><span style="padding: 0.3em !important; font-size: 0.6em;">${! empty user.phone? user.phone:'-'}</span>&nbsp;
+     				<span style="font-size: 0.4em; color: gray; font-weight:700">성별</span><span style="font-size:0.6em; padding: 0.3em !important;">${! empty user.gender? user.gender:'-'}</span>&nbsp;<span style="font-size: 0.4em; color: gray; font-weight:700">생년월일</span><span style="font-size:0.6em; padding: 0.3em !important;">${!empty user.birth? user.birth:'-'}</span></p>
+     				<a style="float: left; font-size: 0.5em; margin: 10px;" href="/user/updateUser?userId=${user.userId}"><span class="fas fa-cog"></span> 프로필수정</a>
+     			</c:if>
+     			<c:if test="${empty user.userName}">
+     				<a style="float: left; font-size: 0.5em; margin: 10px;" href="/user/updateUser?userId=${user.userId}"><span class="far fa-plus-square"></span> 추가 정보를 입력하고 더 다양한 나들이를 즐겨보세요</a>
+     			</c:if>
+     		</span>
+     	</div>
+     </div>
+     <div class="container">
+     	<div style="background-color: white; margin-top:10pt;">
+	     	<div style="margin: 20px; padding-bottom:1em; height: inherit;">
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">좋아요</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">댓글</span></a>
+	     		<a class="col-xs-4" align="center"><span class="button01" align="center">내 모임</span></a>
+	     	</div>
+	     	<div id="logContainer"></div>
+     	</div>
+     </div>
+     <br/>
 
-	<jsp:include page="../layout/footer.jsp"></jsp:include>
-	<script src="../resources/helios/assets/js/jquery.min.js"></script>
-	<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
-	<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
-	<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
-	<script src="../resources/helios/assets/js/skel.min.js"></script>
-	<script src="../resources/helios/assets/js/util.js"></script>
-	<script src="../resources/helios/assets/js/main.js"></script>
-
+     <jsp:include page="../layout/footer.jsp"></jsp:include>
+   		<script src="../resources/helios/assets/js/jquery.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.dropotron.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.scrolly.min.js"></script>
+		<script src="../resources/helios/assets/js/jquery.onvisible.min.js"></script>
+		<script src="../resources/helios/assets/js/skel.min.js"></script>
+		<script src="../resources/helios/assets/js/util.js"></script>
+		<script src="../resources/helios/assets/js/main.js"></script>
+     
 
 </body>
 <style type="text/css">
-p {
-	margin-bottom: 0;
-}
+	p{
+		margin-bottom: 0;
+	}
 </style>
 </html>
