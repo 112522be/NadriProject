@@ -46,10 +46,10 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			File file = null;
 			// 큐알이미지를 저장할 디렉토리 지정
 			// 비트캠프 경로
-//			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
+			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
 			// DanielLaptop 경로
 //			file = new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
-			file = new File("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\qrcode");
+//			file = new File("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\qrcode");
 //			file = new File(".\\WebContent\\resources\\qrcode");
 			
 			if (!file.exists()) {
@@ -71,7 +71,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 //				+ "\n입장인원 : " + count + " 명"
 //				;
 			
-			String ticketInfo = "http://192.168.0.78:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
+			String ticketInfo = "http://192.168.0.8:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
+//			String ticketInfo = "http://192.168.0.78:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
 //			String ticketInfo = "http://192.168.0.8:8080"; 
 			
 			System.out.println("\n[ticketInfo Check]==>" + ticketInfo);
@@ -103,12 +104,8 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			System.out.println("--> " + datetime2);
 			//*/
 			
-			
 			String userId = purchase.getBuyerId();
-//			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode" + userId 
-			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
-//			ImageIO.write(bufferedImage, "png", new File(".\\WebContent\\resources\\qrcode\\" + userId 
-//					+ "&" + datetime2 
+			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
 					+ ".jpg") );
 			// QRCode&userID :: 의 형태로 QR코드 파일 생성됨
 			
