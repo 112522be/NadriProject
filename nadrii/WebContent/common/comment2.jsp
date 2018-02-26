@@ -181,7 +181,7 @@
 			</div>
 		</div>
 		<div class="button" style="float: right; position: relative; padding: 0; font-size: 12pt; width: 15%;" name="submitComment">submit</div>
-		<br/><br/><br/>
+		<br/><br/>
 		<div id="commentContainer"></div>
 	</div>
 </body>
