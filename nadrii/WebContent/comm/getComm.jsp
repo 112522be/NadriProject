@@ -163,6 +163,13 @@
 									<a id="delete"><span class="fas fa-eraser"></span></a>
 								</div>
 							</c:if>
+							<c:if test="${community.user.userId != loginUser.userId}">
+								<div align="right">
+									<a id="modify"><span class="far fa-edit" style="display: none;"></span></a>
+									&nbsp;
+									<a id="delete"><span class="fas fa-eraser" style="display: none;"></span></a>
+								</div>
+							</c:if>
 								${community.text}						
 							</div>
 							<br/><br/>

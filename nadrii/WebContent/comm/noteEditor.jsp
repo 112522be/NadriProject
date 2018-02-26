@@ -52,8 +52,11 @@
                     // 에디터에 이미지 출력
 
 	 	        	$(editor).summernote('editor.insertImage', "\n\n"+data.relativeUrl+"\n\n");
+	 	        if($('#cndThumbnail').html().indexOf('<img') == -1){
+	 	        	$('div#cndThumbnail').html('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
+	 	        }else{
 	 	      		$('div#cndThumbnail').append('<img class="cndThumbnail" border="2" alt="'+data.relativeUrl+'" src="'+data.relativeUrl+'" width="100px" height="120px"/>&nbsp;')
-
+	 	        }
 	 	        	listHashTag(data.url);
 	 	        },
 	 	        error : function() {
