@@ -81,7 +81,10 @@
         					data[i] = "맛집"
         				}
         				var hashtagsTemp=',';
-        				$('button.cdn').each(function() {
+        				$('button.selectedhashtagButtons').each(function() {
+        					hashtagsTemp += $(this).val()+',';
+        				})
+        				$('button.hashtagButtons').each(function() {
         					hashtagsTemp += $(this).val()+',';
         				})
         				console.log(hashtagsTemp)

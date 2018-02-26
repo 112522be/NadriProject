@@ -405,12 +405,12 @@ $(function(){
 		self.location="/planner/getMyPlannerList";
 	});
 	
-	$("#postMod").bind("click", function(){
+	$("#modify").bind("click", function(){
 		self.location="../planner/updatePlanner?postNo=${planner.postNo}";
 	});
 	
 	
-	$("#postDel").bind("click", function(){
+	$("#delete").bind("click", function(){
 		if(confirm("삭제하시겠습니까?")==true){
 			self.location="/planner/deletePlanner?postNo=${planner.postNo}";
 			alert("삭제되었습니다.");

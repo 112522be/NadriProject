@@ -49,7 +49,7 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 //			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
 			// DanielLaptop 경로
 //			file = new File("C:\\Users\\iamsu\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
-			file = new File("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\qrcode");
+			file = new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode");
 //			file = new File(".\\WebContent\\resources\\qrcode");
 			
 			if (!file.exists()) {
@@ -71,7 +71,7 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 //				+ "\n입장인원 : " + count + " 명"
 //				;
 			
-			String ticketInfo = "http://192.168.0.78:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
+			String ticketInfo = "http://192.168.0.39:8080/purchase/listPurchaseQR?userId=" + purchase.getBuyerId(); 
 //			String ticketInfo = "http://192.168.0.8:8080"; 
 			
 			System.out.println("\n[ticketInfo Check]==>" + ticketInfo);
@@ -106,7 +106,7 @@ public class PurchaseQRDaoImpl implements PurchaseDao {
 			
 			String userId = purchase.getBuyerId();
 //			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode" + userId 
-			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\user\\git\\NadriiProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
+			ImageIO.write(bufferedImage, "png", new File("C:\\Users\\bitcamp\\git\\NadriProject\\nadrii\\WebContent\\resources\\qrcode\\" + userId 
 //			ImageIO.write(bufferedImage, "png", new File(".\\WebContent\\resources\\qrcode\\" + userId 
 //					+ "&" + datetime2 
 					+ ".jpg") );

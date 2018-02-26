@@ -88,11 +88,6 @@
 			var title = $( $('input[name="title"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var title = $( $('input[name="firstimage"]')[$("a[href='#']:contains('상세조회')").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
-			
-			console.log('contentId : ' + contentId)
-			console.log('contentTypeId : ' + contentTypeId)
-			console.log('title : ' + title)
-			console.log('encodeTitle : ' + encodeTitle)
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
@@ -112,11 +107,6 @@
 			var title = $( $('input[name="title"]')[$(".image.featured").index(this)]).val();
 			var firstimage = $( $('input[name="firstimage"]')[$(".image.featured").index(this)]).val();
 			var encodeTitle = encodeURI(encodeURIComponent(title));
-			
-			console.log('contentId : ' + contentId)
-			console.log('contentTypeId : ' + contentTypeId)
-			console.log('title : ' + title)
-			console.log('encodeTitle : ' + encodeTitle)
 
 			self.location = "/ticket/getTicket?" + "contentId="
 					+ contentId + "&contentTypeId=" + contentTypeId
@@ -135,6 +125,17 @@
 
  		$("header h1").on("click", function(){
 			self.location="../ticket/listTicket";
+		});
+ 		
+ 		$('#searchKeyword').keydown(function(key) {
+			var data = $(this).val();
+			if(key.keyCode==13){
+				if(data!=""){
+					fncGetList(1);
+				}else{	
+		 			alert("검색어를 입력해주세요");
+				}
+			}
 		});
  		
  	})

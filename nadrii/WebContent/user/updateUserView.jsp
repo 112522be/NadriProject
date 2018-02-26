@@ -382,8 +382,8 @@
 			  <div class="col-sm-2">
 				  <!-- <form id="form" runat="server" method="post" enctype="multipart/form-data"> -->
 				    <input type="file" id="fileName" value=""/>
-				    <img id="image_section" src="#" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
-				    <input type="hidden" id="profileImageFile"name="profileImageFile"/>
+				    <img id="image_section" src="${empty user.profileImageFile? '#':user.profileImageFile}" alt="your image" style="border:1px solid #ddd; margin-top:5px" />
+				    <input type="hidden" id="profileImageFile" name="profileImageFile" value="${user.profileImageFile}"/>
 				<!-- </form> -->
 		     </div>
 		   </div>

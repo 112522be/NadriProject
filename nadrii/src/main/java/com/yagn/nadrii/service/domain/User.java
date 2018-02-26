@@ -66,6 +66,10 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+		String[] temp = phone.split("-");
+		this.phone1 = temp[0];
+		this.phone2 = temp[1];
+		this.phone3 = temp[2];
 	}
 	public String getEmail() {
 		return email;

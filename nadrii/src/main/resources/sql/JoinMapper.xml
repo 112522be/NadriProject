@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="getJoinMemberList"		parameterType="Search"	resultMap="joinSelectMap">
-		SELECT join_no, group_no, j.user_id, group_role, profile_image_file, reg_date
+		SELECT join_no, group_no, j.user_id, group_role, profile_image_file
 		FROM join j, users u
 		WHERE group_no = #{searchKeyword}
 		AND j.user_id = u.user_id
@@ -50,7 +50,7 @@
 	 
 	 <select  id="getTotalJoinCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT join_no, group_no, user_id, group_role, reg_date
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role
 					FROM join
 					WHERE user_id = #{searchKeyword}
 					 ) countTable		
@@ -58,7 +58,7 @@
 	 
 	 <select  id="getTotalMemberCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM  (	SELECT join_no, group_no, user_id, group_role, reg_date
+	  	FROM  (	SELECT join_no, group_no, user_id, group_role
 					FROM join
 					WHERE group_no = #{searchKeyword}
 					ORDER BY join_no ASC

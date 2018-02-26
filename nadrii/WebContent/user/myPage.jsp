@@ -272,7 +272,7 @@ function getComments(menu) {
 										+ '</span>'
 										+ '</div>'
 										+ '<div class="col-xs-3" align="center" style="padding-top:0; padding-left: 0; padding-right: 0;">';
-								html += '<i class="fas fa-comment" style="font-size:1em;"></i>&nbsp;모임'
+								html += '<i class="fas fa-users" style="font-size:1em;"></i>&nbsp;모임'
 										+ '</div>'
 										+ '<div class="col-xs-6" align="left" style="padding: 0 0 0 5%;">'
 										+ '<p id="addedTitle"><span style="font-size: 1em; font-weight: 900; color: #3b2b48">'
