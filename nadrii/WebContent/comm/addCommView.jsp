@@ -31,7 +31,24 @@ $(function() {
 			self.location="../user/loginView.jsp"
 		}
 	})
+	
 	$('a#submit').bind('click', function() {
+		if($('input[name="title"]').val() == null || $('input[name="title"]').val() == ''){
+			alert('제목을 입력해주세요');
+			return;
+		}else if($('textarea[name="text"]').val() == null || $('textarea[name="text"]').val() == ''){
+			alert('내용을 입력해주세요')
+			return;
+		}else if($('input[name="lat"]').val() == null || $('input[name="lat"]').val() == ''){
+			alert('방문하신 장소를 하나 이상 등록해주세요')
+			return;
+		}else if($('input[name="thumbNailFileName"]').val() == null || $('input[name="thumbNailFileName"]').val() == ''){
+			alert('썸네일 이미지를 선택해주세요')
+			return;
+		}else if($('input[name="hashtag"]').val() == null || $('input[name="hashtag"]').val() == ''){
+			alert('해시태그를 하나 이상 등록해주세요')
+			return;
+		}	
 		var hashtags=',';
 		$('button.selectedhashtagButtons').each(function() {
 			hashtags += $(this).val()+',';
@@ -115,7 +132,7 @@ button[data-original-title='More Color']{
 						 <br/>	
 					</form> 
 					<div class="box-bottom" >
-						<a id="submit">저장하기</a>
+						<a id="submit" style="">저장하기</a>
 					</div>
 					<br/>
 				</div>	

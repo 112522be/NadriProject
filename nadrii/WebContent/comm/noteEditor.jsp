@@ -232,6 +232,9 @@
 		<input type="hidden" id="content_pr">
 		<h5 align="left">썸네일을  선택해주세요</h5>
 		<div id="cndThumbnail" align="center">
+		<c:if test="${empty community.thumbNailFileName}">
+			<span style="padding-left: 10px; font-color: gray; font-size:15px;">게시물에 등록하신 이미지 중 선택하실 수 있습니다.</span>
+		</c:if>
 		<c:if test="${! empty community.thumbNailFileName}">
 			<img id="selectedThumbnail" src="${community.thumbNailFileName}" width="100px" height="120px">
 		</c:if>
