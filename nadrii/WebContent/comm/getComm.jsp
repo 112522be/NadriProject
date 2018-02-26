@@ -49,7 +49,7 @@
 		}
 
 		function clickMessage(){	
-			window.open("/message/addMessage?recevierId="+'${community.user.userId}',"addMessgeView","width=300, height=350,status=no, scrollbars=no, location=no");
+			window.open("/message/addMessage?recevierId="+'${community.user.userId}',"addMessgeView","width=400, height=360,status=no, scrollbars=no, location=no");
 		}
 
 		function addLike(){
