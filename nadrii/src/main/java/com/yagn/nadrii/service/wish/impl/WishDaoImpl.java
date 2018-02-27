@@ -63,8 +63,8 @@ public class WishDaoImpl implements WishDao {
 	}
 
 	@Override
-	public Wish checkDuplication(int postNo) throws Exception {
-		return sqlSession.selectOne("WishMapper.checkDuplication",postNo);	
+	public Wish checkDuplication(Map map) throws Exception {
+		return sqlSession.selectOne("WishMapper.checkDuplication",map);	
 	}
 	
 	public List<Wish> listWishByPost(Wish wish) throws Exception{

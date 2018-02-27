@@ -444,6 +444,8 @@ public class PurchaseController {
 		
 		System.out.println("\n /purchase/listPurchaseQR");
 		
+		System.out.println("\n[userId Check]==>" + userId);
+		
 		OpenApiPage resultPage = new OpenApiPage();
 		OpenApiSearch openApiSearch = new OpenApiSearch();
 

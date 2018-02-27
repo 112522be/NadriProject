@@ -119,7 +119,7 @@ function goBack() {
 							<header>
 								<h2><a href="#">결제정보입력</a></h2>
 								<p>
-									선택하신 티켓의 결제 진행을 위해 <strong class="text-danger">형식에 맞게 </strong>작성해 주세요.
+									결제를 진행하시려면  아래의 <br><strong class="text-danger">KakaoPay 결제</strong> 버튼을 눌러 주세요.
 								</p>
 							</header>
 						</article>

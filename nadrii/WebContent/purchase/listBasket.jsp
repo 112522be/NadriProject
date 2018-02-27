@@ -121,7 +121,6 @@ function fncGetList(pageNo) {
 							}
 							sumPostNo += postNo;
 						}
-						alert("선택하신 티켓 번호 확인 : " + sumPostNo)
 						$("input[name='sumPostNo']").val(sumPostNo);
 						$("span[name='ticketCount']").append(postCount);
 					}

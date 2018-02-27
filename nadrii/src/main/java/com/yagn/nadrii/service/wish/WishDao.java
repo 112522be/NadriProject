@@ -21,7 +21,7 @@ public interface WishDao {
 			
 	public Wish getWishByTripNo(Map map) throws Exception;
 	
-	public Wish checkDuplication(int postNo) throws Exception;
+	public Wish checkDuplication(Map map) throws Exception;
 	
 	public List<Wish> listWishByPost(Wish wish) throws Exception;
 	

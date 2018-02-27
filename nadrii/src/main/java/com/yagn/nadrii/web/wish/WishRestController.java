@@ -64,7 +64,7 @@ public class WishRestController {
 		Trip trip = tripService.getTripFromDB(contentId);
 		System.out.println(trip);
 		
-		Wish wish = wishService.checkDuplication(trip.getPostNo());
+		Wish wish = wishService.checkDuplication(trip.getPostNo(),user.getUserId());
 		
 		if(wish==null) {
 			wish = new Wish();
@@ -101,7 +101,7 @@ public class WishRestController {
 		Ticket ticket = ticketService.getTicketFromDB(contentId);
 		System.out.println(ticket);
 		
-		Wish wish = wishService.checkDuplication(ticket.getPostNo());
+		Wish wish = wishService.checkDuplication(ticket.getPostNo(),user.getUserId());
 		
 		if(wish==null) {
 			wish = new Wish();

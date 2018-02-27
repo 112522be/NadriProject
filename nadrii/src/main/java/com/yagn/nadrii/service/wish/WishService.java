@@ -23,7 +23,7 @@ public interface WishService {
 	
 	public List listTripFromWish(String userId) throws Exception;
 	
-	public Wish checkDuplication(int postNo) throws Exception;
+	public Wish checkDuplication(int postNo,String userId) throws Exception;
 	
 	public Map<String , Object > listWishByPost(Wish wish) throws Exception;
 }

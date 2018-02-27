@@ -99,8 +99,13 @@ public class WishServiceImpl implements WishService{
 	}
 
 	@Override
-	public Wish checkDuplication(int postNo) throws Exception {
-		return wishDao.checkDuplication(postNo);
+	public Wish checkDuplication(int postNo,String userId) throws Exception {
+		Map map = new HashMap();
+		map.put("postNo", postNo);
+		map.put("userId", userId);
+		
+			
+		return wishDao.checkDuplication(map);
 	}
 
 	public Map<String , Object > listWishByPost(Wish wish) throws Exception {
