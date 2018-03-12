@@ -1,4 +1,4 @@
-# 나들이 <br><br>
+# 나들이
 시연 영상 : https://youtu.be/9oeojMxryiE
 
 ## 플래너
